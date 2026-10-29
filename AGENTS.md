@@ -137,7 +137,7 @@ public CanonicalEvidenceSet Parse(string payload, ParseOptions? options = null)
 |--------------|---------|
 | `Bosak.Schema.Tests` | Activation-free factories, schema compilation/validation and legacy API compatibility |
 
-The public publication baseline has 114 tests; the native assessment 0.7 candidate has 334 (220 added) and no licensing-pipeline/Azurite dependency. Native assessment coverage is deliberately finite; preserve the original component state, distinguish invalid/unsupported, and never substitute an assertion-only result or stripped 1.0 schema for structural 1.1 assessment. See docs/DOCUMENT-ASSESSMENT.md and its immutable adoption record.
+The public publication baseline has 114 tests; the native assessment 0.8 candidate has 397 (283 added) and no licensing-pipeline/Azurite dependency. Native assessment coverage is deliberately finite; preserve the original component state, distinguish invalid/unsupported, and never substitute an assertion-only result or stripped 1.0 schema for structural 1.1 assessment. See docs/DOCUMENT-ASSESSMENT.md and its immutable adoption record.
 
 ### 5.2 Test Patterns
 
@@ -243,3 +243,5 @@ Current review also verifies exception-safe provider attachment; the core review
 Current candidate: native optional local particles (v2) with required-only v1 compatibility. Core candidate dependency is 1.34.1 through the explicit local source override. Read `docs/OPTIONAL-DECIMAL-IMPLEMENTATION.md`; older 0.5/191-case/204-case notices are historical. Keep the no-commit/push rule without explicit authorization.
 
 Current native candidate supports bounded repeated particles (v3) as well as v1/v2, with a total maximum occurrence budget of sixteen. Read `docs/REPEATED-DECIMAL-IMPLEMENTATION.md`. Core remains source-identical 1.34.1; previous 0.6/260-case status describes the historical optional checkpoint. Keep original receipts and the no-commit/push rule without explicit authorization.
+
+Current candidate admits only unprefixed bounded count(DeclaredChildName) calls in the native assertion grammar, selecting v4 from full-parse metadata; existing no-count v1/v2/v3 remain. Read `docs/COUNT-ASSERTION-IMPLEMENTATION.md`. Core stays source-identical 1.34.1. Prior 0.7/334-case/count-scope-only notices are historical; preserve receipts and the no-commit/push rule without explicit authorization.

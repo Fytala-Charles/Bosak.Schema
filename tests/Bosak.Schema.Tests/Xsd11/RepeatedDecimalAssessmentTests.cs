@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 29-10-2026     | Creation; finite repeated decimal Schema 0.7 candidate                                   |
 //                      | Charles Korthout | 0.2   | 29-10-2026     | Add strict error-contract, bounds, empty-root and lifetime controls                       |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.3   | 29-10-2026     | Adopt recorded count refusal as explicit supported-v4 capability; retain other cases (0.8) |
 // ===========================================================================================================================================================
 
 using System.Runtime.CompilerServices;
@@ -371,8 +372,17 @@ public sealed class RepeatedDecimalAssessmentTests
     /// <summary>Broader grammar and schema constructs remain refused by the new profile.</summary>
     /// <param name="expression">Unsupported grammar request.</param>
     [Theory]
-    [InlineData("sum(a) gt 0")] [InlineData("count(a) eq 2")]
+    [InlineData("sum(a) gt 0")]
     [InlineData("a = 2")] [InlineData("a[1] eq 2")]
     public void WiderAssertionGrammar_RemainsUnsupported(string expression) =>
         Assert.False(Compile(Element("a", "0", "2"), expression).IsSupported);
+
+    /// <summary>The formerly refused count case is explicitly adopted as a supported v4 capability.</summary>
+    [Fact]
+    public void CountAssertionCapability_IsSupported()
+    {
+        var assessor = Compile(Element("a", "0", "2"), "count(a) eq 2");
+        Assert.Equal("decimal-sequence-assertions-v4", assessor.Profile);
+        Assert.Equal(3, Valid(assessor, "<a>2</a><a>3</a>").Elements.Count);
+    }
 }

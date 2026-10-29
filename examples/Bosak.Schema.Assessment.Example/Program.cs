@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 29-10-2026     | Demonstrate original whole-document annotations through XPath and XSLT                    |
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Demonstrate an omitted optional particle without shifting later state (0.6)               |
 //                      | Charles Korthout | 0.4   | 29-10-2026     | Demonstrate ordered repetitions, shared authority and ambiguous projection refusal (0.7)  |
+//                      | Charles Korthout | 0.5   | 29-10-2026     | Validate repeated count and optional absence through actual native assertions (0.8)       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -34,7 +35,7 @@ var schema = XDocument.Parse("""
           <xs:element name="tax" type="xs:decimal" minOccurs="0"/>
           <xs:element name="shipped" type="xs:decimal"/>
         </xs:sequence>
-        <xs:assert test="shipped gt 0"/>
+        <xs:assert test="count(amount) eq 2 and count(tax) eq 0 and shipped gt 0"/>
       </xs:complexType></xs:element>
     </xs:schema>
     """);
@@ -50,6 +51,7 @@ var input = new XDocumentNode(document.CreateDocumentCopy(preserveTypeAnnotation
 var context = new EvaluationContext().WithFocus(XdmValue.FromNode(input), 1, 1);
 Console.WriteLine("Assessment: " + assessment.Outcome);
 Console.WriteLine("Profile: " + assessor.Profile);
+Console.WriteLine("Native count assertions: passed");
 Console.WriteLine("Later declaration retained: " + ReferenceEquals(assessor.ChildDeclarations[2], document.Elements[3].Declaration));
 Console.WriteLine("Shared declaration: " + ReferenceEquals(document.Elements[1].Declaration, document.Elements[2].Declaration));
 Console.WriteLine("Distinct occurrence states: " + !ReferenceEquals(document.Elements[1], document.Elements[2]));

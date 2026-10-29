@@ -17,7 +17,7 @@ Bosak.Schema is free, open-source Fytala software under [Apache-2.0](LICENSE.md)
 
 The implementation targets .NET 10. This feature candidate requires unpublished Bosak 1.34.1 through the local source override below; the original public checkout retains its published 1.26.3 dependency pins. It provides schema-aware XSLT compiler helpers and a staged XSD 1.1 component/assertion pipeline. Complete XSD 1.1 structural validation and integration of its full component universe into running Bosak expressions are **not yet implemented**. See the [support matrix](docs/FEATURE_REQUESTS.md).
 
-The unpublished 0.7 development candidate adds [native document assessment](docs/DOCUMENT-ASSESSMENT.md): a complete structural/decimal/assertion check for one explicit XSD 1.1 profile, an owned result with original declaration/type state, and whole-document exports for Bosak queries/transforms. Anonymous-root and decimal-child assessment state survives preserve copies; strip removes it. Unsupported coverage, including general declaration matching and compatible-universe interchange, is refused.
+The unpublished 0.8 development candidate adds [native document assessment](docs/DOCUMENT-ASSESSMENT.md): a complete structural/decimal/assertion check for one explicit XSD 1.1 profile, an owned result with original declaration/type state, and whole-document exports for Bosak queries/transforms. Anonymous-root and decimal-child assessment state survives preserve copies; strip removes it. Unsupported coverage, including general declaration matching and compatible-universe interchange, is refused.
 
 The initial public source is derived from Fytala's private schema source at `fa0da3e2d9972706a5a86616ef285af4daf5037b`, with the owner-approved Apache transition on 29 October 2026. Billing, key-generation, deployment material and private Git history remain outside this repository. See [provenance](docs/APACHE-TRANSITION.md).
 
@@ -87,4 +87,6 @@ The [bounded repeated-decimal candidate](docs/REPEATED-DECIMAL-IMPLEMENTATION.md
 
 The [bounded repetition review checkpoint](docs/REPEATED-DECIMAL-REVIEW.md) records current implementation review and paired delivery identity.
 
-The next [count assertion scope](docs/COUNT-ASSERTION-PLAN.md) defines a finite cardinality-function grammar extension while preserving native validation and existing child-name semantics.
+The [count assertion candidate](docs/COUNT-ASSERTION-IMPLEMENTATION.md) implements a finite cardinality-function grammar extension while preserving native validation and existing child-name semantics.
+
+[Bounded Schema assessment review and next scope](docs/COUNT-ASSERTION-REVIEW.md).

@@ -17,6 +17,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.4   | 29-10-2026     | Assess ordered optional particles and assertion EBV with present-only state (0.6)        |
 //                      | Charles Korthout | 0.5   | 29-10-2026     | Match repeated original states and classify closed-grammar cardinality errors (0.7)      |
+//                      | Charles Korthout | 0.6   | 29-10-2026     | Select count profile only for parsed admitted calls; retain native validation order (0.8) |
 // ===========================================================================================================================================================
 
 using System.Security.Cryptography;
@@ -35,7 +36,7 @@ public sealed class XsdDocumentAssessor
     private readonly IReadOnlyList<XPath31Expression> _assertions;
     private readonly AssessmentParticle[] _particles;
     internal XsdDocumentAssessor(string schemaXml, IEnumerable<SchemaDiagnostic> diagnostics,
-        AssessedElementDeclaration? root, IEnumerable<AssessmentParticle> particles, IEnumerable<XPath31Expression> assertions)
+        AssessedElementDeclaration? root, IEnumerable<AssessmentParticle> particles, IEnumerable<XPath31Expression> assertions, bool usesCount = false)
     {
         SchemaXml = schemaXml;
         SchemaDigest = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(schemaXml))).ToLowerInvariant();
@@ -43,7 +44,7 @@ public sealed class XsdDocumentAssessor
         RootDeclaration = root;
         _particles = particles.ToArray();
         ChildDeclarations = Array.AsReadOnly(_particles.Select(p => p.Declaration).ToArray());
-        Profile = _particles.Any(p => p.MaxOccurs > 1) ? "decimal-sequence-assertions-v3"
+        Profile = usesCount ? "decimal-sequence-assertions-v4" : _particles.Any(p => p.MaxOccurs > 1) ? "decimal-sequence-assertions-v3"
             : _particles.Any(p => p.MinOccurs == 0) ? "decimal-sequence-assertions-v2" : "decimal-sequence-assertions-v1";
         _assertions = Array.AsReadOnly(assertions.ToArray());
     }

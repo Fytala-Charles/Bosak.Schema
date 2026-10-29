@@ -16,6 +16,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Compile bounded optional local particles; preserve all required-only coverage (0.6)      |
 //                      | Charles Korthout | 0.4   | 29-10-2026     | Compile bounded repeated particles and enforce aggregate maximum sixteen (0.7)           |
+//                      | Charles Korthout | 0.5   | 29-10-2026     | Admit bounded count operands with complete-parse feature tracking and call depth (0.8)   |
 // ===========================================================================================================================================================
 
 using System.Globalization;
@@ -95,17 +96,22 @@ internal static class AssessmentProfileParser
             children.Add(new(new AssessedElementDeclaration(XName.Get(name), decimalType, $"/schema/element/complexType/sequence/element[{i + 1}]"), minimum, maximum));
         }
         var plans = new List<XPath31Expression>();
+        var usesCount = false;
         foreach (var assertion in parts.Skip(1))
         {
             var expression = assertion.Attribute("test")?.Value;
             if (!Attributes(assertion, "test", "xpathDefaultNamespace") || !LocalDefault(assertion) || assertion.HasElements ||
-                expression is null || !AssertionGrammar.Accepts(expression, names))
-                return Refused(text, "An assertion exceeds the bounded child/decimal comparison and logical-expression grammar.");
+                expression is null)
+                return Refused(text, "An assertion exceeds the bounded child/decimal/count comparison and logical-expression grammar.");
+            var admission = AssertionGrammar.Admit(expression, names);
+            if (admission is null)
+                return Refused(text, "An assertion exceeds the bounded child/decimal/count comparison and logical-expression grammar.");
+            usesCount |= admission.Value.UsesCount;
             try { plans.Add(XPath31Expression.Compile(expression, new CompileOptions { Compatibility = XPathCompatibility.XPath20 })); }
             catch (Exception error) when (error is not OutOfMemoryException and not OperationCanceledException)
             { return Refused(text, "The XPath 2.0 compiler refused the assertion: " + error.Message); }
         }
-        return new(text, [], rootDeclaration, children, plans);
+        return new(text, [], rootDeclaration, children, plans, usesCount);
     }
 
     private static bool Attributes(XElement element, params string[] permitted) =>
@@ -173,20 +179,24 @@ internal static class AssessmentProfileParser
         return (negative && (integer != "0" || fraction.Length != 0) ? "-" : "") + integer + (fraction.Length == 0 ? "" : "." + fraction);
     }
 
+    /// <summary>Features recorded only after complete bounded assertion admission.</summary>
+    internal readonly record struct AssertionAdmission(bool UsesCount);
+
     private sealed class AssertionGrammar
     {
         private readonly string[] _tokens;
         private readonly HashSet<string> _names;
         private int _position;
+        private bool _usesCount;
         private AssertionGrammar(string[] tokens, HashSet<string> names) { _tokens = tokens; _names = names; }
-        internal static bool Accepts(string expression, HashSet<string> names)
+        internal static AssertionAdmission? Admit(string expression, HashSet<string> names)
         {
-            if (expression.Length is 0 or > 512 || expression.Any(c => char.IsWhiteSpace(c) && c is not (' ' or '\t' or '\r' or '\n'))) return false;
+            if (expression.Length is 0 or > 512 || expression.Any(c => char.IsWhiteSpace(c) && c is not (' ' or '\t' or '\r' or '\n'))) return null;
             var tokens = expression.Replace("(", " ( ", StringComparison.Ordinal).Replace(")", " ) ", StringComparison.Ordinal)
                 .Split(XmlWhitespace, StringSplitOptions.RemoveEmptyEntries);
-            if (tokens.Length is 0 or > 128) return false;
+            if (tokens.Length is 0 or > 128) return null;
             var parser = new AssertionGrammar(tokens, names);
-            return parser.Or(0) && parser._position == tokens.Length;
+            return parser.Or(0) && parser._position == tokens.Length ? new AssertionAdmission(parser._usesCount) : null;
         }
         private bool Or(int depth)
         {
@@ -204,13 +214,21 @@ internal static class AssessmentProfileParser
         {
             if (depth > 16) return false;
             if (Take("(")) return Or(depth + 1) && Take(")");
-            if (!Operand() || _position >= _tokens.Length || _tokens[_position++] is not ("eq" or "ne" or "lt" or "le" or "gt" or "ge")) return false;
-            return Operand();
+            if (!Operand(depth) || _position >= _tokens.Length || _tokens[_position++] is not ("eq" or "ne" or "lt" or "le" or "gt" or "ge")) return false;
+            return Operand(depth);
         }
-        private bool Operand()
+        private bool Operand(int depth)
         {
             if (_position >= _tokens.Length) return false;
             var token = _tokens[_position++];
+            if (token == "count" && _position < _tokens.Length && _tokens[_position] == "(")
+            {
+                if (depth >= 16) return false;
+                _position++;
+                if (_position >= _tokens.Length || !_names.Contains(_tokens[_position++]) || !Take(")")) return false;
+                _usesCount = true;
+                return true;
+            }
             return _names.Contains(token) || ParseDecimal(token, out _, out _) == SchemaAssessmentOutcome.Valid;
         }
         private bool Take(string token)

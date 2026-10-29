@@ -1,4 +1,4 @@
-# Native document assessment — 0.7 development candidate
+# Native document assessment — 0.8 development candidate
 
 The activation-free `SchemaServices.CreateDocumentAssessor` API provides a **bounded native XSD 1.1 assessment**, separately from the existing assertion-only descriptor service. The source is an unpublished feature candidate; this is not full XSD 1.1 conformance or a general core schema-session API.
 
@@ -9,7 +9,7 @@ dotnet run --project examples/Bosak.Schema.Assessment.Example -c Release -p:Bosa
 dotnet test Bosak.Schema.slnx -c Release -p:BosakSourceRoot=D:/Development/Bosak
 ```
 
-The example compiles a schema with repeated `amount`, required `shipped` and optional `tax` decimal children and an assertion, assesses the XML structure and values, then queries/transforms a whole assessed document with its original root state. The output reports a valid assessment, decimal typing, total 15, and successful annotation-preserve/strip checks. The consumer supplies an empty BCL schema set solely as the legacy annotation-copy context; **no XSD 1.1 schema is compiled or validated through it**.
+The example compiles a schema with repeated `amount`, required `shipped` and optional `tax` decimal children and count/positive-value assertions, assesses the XML structure and values, then queries/transforms a whole assessed document with its original root state. The output reports a valid assessment, decimal typing, total 15, and successful annotation-preserve/strip checks. The consumer supplies an empty BCL schema set solely as the legacy annotation-copy context; **no XSD 1.1 schema is compiled or validated through it**.
 
 ## Use the result
 
@@ -36,7 +36,7 @@ if (result.Outcome == SchemaAssessmentOutcome.Valid)
 | Schema | One XML 1.0, DTD-free, no-target-namespace schema; one named global element with one anonymous element-only complex type. |
 | Structure | One sequence of 1–16 unique local xs:decimal declarations, minimum zero/one and finite maximum 1–16, with sum of maxima at most sixteen, followed by 1–8 assertions. |
 | Attributes | Namespace declarations; schema `version` and `xpathDefaultNamespace="##local"`; documented declaration name/type, local minimum zero/one and bounded maximum attributes; assertion test/local default namespace. Everything else is refused. |
-| Assertions | Declared child names or exact decimal constants compared with eq/ne/lt/le/gt/ge, combined with and/or and parentheses under XPath 2.0. No functions, variables, axes, arithmetic or external access. |
+| Assertions | Declared child names, exact decimal constants or unprefixed count(DeclaredChildName) compared with eq/ne/lt/le/gt/ge, combined with and/or and grouping under XPath 2.0. No other functions, prefixes/aliases, arbitrary arguments, variables, axes, arithmetic or external access. |
 | Values | XML-whitespace collapse, exact decimal lexical/value assessment. Non-decimal syntax is Invalid; valid values requiring rounding/overflow/underflow are Unsupported. |
 | Instance | Exact root, child count/order/names, element-only root text and decimal leaf content. No application attributes or xsi requests. Root comments/PIs and decimal CDATA are supported; comments/PIs inside decimal leaves are Unsupported. |
 | Bounds | 32 KiB serialized schema, 64 KiB serialized instance, 256 descendant nodes, 256 decimal lexical characters, 512 assertion characters, 128 assertion tokens and sixteen parenthesis levels. |
@@ -112,3 +112,12 @@ Current delivery: [reviewed Schema 0.7 implementation](REPEATED-DECIMAL-REVIEW.m
 ## Count assertion scope — 29 October 2026
 
 The [count adoption](COUNT-ASSERTION-ADOPTION-2026-10-29.md), [source locks](COUNT-ASSERTION-SOURCES.json) and [plan](COUNT-ASSERTION-PLAN.md) define the next slice. Unprefixed count(DeclaredChildName) is proposed; no count grammar is implemented yet. Prefixed calls/aliases and wider functions remain Unsupported, and bare count child names retain selection semantics. Current Schema 0.7/core 1.34.1 source is unchanged from reviewed qualification. Schema 0.8/v4 is a proposed future target. Native structure/exact-value validation, original state and copy semantics remain mandatory before assertions. No API freeze or release.
+
+## Count assertion candidate — 29 October 2026
+
+Current behavior: [Schema 0.8/v4 count admission](COUNT-ASSERTION-IMPLEMENTATION.md), with unchanged core 1.34.1. Unprefixed count(DeclaredChildName) is admitted in the bounded comparison/logical grammar; bare count names and no-count v1/v2/v3 profiles are preserved. Native structure/exact values still precede assertions. Complete Schema tests: 397 passes (63 new); build/example/docs pass. One historical count refusal is explicitly adopted, with 333 other prior expectations unchanged. Core full/gate qualification is inherited after source/configuration checks, not rerun. Earlier scope-only notices are capture-time history. General API/session/namespace/function coverage and consumer adoption remain pending. Current changes are uncommitted and unpublished.
+
+Final count-candidate qualification: **397 complete Schema cases pass**, including **63 new count/grammar/validation-order/copy cases**. The original 57-case cohort (23 passed/34 failed) now all passes; six further profile/optimization-boundary cases pass. The prior 334-case suite retains **333 unchanged passing expectations** plus the explicitly adopted count capability check. Source-override build has **zero warnings/errors**. The actual native count/absence example and strict documentation checks pass. Core source/tests/harness/fixture references and build configuration remain identical, so **24,214 core passes**, QT3 **31,397/0/424**, qt4 **8,941/0/1,918** (230 sets) are inherited, not fresh full runs. All earlier sealed evidence and original refusal source/receipts remain unchanged.
+
+
+**29 October 2026 review:** Schema 0.8 count assertions reviewed: fresh 397/397 Schema tests pass; core 1.34.1 source and inherited engine gates remain unchanged. Next is the separately scoped presence-predicate implementation; exists/empty remain unsupported in this checkpoint. [Review and next scope](COUNT-ASSERTION-REVIEW.md).
