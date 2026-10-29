@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Add boundary refusal, required-middle and original-copy controls                          |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.4   | 29-10-2026     | Adopt explicit maxOccurs two coverage/profile update; retain other expectations (0.7)    |
+//                      | Charles Korthout | 0.5   | 29-10-2026     | Adopt bounded exists while preserving optional enclosing-group refusal (0.9)             |
 // ===========================================================================================================================================================
 
 using System.Xml.Linq;
@@ -87,14 +88,16 @@ public sealed class OptionalDecimalAssessmentTests
         Assert.Equal(SchemaDiagnosticCodes.AssessmentInvalidInstance, Assert.Single(result.Diagnostics).Code);
     }
 
-    /// <summary>The extension does not admit optional enclosing groups or wider assertion functions.</summary>
+    /// <summary>Bounded presence is admitted while optional enclosing groups remain unsupported.</summary>
     [Fact]
     public void BroaderGroupAndAssertionCoverage_RemainsUnsupported()
     {
         var schema = XDocument.Parse(Compile(Element("a", "0")).SchemaXml);
         schema.Descendants(XName.Get("sequence", "http://www.w3.org/2001/XMLSchema")).Single().SetAttributeValue("minOccurs", "0");
         Assert.False(SchemaServices.CreateDocumentAssessor(schema).IsSupported);
-        Assert.False(Compile(Element("a", "0"), "exists(a)").IsSupported);
+        var presence = Compile(Element("a", "0"), "exists(a)");
+        Assert.True(presence.IsSupported);
+        Assert.Equal("decimal-sequence-assertions-v5", presence.Profile);
     }
 
     /// <summary>Omitted occurrence attributes retain the original required-only profile.</summary>

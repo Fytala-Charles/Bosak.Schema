@@ -90,3 +90,7 @@ The [bounded repetition review checkpoint](docs/REPEATED-DECIMAL-REVIEW.md) reco
 The [count assertion candidate](docs/COUNT-ASSERTION-IMPLEMENTATION.md) implements a finite cardinality-function grammar extension while preserving native validation and existing child-name semantics.
 
 [Bounded Schema assessment review and next scope](docs/COUNT-ASSERTION-REVIEW.md).
+
+The [bounded presence assertion candidate](docs/PRESENCE-ASSERTION-IMPLEMENTATION.md) adds exists/empty predicates while preserving count and typed-copy behavior.
+
+[Presence assertion implementation review](docs/PRESENCE-ASSERTION-REVIEW.md).

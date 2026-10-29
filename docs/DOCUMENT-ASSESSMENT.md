@@ -1,4 +1,4 @@
-# Native document assessment — 0.8 development candidate
+# Native document assessment — 0.9 development candidate
 
 The activation-free `SchemaServices.CreateDocumentAssessor` API provides a **bounded native XSD 1.1 assessment**, separately from the existing assertion-only descriptor service. The source is an unpublished feature candidate; this is not full XSD 1.1 conformance or a general core schema-session API.
 
@@ -9,7 +9,7 @@ dotnet run --project examples/Bosak.Schema.Assessment.Example -c Release -p:Bosa
 dotnet test Bosak.Schema.slnx -c Release -p:BosakSourceRoot=D:/Development/Bosak
 ```
 
-The example compiles a schema with repeated `amount`, required `shipped` and optional `tax` decimal children and count/positive-value assertions, assesses the XML structure and values, then queries/transforms a whole assessed document with its original root state. The output reports a valid assessment, decimal typing, total 15, and successful annotation-preserve/strip checks. The consumer supplies an empty BCL schema set solely as the legacy annotation-copy context; **no XSD 1.1 schema is compiled or validated through it**.
+The example compiles a schema with repeated `amount`, required `shipped` and optional `tax` decimal children and presence/count/positive-value assertions, assesses the XML structure and values, then queries/transforms a whole assessed document with its original root state. The output reports a valid assessment, decimal typing, total 15, and successful annotation-preserve/strip checks. The consumer supplies an empty BCL schema set solely as the legacy annotation-copy context; **no XSD 1.1 schema is compiled or validated through it**.
 
 ## Use the result
 
@@ -36,7 +36,7 @@ if (result.Outcome == SchemaAssessmentOutcome.Valid)
 | Schema | One XML 1.0, DTD-free, no-target-namespace schema; one named global element with one anonymous element-only complex type. |
 | Structure | One sequence of 1–16 unique local xs:decimal declarations, minimum zero/one and finite maximum 1–16, with sum of maxima at most sixteen, followed by 1–8 assertions. |
 | Attributes | Namespace declarations; schema `version` and `xpathDefaultNamespace="##local"`; documented declaration name/type, local minimum zero/one and bounded maximum attributes; assertion test/local default namespace. Everything else is refused. |
-| Assertions | Declared child names, exact decimal constants or unprefixed count(DeclaredChildName) compared with eq/ne/lt/le/gt/ge, combined with and/or and grouping under XPath 2.0. No other functions, prefixes/aliases, arbitrary arguments, variables, axes, arithmetic or external access. |
+| Assertions | Declared child names, exact decimal constants or unprefixed count(DeclaredChildName) compared with eq/ne/lt/le/gt/ge, combined with and/or and grouping under XPath 2.0. Unprefixed exists(DeclaredChildName)/empty(DeclaredChildName) are Boolean predicates under the same logical grouping. No other functions, Boolean comparisons, prefixes/aliases, arbitrary arguments, variables, axes, arithmetic or external access. |
 | Values | XML-whitespace collapse, exact decimal lexical/value assessment. Non-decimal syntax is Invalid; valid values requiring rounding/overflow/underflow are Unsupported. |
 | Instance | Exact root, child count/order/names, element-only root text and decimal leaf content. No application attributes or xsi requests. Root comments/PIs and decimal CDATA are supported; comments/PIs inside decimal leaves are Unsupported. |
 | Bounds | 32 KiB serialized schema, 64 KiB serialized instance, 256 descendant nodes, 256 decimal lexical characters, 512 assertion characters, 128 assertion tokens and sixteen parenthesis levels. |
@@ -121,3 +121,9 @@ Final count-candidate qualification: **397 complete Schema cases pass**, includi
 
 
 **29 October 2026 review:** Schema 0.8 count assertions reviewed: fresh 397/397 Schema tests pass; core 1.34.1 source and inherited engine gates remain unchanged. Next is the separately scoped presence-predicate implementation; exists/empty remain unsupported in this checkpoint. [Review and next scope](COUNT-ASSERTION-REVIEW.md).
+
+
+Current presence implementation — 29 October 2026: Schema 0.9/v5 supports bounded unprefixed exists(child)/empty(child) Boolean predicates, retaining count-only v4 and no-call v1–v3. Complete Schema qualification: 451 passes (54 new); build zero warnings/errors; native example and real preserve/strip consumer tests pass. Two prior refusal expectations are explicitly adopted, 395 unchanged. Core 1.34.1 and its source-identical engine qualification remain inherited. Current implementation is uncommitted/unpublished; next is review and checkpoint. Earlier scope-only/presence-unsupported notices are historical capture state. [Implementation and evidence](PRESENCE-ASSERTION-IMPLEMENTATION.md).
+
+
+**29 October 2026 review:** Schema 0.9/v5 presence predicates reviewed: fresh 451/451 Schema tests pass and all seven tested implementation source identities match. Core 1.34.1 remains unchanged with inherited engine/gate qualification. No further production correction was needed. Earlier uncommitted notices are historical capture state; checkpoint delivery resolves through the review document Git history. [Review](PRESENCE-ASSERTION-REVIEW.md).

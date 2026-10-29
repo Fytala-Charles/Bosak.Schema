@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 29-10-2026     | Creation; bounded count assertion Schema 0.8 candidate                                   |
 //                      | Charles Korthout | 0.2   | 29-10-2026     | Cover structural profile compatibility and full syntax admission before optimization      |
+//                      | Charles Korthout | 0.3   | 29-10-2026     | Migrate only exists refusal to adopted bounded presence support (0.9)                     |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -167,7 +168,7 @@ public sealed class CountAssertionAssessmentTests
     [InlineData("count(a) + 1 eq 3")] [InlineData("fn:count(a) eq 2")]
     [InlineData("f:count(a) eq 2")] [InlineData("COUNT(a) eq 2")]
     [InlineData("sum(a) gt 0")] [InlineData("avg(a) gt 0")]
-    [InlineData("exists(a)")] [InlineData("count(a)")]
+    [InlineData("count(a)")]
     [InlineData("count(a) eq 2 trailing")] [InlineData("count(a eq 2")]
     [InlineData("1 eq 1 or fn:count(a) eq 2")]
     [InlineData("1 eq 0 and sum(a) eq 2")]
@@ -178,6 +179,15 @@ public sealed class CountAssertionAssessmentTests
         Assert.NotEqual("decimal-sequence-assertions-v4", assessor.Profile);
         var result = Assess(assessor, "<a>1</a><a>2</a>");
         Assert.Equal(SchemaAssessmentOutcome.Unsupported, result.Outcome); Assert.Null(result.Document);
+    }
+
+    /// <summary>The previously refused exists case is explicitly adopted without widening other grammar.</summary>
+    [Fact]
+    public void PresenceCapability_IsExplicitlyAdopted()
+    {
+        var assessor = Compile("exists(a)", Element("a") + Element("b"));
+        Valid(assessor, "<a>1</a><a>2</a>");
+        Assert.Equal("decimal-sequence-assertions-v5", assessor.Profile);
     }
 
     /// <summary>XML prefix bindings cannot rebind an unprefixed standard function or admit a prefixed call.</summary>

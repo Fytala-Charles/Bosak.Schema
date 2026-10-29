@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Compile bounded optional local particles; preserve all required-only coverage (0.6)      |
 //                      | Charles Korthout | 0.4   | 29-10-2026     | Compile bounded repeated particles and enforce aggregate maximum sixteen (0.7)           |
 //                      | Charles Korthout | 0.5   | 29-10-2026     | Admit bounded count operands with complete-parse feature tracking and call depth (0.8)   |
+//                      | Charles Korthout | 0.6   | 29-10-2026     | Admit bounded exists/empty Boolean predicates with full syntax metadata (0.9)            |
 // ===========================================================================================================================================================
 
 using System.Globalization;
@@ -97,21 +98,23 @@ internal static class AssessmentProfileParser
         }
         var plans = new List<XPath31Expression>();
         var usesCount = false;
+        var usesPresence = false;
         foreach (var assertion in parts.Skip(1))
         {
             var expression = assertion.Attribute("test")?.Value;
             if (!Attributes(assertion, "test", "xpathDefaultNamespace") || !LocalDefault(assertion) || assertion.HasElements ||
                 expression is null)
-                return Refused(text, "An assertion exceeds the bounded child/decimal/count comparison and logical-expression grammar.");
+                return Refused(text, "An assertion exceeds the bounded comparison/presence predicate and logical-expression grammar.");
             var admission = AssertionGrammar.Admit(expression, names);
             if (admission is null)
-                return Refused(text, "An assertion exceeds the bounded child/decimal/count comparison and logical-expression grammar.");
+                return Refused(text, "An assertion exceeds the bounded comparison/presence predicate and logical-expression grammar.");
             usesCount |= admission.Value.UsesCount;
+            usesPresence |= admission.Value.UsesPresence;
             try { plans.Add(XPath31Expression.Compile(expression, new CompileOptions { Compatibility = XPathCompatibility.XPath20 })); }
             catch (Exception error) when (error is not OutOfMemoryException and not OperationCanceledException)
             { return Refused(text, "The XPath 2.0 compiler refused the assertion: " + error.Message); }
         }
-        return new(text, [], rootDeclaration, children, plans, usesCount);
+        return new(text, [], rootDeclaration, children, plans, usesCount, usesPresence);
     }
 
     private static bool Attributes(XElement element, params string[] permitted) =>
@@ -180,7 +183,7 @@ internal static class AssessmentProfileParser
     }
 
     /// <summary>Features recorded only after complete bounded assertion admission.</summary>
-    internal readonly record struct AssertionAdmission(bool UsesCount);
+    internal readonly record struct AssertionAdmission(bool UsesCount, bool UsesPresence);
 
     private sealed class AssertionGrammar
     {
@@ -188,6 +191,7 @@ internal static class AssessmentProfileParser
         private readonly HashSet<string> _names;
         private int _position;
         private bool _usesCount;
+        private bool _usesPresence;
         private AssertionGrammar(string[] tokens, HashSet<string> names) { _tokens = tokens; _names = names; }
         internal static AssertionAdmission? Admit(string expression, HashSet<string> names)
         {
@@ -196,7 +200,7 @@ internal static class AssessmentProfileParser
                 .Split(XmlWhitespace, StringSplitOptions.RemoveEmptyEntries);
             if (tokens.Length is 0 or > 128) return null;
             var parser = new AssertionGrammar(tokens, names);
-            return parser.Or(0) && parser._position == tokens.Length ? new AssertionAdmission(parser._usesCount) : null;
+            return parser.Or(0) && parser._position == tokens.Length ? new AssertionAdmission(parser._usesCount, parser._usesPresence) : null;
         }
         private bool Or(int depth)
         {
@@ -214,6 +218,14 @@ internal static class AssessmentProfileParser
         {
             if (depth > 16) return false;
             if (Take("(")) return Or(depth + 1) && Take(")");
+            if (_position + 1 < _tokens.Length && _tokens[_position] is "exists" or "empty" && _tokens[_position + 1] == "(")
+            {
+                if (depth >= 16) return false;
+                _position += 2;
+                if (_position >= _tokens.Length || !_names.Contains(_tokens[_position++]) || !Take(")")) return false;
+                _usesPresence = true;
+                return true;
+            }
             if (!Operand(depth) || _position >= _tokens.Length || _tokens[_position++] is not ("eq" or "ne" or "lt" or "le" or "gt" or "ge")) return false;
             return Operand(depth);
         }
