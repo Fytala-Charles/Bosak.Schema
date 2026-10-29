@@ -1,3 +1,5 @@
+Current next slice: [bounded repeated decimal plan](REPEATED-DECIMAL-PLAN.md), with pre-implementation adoption. Optional implementation is reviewed/checkpointed at `773fd69`; repetitions remain unimplemented.
+
 Current delivery: [optional implementation review checkpoint](OPTIONAL-DECIMAL-REVIEW.md). Review found no further production defect; source and existing full qualification match. The next slice is repetition scoping, not implemented repetition.
 
 Current implementation: [optional decimal candidate](OPTIONAL-DECIMAL-IMPLEMENTATION.md), Schema 0.6/core 1.34.1. Implementation and new qualification supersede the earlier scope-only notices. Source bases remain Schema `33a9039` and core `6b362a15`; changes are uncommitted.
@@ -75,3 +77,9 @@ Source bases/unchanged HEADs: Schema `33a9039a9fc605f8f7192bfcec88ea559c5c0e19`,
 ## Optional decimal review checkpoint — 29 October 2026
 
 Current delivery: [reviewed optional implementation](OPTIONAL-DECIMAL-REVIEW.md), Schema 0.6/core 1.34.1. No further production fix was needed; source matches tested qualification. The user authorized checkpoint commit/push; original uncommitted notices are capture-time history. Next: scope repetitions separately before implementation. Full schema/session/API freeze and product adoption remain pending.
+
+## Bounded repeated decimal scope — 29 October 2026
+
+The [repetition adoption](REPEATED-DECIMAL-ADOPTION-2026-10-29.md) and [implementation plan](REPEATED-DECIMAL-PLAN.md) define the next slice. Repetitions are not implemented. The reviewed optional source is checkpointed at Schema `773fd69` / core `5e277c6a`; current Schema 0.6/core 1.34.1 remain unchanged. Sixteen diagnostic observations cover current refusal and real-engine comparison cardinality, not native repetition acceptance. Proposed Schema 0.7/v3 keeps grammar and public overloads unchanged, bounds total occurrences, preserves original state, handles known cardinality errors and refuses ambiguous singular projection. Broader API/session acceptance remains pending.
+
+What was built in this scope: exact pre-implementation normative selection, finite occurrence/aggregate budget, repeated-state and ambiguous-projection decisions, narrow known-cardinality-error policy, acceptance matrix and sixteen diagnostic observations. Existing implementation source/versions remain unchanged; owning snapshots and strict docs checks pass. Delivery resolver: `git log -1 --format=%H -- docs/REPEATED-DECIMAL-PLAN.md`. Next: implement the bounded repeated slice; no repeated support is claimed now.
