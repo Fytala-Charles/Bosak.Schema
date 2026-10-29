@@ -4,6 +4,8 @@
   <p>Current public schema scope, status and acceptance boundaries.</p>
 </div>
 
+**Publication verified — 29 October 2026:** Public GitHub repository and Apache-2.0 detection verified; all 114 tests and the content-commit CI pass. [Publication receipt](PUBLICATION.json). No NuGet release or commercial infrastructure publication.
+
 # Bosak.Schema Feature Requests
 
 > Current public schema scope, status and acceptance boundaries.
@@ -13,7 +15,7 @@
 
 | Request | Status | Scope |
 |---|---|---|
-| Apache/public transition | Implemented in source; GitHub publication verified separately | Schema-only Apache-2.0; activation-free services; private infrastructure excluded |
+| Apache/public transition | Implemented and GitHub publication verified | Schema-only Apache-2.0; activation-free services; private infrastructure excluded |
 | REQ-009 staged XSD 1.1 support | In Progress | Compiled descriptors, assertion/facet evaluation, alternative applicability/filtering and selected metadata |
 | Core schema-session integration | Pending | Complete component authority, actual PSVI/atomic flow, compatible-schema interchange and real consumer qualification |
 | Complete XSD 1.1 structural validation | Incomplete | No complete current implementation or blanket conformance claim |

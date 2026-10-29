@@ -26,4 +26,10 @@ The complete public solution passes 114 tests. Schema integration/assertion happ
 
 The publication receipt records local/remote commits, original/private and new/public repository IDs, visibility, package license metadata and selected-file/credential scan results. No Git history is force-pushed, no old repository is deleted, and no NuGet package or live licensing deployment is changed.
 
+## Verified Publication
+
+GitHub recognizes [Bosak.Schema](https://github.com/Fytala-Charles/Bosak.Schema) as public and Apache-2.0. Original repository ID 1381449647 remains private as Bosak.Licensing; new public ID 1438210599 has a clean parentless initial commit `c4058c33f83960c7937989571d6a01f4ae1e4ffc`. The 114-test public CI passed on [attempt 2](https://github.com/Fytala-Charles/Bosak.Schema/actions/runs/40851118519). The first private-visibility attempt was blocked before execution by account billing limits and is retained as historical evidence.
+
+See [machine-readable receipt](PUBLICATION.json). Local working copies are `D:/Development/Bosak.Schema.Public` for the public engine and `D:/Development/Bosak.Licensing` for private infrastructure. The original locked `D:/Development/Bosak.Schema` checkout remains intact and points to the private licensing remote; do not use it as the public engine checkout. No process was stopped or private directory deleted.
+
 *Last updated: 2026-10-29*

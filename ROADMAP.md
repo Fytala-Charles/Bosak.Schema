@@ -4,6 +4,8 @@
   <p>An open schema foundation with staged validation and integration.</p>
 </div>
 
+**Publication verified — 29 October 2026:** Public GitHub repository and Apache-2.0 detection verified; all 114 tests and the content-commit CI pass. [Publication receipt](docs/PUBLICATION.json). No NuGet release or commercial infrastructure publication.
+
 # Bosak.Schema Roadmap
 
 > An open schema foundation with staged validation and integration.

@@ -4,6 +4,8 @@
   <p>Use schema services without activation and with explicit supported coverage.</p>
 </div>
 
+**Publication verified — 29 October 2026:** Public GitHub repository and Apache-2.0 detection verified; all 114 tests and the content-commit CI pass. [Publication receipt](PUBLICATION.json). No NuGet release or commercial infrastructure publication.
+
 # Bosak.Schema Integration
 
 > Use schema services without activation and with explicit supported coverage.
