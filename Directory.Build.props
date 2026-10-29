@@ -1,0 +1,44 @@
+<Project>
+
+  <!-- Compiler & analysis hygiene — applies to every project in this repository.
+       Note: TreatWarningsAsErrors + GenerateDocumentationFile means missing XML
+       documentation on public members (CS1591) fails the build, per AGENTS.md. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+
+  <!-- Package metadata & versioning. MinVer derives the version from git tags
+       (e.g. tag v0.1.0). Never hard-code <Version> in individual projects. -->
+  <PropertyGroup>
+    <Authors>Charles Korthout</Authors>
+    <Company>Fytala</Company>
+    <Copyright>Copyright 2026 Fytala</Copyright>
+    <Product>Bosak.Schema</Product>
+    <RepositoryUrl>https://github.com/Fytala-Charles/Bosak.Schema.git</RepositoryUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <MinVerMinimumMajorMinor>0.1</MinVerMinimumMajorMinor>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)LICENSE.md" Pack="true" PackagePath="" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)NOTICE" Pack="true" PackagePath="" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

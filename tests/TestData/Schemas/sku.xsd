@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="urn:fytala:bosak:schema:test"
+           xmlns:t="urn:fytala:bosak:schema:test"
+           elementFormDefault="qualified">
+  <xs:simpleType name="sku">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{3}-\d{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="item" type="t:sku"/>
+</xs:schema>
