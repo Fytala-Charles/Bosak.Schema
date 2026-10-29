@@ -94,3 +94,11 @@ The [count assertion candidate](docs/COUNT-ASSERTION-IMPLEMENTATION.md) implemen
 The [bounded presence assertion candidate](docs/PRESENCE-ASSERTION-IMPLEMENTATION.md) adds exists/empty predicates while preserving count and typed-copy behavior.
 
 [Presence assertion implementation review](docs/PRESENCE-ASSERTION-REVIEW.md).
+
+[Consumer compatibility and native Schema priorities](docs/CONSUMER-COVERAGE-PRIORITIES.md).
+
+[Isolated persistent-provider compatibility qualification](docs/XMLDB-COMPATIBILITY-QUALIFICATION.md).
+
+[Isolated authoring/preview source compatibility qualification](docs/BRAID-COMPATIBILITY-QUALIFICATION.md).
+
+[Consumer qualification review](docs/CONSUMER-QUALIFICATION-REVIEW.md).

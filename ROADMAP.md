@@ -13,18 +13,18 @@
 
 ## 1. Current Milestone
 
-The public 0.4 baseline makes schema services Apache-2.0 and activation-free. The unpublished 0.5 candidate implements [native bounded document assessment](docs/DOCUMENT-ASSESSMENT.md) with original declaration/type state and explicit typed-value projection; complete XSD 1.1 and anonymous-root interchange remain incomplete. Public source contains the schema implementation/tests only; the original commercial infrastructure and full Git history remain private. No NuGet release/tag is included in this migration.
+The reviewed unpublished candidate is Schema 0.9 with bounded required/optional/repeated decimal assessment, count and presence assertions, and original typed state/copy behavior. Core dependency candidate is 1.34.1 through the explicit BosakSourceRoot override. Full XSD 1.1 and general session/API acceptance remain pending. The 0.4 Apache/public baseline and subsequent milestones below are historical evidence.
 
 ## 2. Next Milestones
 
-1. Qualify the smallest anonymous-root/whole-document bridge from the real native assessment result, preserving original type/declaration state and no-typed-value/copy behavior.
-2. Qualify complete component/universe identity, compatible-schema handoff, PSVI/atomic flow and bounded resource ownership.
-3. Implement or explicitly refuse remaining XSD 1.1 structural/assessment coverage.
-4. Build/test real consumers and unchanged binaries, then run the full engine/conformance gates before API freeze or release.
+1. Review/checkpoint the [XmlDb](docs/XMLDB-COMPATIBILITY-QUALIFICATION.md) and [Braid](docs/BRAID-COMPATIBILITY-QUALIFICATION.md) isolated source qualifications, preserving actual product pins.
+2. Scope unchanged-binary compatibility or a concrete Schema structural use case separately from source and native host acceptance.
+3. Select native structural coverage from a concrete schema/instance and typed-consumer need; adopt exact specification sources before implementation.
+4. Resolve complete component/universe compatibility and resource ownership before general API acceptance or release.
 
 ## 3. Validation and Limits
 
-The public schema suite passes 114 cases. Existing core package pins stay at 1.26.3. Neither current-draft XDM certification nor full XSD 1.1 support follows from the Apache transition. Billing/key-generation, other product licensing, Folio, XmlDb storage and Braid workflows remain outside this source change.
+Reviewed Schema qualification is 451 tests; core production remains 1.34.1. No new consumer execution, package release, disk-format migration or further grammar admission is included in this priority assessment. Older counts and pin notices below describe original capture state.
 
 *Last updated: 2026-10-29*
 
@@ -70,3 +70,12 @@ Current presence implementation — 29 October 2026: Schema 0.9/v5 supports boun
 
 
 **29 October 2026 review:** Schema 0.9/v5 presence predicates reviewed: fresh 451/451 Schema tests pass and all seven tested implementation source identities match. Core 1.34.1 remains unchanged with inherited engine/gate qualification. No further production correction was needed. Earlier uncommitted notices are historical capture state; checkpoint delivery resolves through the review document Git history. [Review](docs/PRESENCE-ASSERTION-REVIEW.md).
+
+
+Isolated XmlDb qualification (29 October 2026): committed adapter source builds unchanged against current core; 27/27 existing Xdm tests pass on both 1.26.2 and 1.34.1. All 44 bounded diagnostic observations agree, including 26 query pairs, seven persisted kind mappings and nested snapshot disposal. Unrelated consumer dirty work is excluded. No dependency adoption, binary/native/API acceptance or production fix. Next: isolated Braid source compatibility. [Qualification and limits](docs/XMLDB-COMPATIBILITY-QUALIFICATION.md).
+
+
+Isolated Braid qualification (29 October 2026): all actual consumer source builds against current core without a production fix. Original full suites on 1.26.2/current 1.34.1 each report 1,872 passes/four exact-version failures; separate corrected/adapted identity follow-ups pass all four. No single green unchanged full-suite claim, actual dependency adoption or native desktop acceptance. Next: review/checkpoint the consumer-priority and both compatibility dossiers. [Qualification and limits](docs/BRAID-COMPATIBILITY-QUALIFICATION.md).
+
+
+Consumer qualification reviewed (29 October 2026): exact sealed receipts and test identities verified; XmlDb 27 passes per version/44 matching observations, Braid 1,872 passes/four version failures plus separate four passing identity follow-ups per version. No further production fix, dependency adoption or binary/native acceptance. Earlier uncommitted notices are historical; delivery resolves through the review document Git history. Next: separately scope unchanged-binary qualification. [Review checkpoint](docs/CONSUMER-QUALIFICATION-REVIEW.md).
