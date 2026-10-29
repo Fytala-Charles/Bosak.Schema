@@ -124,3 +124,7 @@ The [bounded presence assertion candidate](docs/PRESENCE-ASSERTION-IMPLEMENTATIO
 [Real consumer inspector typed-boundary proof](docs/BRAID-TYPED-INSPECTOR-PROOF.md).
 
 [Typed-inspector proof and integration review](docs/BRAID-TYPED-INSPECTOR-REVIEW.md).
+
+[Isolated guarded authoring-port facade proof](docs/BRAID-GUARDED-PORT-FACADE-PROOF.md).
+
+[Guarded authoring-port facade review](docs/BRAID-GUARDED-PORT-FACADE-REVIEW.md).
