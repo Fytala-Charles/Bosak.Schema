@@ -72,3 +72,7 @@ The unpublished core 1.34.0 provider bridge now carries original anonymous-root 
 ## Reviewed whole-document bridge — 29 October 2026
 
 The optional provider attachment API now checks a replacement completely before removing the previous binding. Failed replacement retains original state and stale-content refusal; failed initial attachment leaves the node unregistered. The trusted host must supply immutable state and the correct assessed value. This API carries that state without performing schema validation. The finite native profile is unchanged; optional children and general API freeze remain pending. Current core candidate is unpublished 1.34.0; use the BosakSourceRoot override. New review qualification lives in the core `docs/schema-document-bridge/api-review` dossier, separately from historical assessment receipts.
+
+The next [optional-decimal-child slice](docs/OPTIONAL-DECIMAL-PLAN.md) has a pre-implementation specification and verification plan. Current supported coverage remains the required-only profile.
+
+The [scope checkpoint](docs/OPTIONAL-DECIMAL-CHECKPOINT.md) links the adoption, plan and current review-delivery identity; optional support remains future work.

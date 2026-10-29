@@ -1,3 +1,7 @@
+Current delivery: [optional decimal scope checkpoint](OPTIONAL-DECIMAL-CHECKPOINT.md). This is the entry point for current source bases, qualification and remote targets; older checkpoint sections below are historical.
+
+Current next slice: [optional decimal child plan](OPTIONAL-DECIMAL-PLAN.md), with its pre-implementation adoption record. Product baseline remains the reviewed whole-document bridge; optional support is not yet implemented.
+
 # Reviewed whole-document bridge checkpoint — 29 October 2026
 
 Current candidate: Schema 0.5 development line with unpublished core 1.34.0 source override. The original public checkout/pins are untouched. The API review and local checkpoint receipts are in the owning core `docs/schema-document-bridge/api-review` dossier. Earlier projection-only notices below are historical; full-document export is now qualified for the finite profile. General API/session acceptance remains pending.
@@ -43,3 +47,15 @@ The optional provider attachment API now checks a replacement completely before 
 Post-review verification: **24,209 core tests pass in one complete solution run**, **204 Schema tests pass**, and all six focused provider attachment cases pass. Release build: zero warnings/errors. QT3 **31,397/0/424**, qt4 **8,941/0/1,918** (230 gated sets, 11 experimental passes), with exact skip mappings unchanged. The full-document example retains original root state and passes typed-value and preserve/strip checks. Prior sealed assessment, bridge and integration receipts remain unchanged.
 
 Local checkpoint authorized by the user instruction to continue the review/commit recommendations. Delivery revision: `git log -1 --format=%H -- docs/AGENT_HANDOVER.md`. What was built includes the bounded native assessment, original-state whole-document export, executable example and review correction qualified above. Core delivery is independently recorded in its `docs/schema-document-bridge/api-review/CHECKPOINT.json`. No push/tag/package/merge. Next: separately pin and plan optional-decimal-child semantics; no general API freeze.
+
+## Optional decimal child scope — 29 October 2026
+
+The [new adoption record](OPTIONAL-DECIMAL-ADOPTION-2026-10-29.md) and [implementation plan](OPTIONAL-DECIMAL-PLAN.md) define the next finite extension. It is not implemented. Keep occurrence bounds on particles, actual element states only for present nodes, and use effective Boolean conversion for empty assertion results. Maximum occurrence stays one; no broader grammar/session admission. Proposed implementation version is Schema 0.6; this documentation step keeps 0.5 and core 1.34.0 unchanged. Fresh baseline: 204 Schema tests pass. Core solution/gates inherit the source-identical `a163ff11` checkpoint. No REQ completion or publication.
+
+Current Schema HEAD `766eff7a77ee08e9c38cf479994e94eaf232d242`; the original scope capture preceded the authorized delivery below. What was built: pre-implementation immutable normative selection, matching/state/assertion/export design and acceptance matrix; no production source change. Next: implement that plan with before/after controls. Preserve sealed core dossiers; evidence/snapshots for this step are in core `docs/schema-optional-children`.
+
+Scope refinement: a thirteenth isolated observation exposes ignorable-whitespace removal being refused for an empty element-only assessed root. Supporting all-optional-absent documents therefore needs a bounded provider binding correction. The future implementation proposes core patch 1.34.1 plus fresh complete core tests and exact conformance gates; current versions and production source stay unchanged. Both the initial twelve and extended thirteen-observation receipts are preserved in the optional-child dossier; they overlap.
+
+## Optional decimal scope delivery — 29 October 2026
+
+See the [synchronized checkpoint](OPTIONAL-DECIMAL-CHECKPOINT.md) for current delivery identity and remote target. Documentation is prepared for the user-authorized commit/push; optional-child semantics are not implemented. Current versions/pins and production source remain unchanged. Thirteen observations and 204 passing Schema baseline cases support the scope; the core suite/gates are inherited. Next: implement the bounded plan and its core binding correction with fresh required qualification.
