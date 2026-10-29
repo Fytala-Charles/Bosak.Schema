@@ -118,3 +118,9 @@ The [bounded presence assertion candidate](docs/PRESENCE-ASSERTION-IMPLEMENTATIO
 [Isolated actual-runtime identity admission experiment](docs/BRAID-ACTUAL-RUNTIME-ADMISSION.md).
 
 [Actual-runtime admission experiment review](docs/BRAID-ACTUAL-RUNTIME-REVIEW.md).
+
+[Consumer engine-session integration boundary design](docs/BRAID-ENGINE-SESSION-INTEGRATION-DESIGN.md).
+
+[Real consumer inspector typed-boundary proof](docs/BRAID-TYPED-INSPECTOR-PROOF.md).
+
+[Typed-inspector proof and integration review](docs/BRAID-TYPED-INSPECTOR-REVIEW.md).
