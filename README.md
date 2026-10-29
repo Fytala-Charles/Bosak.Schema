@@ -86,3 +86,5 @@ The [optional assessment review checkpoint](docs/OPTIONAL-DECIMAL-REVIEW.md) rec
 The [bounded repeated-decimal candidate](docs/REPEATED-DECIMAL-IMPLEMENTATION.md) implements finite occurrence, assertion-cardinality and copy/projection boundaries without widening assertion grammar.
 
 The [bounded repetition review checkpoint](docs/REPEATED-DECIMAL-REVIEW.md) records current implementation review and paired delivery identity.
+
+The next [count assertion scope](docs/COUNT-ASSERTION-PLAN.md) defines a finite cardinality-function grammar extension while preserving native validation and existing child-name semantics.

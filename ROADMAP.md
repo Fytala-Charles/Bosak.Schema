@@ -57,3 +57,5 @@ The next [bounded repetition slice](docs/REPEATED-DECIMAL-PLAN.md) is specified 
 The [bounded repeated-decimal implementation](docs/REPEATED-DECIMAL-IMPLEMENTATION.md) is a local Schema 0.7 candidate with unchanged core 1.34.1. Review/checkpoint precedes further structural or assertion-grammar expansion; general schema/session acceptance and product adoption remain future work.
 
 The [bounded repetition implementation](docs/REPEATED-DECIMAL-REVIEW.md) is reviewed for checkpoint delivery. A separately adopted fn:count assertion slice is next; aggregation and broader grammar remain outside that first function scope.
+
+The next [count assertion slice](docs/COUNT-ASSERTION-PLAN.md) is adopted/planned but unimplemented. Schema 0.7/core 1.34.1 remain current; Schema 0.8/v4 would mark the future count feature. Other aggregates and wider namespace/function grammar remain separate.

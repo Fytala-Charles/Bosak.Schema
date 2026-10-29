@@ -1,3 +1,5 @@
+Current next slice: [count assertion plan](COUNT-ASSERTION-PLAN.md), with explicit normative adoption/source locks. Repetition is reviewed/checkpointed; count admission remains unimplemented.
+
 Current delivery: [repeated decimal review checkpoint](REPEATED-DECIMAL-REVIEW.md). Review found no additional defect; count assertion scoping follows separately.
 
 Current candidate: [bounded repeated decimal implementation](REPEATED-DECIMAL-IMPLEMENTATION.md), Schema 0.7/core 1.34.1. Repetition is implemented; older scope-only notices are historical. Source changes remain uncommitted; core production code is unchanged.
@@ -99,3 +101,9 @@ Current source/unchanged HEAD: Schema `77c740ca5c86f9a98afbeacbe8949b0076da7abd`
 ## Repetition implementation review checkpoint — 29 October 2026
 
 Current delivery: [reviewed Schema 0.7 implementation](REPEATED-DECIMAL-REVIEW.md), with unchanged core 1.34.1. No further production fix was needed; tested source identities and 334-case qualification match. Review/checkpoint is user-authorized. Count assertion support will be a separate adoption/plan; it is not implemented now. Earlier uncommitted notices describe original capture. General API/session acceptance and product adoption remain pending.
+
+## Count assertion scope — 29 October 2026
+
+The [count adoption](COUNT-ASSERTION-ADOPTION-2026-10-29.md), [source locks](COUNT-ASSERTION-SOURCES.json) and [plan](COUNT-ASSERTION-PLAN.md) define the next slice. Unprefixed count(DeclaredChildName) is proposed; no count grammar is implemented yet. Prefixed calls/aliases and wider functions remain Unsupported, and bare count child names retain selection semantics. Current Schema 0.7/core 1.34.1 source is unchanged from reviewed qualification. Schema 0.8/v4 is a proposed future target. Native structure/exact-value validation, original state and copy semantics remain mandatory before assertions. No API freeze or release.
+
+What was built in the count scope: exact normative edition/revision selection with separate retrieved representation hashes, a bounded unprefixed-count operand grammar, child-name/depth/profile/validation-order decisions, acceptance matrix and twelve diagnostic observations. Current production source/versions are unchanged. Schema delivery resolver: `git log -1 --format=%H -- docs/COUNT-ASSERTION-PLAN.md`. Next: implement the separately recorded count plan. No count assertion admission or release is claimed now.
