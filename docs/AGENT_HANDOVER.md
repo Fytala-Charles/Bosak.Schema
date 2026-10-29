@@ -1,3 +1,19 @@
+# Reviewed whole-document bridge checkpoint — 29 October 2026
+
+Current candidate: Schema 0.5 development line with unpublished core 1.34.0 source override. The original public checkout/pins are untouched. The API review and local checkpoint receipts are in the owning core `docs/schema-document-bridge/api-review` dossier. Earlier projection-only notices below are historical; full-document export is now qualified for the finite profile. General API/session acceptance remains pending.
+
+# Native document assessment candidate — 29 October 2026
+
+Current feature worktree: `feature/bounded-document-assessment`, based on public `044d2cb2e67decd46e03e0f5ee7cb03029f34bd9`; implementation changes remain uncommitted. This is the 0.5 MinVer development line, with original published Bosak 1.26.3 package pins unchanged. No tag, hosted CI, package publication or core/session API freeze.
+
+What was built: strict finite native XSD 1.1 schema/profile compiler, native structural/exact-decimal checks before assertions, immutable successful document snapshots and original declaration/type/value state, native PSVI-preserving copies, stripped XML copies and explicit decimal-child projections. A full typed anonymous-root export is refused. The [guide](DOCUMENT-ASSESSMENT.md), [adoption record](ASSESSMENT-ADOPTION-2026-10-29.md) and [ADR-008](ADR-008-bounded-native-assessment.md) own the exact boundary.
+
+Fresh qualification: 191 complete Schema cases (114 original plus 77 new), against both published 1.26.3 and current core source, and 114 unchanged original test binaries with only Schema replaced. Example reports valid assessment, decimal typing, total 15 and successful preserve/strip checks. These scopes overlap; no full XSD 1.1 certification or new XmlDb/Braid adoption. The original first fixture failure used a detached initial context; later copy fixtures required the documented empty BCL annotation context. Original receipts remain separate from final passes.
+
+Next: qualify a minimal whole-document/anonymous-root bridge retaining actual components, atomization errors, preserving/stripping copies, cancellation and lifetime. Preserve earlier general-session proposals and pending acceptance records; do not adopt all proposed types by implication. Follow the existing Git rule: no commit/push/tag unless explicitly requested.
+
+## Historical Apache publication checkpoint
+
 # Bosak.Schema handover — 29 October 2026
 
 **Publication verified — 29 October 2026:** Public GitHub repository and Apache-2.0 detection verified; all 114 tests and the content-commit CI pass. [Publication receipt](PUBLICATION.json). No NuGet release or commercial infrastructure publication.
@@ -11,3 +27,19 @@ Current development line: 0.4 through MinVer; no new tag/NuGet publication is im
 Next: reassess the smallest necessary core/session contract around the open implementation, then qualify real component completeness, compatible-schema handoff and consumers before engine integration. See [architecture](ARCHITECTURE.md), [registry](FEATURE_REQUESTS.md), [integration](INTEGRATION.md) and [transition](APACHE-TRANSITION.md).
 
 Last updated: 2026-10-29
+
+## Whole-document bridge candidate — 29 October 2026
+
+The unpublished core 1.34.0 provider bridge now carries original anonymous-root and decimal-child state through whole-document exports and preserve/strip copies. Root atomization raises FOTY0012; stale content and legacy reassessment refuse explicitly. Use `-p:BosakSourceRoot=D:/Development/Bosak` for builds/tests/examples because candidate package dependencies are unpublished. See [the current guide](DOCUMENT-ASSESSMENT.md). The earlier 191-case receipts describe the historical projection-only checkpoint; fresh bridge qualification is recorded separately in the core `docs/schema-document-bridge` dossier. Broader coverage, consumer adoption and API freeze remain pending. No commit/push/tag/publication.
+
+Fresh bridge qualification: Release build has zero warnings/errors; complete core aggregate **24,207 passed**, native Schema **204 passed** (13 whole-document cases), QT3 **31,397/0/424**, qt4 gated **8,941/0/1,918**, 230 sets and 11 experimental passes. Exact skip mappings match the sealed integration checkpoint. The initial sandbox database failures are retained separately; the local-HTTP-authorized rerun passes all 47 cases. Whole-document example and strict Schema documentation checks pass.
+
+Core base `a2ade8fd`; core candidate 1.34.0, Schema feature base `044d2cb2e67decd46e03e0f5ee7cb03029f34bd9`. What was built: original-state whole-document export, atomization/copy/mutation protections and full-document runnable example. Core dossier `docs/schema-document-bridge` owns new receipts, separately from sealed assessment evidence. Next: bounded-candidate review before broader coverage/session acceptance. Both trees remain uncommitted under the existing Git rule.
+
+## Reviewed whole-document bridge — 29 October 2026
+
+The optional provider attachment API now checks a replacement completely before removing the previous binding. Failed replacement retains original state and stale-content refusal; failed initial attachment leaves the node unregistered. The trusted host must supply immutable state and the correct assessed value. This API carries that state without performing schema validation. The finite native profile is unchanged; optional children and general API freeze remain pending. Current core candidate is unpublished 1.34.0; use the BosakSourceRoot override. New review qualification lives in the core `docs/schema-document-bridge/api-review` dossier, separately from historical assessment receipts.
+
+Post-review verification: **24,209 core tests pass in one complete solution run**, **204 Schema tests pass**, and all six focused provider attachment cases pass. Release build: zero warnings/errors. QT3 **31,397/0/424**, qt4 **8,941/0/1,918** (230 gated sets, 11 experimental passes), with exact skip mappings unchanged. The full-document example retains original root state and passes typed-value and preserve/strip checks. Prior sealed assessment, bridge and integration receipts remain unchanged.
+
+Local checkpoint authorized by the user instruction to continue the review/commit recommendations. Delivery revision: `git log -1 --format=%H -- docs/AGENT_HANDOVER.md`. What was built includes the bounded native assessment, original-state whole-document export, executable example and review correction qualified above. Core delivery is independently recorded in its `docs/schema-document-bridge/api-review/CHECKPOINT.json`. No push/tag/package/merge. Next: separately pin and plan optional-decimal-child semantics; no general API freeze.

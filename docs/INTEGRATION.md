@@ -45,9 +45,28 @@ The new package contains no internal HMAC/product key, signing implementation, k
 
 | Date | Change |
 |---|---|
+| 2026-10-29 | Unpublished 0.5 native assessment candidate: 191 source tests on published/current core and 114 unchanged legacy binary cases; full typed-root projection remains unsupported |
 | 2026-10-29 | Owner-approved Apache-2.0/public schema-only source, activation-free factories and credential-free compatibility shim; 114 tests pass |
 | Before transition | Private proprietary development, preserved separately with its original Git history |
 
 Public factory/type signatures are retained, with the intentional licensing behavior change documented above. Real previously compiled consumer replacement tests and full schema-session ABI/provider acceptance are not certified by these source tests.
 
+## 6. Native Document Assessment (0.5 Candidate)
+
+Use `SchemaServices.CreateDocumentAssessor(schemaDocument)` when a structurally checked document is needed within the explicit profile. Inspect `IsSupported` and diagnostics, then `Assess(instanceDocument, cancellationToken)`; only `Valid` exposes an owned `AssessedDocument`. This is separate from the assertion-only descriptor service above.
+
+`Elements` retains original root/local declarations, anonymous/built-in types, normalized values and typed/no-typed-value state. `Copy()` preserves the original component authority without revalidation. `CreateDocumentCopy(false)` strips PSVI; its true branch explicitly refuses full anonymous-root projection. `CreateTypedElementCopy(name)` exports only a detached assessed decimal child for real legacy XPath/XSLT processing. For XSLT copy checks, use a document context and an explicit empty SchemaSet as the annotation-copy context; no 1.1 schema is routed through that set.
+
+See [complete profile, example and ownership rules](DOCUMENT-ASSESSMENT.md) and [ADR-008](ADR-008-bounded-native-assessment.md). Library references remain published 1.26.3; no package, tag, core API or consumer pin is changed by this candidate.
+
 *Last updated: 2026-10-29*
+
+## Whole-document bridge candidate — 29 October 2026
+
+The unpublished core 1.34.0 provider bridge now carries original anonymous-root and decimal-child state through whole-document exports and preserve/strip copies. Root atomization raises FOTY0012; stale content and legacy reassessment refuse explicitly. Use `-p:BosakSourceRoot=D:/Development/Bosak` for builds/tests/examples because candidate package dependencies are unpublished. See [the current guide](DOCUMENT-ASSESSMENT.md). The earlier 191-case receipts describe the historical projection-only checkpoint; fresh bridge qualification is recorded separately in the core `docs/schema-document-bridge` dossier. Broader coverage, consumer adoption and API freeze remain pending. No commit/push/tag/publication.
+
+## Reviewed whole-document bridge — 29 October 2026
+
+The optional provider attachment API now checks a replacement completely before removing the previous binding. Failed replacement retains original state and stale-content refusal; failed initial attachment leaves the node unregistered. The trusted host must supply immutable state and the correct assessed value. This API carries that state without performing schema validation. The finite native profile is unchanged; optional children and general API freeze remain pending. Current core candidate is unpublished 1.34.0; use the BosakSourceRoot override. New review qualification lives in the core `docs/schema-document-bridge/api-review` dossier, separately from historical assessment receipts.
+
+Post-review verification: **24,209 core tests pass in one complete solution run**, **204 Schema tests pass**, and all six focused provider attachment cases pass. Release build: zero warnings/errors. QT3 **31,397/0/424**, qt4 **8,941/0/1,918** (230 gated sets, 11 experimental passes), with exact skip mappings unchanged. The full-document example retains original root state and passes typed-value and preserve/strip checks. Prior sealed assessment, bridge and integration receipts remain unchanged.

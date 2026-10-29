@@ -1,0 +1,76 @@
+# Native document assessment — 0.5 development candidate
+
+The activation-free `SchemaServices.CreateDocumentAssessor` API provides a **bounded native XSD 1.1 assessment**, separately from the existing assertion-only descriptor service. The source is an unpublished feature candidate; this is not full XSD 1.1 conformance or a general core schema-session API.
+
+## Run the example
+
+```sh
+dotnet run --project examples/Bosak.Schema.Assessment.Example -c Release -p:BosakSourceRoot=D:/Development/Bosak
+dotnet test Bosak.Schema.slnx -c Release -p:BosakSourceRoot=D:/Development/Bosak
+```
+
+The example compiles a schema with `amount`/`shipped` decimal children and an assertion, assesses the XML structure and values, then queries/transforms a whole assessed document with its original root state. The output reports a valid assessment, decimal typing, total 15, and successful annotation-preserve/strip checks. The consumer supplies an empty BCL schema set solely as the legacy annotation-copy context; **no XSD 1.1 schema is compiled or validated through it**.
+
+## Use the result
+
+```csharp
+var assessor = SchemaServices.CreateDocumentAssessor(schemaDocument);
+var result = assessor.Assess(instanceDocument, cancellationToken);
+if (result.Outcome == SchemaAssessmentOutcome.Valid)
+{
+    var assessed = result.Document!;
+    var rootState = assessed.Elements[0];
+    var originalComponents = rootState.Declaration;
+    var preserved = assessed.Copy();
+    var untypedXml = assessed.CreateDocumentCopy(preserveTypeAnnotations: false);
+    var decimalLeaf = assessed.CreateTypedElementCopy("amount");
+}
+```
+
+`IsSupported` describes compilation of this finite profile. It does not certify that an arbitrary schema is valid or fully implemented. `Invalid` means a supported structure, lexical constraint or assertion failed. `Unsupported` means coverage/representation was refused. Neither outcome exposes an `AssessedDocument`. Cancellation throws; it does not produce successful partial output.
+
+## Exact profile
+
+| Area | Supported coverage |
+|---|---|
+| Schema | One XML 1.0, DTD-free, no-target-namespace schema; one named global element with one anonymous element-only complex type. |
+| Structure | One sequence of 1–16 unique local xs:decimal declarations, each occurring exactly once, followed by 1–8 assertions. |
+| Attributes | Namespace declarations; schema `version` and `xpathDefaultNamespace="##local"`; documented declaration name/type and occurrence-one attributes; assertion test/local default namespace. Everything else is refused. |
+| Assertions | Declared child names or exact decimal constants compared with eq/ne/lt/le/gt/ge, combined with and/or and parentheses under XPath 2.0. No functions, variables, axes, arithmetic or external access. |
+| Values | XML-whitespace collapse, exact decimal lexical/value assessment. Non-decimal syntax is Invalid; valid values requiring rounding/overflow/underflow are Unsupported. |
+| Instance | Exact root, child count/order/names, element-only root text and decimal leaf content. No application attributes or xsi requests. Root comments/PIs and decimal CDATA are supported; comments/PIs inside decimal leaves are Unsupported. |
+| Bounds | 32 KiB serialized schema, 64 KiB serialized instance, 256 descendant nodes, 256 decimal lexical characters, 512 assertion characters, 128 assertion tokens and sixteen parenthesis levels. |
+
+Imports/includes, named types, attributes, facets, alternatives, nil/default/fixed, identity constraints, wildcards, open content and other constructs are explicitly outside the profile. Unsupported constructs are never dropped and sent to a 1.0 validator. The native implementation uses no `XmlSchemaSet` structural-validation path.
+
+## Ownership and original state
+
+The assessor captures immutable schema text, original declaration/type objects and assertion plans. Each successful assessment owns a separate normalized XML snapshot and immutable element states. The root retains its anonymous complex type and **has no typed value**; decimal children retain their actual built-in type, governing local declaration and exact typed value. This profile never admits nilled elements.
+
+Native `Copy()` preserves original PSVI, component references and `AssessmentIdentity` without revalidation; it creates an independent snapshot and `SnapshotIdentity`. These are process-local instance labels, not persistent source identities or compatibility proofs. Independent compilation creates independent anonymous component authority even when schema digests match.
+
+The result cannot be mutated through the original schema/instance, its read-only collections or exported XML. Exported XML is caller-owned; later edits invalidate any assumptions about that export's assessment and do not modify the retained result. Inputs must not be concurrently edited while being captured. Immutable compiled assessors can process independent documents concurrently; no session/resource is disposed on behalf of the caller.
+
+## Engine projection boundary
+
+`CreateTypedElementCopy` exports a **detached built-in decimal value view**, not local-declaration authority or a complete PSVI document. Use it with `XDocumentNode` for real typed XPath and wrap it in an `XDocument` for the example's XSLT initial-template invocation. Native and engine preserve/strip copies are tested separately.
+
+`CreateDocumentCopy(preserveTypeAnnotations: true)` now exports the whole document through the unpublished core 1.34.0 `XdmElementAssessment` provider bridge. Original owner and element/component state are retained; the anonymous element-only root has no typed value (FOTY0012 on atomization), while decimal children retain exact typed values. The false branch exports stripped XML. XQuery/XSLT preserve copies retain state and strip copies remove it. Edited content refuses stale values; namespace fixup and ignorable element-only whitespace preserve state.
+
+Legacy reassessment and declaration projection refuse explicitly. No anonymous name is synthesized and QName/digest equality grants no cross-schema admission. Full schema-element matching, compatible universes, general PSVI serialization and product adoption remain pending. The candidate requires `BosakSourceRoot` because core 1.34.0 is unpublished; original public checkout/package pins remain unchanged.
+
+## Historical assessment-only qualification
+
+The complete candidate Schema suite passes **191 cases**: the original 114 plus 77 new assessment cases. It passes against the unchanged published 1.26.3 package pins and against current core source in an isolated source wrapper. Existing 114-case test binaries also pass with only the Schema library replaced by the candidate. These scopes overlap and must not be added together.
+
+The general core production code, frozen conformance gates and consumer dependency pins are unchanged. No new hosted CI result, package/tag publication or public API freeze is claimed. See the [adoption record](ASSESSMENT-ADOPTION-2026-10-29.md) and [ADR-008](ADR-008-bounded-native-assessment.md).
+
+## Current whole-document qualification
+
+Fresh bridge qualification: Release build has zero warnings/errors; complete core aggregate **24,207 passed**, native Schema **204 passed** (13 whole-document cases), QT3 **31,397/0/424**, qt4 gated **8,941/0/1,918**, 230 sets and 11 experimental passes. Exact skip mappings match the sealed integration checkpoint. The initial sandbox database failures are retained separately; the local-HTTP-authorized rerun passes all 47 cases. Whole-document example and strict Schema documentation checks pass. Core 1.34.0 source override is required for this candidate; historical published-1.26.3 runs above do not qualify the new bridge.
+
+## Reviewed whole-document bridge — 29 October 2026
+
+The optional provider attachment API now checks a replacement completely before removing the previous binding. Failed replacement retains original state and stale-content refusal; failed initial attachment leaves the node unregistered. The trusted host must supply immutable state and the correct assessed value. This API carries that state without performing schema validation. The finite native profile is unchanged; optional children and general API freeze remain pending. Current core candidate is unpublished 1.34.0; use the BosakSourceRoot override. New review qualification lives in the core `docs/schema-document-bridge/api-review` dossier, separately from historical assessment receipts.
+
+Post-review verification: **24,209 core tests pass in one complete solution run**, **204 Schema tests pass**, and all six focused provider attachment cases pass. Release build: zero warnings/errors. QT3 **31,397/0/424**, qt4 **8,941/0/1,918** (230 gated sets, 11 experimental passes), with exact skip mappings unchanged. The full-document example retains original root state and passes typed-value and preserve/strip checks. Prior sealed assessment, bridge and integration receipts remain unchanged.

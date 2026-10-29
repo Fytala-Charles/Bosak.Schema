@@ -19,6 +19,7 @@
 //                      | Charles Korthout | 0.5   | 27-10-2026     | Added BSK-XSD-015 AlternativeNotApplicable (REQ-009 S4b)                                 |
 
 //                      | Charles Korthout | 0.6   | 29-10-2026     | Publish schema-only Apache-2.0 source; remove activation dependency                       |
+//                      | Charles Korthout | 0.7   | 29-10-2026     | Add explicit native assessment coverage and invalid-instance diagnostics                 |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -47,6 +48,12 @@ public sealed record SchemaDiagnostic(string Code, string Message, string? NodeP
 /// </summary>
 public static class SchemaDiagnosticCodes
 {
+    /// <summary>A native document assessment requests unsupported profile or representation coverage.</summary>
+    public const string AssessmentUnsupported = "BSK-XSD-016";
+
+    /// <summary>An instance violates a supported native structural or lexical constraint.</summary>
+    public const string AssessmentInvalidInstance = "BSK-XSD-017";
+
     /// <summary>The document root is not an <c>xs:schema</c> element in the XML Schema namespace.</summary>
     public const string RootNotSchema = "BSK-XSD-001";
 

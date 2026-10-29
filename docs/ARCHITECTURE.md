@@ -22,6 +22,7 @@ One public `Bosak.Schema` assembly references the published Bosak XPath API/prov
 | `Compilation` | Explicit-version schema descriptor compilation and bounded resolved imports/includes |
 | `Model` | Staged XSD 1.1 assertions, alternatives, declarations, simple facets, open-content/default-attribute metadata |
 | `Validation` | Assertion/facet evaluation and supported governing-type applicability through Bosak XPath |
+| `Assessment` | Native finite structural/decimal/assertion assessment, immutable component state and explicit built-in value projection (0.5 candidate) |
 | `SchemaServices` | Activation-free factories for compiler and validation services |
 | `SchemaAwareXslt` | Opt-in helper for the existing schema-aware XSLT path |
 | Legacy license DTO/shim types | API compatibility only; no credential implementation or authority |
@@ -42,11 +43,28 @@ Schema language version, host/XDM profile, component authority and source/snapsh
 | Preserve modular package and core dependency direction | Retained |
 | Require no activation for standards processing | Implemented |
 | Full XSD 1.1 provider/session integration | Pending; no conformance promotion |
+| [ADR-008: bounded native assessment](ADR-008-bounded-native-assessment.md) | Implemented candidate; public API freeze pending |
 
 ## 5. Validation and Extensibility
 
-All 114 public schema tests pass. Existing assertion, facet, alternative, resource-policy and typed-XSLT regression bodies are retained; commercial credential tests remain with the private infrastructure. New tests cover activation-free factories, valid/invalid assertions, ignored legacy activation, invalid directory input and absence of issuer/credential implementations.
+The publication baseline has 114 tests. The 0.5 native assessment candidate passes 191 tests (114 existing plus 77 new) against published 1.26.3 and current core source; those overlapping scopes are not additive. Existing 114-case test binaries pass with only the Schema assembly replaced. Existing assertion, facet, alternative, resource-policy and typed-XSLT regression bodies are retained; commercial credential tests remain with the private infrastructure. New tests cover activation-free factories, valid/invalid assertions, ignored legacy activation, invalid directory input and absence of issuer/credential implementations.
 
 No new engine implementation, baseline/filter change, storage migration or consumer adoption is included. Registry reclamation, full PSVI/component completeness and real consumer ABI qualification remain future acceptance gates.
 
+## 6. Native Assessment Candidate
+
+[ADR-008](ADR-008-bounded-native-assessment.md) separates complete admitted-profile assessment from descriptor assertion success. Compilation captures a closed single-schema model and finite XPath 2.0 assertion plans. Native validation checks structure and exact decimal values before assertions; successful results alone own snapshots and original declaration/type state. Unsupported coverage cannot fall back to XmlSchemaSet or expose a partially assessed document.
+
+Anonymous root authority is retained in the native result, not invented from a QName or digest. Native copies preserve original PSVI; full typed XML projection is refused. Explicit decimal-child projections use the actual built-in type with the legacy provider, without claiming local-declaration interchange. The [profile guide](DOCUMENT-ASSESSMENT.md) documents limits, ownership, cancellation and the next root bridge. No core/session interface, normal engine dependency or global conformance admission changes.
+
 *Last updated: 2026-10-29*
+
+## Whole-document bridge candidate — 29 October 2026
+
+The unpublished core 1.34.0 provider bridge now carries original anonymous-root and decimal-child state through whole-document exports and preserve/strip copies. Root atomization raises FOTY0012; stale content and legacy reassessment refuse explicitly. Use `-p:BosakSourceRoot=D:/Development/Bosak` for builds/tests/examples because candidate package dependencies are unpublished. See [the current guide](DOCUMENT-ASSESSMENT.md). The earlier 191-case receipts describe the historical projection-only checkpoint; fresh bridge qualification is recorded separately in the core `docs/schema-document-bridge` dossier. Broader coverage, consumer adoption and API freeze remain pending. No commit/push/tag/publication.
+
+## Reviewed whole-document bridge — 29 October 2026
+
+The optional provider attachment API now checks a replacement completely before removing the previous binding. Failed replacement retains original state and stale-content refusal; failed initial attachment leaves the node unregistered. The trusted host must supply immutable state and the correct assessed value. This API carries that state without performing schema validation. The finite native profile is unchanged; optional children and general API freeze remain pending. Current core candidate is unpublished 1.34.0; use the BosakSourceRoot override. New review qualification lives in the core `docs/schema-document-bridge/api-review` dossier, separately from historical assessment receipts.
+
+Post-review verification: **24,209 core tests pass in one complete solution run**, **204 Schema tests pass**, and all six focused provider attachment cases pass. Release build: zero warnings/errors. QT3 **31,397/0/424**, qt4 **8,941/0/1,918** (230 gated sets, 11 experimental passes), with exact skip mappings unchanged. The full-document example retains original root state and passes typed-value and preserve/strip checks. Prior sealed assessment, bridge and integration receipts remain unchanged.

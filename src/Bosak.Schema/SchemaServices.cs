@@ -16,8 +16,11 @@
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Make schema compilation and validation factories activation-free                         |
 
 //                      | Charles Korthout | 0.4   | 29-10-2026     | Publish schema-only Apache-2.0 source; remove activation dependency                       |
+//                      | Charles Korthout | 0.5   | 29-10-2026     | Add native bounded document assessor factory (0.5 development line)                      |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
+
+using System.Xml.Linq;
 
 namespace Bosak.Schema;
 
@@ -27,10 +30,18 @@ namespace Bosak.Schema;
 /// without flowing through the core engine's XSD 1.0-only <c>XmlSchemaSet</c> seam, and an
 /// <see cref="IXsdValidationService"/> (S2) that evaluates the recorded assertions against
 /// candidate elements (ADR-005).
+/// A separate <see cref="XsdDocumentAssessor"/> checks structure, exact values and assertions
+/// within an explicit native XSD 1.1 document profile before returning an owned assessment.
 /// </summary>
 /// <remarks>Available under Apache-2.0; no license activation is required.</remarks>
 public static class SchemaServices
 {
+    /// <summary>Compiles the finite native XSD 1.1 decimal-sequence/assertion assessment profile.</summary>
+    /// <param name="schema">Caller-owned schema XML, captured independently of later edits.</param>
+    /// <returns>An immutable assessor with explicit support diagnostics and no activation requirement.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="schema"/> is null.</exception>
+    public static XsdDocumentAssessor CreateDocumentAssessor(XDocument schema) => AssessmentProfileParser.Compile(schema);
+
     /// <summary>
     /// Creates an <see cref="IXsdSchemaCompiler"/> that parses XSD documents with hardened
     /// <see cref="System.Xml.XmlReader"/> settings, records XSD 1.1 assertion/alternative

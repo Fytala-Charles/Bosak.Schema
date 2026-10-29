@@ -15,7 +15,9 @@
 
 Bosak.Schema is free, open-source Fytala software under [Apache-2.0](LICENSE.md). Schema compilation and validation require no activation, license key, trial, subscription or billing service. This public repository contains only the schema engine, its tests and documentation.
 
-The implementation targets .NET 10 and currently references published Bosak 1.26.3 packages. It provides schema-aware XSLT compiler helpers and a staged XSD 1.1 component/assertion pipeline. Complete XSD 1.1 structural validation and integration of its full component universe into running Bosak expressions are **not yet implemented**. See the [support matrix](docs/FEATURE_REQUESTS.md).
+The implementation targets .NET 10. This feature candidate requires unpublished Bosak 1.34.0 through the local source override below; the original public checkout retains its published 1.26.3 dependency pins. It provides schema-aware XSLT compiler helpers and a staged XSD 1.1 component/assertion pipeline. Complete XSD 1.1 structural validation and integration of its full component universe into running Bosak expressions are **not yet implemented**. See the [support matrix](docs/FEATURE_REQUESTS.md).
+
+The unpublished 0.5 development candidate adds [native document assessment](docs/DOCUMENT-ASSESSMENT.md): a complete structural/decimal/assertion check for one explicit XSD 1.1 profile, an owned result with original declaration/type state, and whole-document exports for Bosak queries/transforms. Anonymous-root and decimal-child assessment state survives preserve copies; strip removes it. Unsupported coverage, including general declaration matching and compatible-universe interchange, is refused.
 
 The initial public source is derived from Fytala's private schema source at `fa0da3e2d9972706a5a86616ef285af4daf5037b`, with the owner-approved Apache transition on 29 October 2026. Billing, key-generation, deployment material and private Git history remain outside this repository. See [provenance](docs/APACHE-TRANSITION.md).
 
@@ -36,8 +38,9 @@ The `SchemaAwareXslt` helper explicitly enables the existing schema-aware compil
 ## 3. Build and Test
 
 ```powershell
-dotnet build Bosak.Schema.slnx -c Release
-dotnet test Bosak.Schema.slnx -c Release
+dotnet build Bosak.Schema.slnx -c Release -p:BosakSourceRoot=D:/Development/Bosak
+dotnet test Bosak.Schema.slnx -c Release -p:BosakSourceRoot=D:/Development/Bosak
+dotnet run --project examples/Bosak.Schema.Assessment.Example -c Release -p:BosakSourceRoot=D:/Development/Bosak
 pwsh tools/check-docs.ps1 -ProjectPath .
 ```
 
@@ -50,6 +53,7 @@ The public solution needs the .NET 10 SDK; it has no Azure, payment-service, key
 | `src/Bosak.Schema` | Schema compilation, models, validation and activation-free integration |
 | `tests/Bosak.Schema.Tests` | Schema and Apache compatibility regressions |
 | `tests/TestData/Schemas` | Locally authored schema fixtures |
+| `examples/Bosak.Schema.Assessment.Example` | Runnable native assessment and typed query/transformation |
 | `docs` | Architecture, integration, roadmap and transition decisions |
 | `tools` | Build and documentation checks |
 
@@ -60,3 +64,11 @@ Existing schema factory signatures remain intact. The old `License` entry points
 Fytala retains copyright and trademark ownership; Apache-2.0 grants the rights stated in the license. Branding does not grant trademark rights. The new license applies to this public source release; old proprietary releases and private licensing-product agreements are separate historical artifacts.
 
 *Last updated: 2026-10-29*
+
+## Whole-document bridge candidate — 29 October 2026
+
+The unpublished core 1.34.0 provider bridge now carries original anonymous-root and decimal-child state through whole-document exports and preserve/strip copies. Root atomization raises FOTY0012; stale content and legacy reassessment refuse explicitly. Use `-p:BosakSourceRoot=D:/Development/Bosak` for builds/tests/examples because candidate package dependencies are unpublished. See [the current guide](docs/DOCUMENT-ASSESSMENT.md). The earlier 191-case receipts describe the historical projection-only checkpoint; fresh bridge qualification is recorded separately in the core `docs/schema-document-bridge` dossier. Broader coverage, consumer adoption and API freeze remain pending. No commit/push/tag/publication.
+
+## Reviewed whole-document bridge — 29 October 2026
+
+The optional provider attachment API now checks a replacement completely before removing the previous binding. Failed replacement retains original state and stale-content refusal; failed initial attachment leaves the node unregistered. The trusted host must supply immutable state and the correct assessed value. This API carries that state without performing schema validation. The finite native profile is unchanged; optional children and general API freeze remain pending. Current core candidate is unpublished 1.34.0; use the BosakSourceRoot override. New review qualification lives in the core `docs/schema-document-bridge/api-review` dossier, separately from historical assessment receipts.
