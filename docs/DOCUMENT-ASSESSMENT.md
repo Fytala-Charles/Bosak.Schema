@@ -1,4 +1,4 @@
-# Native document assessment — 0.6 development candidate
+# Native document assessment — 0.7 development candidate
 
 The activation-free `SchemaServices.CreateDocumentAssessor` API provides a **bounded native XSD 1.1 assessment**, separately from the existing assertion-only descriptor service. The source is an unpublished feature candidate; this is not full XSD 1.1 conformance or a general core schema-session API.
 
@@ -9,7 +9,7 @@ dotnet run --project examples/Bosak.Schema.Assessment.Example -c Release -p:Bosa
 dotnet test Bosak.Schema.slnx -c Release -p:BosakSourceRoot=D:/Development/Bosak
 ```
 
-The example compiles a schema with required `amount`/`shipped` and optional `tax` decimal children and an assertion, assesses the XML structure and values, then queries/transforms a whole assessed document with its original root state. The output reports a valid assessment, decimal typing, total 15, and successful annotation-preserve/strip checks. The consumer supplies an empty BCL schema set solely as the legacy annotation-copy context; **no XSD 1.1 schema is compiled or validated through it**.
+The example compiles a schema with repeated `amount`, required `shipped` and optional `tax` decimal children and an assertion, assesses the XML structure and values, then queries/transforms a whole assessed document with its original root state. The output reports a valid assessment, decimal typing, total 15, and successful annotation-preserve/strip checks. The consumer supplies an empty BCL schema set solely as the legacy annotation-copy context; **no XSD 1.1 schema is compiled or validated through it**.
 
 ## Use the result
 
@@ -23,7 +23,7 @@ if (result.Outcome == SchemaAssessmentOutcome.Valid)
     var originalComponents = rootState.Declaration;
     var preserved = assessed.Copy();
     var untypedXml = assessed.CreateDocumentCopy(preserveTypeAnnotations: false);
-    var decimalLeaf = assessed.CreateTypedElementCopy("amount");
+    var decimalLeaf = assessed.CreateTypedElementCopy("shipped"); // exactly one actual match
 }
 ```
 
@@ -34,8 +34,8 @@ if (result.Outcome == SchemaAssessmentOutcome.Valid)
 | Area | Supported coverage |
 |---|---|
 | Schema | One XML 1.0, DTD-free, no-target-namespace schema; one named global element with one anonymous element-only complex type. |
-| Structure | One sequence of 1–16 unique local xs:decimal declarations, each occurring zero-or-one or exactly once, followed by 1–8 assertions. |
-| Attributes | Namespace declarations; schema `version` and `xpathDefaultNamespace="##local"`; documented declaration name/type, local minimum zero/one and maximum-one attributes; assertion test/local default namespace. Everything else is refused. |
+| Structure | One sequence of 1–16 unique local xs:decimal declarations, minimum zero/one and finite maximum 1–16, with sum of maxima at most sixteen, followed by 1–8 assertions. |
+| Attributes | Namespace declarations; schema `version` and `xpathDefaultNamespace="##local"`; documented declaration name/type, local minimum zero/one and bounded maximum attributes; assertion test/local default namespace. Everything else is refused. |
 | Assertions | Declared child names or exact decimal constants compared with eq/ne/lt/le/gt/ge, combined with and/or and parentheses under XPath 2.0. No functions, variables, axes, arithmetic or external access. |
 | Values | XML-whitespace collapse, exact decimal lexical/value assessment. Non-decimal syntax is Invalid; valid values requiring rounding/overflow/underflow are Unsupported. |
 | Instance | Exact root, child count/order/names, element-only root text and decimal leaf content. No application attributes or xsi requests. Root comments/PIs and decimal CDATA are supported; comments/PIs inside decimal leaves are Unsupported. |
@@ -98,3 +98,13 @@ Current delivery: [reviewed optional implementation](OPTIONAL-DECIMAL-REVIEW.md)
 ## Bounded repeated decimal scope — 29 October 2026
 
 The [repetition adoption](REPEATED-DECIMAL-ADOPTION-2026-10-29.md) and [implementation plan](REPEATED-DECIMAL-PLAN.md) define the next slice. Repetitions are not implemented. The reviewed optional source is checkpointed at Schema `773fd69` / core `5e277c6a`; current Schema 0.6/core 1.34.1 remain unchanged. Sixteen diagnostic observations cover current refusal and real-engine comparison cardinality, not native repetition acceptance. Proposed Schema 0.7/v3 keeps grammar and public overloads unchanged, bounds total occurrences, preserves original state, handles known cardinality errors and refuses ambiguous singular projection. Broader API/session acceptance remains pending.
+
+## Bounded repeated decimal candidate — 29 October 2026
+
+Current behavior: [Schema 0.7/v3 repetition implementation](REPEATED-DECIMAL-IMPLEMENTATION.md). Local minimum zero/one, maximum and total budget up to sixteen, contiguous ordered states, shared original declarations, narrow XPTY0004 assertion failure and ambiguous singular projection refusal are implemented. Required-only v1 and optional v2 remain; broader grammar is refused. Fresh complete Schema tests: 334 passes (74 new). Build/example pass; unchanged core 1.34.1 full/gate evidence is inherited after source checks. Earlier planned-scope/version notices describe earlier capture. General schema/session acceptance and product adoption remain pending. Source changes are uncommitted and unpublished.
+
+Final repeated-candidate qualification: **334 complete Schema cases pass**, including **74 new repetition/error-boundary cases**. The original 57-case before cohort (17 passed/40 failed) now all passes; seventeen further boundary/safety cases also pass. The prior 260-case suite retains 259 unchanged passing expectations and one explicitly adopted maxOccurs-two coverage/profile update. Schema source-override Release build: **zero warnings/errors**. The repeated-document XPath/XSLT example and strict Schema docs check pass. Core source/tests/harness/fixture references and build configuration are unchanged from the reviewed source, so **24,214 core passes**, QT3 **31,397/0/424** and qt4 **8,941/0/1,918** (230 sets) are inherited, not fresh full runs. Exact raw source/receipt identities and all earlier sealed dossiers are preserved.
+
+## Repetition implementation review checkpoint — 29 October 2026
+
+Current delivery: [reviewed Schema 0.7 implementation](REPEATED-DECIMAL-REVIEW.md), with unchanged core 1.34.1. No further production fix was needed; tested source identities and 334-case qualification match. Review/checkpoint is user-authorized. Count assertion support will be a separate adoption/plan; it is not implemented now. Earlier uncommitted notices describe original capture. General API/session acceptance and product adoption remain pending.

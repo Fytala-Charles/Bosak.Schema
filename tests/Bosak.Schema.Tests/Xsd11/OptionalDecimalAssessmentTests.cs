@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 29-10-2026     | Enumerate constructor results through the unboxed sequence API                            |
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Add boundary refusal, required-middle and original-copy controls                          |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.4   | 29-10-2026     | Adopt explicit maxOccurs two coverage/profile update; retain other expectations (0.7)    |
 // ===========================================================================================================================================================
 
 using System.Xml.Linq;
@@ -121,7 +122,7 @@ public sealed class OptionalDecimalAssessmentTests
     [InlineData("", "1", false)]
     [InlineData("2", "1", false)]
     [InlineData("0", "0", false)]
-    [InlineData("0", "2", false)]
+    [InlineData("0", "2", true)]
     [InlineData("0", "unbounded", false)]
     public void OccurrenceCoverage_IsFinite(string minimum, string maximum, bool supported)
     {
@@ -133,7 +134,8 @@ public sealed class OptionalDecimalAssessmentTests
             Assert.Equal(SchemaAssessmentOutcome.Unsupported, result.Outcome);
             Assert.Null(result.Document);
         }
-        else Assert.Equal(minimum.Trim(' ', '0').Length == 0 ? "decimal-sequence-assertions-v2" : "decimal-sequence-assertions-v1", assessor.Profile);
+        else Assert.Equal(maximum.Trim(' ', '0') == "2" ? "decimal-sequence-assertions-v3"
+            : minimum.Trim(' ', '0').Length == 0 ? "decimal-sequence-assertions-v2" : "decimal-sequence-assertions-v1", assessor.Profile);
     }
 
     /// <summary>Optional first/middle/last particles do not shift the original declaration of later nodes.</summary>

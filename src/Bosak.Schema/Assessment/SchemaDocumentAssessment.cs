@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Preserve absence of a root normalized value and original no-typed-value state           |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.4   | 29-10-2026     | Bind local occurrence to internal particles; keep original declaration identities (0.6)  |
+//                      | Charles Korthout | 0.5   | 29-10-2026     | Store finite local occurrence bounds separately from declaration identity (0.7)          |
 // ===========================================================================================================================================================
 
 using System.Xml.Linq;
@@ -60,7 +61,7 @@ public sealed class AssessedElementDeclaration
 }
 
 /// <summary>Internal local particle binding; occurrence is separate from declaration identity.</summary>
-internal readonly record struct AssessmentParticle(AssessedElementDeclaration Declaration, bool IsOptional);
+internal readonly record struct AssessmentParticle(AssessedElementDeclaration Declaration, int MinOccurs, int MaxOccurs);
 
 /// <summary>Immutable original assessment state for one present element in the owned snapshot.</summary>
 public sealed class AssessedElement

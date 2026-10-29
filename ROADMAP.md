@@ -53,3 +53,7 @@ Current behavior: [Schema 0.6 optional assessment](docs/OPTIONAL-DECIMAL-IMPLEME
 The [optional assessment implementation](docs/OPTIONAL-DECIMAL-REVIEW.md) is reviewed for checkpoint delivery. Bounded repeated-child coverage is the next scope; general schema/session acceptance and product adoption remain future work.
 
 The next [bounded repetition slice](docs/REPEATED-DECIMAL-PLAN.md) is specified but not implemented. Current optional support remains Schema 0.6/core 1.34.1; Schema 0.7/v3 is a future candidate target. General schema/session acceptance and product adoption remain separate.
+
+The [bounded repeated-decimal implementation](docs/REPEATED-DECIMAL-IMPLEMENTATION.md) is a local Schema 0.7 candidate with unchanged core 1.34.1. Review/checkpoint precedes further structural or assertion-grammar expansion; general schema/session acceptance and product adoption remain future work.
+
+The [bounded repetition implementation](docs/REPEATED-DECIMAL-REVIEW.md) is reviewed for checkpoint delivery. A separately adopted fn:count assertion slice is next; aggregation and broader grammar remain outside that first function scope.

@@ -13,7 +13,7 @@
 
 ## 1. Current Architecture
 
-One public `Bosak.Schema` assembly references the published Bosak XPath API/providers, XSLT and XQuery packages at 1.26.3. The core engine does not reference this package. Keeping schema services in a separate assembly avoids a dependency cycle; changing the license does not require merging them into Core.
+This Schema 0.7 feature candidate references unpublished Bosak XPath API/providers, XSLT and XQuery 1.34.1 through the explicit local source override; the original public checkout retains its published 1.26.3 pins. The core engine does not reference this package. Keeping schema services in a separate assembly avoids a dependency cycle; changing the license does not require merging them into Core.
 
 ## 2. Components
 
@@ -22,7 +22,7 @@ One public `Bosak.Schema` assembly references the published Bosak XPath API/prov
 | `Compilation` | Explicit-version schema descriptor compilation and bounded resolved imports/includes |
 | `Model` | Staged XSD 1.1 assertions, alternatives, declarations, simple facets, open-content/default-attribute metadata |
 | `Validation` | Assertion/facet evaluation and supported governing-type applicability through Bosak XPath |
-| `Assessment` | Native finite structural/decimal/assertion assessment, immutable component state and explicit built-in value projection (0.5 candidate) |
+| `Assessment` | Native v1/v2/v3 finite structural/decimal/assertion assessment, distinct occurrence state and original declaration authority (0.7 candidate) |
 | `SchemaServices` | Activation-free factories for compiler and validation services |
 | `SchemaAwareXslt` | Opt-in helper for the existing schema-aware XSLT path |
 | Legacy license DTO/shim types | API compatibility only; no credential implementation or authority |
@@ -92,3 +92,13 @@ Current delivery: [reviewed optional implementation](OPTIONAL-DECIMAL-REVIEW.md)
 ## Bounded repeated decimal scope — 29 October 2026
 
 The [repetition adoption](REPEATED-DECIMAL-ADOPTION-2026-10-29.md) and [implementation plan](REPEATED-DECIMAL-PLAN.md) define the next slice. Repetitions are not implemented. The reviewed optional source is checkpointed at Schema `773fd69` / core `5e277c6a`; current Schema 0.6/core 1.34.1 remain unchanged. Sixteen diagnostic observations cover current refusal and real-engine comparison cardinality, not native repetition acceptance. Proposed Schema 0.7/v3 keeps grammar and public overloads unchanged, bounds total occurrences, preserves original state, handles known cardinality errors and refuses ambiguous singular projection. Broader API/session acceptance remains pending.
+
+## Bounded repeated decimal candidate — 29 October 2026
+
+Current behavior: [Schema 0.7/v3 repetition implementation](REPEATED-DECIMAL-IMPLEMENTATION.md). Local minimum zero/one, maximum and total budget up to sixteen, contiguous ordered states, shared original declarations, narrow XPTY0004 assertion failure and ambiguous singular projection refusal are implemented. Required-only v1 and optional v2 remain; broader grammar is refused. Fresh complete Schema tests: 334 passes (74 new). Build/example pass; unchanged core 1.34.1 full/gate evidence is inherited after source checks. Earlier planned-scope/version notices describe earlier capture. General schema/session acceptance and product adoption remain pending. Source changes are uncommitted and unpublished.
+
+Final repeated-candidate qualification: **334 complete Schema cases pass**, including **74 new repetition/error-boundary cases**. The original 57-case before cohort (17 passed/40 failed) now all passes; seventeen further boundary/safety cases also pass. The prior 260-case suite retains 259 unchanged passing expectations and one explicitly adopted maxOccurs-two coverage/profile update. Schema source-override Release build: **zero warnings/errors**. The repeated-document XPath/XSLT example and strict Schema docs check pass. Core source/tests/harness/fixture references and build configuration are unchanged from the reviewed source, so **24,214 core passes**, QT3 **31,397/0/424** and qt4 **8,941/0/1,918** (230 sets) are inherited, not fresh full runs. Exact raw source/receipt identities and all earlier sealed dossiers are preserved.
+
+## Repetition implementation review checkpoint — 29 October 2026
+
+Current delivery: [reviewed Schema 0.7 implementation](REPEATED-DECIMAL-REVIEW.md), with unchanged core 1.34.1. No further production fix was needed; tested source identities and 334-case qualification match. Review/checkpoint is user-authorized. Count assertion support will be a separate adoption/plan; it is not implemented now. Earlier uncommitted notices describe original capture. General API/session acceptance and product adoption remain pending.

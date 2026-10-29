@@ -16,6 +16,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Add bounded native document assessment bridge and original-state copy handling           |
 //                      | Charles Korthout | 0.4   | 29-10-2026     | Document present-only child state and explicit absent projection refusal (0.6)           |
+//                      | Charles Korthout | 0.5   | 29-10-2026     | Refuse ambiguous singular projection rather than choosing a repeated value (0.7)         |
 // ===========================================================================================================================================================
 
 using System.Xml.Linq;
@@ -70,14 +71,19 @@ public sealed class AssessedDocument
     /// <param name="name">The direct child declaration's expanded name.</param>
     /// <returns>A caller-owned detached element annotated with the built-in decimal type.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="name"/> is null.</exception>
-    /// <exception cref="NotSupportedException">The requested child is absent or is not a supported assessed decimal child.</exception>
+    /// <exception cref="NotSupportedException">The requested child is absent, ambiguous, or is not a supported assessed decimal child.</exception>
     /// <remarks>This is a built-in typed-value projection, not full local-declaration or anonymous-root interchange.</remarks>
     public XElement CreateTypedElementCopy(XName name)
     {
         ArgumentNullException.ThrowIfNull(name);
         var index = -1;
         for (var i = 1; i < Elements.Count; i++)
-            if (Elements[i].Declaration.Name == name) { index = i; break; }
+            if (Elements[i].Declaration.Name == name)
+            {
+                if (index >= 0)
+                    throw new NotSupportedException("BSK-XSD-016: Singular projection is ambiguous for repeated child occurrences; use the whole-document export.");
+                index = i;
+            }
         if (index < 0)
             throw new NotSupportedException("BSK-XSD-016: Only assessed decimal child declarations can be projected.");
         var result = new XElement(_snapshot.Root!.Elements().ElementAt(index - 1));

@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Retain absent root normalized value in native assessment state                          |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.4   | 29-10-2026     | Assess ordered optional particles and assertion EBV with present-only state (0.6)        |
+//                      | Charles Korthout | 0.5   | 29-10-2026     | Match repeated original states and classify closed-grammar cardinality errors (0.7)      |
 // ===========================================================================================================================================================
 
 using System.Security.Cryptography;
@@ -42,7 +43,8 @@ public sealed class XsdDocumentAssessor
         RootDeclaration = root;
         _particles = particles.ToArray();
         ChildDeclarations = Array.AsReadOnly(_particles.Select(p => p.Declaration).ToArray());
-        Profile = _particles.Any(p => p.IsOptional) ? "decimal-sequence-assertions-v2" : "decimal-sequence-assertions-v1";
+        Profile = _particles.Any(p => p.MaxOccurs > 1) ? "decimal-sequence-assertions-v3"
+            : _particles.Any(p => p.MinOccurs == 0) ? "decimal-sequence-assertions-v2" : "decimal-sequence-assertions-v1";
         _assertions = Array.AsReadOnly(assertions.ToArray());
     }
     /// <summary>The exact finite supported profile identifier.</summary>
@@ -90,16 +92,19 @@ public sealed class XsdDocumentAssessor
         foreach (var particle in _particles)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            if (childIndex < children.Length && children[childIndex].Name == particle.Declaration.Name)
+            var count = 0;
+            while (count < particle.MaxOccurs && childIndex < children.Length && children[childIndex].Name == particle.Declaration.Name)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 presentDeclarations.Add(particle.Declaration);
                 childIndex++;
+                count++;
             }
-            else if (!particle.IsOptional)
-                return Invalid("A required child is missing or the sequence order violates its declaration.");
+            if (count < particle.MinOccurs)
+                return Invalid("A required child occurrence is missing or the sequence order violates its declaration.");
         }
         if (childIndex != children.Length)
-            return Invalid("Unexpected, repeated or out-of-order child elements violate the particles.");
+            return Invalid("Unexpected, excess or out-of-order child occurrences violate the particles.");
         var states = new List<AssessedElement> { new(RootDeclaration, null, null) };
         for (var index = 0; index < children.Length; index++)
         {
@@ -129,6 +134,10 @@ public sealed class XsdDocumentAssessor
                 if (!assertion.Evaluate(context).GetEffectiveBooleanValue())
                     findings.Add(new(SchemaDiagnosticCodes.AssertionViolated, "An assessed-document assertion was false.", null));
             }
+            catch (Exception error) when (IsAssertionCardinalityError(error))
+            {
+                findings.Add(new(SchemaDiagnosticCodes.AssertionViolated, "An assessed-document assertion raised XPTY0004.", null));
+            }
             catch (Exception error) when (error is not OperationCanceledException and not OutOfMemoryException)
             { return Refuse("The assertion engine could not evaluate the supported request: " + error.Message); }
         }
@@ -136,6 +145,11 @@ public sealed class XsdDocumentAssessor
         if (findings.Count != 0) return new(SchemaAssessmentOutcome.Invalid, findings);
         return new(SchemaAssessmentOutcome.Valid, [], new AssessedDocument(this, snapshot, states));
     }
+    /// <summary>Recognizes only the standard cardinality error contract in this closed assertion grammar.</summary>
+    internal static bool IsAssertionCardinalityError(Exception error) => error is XPathErrorException structured
+        ? structured.CodeNamespaceUri == "http://www.w3.org/2005/xqt-errors" && structured.CodeLocalName == "XPTY0004"
+        : error.GetType() == typeof(InvalidOperationException) && error.Message.StartsWith("XPTY0004:", StringComparison.Ordinal);
+
     private static SchemaDocumentAssessment Invalid(string message) => new(SchemaAssessmentOutcome.Invalid,
         [new SchemaDiagnostic(SchemaDiagnosticCodes.AssessmentInvalidInstance, message, null)]);
     private static SchemaDocumentAssessment Refuse(string message) => new(SchemaAssessmentOutcome.Unsupported,

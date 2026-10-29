@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 29-10-2026     | Bound input capture and refuse malformed type QNames |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Compile bounded optional local particles; preserve all required-only coverage (0.6)      |
+//                      | Charles Korthout | 0.4   | 29-10-2026     | Compile bounded repeated particles and enforce aggregate maximum sixteen (0.7)           |
 // ===========================================================================================================================================================
 
 using System.Globalization;
@@ -82,13 +83,16 @@ internal static class AssessmentProfileParser
         var decimalType = new AssessedSchemaType(Xs + "decimal", false);
         var names = new HashSet<string>(StringComparer.Ordinal);
         var children = new List<AssessmentParticle>();
+        var totalMaximum = 0;
         for (var i = 0; i < declarations.Length; i++)
         {
             var declaration = declarations[i];
             if (declaration.Name != Xs + "element" || !Attributes(declaration, "name", "type", "minOccurs", "maxOccurs") ||
-                declaration.HasElements || !LocalOccurrences(declaration, out var optional) || !TryName(declaration, out var name) || !names.Add(name) || !IsDecimalType(declaration))
-                return Refused(text, "Every local particle must be a unique xs:decimal element with minimum zero or one and maximum one.");
-            children.Add(new(new AssessedElementDeclaration(XName.Get(name), decimalType, $"/schema/element/complexType/sequence/element[{i + 1}]"), optional));
+                declaration.HasElements || !LocalOccurrences(declaration, out var minimum, out var maximum) || !TryName(declaration, out var name) || !names.Add(name) || !IsDecimalType(declaration))
+                return Refused(text, "Every local particle must be a unique xs:decimal element with minimum zero or one and finite maximum 1–16.");
+            totalMaximum += maximum;
+            if (totalMaximum > 16) return Refused(text, "The total local maximum occurrence budget exceeds sixteen.");
+            children.Add(new(new AssessedElementDeclaration(XName.Get(name), decimalType, $"/schema/element/complexType/sequence/element[{i + 1}]"), minimum, maximum));
         }
         var plans = new List<XPath31Expression>();
         foreach (var assertion in parts.Skip(1))
@@ -109,12 +113,25 @@ internal static class AssessmentProfileParser
         element.Nodes().OfType<XText>().All(t => IsXmlWhitespace(t.Value));
     private static bool LocalDefault(XElement element) => element.Attribute("xpathDefaultNamespace") is not { } a || a.Value.Trim(XmlWhitespace) == "##local";
     private static bool ExactlyOne(XElement element) => new[] { "minOccurs", "maxOccurs" }.All(name => element.Attribute(name) is not { } a || a.Value.Trim(XmlWhitespace).TrimStart('0') == "1");
-    private static bool LocalOccurrences(XElement element, out bool optional)
+    private static bool LocalOccurrences(XElement element, out int minimum, out int maximum)
     {
-        var minimum = element.Attribute("minOccurs")?.Value.Trim(XmlWhitespace) ?? "1";
-        optional = minimum.Length > 0 && minimum.All(c => c == '0');
-        var maximum = element.Attribute("maxOccurs")?.Value.Trim(XmlWhitespace) ?? "1";
-        return (optional || minimum.TrimStart('0') == "1") && maximum.TrimStart('0') == "1";
+        maximum = 0;
+        return BoundedOccurrence(element.Attribute("minOccurs")?.Value ?? "1", 0, 1, out minimum)
+            && BoundedOccurrence(element.Attribute("maxOccurs")?.Value ?? "1", 1, 16, out maximum);
+    }
+    private static bool BoundedOccurrence(string lexical, int lower, int upper, out int value)
+    {
+        value = 0;
+        lexical = lexical.Trim(XmlWhitespace);
+        if (lexical.Length == 0) return false;
+        foreach (var digit in lexical)
+        {
+            if (digit is < '0' or > '9') return false;
+            value = value * 10 + digit - '0';
+            // Value never exceeds 16 before this iteration, so oversized lexicals cannot overflow.
+            if (value > upper) return false;
+        }
+        return value >= lower;
     }
     private static bool TryName(XElement element, out string name)
     {
