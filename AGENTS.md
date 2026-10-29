@@ -137,7 +137,7 @@ public CanonicalEvidenceSet Parse(string payload, ParseOptions? options = null)
 |--------------|---------|
 | `Bosak.Schema.Tests` | Activation-free factories, schema compilation/validation and legacy API compatibility |
 
-The public publication baseline has 114 tests; the native assessment 0.5 candidate has 191 (77 added) and no licensing-pipeline/Azurite dependency. Native assessment coverage is deliberately finite; preserve the original component state, distinguish invalid/unsupported, and never substitute an assertion-only result or stripped 1.0 schema for structural 1.1 assessment. See docs/DOCUMENT-ASSESSMENT.md and its immutable adoption record.
+The public publication baseline has 114 tests; the native assessment 0.6 candidate has 260 (146 added) and no licensing-pipeline/Azurite dependency. Native assessment coverage is deliberately finite; preserve the original component state, distinguish invalid/unsupported, and never substitute an assertion-only result or stripped 1.0 schema for structural 1.1 assessment. See docs/DOCUMENT-ASSESSMENT.md and its immutable adoption record.
 
 ### 5.2 Test Patterns
 
@@ -239,3 +239,5 @@ Schema services require no activation. Legacy License/ActivatedLicense types are
 Current whole-document bridge qualification supersedes the 191-case assessment-only checkpoint. Candidate core dependencies are unpublished 1.34.0; use the explicit BosakSourceRoot local override. Preserve prior sealed evidence and the no-commit/push rule.
 
 Current review also verifies exception-safe provider attachment; the core review dossier records local checkpoint commit identities. Broader structural and general API acceptance remain pending.
+
+Current candidate: native optional local particles (v2) with required-only v1 compatibility. Core candidate dependency is 1.34.1 through the explicit local source override. Read `docs/OPTIONAL-DECIMAL-IMPLEMENTATION.md`; older 0.5/191-case/204-case notices are historical. Keep the no-commit/push rule without explicit authorization.

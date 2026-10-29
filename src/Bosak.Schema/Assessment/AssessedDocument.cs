@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 29-10-2026     | Keep native absence distinct while exporting validated decimal child copies             |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Add bounded native document assessment bridge and original-state copy handling           |
+//                      | Charles Korthout | 0.4   | 29-10-2026     | Document present-only child state and explicit absent projection refusal (0.6)           |
 // ===========================================================================================================================================================
 
 using System.Xml.Linq;
@@ -43,7 +44,7 @@ public sealed class AssessedDocument
     public Guid AssessmentIdentity { get; }
     /// <summary>The distinct snapshot-instance label; neither label proves cross-schema compatibility.</summary>
     public Guid SnapshotIdentity { get; }
-    /// <summary>Original root and ordered child PSVI states, including the anonymous root type.</summary>
+    /// <summary>Original root and present child PSVI states in instance order, including the anonymous root type.</summary>
     public IReadOnlyList<AssessedElement> Elements { get; }
     /// <summary>Copies the owned snapshot while retaining original PSVI and schema component authority.</summary>
     /// <returns>An independent snapshot with the same original assessment and component identities.</returns>
@@ -69,7 +70,7 @@ public sealed class AssessedDocument
     /// <param name="name">The direct child declaration's expanded name.</param>
     /// <returns>A caller-owned detached element annotated with the built-in decimal type.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="name"/> is null.</exception>
-    /// <exception cref="NotSupportedException">The requested declaration is not a supported decimal child.</exception>
+    /// <exception cref="NotSupportedException">The requested child is absent or is not a supported assessed decimal child.</exception>
     /// <remarks>This is a built-in typed-value projection, not full local-declaration or anonymous-root interchange.</remarks>
     public XElement CreateTypedElementCopy(XName name)
     {

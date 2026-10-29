@@ -15,9 +15,9 @@
 
 Bosak.Schema is free, open-source Fytala software under [Apache-2.0](LICENSE.md). Schema compilation and validation require no activation, license key, trial, subscription or billing service. This public repository contains only the schema engine, its tests and documentation.
 
-The implementation targets .NET 10. This feature candidate requires unpublished Bosak 1.34.0 through the local source override below; the original public checkout retains its published 1.26.3 dependency pins. It provides schema-aware XSLT compiler helpers and a staged XSD 1.1 component/assertion pipeline. Complete XSD 1.1 structural validation and integration of its full component universe into running Bosak expressions are **not yet implemented**. See the [support matrix](docs/FEATURE_REQUESTS.md).
+The implementation targets .NET 10. This feature candidate requires unpublished Bosak 1.34.1 through the local source override below; the original public checkout retains its published 1.26.3 dependency pins. It provides schema-aware XSLT compiler helpers and a staged XSD 1.1 component/assertion pipeline. Complete XSD 1.1 structural validation and integration of its full component universe into running Bosak expressions are **not yet implemented**. See the [support matrix](docs/FEATURE_REQUESTS.md).
 
-The unpublished 0.5 development candidate adds [native document assessment](docs/DOCUMENT-ASSESSMENT.md): a complete structural/decimal/assertion check for one explicit XSD 1.1 profile, an owned result with original declaration/type state, and whole-document exports for Bosak queries/transforms. Anonymous-root and decimal-child assessment state survives preserve copies; strip removes it. Unsupported coverage, including general declaration matching and compatible-universe interchange, is refused.
+The unpublished 0.6 development candidate adds [native document assessment](docs/DOCUMENT-ASSESSMENT.md): a complete structural/decimal/assertion check for one explicit XSD 1.1 profile, an owned result with original declaration/type state, and whole-document exports for Bosak queries/transforms. Anonymous-root and decimal-child assessment state survives preserve copies; strip removes it. Unsupported coverage, including general declaration matching and compatible-universe interchange, is refused.
 
 The initial public source is derived from Fytala's private schema source at `fa0da3e2d9972706a5a86616ef285af4daf5037b`, with the owner-approved Apache transition on 29 October 2026. Billing, key-generation, deployment material and private Git history remain outside this repository. See [provenance](docs/APACHE-TRANSITION.md).
 
@@ -73,6 +73,12 @@ The unpublished core 1.34.0 provider bridge now carries original anonymous-root 
 
 The optional provider attachment API now checks a replacement completely before removing the previous binding. Failed replacement retains original state and stale-content refusal; failed initial attachment leaves the node unregistered. The trusted host must supply immutable state and the correct assessed value. This API carries that state without performing schema validation. The finite native profile is unchanged; optional children and general API freeze remain pending. Current core candidate is unpublished 1.34.0; use the BosakSourceRoot override. New review qualification lives in the core `docs/schema-document-bridge/api-review` dossier, separately from historical assessment receipts.
 
-The next [optional-decimal-child slice](docs/OPTIONAL-DECIMAL-PLAN.md) has a pre-implementation specification and verification plan. Current supported coverage remains the required-only profile.
+The [optional-decimal-child candidate](docs/OPTIONAL-DECIMAL-IMPLEMENTATION.md) now implements zero-or-one local decimals with ordered matching and original present-node state; required-only v1 and optional v2 profiles are distinct.
 
 The [scope checkpoint](docs/OPTIONAL-DECIMAL-CHECKPOINT.md) links the adoption, plan and current review-delivery identity; optional support remains future work.
+
+## Optional decimal implementation candidate — 29 October 2026
+
+Current behavior: [Schema 0.6 optional assessment](docs/OPTIONAL-DECIMAL-IMPLEMENTATION.md), with core 1.34.1 and required local source override. Local zero-or-one particles, ordered matching, assertion EBV and present-only original state are implemented; required-only v1 remains and optional schemas use v2. Empty element-only root whitespace normalization is corrected while real/decimal mutation refusal remains. The complete Schema suite passes 260 cases, including 56 new optional cases; the full-document example retains later declaration identity. Earlier planned-scope/version notices are historical. Broader REQ-009/general session/API freeze and consumer acceptance remain pending. Original public checkout and product pins are unchanged; implementation is uncommitted and unpublished.
+
+The [optional assessment review checkpoint](docs/OPTIONAL-DECIMAL-REVIEW.md) records the bounded implementation review and paired delivery identity.

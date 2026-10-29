@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 29-10-2026     | Creation (REQ-009 bounded document assessment, 0.5 development line)                      |
 //                      | Charles Korthout | 0.2   | 29-10-2026     | Bound input capture and refuse malformed type QNames |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.3   | 29-10-2026     | Compile bounded optional local particles; preserve all required-only coverage (0.6)      |
 // ===========================================================================================================================================================
 
 using System.Globalization;
@@ -80,14 +81,14 @@ internal static class AssessmentProfileParser
         var rootDeclaration = new AssessedElementDeclaration(XName.Get(rootName), anonymous, "/schema/element");
         var decimalType = new AssessedSchemaType(Xs + "decimal", false);
         var names = new HashSet<string>(StringComparer.Ordinal);
-        var children = new List<AssessedElementDeclaration>();
+        var children = new List<AssessmentParticle>();
         for (var i = 0; i < declarations.Length; i++)
         {
             var declaration = declarations[i];
             if (declaration.Name != Xs + "element" || !Attributes(declaration, "name", "type", "minOccurs", "maxOccurs") ||
-                declaration.HasElements || !ExactlyOne(declaration) || !TryName(declaration, out var name) || !names.Add(name) || !IsDecimalType(declaration))
-                return Refused(text, "Every local declaration must be a unique, single-occurrence xs:decimal element without additional content.");
-            children.Add(new(XName.Get(name), decimalType, $"/schema/element/complexType/sequence/element[{i + 1}]"));
+                declaration.HasElements || !LocalOccurrences(declaration, out var optional) || !TryName(declaration, out var name) || !names.Add(name) || !IsDecimalType(declaration))
+                return Refused(text, "Every local particle must be a unique xs:decimal element with minimum zero or one and maximum one.");
+            children.Add(new(new AssessedElementDeclaration(XName.Get(name), decimalType, $"/schema/element/complexType/sequence/element[{i + 1}]"), optional));
         }
         var plans = new List<XPath31Expression>();
         foreach (var assertion in parts.Skip(1))
@@ -108,6 +109,13 @@ internal static class AssessmentProfileParser
         element.Nodes().OfType<XText>().All(t => IsXmlWhitespace(t.Value));
     private static bool LocalDefault(XElement element) => element.Attribute("xpathDefaultNamespace") is not { } a || a.Value.Trim(XmlWhitespace) == "##local";
     private static bool ExactlyOne(XElement element) => new[] { "minOccurs", "maxOccurs" }.All(name => element.Attribute(name) is not { } a || a.Value.Trim(XmlWhitespace).TrimStart('0') == "1");
+    private static bool LocalOccurrences(XElement element, out bool optional)
+    {
+        var minimum = element.Attribute("minOccurs")?.Value.Trim(XmlWhitespace) ?? "1";
+        optional = minimum.Length > 0 && minimum.All(c => c == '0');
+        var maximum = element.Attribute("maxOccurs")?.Value.Trim(XmlWhitespace) ?? "1";
+        return (optional || minimum.TrimStart('0') == "1") && maximum.TrimStart('0') == "1";
+    }
     private static bool TryName(XElement element, out string name)
     {
         name = element.Attribute("name")?.Value.Trim(XmlWhitespace) ?? string.Empty;

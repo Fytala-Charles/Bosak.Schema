@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 29-10-2026     | Bound input capture and refuse unsupported leaf node kinds |
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Retain absent root normalized value in native assessment state                          |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.4   | 29-10-2026     | Assess ordered optional particles and assertion EBV with present-only state (0.6)        |
 // ===========================================================================================================================================================
 
 using System.Security.Cryptography;
@@ -27,22 +28,25 @@ using Bosak.XPath.Runtime.Vm;
 
 namespace Bosak.Schema;
 
-/// <summary>Immutable compiled decimal-sequence-assertions-v1 assessor; not a complete XSD 1.1 processor.</summary>
+/// <summary>Immutable compiled bounded decimal-sequence/assertion assessor; not a complete XSD 1.1 processor.</summary>
 public sealed class XsdDocumentAssessor
 {
     private readonly IReadOnlyList<XPath31Expression> _assertions;
+    private readonly AssessmentParticle[] _particles;
     internal XsdDocumentAssessor(string schemaXml, IEnumerable<SchemaDiagnostic> diagnostics,
-        AssessedElementDeclaration? root, IEnumerable<AssessedElementDeclaration> children, IEnumerable<XPath31Expression> assertions)
+        AssessedElementDeclaration? root, IEnumerable<AssessmentParticle> particles, IEnumerable<XPath31Expression> assertions)
     {
         SchemaXml = schemaXml;
         SchemaDigest = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(schemaXml))).ToLowerInvariant();
         Diagnostics = Array.AsReadOnly(diagnostics.ToArray());
         RootDeclaration = root;
-        ChildDeclarations = Array.AsReadOnly(children.ToArray());
+        _particles = particles.ToArray();
+        ChildDeclarations = Array.AsReadOnly(_particles.Select(p => p.Declaration).ToArray());
+        Profile = _particles.Any(p => p.IsOptional) ? "decimal-sequence-assertions-v2" : "decimal-sequence-assertions-v1";
         _assertions = Array.AsReadOnly(assertions.ToArray());
     }
     /// <summary>The exact finite supported profile identifier.</summary>
-    public string Profile => "decimal-sequence-assertions-v1";
+    public string Profile { get; }
     /// <summary>The explicit schema language version assessed by this service.</summary>
     public XsdLanguageVersion LanguageVersion => XsdLanguageVersion.Xsd11;
     /// <summary>The retained single-document schema XML; imports/includes are never accepted.</summary>
@@ -55,7 +59,7 @@ public sealed class XsdDocumentAssessor
     public IReadOnlyList<SchemaDiagnostic> Diagnostics { get; }
     /// <summary>The original global root declaration and anonymous element-only type, or null after refusal.</summary>
     public AssessedElementDeclaration? RootDeclaration { get; }
-    /// <summary>The original local declarations, in required sequence order.</summary>
+    /// <summary>All original local declarations in schema order, including omitted optional particles.</summary>
     public IReadOnlyList<AssessedElementDeclaration> ChildDeclarations { get; }
 
     /// <summary>Checks native structure and exact decimal values, then evaluates every supported assertion.</summary>
@@ -81,8 +85,21 @@ public sealed class XsdDocumentAssessor
         if (all.Any(e => e.Attributes().Any(a => !a.IsNamespaceDeclaration))) return Invalid("This profile declares no instance attributes.");
         if (root.Nodes().OfType<XText>().Any(t => !AssessmentProfileParser.IsXmlWhitespace(t.Value))) return Invalid("The root permits element-only content.");
         var children = root.Elements().ToArray();
-        if (children.Length != ChildDeclarations.Count || children.Where((child, index) => child.Name != ChildDeclarations[index].Name).Any())
-            return Invalid("Child count, names or sequence order violate the declarations.");
+        var presentDeclarations = new List<AssessedElementDeclaration>(children.Length);
+        var childIndex = 0;
+        foreach (var particle in _particles)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (childIndex < children.Length && children[childIndex].Name == particle.Declaration.Name)
+            {
+                presentDeclarations.Add(particle.Declaration);
+                childIndex++;
+            }
+            else if (!particle.IsOptional)
+                return Invalid("A required child is missing or the sequence order violates its declaration.");
+        }
+        if (childIndex != children.Length)
+            return Invalid("Unexpected, repeated or out-of-order child elements violate the particles.");
         var states = new List<AssessedElement> { new(RootDeclaration, null, null) };
         for (var index = 0; index < children.Length; index++)
         {
@@ -94,14 +111,14 @@ public sealed class XsdDocumentAssessor
             var outcome = AssessmentProfileParser.ParseDecimal(child.Value, out var value, out var normalized);
             if (outcome == SchemaAssessmentOutcome.Invalid) return Invalid("A decimal child has an invalid XSD decimal lexical value.");
             if (outcome == SchemaAssessmentOutcome.Unsupported) return Refuse("A valid XSD decimal cannot be represented exactly; no rounding is permitted.");
-            states.Add(new(ChildDeclarations[index], normalized, XdmValue.FromDecimal(value)));
+            states.Add(new(presentDeclarations[index], normalized, XdmValue.FromDecimal(value)));
             child.Value = normalized;
             XdmSchemaAnnotator.Annotate(child, AssessedDocument.DecimalSchemaInfo.Instance);
         }
         // A parentless assertion candidate sees only the assessed element, not document ancestors.
         var candidate = new XElement(root);
-        for (var index = 0; index < ChildDeclarations.Count; index++)
-            XdmSchemaAnnotator.Annotate(candidate.Elements().ElementAt(index), AssessedDocument.DecimalSchemaInfo.Instance);
+        foreach (var child in candidate.Elements())
+            XdmSchemaAnnotator.Annotate(child, AssessedDocument.DecimalSchemaInfo.Instance);
         var context = new EvaluationContext().WithFocus(XdmValue.FromNode(new XDocumentNode(candidate)), 1, 1);
         var findings = new List<SchemaDiagnostic>();
         foreach (var assertion in _assertions)
@@ -109,7 +126,7 @@ public sealed class XsdDocumentAssessor
             cancellationToken.ThrowIfCancellationRequested();
             try
             {
-                if (!assertion.Evaluate(context).BooleanValue)
+                if (!assertion.Evaluate(context).GetEffectiveBooleanValue())
                     findings.Add(new(SchemaDiagnosticCodes.AssertionViolated, "An assessed-document assertion was false.", null));
             }
             catch (Exception error) when (error is not OperationCanceledException and not OutOfMemoryException)

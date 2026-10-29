@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 29-10-2026     | Creation (REQ-009 bounded document assessment, 0.5 development line)                      |
 //                      | Charles Korthout | 0.2   | 29-10-2026     | Demonstrate original whole-document annotations through XPath and XSLT                    |
+//                      | Charles Korthout | 0.3   | 29-10-2026     | Demonstrate an omitted optional particle without shifting later state (0.6)               |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -29,6 +30,7 @@ var schema = XDocument.Parse("""
       <xs:element name="order"><xs:complexType>
         <xs:sequence>
           <xs:element name="amount" type="xs:decimal"/>
+          <xs:element name="tax" type="xs:decimal" minOccurs="0"/>
           <xs:element name="shipped" type="xs:decimal"/>
         </xs:sequence>
         <xs:assert test="amount gt 0 and shipped le amount"/>
@@ -46,6 +48,8 @@ var document = assessment.Document!;
 var input = new XDocumentNode(document.CreateDocumentCopy(preserveTypeAnnotations: true));
 var context = new EvaluationContext().WithFocus(XdmValue.FromNode(input), 1, 1);
 Console.WriteLine("Assessment: " + assessment.Outcome);
+Console.WriteLine("Profile: " + assessor.Profile);
+Console.WriteLine("Later declaration retained: " + ReferenceEquals(assessor.ChildDeclarations[2], document.Elements[2].Declaration));
 Console.WriteLine("Typed decimal: " + XPath31Expression.Compile("data(/order/amount) instance of xs:decimal").Evaluate(context).BooleanValue);
 Console.WriteLine("Total: " + XPath31Expression.Compile("data(/order/amount) * 1.20").Evaluate(context).DecimalValue.ToString(System.Globalization.CultureInfo.InvariantCulture));
 Console.WriteLine("Original root state: " + ReferenceEquals(document.Elements[0], XdmElementAssessment.Get(((XDocument)input.UnderlyingObject).Root!)!.State));

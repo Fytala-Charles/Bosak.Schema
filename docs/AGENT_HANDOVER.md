@@ -1,3 +1,7 @@
+Current delivery: [optional implementation review checkpoint](OPTIONAL-DECIMAL-REVIEW.md). Review found no further production defect; source and existing full qualification match. The next slice is repetition scoping, not implemented repetition.
+
+Current implementation: [optional decimal candidate](OPTIONAL-DECIMAL-IMPLEMENTATION.md), Schema 0.6/core 1.34.1. Implementation and new qualification supersede the earlier scope-only notices. Source bases remain Schema `33a9039` and core `6b362a15`; changes are uncommitted.
+
 Current delivery: [optional decimal scope checkpoint](OPTIONAL-DECIMAL-CHECKPOINT.md). This is the entry point for current source bases, qualification and remote targets; older checkpoint sections below are historical.
 
 Current next slice: [optional decimal child plan](OPTIONAL-DECIMAL-PLAN.md), with its pre-implementation adoption record. Product baseline remains the reviewed whole-document bridge; optional support is not yet implemented.
@@ -59,3 +63,15 @@ Scope refinement: a thirteenth isolated observation exposes ignorable-whitespace
 ## Optional decimal scope delivery — 29 October 2026
 
 See the [synchronized checkpoint](OPTIONAL-DECIMAL-CHECKPOINT.md) for current delivery identity and remote target. Documentation is prepared for the user-authorized commit/push; optional-child semantics are not implemented. Current versions/pins and production source remain unchanged. Thirteen observations and 204 passing Schema baseline cases support the scope; the core suite/gates are inherited. Next: implement the bounded plan and its core binding correction with fresh required qualification.
+
+## Optional decimal implementation candidate — 29 October 2026
+
+Current behavior: [Schema 0.6 optional assessment](OPTIONAL-DECIMAL-IMPLEMENTATION.md), with core 1.34.1 and required local source override. Local zero-or-one particles, ordered matching, assertion EBV and present-only original state are implemented; required-only v1 remains and optional schemas use v2. Empty element-only root whitespace normalization is corrected while real/decimal mutation refusal remains. The complete Schema suite passes 260 cases, including 56 new optional cases; the full-document example retains later declaration identity. Earlier planned-scope/version notices are historical. Broader REQ-009/general session/API freeze and consumer acceptance remain pending. Original public checkout and product pins are unchanged; implementation is uncommitted and unpublished.
+
+Fresh final qualification: **24,214 complete core tests pass** (including 8,196 XSLT and 212 provider cases), **260 complete Schema tests pass** (56 new optional cases), normal QT3 **31,397/0/424**, qt4 **8,941/0/1,918**, 230 gated sets and 11 experimental passes. Exact skip names/reasons match the sealed integration checkpoint. Core build has zero errors and five warnings in unchanged Standard test/XSLT conformance sources; no new warning source is introduced. The optional-gap whole-document example and strict Schema documentation check pass. Original 45-case before evidence is 9 passed/36 failed; all 45 now pass alongside eleven added boundary cases. Five new core cases cover the root binding correction.
+
+Source bases/unchanged HEADs: Schema `33a9039a9fc605f8f7192bfcec88ea559c5c0e19`, core `6b362a15f6fb62eebc36f82e803e35faf42cecd4`. What was built: optional particle compiler/matcher, original present-only states, effective Boolean assertion conversion, retained copies/projections and optional-gap example. Candidate 0.6 uses core 1.34.1 through the source override; original public checkout and product pins remain untouched. Raw receipts/identities live in core `docs/schema-optional-implementation`. Changes remain uncommitted under the existing Git rule; no push/tag/publication. Next: bounded review/checkpoint before broader coverage.
+
+## Optional decimal review checkpoint — 29 October 2026
+
+Current delivery: [reviewed optional implementation](OPTIONAL-DECIMAL-REVIEW.md), Schema 0.6/core 1.34.1. No further production fix was needed; source matches tested qualification. The user authorized checkpoint commit/push; original uncommitted notices are capture-time history. Next: scope repetitions separately before implementation. Full schema/session/API freeze and product adoption remain pending.

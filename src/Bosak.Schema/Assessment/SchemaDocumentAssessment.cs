@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 29-10-2026     | Expose the supported non-nilled state explicitly |
 //                      | Charles Korthout | 0.3   | 29-10-2026     | Preserve absence of a root normalized value and original no-typed-value state           |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.4   | 29-10-2026     | Bind local occurrence to internal particles; keep original declaration identities (0.6)  |
 // ===========================================================================================================================================================
 
 using System.Xml.Linq;
@@ -58,7 +59,10 @@ public sealed class AssessedElementDeclaration
     public string SchemaPath { get; }
 }
 
-/// <summary>Immutable original assessment state for one element in the owned snapshot.</summary>
+/// <summary>Internal local particle binding; occurrence is separate from declaration identity.</summary>
+internal readonly record struct AssessmentParticle(AssessedElementDeclaration Declaration, bool IsOptional);
+
+/// <summary>Immutable original assessment state for one present element in the owned snapshot.</summary>
 public sealed class AssessedElement
 {
     internal AssessedElement(AssessedElementDeclaration declaration, string? normalizedValue, XdmValue? typedValue)
