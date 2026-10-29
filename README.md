@@ -108,3 +108,9 @@ The [bounded presence assertion candidate](docs/PRESENCE-ASSERTION-IMPLEMENTATIO
 [Unchanged-binary qualification and runtime identity limits](docs/UNCHANGED-BINARY-COMPATIBILITY-RESULTS.md).
 
 [Unchanged-binary qualification review](docs/UNCHANGED-BINARY-COMPATIBILITY-REVIEW.md).
+
+[Consumer engine identity and reviewed adoption policy](docs/BRAID-ENGINE-IDENTITY-POLICY-SCOPE.md).
+
+[Isolated consumer identity-policy prototype](docs/BRAID-IDENTITY-POLICY-PROTOTYPE.md).
+
+[Identity-policy prototype review](docs/BRAID-IDENTITY-POLICY-REVIEW.md).
