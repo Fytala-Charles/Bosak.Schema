@@ -37,3 +37,10 @@ The native assessment profile remains exactly the [documented 0.9 candidate](DOC
 The matching [Bosak REQ-139 packages](https://github.com/Fytala-Charles/Bosak/blob/checkpoint/restart-2026-10-29/docs/REQ-139-OWNER-WORK-PACKAGES.md) require a minimal C45 disposition before permanent general contract implementation. Schema fixture/coverage work and provider-fact preparation proceed in parallel with that review and with Braid D02. This registration does not approve C45 or adopt a new Braid engine pin.
 
 For current-source qualification, use the existing documented command with a pinned core source checkout, for example `dotnet test Bosak.Schema.slnx -c Release -p:BosakSourceRoot=D:/Development/Bosak`, and record the actual checkout revision. A local override is not published-package evidence. Owner handoff must state completed package IDs, exact commits/packages, executed results, remaining limits and required consumer action. Update [FEATURE_REQUESTS](FEATURE_REQUESTS.md) when those facts change.
+
+## Progress
+
+- **2026-10-30 — S009-02 started (internal scope):** [provider-fact mapping](S009-02-PROVIDER-FACT-MAPPING.md) records the native 0.9/v5 candidate's actual provider facts against the seven neutral requirement dimensions, plus the F-01–F-06 compatibility/lifetime fixture inventory. Production adapter binding still waits for the accepted core C139-01 contract shape.
+- **2026-10-30 — S009-04 started (requirements scope):** [foundation requirements roadmap](S009-04-FOUNDATION-REQUIREMENTS.md) maps needs N1–N8 to gap-matrix features, current evidence, required neutral core contract elements and freeze-blocker status, including the known-core-needs consume/supply map. Joint sign-off still waits for the agreed candidate, actual qualification and REQ-140 closure.
+
+Both steps are documentation-only: no runtime behavior, test execution, API adoption or conformance is claimed.

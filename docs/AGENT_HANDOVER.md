@@ -96,7 +96,7 @@ Current development line: 0.4 through MinVer; no new tag/NuGet publication is im
 
 Next: reassess the smallest necessary core/session contract around the open implementation, then qualify real component completeness, compatible-schema handoff and consumers before engine integration. See [architecture](ARCHITECTURE.md), [registry](FEATURE_REQUESTS.md), [integration](INTEGRATION.md) and [transition](APACHE-TRANSITION.md).
 
-Last updated: 2026-10-29
+Last updated: 2026-10-30
 
 ## Whole-document bridge candidate — 29 October 2026
 
@@ -173,3 +173,7 @@ Current source HEAD `2f4bf417131ba70e1653eda3d9148d83a6ef6d8a`; paired core HEAD
 ## Shared foundation goal — 30 October 2026
 
 Schema REQ-009/S009-04 adds the full-XSD-1.1 foundation requirements inventory and required Schema owner sign-off for the shared Bosak API freeze, alongside Bosak.XmlDb. See [owner work packages](REQ-009-OWNER-WORK-PACKAGES.md). The bounded 0.9/v5 assessment does not establish full XSD 1.1 support. Known required contract gaps must be resolved before the named foundation surface freezes; backend conformance and release retain separate evidence. No API acceptance, source change or package adoption occurs in this registration.
+
+## S009-02 / S009-04 started — 30 October 2026
+
+[S009-02 provider-fact mapping](S009-02-PROVIDER-FACT-MAPPING.md): the native 0.9/v5 candidate's actual provider facts mapped onto seven neutral requirement dimensions (D1–D7), plus the F-01–F-06 compatibility/lifetime fixture inventory. [S009-04 foundation requirements](S009-04-FOUNDATION-REQUIREMENTS.md): full-XSD-1.1 requirements roadmap N1–N8 with the known-core-needs consume/supply map and freeze-blocker status. Both are documentation-only starter steps — no runtime behavior, test execution, API adoption or conformance claim. Production adapter binding still waits for accepted core C139-01; S009-04 sign-off waits for the agreed candidate, actual qualification and REQ-140 closure. Work remains uncommitted under the Git rule.
