@@ -137,7 +137,7 @@ public CanonicalEvidenceSet Parse(string payload, ParseOptions? options = null)
 |--------------|---------|
 | `Bosak.Schema.Tests` | Activation-free factories, schema compilation/validation and legacy API compatibility |
 
-The public schema solution has 114 tests and no licensing-pipeline/Azurite dependency.
+The public schema solution has 124 tests and no licensing-pipeline/Azurite dependency.
 
 ### 5.2 Test Patterns
 
@@ -228,7 +228,7 @@ After **every** successful implementation step, update the following canonical d
 
 ---
 
-*Last updated: 2026-10-29*
+*Last updated: 2026-10-30*
 
 
 

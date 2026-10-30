@@ -17,8 +17,8 @@
 //                      | Charles Korthout | 0.3   | 27-10-2026     | Added BSK-XSD-010 SimpleTypeNotFound (REQ-009 S3 facet evaluation)                       |
 //                      | Charles Korthout | 0.4   | 27-10-2026     | Added BSK-XSD-013/014 alternative diagnostics (REQ-009 S4a)                              |
 //                      | Charles Korthout | 0.5   | 27-10-2026     | Added BSK-XSD-015 AlternativeNotApplicable (REQ-009 S4b)                                 |
-
 //                      | Charles Korthout | 0.6   | 29-10-2026     | Publish schema-only Apache-2.0 source; remove activation dependency                       |
+//                      | Charles Korthout | 0.7   | 30-10-2026     | Added BSK-XSD-016 InvalidWildcard (REQ-009 S5c wildcard constraints)                     |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -91,4 +91,8 @@ public static class SchemaDiagnosticCodes
 
     /// <summary>Conditional type assignment found no matching alternative and the declaration has no default alternative — the element has no governing type.</summary>
     public const string AlternativeNotApplicable = "BSK-XSD-015";
+
+    /// <summary>A wildcard's <c>namespace</c> and <c>notNamespace</c> attributes are both present, or a
+    /// <c>notNamespace</c> / <c>notQName</c> token is not in the lexical space of W3C XML Schema 1.1 Part 1 §3.10.2.</summary>
+    public const string InvalidWildcard = "BSK-XSD-016";
 }

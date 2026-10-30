@@ -14,8 +14,8 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 27-10-2026     | Creation (REQ-009 S5a: xs:openContent / xs:defaultOpenContent compile support)           |
-
 //                      | Charles Korthout | 0.2   | 29-10-2026     | Publish schema-only Apache-2.0 source; remove activation dependency                       |
+//                      | Charles Korthout | 0.3   | 30-10-2026     | Wildcard records notNamespace / notQName negative constraints (REQ-009 S5c)              |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -57,13 +57,26 @@ public enum WildcardProcessContents
 /// </summary>
 /// <param name="NamespaceConstraint">The space-separated <c>namespace</c> attribute tokens
 /// (<c>##any</c>, <c>##other</c>, <c>##targetNamespace</c>, <c>##local</c>, or namespace URIs);
-/// <c>##any</c> when the attribute is absent.</param>
+/// <c>##any</c> when the attribute is absent and no <c>notNamespace</c> attribute is present;
+/// empty when only <c>notNamespace</c> is present (the constraint has negative variety, per the
+/// mapping rule in W3C XML Schema 1.1 Part 1 §3.10.2.2).</param>
 /// <param name="ProcessContents">The <c>processContents</c> attribute value; <see cref="WildcardProcessContents.Strict"/> when absent.</param>
 /// <param name="NodePath">Path of the originating node inside the schema document.</param>
 public sealed record OpenContentWildcard(
     IReadOnlyList<string> NamespaceConstraint,
     WildcardProcessContents ProcessContents,
-    string? NodePath);
+    string? NodePath)
+{
+    /// <summary>The space-separated <c>notNamespace</c> attribute tokens (<c>##targetNamespace</c>,
+    /// <c>##local</c>, or namespace URIs); empty when the attribute is absent. Mutually exclusive
+    /// with the <c>namespace</c> constraint per W3C XML Schema 1.1 Part 1 §3.10.3.</summary>
+    public IReadOnlyList<string> NotNamespace { get; init; } = [];
+
+    /// <summary>The space-separated <c>notQName</c> attribute tokens (<c>##defined</c>,
+    /// <c>##definedSibling</c>, or QNames); empty when the attribute is absent (W3C XML Schema
+    /// 1.1 Part 1 §3.10.2). Semantic enforcement of the disallowed-names set is a later REQ-009 phase.</summary>
+    public IReadOnlyList<string> NotQName { get; init; } = [];
+}
 
 /// <summary>
 /// A compiled XSD 1.1 open content component: an explicit <c>xs:openContent</c> on a complex type

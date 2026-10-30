@@ -24,6 +24,7 @@
 //                      | Charles Korthout | 0.8   | 27-10-2026     | Records xs:alternative with owner/static context + resolved type (REQ-009 S4a)          |
 //                      | Charles Korthout | 0.9   | 27-10-2026     | Records owning type/element on xs:assert for S4b applicability filtering                 |
 //                      | Charles Korthout | 0.10  | 29-10-2026     | Publish schema-only Apache-2.0 source; remove activation dependency                       |
+//                      | Charles Korthout | 0.11  | 30-10-2026     | Records wildcard notNamespace / notQName with §3.10 representation checks (REQ-009 S5c)|
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -255,7 +256,16 @@ public sealed class SchemaCompiler : IXsdSchemaCompiler
                 case "anyAttribute":
                     if (element.Attribute("notQName") is not null || element.Attribute("notNamespace") is not null)
                     {
-                        RecognizedButUnsupported(state, path, "xs:" + local + " notQName/notNamespace", options.Version);
+                        // The xs:any child of xs:openContent / xs:defaultOpenContent is recorded (and its
+                        // negative constraints validated) by ParseOpenContentWildcard — only content-model
+                        // and attribute wildcards, which have no recorded component yet, stay explicit diagnostics.
+                        var recordedWildcard = local == "any" &&
+                            (element.Parent?.Name == XName.Get("openContent", XmlSchemaNamespace) ||
+                             element.Parent?.Name == XName.Get("defaultOpenContent", XmlSchemaNamespace));
+                        if (!recordedWildcard)
+                        {
+                            RecognizedButUnsupported(state, path, "xs:" + local + " notQName/notNamespace", options.Version);
+                        }
                     }
 
                     break;
@@ -503,7 +513,19 @@ public sealed class SchemaCompiler : IXsdSchemaCompiler
 
     private static OpenContentWildcard? ParseOpenContentWildcard(XElement any, string path, CompilationState state)
     {
-        var namespaceTokens = (any.Attribute("namespace")?.Value ?? "##any")
+        var namespaceAttribute = any.Attribute("namespace");
+        var notNamespaceAttribute = any.Attribute("notNamespace");
+        if (namespaceAttribute is not null && notNamespaceAttribute is not null)
+        {
+            // W3C XML Schema 1.1 Part 1 §3.10.3 (Wildcard Representation OK): namespace and
+            // notNamespace attributes must not both be present.
+            InvalidWildcard(state, path, "The xs:any attributes 'namespace' and 'notNamespace' must not both be present (W3C XML Schema 1.1 Part 1 §3.10.3).");
+            return null;
+        }
+
+        // With only notNamespace present the positive constraint has no tokens (§3.10.2.2 mapping:
+        // the {namespaces} set belongs to the negative 'not' variety recorded in NotNamespace).
+        var namespaceTokens = (namespaceAttribute?.Value ?? (notNamespaceAttribute is null ? "##any" : string.Empty))
             .Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
         foreach (var token in namespaceTokens)
         {
@@ -511,6 +533,32 @@ public sealed class SchemaCompiler : IXsdSchemaCompiler
             if (!knownToken && !Uri.TryCreate(token, UriKind.Absolute, out _))
             {
                 InvalidOpenContent(state, path, $"The xs:any namespace token '{token}' is not ##any, ##other, ##targetNamespace, ##local, or an absolute URI.");
+                return null;
+            }
+        }
+
+        var notNamespaceTokens = SplitTokens(notNamespaceAttribute?.Value);
+        foreach (var token in notNamespaceTokens)
+        {
+            var knownToken = token is "##targetNamespace" or "##local";
+            if (!knownToken && !Uri.TryCreate(token, UriKind.Absolute, out _))
+            {
+                InvalidWildcard(state, path, $"The xs:any notNamespace token '{token}' is not ##targetNamespace, ##local, or an absolute URI (W3C XML Schema 1.1 Part 1 §3.10.2).");
+                return null;
+            }
+        }
+
+        var notQNameTokens = SplitTokens(any.Attribute("notQName")?.Value);
+        foreach (var token in notQNameTokens)
+        {
+            if (token is "##defined" or "##definedSibling")
+            {
+                continue;
+            }
+
+            if (!IsQNameLexical(token))
+            {
+                InvalidWildcard(state, path, $"The xs:any notQName token '{token}' is not ##defined, ##definedSibling, or a QName (W3C XML Schema 1.1 Part 1 §3.10.2).");
                 return null;
             }
         }
@@ -529,13 +577,68 @@ public sealed class SchemaCompiler : IXsdSchemaCompiler
             return null;
         }
 
-        return new OpenContentWildcard(namespaceTokens, processContents.Value, path);
+        return new OpenContentWildcard(namespaceTokens, processContents.Value, path)
+        {
+            NotNamespace = notNamespaceTokens,
+            NotQName = notQNameTokens,
+        };
+    }
+
+    private static IReadOnlyList<string> SplitTokens(string? lexical)
+    {
+        if (string.IsNullOrWhiteSpace(lexical))
+        {
+            return [];
+        }
+
+        return lexical.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+    }
+
+    private static bool IsQNameLexical(string token)
+    {
+        // §3.10.2.2: an unprefixed QName member of notQName denotes the no-namespace expanded name;
+        // a prefixed one must have exactly one colon with non-empty NCName parts. Tokens beginning
+        // with '##' are only the two keywords validated earlier, so e.g. '##bogus' fails NCName here.
+        var colon = token.IndexOf(':');
+        try
+        {
+            if (colon < 0)
+            {
+                XmlConvert.VerifyNCName(token);
+                return true;
+            }
+
+            if (colon == 0 || colon != token.LastIndexOf(':') || colon == token.Length - 1)
+            {
+                return false;
+            }
+
+            XmlConvert.VerifyNCName(token[..colon]);
+            XmlConvert.VerifyNCName(token[(colon + 1)..]);
+            return true;
+        }
+        catch (XmlException)
+        {
+            return false;
+        }
+        catch (ArgumentException)
+        {
+            return false;
+        }
     }
 
     private static void InvalidOpenContent(CompilationState state, string path, string message)
     {
         state.Diagnostics.Add(new SchemaDiagnostic(
             SchemaDiagnosticCodes.InvalidOpenContent,
+            message,
+            path));
+    }
+
+    private static void InvalidWildcard(CompilationState state, string path, string message)
+    {
+        state.Diagnostics.Add(new SchemaDiagnostic(
+            SchemaDiagnosticCodes.InvalidWildcard,
             message,
             path));
     }
