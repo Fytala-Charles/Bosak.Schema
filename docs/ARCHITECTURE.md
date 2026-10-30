@@ -190,3 +190,7 @@ Read-only adoption proposal reviewed (29 October 2026): compiled draft source/pr
 
 
 Owner execution registration — 30 October 2026: [REQ-009 S009-01–03](REQ-009-OWNER-WORK-PACKAGES.md) defines fixture-driven native coverage, real provider authority/PSVI mapping and bounded delivery/consumer qualification. These can be prepared alongside Bosak REQ-139 review and Braid D02. Final general adapter binding waits for accepted core shape; no new public API, runtime coverage, pin or release is implemented by registration. Public schema remains activation-free; private issuer/licensing work is excluded.
+
+## Shared foundation goal — 30 October 2026
+
+Schema REQ-009/S009-04 adds the full-XSD-1.1 foundation requirements inventory and required Schema owner sign-off for the shared Bosak API freeze, alongside Bosak.XmlDb. See [owner work packages](REQ-009-OWNER-WORK-PACKAGES.md). The bounded 0.9/v5 assessment does not establish full XSD 1.1 support. Known required contract gaps must be resolved before the named foundation surface freezes; backend conformance and release retain separate evidence. No API acceptance, source change or package adoption occurs in this registration.

@@ -2,6 +2,8 @@
 
 Registered: 30 October 2026. Accountable owner role: **Public Bosak.Schema maintainers**; individual scheduling/assignment belongs to that owner. Parent status remains **In Progress**. This registers scoped follow-up work and does not claim full XSD 1.1 conformance, C45/public API acceptance or publication.
 
+Strategic outcome: full XSD 1.1 implementation on the shared Bosak foundation, with Schema and XmlDb jointly qualifying the core freeze surface. The bounded candidate remains a milestone toward that outcome, not completion. [Core REQ-140 plan](https://github.com/Fytala-Charles/Bosak/blob/checkpoint/restart-2026-10-29/docs/FOUNDATION-API-FREEZE-PLAN.md).
+
 ## Current basis and ownership
 
 Candidate baseline: `7e498a1922dbda4ae14005acc4b13a049896c75a`, persistent feature/bounded-document-assessment worktree. Original public checkout remains separate at `044d2cb2e67decd46e03e0f5ee7cb03029f34bd9`. Native 0.9/v5 and its 451-case qualification are finite existing evidence; no new execution is supplied by this registration. The candidate uses current core 1.34.1 through the documented source override because its package dependency is unpublished.
@@ -16,6 +18,8 @@ Read [current assessment scope](DOCUMENT-ASSESSMENT.md), [consumer coverage prio
 | S009-02 Provider facts, provenance and core-adapter mapping | Internal mapping/proofs can start now; final production binding waits for accepted core C139-01 shape | Map provider-owned component/universe identity, affiliation/derivation/closure, original assessment/PSVI and actual typed values to the neutral requirements. Prepare compatibility and lifetime fixtures. After the core shape is accepted, implement an opt-in adapter for capabilities actually supported; explicitly refuse the remainder. | Real-provider tests for supported and foreign components, compatible views without rewriting original PSVI, original-source identity, preserve/strip/copies, cancellation/disposal and no unsupported downgrade to BCL XSD 1.0. Proposed core types or QName equality alone are not complete component authority. |
 | S009-03 Bounded-candidate delivery and consumer qualification | Source/build/package preparation ready now against existing bounded APIs; package publication requires available core package and separate owner authorization | Produce exact source/core/package pins, public API delta, support matrix and package-only example/regression recipe for the bounded candidate. Refresh isolated consumer qualification against those exact artifacts, keeping original checkouts/pins unchanged. Keep this delivery separate from a general C45 adapter/API freeze. | Full Schema suite including retained 114 legacy binary expectations and current native regressions, exact input/archive/output identities, docs/examples, refused-coverage cases and no private licensing material. Compare recorded counts to actual execution; publication and each consumer adoption remain explicit subsequent decisions. |
 
+| S009-04 Full-XSD-1.1 foundation requirements and joint freeze acceptance | Requirements work ready now; final sign-off follows agreed candidate and actual qualification | Deliver the full validator coverage/requirements roadmap and map all known core needs, including general component identity, derivation/list/union/typed value transport, assertions/alternatives and original PSVI. Close required foundation gaps with core REQ-140 and provide Schema owner sign-off alongside XmlDb. | Known required API needs mapped and representative actual provider cases qualified on the same candidate; no freeze from decimal-only/prototype evidence. Full backend conformance/release remains separately evidenced. |
+
 ## Acceptance checklist and constraints
 
 - [ ] S009-01 identifies real demand and exact bounded behavior; metadata/descriptor recognition is not labeled structural enforcement.
@@ -23,6 +27,8 @@ Read [current assessment scope](DOCUMENT-ASSESSMENT.md), [consumer coverage prio
 - [ ] S009-02 exposes only actual provider authority, preserving original assessment state and explicit Unsupported outcomes; the accepted core interface is identified before production adapter binding.
 - [ ] S009-03 records actual complete tests, source/package/API evidence and unsupported scope without claiming full XSD 1.1 coverage or automatic Braid/XmlDb adoption.
 - [ ] Source changes, old expectation migrations and review receipts are separated; all prior sealed dossiers remain unchanged.
+
+Shared API freeze remains pending until both Schema and XmlDb owners qualify the named required contract. Schema backend features can continue within that stable scope, while unresolved required API needs must be closed before freeze.
 
 The native assessment profile remains exactly the [documented 0.9 candidate](DOCUMENT-ASSESSMENT.md) until a selected extension is adopted and implemented. Do not infer list/union/general derivation, namespaces or broader structure from decimal count/presence examples. Do not add licensing checks or core-to-Schema production references.
 

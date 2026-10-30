@@ -136,3 +136,7 @@ Read-only adoption proposal reviewed (29 October 2026): compiled draft source/pr
 
 
 Owner queue — 30 October 2026: [REQ-009 S009-01–03](docs/REQ-009-OWNER-WORK-PACKAGES.md) registers native coverage/fixture selection, provider mapping and bounded source/package qualification. Prepare these independently of Braid product validation; final general binding waits for the accepted core contract. No automatic publication or broader XSD 1.1 claim.
+
+## Shared foundation goal — 30 October 2026
+
+Schema REQ-009/S009-04 adds the full-XSD-1.1 foundation requirements inventory and required Schema owner sign-off for the shared Bosak API freeze, alongside Bosak.XmlDb. See [owner work packages](docs/REQ-009-OWNER-WORK-PACKAGES.md). The bounded 0.9/v5 assessment does not establish full XSD 1.1 support. Known required contract gaps must be resolved before the named foundation surface freezes; backend conformance and release retain separate evidence. No API acceptance, source change or package adoption occurs in this registration.

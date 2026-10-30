@@ -23,6 +23,7 @@
 | REQ-009 / S009-01 | Pending owner scope; ready now | [Fixture-driven native coverage inventory and next bounded slice](REQ-009-OWNER-WORK-PACKAGES.md) |
 | REQ-009 / S009-02 | Mapping/proofs ready now; production binding waits for accepted core contract | [Provider authority/PSVI/lifetime mapping and adapter](REQ-009-OWNER-WORK-PACKAGES.md) |
 | REQ-009 / S009-03 | Delivery preparation ready now; publication separately gated | [Bounded candidate package and consumer qualification](REQ-009-OWNER-WORK-PACKAGES.md) |
+| REQ-009 / S009-04 | Requirements ready now; joint core freeze pending | [Full XSD 1.1 foundation requirements and Schema/XmlDb joint acceptance](REQ-009-OWNER-WORK-PACKAGES.md) |
 
 ## 2. Implemented Coverage
 
