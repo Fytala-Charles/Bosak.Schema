@@ -20,7 +20,7 @@
 | Core schema-session integration | Pending | Complete component authority, actual PSVI/atomic flow, compatible-schema interchange and real consumer qualification |
 | Native document assessment (REQ-009, 0.9 candidate) | Implemented candidate | Finite required/optional/repeated particles, bounded count/presence assertions, exact decimals and original typed occurrence state |
 | Complete XSD 1.1 structural validation | Incomplete | One native profile does not establish complete coverage or conformance |
-| REQ-009 / S009-01 | Pending owner scope; ready now | [Fixture-driven native coverage inventory and next bounded slice](REQ-009-OWNER-WORK-PACKAGES.md) |
+| REQ-009 / S009-01 | Executed 2026-10-30 — inventory complete; slice selection blocked on owner fixture | [Native coverage inventory; no next slice selected pending owner fixture](S009-01-NATIVE-COVERAGE-INVENTORY.md) |
 | REQ-009 / S009-02 | Started 2026-10-30 (internal mapping/fixtures); production binding waits for accepted core contract | [Provider fact mapping D1–D7 + fixture inventory F-01–F-06](S009-02-PROVIDER-FACT-MAPPING.md) |
 | REQ-009 / S009-03 | Delivery preparation ready now; publication separately gated | [Bounded candidate package and consumer qualification](REQ-009-OWNER-WORK-PACKAGES.md) |
 | REQ-009 / S009-04 | Started 2026-10-30 (requirements roadmap N1–N8); joint core freeze pending | [Full XSD 1.1 foundation requirements and Schema/XmlDb joint acceptance](S009-04-FOUNDATION-REQUIREMENTS.md) |

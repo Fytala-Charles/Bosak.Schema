@@ -52,7 +52,7 @@ Fixture inputs must be owner-authorized/public and hash-pinned when executed; ha
 ## 5. Blockers and next actions
 
 1. **Blocked (external):** production adapter binding until core C139-01 records the accepted neutral contract (minimal C45 disposition first). Proposed core types or QName equality alone are not component authority.
-2. **Next (internal):** hash-pin fixture inputs for F-01…F-06; keep the mapping current as S009-01 selects the next bounded slice; supply this map as provider-fact input to C139-01 review.
+2. **Done (internal, 2026-10-30):** fixture inputs for F-01…F-06 are hash-pinned in [S009-02-FIXTURE-IDENTITIES.json](S009-02-FIXTURE-IDENTITIES.json) against the 451-case suite source at commit `31f6661`. Next internal: keep the mapping current as S009-01 selects the next bounded slice (currently blocked on an owner fixture); supply this map as provider-fact input to C139-01 review.
 3. **Not in scope:** general session/API acceptance, freeze sign-off (S009-04), package publication (S009-03), any new native grammar.
 
 ---
