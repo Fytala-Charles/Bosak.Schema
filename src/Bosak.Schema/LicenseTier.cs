@@ -2,7 +2,8 @@
 // AUTHOR               : Charles Korthout
 // CREATE DATE          : 23 September 2026
 // PURPOSE              : License tiers for Bosak.Schema activation (per-developer or per-deployment).
-// SPECIAL NOTES        : Mirrors the commercial model in COMMERCIAL.md (subscription vs runtime license).
+// SPECIAL NOTES        : Legacy tier shapes mirroring the pre-Apache commercial model (subscription
+//                        vs runtime license); retained as Apache-2.0 API compatibility only.
 //
 // COPYRIGHT            : Fytala
 // LICENSE              : LICENSE.md (Apache-2.0)
@@ -16,6 +17,7 @@
 //                      | Charles Korthout | 0.3   | 05-10-2026     | Added Team tier (REQ-005 open question 1: tid "team", up to 10 named developers)         |
 
 //                      | Charles Korthout | 0.4   | 29-10-2026     | Publish schema-only Apache-2.0 source; remove activation dependency                       |
+//                      | Charles Korthout | 0.5   | 30-10-2026     | Reworded SPECIAL NOTES: dropped private COMMERCIAL.md reference                           |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 

@@ -45,9 +45,11 @@ The new package contains no internal HMAC/product key, signing implementation, k
 
 | Date | Change |
 |---|---|
+| 2026-10-30 | REQ-009 decision evidence (ADR-005/006, ADR-001/002, XSD11_SOURCE_AUDIT, XSD11_GAP_MATRIX, XSD11_S4_DESIGN_PREP, SEAM_DESIGN, XSD 1.1 design handover) transferred from the private repository with dated historical-context notes; all source references to docs/ADR-005 and docs/XSD11_S4_DESIGN_PREP.md now resolve |
+| 2026-10-30 | REQ-009 S5c: open-content wildcards record the XSD 1.1 negative constraints notNamespace/notQName with explicit representation diagnostics (BSK-XSD-016); content-model wildcards remain explicit BSK-XSD-003; 124 tests pass |
 | 2026-10-29 | Owner-approved Apache-2.0/public schema-only source, activation-free factories and credential-free compatibility shim; 114 tests pass |
 | Before transition | Private proprietary development, preserved separately with its original Git history |
 
 Public factory/type signatures are retained, with the intentional licensing behavior change documented above. Real previously compiled consumer replacement tests and full schema-session ABI/provider acceptance are not certified by these source tests.
 
-*Last updated: 2026-10-29*
+*Last updated: 2026-10-30*

@@ -20,7 +20,7 @@ One public `Bosak.Schema` assembly references the published Bosak XPath API/prov
 | Component | Responsibility and limit |
 |---|---|
 | `Compilation` | Explicit-version schema descriptor compilation and bounded resolved imports/includes |
-| `Model` | Staged XSD 1.1 assertions, alternatives, declarations, simple facets, open-content/default-attribute metadata |
+| `Model` | Staged XSD 1.1 assertions, alternatives, declarations, simple facets, open-content/default-attribute metadata, wildcard negative constraints (notNamespace/notQName) |
 | `Validation` | Assertion/facet evaluation and supported governing-type applicability through Bosak XPath |
 | `SchemaServices` | Activation-free factories for compiler and validation services |
 | `SchemaAwareXslt` | Opt-in helper for the existing schema-aware XSLT path |
@@ -39,14 +39,16 @@ Schema language version, host/XDM profile, component authority and source/snapsh
 | Decision | Status |
 |---|---|
 | [ADR-007: Apache/public schema split](ADR-007-apache-schema-publication.md) | Accepted by owner on 29 October 2026 |
+| [ADR-005: XSD 1.1 compiled model and validation pipeline](ADR-005-xsd11-compiled-model-and-validation.md) | Accepted by owner on 27 October 2026; transferred to the public repository 30 October 2026 as REQ-009 decision evidence |
+| [ADR-006: XSD 1.1 S4/S5 engine seam compatibility](ADR-006-xsd11-engine-seam-compatibility.md) | Proposed; pending core-repo acceptance before the S4 design freeze (core tracking REQ-139) |
 | Preserve modular package and core dependency direction | Retained |
 | Require no activation for standards processing | Implemented |
 | Full XSD 1.1 provider/session integration | Pending; no conformance promotion |
 
 ## 5. Validation and Extensibility
 
-All 114 public schema tests pass. Existing assertion, facet, alternative, resource-policy and typed-XSLT regression bodies are retained; commercial credential tests remain with the private infrastructure. New tests cover activation-free factories, valid/invalid assertions, ignored legacy activation, invalid directory input and absence of issuer/credential implementations.
+All 124 public schema tests pass. Existing assertion, facet, alternative, resource-policy and typed-XSLT regression bodies are retained; commercial credential tests remain with the private infrastructure. New tests cover activation-free factories, valid/invalid assertions, ignored legacy activation, invalid directory input, absence of issuer/credential implementations and wildcard negative-constraint recording.
 
 No new engine implementation, baseline/filter change, storage migration or consumer adoption is included. Registry reclamation, full PSVI/component completeness and real consumer ABI qualification remain future acceptance gates.
 
-*Last updated: 2026-10-29*
+*Last updated: 2026-10-30*
