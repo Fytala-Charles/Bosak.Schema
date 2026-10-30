@@ -133,3 +133,6 @@ Finite read-only adoption proposal (29 October 2026): additive inspection-only s
 
 
 Read-only adoption proposal reviewed (29 October 2026): compiled draft source/project/assembly/XML hashes and port-free data shape verified; zero-warning/error build receipt preserved. This is an additive inspection-only proposal at Braid 1.26.2, not implementation or actual public API adoption. Existing default editing/preview/export stays untouched; no product pin/core API/ID change. Earlier uncommitted notices are history; delivery resolves through review Git history. Next: consumer-owned implementation task/ADR at the unchanged pin. [Proposal review checkpoint](docs/BRAID-READONLY-ADOPTION-REVIEW.md).
+
+
+Owner queue — 30 October 2026: [REQ-009 S009-01–03](docs/REQ-009-OWNER-WORK-PACKAGES.md) registers native coverage/fixture selection, provider mapping and bounded source/package qualification. Prepare these independently of Braid product validation; final general binding waits for the accepted core contract. No automatic publication or broader XSD 1.1 claim.

@@ -20,6 +20,9 @@
 | Core schema-session integration | Pending | Complete component authority, actual PSVI/atomic flow, compatible-schema interchange and real consumer qualification |
 | Native document assessment (REQ-009, 0.9 candidate) | Implemented candidate | Finite required/optional/repeated particles, bounded count/presence assertions, exact decimals and original typed occurrence state |
 | Complete XSD 1.1 structural validation | Incomplete | One native profile does not establish complete coverage or conformance |
+| REQ-009 / S009-01 | Pending owner scope; ready now | [Fixture-driven native coverage inventory and next bounded slice](REQ-009-OWNER-WORK-PACKAGES.md) |
+| REQ-009 / S009-02 | Mapping/proofs ready now; production binding waits for accepted core contract | [Provider authority/PSVI/lifetime mapping and adapter](REQ-009-OWNER-WORK-PACKAGES.md) |
+| REQ-009 / S009-03 | Delivery preparation ready now; publication separately gated | [Bounded candidate package and consumer qualification](REQ-009-OWNER-WORK-PACKAGES.md) |
 
 ## 2. Implemented Coverage
 
@@ -37,7 +40,7 @@ The [0.5 candidate](DOCUMENT-ASSESSMENT.md) implements `decimal-sequence-asserti
 
 The broader REQ-009 remains In Progress. Anonymous-root projection, general component closure, compatible universes, named/anonymous/list/union derivation and broader structural features remain acceptance work. No core REQ-139 completion or frozen skip removal is inferred.
 
-*Last updated: 2026-10-29*
+*Last updated: 2026-10-30*
 
 ## Whole-document bridge candidate — 29 October 2026
 
@@ -167,3 +170,8 @@ Finite read-only adoption proposal (29 October 2026): additive inspection-only s
 
 
 Read-only adoption proposal reviewed (29 October 2026): compiled draft source/project/assembly/XML hashes and port-free data shape verified; zero-warning/error build receipt preserved. This is an additive inspection-only proposal at Braid 1.26.2, not implementation or actual public API adoption. Existing default editing/preview/export stays untouched; no product pin/core API/ID change. Earlier uncommitted notices are history; delivery resolves through review Git history. Next: consumer-owned implementation task/ADR at the unchanged pin. [Proposal review checkpoint](BRAID-READONLY-ADOPTION-REVIEW.md).
+
+
+## Owner execution registration — 30 October 2026
+
+[REQ-009 owner packages S009-01–03](REQ-009-OWNER-WORK-PACKAGES.md) are registered with concrete deliverables, evidence, blockers and the public Schema maintainer role. They link to Bosak C139-01–04 under existing REQ-139. Fixture/coverage, provider-fact mapping and bounded delivery preparation may proceed in parallel with Braid D02; permanent adapter binding waits for accepted core shape. Parent REQ-009 remains In Progress; C45, general session/API freeze, release and product adoption are not accepted by registration. No new runtime behavior or test execution is claimed.
