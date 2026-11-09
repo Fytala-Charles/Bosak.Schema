@@ -13,7 +13,7 @@
 
 ## 1. Current Architecture
 
-One public `Bosak.Schema` assembly references the published Bosak XPath API/providers, XSLT and XQuery packages at 1.81.2 in this isolated adoption candidate. The core engine does not reference this package. Keeping schema services in a separate assembly avoids a dependency cycle; changing the license does not require merging them into Core.
+One public `Bosak.Schema` assembly references the published Bosak XPath API/providers, XSLT and XQuery packages at 1.81.2 after the merged dependency adoption. The core engine does not reference this package. Keeping schema services in a separate assembly avoids a dependency cycle; changing the license does not require merging them into Core.
 
 ## 2. Components
 
@@ -41,6 +41,8 @@ Schema language version, host/XDM profile, component authority and source/snapsh
 | [ADR-007: Apache/public schema split](ADR-007-apache-schema-publication.md) | Accepted by owner on 29 October 2026 |
 | [ADR-005: XSD 1.1 compiled model and validation pipeline](ADR-005-xsd11-compiled-model-and-validation.md) | Accepted by owner on 27 October 2026; transferred to the public repository 30 October 2026 as REQ-009 decision evidence |
 | [ADR-006: XSD 1.1 S4/S5 engine seam compatibility](ADR-006-xsd11-engine-seam-compatibility.md) | Proposed; pending core-repo acceptance before the S4 design freeze (core tracking REQ-139) |
+| [Core 1.81.2 dependency adoption](CORE-1.81.2-ADOPTION.md) | Merged in Schema PR #1; existing source and unchanged-binary coverage qualified |
+| [Historical BCAP O1/O2 design review](core-disposition-responses/2026-11-03-v2/README.md) | Scoped design returns dated 3 November; not new native/runtime acceptance |
 | Preserve modular package and core dependency direction | Retained |
 | Require no activation for standards processing | Implemented |
 | Full XSD 1.1 provider/session integration | Pending; no conformance promotion |
@@ -49,8 +51,8 @@ Schema language version, host/XDM profile, component authority and source/snapsh
 
 All 124 public schema tests pass. Existing assertion, facet, alternative, resource-policy and typed-XSLT regression bodies are retained; commercial credential tests remain with the private infrastructure. New tests cover activation-free factories, valid/invalid assertions, ignored legacy activation, invalid directory input, absence of issuer/credential implementations and wildcard negative-constraint recording.
 
-No new engine implementation, baseline/filter change, storage migration or consumer adoption is included. Registry reclamation, full PSVI/component completeness and real consumer ABI qualification remain future acceptance gates.
+The dependency adoption changes no Schema C# implementation, upstream baseline/filter or storage format. The same 124 cases pass after rebuilding and in the separately retained unchanged-binary lane; these repeated case catalogs are not additive coverage. The Core optional source wrapper pins merged Schema c953ebe and runs 124 upstream plus 11 local cases. This does not prove arbitrary downstream ABI, native registry/lease safety, concurrent disposal or full PSVI/component completeness.
 
-*Last updated: 2026-10-30*
+Earlier source/design inputs and unsigned drafts remain in their [historical inbox](core-disposition-inbox/2026-11-03/README.md); their original identities and decisions are unchanged. Current engineering state takes precedence over the archived local notices in [development history](DEVELOPMENT_HISTORY.md).
 
-The [Core 1.81.2 adoption candidate](CORE-1.81.2-ADOPTION.md) qualifies existing source, unchanged-binary and bounded integration/ownership controls. Schema MinVer remains on the 0.4 development line; this is not a Schema package release or full native provider/session adoption.
+*Last updated: 2026-11-09*

@@ -13,7 +13,7 @@
 
 ## 1. Dependency and Availability
 
-Build this source with .NET 10. The project references Bosak XPath API/providers, XSLT and XQuery 1.81.2 in this isolated adoption candidate. The source transition targets the 0.4 development line through MinVer; no new NuGet release or tag is claimed.
+Build this source with .NET 10. The project references Bosak XPath API/providers, XSLT and XQuery 1.81.2 after the merged dependency adoption. The source transition targets the 0.4 development line through MinVer; no new NuGet release or tag is claimed.
 
 ## 2. Compile and Validate
 
@@ -35,23 +35,25 @@ Always inspect compile/validation diagnostics and the [coverage status](FEATURE_
 
 `SchemaAwareXslt.CreateCompiler()` enables the existing schema-aware compiler path. Its directory overload preserves the existing resolver behavior; pass an appropriate directory and resource policy for your host. This path still uses the core's established `XmlSchemaSet` integration and does not turn it into a complete XSD 1.1 processor.
 
+The [current Core integration guide](https://github.com/Fytala-Charles/Bosak/tree/main/integrations/Schema) builds an optional nonpackable source wrapper at an exact Schema revision. It does not install a new Schema NuGet package or make Core depend on this repository. The 135-case suite includes the standalone 124 cases, eight price/assertion cases and three caller stream/reader ownership cases; they are not 259 independent tests. Full structural XSD 1.1 validation remains incomplete.
+
 ## 4. Activation Migration
 
 Remove `License.Activate(...)` from new applications. Existing binaries can retain that call: the public shim ignores the supplied value, stores no credential and never contacts a service. `IsActivated` is always true; `Current` is a perpetual Apache compatibility marker. It grants no entitlement to any other Fytala product. `GracePeriod`, `ActivatedLicense`, `LicenseTier` and `LicenseValidationException` remain legacy compatibility shapes, without schema access enforcement.
 
-The new package contains no internal HMAC/product key, signing implementation, key issuer, billing pipeline or private deployment configuration. Those remain private infrastructure. Do not use the shim to authorize another product.
+The public source contains no internal HMAC/product key, signing implementation, key issuer, billing pipeline or private deployment configuration. Those remain private infrastructure. Do not use the shim to authorize another product.
 
 ## 5. Version History and Limitations
 
 | Date | Change |
 |---|---|
-| 2026-10-30 | REQ-009 decision evidence (ADR-005/006, ADR-001/002, XSD11_SOURCE_AUDIT, XSD11_GAP_MATRIX, XSD11_S4_DESIGN_PREP, SEAM_DESIGN, XSD 1.1 design handover) transferred from the private repository with dated historical-context notes; all source references to docs/ADR-005 and docs/XSD11_S4_DESIGN_PREP.md now resolve |
+| 2026-11-09 | Core 1.81.2 dependencies merged in Schema PR #1; 124 existing regression cases and separate source/binary compatibility evidence retained |
+| 2026-11-09 | Core optional source wrapper refreshed to merged Schema c953ebe in Core PR #472; 135 cases and typed-price example pass, with exact LF/CRLF input hashes |
+| 2026-10-30 | REQ-009 decision evidence (ADR-005/006, ADR-001/002, XSD 11_SOURCE_AUDIT, XSD 11_GAP_MATRIX, XSD 11_S4_DESIGN_PREP, SEAM_DESIGN, XSD 1.1 design handover) transferred from the private repository with dated historical-context notes; all source references to docs/ADR-005 and docs/XSD 11_S4_DESIGN_PREP.md now resolve |
 | 2026-10-30 | REQ-009 S5c: open-content wildcards record the XSD 1.1 negative constraints notNamespace/notQName with explicit representation diagnostics (BSK-XSD-016); content-model wildcards remain explicit BSK-XSD-003; 124 tests pass |
 | 2026-10-29 | Owner-approved Apache-2.0/public schema-only source, activation-free factories and credential-free compatibility shim; 114 tests pass |
 | Before transition | Private proprietary development, preserved separately with its original Git history |
 
-Public factory/type signatures are retained, with the intentional licensing behavior change documented above. Real previously compiled consumer replacement tests and full schema-session ABI/provider acceptance are not certified by these source tests.
+Public factory/type signatures are retained, with the intentional licensing behavior change documented above. The separate dependency-adoption dossier records the exercised unchanged-Schema/test-binary replacement lane. It does not certify arbitrary previously compiled consumers or full schema-session ABI/provider acceptance.
 
-*Last updated: 2026-10-30*
-
-The [Core 1.81.2 adoption candidate](CORE-1.81.2-ADOPTION.md) qualifies existing source, unchanged-binary and bounded integration/ownership controls. Schema MinVer remains on the 0.4 development line; this is not a Schema package release or full native provider/session adoption.
+*Last updated: 2026-11-09*
