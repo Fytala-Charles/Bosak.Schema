@@ -1,23 +1,28 @@
-# Isolated Core 1.81.2 adoption candidate - 9 November 2026
-
-Parent source20090180755d0427d824b091cf838e9a03ca9adc, branchfeature/core-1.81.2-adoption. The local dependency checkpoint is the commit containing this entry; the user requested continuing with review and commit. [Candidate scope](CORE-1.81.2-ADOPTION.md) records five actual dependency edits (four product/one test),124 baseline/source/unchanged-binary controls and11 separate integration/ownership controls. Product/test C# remains unchanged; dependency output hashes match the published1.81.2 cohort. Original public checkout, its dirty review documents and the separate native assessment worktree remain unchanged. No push/tag/release or production native session adoption. Rebuild and qualify the local committed checkpoint, then obtain explicit direction before remote delivery; broader native/XSD coverage remains separate.
-
----
-
-# Bosak.Schema handover — 29 October 2026
-
-**Publication verified — 29 October 2026:** Public GitHub repository and Apache-2.0 detection verified; all 114 tests and the content-commit CI pass. [Publication receipt](PUBLICATION.json). No NuGet release or commercial infrastructure publication.
-
-This is the clean Apache-2.0 public schema repository. The original private repository/history and billing/key-generation code are preserved separately as Bosak.Licensing. Do not copy private history, credential helpers, deployment settings or commercial test vectors into this repository.
-
-What was built: owner-approved schema-only license/publication split, Apache/SPDX/package metadata, activation-free factories, credential-free legacy API shims, public CI and a 114-case schema regression suite. Source base `fa0da3e2d9972706a5a86616ef285af4daf5037b`; public delivery commit is recorded in the publication receipt and Git history.
-
-30 October 2026: REQ-009 S5c — open-content wildcards now record the XSD 1.1 negative constraints `notNamespace`/`notQName` (W3C XML Schema 1.1 Part 1 §3.10) with explicit `BSK-XSD-016` representation diagnostics; content-model and attribute wildcards remain explicit `BSK-XSD-003` (no component recorded for them yet). The suite grows to 124 tests, all passing.
-
-Also 30 October 2026: the REQ-009 decision-evidence set (`ADR-005`, `ADR-006`, `ADR-001`, `ADR-002`, `XSD11_SOURCE_AUDIT`, `XSD11_GAP_MATRIX`, `XSD11_S4_DESIGN_PREP`, `SEAM_DESIGN`, `Bosak_Schema_XSD11_Agent_Handover_v0.1`) was transferred from the private Bosak.Licensing repository into `docs/` with dated historical-context notes (licensing-era framing is pre-Apache history). Every source/test reference to `docs/ADR-005` and `docs/XSD11_S4_DESIGN_PREP.md` now resolves; the `COMMERCIAL.md` pointer in `LicenseTier.cs` was reworded. Commercial ADRs (003/004), REQ-005/REQ-008, go-live and enterprise-fabric documents remain private.
-
-Current development line: 0.4 through MinVer; no new tag/NuGet publication is implied. Core package pins remain 1.26.3. Full XSD 1.1 structural validation and the core session/PSVI integration are incomplete/pending. The licensing change does not accept the C44-R2 public API proposal.
-
-Next: reassess the smallest necessary core/session contract around the open implementation, then qualify real component completeness, compatible-schema handoff and consumers before engine integration. See [architecture](ARCHITECTURE.md), [registry](FEATURE_REQUESTS.md), [integration](INTEGRATION.md) and [transition](APACHE-TRANSITION.md).
+# Bosak.Schema agent handover
 
 Last updated: 2026-11-09
+
+## Current source and dependencies
+
+Schema main includes Core 1.81.2 adoption at mergec953ebe0057bea1616d3e4f891f7b0a5fc4bd99b, from reviewed commit 9d1881ef7ccc52e9c756e864e984a6211ae514cc. Four product PackageReference entries and the test provider reference select1.81.2; MinVer remains on the0.4 development line. No new Schema NuGet release/tag is announced. This documentation checkpoint is the commit containing this entry, based on mergedc953ebe; no product/test C# source changes are introduced.
+
+Core 1.81.2 and extension0.2.6 are published. Core's optional Schema source wrapper is updated in Core merge 18946b3125bf3187090877e00f22ea5a1e746118 ([PR #472](https://github.com/Fytala-Charles/Bosak/pull/472)) and pins merged Schema c953ebe with exact LF/CRLF source/test/fixture/legal hashes.
+
+## Qualification and acceptance boundaries
+
+- Standalone Schema:124 source regression cases; zero build warnings/errors in the dependency-adoption qualification.
+- Separately retained unchanged Schema/test/configuration lane:124 cases over nine verified published 1.81.2 replacement DLLs. Same case names, not additive coverage.
+- Core optional integration:135 cases, including124 upstream, eight price/assertion and three caller stream/reader ownership cases. Hosted integration and typed-price output pass.
+- These establish bounded existing compatibility and input ownership. They do not certify full XSD 1.1 structural validation, native assessor/advisor/session adoption, component-universe interchange, concurrent disposal or performance budgets.
+
+[Adoption and exact receipts](CORE-1.81.2-ADOPTION.md), [architecture](ARCHITECTURE.md), [integration](INTEGRATION.md), [registry](FEATURE_REQUESTS.md) and [roadmap](../ROADMAP.md) agree on this scope. Core's scoped release approval/budget deferral does not complete Schema's broader native provider or performance requirements.
+
+## Preserved local work and history
+
+The original pre-sync checkout was still2009018 with uncommitted compatibility/design notes. All42 local input files are preserved: four original canonical files as [raw snapshots](history/2026-11-09-pre-sync/README.md), plus the original historical review inbox and responses at their existing paths. [Hash inventory](DOCUMENTATION-SYNC-2026-11-09.json). Exact input/response bytes, NotSubmitted draft fields and source/proposal identities are unchanged; no acceptance was manufactured. A local safety snapshot and Git stash also retain the pre-sync work.
+
+The separate public native assessment worktree is not advanced or edited by this documentation task. Never copy private Bosak.Licensing source/history, credentials, billing or deployment material into this repository. Schema remains Apache-2.0 with no activation requirement.
+
+## Next work
+
+Select and qualify the next bounded native provider/session profile using the released Core surface and recorded supported/refused requirements. Keep native runtime/lifetime evidence, broader XSD coverage, numerical budgets and any Schema package publication as explicit separate work. Do not revive obsolete1.26.3 or pre-release statements from archived notes as current pins. Commit/push only on explicit user instruction; this documentation synchronization and delivery were explicitly requested.

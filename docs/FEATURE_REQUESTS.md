@@ -17,6 +17,8 @@
 |---|---|---|
 | Apache/public transition | Implemented and GitHub publication verified | Schema-only Apache-2.0; activation-free services; private infrastructure excluded |
 | [REQ-009](ADR-005-xsd11-compiled-model-and-validation.md) staged XSD 1.1 support | In Progress | Compiled descriptors, assertion/facet evaluation, alternative applicability/filtering and selected metadata |
+| [Core 1.81.2 dependency adoption](CORE-1.81.2-ADOPTION.md) | Merged | Four product references and one test provider reference updated; no C# adaptation |
+| Core optional source integration | Refreshed in Core PR #472 | Merged Schema c953ebe pinned with source/test/fixture/legal hashes; 135 cases |
 | Core schema-session integration | Pending | Complete component authority, actual PSVI/atomic flow, compatible-schema interchange and real consumer qualification |
 | Complete XSD 1.1 structural validation | Incomplete | No complete current implementation or blanket conformance claim |
 
@@ -30,6 +32,6 @@ The Apache transition passed 114 public schema tests with zero failures/skips. C
 
 The transition does not implement the proposed core session API, change frozen W3C gates, admit skipped tests, certify XmlDb/Braid adoption or release a package. Future semantic additions require immutable specification adoption evidence and happy-path/edge regression tests.
 
-*Last updated: 2026-11-09*
+The 3 November [O1/O2 versioned responses](core-disposition-responses/2026-11-03-v2/README.md) are scoped historical design acceptance, not proof of current native adapter/runtime delivery. Their original source/proposal hashes and the unsigned [confirmation drafts](core-disposition-inbox/2026-11-03/README.md) remain unchanged. The published Core 1.81.2 release and its budget deferral do not complete Schema's native provider/session or performance requirements. See [history](DEVELOPMENT_HISTORY.md).
 
-Core dependency adoption candidate (9 November 2026): actual package references now select1.81.2 in this isolated branch;124 source cases,124 unchanged-binary cases and11 additional integration/ownership cases pass. This completes no new schema feature or native provider/session requirement. See [candidate scope](CORE-1.81.2-ADOPTION.md).
+*Last updated: 2026-11-09*

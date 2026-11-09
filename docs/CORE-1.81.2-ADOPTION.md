@@ -1,20 +1,22 @@
-# Core 1.81.2 dependency adoption candidate
+# Core 1.81.2 dependency adoption
 
-9 November 2026. Isolated branch `feature/core-1.81.2-adoption`, based on public Schema commit `20090180755d0427d824b091cf838e9a03ca9adc`. The original checkout and its uncommitted review documents are preserved; they are excluded from this candidate.
+Updated 9 November 2026. **Merged in [Schema PR #1](https://github.com/Fytala-Charles/Bosak.Schema/pull/1)** at c953ebe0057bea1616d3e4f891f7b0a5fc4bd99b; reviewed source commit 9d1881ef7ccc52e9c756e864e984a6211ae514cc. This is no longer an unpushed local candidate. Four product references and the test project's direct provider reference select published 1.81.2 packages. Schema C# source and MinVer configuration are unchanged; its development line remains0.4. No new Schema NuGet package or version tag is announced.
 
-## Change
+## Recorded qualification
 
-Four product PackageReference entries and the test project's direct provider reference change from1.26.3 to1.81.2. No C# product or existing test source changes. MinVer remains unchanged on the0.4 development line; no Schema version tag or publication is performed. Dependencies resolve to the nine published1.81.2 engine libraries with no Core source project references or DLL HintPaths.
+- Baseline1.26.3 and rebuilt1.81.2 Schema solutions each pass the same124 cases, with zero build warnings/errors.
+- The unchanged1.26.3-built Schema/test/configuration lane passes124 cases after only the nine engine DLLs are replaced by verified published 1.81.2 payloads. This is exercised compatibility, not an arbitrary downstream ABI guarantee.
+- The exact committed candidate is freshly rebuilt/tested:124 cases plus11 additional bounded price/assertion/ownership cases pass. Repeated source/binary catalogs are not additive coverage.
+- [Schema CI](https://github.com/Fytala-Charles/Bosak.Schema/actions/runs/42601780777) validates build,124 tests and documentation hygiene over the candidate source.
 
-## Qualification
+[Core-side adoption receipts](https://github.com/Fytala-Charles/Bosak/tree/main/docs/schema-core-1.81.2-adoption/committed) preserve exact source, binaries, case catalogs and the initial local delivery state. They are historical receipts, not a live remote-delivery status query.
 
-- Baseline1.26.3: full solution124/0/0, zero build warnings/errors.
-- Candidate1.81.2: full solution124/0/0, zero build warnings/errors; identical case names.
-- Unchanged-binary lane: original1.26.3-built Schema/test/configuration bytes retained, only nine engine DLLs overlaid with approved published1.81.2 payloads;124/0/0.
-- Additional package-backed integration: eight existing price/staged-assertion cases and three stream/reader ownership cases;11/0/0. A compiled model remains usable after the caller disposes its input, failed compilation leaves the stream open, and supplied readers remain caller-owned. These are135 distinct exercised candidate cases; the repeated124-case binary/baseline lanes are not additive coverage.
+## Core optional integration
 
-The Core-side evidence dossier is `docs/schema-core-1.81.2-adoption` in the adjacent Bosak repository. It retains source/hash pins, the dependency-only patch, test logs/TRX, output DLL/package comparisons, harness inputs and reproducibility notes. The existing historical Core integration wrapper and its044d2cb2 source pin are unchanged.
+[Core PR #472](https://github.com/Fytala-Charles/Bosak/pull/472) refreshes the optional wrapper to merged Schema c953ebe. Its source/asset guard pins20 library files,13 upstream test files, two fixtures and LICENSE/NOTICE, accepting only exact LF/CRLF forms. The suite passes135 cases (124 upstream, eight price/assertion and three ownership), and the typed-price example matches. [Current pin/qualification](https://github.com/Fytala-Charles/Bosak/tree/main/docs/schema-integration-1812), [hosted integration](https://github.com/Fytala-Charles/Bosak/actions/runs/42611185565).
 
-## Remaining boundaries
+The wrapper compiles actual Schema source against Core projects, remains nonpackable and outside Core's normal solution. It neither republishes Schema nor introduces a Core-to-Schema package dependency. Its original044d2cb2/114-test dossier remains historical and unchanged.
 
-Existing XSD1.0/schema-aware transformation and staged XSD1.1 assertion behavior are compatible within the exercised cases. The retained extra-child test still demonstrates incomplete XSD1.1 structural validation. This does not implement native foundation assessor/advisor/session attachment, component-universe interchange, concurrent disposal/operation leases or production provider adoption. Workload budgets remain unaccepted; Core's scoped release deferral creates no Schema performance guarantee. The user requested continuing with review and local commit. This guide belongs to that local dependency checkpoint. Remote push/review/merge and any Schema publication remain separate explicit decisions.
+## Remaining scope
+
+Current stream/reader ownership checks do not establish native operation leases or concurrent-disposal safety. Full XSD 1.1 structural validation, native assessor/advisor/session integration and component-universe compatibility remain separate work. The retained extra-child case explicitly shows the structural-validation gap. No accepted Schema workload budget, independent reviewer signature or performance guarantee is inferred.

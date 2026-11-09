@@ -228,10 +228,14 @@ After **every** successful implementation step, update the following canonical d
 
 ---
 
-*Last updated: 2026-10-30*
+*Last updated: 2026-11-09*
 
 
 
 ## Apache and Public Repository Boundary
 
 Schema services require no activation. Legacy License/ActivatedLicense types are compatibility shapes only. No private Git history, credential issuer/verifier, signing material, licensing/payment infrastructure, private deployment documents or commercial test vectors may be copied here. Preserve Fytala copyright/SPDX notices and record semantic adoption evidence before new standards behavior. Full XSD 1.1 support and core/session API acceptance remain pending.
+
+## Current dependency and documentation checkpoint
+
+Product and test Core references select published 1.81.2 after Schema PR #1. Schema's own MinVer 0.4 development line is unchanged; no new Schema package release is implied. Standalone124-case regression coverage and the separate Core 135-case optional integration have distinct scopes. Use `docs/AGENT_HANDOVER.md` for current state and `docs/DEVELOPMENT_HISTORY.md` for archived local review notices; older inputs keep their original source hashes and do not replace current package pins. Full XSD 1.1 structural/native session/lease coverage and performance acceptance remain separate tasks.
