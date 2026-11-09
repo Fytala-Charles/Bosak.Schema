@@ -1,3 +1,9 @@
+# Isolated Core 1.81.2 adoption candidate - 9 November 2026
+
+Parent source20090180755d0427d824b091cf838e9a03ca9adc, branchfeature/core-1.81.2-adoption. The local dependency checkpoint is the commit containing this entry; the user requested continuing with review and commit. [Candidate scope](CORE-1.81.2-ADOPTION.md) records five actual dependency edits (four product/one test),124 baseline/source/unchanged-binary controls and11 separate integration/ownership controls. Product/test C# remains unchanged; dependency output hashes match the published1.81.2 cohort. Original public checkout, its dirty review documents and the separate native assessment worktree remain unchanged. No push/tag/release or production native session adoption. Rebuild and qualify the local committed checkpoint, then obtain explicit direction before remote delivery; broader native/XSD coverage remains separate.
+
+---
+
 # Bosak.Schema handover — 29 October 2026
 
 **Publication verified — 29 October 2026:** Public GitHub repository and Apache-2.0 detection verified; all 114 tests and the content-commit CI pass. [Publication receipt](PUBLICATION.json). No NuGet release or commercial infrastructure publication.
@@ -14,4 +20,4 @@ Current development line: 0.4 through MinVer; no new tag/NuGet publication is im
 
 Next: reassess the smallest necessary core/session contract around the open implementation, then qualify real component completeness, compatible-schema handoff and consumers before engine integration. See [architecture](ARCHITECTURE.md), [registry](FEATURE_REQUESTS.md), [integration](INTEGRATION.md) and [transition](APACHE-TRANSITION.md).
 
-Last updated: 2026-10-30
+Last updated: 2026-11-09

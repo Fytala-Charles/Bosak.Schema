@@ -13,7 +13,7 @@
 
 ## 1. Dependency and Availability
 
-Build this source with .NET 10. The project references Bosak XPath API/providers, XSLT and XQuery 1.26.3. The source transition targets the 0.4 development line through MinVer; no new NuGet release or tag is claimed.
+Build this source with .NET 10. The project references Bosak XPath API/providers, XSLT and XQuery 1.81.2 in this isolated adoption candidate. The source transition targets the 0.4 development line through MinVer; no new NuGet release or tag is claimed.
 
 ## 2. Compile and Validate
 
@@ -53,3 +53,5 @@ The new package contains no internal HMAC/product key, signing implementation, k
 Public factory/type signatures are retained, with the intentional licensing behavior change documented above. Real previously compiled consumer replacement tests and full schema-session ABI/provider acceptance are not certified by these source tests.
 
 *Last updated: 2026-10-30*
+
+The [Core 1.81.2 adoption candidate](CORE-1.81.2-ADOPTION.md) qualifies existing source, unchanged-binary and bounded integration/ownership controls. Schema MinVer remains on the 0.4 development line; this is not a Schema package release or full native provider/session adoption.

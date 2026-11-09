@@ -30,4 +30,6 @@ The Apache transition passed 114 public schema tests with zero failures/skips. C
 
 The transition does not implement the proposed core session API, change frozen W3C gates, admit skipped tests, certify XmlDb/Braid adoption or release a package. Future semantic additions require immutable specification adoption evidence and happy-path/edge regression tests.
 
-*Last updated: 2026-10-30*
+*Last updated: 2026-11-09*
+
+Core dependency adoption candidate (9 November 2026): actual package references now select1.81.2 in this isolated branch;124 source cases,124 unchanged-binary cases and11 additional integration/ownership cases pass. This completes no new schema feature or native provider/session requirement. See [candidate scope](CORE-1.81.2-ADOPTION.md).

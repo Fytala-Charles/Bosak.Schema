@@ -27,3 +27,7 @@ The 0.4 development line makes schema services Apache-2.0 and activation-free. P
 The public schema suite passes 124 cases. Existing core package pins stay at 1.26.3. Neither current-draft XDM certification nor full XSD 1.1 support follows from the Apache transition. Billing/key-generation, other product licensing, Folio, XmlDb storage and Braid workflows remain outside this source change.
 
 *Last updated: 2026-10-30*
+
+## Core dependency adoption - 9 November 2026
+
+The isolated [Core 1.81.2 candidate](docs/CORE-1.81.2-ADOPTION.md) updates actual product and test package references and passes existing source/binary regression and bounded consumer checks. Review the candidate before an explicit commit/merge decision. Native provider/session implementation, full XSD 1.1 structural coverage, workload budgets and a Schema release remain separate milestones.
