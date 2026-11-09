@@ -13,7 +13,7 @@
 
 ## 1. Current Architecture
 
-One public `Bosak.Schema` assembly references the published Bosak XPath API/providers, XSLT and XQuery packages at 1.26.3. The core engine does not reference this package. Keeping schema services in a separate assembly avoids a dependency cycle; changing the license does not require merging them into Core.
+One public `Bosak.Schema` assembly references the published Bosak XPath API/providers, XSLT and XQuery packages at 1.81.2 in this isolated adoption candidate. The core engine does not reference this package. Keeping schema services in a separate assembly avoids a dependency cycle; changing the license does not require merging them into Core.
 
 ## 2. Components
 
@@ -52,3 +52,5 @@ All 124 public schema tests pass. Existing assertion, facet, alternative, resour
 No new engine implementation, baseline/filter change, storage migration or consumer adoption is included. Registry reclamation, full PSVI/component completeness and real consumer ABI qualification remain future acceptance gates.
 
 *Last updated: 2026-10-30*
+
+The [Core 1.81.2 adoption candidate](CORE-1.81.2-ADOPTION.md) qualifies existing source, unchanged-binary and bounded integration/ownership controls. Schema MinVer remains on the 0.4 development line; this is not a Schema package release or full native provider/session adoption.

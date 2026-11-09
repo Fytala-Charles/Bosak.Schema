@@ -15,7 +15,7 @@
 
 Bosak.Schema is free, open-source Fytala software under [Apache-2.0](LICENSE.md). Schema compilation and validation require no activation, license key, trial, subscription or billing service. This public repository contains only the schema engine, its tests and documentation.
 
-The implementation targets .NET 10 and currently references published Bosak 1.26.3 packages. It provides schema-aware XSLT compiler helpers and a staged XSD 1.1 component/assertion pipeline. Complete XSD 1.1 structural validation and integration of its full component universe into running Bosak expressions are **not yet implemented**. See the [support matrix](docs/FEATURE_REQUESTS.md).
+The implementation targets .NET 10 and in this isolated adoption candidate references published Bosak 1.81.2 packages. It provides schema-aware XSLT compiler helpers and a staged XSD 1.1 component/assertion pipeline. Complete XSD 1.1 structural validation and integration of its full component universe into running Bosak expressions are **not yet implemented**. See the [support matrix](docs/FEATURE_REQUESTS.md).
 
 The initial public source is derived from Fytala's private schema source at `fa0da3e2d9972706a5a86616ef285af4daf5037b`, with the owner-approved Apache transition on 29 October 2026. Billing, key-generation, deployment material and private Git history remain outside this repository. See [provenance](docs/APACHE-TRANSITION.md).
 
@@ -60,3 +60,5 @@ Existing schema factory signatures remain intact. The old `License` entry points
 Fytala retains copyright and trademark ownership; Apache-2.0 grants the rights stated in the license. Branding does not grant trademark rights. The new license applies to this public source release; old proprietary releases and private licensing-product agreements are separate historical artifacts.
 
 *Last updated: 2026-10-29*
+
+The [Core 1.81.2 adoption candidate](docs/CORE-1.81.2-ADOPTION.md) qualifies existing source, unchanged-binary and bounded integration/ownership controls. Schema MinVer remains on the 0.4 development line; this is not a Schema package release or full native provider/session adoption.
