@@ -1,0 +1,11 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.1" xpathDefaultNamespace="##local">
+  <xs:element name="order">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="amount" type="xs:decimal" minOccurs="0" maxOccurs="2"/>
+        <xs:element name="tax" type="xs:decimal"/>
+      </xs:sequence>
+      <xs:assert test="count(amount) eq 2 and tax gt 0"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

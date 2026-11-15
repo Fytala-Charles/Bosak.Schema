@@ -22,6 +22,7 @@ One public `Bosak.Schema` assembly references the published Bosak XPath API/prov
 | `Compilation` | Explicit-version schema descriptor compilation and bounded resolved imports/includes |
 | `Model` | Staged XSD 1.1 assertions, alternatives, declarations, simple facets, open-content/default-attribute metadata, wildcard negative constraints (notNamespace/notQName) |
 | `Validation` | Assertion/facet evaluation and supported governing-type applicability through Bosak XPath |
+| `Assessment` | Internal complete finite decimal grammar and native structural/assertion assessment; immutable present-only states and exact decimal values; no Core adapter/public native factory yet |
 | `SchemaServices` | Activation-free factories for compiler and validation services |
 | `SchemaAwareXslt` | Opt-in helper for the existing schema-aware XSLT path |
 | Legacy license DTO/shim types | API compatibility only; no credential implementation or authority |
@@ -44,15 +45,18 @@ Schema language version, host/XDM profile, component authority and source/snapsh
 | [Core 1.81.2 dependency adoption](CORE-1.81.2-ADOPTION.md) | Merged in Schema PR #1; existing source and unchanged-binary coverage qualified |
 | [Historical BCAP O1/O2 design review](core-disposition-responses/2026-11-03-v2/README.md) | Scoped design returns dated 3 November; not new native/runtime acceptance |
 | Preserve modular package and core dependency direction | Retained |
+| [ADR-009: first native decimal session profile](ADR-009-native-decimal-session-profile.md) | Proposed; scope defined, implementation/qualification pending |
 | Require no activation for standards processing | Implemented |
 | Full XSD 1.1 provider/session integration | Pending; no conformance promotion |
 
 ## 5. Validation and Extensibility
 
-All 124 public schema tests pass. Existing assertion, facet, alternative, resource-policy and typed-XSLT regression bodies are retained; commercial credential tests remain with the private infrastructure. New tests cover activation-free factories, valid/invalid assertions, ignored legacy activation, invalid directory input, absence of issuer/credential implementations and wildcard negative-constraint recording.
+The [native decimal session profile](NATIVE-SESSION-PROFILE.md) maps N1–N8 onto inspected Core 1.81.2 contracts and defines twelve paired planned acceptance groups. It requires a native structural backend, authority-owned facts and host-retained operation lifetimes. Cross-universe handoff remains Unsupported in this first scope. No adapter or new public API is delivered by the definition.
+
+All 207 standalone tests pass: 124 retained regressions, seven published-package scalar transport probes and 76 [internal native decimal backend cases](native-decimal-backend/2026-11-15/README.md). The [finite grammar](NATIVE-DECIMAL-GRAMMAR.md) binds strict UTF-8 capture limits, schema/instance coverage, exact arithmetic comparison and immutable original state to the recorded specification basis. The backend remains internal; Core authority/advisor/input/lifetime integration and native provider acceptance remain pending. Historical source/binary and separate Core integration receipts retain their original scopes.
 
 The dependency adoption changes no Schema C# implementation, upstream baseline/filter or storage format. The same 124 cases pass after rebuilding and in the separately retained unchanged-binary lane; these repeated case catalogs are not additive coverage. The Core optional source wrapper pins merged Schema c953ebe and runs 124 upstream plus 11 local cases. This does not prove arbitrary downstream ABI, native registry/lease safety, concurrent disposal or full PSVI/component completeness.
 
 Earlier source/design inputs and unsigned drafts remain in their [historical inbox](core-disposition-inbox/2026-11-03/README.md); their original identities and decisions are unchanged. Current engineering state takes precedence over the archived local notices in [development history](DEVELOPMENT_HISTORY.md).
 
-*Last updated: 2026-11-09*
+*Last updated: 2026-11-15*

@@ -19,7 +19,9 @@ The implementation targets .NET 10 and references published Bosak 1.81.2 package
 
 The initial public source is derived from Fytala's private schema source at `fa0da3e2d9972706a5a86616ef285af4daf5037b`, with the owner-approved Apache transition on 29 October 2026. Billing, key-generation, deployment material and private Git history remain outside this repository. See [provenance](docs/APACHE-TRANSITION.md).
 
-The dependency upgrade is merged in [Schema PR #1](https://github.com/Fytala-Charles/Bosak.Schema/pull/1). The standalone Schema suite has **124 cases**; the separate [Core optional integration](https://github.com/Fytala-Charles/Bosak/blob/main/docs/schema-integration-1812/README.md) exercises **135 cases**, including the public Schema tests and bounded price/ownership controls. Schema remains on its **0.4 development line** through MinVer; no new Schema NuGet release is announced. See [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and the [roadmap](ROADMAP.md).
+The dependency upgrade is merged in [Schema PR #1](https://github.com/Fytala-Charles/Bosak.Schema/pull/1). The adoption baseline retained **124 standalone cases**; the separate historical [Core optional integration](https://github.com/Fytala-Charles/Bosak/blob/main/docs/schema-integration-1812/README.md) exercised **135 cases**, including those public Schema tests and bounded price/ownership controls. Schema remains on its **0.4 development line** through MinVer; no new Schema NuGet release is announced. See [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and the [roadmap](ROADMAP.md).
+
+The next native provider/session scope is [defined as a proposed decimal-only profile](docs/NATIVE-SESSION-PROFILE.md), with paired acceptance cases. The [internal native decimal backend](docs/native-decimal-backend/2026-11-15/README.md) now implements its finite structural/assertion grammar with 76 cases. The current standalone suite has **207 cases**: 124 retained regressions, seven [Core scalar transport probes](docs/native-session-probe/2026-11-15/README.md) and those 76 backend cases. Core adapter/provider qualification remains pending; there is no public native factory yet.
 
 ## 2. Quick Start
 
@@ -50,6 +52,7 @@ The public solution needs the .NET 10 SDK; it has no Azure, payment-service, key
 | Path | Purpose |
 |---|---|
 | `src/Bosak.Schema` | Schema compilation, models, validation and activation-free integration |
+| `src/Bosak.Schema/Assessment` | Internal finite native decimal structural/assertion backend; Core adapter pending |
 | `tests/Bosak.Schema.Tests` | Schema and Apache compatibility regressions |
 | `tests/TestData/Schemas` | Locally authored schema fixtures |
 | `docs` | Architecture, integration, roadmap and transition decisions |
@@ -61,4 +64,4 @@ Existing schema factory signatures remain intact. The old `License` entry points
 
 Fytala retains copyright and trademark ownership; Apache-2.0 grants the rights stated in the license. Branding does not grant trademark rights. The new license applies to this public source release; old proprietary releases and private licensing-product agreements are separate historical artifacts.
 
-*Last updated: 2026-11-09*
+*Last updated: 2026-11-15*
