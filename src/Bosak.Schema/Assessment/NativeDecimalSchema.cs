@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Implement bounded native decimal backend                                                 |
+//                      | Charles Korthout | 0.2   | 15-11-2026     | Share hardened bounded input capture with the internal Core adapter                       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -181,7 +182,7 @@ internal sealed class NativeDecimalSchema
         return new XdmExactDecimal(coefficient, scale, limits.MaxDigits, limits.MaxScale);
     }
 
-    private static XDocument Parse(string input, int bytes, CancellationToken cancellationToken)
+    internal static XDocument Parse(string input, int bytes, CancellationToken cancellationToken)
     {
         Require(input.Length <= bytes, "Input length exceeds the byte ceiling.");
         try

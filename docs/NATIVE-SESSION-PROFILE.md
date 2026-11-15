@@ -4,7 +4,7 @@
 
 ## 1. Status and candidate
 
-Profile identifier: `schema-native-decimal-session-v1`. Status: **Internal backend implemented; Core adapter and overall qualification pending**. The [backend receipt](native-decimal-backend/2026-11-15/README.md) records 76 cases on the [finite executable grammar](NATIVE-DECIMAL-GRAMMAR.md). This does not deliver a public provider, API acceptance, conformance promotion, performance budget or package release. Schema remains on the MinVer 0.4 development line. See [ADR-009](ADR-009-native-decimal-session-profile.md).
+Profile identifier: `schema-native-decimal-session-v1`. Status: **Internal backend and Core adapter implemented; overall qualification/public API pending**. The backend has 76 cases; the [adapter receipt](native-session-adapter/2026-11-15/README.md) adds 20 native scalar/issuance/lifetime controls. This delivers no public provider, API acceptance, conformance promotion, performance budget or package release. Schema remains on the MinVer 0.4 development line. See [ADR-009](ADR-009-native-decimal-session-profile.md).
 
 Baseline: Schema `302d6f6b168b692dc053b0160f4babde8ebfad15`, with the four product and one test references at 1.81.2. The published API/Core XML documentation and binaries were inspected locally on 2026-11-15. Observed SHA-256 identities:
 
@@ -19,7 +19,7 @@ The historical [native profile description](core-disposition-inbox/2026-11-02/in
 
 ## 2. Selected coverage
 
-The internal backend assesses one complete finite schema/instance grammar natively; exposing its issued facts through the released Core contracts remains next. Existing descriptor/assertion validation alone cannot supply structural authority.
+The internal backend assesses one complete finite grammar natively; the internal adapter now exposes its issued facts through released Core contracts under the [bounded host policy](NATIVE-SESSION-ADAPTER.md). Existing public descriptor/assertion validation remains separate from native authority.
 
 | Area | Intended supported scope | Explicit refusal boundary |
 |---|---|---|
@@ -82,6 +82,6 @@ Use deterministic barriers for lifetime tests, no timing sleeps. Test independen
 4. Run fresh build, full standalone tests, documentation checks and a real scalar consumer. Retain exact commands, hashes, supported/refused case names and result logs. A focused Core probe is not provider acceptance. The separate Core 135-case historical lane is not rerun or extended by these checks.
 5. Review the bounded evidence before marking this profile qualified. Full XSD 1.1, complete N1–N8 support, positive compatible-universe interchange, general XSLT/XQuery adoption, concurrent session disposal, numeric performance budgets, joint freeze and Schema publication remain separate milestones.
 
-The published-package scalar probe establishes `$value` with omitted/default compile options on a test-issued decimal. The specification basis, executable grammar and internal backend are delivered. The current full suite passes 207 cases (124 retained, seven transport probes, 76 backend cases). Next: authority/advisor/input/lifetime adapters and a real scalar consumer, including missing root atomization, authentic issuance, cancellation/drain and refusal controls. Backend evidence alone does not complete P01/P02/P05/P08 or overall P01–P12 qualification.
+The specification basis, backend and internal adapter are delivered. The suite passes 227 cases (124 retained, seven probes, 76 backend, 20 adapter), including actual native `$value` integration, root atomization, issuance and cancellation/drain controls. The [qualification map](NATIVE-SESSION-ADAPTER.md) records remaining acceptance. Next: close remaining bounded controls and review public entry points/external consumers before broader coverage or publication. No overall P01–P12 sign-off is claimed.
 
 *Last updated: 2026-11-15*

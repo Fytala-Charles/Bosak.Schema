@@ -14,6 +14,8 @@ We propose implementing [schema-native-decimal-session-v1](NATIVE-SESSION-PROFIL
 
 This selects a work scope. API freeze, full XSD 1.1 acceptance, performance budgets and publication require separate evidence and decisions.
 
+Internal implementation checkpoint, 15 November: the backend is committed at `aba6967`; the [Core adapter](NATIVE-SESSION-ADAPTER.md) now supplies authentic issuance, guarded captured nodes and a real scalar integration test. One original assessment per capture is retained; reassessment refuses. One shared host runner serializes work through actual task completion because Core lease counts do not distinguish overlapping runs. This bounded implementation is not owner/API/global acceptance; this ADR remains Proposed.
+
 ## Consequences
 
 ### Positive
@@ -24,7 +26,7 @@ This selects a work scope. API freeze, full XSD 1.1 acceptance, performance budg
 
 ### Negative / Accepted Costs
 
-- The native structural backend is now implemented internally with 76 cases; the Core adapter remains required. Existing public assertion evaluation remains separate and insufficient for native provider authority.
+- The native backend and Core adapter are implemented internally, with 76 backend and 20 adapter cases. Public entry point review and overall profile acceptance remain required; existing public assertion evaluation stays separate from native authority.
 - Cross-universe positive compatibility, wider datatypes, general engine execution and full structural coverage remain pending.
 - The [released-package probe](native-session-probe/2026-11-15/README.md) establishes `$value` with default compile options on a test-issued decimal. A real native consumer remains pending; the [specification basis](NATIVE-DECIMAL-SPECIFICATION-ADOPTION.md) is recorded before backend implementation.
 

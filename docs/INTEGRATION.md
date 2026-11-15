@@ -41,7 +41,9 @@ The [current Core integration guide](https://github.com/Fytala-Charles/Bosak/tre
 
 For planned native integration, use the [decimal session profile](NATIVE-SESSION-PROFILE.md). It defines a future explicit assessor-bound scalar route and twelve paired planned acceptance groups. No new factory or consumer API is available yet; continue using the existing services within their documented limits until implementation and qualification are recorded.
 
-The [native decimal backend](native-decimal-backend/2026-11-15/README.md) now implements the finite structural/assertion grammar internally, with exact decimal values, present-only original states and owned XML exports. It has no public factory or Core adapter; existing public compilation/validation services retain their documented behavior. Backend coverage is not an end-to-end native session integration result.
+The [native decimal backend checkpoint](native-decimal-backend/2026-11-15/README.md) delivered the finite structural/assertion grammar internally, with exact decimals, present-only states and owned XML exports. Its 76 backend cases alone did not qualify a Core adapter. Existing public compilation/validation services retain their documented behavior.
+
+The subsequent [internal Core adapter](NATIVE-SESSION-ADAPTER.md) now exercises actual native assessment and `$value` scalar transport, including original provenance, guarded nodes and host-owned resource leases. One shared NativeSessionRunner per session enforces the sequential host policy through raw task completion. This is an internal friend-assembly integration consumer; external consumer/public factory review remains pending. The existing public services above are unchanged.
 
 Remove `License.Activate(...)` from new applications. Existing binaries can retain that call: the public shim ignores the supplied value, stores no credential and never contacts a service. `IsActivated` is always true; `Current` is a perpetual Apache compatibility marker. It grants no entitlement to any other Fytala product. `GracePeriod`, `ActivatedLicense`, `LicenseTier` and `LicenseValidationException` remain legacy compatibility shapes, without schema access enforcement.
 
@@ -51,6 +53,7 @@ The public source contains no internal HMAC/product key, signing implementation,
 
 | Date | Change |
 |---|---|
+| 2026-11-15 | Backend committed as aba6967; internal native authority/advisor/input/lifetime adapter and sequential runner delivered with 20 cases; 227 standalone tests pass; public API/package pins unchanged |
 | 2026-11-15 | Internal native decimal backend and finite grammar delivered; 76 backend cases and 207 total standalone tests pass; public APIs/package pins unchanged; authority/advisor/session qualification pending |
 | 2026-11-15 | Published Core `$value` transport probe passes seven cases; 131 standalone tests pass. Test-only issuance, not native assessment; [receipt](native-session-probe/2026-11-15/README.md) and [specification basis](NATIVE-DECIMAL-SPECIFICATION-ADOPTION.md) recorded |
 | 2026-11-15 | First native decimal session profile defined with proposed ADR-009; implementation and qualification pending; no API, dependency or runtime change |

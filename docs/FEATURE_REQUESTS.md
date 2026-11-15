@@ -19,15 +19,18 @@
 | [REQ-009](ADR-005-xsd11-compiled-model-and-validation.md) staged XSD 1.1 support | In Progress | Compiled descriptors, assertion/facet evaluation, alternative applicability/filtering and selected metadata |
 | [Core 1.81.2 dependency adoption](CORE-1.81.2-ADOPTION.md) | Merged | Four product references and one test provider reference updated; no C# adaptation |
 | Core optional source integration | Refreshed in Core PR #472 | Merged Schema c953ebe pinned with source/test/fixture/legal hashes; 135 cases |
-| Core schema-session integration | First bounded profile defined; implementation pending | Complete component authority, actual PSVI/atomic flow, compatible-schema interchange and real consumer qualification |
+| Core schema-session integration | Internal native scalar adapter delivered; overall acceptance pending | Bounded original facts/scalar flow and host lifetime controls; broader component/compatibility/public consumer qualification pending |
 | Complete XSD 1.1 structural validation | Incomplete | No complete current implementation or blanket conformance claim |
-| Native decimal structural backend | Implemented internally; 76 cases pass | Complete finite grammar only; Core adapter/public native factory pending; [evidence](native-decimal-backend/2026-11-15/README.md) |
+| Native decimal structural backend | Implemented internally; 76 cases pass | Complete finite grammar only; [evidence](native-decimal-backend/2026-11-15/README.md) |
+| Native decimal Core adapter | Implemented internally; 20 cases pass | Authentic issuance, real scalar flow, guarded owner leases and shared sequential runner; public API/overall acceptance pending; [evidence](native-session-adapter/2026-11-15/README.md) |
 
 ## 2. Implemented Coverage
 
 The public tests cover XSD version selection, schema components, explicit resolution/security, assertion evaluation, simple-type assertion facets, alternative compilation/applicability, open-content/default-attribute descriptor handling, open-content wildcard negative constraints (notNamespace/notQName) and the existing typed-XSLT integration. Support is bounded by those implementations and diagnostics; recorded metadata is not equivalent to structural enforcement.
 
 ## 3. Acceptance and Exclusions
+
+Latest 15 November checkpoint: backend/profile work committed as `aba6967`; the next internal Core adapter step delivers 20 cases and 227 total standalone passes. [Adapter qualification map](NATIVE-SESSION-ADAPTER.md) distinguishes executed controls from remaining group acceptance, external consumer/API review and broader coverage. No P01–P12/global sign-off, version/tag/release or historical Core-lane requalification is implied. REQ-009 remains In Progress on the unchanged 0.4 development line.
 
 Native backend delivery on 15 November: [grammar](NATIVE-DECIMAL-GRAMMAR.md) finalized, internal structural/assertion assessor implemented, 76 backend cases and 207 total standalone cases pass. Backend controls cover bounded portions of P01/P02/P05/P08 plus independent snapshot/concurrency observations; engine-root atomization, full adapter identity/environment/lifetime and overall P01–P12 acceptance remain pending. REQ-009 stays In Progress. Schema's 0.4 development line and all published Core pins remain unchanged; no tag or release is implied.
 

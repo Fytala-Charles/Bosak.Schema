@@ -21,7 +21,7 @@ The initial public source is derived from Fytala's private schema source at `fa0
 
 The dependency upgrade is merged in [Schema PR #1](https://github.com/Fytala-Charles/Bosak.Schema/pull/1). The adoption baseline retained **124 standalone cases**; the separate historical [Core optional integration](https://github.com/Fytala-Charles/Bosak/blob/main/docs/schema-integration-1812/README.md) exercised **135 cases**, including those public Schema tests and bounded price/ownership controls. Schema remains on its **0.4 development line** through MinVer; no new Schema NuGet release is announced. See [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and the [roadmap](ROADMAP.md).
 
-The next native provider/session scope is [defined as a proposed decimal-only profile](docs/NATIVE-SESSION-PROFILE.md), with paired acceptance cases. The [internal native decimal backend](docs/native-decimal-backend/2026-11-15/README.md) now implements its finite structural/assertion grammar with 76 cases. The current standalone suite has **207 cases**: 124 retained regressions, seven [Core scalar transport probes](docs/native-session-probe/2026-11-15/README.md) and those 76 backend cases. Core adapter/provider qualification remains pending; there is no public native factory yet.
+The next native provider/session scope is [defined as a proposed decimal-only profile](docs/NATIVE-SESSION-PROFILE.md). Its internal backend and [Core adapter](docs/NATIVE-SESSION-ADAPTER.md) now support real native scalar integration with explicit ownership and sequential host gating. The standalone suite has **227 cases**: 124 retained regressions, seven scalar probes, 76 backend cases and 20 adapter cases. Overall profile/public API acceptance remains pending; there is no public native factory yet.
 
 ## 2. Quick Start
 
@@ -52,7 +52,7 @@ The public solution needs the .NET 10 SDK; it has no Azure, payment-service, key
 | Path | Purpose |
 |---|---|
 | `src/Bosak.Schema` | Schema compilation, models, validation and activation-free integration |
-| `src/Bosak.Schema/Assessment` | Internal finite native decimal structural/assertion backend; Core adapter pending |
+| `src/Bosak.Schema/Assessment` | Internal finite native decimal backend, Core authority/advisor/input adapter and sequential host runner |
 | `tests/Bosak.Schema.Tests` | Schema and Apache compatibility regressions |
 | `tests/TestData/Schemas` | Locally authored schema fixtures |
 | `docs` | Architecture, integration, roadmap and transition decisions |

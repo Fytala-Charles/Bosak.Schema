@@ -22,7 +22,7 @@ One public `Bosak.Schema` assembly references the published Bosak XPath API/prov
 | `Compilation` | Explicit-version schema descriptor compilation and bounded resolved imports/includes |
 | `Model` | Staged XSD 1.1 assertions, alternatives, declarations, simple facets, open-content/default-attribute metadata, wildcard negative constraints (notNamespace/notQName) |
 | `Validation` | Assertion/facet evaluation and supported governing-type applicability through Bosak XPath |
-| `Assessment` | Internal complete finite decimal grammar and native structural/assertion assessment; immutable present-only states and exact decimal values; no Core adapter/public native factory yet |
+| `Assessment` | Internal finite native backend; authority/advisor/input adapters; canonical guarded nodes, original facts and scalar provenance; host-owned leases and one shared sequential runner per session; public native factory pending |
 | `SchemaServices` | Activation-free factories for compiler and validation services |
 | `SchemaAwareXslt` | Opt-in helper for the existing schema-aware XSLT path |
 | Legacy license DTO/shim types | API compatibility only; no credential implementation or authority |
@@ -53,7 +53,7 @@ Schema language version, host/XDM profile, component authority and source/snapsh
 
 The [native decimal session profile](NATIVE-SESSION-PROFILE.md) maps N1–N8 onto inspected Core 1.81.2 contracts and defines twelve paired planned acceptance groups. It requires a native structural backend, authority-owned facts and host-retained operation lifetimes. Cross-universe handoff remains Unsupported in this first scope. No adapter or new public API is delivered by the definition.
 
-All 207 standalone tests pass: 124 retained regressions, seven published-package scalar transport probes and 76 [internal native decimal backend cases](native-decimal-backend/2026-11-15/README.md). The [finite grammar](NATIVE-DECIMAL-GRAMMAR.md) binds strict UTF-8 capture limits, schema/instance coverage, exact arithmetic comparison and immutable original state to the recorded specification basis. The backend remains internal; Core authority/advisor/input/lifetime integration and native provider acceptance remain pending. Historical source/binary and separate Core integration receipts retain their original scopes.
+All 227 standalone tests pass: 124 retained regressions, seven scalar probes, 76 backend and 20 [Core adapter cases](native-session-adapter/2026-11-15/README.md). The [finite grammar](NATIVE-DECIMAL-GRAMMAR.md) retains the adopted semantics. The [internal adapter](NATIVE-SESSION-ADAPTER.md) qualifies bounded real scalar flow and refusal/lifetime controls; full profile/public API acceptance remains pending. Sequential admission is a shared host-runner policy, not a guarantee inferred from Core lease counts. Historical source/binary and Core integration receipts retain their scopes.
 
 The dependency adoption changes no Schema C# implementation, upstream baseline/filter or storage format. The same 124 cases pass after rebuilding and in the separately retained unchanged-binary lane; these repeated case catalogs are not additive coverage. The Core optional source wrapper pins merged Schema c953ebe and runs 124 upstream plus 11 local cases. This does not prove arbitrary downstream ABI, native registry/lease safety, concurrent disposal or full PSVI/component completeness.
 
