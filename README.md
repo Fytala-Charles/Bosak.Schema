@@ -21,7 +21,7 @@ The initial public source is derived from Fytala's private schema source at `fa0
 
 The dependency upgrade is merged in [Schema PR #1](https://github.com/Fytala-Charles/Bosak.Schema/pull/1). The adoption baseline retained **124 standalone cases**; the separate historical [Core optional integration](https://github.com/Fytala-Charles/Bosak/blob/main/docs/schema-integration-1812/README.md) exercised **135 cases**, including those public Schema tests and bounded price/ownership controls. Schema remains on its **0.4 development line** through MinVer; no new Schema NuGet release is announced. See [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and the [roadmap](ROADMAP.md).
 
-The next native provider/session scope is [defined as a proposed decimal-only profile](docs/NATIVE-SESSION-PROFILE.md). Its internal backend and [Core adapter](docs/NATIVE-SESSION-ADAPTER.md) now support real native scalar integration with explicit ownership and sequential host gating. The standalone suite has **227 cases**: 124 retained regressions, seven scalar probes, 76 backend cases and 20 adapter cases. Overall profile/public API acceptance remains pending; there is no public native factory yet.
+The next native provider/session scope is [defined as a proposed decimal-only profile](docs/NATIVE-SESSION-PROFILE.md). Its internal backend, Core adapter and [owned-facade prototype](docs/NATIVE-DECIMAL-PUBLIC-API-PROPOSAL.md) now support the native assess/read/export/dispose workflow. The standalone suite has **243 cases**: 124 retained regressions, seven scalar probes, 76 backend, 28 adapter and eight facade cases. Overall profile/public API acceptance remains pending; there is no public native factory yet.
 
 ## 2. Quick Start
 

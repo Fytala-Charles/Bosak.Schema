@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Implement internal native decimal Core adapter                                                 |
+//                      | Charles Korthout | 0.2   | 15-11-2026     | Reject uninitialized lookup names with explicit argument diagnostics                        |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -71,6 +72,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     public SchemaResult<ISchemaComponentHandle> ResolveType(SchemaExpandedName name, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
+        ValidateName(name);
         return name.NamespaceUri == "http://www.w3.org/2001/XMLSchema" && name.LocalName == "decimal"
             ? NativeCoreResult<ISchemaComponentHandle>.Supported(DecimalType)
             : NativeCoreResult<ISchemaComponentHandle>.Unsupported("BSK-NATIVE-TYPE");
@@ -78,6 +80,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     public SchemaResult<ISchemaComponentHandle> ResolveElementDeclaration(SchemaExpandedName name, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
+        ValidateName(name);
         return name.NamespaceUri.Length == 0 && name.LocalName == schema.Root.Name
             ? NativeCoreResult<ISchemaComponentHandle>.Supported(RootDeclaration)
             : NativeCoreResult<ISchemaComponentHandle>.NotFound();
@@ -85,6 +88,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     public SchemaResult<ISchemaComponentHandle> ResolveAttributeDeclaration(SchemaExpandedName name, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
+        ValidateName(name);
         return NativeCoreResult<ISchemaComponentHandle>.Unsupported("BSK-NATIVE-ATTRIBUTES");
     }
     public SchemaResult<bool> IsSameComponent(ISchemaComponentHandle left, ISchemaComponentHandle right, CancellationToken cancellationToken)
@@ -112,6 +116,11 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     {
         cancellationToken.ThrowIfCancellationRequested();
         if (!Owns(component)) throw new ArgumentException("Foreign or unissued component.", nameof(component));
+    }
+    private static void ValidateName(SchemaExpandedName name)
+    {
+        if (name.NamespaceUri is null || string.IsNullOrEmpty(name.LocalName))
+            throw new ArgumentException("Lookup names require a namespace string and nonempty local name.", nameof(name));
     }
 
     internal sealed class Component(NativeSchemaProvider provider) : ISchemaComponentHandle

@@ -137,7 +137,7 @@ public CanonicalEvidenceSet Parse(string payload, ParseOptions? options = null)
 |--------------|---------|
 | `Bosak.Schema.Tests` | Activation-free factories, schema compilation/validation and legacy API compatibility |
 
-The public schema solution has 227 tests (124 retained regressions, seven scalar transport probes, 76 native decimal backend cases and 20 internal Core adapter cases) and no licensing-pipeline/Azurite dependency. The internal adapter uses a shared sequential host runner; public API and overall profile acceptance remain pending.
+The public schema solution has 243 tests (124 retained regressions, seven scalar probes, 76 backend, 28 adapter and eight internal owned-facade cases) and no licensing-pipeline/Azurite dependency. Public API and overall profile acceptance remain pending. Network-enabled NuGet auditing and the official PowerShell 7 docs check passed at the owned-facade checkpoint; earlier restricted-shell failures remain historical.
 
 ### 5.2 Test Patterns
 

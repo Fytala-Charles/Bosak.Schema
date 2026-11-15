@@ -24,6 +24,8 @@ The internal integration consumer compiles `$value`, assesses a captured instanc
 
 ## 3. Qualification map and remaining acceptance
 
+Follow-up after commit 939ba9a: the [owned-facade/expiry checkpoint](native-session-facade/2026-11-15/README.md) increases adapter coverage from 20 to 28 and adds eight internal facade cases (243 standalone total). It qualifies container/raw expiry, scalar receipt/snapshot expiry, scale bounds, gate/fault/cancellation cleanup and default-name rejection. ADR-010 records the concrete public proposal; prior 20-case receipts remain historical. Official docs and network-enabled NuGet audit now pass; earlier sandbox failures do not remain current blockers.
+
 | Profile groups | Current evidence | Remaining boundary |
 |---|---|---|
 | P01/P02 | 76 backend cases plus actual advisor Valid/Invalid/Unsupported cases | Broader structural/assertion grammar remains refused |

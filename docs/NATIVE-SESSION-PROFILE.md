@@ -4,7 +4,7 @@
 
 ## 1. Status and candidate
 
-Profile identifier: `schema-native-decimal-session-v1`. Status: **Internal backend and Core adapter implemented; overall qualification/public API pending**. The backend has 76 cases; the [adapter receipt](native-session-adapter/2026-11-15/README.md) adds 20 native scalar/issuance/lifetime controls. This delivers no public provider, API acceptance, conformance promotion, performance budget or package release. Schema remains on the MinVer 0.4 development line. See [ADR-009](ADR-009-native-decimal-session-profile.md).
+Profile identifier: `schema-native-decimal-session-v1`. Status: **Internal backend, Core adapter and owned-facade prototype implemented; overall qualification/public API pending**. Latest [qualification](native-session-facade/2026-11-15/README.md): 243 cases including 76 backend, 28 adapter and eight facade cases. No public provider, API acceptance, conformance promotion, performance budget or release. Schema remains on MinVer 0.4; the proposed public feature targets candidate 0.5 subject to review. See ADR-009 and [proposed ADR-010](ADR-010-owned-native-decimal-facade.md).
 
 Baseline: Schema `302d6f6b168b692dc053b0160f4babde8ebfad15`, with the four product and one test references at 1.81.2. The published API/Core XML documentation and binaries were inspected locally on 2026-11-15. Observed SHA-256 identities:
 
@@ -82,6 +82,6 @@ Use deterministic barriers for lifetime tests, no timing sleeps. Test independen
 4. Run fresh build, full standalone tests, documentation checks and a real scalar consumer. Retain exact commands, hashes, supported/refused case names and result logs. A focused Core probe is not provider acceptance. The separate Core 135-case historical lane is not rerun or extended by these checks.
 5. Review the bounded evidence before marking this profile qualified. Full XSD 1.1, complete N1–N8 support, positive compatible-universe interchange, general XSLT/XQuery adoption, concurrent session disposal, numeric performance budgets, joint freeze and Schema publication remain separate milestones.
 
-The specification basis, backend and internal adapter are delivered. The suite passes 227 cases (124 retained, seven probes, 76 backend, 20 adapter), including actual native `$value` integration, root atomization, issuance and cancellation/drain controls. The [qualification map](NATIVE-SESSION-ADAPTER.md) records remaining acceptance. Next: close remaining bounded controls and review public entry points/external consumers before broader coverage or publication. No overall P01–P12 sign-off is claimed.
+The basis, backend, adapter and owned prototype are delivered; 243 cases pass, including complete-container/raw expiry, receipt/snapshot expiry and facade cleanup. The [public contract proposal](NATIVE-DECIMAL-PUBLIC-API-PROPOSAL.md) records the next DTO/diagnostic/ownership/external-consumer work. Audited Release build and the official documentation check now pass with required host permissions. Broader coverage, general disposal races and overall P01–P12 sign-off remain pending.
 
 *Last updated: 2026-11-15*

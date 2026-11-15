@@ -45,7 +45,8 @@ Schema language version, host/XDM profile, component authority and source/snapsh
 | [Core 1.81.2 dependency adoption](CORE-1.81.2-ADOPTION.md) | Merged in Schema PR #1; existing source and unchanged-binary coverage qualified |
 | [Historical BCAP O1/O2 design review](core-disposition-responses/2026-11-03-v2/README.md) | Scoped design returns dated 3 November; not new native/runtime acceptance |
 | Preserve modular package and core dependency direction | Retained |
-| [ADR-009: first native decimal session profile](ADR-009-native-decimal-session-profile.md) | Proposed; scope defined, implementation/qualification pending |
+| [ADR-009: first native decimal session profile](ADR-009-native-decimal-session-profile.md) | Proposed; internal backend/adapter implemented, overall acceptance pending |
+| [ADR-010: owned synchronous native decimal facade](ADR-010-owned-native-decimal-facade.md) | Proposed; internal prototype and public contract proposal delivered; external/public acceptance pending |
 | Require no activation for standards processing | Implemented |
 | Full XSD 1.1 provider/session integration | Pending; no conformance promotion |
 
@@ -53,7 +54,7 @@ Schema language version, host/XDM profile, component authority and source/snapsh
 
 The [native decimal session profile](NATIVE-SESSION-PROFILE.md) maps N1–N8 onto inspected Core 1.81.2 contracts and defines twelve paired planned acceptance groups. It requires a native structural backend, authority-owned facts and host-retained operation lifetimes. Cross-universe handoff remains Unsupported in this first scope. No adapter or new public API is delivered by the definition.
 
-All 227 standalone tests pass: 124 retained regressions, seven scalar probes, 76 backend and 20 [Core adapter cases](native-session-adapter/2026-11-15/README.md). The [finite grammar](NATIVE-DECIMAL-GRAMMAR.md) retains the adopted semantics. The [internal adapter](NATIVE-SESSION-ADAPTER.md) qualifies bounded real scalar flow and refusal/lifetime controls; full profile/public API acceptance remains pending. Sequential admission is a shared host-runner policy, not a guarantee inferred from Core lease counts. Historical source/binary and Core integration receipts retain their scopes.
+All 243 standalone cases pass: 124 retained, seven scalar probes, 76 backend, 28 adapter and eight [owned-facade cases](native-session-facade/2026-11-15/README.md). The prototype owns the sole Core session/runner and each document admission, exposing only detached exact decimals and XML through its internal workflow. Borrowed container and scalar receipt expiry, quota/cancellation/fault cleanup and default-name argument rejection are qualified. The finite grammar is unchanged. Public symbols, external consumers, general close/work races and global acceptance remain pending under ADR-010. Historical receipts retain their scopes.
 
 The dependency adoption changes no Schema C# implementation, upstream baseline/filter or storage format. The same 124 cases pass after rebuilding and in the separately retained unchanged-binary lane; these repeated case catalogs are not additive coverage. The Core optional source wrapper pins merged Schema c953ebe and runs 124 upstream plus 11 local cases. This does not prove arbitrary downstream ABI, native registry/lease safety, concurrent disposal or full PSVI/component completeness.
 

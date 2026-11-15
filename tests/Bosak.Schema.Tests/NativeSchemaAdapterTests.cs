@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Implement internal native decimal Core adapter                                                 |
+//                      | Charles Korthout | 0.2   | 15-11-2026     | Qualify remaining bounded admission, expiry and failure-cleanup controls                    |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -290,6 +291,152 @@ public sealed class NativeSchemaAdapterTests
 
     private static NativeDecimalSchema ProviderSchema() => NativeDecimalSchema.Compile(
         File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "TestData", "Schemas", "native-decimal.xsd")), new(256, 256)).Value!;
+
+    /// <summary>Checks complete container adapters expire with raw work while copied payloads survive.</summary>
+    [Fact]
+    public void ReadTypedContainer_RawOperationEnds_ExpiresBorrowedAdapterOnly()
+    {
+        using var session = Session(Provider());
+        using var input = Input();
+        var assessment = Assess(session, input);
+        using var snapshot = Open(session, input, assessment);
+        var result = session.Run([snapshot], operation =>
+        {
+            var read = operation.ReadTypedContainer(snapshot, assessment.Facts[^1].ReadTypedValue(default).Value);
+            Assert.Equal(SchemaResultKind.Supported, read.Kind);
+            Assert.False(read.Value.IsList);
+            var item = Assert.Single(read.Value.AtomicItems);
+            Assert.Same(assessment.Origin, item.TypeEvidence.OriginalAssessment);
+            return (Container: read.Value, Plain: item.Value.ExactDecimalValue);
+        });
+        Assert.Equal("1", result.Plain.ToInvariantString(256));
+        Assert.Throws<ObjectDisposedException>(() => result.Container.GoverningType);
+        Assert.NotNull(assessment.Facts[^1].Type);
+    }
+
+    /// <summary>Checks registered scalar provenance expires on snapshot close without closing its host owner.</summary>
+    [Fact]
+    public void Dispose_Snapshot_ExpiresScalarReceiptButKeepsProviderOwnerAlive()
+    {
+        using var session = Session(Provider());
+        using var input = Input();
+        var assessment = Assess(session, input);
+        var snapshot = Open(session, input, assessment);
+        var result = session.Run([snapshot], operation =>
+        {
+            var scalar = operation.ReadTypedValue(snapshot, assessment.Facts[^1].ReadTypedValue(default).Value).Value;
+            Assert.True(SchemaAtomics.TryGetProvenance(scalar, out var provenance));
+            return (Scalar: scalar, Provenance: provenance!);
+        });
+        snapshot.Dispose();
+        Assert.False(SchemaAtomics.TryGetProvenance(result.Scalar, out _));
+        Assert.Throws<ObjectDisposedException>(() => result.Provenance.DeclaredType);
+        Assert.True(session.Advisor!.OwnsAssessment(assessment.Origin));
+        Assert.Equal(0, input.ActiveLeases);
+        Assert.NotEmpty(input.Root.ToXmlString());
+    }
+
+    /// <summary>Checks exact supplied scale is admitted at the query ceiling and refused one beyond.</summary>
+    [Fact]
+    public void ReadTypedValue_ScaleBoundary_AdmitsExactValueAndRefusesExcess()
+    {
+        using var session = SchemaQuerySession.CompileXPath("$value", new SchemaQueryLimits(1, 4, 1, 10, 2), assessor: Provider()).Value;
+        using var exact = Input("<order><amount>1</amount><amount>2</amount><tax>1.23</tax></order>");
+        var assessment = Assess(session, exact);
+        using (var snapshot = Open(session, exact, assessment))
+            Assert.Equal("1.23", session.Run([snapshot], operation => operation.ReadTypedValue(snapshot,
+                assessment.Facts[^1].ReadTypedValue(default).Value).Value.ExactDecimalValue.ToInvariantString(256)));
+        using var excess = Input("<order><amount>1</amount><amount>2</amount><tax>1.234</tax></order>");
+        var other = Assess(session, excess);
+        using var beyond = Open(session, excess, other);
+        session.Run([beyond], operation =>
+        {
+            Assert.Throws<NotSupportedException>(() => operation.ReadTypedValue(beyond, other.Facts[^1].ReadTypedValue(default).Value));
+            return 0;
+        });
+    }
+
+    /// <summary>Checks missing membership and foreign/closed snapshots with actual native inputs.</summary>
+    [Fact]
+    public void Run_ForeignOrClosedNativeAdmission_RejectsBeforeCallback()
+    {
+        using var session = Session(Provider());
+        using var foreign = Session(Provider());
+        using var input = Input();
+        var assessment = Assess(session, input);
+        var snapshot = Open(session, input, assessment);
+        var called = false;
+        Assert.Throws<ArgumentException>(() => foreign.Run([snapshot], _ => called = true));
+        session.Run([], operation =>
+        {
+            Assert.Throws<ArgumentException>(() => operation.ReadTypedValue(snapshot, assessment.Facts[^1].ReadTypedValue(default).Value));
+            return 0;
+        });
+        snapshot.Dispose();
+        Assert.Throws<ObjectDisposedException>(() => session.Run([snapshot], _ => called = true));
+        Assert.False(called);
+        Assert.Equal(0, input.ActiveLeases);
+    }
+
+    /// <summary>Checks a pre-canceled host runner never invokes work and remains usable.</summary>
+    [Fact]
+    public void Run_PreCanceled_LeavesGateAndAdmissionUsable()
+    {
+        using var session = Session(Provider());
+        using var input = Input();
+        var assessment = Assess(session, input);
+        using var snapshot = Open(session, input, assessment);
+        var runner = new NativeSessionRunner(session);
+        using var cancellation = new CancellationTokenSource();
+        cancellation.Cancel();
+        var called = false;
+        Assert.Throws<OperationCanceledException>(() => runner.Run([snapshot], _ => called = true, cancellation.Token));
+        Assert.False(called);
+        Assert.Equal(6, runner.Run([snapshot], _ => 6));
+    }
+
+    /// <summary>Checks asynchronous callback failure releases the shared sequential runner gate.</summary>
+    /// <returns>The completion of the asynchronous failure control.</returns>
+    [Fact]
+    public async Task RunAsync_CallbackFault_ReleasesGateAfterActualCompletion()
+    {
+        using var session = Session(Provider());
+        using var input = Input();
+        var assessment = Assess(session, input);
+        using var snapshot = Open(session, input, assessment);
+        var runner = new NativeSessionRunner(session);
+        await Assert.ThrowsAsync<InvalidOperationException>(() => runner.RunAsync<int>([snapshot],
+            _ => Task.FromException<int>(new InvalidOperationException("async control"))));
+        Assert.Equal(9, await runner.RunAsync([snapshot], _ => Task.FromResult(9)));
+        Assert.Equal(1, input.ActiveLeases);
+    }
+
+    /// <summary>Checks host leases reject cancellation and dispose exactly once.</summary>
+    [Fact]
+    public void Enter_LeaseCancellationAndDoubleDispose_KeepsBalancedOwnership()
+    {
+        using var input = Input();
+        using var cancellation = new CancellationTokenSource();
+        cancellation.Cancel();
+        Assert.Throws<OperationCanceledException>(() => input.Enter(cancellation.Token));
+        Assert.Equal(0, input.ActiveLeases);
+        var lease = input.Enter(default);
+        Assert.Equal(1, input.ActiveLeases);
+        lease.Dispose();
+        lease.Dispose();
+        Assert.Equal(0, input.ActiveLeases);
+        Assert.Throws<ObjectDisposedException>(() => lease.ThrowIfUnavailable(default));
+    }
+
+    /// <summary>Checks invalid/default lookup names reject as arguments instead of null dereferences.</summary>
+    [Fact]
+    public void Resolve_DefaultExpandedName_RejectsInvalidArgument()
+    {
+        var provider = Provider();
+        Assert.Throws<ArgumentException>(() => provider.ResolveElementDeclaration(default, default));
+        Assert.Throws<ArgumentException>(() => provider.ResolveType(default, default));
+        Assert.Throws<ArgumentException>(() => provider.ResolveAttributeDeclaration(default, default));
+    }
 
     /// <summary>Checks overlapping work on the same admitted input refuses without leaking a lease.</summary>
     /// <returns>The completion of the deterministic concurrency control.</returns>
