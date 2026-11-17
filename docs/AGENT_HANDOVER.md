@@ -1,3 +1,9 @@
+## Legacy compile-diagnostic guard local — 17 November 2026
+
+PR9 merged88c3a45fa2f7f37980e2105ba0947399dd77af44/tree0eded90c944d922c2cfa28770fddfc109cddf5c3, equal accepted PR tree; main44140782563 green. Isolated .worktrees/Schema.CompileDiagnostics / fix/schema-compile-diagnostics. Validate/ValidateValue/ValidateAlternativeTests now return false with copied original compile findings after null checks and before other model/evaluation work. Clean success remains assertion/facet/static-check scope; unknown-root/no-tests true explicitly tested, not structural validity. [Contract](LEGACY_VALIDATION.md), [evidence](compile-diagnostics/README.md).
+
+Full345pass (312implementation/33external),22+4 new cases,45release controls; zero-warning/error build. API40types317rows identical toPR9. Copied compile diagnostic collections are immutable; no blanket legacy result redaction/immutability promise. Historical dossiers preserved, Core1.81.2/native/profile unchanged. No commit/push, beta/ADR acceptance, tag or publication. Next beta acceptance/checklist and resource-budget work after review; do not silently expand XSD scope. Rawpacket .guard-tmp/schema-compile-diagnostics-20261117.
+
 ## Compiler-owned descriptor snapshots local — 17 November 2026
 
 PR8 merged as7e16b1609741caa5ac445cf9c81ae1725cf36da3, tree8da044cdb13d29780fd9d8a7cfa0409b86505a69 matches accepted PR head; fresh main44121838200 green. New isolated .worktrees/Schema.DescriptorSnapshots / fix/schema-descriptor-snapshots. Compiler publication now freezes outer and nested bindings/facets/wildcards, preserving shared assertion identity. Public positional constructors/with records unchanged and caller-owned. [Contract](DESCRIPTOR_SNAPSHOTS.md), [evidence](descriptor-snapshots/README.md).

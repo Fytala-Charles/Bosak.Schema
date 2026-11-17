@@ -24,10 +24,12 @@
 //                      | Charles Korthout | 0.4   | 27-10-2026     | ValidateAlternativeTests: CTA test compile checks sharing the plan cache (REQ-009 S4a)   |
 //                      | Charles Korthout | 0.5   | 27-10-2026     | Governing-type CTA applicability + assertion filtering + typed view v2 (REQ-009 S4b)     |
 //                      | Charles Korthout | 0.6   | 29-10-2026     | Publish schema-only Apache-2.0 source; remove activation dependency                       |
+//                      | Charles Korthout | 0.7   | 17-11-2026     | Refuse legacy validation on compile findings before any assertion or typed work             |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
 using System.Collections.Concurrent;
+using System.Collections.Immutable;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
@@ -54,6 +56,9 @@ namespace Bosak.Schema;
 /// REQ-009 S4a adds <see cref="ValidateAlternativeTests"/> — static compilation checking of the recorded
 /// <c>xs:alternative</c> test expressions under the same constrained environment (CTA applicability
 /// evaluation itself is S4b).
+/// Every operation first validates its arguments, then refuses a model carrying compile diagnostics.
+/// Such findings are copied unchanged into a false result before any validation work. Successful results
+/// describe only the requested assertion/facet/static-check operation, not complete structural validity.
 /// </remarks>
 public interface IXsdValidationService
 {
@@ -68,7 +73,7 @@ public interface IXsdValidationService
     /// </summary>
     /// <param name="schema">A schema produced by <see cref="IXsdSchemaCompiler"/> against <see cref="XsdLanguageVersion.Xsd11"/>.</param>
     /// <param name="candidate">The element to validate. Its child content is what the assertion expressions see.</param>
-    /// <returns>A <see cref="SchemaValidationResult"/>; invalid when any applicable assertion is violated, refused, or errors, or when CTA fails.</returns>
+    /// <returns>A <see cref="SchemaValidationResult"/>; invalid for compile findings, assertion violations/refusals/errors or CTA failure. A true result is not a full structural assessment.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="schema"/> or <paramref name="candidate"/> is null.</exception>
     SchemaValidationResult Validate(ICompiledSchema schema, XElement candidate);
 
@@ -81,7 +86,7 @@ public interface IXsdValidationService
     /// applicability against any candidate element.
     /// </summary>
     /// <param name="schema">A schema produced by <see cref="IXsdSchemaCompiler"/> against <see cref="XsdLanguageVersion.Xsd11"/>.</param>
-    /// <returns>A <see cref="SchemaValidationResult"/>; invalid when any alternative test is refused by the constrained environment.</returns>
+    /// <returns>A <see cref="SchemaValidationResult"/>; invalid for compile findings or refused alternative tests. Success checks static tests only.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="schema"/> is null.</exception>
     SchemaValidationResult ValidateAlternativeTests(ICompiledSchema schema);
 
@@ -93,7 +98,7 @@ public interface IXsdValidationService
     /// <param name="schema">A schema produced by <see cref="IXsdSchemaCompiler"/> against <see cref="XsdLanguageVersion.Xsd11"/>.</param>
     /// <param name="simpleType">The expanded name of a named simple type declared by <paramref name="schema"/>.</param>
     /// <param name="lexicalValue">The lexical representation of the value to validate.</param>
-    /// <returns>A <see cref="SchemaValidationResult"/>; invalid when any facet is violated, refused, or errors.</returns>
+    /// <returns>A <see cref="SchemaValidationResult"/>; invalid for compile findings or violated/refused/erroring facets. Success is not complete datatype or schema validation.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="schema"/>, <paramref name="simpleType"/>, or <paramref name="lexicalValue"/> is null.</exception>
     SchemaValidationResult ValidateValue(ICompiledSchema schema, XName simpleType, string lexicalValue);
 }
@@ -113,6 +118,8 @@ public sealed partial class XsdValidationService : IXsdValidationService
     {
         ArgumentNullException.ThrowIfNull(schema);
         ArgumentNullException.ThrowIfNull(candidate);
+
+        if (CompileFailure(schema) is { } failure) return failure;
 
         var contextItem = BuildContextItem(schema, candidate);
         var focus = XdmValue.FromNode(contextItem);
@@ -275,6 +282,8 @@ public sealed partial class XsdValidationService : IXsdValidationService
         ArgumentNullException.ThrowIfNull(schema);
         ArgumentNullException.ThrowIfNull(simpleType);
         ArgumentNullException.ThrowIfNull(lexicalValue);
+
+        if (CompileFailure(schema) is { } failure) return failure;
 
         var declaration = schema.SimpleTypes.FirstOrDefault(s =>
             s.TypeNamespace == simpleType.NamespaceName && s.TypeLocalName == simpleType.LocalName);
@@ -504,6 +513,8 @@ public sealed partial class XsdValidationService : IXsdValidationService
     {
         ArgumentNullException.ThrowIfNull(schema);
 
+        if (CompileFailure(schema) is { } failure) return failure;
+
         var diagnostics = new List<SchemaDiagnostic>();
         foreach (var alternative in schema.Alternatives)
         {
@@ -525,6 +536,12 @@ public sealed partial class XsdValidationService : IXsdValidationService
         }
 
         return new SchemaValidationResult(diagnostics.Count == 0, diagnostics);
+    }
+
+    private static SchemaValidationResult? CompileFailure(ICompiledSchema schema)
+    {
+        var diagnostics = schema.Diagnostics.ToImmutableArray();
+        return diagnostics.IsEmpty ? null : new SchemaValidationResult(false, diagnostics);
     }
 
     private AssertionEvaluationPlan GetPlan(

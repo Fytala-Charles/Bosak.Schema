@@ -1,5 +1,5 @@
-# Schema descriptor snapshots — 17 November 2026
+# Schema legacy compile precondition — 17 November 2026
 
 Last updated: 2026-11-17
 
-Base7e16b1609741caa5ac445cf9c81ae1725cf36da3; isolated fix/schema-descriptor-snapshots. PR8 merged/main green. Compiler-owned immutable outer/nested snapshots implemented; caller records unchanged.319 tests/45 controls pass; API40types317rows unchanged. See docs/AGENT_HANDOVER.md and docs/DESCRIPTOR_SNAPSHOTS.md. No commit/push, beta acceptance, tag or publication.
+Base88c3a45fa2f7f37980e2105ba0947399dd77af44, PR9 merged/main green. Isolated fix/schema-compile-diagnostics returns false before validation on compile findings across all three legacy methods; clean success remains assertion-only.345cases/45controls pass; API40types317rows unchanged. See docs/AGENT_HANDOVER.md and docs/LEGACY_VALIDATION.md. No commit/push, beta acceptance or publication.
