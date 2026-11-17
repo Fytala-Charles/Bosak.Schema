@@ -43,3 +43,6 @@ Internal implementation checkpoint, 15 November: the backend is committed at `ab
 - [Profile and acceptance plan](NATIVE-SESSION-PROFILE.md)
 - [Current architecture](ARCHITECTURE.md)
 - [Historical scoped O2 return](core-disposition-responses/2026-11-03-v2/BCAP-O2-Schema.v2.response.json)
+
+
+17 November2026 beta review: [API contract audit](beta-readiness/API-CONTRACT-AUDIT.md) and [decision draft](beta-readiness/CONTRACT-DECISIONS.md) propose current boundaries. Status remains Proposed; no acceptance is inferred from alpha publication.
