@@ -1,3 +1,11 @@
+## First hosted preparation refused; diagnostics prepared — 17 November 2026
+
+PR #5 merged as `84c0fc9df3df6f4a97a8a459c2c21fca12d25002`; main run44087274600 passed. Preparation-only [run44087538178](https://github.com/Fytala-Charles/Bosak.Schema/actions/runs/44087538178), first attempt, passed controls, product272 cases, package23 cases, nine Core signatures/payload checks and legacy124 cases per lane. Sealing refused `Unexpected package content`. Publish was skipped and no eligible package artifact was uploaded. The unexpected entry is unknown: the original error omitted its name, and rejected package bytes were not retained. Local same-source packaging passed the existing allowlist, so it does not prove the hosted cause.
+
+Isolated local `ci/schema-preparation-diagnostics` at the merge adds offending entry names to the refusal and a failure-only `schema-rejected-package-<run>-<attempt>` artifact with seven-day retention. No allowlist change. Eligible artifact names, success requirement, manual default, source/version pins and publisher remain unchanged. Two new diagnostic controls bring local controls to21 Python plus22 Node. Historical trusted-publishing evidence stays sealed. See [diagnostic evidence](preparation-diagnostics/README.md). This candidate is uncommitted/unpushed pending explicit instruction; no rerun or new preparation has been dispatched.
+
+Next: commit/push/PR approval, review/merge/main validation, then a new preparation run rather than rerunning the failed first attempt. Inspect any retained rejected package before proposing a specific acceptance fix. No NuGet policy/profile variable change, login, publication or tag occurred. Earlier89,520-byte local package SHA-256 remains `d9f3ed5897ce30c6069e72a8e651e3648d132251a3c6ef232d8aa946dd3428d6`.
+
 # Schema trusted-publishing route prepared locally - 17 November 2026
 
 Last updated: 2026-11-17

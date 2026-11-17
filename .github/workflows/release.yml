@@ -105,6 +105,13 @@ jobs:
           if-no-files-found: error
           retention-days: 30
       - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: schema-rejected-package-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/package/
+          if-no-files-found: ignore
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: schema-qualification-${{ github.run_id }}-${{ github.run_attempt }}

@@ -83,7 +83,8 @@ def package_info(path, root, revision, version):
         require(len(dependencies) == 4 and {d.attrib.get("id") for d in dependencies} == DEPENDENCIES and all(d.attrib.get("version") == "1.81.2" for d in dependencies), "Dependency change refused")
         require([n for n in names if n.endswith(".dll")] == ["lib/net10.0/Bosak.Schema.dll"], "Extra or missing DLL")
         allowed = {"Bosak.Schema.nuspec", "_rels/.rels", "[Content_Types].xml", "LICENSE.md", "NOTICE", "NUGET_README.md", "lib/net10.0/Bosak.Schema.dll", "lib/net10.0/Bosak.Schema.xml"}
-        require(all(n in allowed or re.fullmatch(r"package/services/metadata/core-properties/[0-9a-f]+\.psmdcp", n) for n in names), "Unexpected package content")
+        unexpected = [n for n in names if n not in allowed and not re.fullmatch(r"package/services/metadata/core-properties/[0-9a-f]+\.psmdcp", n)]
+        require(not unexpected, "Unexpected package content: " + repr(unexpected))
         for name, source in [("LICENSE.md", "LICENSE.md"), ("NOTICE", "NOTICE"), ("NUGET_README.md", "docs/NUGET_README.md")]:
             require(archive.read(name).replace(b"\r\n", b"\n") == (root / source).read_bytes().replace(b"\r\n", b"\n"), "Source/legal/README mismatch")
         require("lib/net10.0/Bosak.Schema.xml" in names, "XML API documentation missing")

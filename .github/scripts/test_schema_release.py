@@ -80,6 +80,22 @@ class ReleaseControls(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "digest mismatch"):
             self.verify(original)
 
+    def test_unexpected_entry_is_named_and_still_refused(self):
+        self.entries["unexpected.txt"] = b"diagnostic-only"
+        self.write_package()
+        with self.assertRaisesRegex(ValueError, r"Unexpected package content: .*unexpected.txt"):
+            self.seal()
+        self.assertFalse((self.out / "release-manifest.json").exists())
+
+    def test_failure_artifact_is_distinct_from_eligible_package(self):
+        workflow = (Path(__file__).parent.parent / "workflows/release.yml").read_text(encoding="utf-8")
+        self.assertIn("if: failure()\n        with:\n          name: schema-rejected-package-", workflow)
+        self.assertIn("retention-days: 7", workflow)
+        admitted = workflow.index("name: schema-nuget-${{ github.sha }}")
+        rejected = workflow.index("name: schema-rejected-package-")
+        self.assertLess(admitted, rejected)
+        self.assertNotIn("if: always()", workflow[workflow.rfind("- uses:", 0, admitted):admitted])
+
     def test_package_tamper_refuses(self):
         original = self.seal()
         self.entries["lib/net10.0/Bosak.Schema.dll"] = b"changed"
