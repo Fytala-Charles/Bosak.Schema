@@ -1,0 +1,11 @@
+# Exact NuGet metadata path correction
+
+17 November 2026. Base `2e7c0aa5ba30cafabb53d46c001d0a4034223d3e`. [Pre-implementation basis](BASIS.json), [upstream source pin](UPSTREAM.json), [verification](VERIFICATION.json), [offline verifier](verify.py).
+
+The second first-attempt [hosted preparation](https://github.com/Fytala-Charles/Bosak.Schema/actions/runs/44098084319) retained its rejected archive and identified the exact entry `package/services/metadata/core-properties/nuget.psmdcp`. The archive contains ordinary OPC metadata with the package ID/version/description/author and NuGet.Packaging7.9.0.0 creator. Its OPC relationship targets that entry. [NuGet's PackageBuilder.Save source](https://github.com/NuGet/NuGet.Client/blob/5d780b5e8b195d42e02e2013858f7dc02586ce32/src/NuGet.Core/NuGet.Packaging/PackageCreation/Authoring/PackageBuilder.cs) uses this exact path. This pin is an operational source review, not the historical build revision or a language-spec adoption.
+
+The release verifier allowed only the older generated metadata filename form. This change adds the single observed NuGet filename; arbitrary metadata names, extra DLLs, unsafe paths, duplicate entries and payload/provenance drift remain refused. Tests cover qualifying and hashing the exact entry plus near-name refusals. Product source, SDK/version rules, dependencies and publisher are unchanged.
+
+All23Python+22Node controls pass. The actual89,416-byte rejected package SHA-256 is `b88a25bdaa8f59294aaac775b3c11c79bb442c858943eb73c629a5d081d03a45`. Corrected local sealing and verification pass using actual272source/23package/124-per-legacy-lane TRX and nine Core signature/payload receipts. Catalogs overlap. No bytes were changed. This does not admit the failed hosted run; no eligible hosted manifest/artifact exists. A new successful first-attempt preparation and exact-artifact approval remain required.
+
+Raw rejected bytes and corrected rehearsal manifest remain under ignored `.guard-tmp/schema-preparation-diagnosis-20261117`. The source-only archive here retains original hosted logs/qualification and local rehearsal manifest, with no product binary or package. Earlier89,520-byte local package and first-run evidence remain unchanged. No account setting, login, publishing action, commit or push occurred for this local candidate.

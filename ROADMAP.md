@@ -38,3 +38,6 @@ The [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and historical source/bi
 
 
 First hosted package preparation stopped at content sealing; qualify failure diagnostics and inspect the rejected package before any acceptance change. See [diagnostic follow-up](docs/preparation-diagnostics/README.md).
+
+
+The retained hosted package identified a verifier mismatch for the exact NuGet-generated `nuget.psmdcp` metadata path. The [local correction](docs/package-metadata-correction/README.md) accepts that path while preserving all other admission checks; the failed run remains ineligible and publication is pending. Product sources and dependencies are unchanged.

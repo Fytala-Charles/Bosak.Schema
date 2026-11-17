@@ -58,3 +58,6 @@ The 3 November [O1/O2 versioned responses](core-disposition-responses/2026-11-03
 
 
 Hosted preparation first attempt passed product/package/legacy qualification but refused unexpected package content before sealing. [Diagnostic follow-up](preparation-diagnostics/README.md) preserves failure evidence and keeps the package allowlist unchanged; local candidate awaits delivery. No package is admitted or published.
+
+
+The retained hosted package identified a verifier mismatch for the exact NuGet-generated `nuget.psmdcp` metadata path. The [local correction](package-metadata-correction/README.md) accepts that path while preserving all other admission checks; the failed run remains ineligible and publication is pending. Product sources and dependencies are unchanged.
