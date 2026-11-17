@@ -137,7 +137,7 @@ public CanonicalEvidenceSet Parse(string payload, ParseOptions? options = null)
 |--------------|---------|
 | `Bosak.Schema.Tests` | Activation-free factories, schema compilation/validation and legacy API compatibility |
 
-The public schema solution has 124 tests and no licensing-pipeline/Azurite dependency.
+The public-entry candidate solution has 272 cases: 249 implementation cases (243 retained plus six lifecycle controls) and 23 public-consumer cases in Bosak.Schema.PublicConsumer.Tests without friend access. Both source and locally packed binary lanes are exercised; repeated case catalogs are not additive coverage. Core stays at 1.81.2, MinVer development minimum is 0.5, and hosted/public API acceptance and publication remain pending.
 
 ### 5.2 Test Patterns
 
@@ -228,7 +228,7 @@ After **every** successful implementation step, update the following canonical d
 
 ---
 
-*Last updated: 2026-11-09*
+*Last updated: 2026-11-17*
 
 
 
@@ -238,4 +238,4 @@ Schema services require no activation. Legacy License/ActivatedLicense types are
 
 ## Current dependency and documentation checkpoint
 
-Product and test Core references select published 1.81.2 after Schema PR #1. Schema's own MinVer 0.4 development line is unchanged; no new Schema package release is implied. Standalone124-case regression coverage and the separate Core 135-case optional integration have distinct scopes. Use `docs/AGENT_HANDOVER.md` for current state and `docs/DEVELOPMENT_HISTORY.md` for archived local review notices; older inputs keep their original source hashes and do not replace current package pins. Full XSD 1.1 structural/native session/lease coverage and performance acceptance remain separate tasks.
+Product and test Core references select published 1.81.2 after Schema PR #1. The public-entry candidate advances Schema's MinVer development minimum to 0.5; no new Schema package release is implied. Standalone124-case regression coverage and the separate Core 135-case optional integration have distinct scopes. Use `docs/AGENT_HANDOVER.md` for current state and `docs/DEVELOPMENT_HISTORY.md` for archived local review notices; older inputs keep their original source hashes and do not replace current package pins. Full XSD 1.1 structural/native session/lease coverage and performance acceptance remain separate tasks.
