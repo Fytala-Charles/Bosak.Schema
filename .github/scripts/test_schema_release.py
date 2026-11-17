@@ -87,6 +87,24 @@ class ReleaseControls(unittest.TestCase):
             self.seal()
         self.assertFalse((self.out / "release-manifest.json").exists())
 
+    def test_nuget_named_core_properties_are_qualified_and_hashed(self):
+        name = "package/services/metadata/core-properties/nuget.psmdcp"
+        self.entries[name] = b"<coreProperties/>"
+        self.write_package()
+        self.identity["packageSha256"] = release.digest(self.package.read_bytes())
+        release.save(self.results / "consumer-identity.json", self.identity)
+        manifest = self.verify(self.seal())
+        self.assertEqual(manifest["package"]["entries"][name], release.digest(self.entries[name]))
+
+    def test_similar_metadata_names_remain_refused(self):
+        for name in ["package/services/metadata/core-properties/nuget-extra.psmdcp", "package/services/metadata/core-properties/nuget.psmdcp.dll", "package/services/metadata/core-properties/NuGet.psmdcp"]:
+            with self.subTest(name=name):
+                self.entries = self.contents()
+                self.entries[name] = b"unapproved"
+                self.write_package()
+                with self.assertRaises(ValueError):
+                    self.seal()
+
     def test_failure_artifact_is_distinct_from_eligible_package(self):
         workflow = (Path(__file__).parent.parent / "workflows/release.yml").read_text(encoding="utf-8")
         self.assertIn("if: failure()\n        with:\n          name: schema-rejected-package-", workflow)

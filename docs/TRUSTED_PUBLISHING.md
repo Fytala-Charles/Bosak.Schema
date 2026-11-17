@@ -40,3 +40,6 @@ SDK10.0.301, productCore1.81.2 minima and source pin remain explicit. No engine 
 ## Failed preparation diagnostics
 
 The first hosted preparation failed at content sealing; no publishable artifact was admitted. [Follow-up evidence](preparation-diagnostics/README.md) records the limits of the diagnosis. The local diagnostic candidate reports rejected entry names and retains a distinct failure-only `schema-rejected-package-<run>-<attempt>` artifact for seven days. Such an artifact is unqualified, may lack a manifest and must never be supplied as a publication source. It has a different name from `schema-nuget-<controller SHA>`; failed preparations remain refused regardless of retained bytes. Inspect it before changing any allowlist. A new successful first-attempt preparation and exact-artifact review are still required.
+
+
+The diagnostic run identified the exact standard metadata path `package/services/metadata/core-properties/nuget.psmdcp`. The [local verifier correction](package-metadata-correction/README.md) permits this filename alongside generated names; it does not admit other payload paths or make failed preparations eligible. A corrected local rehearsal of retained bytes is evidence only. Start a new preparation after the correction is reviewed and merged.
