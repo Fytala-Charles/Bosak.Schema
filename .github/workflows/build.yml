@@ -34,3 +34,10 @@ jobs:
       - name: Documentation hygiene
         shell: pwsh
         run: ./tools/check-docs.ps1 -ProjectPath .
+      - name: Workload tool build and measurement-integrity controls
+        shell: pwsh
+        run: |
+          dotnet build tools/Bosak.Schema.Workloads/Bosak.Schema.Workloads.csproj -c Release
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s tools -p test_schema_workloads.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

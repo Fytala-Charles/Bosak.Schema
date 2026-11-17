@@ -259,3 +259,8 @@ Compiler-produced descriptors own immutable outer and nested collections; preser
 ## Legacy validation compile findings
 
 All three legacy validation entry points validate null arguments, snapshot compile findings and return false before other model/typed/assertion work. Preserve original findings and scoped clean success; do not reinterpret IsValid as structural certification. See docs/LEGACY_VALIDATION.md. Current suite345; historical API/dossier records retain their original source scope.
+
+
+## Workload qualification
+
+Read docs/BETA_QUALIFICATION.md before measuring workloads. Build tools/Bosak.Schema.Workloads separately; run six Python controls with `python -m unittest discover -s tools -p test_schema_workloads.py`. Use tools/run-schema-workloads.py with a new ignored .workload-results output directory. No unhandled negative diagnostic launches or machine-wide WER changes. Proposed local timing/memory envelopes are not acceptance or SLAs. Product345/release45/runner6 scopes remain distinct.

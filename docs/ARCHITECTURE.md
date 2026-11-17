@@ -80,3 +80,9 @@ Compiler-produced [descriptor snapshots](DESCRIPTOR_SNAPSHOTS.md) now own immuta
 
 
 [Legacy validation](LEGACY_VALIDATION.md) now refuses models with compile diagnostics before assertion/facet/static-check work, preserving original findings. For clean models, success remains operation-scoped and does not certify structural validity. Local suite345 cases (312 implementation/33 external), plus45 release controls; public40types/317rows unchanged. The published alpha remains unchanged; this source fix is not a beta release.
+
+
+The owner selected a bounded decimal-session beta with explicit exclusions. The [beta qualification](BETA_QUALIFICATION.md) records five measured standalone workflows and a reproducible watchdog-controlled diagnostic. Product345 and release45 checks remain green; six separate runner controls qualify measurement integrity. Timing/memory results are local observations, not a production SLA. API/ADR acceptance and exact beta packaging/publication remain pending.
+
+
+`tools/Bosak.Schema.Workloads` is a non-packable console consumer of the public Schema API, built separately from the product solution. The Python parent pins its binaries/configurations, enforces a per-process watchdog and preserves raw observations. CI compiles it and runs mocked refusal/measurement-integrity controls; timing budgets are not CI gates.
