@@ -79,3 +79,6 @@ The local [restricted-resolution APIs](docs/RESTRICTED_RESOLUTION.md) add an exp
 
 
 Compiler-produced [descriptor snapshots](docs/DESCRIPTOR_SNAPSHOTS.md) now own immutable outer/nested collections. Caller-created positional records retain their existing ownership behavior. This is local beta-readiness work; the published alpha and legacy validation meanings are unchanged.
+
+
+[Legacy validation](docs/LEGACY_VALIDATION.md) now refuses models with compile diagnostics before assertion/facet/static-check work, preserving original findings. For clean models, success remains operation-scoped and does not certify structural validity. The published alpha remains unchanged; this source fix is not a beta release.

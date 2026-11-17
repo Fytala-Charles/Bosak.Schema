@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 17-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 17-11-2026     | Qualify restricted schema resolution from the external public consumer                   |
 //                      | Charles Korthout | 0.3   | 17-11-2026     | Qualify compiler-owned snapshots without changing caller-created record compatibility      |
+//                      | Charles Korthout | 0.4   | 17-11-2026     | Qualify compile-diagnostic preconditions and assertion-only legacy success                  |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -316,6 +317,35 @@ public sealed class NativeDecimalConsumerTests
         const string schema = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:original'><xs:simpleType name='Positive'><xs:restriction base='xs:decimal'><xs:assertion test='$value gt 0'/></xs:restriction></xs:simpleType><xs:element name='amount' type='xs:decimal'/></xs:schema>";
         using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(schema));
         return SchemaServices.CreateSchemaCompiler().Compile(stream, new Uri("file:///descriptor.xsd"), SchemaCompileOptions.Default(XsdLanguageVersion.Xsd11));
+    }
+
+    /// <summary>Checks each legacy operation exposes compile findings through the public service contract.</summary>
+    [Theory]
+    [InlineData(0)] [InlineData(1)] [InlineData(2)]
+    public void LegacyValidation_CompileFindings_ReturnFalseBeforeWork(int route)
+    {
+        using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes("<not-schema/>"));
+        var model = SchemaServices.CreateSchemaCompiler().Compile(stream, new Uri("file:///invalid.xsd"), SchemaCompileOptions.Default(XsdLanguageVersion.Xsd11));
+        var service = SchemaServices.CreateValidationService();
+        var result = route switch
+        {
+            0 => service.Validate(model, new XElement("unknown")),
+            1 => service.ValidateValue(model, XName.Get("missing"), "bad lexical value"),
+            _ => service.ValidateAlternativeTests(model),
+        };
+        Assert.False(result.IsValid);
+        Assert.Equal(model.Diagnostics, result.Diagnostics);
+        Assert.Equal(SchemaDiagnosticCodes.RootNotSchema, Assert.Single(result.Diagnostics).Code);
+    }
+
+    /// <summary>Checks a clean assertion-free model does not gain an unsupported structural-validity promise.</summary>
+    [Fact]
+    public void LegacyValidation_CleanUnmatchedRoot_RemainsAssertionOnly()
+    {
+        var model = Descriptor();
+        var result = SchemaServices.CreateValidationService().Validate(model, new XElement("unknown"));
+        Assert.True(result.IsValid);
+        Assert.Empty(result.Diagnostics);
     }
 
     private static NativeDecimalSession Create() => NativeDecimalSession.Create(Schema, Options).Value!;

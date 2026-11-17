@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.1   | 27-10-2026     | Creation (REQ-009 S2)                                                                    |
 
 //                      | Charles Korthout | 0.2   | 29-10-2026     | Publish schema-only Apache-2.0 source; remove activation dependency                       |
+//                      | Charles Korthout | 0.3   | 17-11-2026     | Clarify compile precondition and assertion-only service result scope                       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -25,8 +26,12 @@ namespace Bosak.Schema;
 /// compiled schema (REQ-009 S2).
 /// </summary>
 /// <param name="IsValid"><see langword="true"/> only when every evaluated assertion held (effective boolean
-/// value true) and no assertion was refused or raised an evaluation error.</param>
+/// value true), no compile diagnostics blocked the operation and no assertion was refused or raised an evaluation error.
+/// A service-produced true result describes only that operation, not complete structural validation.</param>
 /// <param name="Diagnostics">Validation findings: violated assertions (<see cref="SchemaDiagnosticCodes.AssertionViolated"/>),
 /// refused expressions (<see cref="SchemaDiagnosticCodes.AssertionRefused"/>), and evaluation errors
-/// (<see cref="SchemaDiagnosticCodes.AssertionEvaluationError"/>). Empty when <paramref name="IsValid"/> is true.</param>
+/// (<see cref="SchemaDiagnosticCodes.AssertionEvaluationError"/>). Compile findings are copied unchanged when they
+/// block the operation. Empty for a service-produced true result.</param>
+/// <remarks>The public constructor accepts application-supplied values; this record is not authenticated
+/// native assessment evidence. Detailed legacy diagnostics do not have native bounded-stage redaction guarantees.</remarks>
 public sealed record SchemaValidationResult(bool IsValid, IReadOnlyList<SchemaDiagnostic> Diagnostics);

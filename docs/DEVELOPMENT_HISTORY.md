@@ -29,3 +29,8 @@ Assessed the published alpha, classified39 public types/313 contract rows and re
 ## 17 November 2026 — compiler-owned descriptor snapshot candidate
 
 After PR8 merge/main validation, froze compiler-produced outer/nested collections without changing positional record constructors. Preserved shared assertion identity and ordinal bindings;13 added cases bring suite to319, plus45 release controls. Public40types/317rows unchanged; runtime mutable implementation casts deliberately stop working. Caller records remain application-owned. No tag, beta/profile acceptance or publication; canonical contract and source-only receipts recorded.
+
+
+## 17 November 2026 — legacy compile-diagnostic precondition candidate
+
+After PR9 merge/main validation, added a common compile-finding guard to all three legacy validation entry points. Arguments retain precedence; original findings are copied unchanged before any other work. Clean result meaning remains assertion/facet/static-check scope, not structural validation.26 added cases bring suite to345, plus45 release controls; public40types/317rows unchanged. No native/Core/version change, beta/ADR acceptance or publication.

@@ -243,7 +243,7 @@ Product and test Core references select published 1.81.2 after Schema PR #1. The
 
 ## Release automation controls
 
-Workflow-only release controls are separate from the current 319 product/source cases (published alpha: 272). Run `python -m unittest discover -s .github/scripts -p test_schema_release.py` and `node --test .github/scripts/test-schema-source-run.cjs`. They use synthetic artifacts and mocked GitHub/network responses; they do not log in or push. `.github/workflows/release.yml` admits only manually selected main preparation/publication for the recorded first prerelease, with OIDC permission confined to the publish job. Neither passing controls nor a prepared artifact authorizes registry publication. Keep the product source/Core pins and earlier immutable receipts unchanged.
+Workflow-only release controls are separate from the current 345 product/source cases (published alpha: 272). Run `python -m unittest discover -s .github/scripts -p test_schema_release.py` and `node --test .github/scripts/test-schema-source-run.cjs`. They use synthetic artifacts and mocked GitHub/network responses; they do not log in or push. `.github/workflows/release.yml` admits only manually selected main preparation/publication for the recorded first prerelease, with OIDC permission confined to the publish job. Neither passing controls nor a prepared artifact authorizes registry publication. Keep the product source/Core pins and earlier immutable receipts unchanged.
 
 
 ## Restricted resolution candidate
@@ -253,4 +253,9 @@ The local restricted resolver/XSLT factory requires stable host-owned filesystem
 
 ## Compiler snapshot ownership
 
-Compiler-produced descriptors own immutable outer and nested collections; preserve shared assertion identity across root/facet lists. Public record constructors/with copies still accept application-owned data. Use docs/DESCRIPTOR_SNAPSHOTS.md and do not extend compiler guarantees to arbitrary ICompiledSchema implementations. Current suite319; historical verifiers must run against their recorded source revisions.
+Compiler-produced descriptors own immutable outer and nested collections; preserve shared assertion identity across root/facet lists. Public record constructors/with copies still accept application-owned data. Use docs/DESCRIPTOR_SNAPSHOTS.md and do not extend compiler guarantees to arbitrary ICompiledSchema implementations. Snapshot checkpoint319; historical verifiers must run against their recorded source revisions.
+
+
+## Legacy validation compile findings
+
+All three legacy validation entry points validate null arguments, snapshot compile findings and return false before other model/typed/assertion work. Preserve original findings and scoped clean success; do not reinterpret IsValid as structural certification. See docs/LEGACY_VALIDATION.md. Current suite345; historical API/dossier records retain their original source scope.

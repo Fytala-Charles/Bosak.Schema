@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-17",
+  "sourceBase": "88c3a45fa2f7f37980e2105ba0947399dd77af44",
+  "basisKind": "Explicit legacy validation precondition from beta audit A01/A02; no new XSD structural semantics",
+  "affectedSourceSections": ["IXsdValidationService.Validate", "IXsdValidationService.ValidateValue", "IXsdValidationService.ValidateAlternativeTests", "SchemaValidationResult service-produced meaning"],
+  "existingContractRevision": "88c3a45fa2f7f37980e2105ba0947399dd77af44",
+  "immutableCollectionReview": {"repository": "https://github.com/dotnet/dotnet", "revision": "b0f34d51fccc69fd334253924abd8d6853fad7aa", "section": "src/runtime/src/libraries/System.Collections.Immutable/src/System/Collections/Immutable/ImmutableArray_1.cs"},
+  "decision": "After existing null checks, snapshot compile diagnostics once; any finding returns false before typed focus, lookup, assertion/alternative compilation or evaluation. Preserve code/message/path/order without translating to a new finding.",
+  "intentionalRestrictions": ["Every compile finding blocks because SchemaDiagnostic has no severity model", "Clean compiled models retain assertion/facet/static-check semantics; success does not certify arbitrary structural validity", "No new native outcome or W3C diagnostic code", "Legacy detailed diagnostic text is copied, not redacted or bounded like native stage diagnostics", "Caller-created result records and arbitrary custom ICompiledSchema implementations remain application data", "No broader lexical exception normalization or complete xsi:type/type-derivation validation"],
+  "versionPolicy": "Bug fix within unreleased 0.5 feature line; no tag, Version override or publication.",
+  "coreVersion": "1.81.2",
+  "historicalSpecificationAdoptionChanged": false,
+  "recordedBeforeImplementation": true
+}
