@@ -85,3 +85,6 @@ Compiler-produced [descriptor snapshots](docs/DESCRIPTOR_SNAPSHOTS.md) now own i
 
 
 The next beta targets the bounded decimal-session profile with explicit exclusions. See [beta qualification and workload reproduction](docs/BETA_QUALIFICATION.md) for the supported boundary and diagnostic tool. Beta contract acceptance and publication remain pending.
+
+
+The [bounded beta contract review](docs/BETA_CONTRACT_REVIEW.md) records the owner-accepted bounded public API/ADR decisions and compatibility evidence. ADR009/010 were accepted for this bounded scope on17 November2026. A clean-source alpha compatibility package passes package-only and retained-binary checks; no beta tag/artifact or publication is implied.

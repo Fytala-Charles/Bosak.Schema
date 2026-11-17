@@ -264,3 +264,8 @@ All three legacy validation entry points validate null arguments, snapshot compi
 ## Workload qualification
 
 Read docs/BETA_QUALIFICATION.md before measuring workloads. Build tools/Bosak.Schema.Workloads separately; run six Python controls with `python -m unittest discover -s tools -p test_schema_workloads.py`. Use tools/run-schema-workloads.py with a new ignored .workload-results output directory. No unhandled negative diagnostic launches or machine-wide WER changes. Proposed local timing/memory envelopes are not acceptance or SLAs. Product345/release45/runner6 scopes remain distinct.
+
+
+## Beta contract review boundary
+
+Use docs/BETA_CONTRACT_REVIEW.md for the current concrete ADR009/010 proposal. The owner accepted ADR009/010 for the bounded Schema beta scope on17 November2026; broader acceptance is not inferred. Local alpha compatibility packages are not beta artifacts. General Core C45/ADR006, production SLAs, exact beta tag/controller/artifact and publication remain separate; do not infer their acceptance from package/binary passes.

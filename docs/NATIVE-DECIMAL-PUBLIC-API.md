@@ -1,6 +1,6 @@
-# Owned native decimal public API candidate
+# Owned native decimal public API
 
-Date: 17 November 2026. Scope: source implementation candidate under REQ-009 and [ADR-010](ADR-010-owned-native-decimal-facade.md), not API freeze or published Schema package. [Pre-implementation basis](native-decimal-public/2026-11-17/BASIS.json) retains the historical specification hashes, sections and intentional restrictions unchanged. The finite backend and assertion evaluator are unchanged from df40a17; public ownership and host-policy behavior is implemented here.
+Date: 17 November 2026. Scope: the owned API shipped in0.5.0-alpha.0.7; current bounded beta contract acceptance under REQ-009 and [ADR-010](ADR-010-owned-native-decimal-facade.md) was accepted for the bounded Schema beta scope on17 November2026. [Pre-implementation basis](native-decimal-public/2026-11-17/BASIS.json) retains the historical specification hashes, sections and intentional restrictions unchanged. The finite backend and assertion evaluator are unchanged from df40a17; public ownership and host-policy behavior is implemented here.
 
 ## Public contract
 
@@ -33,6 +33,6 @@ Six deterministic implementation controls cover held-work versus document/sessio
 
 ## Qualification and release boundary
 
-The [receipt and P01-P12 map](native-decimal-public/2026-11-17/README.md) distinguish executed source, package and lifecycle lanes. Both consumer lanes use published Core 1.81.2 references without source overrides or an InternalsVisibleTo grant. The source implementation exposes the candidate symbols; permanent public dependency acceptance and hosted review remain pending. The project development minimum advances to 0.5 for this additive feature; no tag or registry action is performed.
+The [receipt and P01-P12 map](native-decimal-public/2026-11-17/README.md) distinguish executed source, package and lifecycle lanes. Both consumer lanes use published Core 1.81.2 references without source overrides or an InternalsVisibleTo grant. The merged source and clean-source compatibility package now pass345source/33package-only cases and retained124/23 binary catalogs; [current contract review](BETA_CONTRACT_REVIEW.md) records the owner-accepted scoped Schema dependency/ADR contract. The0.5 development minimum and Core1.81.2 remain unchanged. A compatibility alpha package is not a beta release.
 
-Full XSD 1.1, arbitrary queries, streams/readers, positive cross-universe handoff, complete relations, overall provider sign-off, performance budgets and Braid product integration remain outside this candidate. Existing schema services retain their previous behavior. Historical adoption/proposal receipts are not rewritten.
+Full XSD 1.1, arbitrary queries, streams/readers, positive cross-universe handoff, complete relations, overall provider sign-off, performance budgets and Braid product integration remain outside this candidate. Existing services retain their documented distinct scopes; the later [compile-diagnostic guard](LEGACY_VALIDATION.md) intentionally prevents legacy success on bad compiled models. Historical adoption/proposal receipts are not rewritten.
