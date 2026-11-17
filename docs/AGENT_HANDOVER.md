@@ -1,3 +1,17 @@
+# Schema trusted-publishing route prepared locally - 17 November 2026
+
+Last updated: 2026-11-17
+
+Owner selected NuGet trusted publishing after metadata inspection found Schema has no secrets/variables/environment or publisher workflow configured. Isolated .worktrees/Schema.TrustedPublishing / ci/schema-trusted-publishing based on merged1783d1a. A [trusted-publishing route](TRUSTED_PUBLISHING.md) is prepared locally following the owner's selection. The new release workflow is manual and preparation-only by default; its publisher verifies a successful same-repository/main/first-attempt preparation, the exact reviewed manifest/package and registry absence before OIDC login and again before one push. Product source/version/Core dependencies are unchanged. No workflow dispatch, policy/account update, login or publication has occurred. A hosted preparation will create its own artifact/digest for review; the earlier local package remains preserved.
+
+Release workflow/controller/tests are uncommitted; explicit commit/push instruction is still required by AGENTS. Product src/tests/global.json and package dependencies unchanged. Build0warnings/errors and272product cases pass;19Python+22Node=41separatecontrol cases pass. Release/build YAML parses;11PowerShell bodies parse without execution. A local rehearsal against the actual preserved89,520-byte0.5alpha0.7package verifies source, package/9Core signatures/payloads,272+23case receipts,124legacy cases per lane,seal/verify andregistryGET. It uses all-zero controller placeholder, has no hosted run, and is explicitly ineligible for publication. PyYAML6.0.3 installed only under ignored Core packet for local syntax validation; no product dependency.
+
+Current source/version allowlist is1783d1a99b37e206b10592c24b3a5fa3ac126969/0.5.0-alpha.0.7, legacybaselinec953ebe, SDK10.0.301, Core1.81.2. Manual publish consumes a first-attempt successful release preparation run and exactmanifesthash; no rebuild, duplicate suppression, broad package glob or long-lived APIkey. VariableNUGET_USER (NuGet profile name) and NuGet policy must be configured by owner/explicit authorized action. Policy fields:ownerFytala-Charles/repoBosak.Schema/workflowrelease.yml/environmentblank, packageBosak.Schema, pushnew+versions scope. See docs/TRUSTED_PUBLISHING.md. No trust-policy/account or GitHub setting changes made; no credential requested/read.
+
+Next: review concrete workflow/source-only evidence payload and request explicit commit/push/PR approval. After merge+checks, dispatch preparation only, download and independently review new hosted artifact/manifest, then ask explicit publication approval for that exact run/hash before login/push. Earlier localpackageSHA d9f3ed5897ce30c6069e72a8e651e3648d132251a3c6ef232d8aa946dd3428d6 remains sealed; hosted rebuild has a distinct provenance/digest and cannot be silently substituted. No tag/release/publication/profilefreeze acceptance. Rawlogs/rehearsal/parser/controllers .guard-tmp/schema-trusted-publishing-20261117; source-only dossier docs/trusted-publishing. Originalownercheckouts andsealedpackets preserved.
+
+---
+
 # Schema0.5 package-delivery review - 17 November 2026
 
 Last updated: 2026-11-17

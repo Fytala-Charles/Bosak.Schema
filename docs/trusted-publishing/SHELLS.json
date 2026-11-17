@@ -1,0 +1,68 @@
+[
+  {
+    "workflow": "build.yml",
+    "job": "build-test-hygiene",
+    "step": "Release refusal controls (no login or push)",
+    "file": "build.yml-build-test-hygiene-3.ps1"
+  },
+  {
+    "workflow": "build.yml",
+    "job": "build-test-hygiene",
+    "step": "Build",
+    "file": "build.yml-build-test-hygiene-4.ps1"
+  },
+  {
+    "workflow": "build.yml",
+    "job": "build-test-hygiene",
+    "step": "Test",
+    "file": "build.yml-build-test-hygiene-5.ps1"
+  },
+  {
+    "workflow": "build.yml",
+    "job": "build-test-hygiene",
+    "step": "Documentation hygiene",
+    "file": "build.yml-build-test-hygiene-6.ps1"
+  },
+  {
+    "workflow": "release.yml",
+    "job": "prepare",
+    "step": "Verify release refusal controls",
+    "file": "release.yml-prepare-3.ps1"
+  },
+  {
+    "workflow": "release.yml",
+    "job": "prepare",
+    "step": "Build and test exact accepted source",
+    "file": "release.yml-prepare-6.ps1"
+  },
+  {
+    "workflow": "release.yml",
+    "job": "prepare",
+    "step": "Qualify package-only public consumer and exact dependency payloads",
+    "file": "release.yml-prepare-7.ps1"
+  },
+  {
+    "workflow": "release.yml",
+    "job": "prepare",
+    "step": "Qualify retained legacy test binaries",
+    "file": "release.yml-prepare-8.ps1"
+  },
+  {
+    "workflow": "release.yml",
+    "job": "prepare",
+    "step": "Seal qualified immutable package manifest",
+    "file": "release.yml-prepare-9.ps1"
+  },
+  {
+    "workflow": "release.yml",
+    "job": "publish",
+    "step": "Verify reviewed bytes and registry absence before authentication",
+    "file": "release.yml-publish-6.ps1"
+  },
+  {
+    "workflow": "release.yml",
+    "job": "publish",
+    "step": "Push one verified package without rebuilding",
+    "file": "release.yml-publish-8.ps1"
+  }
+]

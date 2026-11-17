@@ -239,3 +239,8 @@ Schema services require no activation. Legacy License/ActivatedLicense types are
 ## Current dependency and documentation checkpoint
 
 Product and test Core references select published 1.81.2 after Schema PR #1. The public-entry candidate advances Schema's MinVer development minimum to 0.5; no new Schema package release is implied. Standalone124-case regression coverage and the separate Core 135-case optional integration have distinct scopes. Use `docs/AGENT_HANDOVER.md` for current state and `docs/DEVELOPMENT_HISTORY.md` for archived local review notices; older inputs keep their original source hashes and do not replace current package pins. Full XSD 1.1 structural/native session/lease coverage and performance acceptance remain separate tasks.
+
+
+## Release automation controls
+
+Workflow-only release controls are separate from the 272 product/source test cases. Run `python -m unittest discover -s .github/scripts -p test_schema_release.py` and `node --test .github/scripts/test-schema-source-run.cjs`. They use synthetic artifacts and mocked GitHub/network responses; they do not log in or push. `.github/workflows/release.yml` admits only manually selected main preparation/publication for the recorded first prerelease, with OIDC permission confined to the publish job. Neither passing controls nor a prepared artifact authorizes registry publication. Keep the product source/Core pins and earlier immutable receipts unchanged.
