@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-17",
+  "sourceBase": "22aa9ad84959f95d92dc82626117955edd1fdb0b",
+  "kind": "Measurement and acceptance-checklist qualification; no product semantics or beta acceptance",
+  "productApiBaseline": "40 exported types / 317 declared contract rows",
+  "coreVersion": "1.81.2",
+  "platformReviewRevision": "b0f34d51fccc69fd334253924abd8d6853fad7aa",
+  "platformReviewRepository": "https://github.com/dotnet/dotnet",
+  "measurementSections": ["GC.GetAllocatedBytesForCurrentThread: managed allocation on measured calling thread", "Process.PeakWorkingSet64: lifetime process working-set peak, not managed heap peak or per-operation delta", "Stopwatch: elapsed workload time, separate parent process wall time"],
+  "plannedWorkloads": ["native-small", "native-max-bytes", "legacy-facets", "restricted-xslt", "refusal-recovery"],
+  "protocol": {"coldProcessesPerWorkload": 3, "coldIterations": 1, "warmProcessesPerWorkload": 1, "warmupIterations": 5, "measuredWarmIterations": 30, "perProcessWatchdogSeconds": 30},
+  "proposedObservationThresholds": {"coldWorkloadMaxMs": 5000, "warmWorkloadP95Ms": 250, "coldCallingThreadAllocationMaxBytes": 67108864, "warmCallingThreadAllocationMaxBytes": 16777216, "processPeakWorkingSetMaxBytes": 536870912},
+  "limits": ["Proposed local smoke envelopes, not owner-accepted release or production SLA", "Fresh process is not flushed filesystem cache", "Fixtures prepared before measured action; parent wall time includes setup/startup", "Calling-thread allocation excludes native/other-thread memory", "Working-set peak includes runtime, JIT, setup and warmups", "Pre-cancelled calls and quota/disposal recovery only; no new mid-work cancellation latency claim", "One Windows machine, no broad platform/performance acceptance"],
+  "recordedBeforeImplementation": true,
+  "historicalSpecificationAdoptionChanged": false
+}

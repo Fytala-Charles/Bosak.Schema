@@ -34,3 +34,8 @@ After PR8 merge/main validation, froze compiler-produced outer/nested collection
 ## 17 November 2026 — legacy compile-diagnostic precondition candidate
 
 After PR9 merge/main validation, added a common compile-finding guard to all three legacy validation entry points. Arguments retain precedence; original findings are copied unchanged before any other work. Clean result meaning remains assertion/facet/static-check scope, not structural validation.26 added cases bring suite to345, plus45 release controls; public40types/317rows unchanged. No native/Core/version change, beta/ADR acceptance or publication.
+
+
+## 17 November 2026 — bounded beta workload qualification candidate
+
+Owner selected bounded decimal-session beta with exclusions after PR10 merge/main verification. Added a separate non-packable public consumer workload tool, six mocked integrity controls and CI build/checks. Five named workflows ran in20 processes with explicit pre-recorded local envelopes; all final mixed-numeric observations pass. Product345 and release45 controls remain green; source/dependencies unchanged. Scope selection does not accept ADR/API contracts, production budgets or beta publication. Current alpha-only release pins require separate beta review.
