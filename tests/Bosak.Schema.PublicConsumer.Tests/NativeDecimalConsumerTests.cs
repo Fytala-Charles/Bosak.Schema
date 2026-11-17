@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 17-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 17-11-2026     | Qualify restricted schema resolution from the external public consumer                   |
+//                      | Charles Korthout | 0.3   | 17-11-2026     | Qualify compiler-owned snapshots without changing caller-created record compatibility      |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -270,6 +271,51 @@ public sealed class NativeDecimalConsumerTests
             action(root, file);
         }
         finally { File.Delete(file); Directory.Delete(root, false); }
+    }
+
+    /// <summary>Checks compiler-produced outer collections refuse mutable-interface changes publicly.</summary>
+    [Fact]
+    public void DescriptorSnapshot_OuterCollections_RefuseMutation()
+    {
+        var model = Descriptor();
+        var count = model.ElementDeclarations.Count;
+        Assert.NotEqual(0, count);
+        Assert.Throws<NotSupportedException>(() => ((IList<ElementDeclaration>)model.ElementDeclarations).Clear());
+        Assert.Throws<NotSupportedException>(() => ((IList<SchemaDiagnostic>)model.Diagnostics).Clear());
+        Assert.Equal(count, model.ElementDeclarations.Count);
+    }
+
+    /// <summary>Checks nested bindings and facet lists cannot alter a compiler-produced model publicly.</summary>
+    [Fact]
+    public void DescriptorSnapshot_NestedBindingsAndFacets_RefuseMutation()
+    {
+        var model = Descriptor();
+        var simple = Assert.Single(model.SimpleTypes);
+        var assertion = Assert.Single(simple.Assertions);
+        Assert.Throws<NotSupportedException>(() => ((IList<AssertionDefinition>)simple.Assertions).Clear());
+        Assert.Throws<NotSupportedException>(() => ((IDictionary<string, string>)assertion.NamespaceBindings!)["p"] = "urn:changed");
+        Assert.Equal("urn:original", assertion.NamespaceBindings!["p"]);
+        Assert.Same(Assert.Single(model.Assertions), assertion);
+        Assert.True(SchemaServices.CreateValidationService().ValidateValue(model, XName.Get("Positive"), "2").IsValid);
+    }
+
+    /// <summary>Checks caller-created record replacements remain compatible and independent of the original.</summary>
+    [Fact]
+    public void DescriptorSnapshot_RecordCopy_CannotMutateOriginal()
+    {
+        var model = Assert.IsType<CompiledSchema>(Descriptor());
+        var callerList = model.ElementDeclarations.ToList();
+        var copy = model with { ElementDeclarations = callerList };
+        callerList.Clear();
+        Assert.Empty(copy.ElementDeclarations);
+        Assert.NotEmpty(model.ElementDeclarations);
+    }
+
+    private static ICompiledSchema Descriptor()
+    {
+        const string schema = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:original'><xs:simpleType name='Positive'><xs:restriction base='xs:decimal'><xs:assertion test='$value gt 0'/></xs:restriction></xs:simpleType><xs:element name='amount' type='xs:decimal'/></xs:schema>";
+        using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(schema));
+        return SchemaServices.CreateSchemaCompiler().Compile(stream, new Uri("file:///descriptor.xsd"), SchemaCompileOptions.Default(XsdLanguageVersion.Xsd11));
     }
 
     private static NativeDecimalSession Create() => NativeDecimalSession.Create(Schema, Options).Value!;

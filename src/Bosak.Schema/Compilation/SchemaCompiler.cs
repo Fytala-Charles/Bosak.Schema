@@ -25,10 +25,12 @@
 //                      | Charles Korthout | 0.9   | 27-10-2026     | Records owning type/element on xs:assert for S4b applicability filtering                 |
 //                      | Charles Korthout | 0.10  | 29-10-2026     | Publish schema-only Apache-2.0 source; remove activation dependency                       |
 //                      | Charles Korthout | 0.11  | 30-10-2026     | Records wildcard notNamespace / notQName with §3.10 representation checks (REQ-009 S5c)|
+//                      | Charles Korthout | 0.12  | 17-11-2026     | Publish owned immutable descriptor collections and nested component snapshots              |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
 using System.Security.Cryptography;
+using System.Collections.Immutable;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -99,23 +101,46 @@ public sealed class SchemaCompiler : IXsdSchemaCompiler
             VisitDocument(root, baseUri, options, state, depth: 0);
         }
 
+        var frozenAssertions = new Dictionary<AssertionDefinition, AssertionDefinition>(ReferenceEqualityComparer.Instance);
+        foreach (var assertion in state.Assertions)
+        {
+            frozenAssertions.Add(assertion, assertion with { NamespaceBindings = FreezeBindings(assertion.NamespaceBindings) });
+        }
+
         return new CompiledSchema(
             SchemaId: "xsd-" + digest[..16],
             Sha256Digest: digest,
             LanguageVersion: options.Version,
             TargetNamespace: root?.Attribute("targetNamespace")?.Value,
-            Assertions: state.Assertions,
-            Alternatives: state.Alternatives,
-            ElementDeclarations: state.ElementDeclarations,
+            Assertions: state.Assertions.Select(assertion => frozenAssertions[assertion]).ToImmutableArray(),
+            Alternatives: state.Alternatives.Select(alternative => alternative with
+            {
+                NamespaceBindings = FreezeBindings(alternative.NamespaceBindings),
+            }).ToImmutableArray(),
+            ElementDeclarations: state.ElementDeclarations.ToImmutableArray(),
             SimpleTypes: state.SimpleTypes
-                .Select(c => new SimpleTypeDeclaration(c.TypeNamespace, c.TypeLocalName, c.BaseTypeNamespace, c.BaseTypeLocalName, c.Assertions, c.Path))
-                .ToList(),
-            OpenContents: state.OpenContents,
-            DefaultOpenContents: state.DefaultOpenContents,
-            DefaultAttributeReferences: state.DefaultAttributeReferences,
-            DefaultAttributeOptOuts: state.DefaultAttributeOptOuts,
-            Diagnostics: state.Diagnostics);
+                .Select(c => new SimpleTypeDeclaration(c.TypeNamespace, c.TypeLocalName, c.BaseTypeNamespace, c.BaseTypeLocalName,
+                    c.Assertions.Select(assertion => frozenAssertions[assertion]).ToImmutableArray(), c.Path))
+                .ToImmutableArray(),
+            OpenContents: state.OpenContents.Select(FreezeOpenContent).ToImmutableArray(),
+            DefaultOpenContents: state.DefaultOpenContents.Select(FreezeOpenContent).ToImmutableArray(),
+            DefaultAttributeReferences: state.DefaultAttributeReferences.ToImmutableArray(),
+            DefaultAttributeOptOuts: state.DefaultAttributeOptOuts.ToImmutableArray(),
+            Diagnostics: state.Diagnostics.ToImmutableArray());
     }
+
+    private static IReadOnlyDictionary<string, string>? FreezeBindings(IReadOnlyDictionary<string, string>? bindings) =>
+        bindings?.ToImmutableDictionary(pair => pair.Key, pair => pair.Value, StringComparer.Ordinal);
+
+    private static OpenContentDefinition FreezeOpenContent(OpenContentDefinition definition) => definition with
+    {
+        Wildcard = definition.Wildcard is { } wildcard ? wildcard with
+        {
+            NamespaceConstraint = wildcard.NamespaceConstraint.ToImmutableArray(),
+            NotNamespace = wildcard.NotNamespace.ToImmutableArray(),
+            NotQName = wildcard.NotQName.ToImmutableArray(),
+        } : null,
+    };
 
     private static string ComputeDigest(XDocument document)
     {

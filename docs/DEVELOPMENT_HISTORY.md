@@ -24,3 +24,8 @@ The public schema-only repository and activation-free shims were published under
 ## 17 November 2026 — local beta readiness and restricted resolution
 
 Assessed the published alpha, classified39 public types/313 contract rows and reproduced five caught published-package observations. Proposed beta/API decisions remain unaccepted. Implemented additive RestrictedSchemaFileResolver and CreateRestrictedCompiler using published Core1.81.2 controlled schema acquisition, including nested references. The old convenience paths retain their compatibility behavior. New31 implementation and three public consumer controls bring the suite to306 cases;45 release controls pass separately. Candidate API40types/317rows is strictly additive. Documented stable-filesystem/no-atomic-sandbox boundary, full XML/DTD/byte policy, URI alias checks and Core's unused-include warning behavior. Source-only receipts and immutable pre-change basis are in docs/restricted-resolution; no tag, release or commit/push is made by this local checkpoint.
+
+
+## 17 November 2026 — compiler-owned descriptor snapshot candidate
+
+After PR8 merge/main validation, froze compiler-produced outer/nested collections without changing positional record constructors. Preserved shared assertion identity and ordinal bindings;13 added cases bring suite to319, plus45 release controls. Public40types/317rows unchanged; runtime mutable implementation casts deliberately stop working. Caller records remain application-owned. No tag, beta/profile acceptance or publication; canonical contract and source-only receipts recorded.

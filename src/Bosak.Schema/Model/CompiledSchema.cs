@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.4   | 27-10-2026     | Added SimpleTypes (xs:assertion facet evaluation for REQ-009 S3)                         |
 
 //                      | Charles Korthout | 0.5   | 29-10-2026     | Publish schema-only Apache-2.0 source; remove activation dependency                       |
+//                      | Charles Korthout | 0.6   | 17-11-2026     | Clarify compiler-owned snapshots versus caller-supplied record collections                |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -72,8 +73,12 @@ public interface ICompiledSchema
 }
 
 /// <summary>
-/// Immutable default implementation of <see cref="ICompiledSchema"/> (REQ-009 S1).
+/// Default descriptor record used for compiler-owned immutable snapshots (REQ-009 S1).
 /// </summary>
+/// <remarks><see cref="SchemaCompiler"/> returns owned immutable collections, including nested bindings,
+/// facets and wildcards. The public positional constructor and init properties retain caller-supplied
+/// collections without defensive copying. A caller-created record or replacement via a with expression
+/// is application data, not a compiler-issued immutable snapshot or native schema authority.</remarks>
 /// <param name="SchemaId">Deterministic schema identifier, derived from <paramref name="Sha256Digest"/>.</param>
 /// <param name="Sha256Digest">SHA-256 digest of the canonical schema document content.</param>
 /// <param name="LanguageVersion">The language version the schema was compiled against.</param>
