@@ -1,3 +1,17 @@
+# Schema0.5 package-delivery review - 17 November 2026
+
+Last updated: 2026-11-17
+
+Isolated .worktrees/Schema.Release05Review / release/schema-0.5-review at clean merged9fd4e6a; original Schema checkout remains untouched. The public owned decimal API is merged in [Schema PR #3](https://github.com/Fytala-Charles/Bosak.Schema/pull/3) at9fd4e6a; its272-case standalone main check passed. Core's optional source consumer is refreshed in [Core PR #503](https://github.com/Fytala-Charles/Bosak/pull/503), mergef7b6c995, with269 current-Core cases and all six main checks passing. Standalone/package dependencies remain Core1.81.2; current-Core1.81.17 source-consumer evidence is a separate lane. The [0.5 package-delivery review](package-0.5-review/README.md) prepares a local prerelease and a package README correction. No Schema package, tag or registry action has been published; global profile/ADR/API-freeze/performance acceptance remains open.
+
+Clean-source MinVer produced0.5.0-alpha.0.6 without tag/Version override. Original unsigned89782-byte nupkgSHAf41d1909d25ae80969697a3ddba5d083ffd22cfaa973a8ffccf628c3957d0bdb preserved. Staging89515-byteSHA d10b32adc1a00da5a2ba9b35fc9941aab17bf798ba01ab58320a582f5050a1c8 changes only package README/metadata; runtimeDLL/XML/legal identical. Directory.Build.props now selects docs/NUGET_README.md, using only absolute HTTPS and an allowed-domain remote logo. This packaging patch is uncommitted; metadata source9fd4e6a identifies assembly source, not an immutable packaging commit. Do not publish either same-version local archive without resolving the review/commit/preparation gates.
+
+API review32->39exportedtypes/278->313declaredrows, seven new types/35rows, no removed/changed legacy row. Full272source tests and23 package-only cases pass. Old124-case test/host/config binaries pass baseline and with onlySchemaDLL replaced; identical identities/non-Schemabytes/config, not248distinctcases. Core package references stay1.81.2, fresh archive/cache/runtimeDLL verified. Build0warnings/errors. Read-onlyNuGetindex/candidate/stable endpoints404 on17November; no package-ID rights/availability guarantee. ADR009/010 remainProposed; stable0.5.0 not prepared, no globalXSD/compatibility/API-freeze/performance acceptance. Existing source+package counts overlap and must not be added.
+
+Rawcandidate archives/caches/binaries/logs/scanner .guard-tmp/schema-05-package-review-20261117; source-only review dossier docs/package-0.5-review. Offline verification and documentation checks must pass before closing. Next: explicit commit/push approval for package-only README correction and synchronized review docs, hosted source qualification, then a new normal MinVer preparation from immutable accepted source. Registry publication is a separate future decision; no API key, tag, publisher workflow, NuGet push, Git commit or push was executed. AGENTS Git rule still requires explicit commit/push instruction. Historical source/proposal receipts preserved.
+
+---
+
 # Public native decimal entry candidate - 17 November 2026
 
 Last updated: 2026-11-17

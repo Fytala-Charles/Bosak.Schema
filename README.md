@@ -19,9 +19,9 @@ The implementation targets .NET 10 and references published Bosak 1.81.2 package
 
 The initial public source is derived from Fytala's private schema source at `fa0da3e2d9972706a5a86616ef285af4daf5037b`, with the owner-approved Apache transition on 29 October 2026. Billing, key-generation, deployment material and private Git history remain outside this repository. See [provenance](docs/APACHE-TRANSITION.md).
 
-The dependency upgrade is merged in [Schema PR #1](https://github.com/Fytala-Charles/Bosak.Schema/pull/1). The adoption baseline retained **124 standalone cases**; the separate historical [Core optional integration](https://github.com/Fytala-Charles/Bosak/blob/main/docs/schema-integration-1812/README.md) exercised **135 cases**, including those public Schema tests and bounded price/ownership controls. The public-entry candidate advances MinVer to the **0.5 development line**; no new Schema NuGet release is announced. See [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and the [roadmap](ROADMAP.md).
+The dependency upgrade is merged in [Schema PR #1](https://github.com/Fytala-Charles/Bosak.Schema/pull/1). The adoption baseline retained **124 standalone cases**; the separate historical [Core optional integration](https://github.com/Fytala-Charles/Bosak/blob/main/docs/schema-integration-1812/README.md) exercised **135 cases**, including those public Schema tests and bounded price/ownership controls. The public entry point uses the **0.5 development line**; no new Schema NuGet release is announced. See [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and the [roadmap](ROADMAP.md).
 
-The candidate [owned decimal session API](docs/NATIVE-DECIMAL-PUBLIC-API.md) supports native assessment of a finite decimal-only schema profile, exact scalar reads and detached XML export. Callers supply explicit limits and assessment context. Complete XSD 1.1 and broader provider integration remain outside this profile; public API review and package publication are pending.
+The [owned decimal session API](docs/NATIVE-DECIMAL-PUBLIC-API.md) supports native assessment of a finite decimal-only schema profile, exact scalar reads and detached XML export. Callers supply explicit limits and assessment context. It is merged and consumer-qualified; complete XSD 1.1, broader provider acceptance and package publication remain separate. See [package-delivery status](docs/package-0.5-review/README.md).
 
 ## 2. Quick Start
 
@@ -58,6 +58,8 @@ The public solution needs the .NET 10 SDK; it has no Azure, payment-service, key
 | `tests/TestData/Schemas` | Locally authored schema fixtures |
 | `docs` | Architecture, integration, roadmap and transition decisions |
 | `tools` | Build and documentation checks |
+
+NuGet packaging uses the separate [package README](docs/NUGET_README.md) with absolute HTTPS links; this repository overview retains its normal local documentation links.
 
 ## 5. Compatibility and License
 

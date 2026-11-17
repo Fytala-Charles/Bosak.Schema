@@ -13,6 +13,8 @@
 
 ## 1. Dependency and Availability
 
+The public owned decimal API is merged in [Schema PR #3](https://github.com/Fytala-Charles/Bosak.Schema/pull/3) at9fd4e6a; its272-case standalone main check passed. Core's optional source consumer is refreshed in [Core PR #503](https://github.com/Fytala-Charles/Bosak/pull/503), mergef7b6c995, with269 current-Core cases and all six main checks passing. Standalone/package dependencies remain Core1.81.2; current-Core1.81.17 source-consumer evidence is a separate lane. The [0.5 package-delivery review](package-0.5-review/README.md) prepares a local prerelease and a package README correction. No Schema package, tag or registry action has been published; global profile/ADR/API-freeze/performance acceptance remains open.
+
 Build this source with .NET 10. The project references Bosak XPath API/providers, XSLT and XQuery 1.81.2 after the merged dependency adoption. The public-entry candidate targets the 0.5 development line through MinVer; no new NuGet release or tag is claimed.
 
 ## 2. Compile and Validate
@@ -80,6 +82,7 @@ The public source contains no internal HMAC/product key, signing implementation,
 
 | Date | Change |
 |---|---|
+| 2026-11-17 | Local0.5 prerelease package review:272 source cases,23 repeated package cases and124 retained legacy binary cases pass; seven additive public types; package-only README correction; no publication |
 | 2026-11-17 | Public owned decimal entry candidate, explicit options/context, fixed diagnostics, deterministic lifecycle controls and separate consumer; 272 solution cases; Core remains 1.81.2, development minimum 0.5, no publication |
 | 2026-11-15 | Adapter committed as 939ba9a; internal owned-facade prototype and public proposal delivered; default component lookup names now throw ArgumentException; 243 tests, audited Release build and official docs check pass |
 | 2026-11-15 | Backend committed as aba6967; internal native authority/advisor/input/lifetime adapter and sequential runner delivered with 20 cases; 227 standalone tests pass; public API/package pins unchanged |
