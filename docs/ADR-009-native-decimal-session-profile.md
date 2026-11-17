@@ -1,48 +1,28 @@
-# ADR-009: First native decimal session profile
+# ADR-009: Bounded native decimal session beta profile
 
-**Status:** Proposed
+**Status:** Accepted — bounded Schema beta contract, 17 November 2026
 **Date:** 2026-11-15
-**Deciders:** Repository owner; acceptance pending review of implementation evidence
+**Review date:** 2026-11-17
+**Deciders:** Repository owner; bounded decision explicitly accepted 17 November 2026
 
 ## Context
 
-[REQ-009](FEATURE_REQUESTS.md) and the pending native session integration need an executable scope after Core 1.81.2 adoption. Current descriptor/assertion services and 124 standalone regression cases establish no complete native structural authority. Historical native decimal/source-feasibility receipts retain their original identities and cannot qualify this released dependency candidate. ADR-008 is referenced by archived native work and its number is reserved; this record does not supersede it or ADR-006.
+The owner selected a bounded decimal-session beta with explicit exclusions. The public owned workflow shipped in0.5.0-alpha.0.7; PR8/9/10 added restricted IO, immutable compiler snapshots and legacy compile-diagnostic preconditions; PR11 records local workload evidence. Those deliveries did not themselves accept this ADR; the owner explicitly accepted the bounded decision on17 November2026. The [original proposal](beta-contract/ORIGINAL-ADR-009.txt) and [source identity](beta-contract/ORIGINAL-ADRS.json) preserve the historical context; original specification/adoption dossiers are unchanged.
 
-## Decision
+## Accepted bounded decision
 
-We propose implementing [schema-native-decimal-session-v1](NATIVE-SESSION-PROFILE.md) as an opt-in native finite decimal assessor with authority-owned facts and a single scalar session identity route on published Core 1.81.2. Explicit Unsupported results bound unimplemented schema, relation and compatibility operations. Provider resources remain host-owned and retained through operation completion. No core product dependency on Schema is introduced.
+Accept the [finite grammar](NATIVE-DECIMAL-GRAMMAR.md) as the first Schema beta's native support boundary: an owned synchronous string-input workflow, one unqualified root, ordered bounded decimal leaves and the recorded finite assertion grammar. Complete Valid admits an owned document only after the supported grammar succeeds. Invalid/Unsupported publish no document. Argument, cancellation, quota, closure and overlap exceptions remain separate. No source bytes or exported scalar/XML confer transferable schema authority.
 
-This selects a work scope. API freeze, full XSD 1.1 acceptance, performance budgets and publication require separate evidence and decisions.
+Require explicit numerical/session capacities and explicit assessment context; consume released Core1.81.2 for the qualified scalar path. No Core dependency on Schema is added. Public raw provider/session contracts and their general C45 acceptance are not accepted or frozen by this Schema decision. [The bounded contract review](BETA_CONTRACT_REVIEW.md) records this accepted scoped consumption disposition and leaves wider Core decisions pending for their own owner review.
 
-Internal implementation checkpoint, 15 November: the backend is committed at `aba6967`; the [Core adapter](NATIVE-SESSION-ADAPTER.md) now supplies authentic issuance, guarded captured nodes and a real scalar integration test. One original assessment per capture is retained; reassessment refuses. One shared host runner serializes work through actual task completion because Core lease counts do not distinguish overlapping runs. This bounded implementation is not owner/API/global acceptance; this ADR remains Proposed.
+Exclude native target namespaces, application attributes, broader datatypes, nil/list/union profiles, arbitrary XPath, stream/reader/async native APIs, full component relations and positive cross-universe transfer. Legacy descriptor/assertion and Core XSD1.0/XSLT helpers remain separate services; metadata recording and assertion-only success are not full XSD1.1 structural assessment. Neither all P01–P12 scenarios nor skipped engine tests are accepted globally.
 
-## Consequences
+## Evidence and costs
 
-### Positive
+[Compatibility qualification](beta-contract/README.md) records345 source cases,33 repeated package-only cases, retained124 legacy/23 public binary catalogs and nine signed Core packages. API is40types/317rows, four additions/no removals versus the published alpha. Intentional runtime behavior changes are documented. Counts overlap and do not prove arbitrary consumer/semantic coverage.
 
-- One finite grammar and twelve paired acceptance groups make provider delivery reviewable.
-- Released contracts can be qualified without treating old source overrides or equal schema text as authority.
-- Original PSVI, exact scalar transport and resource ownership receive independent acceptance controls.
+[Local measurements](BETA_QUALIFICATION.md) qualify named Windows workflows only. Representation/admission limits are not total memory/time budgets. No production SLA, long-duration leak, adversarial scheduler or cross-platform performance acceptance follows. Wider schema profiles require new immutable semantic adoption evidence and paired tests before implementation.
 
-### Negative / Accepted Costs
+## Approval boundary
 
-- The native backend and Core adapter are implemented internally, with 76 backend and 20 adapter cases. Public entry point review and overall profile acceptance remain required; existing public assertion evaluation stays separate from native authority.
-- Cross-universe positive compatibility, wider datatypes, general engine execution and full structural coverage remain pending.
-- The [released-package probe](native-session-probe/2026-11-15/README.md) establishes `$value` with default compile options on a test-issued decimal. A real native consumer remains pending; the [specification basis](NATIVE-DECIMAL-SPECIFICATION-ADOPTION.md) is recorded before backend implementation.
-
-## Alternatives Considered
-
-| Option | Why Rejected for this first profile |
-|---|---|
-| Promote existing descriptor/assertion validation to native authority | Does not establish complete structural assessment or authentic component ownership |
-| Import historical native work and claim its old tests qualify 1.81.2 | Source adoption, semantic evidence and fresh released-candidate qualification remain necessary |
-| Implement all XSD 1.1 and positive universe interchange in one step | Prevents isolation of the first provider/session boundary and its failure modes |
-
-## References
-
-- [Profile and acceptance plan](NATIVE-SESSION-PROFILE.md)
-- [Current architecture](ARCHITECTURE.md)
-- [Historical scoped O2 return](core-disposition-responses/2026-11-03-v2/BCAP-O2-Schema.v2.response.json)
-
-
-17 November2026 beta review: [API contract audit](beta-readiness/API-CONTRACT-AUDIT.md) and [decision draft](beta-readiness/CONTRACT-DECISIONS.md) propose current boundaries. Status remains Proposed; no acceptance is inferred from alpha publication.
+The owner explicitly accepted this bounded decision on17 November2026. Acceptance approves Schema's selected beta support contract and exclusions only. It does not waive general Core C45/ADR006 decisions, certify complete XSD1.1, create a beta tag, accept a future artifact or authorize publication. [Review decisions and remaining release steps](BETA_CONTRACT_REVIEW.md).

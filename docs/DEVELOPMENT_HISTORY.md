@@ -39,3 +39,11 @@ After PR9 merge/main validation, added a common compile-finding guard to all thr
 ## 17 November 2026 — bounded beta workload qualification candidate
 
 Owner selected bounded decimal-session beta with exclusions after PR10 merge/main verification. Added a separate non-packable public consumer workload tool, six mocked integrity controls and CI build/checks. Five named workflows ran in20 processes with explicit pre-recorded local envelopes; all final mixed-numeric observations pass. Product345 and release45 controls remain green; source/dependencies unchanged. Scope selection does not accept ADR/API contracts, production budgets or beta publication. Current alpha-only release pins require separate beta review.
+
+
+## 17 November 2026 — bounded beta contract review and compatibility
+
+After PR11 merge/main verification, prepared current Proposed ADR009/010 decisions with archived original Git text. Clean source produces normalMinVer alpha0.14 without tag/override;345source/33package consumer/124legacy and23public retained binary controls pass, with onlySchemaDLLreplaced in candidate lanes. NineCore1.81.2 signatures/payloads and exact40type317row API verify. Contract review distinguishes scoped Schema consumption from generalCoreC45/ADR006 acceptance; no beta tag/artifact/publication or inferred owner acceptance.
+
+
+17 November2026 owner decision: explicitly accepted bounded ADR009/010/API contracts and instructed commit/push/PR. Scoped Schema facade/publicCore1.81.2 use accepted; generalCoreC45/ADR006, productionSLAs and beta tag/artifact/publication remain outside approval.

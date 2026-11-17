@@ -1,0 +1,9 @@
+# Bounded beta API/ADR and compatibility evidence
+
+17 November 2026. Base6d4e1e2bae2ee7889791e9a9dd22a2034cf3ab05. [Review](../BETA_CONTRACT_REVIEW.md), [basis](BASIS.json), [original ADR identities](ORIGINAL-ADRS.json), [verification](VERIFICATION.json), [offline verifier](verify.py).
+
+Canonical ADR009/010 now describe a concrete current public beta proposal instead of an unimplemented internal prototype. The owner explicitly accepted both for the bounded Schema beta scope on17 November2026. Original text is copied from the exact Git source blob, with LF hash and commit identity. No old adoption/qualification dossier is modified. General Core C45/ADR006 acceptance is explicitly not inferred; scoped Schema consumption of public Core1.81.2 is accepted for this facade.
+
+Clean-source normal MinVer package0.5.0-alpha.0.14 is local compatibility evidence, not a beta artifact.345source,33 repeated package-only public, retained124 legacy and23 original public catalogs pass. Retained controls/replacements preserve every file except Schema DLL and agree in case identity. Nine Core1.81.2 packages pass signature/archive/cache/runtime checks. API40types/317rows matches current source, four additions/no removals versus published alpha. All45 release and six workload-runner controls pass separately. Counts overlap.
+
+Raw package/binaries/caches/layouts stay in ignored `.guard-tmp/schema-beta-contract-20261117`. The source-only archive retains final TRX, signature logs, package/API receipts and metadata, with no binary/package/credential. Final compatibility archive SHA and API/binary inventories are pinned here. No source/test/API/dependency change, tag, version override, beta artifact or publication is performed. Bounded ADR acceptance is recorded; Git delivery follows the owner's explicit instruction. Beta tagging/publication remain unauthorized.

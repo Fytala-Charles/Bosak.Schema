@@ -86,3 +86,6 @@ The owner selected a bounded decimal-session beta with explicit exclusions. The 
 
 
 `tools/Bosak.Schema.Workloads` is a non-packable console consumer of the public Schema API, built separately from the product solution. The Python parent pins its binaries/configurations, enforces a per-process watchdog and preserves raw observations. CI compiles it and runs mocked refusal/measurement-integrity controls; timing budgets are not CI gates.
+
+
+The [bounded beta contract review](BETA_CONTRACT_REVIEW.md) records the owner-accepted bounded public API/ADR decisions and compatibility evidence. ADR009/010 were accepted for this bounded scope on17 November2026. A clean-source alpha compatibility package passes package-only and retained-binary checks; no beta tag/artifact or publication is implied.

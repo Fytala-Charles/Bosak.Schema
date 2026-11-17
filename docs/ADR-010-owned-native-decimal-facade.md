@@ -1,46 +1,30 @@
-# ADR-010: Owned synchronous native decimal facade
+# ADR-010: Owned synchronous native decimal beta facade
 
-> 17 November 2026: the [public implementation candidate](NATIVE-DECIMAL-PUBLIC-API.md) supersedes the implementation-pending statements below. Historical prototype evidence is preserved; global acceptance and API freeze remain pending.
-
-**Status:** Proposed
+**Status:** Accepted — bounded Schema beta contract, 17 November 2026
 **Date:** 2026-11-15
-**Deciders:** Repository owner; public contract acceptance pending
+**Review date:** 2026-11-17
+**Deciders:** Repository owner; bounded public contract explicitly accepted 17 November 2026
 
 ## Context
 
-[REQ-009 and native integration](FEATURE_REQUESTS.md) have an internal backend and adapter at commits aba6967/939ba9a. Raw Core session leases do not enforce sequential operations; the internal host profile needs one shared runner. Borrowed container adapters expire with raw work while detached decimal payloads survive. Exposing raw callbacks/handles would force every public consumer to reproduce those boundaries.
+The facade is public and package-qualified; it is no longer an inaccessible prototype. [Original proposal text](beta-contract/ORIGINAL-ADR-010.txt) and [its identity](beta-contract/ORIGINAL-ADRS.json) remain historical evidence. The owner selected the bounded profile in ADR009; this public API/ownership decision was explicitly accepted on17 November2026 within that bounded scope.
 
-## Decision
+## Accepted bounded decision
 
-We propose an owned synchronous scalar facade whose session retains the sole Core session/runner and whose documents own assessed inputs/snapshot admissions. The [concrete proposed contract](NATIVE-DECIMAL-PUBLIC-API-PROPOSAL.md) exposes only decimal count, detached exact decimal reads and detached XML. Explicit numerical/query limits and an explicit immutable assessment episode remain caller responsibilities. Current implementation is an internal prototype, not an accepted public API.
+Accept NativeDecimalSession.Create/Assess/Dispose, NativeDecimalDocument.DecimalCount/ReadDecimal/ExportXml/Dispose, immutable options/context and factory-free result/diagnostic shapes as the bounded0.5 beta facade. Callers supply all capacities and assessment date/timezone. Successful results transfer cleanup responsibility for their owned Value; refusal has no owned Value. ReadDecimal exposes published XdmExactDecimal; callers separately supply formatting capacity. No rounding or fallback numeric type is introduced.
 
-## Consequences
+One private synchronous gate covers every document operation in a session. Overlapping/reentrant operations refuse; disposal waits for admitted synchronous work. Document disposal revokes its admission; session disposal revokes all documents and attempts every owned cleanup once. Cleanup failure is sanitized and does not certify physical release; repeated disposal does not retry it. No arbitrary fairness, maximum close latency, raw callback/handle, asynchronous API or arbitrary-schedule guarantee is selected.
 
-### Positive
+Detached exact values and XML survive closure; neither carries live PSVI/authority. XML preserves decimal lexical spelling, not original source bytes or canonical XSD serialization. Export cancellation is checked before synchronous serialization, not guaranteed during it. Public native refusals carry one immutable fixed stage diagnostic using the four recorded codes; arguments/cancellation/quota/closure/overlap remain documented exceptions, not Invalid outcomes.
 
-- Applications cannot bypass the runner through the proposed public surface or retain live provider facts as detached data.
-- Failed assessment/admission cleans captured ownership before a document is returned.
-- A narrow real workflow can be reviewed and tested before a long-lived API is introduced.
+Keep compatibility services explicit: restricted resolver/factory is opt-in and requires a stable host filesystem; old directory/text-prefix helpers retain old semantics. Compiler-produced descriptor collections are immutable; caller-created positional records/with copies remain application data. Allthree legacy validation methods refuse compile findings before operation work; clean true results remain assertion/facet/static-check scope. Native diagnostic redaction does not extend to detailed legacy messages.
 
-### Negative / Accepted Costs
+## Evidence and compatibility
 
-- This first surface is decimal-only, synchronous and string-input-only; general engine operations and stream/reader ownership are deferred.
-- Public exact-value dependency, structured diagnostics, close/work races and cleanup failure policy still need explicit qualification.
-- An external consumer cannot use the internal prototype; public symbols and separate assembly tests remain work.
+Source/package consumer and retained-binary results are in [the qualification dossier](beta-contract/README.md). Public surface matches the merged source exactly at40types/317rows. Relative to published alpha, four rows were added for restricted IO; no declared row was removed. Mutating compiler collection implementations and ignoring compile findings no longer work: unchanged signatures are not a promise to preserve those defects.
 
-## Alternatives Considered
+The default qualified dependency combination is published Core1.81.2. Its use by this facade, including the public exact-value type, is the accepted scoped Schema dependency decision; it does not accept the whole Core provider/session surface or promise all higher dependency combinations. Wider C45/ADR006 and other product integration remain separate. Existing deterministic lifecycle tests and local workloads support only their recorded schedules/options.
 
-| Option | Why not selected for this prototype |
-|---|---|
-| Expose raw sessions/providers and require each caller to coordinate lifetime | Leaves sequential ownership and borrowed-value expiry easy to bypass |
-| Export live typed nodes or provenance as ordinary detached results | Misrepresents owner/operation-bound facts as transferable authority |
-| Introduce asynchronous callbacks and full query syntax immediately | Adds lifetime and execution profiles beyond the qualified scalar workflow |
+## Approval boundary
 
-## References
-
-- [ADR-009 profile](ADR-009-native-decimal-session-profile.md)
-- [Internal adapter](NATIVE-SESSION-ADAPTER.md)
-- [Prototype evidence](native-session-facade/2026-11-15/README.md)
-
-
-17 November2026 beta review: [API contract audit](beta-readiness/API-CONTRACT-AUDIT.md) and [decision draft](beta-readiness/CONTRACT-DECISIONS.md) propose current boundaries. Status remains Proposed; no acceptance is inferred from alpha publication.
+Owner explicitly accepted this as the reviewed bounded beta contract baseline on17 November2026, with subsequent breaking changes explicitly reviewed/documented; it is not a perpetual1.0 freeze. API/ADR acceptance does not approve production SLAs, all caller policies, a beta tag/artifact, or NuGet publication. [Concrete review package](BETA_CONTRACT_REVIEW.md).
