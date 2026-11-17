@@ -76,3 +76,6 @@ Schema beta readiness is now the next priority before Braid/XmlDb adoption. The 
 
 
 The local [restricted-resolution APIs](docs/RESTRICTED_RESOLUTION.md) add an explicit bounded file resolver and a controlled schema-only XSLT factory. Canonical containment, reparse-point refusal, full XML/DTD checks and published Core policy cover direct/nested schema reads. Stable host-owned filesystem paths are required; this is not an atomic sandbox.
+
+
+Compiler-produced [descriptor snapshots](docs/DESCRIPTOR_SNAPSHOTS.md) now own immutable outer/nested collections. Caller-created positional records retain their existing ownership behavior. This is local beta-readiness work; the published alpha and legacy validation meanings are unchanged.

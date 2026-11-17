@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-17",
+  "sourceBase": "7e16b1609741caa5ac445cf9c81ae1725cf36da3",
+  "ownerDirection": "Continue after beta audit with immutable descriptor snapshots.",
+  "scope": "Freeze compiler-produced model collections and nested bindings/wildcards; preserve public record constructors and alpha API shape.",
+  "platformReviewRepository": "https://github.com/dotnet/dotnet",
+  "platformReviewRevision": "b0f34d51fccc69fd334253924abd8d6853fad7aa",
+  "affectedSections": ["src/runtime/src/libraries/System.Collections.Immutable/src/System/Collections/Immutable/ImmutableArray_1.cs: immutable collection interfaces", "src/runtime/src/libraries/System.Collections.Immutable/src/System/Collections/Immutable/ImmutableDictionary_2.cs: immutable dictionary interfaces", "SchemaCompiler.CompileCore: materialization and shared assertion references"],
+  "intentionalRestrictions": ["Compiler-produced snapshots only, not arbitrary ICompiledSchema implementations or caller-created positional records", "Record with expressions construct distinct records and may supply application collections", "Reflection/unsafe/marshal access to immutable storage is outside the ordinary managed contract", "Preserve shared assertion instances between root Assertions and simple-type facets", "No validation-result, resolver-policy, namespace, assertion or structural semantics changed"],
+  "coreVersion": "1.81.2",
+  "versionPolicy": "Bug fix within unreleased 0.5 feature line; no Version override, tag or publication.",
+  "historicalSpecificationAdoptionChanged": false,
+  "recordedBeforeImplementation": true
+}

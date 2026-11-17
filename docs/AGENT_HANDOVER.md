@@ -1,3 +1,9 @@
+## Compiler-owned descriptor snapshots local — 17 November 2026
+
+PR8 merged as7e16b1609741caa5ac445cf9c81ae1725cf36da3, tree8da044cdb13d29780fd9d8a7cfa0409b86505a69 matches accepted PR head; fresh main44121838200 green. New isolated .worktrees/Schema.DescriptorSnapshots / fix/schema-descriptor-snapshots. Compiler publication now freezes outer and nested bindings/facets/wildcards, preserving shared assertion identity. Public positional constructors/with records unchanged and caller-owned. [Contract](DESCRIPTOR_SNAPSHOTS.md), [evidence](descriptor-snapshots/README.md).
+
+Full319pass (290implementation/29external), ten+three new cases,45 release controls; build0warnings/errors. API40types/317rows identical toPR8; runtime implementation collection types intentionally change. Initial two test failures came from invalid fixture order and were corrected without grammar relaxation. No new engine language semantics, API/pin/version/tag/publication or ADR/beta acceptance. Existing sealed dossiers unchanged; verify at original commits/checkouts. Rawpacket .guard-tmp/schema-descriptor-snapshots-20261117. No commit/push; explicit instruction required. Next legacy compile-diagnostic/result precondition, not full structural validation.
+
 ## Restricted schema resolution implemented locally — 17 November2026
 
 Same isolated docs/schema-beta-assessment atd82e93d. Added RestrictedSchemaFileResolver and SchemaAwareXslt.CreateRestrictedCompiler, controlled through publishedCore1.81.2 resource authority. Basis recorded before implementation with Core7249d0e/package and immutable platform source review.31 new path/XML/controlled-XSLT controls and three new no-friend consumer cases; full306pass (280/26),45 unchanged release controls. API40types/317rows, four additions/no removals. Build0warnings/errors. [Guide](RESTRICTED_RESOLUTION.md) and [evidence](restricted-resolution/README.md).

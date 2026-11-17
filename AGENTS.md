@@ -243,9 +243,14 @@ Product and test Core references select published 1.81.2 after Schema PR #1. The
 
 ## Release automation controls
 
-Workflow-only release controls are separate from the current 306 product/source cases (published alpha: 272). Run `python -m unittest discover -s .github/scripts -p test_schema_release.py` and `node --test .github/scripts/test-schema-source-run.cjs`. They use synthetic artifacts and mocked GitHub/network responses; they do not log in or push. `.github/workflows/release.yml` admits only manually selected main preparation/publication for the recorded first prerelease, with OIDC permission confined to the publish job. Neither passing controls nor a prepared artifact authorizes registry publication. Keep the product source/Core pins and earlier immutable receipts unchanged.
+Workflow-only release controls are separate from the current 319 product/source cases (published alpha: 272). Run `python -m unittest discover -s .github/scripts -p test_schema_release.py` and `node --test .github/scripts/test-schema-source-run.cjs`. They use synthetic artifacts and mocked GitHub/network responses; they do not log in or push. `.github/workflows/release.yml` admits only manually selected main preparation/publication for the recorded first prerelease, with OIDC permission confined to the publish job. Neither passing controls nor a prepared artifact authorizes registry publication. Keep the product source/Core pins and earlier immutable receipts unchanged.
 
 
 ## Restricted resolution candidate
 
-The local restricted resolver/XSLT factory requires stable host-owned filesystem paths, exact captured root spelling and explicit byte limits. It is not an atomic filesystem sandbox. Use docs/RESTRICTED_RESOLUTION.md; qualify nested acquisition through published Core policy, not a fallback-capable convenience callback. All 31 restricted implementation cases and three added public consumer cases are included in the full 306-case suite. Preserve the published alpha/audit evidence as historical inputs; beta acceptance and publication remain separate.
+The local restricted resolver/XSLT factory requires stable host-owned filesystem paths, exact captured root spelling and explicit byte limits. It is not an atomic filesystem sandbox. Use docs/RESTRICTED_RESOLUTION.md; qualify nested acquisition through published Core policy, not a fallback-capable convenience callback. All 31 restricted implementation cases and three added public consumer cases are included in the current suite (306 cases at the restricted-resolution checkpoint). Preserve the published alpha/audit evidence as historical inputs; beta acceptance and publication remain separate.
+
+
+## Compiler snapshot ownership
+
+Compiler-produced descriptors own immutable outer and nested collections; preserve shared assertion identity across root/facet lists. Public record constructors/with copies still accept application-owned data. Use docs/DESCRIPTOR_SNAPSHOTS.md and do not extend compiler guarantees to arbitrary ICompiledSchema implementations. Current suite319; historical verifiers must run against their recorded source revisions.
