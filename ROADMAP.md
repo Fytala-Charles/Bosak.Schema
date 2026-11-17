@@ -35,3 +35,6 @@ The standalone solution passes 272 cases with Core pins at 1.81.2: 249 implement
 The [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and historical source/binary controls establish only their recorded compatibility scope. Broader component-universe interchange, native operation leases, concurrent disposal and complete structural assessment remain work. Select representative workloads and explicit budgets before making Schema performance claims; Core's scoped release deferral is not performance acceptance. Keep Schema package publication and consumer adoption decisions separate from the already published Core release.
 
 *Last updated: 2026-11-17*
+
+
+First hosted package preparation stopped at content sealing; qualify failure diagnostics and inspect the rejected package before any acceptance change. See [diagnostic follow-up](docs/preparation-diagnostics/README.md).
