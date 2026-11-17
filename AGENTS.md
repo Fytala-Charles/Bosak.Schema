@@ -137,7 +137,7 @@ public CanonicalEvidenceSet Parse(string payload, ParseOptions? options = null)
 |--------------|---------|
 | `Bosak.Schema.Tests` | Activation-free factories, schema compilation/validation and legacy API compatibility |
 
-The public-entry candidate solution has 272 cases: 249 implementation cases (243 retained plus six lifecycle controls) and 23 public-consumer cases in Bosak.Schema.PublicConsumer.Tests without friend access. Both source and locally packed binary lanes are exercised; repeated case catalogs are not additive coverage. Core stays at 1.81.2, MinVer development minimum is 0.5, and hosted/public API acceptance and publication remain pending.
+The public-entry candidate solution has 272 cases: 249 implementation cases (243 retained plus six lifecycle controls) and 23 public-consumer cases in Bosak.Schema.PublicConsumer.Tests without friend access. Both source and locally packed binary lanes are exercised; repeated case catalogs are not additive coverage. Core stays at 1.81.2, MinVer development minimum is 0.5, and Schema PR #3 and Core consumer PR #503 are merged/hosted green; package delivery is under local review, while explicit profile/ADR/API-freeze acceptance and publication remain separate.
 
 ### 5.2 Test Patterns
 
