@@ -47,3 +47,8 @@ After PR11 merge/main verification, prepared current Proposed ADR009/010 decisio
 
 
 17 November2026 owner decision: explicitly accepted bounded ADR009/010/API contracts and instructed commit/push/PR. Scoped Schema facade/publicCore1.81.2 use accepted; generalCoreC45/ADR006, productionSLAs and beta tag/artifact/publication remain outside approval.
+
+
+## Beta.1 preparation — 17 November 2026
+
+Bounded ADR009/010 acceptance is merged in PR12; source `2a5abf6fb663313dc32bfeca5bbb8740bbe987ae`, main44174792275 green. [Beta.1 preparation](BETA1_PREPARATION.md) records the exact product/tag plan and fresh local beta package.345 source,33 package-only, retained124/23 control/replacement cases and nine signed Core1.81.2 payloads pass;54 release and six runner controls pass separately. The controller candidate requires the reviewed beta tag and both retained lanes. No remote beta tag or NuGet beta publication; controller delivery, hosted preparation and exact hosted-artifact approval remain pending. Accepted bounded application scope does not close general CoreC45/ADR006 or production SLA/full-XSD acceptance.

@@ -27,13 +27,18 @@ class ReleaseControls(unittest.TestCase):
         self.entries = self.contents()
         self.write_package()
         self.results = self.root / "results"
-        self.trx("source", [249, 23])
-        self.trx("consumer", [23])
+        self.trx("source", [312, 33])
+        self.trx("consumer", [33])
         self.trx("legacy-control", [124])
         self.trx("legacy-candidate", [124])
         release.save(self.results / "legacy.json", {"baselineCommit": release.LEGACY, "count": 124, "onlySchemaDllChanged": True, "sameCases": True})
         self.identity = {"packageSha256": release.digest(self.package.read_bytes()), "packageOnly": True, "core": [{"id": name, "version": "1.81.2", "identical": True, "signatureExitCode": 0} for name in sorted(release.CORE_ASSEMBLIES)]}
         release.save(self.results / "consumer-identity.json", self.identity)
+        self.trx("published-control", [23])
+        self.trx("published-candidate", [23])
+        release.save(self.results / "published.json", {"baselineCommit": release.ALPHA_SOURCE, "count": 23, "onlySchemaDllChanged": True, "sameCases": True})
+        self.alpha = dict(self.identity, packageSha256=release.ALPHA_SHA256, schemaSignatureExitCode=0)
+        release.save(self.results / "published-identity.json", self.alpha)
         self.controller = "1" * 40
         self.tree = "2" * 40
         self.source_patch = patch.object(release, "source_identity", return_value=self.tree)
@@ -71,7 +76,7 @@ class ReleaseControls(unittest.TestCase):
     def test_qualified_manifest_and_payload_pass_without_launcher(self):
         with patch.object(release.subprocess, "run", side_effect=AssertionError("No process in verification")):
             manifest = self.verify(self.seal().upper())
-        self.assertEqual(manifest["qualification"]["sourceCases"], 272)
+        self.assertEqual(manifest["qualification"]["sourceCases"], 345)
 
     def test_manifest_hash_tamper_refuses(self):
         original = self.seal()
@@ -204,9 +209,88 @@ class ReleaseControls(unittest.TestCase):
                 release.source_identity(self.source, release.SOURCE)
         self.source_patch.start()
 
+    def test_missing_published_lane_refuses(self):
+        (self.results / "published.json").unlink()
+        with self.assertRaises(OSError):
+            self.seal()
+
+    def test_published_catalog_drift_refuses(self):
+        self.trx("published-candidate", [22])
+        with self.assertRaisesRegex(ValueError, "Published alpha TRX"):
+            self.seal()
+
+    def test_published_archive_or_signature_failure_refuses(self):
+        for field, value in [("packageSha256", "0" * 64), ("schemaSignatureExitCode", 1), ("packageOnly", False)]:
+            with self.subTest(field=field):
+                changed = dict(self.alpha, **{field: value})
+                release.save(self.results / "published-identity.json", changed)
+                with self.assertRaisesRegex(ValueError, "Published alpha identity"):
+                    self.seal()
+
+    def test_wrong_or_missing_beta_tag_refuses(self):
+        self.source_patch.stop()
+        answers = [release.SOURCE, "", "https://github.com/" + release.REPOSITORY, "3" * 40]
+        with patch.object(release.subprocess, "check_output", side_effect=answers), patch.object(release.subprocess, "run"):
+            with self.assertRaisesRegex(ValueError, "tag mismatch"):
+                release.source_identity(self.source, release.SOURCE)
+        with patch.object(release.subprocess, "check_output", side_effect=answers[:3] + [release.subprocess.CalledProcessError(128, "git")]), patch.object(release.subprocess, "run"):
+            with self.assertRaises(release.subprocess.CalledProcessError):
+                release.source_identity(self.source, release.SOURCE)
+        self.source_patch.start()
+
     def test_registry_404_permits_preflight_only(self):
         with patch.object(release, "urlopen", side_effect=HTTPError("url", 404, "absent", {}, None)):
             release.registry_absent(release.VERSION)
+
+    def test_alpha_version_cannot_be_admitted_as_beta(self):
+        with self.assertRaisesRegex(ValueError, "prerelease"):
+            release.package_info(self.package, self.source, release.SOURCE, release.ALPHA_VERSION)
+
+    def test_beta_tag_and_exact_source_are_accepted(self):
+        self.source_patch.stop()
+        answers = [release.SOURCE, "", "https://github.com/" + release.REPOSITORY, release.SOURCE, self.tree]
+        with patch.object(release.subprocess, "check_output", side_effect=answers) as git, patch.object(release.subprocess, "run"):
+            self.assertEqual(release.source_identity(self.source, release.SOURCE), self.tree)
+        self.assertIn("refs/tags/" + release.TAG + "^{commit}", git.call_args_list[3].args[0])
+        self.source_patch.start()
+
+    def test_retained_lanes_preserve_original_binaries_and_refuse_reuse(self):
+        for published, label, count, assembly in [(False, "legacy", 124, "Bosak.Schema.Tests.dll"), (True, "published", 23, "Bosak.Schema.PublicConsumer.Tests.dll")]:
+            with self.subTest(label=label):
+                baseline = self.root / label / "baseline"
+                baseline.mkdir(parents=True)
+                (baseline / "Bosak.Schema.dll").write_bytes(b"old-schema")
+                (baseline / assembly).write_bytes(b"retained-tests")
+                (baseline / "fixture.xml").write_bytes(b"unchanged")
+                def launch(args, log):
+                    target = Path(args[2]).parent
+                    self.assertEqual((target / assembly).read_bytes(), b"retained-tests")
+                    self.assertEqual((target / "fixture.xml").read_bytes(), b"unchanged")
+                    lane = "candidate" if target.name == "candidate" else "control"
+                    self.trx(label + "-" + lane, [count])
+                with patch.object(release, "command", side_effect=launch) as launcher:
+                    release.legacy_check(baseline, self.package, self.results, published)
+                    self.assertEqual(launcher.call_count, 2)
+                    with self.assertRaisesRegex(ValueError, "preserved"):
+                        release.legacy_check(baseline, self.package, self.results, published)
+                self.assertEqual((baseline / "Bosak.Schema.dll").read_bytes(), b"old-schema")
+                self.assertEqual(release.read_json(self.results / (label + ".json"))["count"], count)
+
+    def test_retained_layout_mutation_refuses(self):
+        baseline = self.root / "mutation" / "baseline"
+        baseline.mkdir(parents=True)
+        (baseline / "Bosak.Schema.dll").write_bytes(b"old-schema")
+        (baseline / "Bosak.Schema.Tests.dll").write_bytes(b"retained-tests")
+        def launch(args, log):
+            Path(args[2]).write_bytes(b"unexpected-mutation")
+        with patch.object(release, "command", side_effect=launch):
+            with self.assertRaisesRegex(ValueError, "mutated"):
+                release.legacy_check(baseline, self.package, self.results)
+
+    def test_workflow_beta_pins_and_both_retained_lanes(self):
+        workflow = (Path(__file__).resolve().parents[1] / "workflows/release.yml").read_text(encoding="utf-8")
+        for value in ["SOURCE_COMMIT: " + release.SOURCE, "PACKAGE_VERSION: " + release.VERSION, "ref: " + release.ALPHA_SOURCE, "schema_release.py published-consumer", "schema_release.py published --baseline", "schema_release.py legacy --baseline"]:
+            self.assertIn(value, workflow)
 
     def test_registry_existing_auth_failure_or_network_failure_refuse(self):
         response = unittest.mock.MagicMock()

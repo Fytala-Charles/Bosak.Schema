@@ -22,11 +22,11 @@ The 17 November public-entry candidate implements `NativeDecimalSession`, `Nativ
 | [Core 1.81.2 dependency adoption](CORE-1.81.2-ADOPTION.md) | Merged | Four product references and one test provider reference updated; no C# adaptation |
 | Core optional source integration | Refreshed in Core PR #503 | Merged Schema9fd4e6a pinned with58 source/test/fixture/legal inputs;260 implementation/legacy plus nine public current-Core cases. Original135-case receipt remains historical. |
 | Core schema-session integration | Internal native scalar adapter delivered; overall acceptance pending | Bounded original facts/scalar flow and host lifetime controls; broader component/compatibility/public consumer qualification pending |
-| NuGet trusted publishing | Published alpha verified | Manual prepare/publish separation;45 release controls; approved exact artifact, repository signature and registry-only consumer verified |
+| NuGet trusted publishing | Published alpha verified; beta controller locally qualified | Manual prepare/publish separation;54 release controls; beta345/33 and retained124/23 qualification; hosted beta delivery pending |
 | Complete XSD 1.1 structural validation | Incomplete | No complete current implementation or blanket conformance claim |
 | Native decimal structural backend | Implemented internally; 76 cases pass | Complete finite grammar only; [evidence](native-decimal-backend/2026-11-15/README.md) |
 | Native decimal Core adapter | Implemented internally; 28 cases pass | Issuance, scalar flow, guarded leases, expiry and cleanup; [latest evidence](native-session-facade/2026-11-15/README.md) |
-| Owned native decimal entry point | Published in0.5.0-alpha.0.7;23 external consumer cases and six added lifecycle controls pass | [ADR-010](ADR-010-owned-native-decimal-facade.md), [proposal](NATIVE-DECIMAL-PUBLIC-API-PROPOSAL.md); development minimum0.5; alpha published, beta acceptance pending |
+| Owned native decimal entry point | Published in0.5.0-alpha.0.7;23 external consumer cases and six added lifecycle controls pass | [ADR-010](ADR-010-owned-native-decimal-facade.md), [proposal](NATIVE-DECIMAL-PUBLIC-API-PROPOSAL.md); development minimum0.5; alpha published, bounded ADR009/010 acceptance merged; beta delivery pending |
 
 ## 2. Implemented Coverage
 
@@ -74,3 +74,8 @@ The owner selected a bounded decimal-session beta with explicit exclusions. The 
 
 
 The [bounded beta contract review](BETA_CONTRACT_REVIEW.md) records the owner-accepted bounded public API/ADR decisions and compatibility evidence. ADR009/010 were accepted for this bounded scope on17 November2026. A clean-source alpha compatibility package passes package-only and retained-binary checks; no beta tag/artifact or publication is implied.
+
+
+## Beta.1 preparation — 17 November 2026
+
+Bounded ADR009/010 acceptance is merged in PR12; source `2a5abf6fb663313dc32bfeca5bbb8740bbe987ae`, main44174792275 green. [Beta.1 preparation](BETA1_PREPARATION.md) records the exact product/tag plan and fresh local beta package.345 source,33 package-only, retained124/23 control/replacement cases and nine signed Core1.81.2 payloads pass;54 release and six runner controls pass separately. The controller candidate requires the reviewed beta tag and both retained lanes. No remote beta tag or NuGet beta publication; controller delivery, hosted preparation and exact hosted-artifact approval remain pending. Accepted bounded application scope does not close general CoreC45/ADR006 or production SLA/full-XSD acceptance.

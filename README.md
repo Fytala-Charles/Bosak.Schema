@@ -70,7 +70,7 @@ Fytala retains copyright and trademark ownership; Apache-2.0 grants the rights s
 *Last updated: 2026-11-17*
 
 
-**Current release — 17 November 2026:** [Bosak.Schema 0.5.0-alpha.0.7](https://www.nuget.org/packages/Bosak.Schema/0.5.0-alpha.0.7) is published and independently verified. Beta readiness remains proposed; full XSD 1.1/API freeze/performance acceptance is not implied.
+**Current release — 17 November 2026:** [Bosak.Schema 0.5.0-alpha.0.7](https://www.nuget.org/packages/Bosak.Schema/0.5.0-alpha.0.7) is published and independently verified. The bounded decimal-session contract is accepted; [beta.1 preparation](docs/BETA1_PREPARATION.md) is locally qualified and awaits delivery and hosted artifact review. Full XSD 1.1, a perpetual API freeze and production SLAs are excluded.
 
 Schema beta readiness is now the next priority before Braid/XmlDb adoption. The [beta gap assessment](docs/beta-readiness/ASSESSMENT.md) proposes a bounded decimal-session beta and distinguishes a broader validator target. Scope and public-contract decisions remain pending; no beta version or semantic change is made.
 

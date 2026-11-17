@@ -269,3 +269,8 @@ Read docs/BETA_QUALIFICATION.md before measuring workloads. Build tools/Bosak.Sc
 ## Beta contract review boundary
 
 Use docs/BETA_CONTRACT_REVIEW.md for the current concrete ADR009/010 proposal. The owner accepted ADR009/010 for the bounded Schema beta scope on17 November2026; broader acceptance is not inferred. Local alpha compatibility packages are not beta artifacts. General Core C45/ADR006, production SLAs, exact beta tag/controller/artifact and publication remain separate; do not infer their acceptance from package/binary passes.
+
+
+## Beta.1 release candidate
+
+Read docs/BETA1_PREPARATION.md before release operations. Exact source2a5abf6fb663313dc32bfeca5bbb8740bbe987ae/tagv0.5.0-beta.1; controller requires345/33 and retained124/23 lanes, nine signed Core1.81.2 payloads.32 Python +22 GitHub provenance controls, six runner controls. Local manifest zero controller is never hosted evidence. No remote tag or beta publication yet; do not infer publication authority from preparation. Historical dossiers remain unchanged.
