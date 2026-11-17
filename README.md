@@ -59,7 +59,7 @@ The public solution needs the .NET 10 SDK; it has no Azure, payment-service, key
 | `docs` | Architecture, integration, roadmap and transition decisions |
 | `tools` | Build and documentation checks |
 
-NuGet packaging uses the separate [package README](docs/NUGET_README.md) with absolute HTTPS links; this repository overview retains its normal local documentation links.
+NuGet packaging uses the separate [package README](docs/NUGET_README.md) with absolute HTTPS links; this repository overview retains its normal local documentation links. See [trusted-publishing preparation](docs/TRUSTED_PUBLISHING.md) for the manual prerelease delivery route.
 
 ## 5. Compatibility and License
 

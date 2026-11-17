@@ -17,6 +17,16 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           global-json-file: global.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Release refusal controls (no login or push)
+        shell: pwsh
+        run: |
+          python -m unittest discover -s .github/scripts -p test_schema_release.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node --test .github/scripts/test-schema-source-run.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Build
         run: dotnet build Bosak.Schema.slnx -c Release
       - name: Test
