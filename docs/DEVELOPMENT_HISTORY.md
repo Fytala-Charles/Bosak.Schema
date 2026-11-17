@@ -19,3 +19,8 @@ Four original local canonical files are retained byte-for-byte as [pre-sync text
 ## 29–30 October 2026: public Apache transition and staged schema coverage
 
 The public schema-only repository and activation-free shims were published under Apache-2.0; licensing infrastructure/private history stayed separate. [Publication](PUBLICATION.json) records114 original tests. Staged wildcard negative-constraint recording grew the standalone suite to124 cases; full structural enforcement was not implied.
+
+
+## 17 November 2026 — local beta readiness and restricted resolution
+
+Assessed the published alpha, classified39 public types/313 contract rows and reproduced five caught published-package observations. Proposed beta/API decisions remain unaccepted. Implemented additive RestrictedSchemaFileResolver and CreateRestrictedCompiler using published Core1.81.2 controlled schema acquisition, including nested references. The old convenience paths retain their compatibility behavior. New31 implementation and three public consumer controls bring the suite to306 cases;45 release controls pass separately. Candidate API40types/317rows is strictly additive. Documented stable-filesystem/no-atomic-sandbox boundary, full XML/DTD/byte policy, URI alias checks and Core's unused-include warning behavior. Source-only receipts and immutable pre-change basis are in docs/restricted-resolution; no tag, release or commit/push is made by this local checkpoint.

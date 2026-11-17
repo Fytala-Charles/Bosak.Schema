@@ -4,7 +4,7 @@
   <p>Apache-2.0 schema integration and staged XSD 1.1 services for .NET.</p>
 </div>
 
-**Publication verified — 29 October 2026:** Public GitHub repository and Apache-2.0 detection verified; all 114 tests and the content-commit CI pass. [Publication receipt](docs/PUBLICATION.json). No NuGet release or commercial infrastructure publication.
+**Publication verified — 29 October 2026:** Public GitHub repository and Apache-2.0 detection verified; all 114 tests and the content-commit CI pass. [Publication receipt](docs/PUBLICATION.json). Historical GitHub transition receipt; the current NuGet release is recorded below.
 
 # Bosak.Schema
 
@@ -21,7 +21,7 @@ The initial public source is derived from Fytala's private schema source at `fa0
 
 The dependency upgrade is merged in [Schema PR #1](https://github.com/Fytala-Charles/Bosak.Schema/pull/1). The adoption baseline retained **124 standalone cases**; the separate historical [Core optional integration](https://github.com/Fytala-Charles/Bosak/blob/main/docs/schema-integration-1812/README.md) exercised **135 cases**, including those public Schema tests and bounded price/ownership controls. The public entry point uses the **0.5 development line**; no new Schema NuGet release is announced. See [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and the [roadmap](ROADMAP.md).
 
-The [owned decimal session API](docs/NATIVE-DECIMAL-PUBLIC-API.md) supports native assessment of a finite decimal-only schema profile, exact scalar reads and detached XML export. Callers supply explicit limits and assessment context. It is merged and consumer-qualified; complete XSD 1.1, broader provider acceptance and package publication remain separate. See [package-delivery status](docs/package-0.5-review/README.md).
+The [owned decimal session API](docs/NATIVE-DECIMAL-PUBLIC-API.md) supports native assessment of a finite decimal-only schema profile, exact scalar reads and detached XML export. Callers supply explicit limits and assessment context. It is merged and consumer-qualified; complete XSD 1.1 and broader provider acceptance remain pending. See [package-delivery status](docs/package-0.5-review/README.md).
 
 ## 2. Quick Start
 
@@ -68,3 +68,11 @@ Existing schema factory signatures remain intact. The old `License` entry points
 Fytala retains copyright and trademark ownership; Apache-2.0 grants the rights stated in the license. Branding does not grant trademark rights. The new license applies to this public source release; old proprietary releases and private licensing-product agreements are separate historical artifacts.
 
 *Last updated: 2026-11-17*
+
+
+**Current release — 17 November 2026:** [Bosak.Schema 0.5.0-alpha.0.7](https://www.nuget.org/packages/Bosak.Schema/0.5.0-alpha.0.7) is published and independently verified. Beta readiness remains proposed; full XSD 1.1/API freeze/performance acceptance is not implied.
+
+Schema beta readiness is now the next priority before Braid/XmlDb adoption. The [beta gap assessment](docs/beta-readiness/ASSESSMENT.md) proposes a bounded decimal-session beta and distinguishes a broader validator target. Scope and public-contract decisions remain pending; no beta version or semantic change is made.
+
+
+The local [restricted-resolution APIs](docs/RESTRICTED_RESOLUTION.md) add an explicit bounded file resolver and a controlled schema-only XSLT factory. Canonical containment, reparse-point refusal, full XML/DTD checks and published Core policy cover direct/nested schema reads. Stable host-owned filesystem paths are required; this is not an atomic sandbox.

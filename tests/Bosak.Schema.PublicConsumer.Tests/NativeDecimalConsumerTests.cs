@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 17-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 17-11-2026     | Qualify restricted schema resolution from the external public consumer                   |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -220,6 +221,55 @@ public sealed class NativeDecimalConsumerTests
         Assert.All(typeof(NativeDecimalAssessmentContext).GetProperties(), property => Assert.Null(property.SetMethod));
         Assert.DoesNotContain(schemaAssembly.GetExportedTypes(), type => type.Name.Contains("NativeSchemaProvider", StringComparison.Ordinal));
         Assert.Equal(new Version(1, 81, 2, 0), typeof(XdmExactDecimal).Assembly.GetName().Version);
+    }
+
+    /// <summary>Checks the opt-in resolver returns detached read-only schema bytes outside friend access.</summary>
+    [Fact]
+    public void RestrictedResolver_ContainedFile_ReturnsReadonlyBytes()
+    {
+        WithSchemaFiles((root, file) =>
+        {
+            using var stream = new RestrictedSchemaFileResolver(root, 4096).Open(new Uri(file));
+            Assert.False(stream.CanWrite);
+            Assert.Contains("urn:restricted", new StreamReader(stream).ReadToEnd(), StringComparison.Ordinal);
+        });
+    }
+
+    /// <summary>Checks a public resolver refuses a contained-prefix sibling without reading its file.</summary>
+    [Fact]
+    public void RestrictedResolver_OutsideFile_Refuses()
+    {
+        WithSchemaFiles((root, file) =>
+        {
+            var error = Assert.Throws<SchemaResolutionException>(() => new RestrictedSchemaFileResolver(root, 4096).Open(new Uri(Path.Combine(root, "..", "outside.xsd"))));
+            Assert.Equal(SchemaDiagnosticCodes.ResolutionDenied, error.Code);
+        });
+    }
+
+    /// <summary>Checks the public restricted XSLT factory compiles an allowed schema using published Core.</summary>
+    [Fact]
+    public void RestrictedCompiler_ContainedSchema_Compiles()
+    {
+        WithSchemaFiles((root, file) =>
+        {
+            var compiler = SchemaAwareXslt.CreateRestrictedCompiler(root, 4096);
+            const string stylesheet = "<xsl:stylesheet xmlns:xsl='http://www.w3.org/1999/XSL/Transform' version='3.0'><xsl:import-schema namespace='urn:restricted' schema-location='schema.xsd'/><xsl:template name='main'/></xsl:stylesheet>";
+            compiler.Compile(stylesheet, new Uri(Path.Combine(root, "main.xsl")).AbsoluteUri);
+            Assert.NotEmpty(compiler.ResourcePolicy!.Receipts);
+        });
+    }
+
+    private static void WithSchemaFiles(Action<string, string> action)
+    {
+        var root = Path.Combine(Path.GetTempPath(), "bosak-restricted-consumer-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        var file = Path.Combine(root, "schema.xsd");
+        try
+        {
+            File.WriteAllText(file, "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:restricted'><xs:element name='value' type='xs:decimal'/></xs:schema>");
+            action(root, file);
+        }
+        finally { File.Delete(file); Directory.Delete(root, false); }
     }
 
     private static NativeDecimalSession Create() => NativeDecimalSession.Create(Schema, Options).Value!;

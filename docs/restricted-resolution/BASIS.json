@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-17",
+  "sourceBase": "d82e93d023233eb85b15ed203cb04f964054908d",
+  "adoptionKind": "Additive host resource policy; no XSD/XPath language semantic expansion",
+  "corePackageVersion": "1.81.2",
+  "corePackageRepositoryCommit": "7249d0e01628c47f92b89a3380bc69cf58d70045",
+  "coreSections": ["ControlledResourcePolicy", "IControlledResourceAuthority.Authorize", "SchemaSetBuilder controlled schema acquisition and nested resolver"],
+  "platformSourceRevision": "b0f34d51fccc69fd334253924abd8d6853fad7aa",
+  "platformSourceRepository": "https://github.com/dotnet/dotnet",
+  "platformSections": ["src/runtime/src/libraries/System.Private.CoreLib/src/System/IO/Path.cs: GetFullPath/GetRelativePath", "src/runtime/src/libraries/System.Private.CoreLib/src/System/IO/FileAttributes.cs: ReparsePoint", "src/runtime/src/libraries/System.Private.Xml/src/System/Xml/Core/XmlReaderSettings.cs: DtdProcessing/XmlResolver/MaxCharactersInDocument"],
+  "newSurface": ["RestrictedSchemaFileResolver(string,int)", "RestrictedSchemaFileResolver.Open(Uri)", "SchemaAwareXslt.CreateRestrictedCompiler(string,int)"],
+  "intentionalRestrictions": ["Explicit absolute existing root and positive per-document byte cap", "Canonical contained local file URIs only; no query/fragment/credentials/UNC", "Reject root/ancestor/target reparse points and ambiguous Windows file components", "Parse complete buffered XML with DTD prohibited and no resolver before returning read-only bytes", "XSLT controlled authority approves Schema route only; all other acquisition routes deny", "Caller supplies stylesheet base URI for relative hints; no convenience-root rebasing", "Host must maintain trusted stable filesystem paths; not atomic protection from concurrent rename/link replacement or malicious filesystem owners", "Existing directory convenience helper and textual URI-prefix policy unchanged"],
+  "versionPolicy": "Additive work within unreleased 0.5 feature line; no release tag or MinVer override; beta version remains pending",
+  "historicalSpecificationAdoptionChanged": false,
+  "recordedBeforeImplementation": true
+}

@@ -4,7 +4,7 @@
   <p>An open schema foundation with staged validation and integration.</p>
 </div>
 
-**Publication verified — 29 October 2026:** Public GitHub repository and Apache-2.0 detection verified; all 114 tests and the content-commit CI pass. [Publication receipt](docs/PUBLICATION.json). No NuGet release or commercial infrastructure publication.
+**Publication verified — 29 October 2026:** Public GitHub repository and Apache-2.0 detection verified; all 114 tests and the content-commit CI pass. [Publication receipt](docs/PUBLICATION.json). Historical GitHub transition receipt; the current NuGet release is recorded below.
 
 # Bosak.Schema Roadmap
 
@@ -17,16 +17,12 @@ Schema services remain Apache-2.0 and activation-free; the public decimal-entry 
 
 ## 2. Next Milestones
 
-A [trusted-publishing route](docs/TRUSTED_PUBLISHING.md) is prepared locally following the owner's selection. The new release workflow is manual and preparation-only by default; its publisher verifies a successful same-repository/main/first-attempt preparation, the exact reviewed manifest/package and registry absence before OIDC login and again before one push. Product source/version/Core dependencies are unchanged. No workflow dispatch, policy/account update, login or publication has occurred. A hosted preparation will create its own artifact/digest for review; the earlier local package remains preserved.
-
-The public owned decimal API is merged in [Schema PR #3](https://github.com/Fytala-Charles/Bosak.Schema/pull/3) at9fd4e6a; its272-case standalone main check passed. Core's optional source consumer is refreshed in [Core PR #503](https://github.com/Fytala-Charles/Bosak/pull/503), mergef7b6c995, with269 current-Core cases and all six main checks passing. Standalone/package dependencies remain Core1.81.2; current-Core1.81.17 source-consumer evidence is a separate lane. The [0.5 package-delivery review](docs/package-0.5-review/README.md) prepares a local prerelease and a package README correction. No Schema package, tag or registry action has been published; global profile/ADR/API-freeze/performance acceptance remains open.
-
 1. Define the next bounded native provider/session adoption against the released Core surface and recorded source/design requirements; preserve explicit supported/refused profiles.
 2. Qualify complete component/universe identity, compatible-schema handoff, PSVI/atomic flow and bounded resource ownership.
 3. Implement or explicitly refuse remaining XSD 1.1 structural/assessment coverage.
 4. Build/test real consumers and unchanged binaries, then run the full engine/conformance gates before API freeze or release.
 
-The 17 November public-entry candidate implements `NativeDecimalSession`, `NativeDecimalDocument`, immutable options/context and owned results with fixed bounded stage diagnostics. It keeps Core 1.81.2 and the finite backend grammar unchanged. The 0.5 development line has 272 passing cases: 249 implementation cases (243 retained plus six lifecycle/cleanup controls) and 23 separate public-consumer cases without friend access. The consumer also passes through the locally packed Schema binary and published Core dependencies; this repeats its case catalog and is not additive coverage. [Contract and qualification](docs/NATIVE-DECIMAL-PUBLIC-API.md). Hosted review, overall profile acceptance, API freeze and package publication remain separate.
+The 17 November public-entry candidate implements `NativeDecimalSession`, `NativeDecimalDocument`, immutable options/context and owned results with fixed bounded stage diagnostics. It keeps Core 1.81.2 and the finite backend grammar unchanged. The 0.5 development line has 272 passing cases: 249 implementation cases (243 retained plus six lifecycle/cleanup controls) and 23 separate public-consumer cases without friend access. The consumer also passes through the locally packed Schema binary and published Core dependencies; this repeats its case catalog and is not additive coverage. [Contract and qualification](docs/NATIVE-DECIMAL-PUBLIC-API.md). The alpha is published; overall profile acceptance and API freeze remain pending.
 
 ## 3. Validation and Limits
 
@@ -37,7 +33,12 @@ The [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and historical source/bi
 *Last updated: 2026-11-17*
 
 
-First hosted package preparation stopped at content sealing; qualify failure diagnostics and inspect the rejected package before any acceptance change. See [diagnostic follow-up](docs/preparation-diagnostics/README.md).
+**Current release — 17 November 2026:** [Bosak.Schema 0.5.0-alpha.0.7](https://www.nuget.org/packages/Bosak.Schema/0.5.0-alpha.0.7) is published and independently verified. Product coverage is 272 cases; 45 separate release controls pass. Beta readiness remains proposed; full XSD 1.1/API freeze/performance acceptance is not implied.
+
+Schema beta readiness is now the next priority before Braid/XmlDb adoption. The [beta gap assessment](docs/beta-readiness/ASSESSMENT.md) proposes a bounded decimal-session beta and distinguishes a broader validator target. Scope and public-contract decisions remain pending; no beta version or semantic change is made.
 
 
-The retained hosted package identified a verifier mismatch for the exact NuGet-generated `nuget.psmdcp` metadata path. The [local correction](docs/package-metadata-correction/README.md) accepts that path while preserving all other admission checks; the failed run remains ineligible and publication is pending. Product sources and dependencies are unchanged.
+The [public API audit](docs/beta-readiness/API-CONTRACT-AUDIT.md) classifies all39 published types/313 contract rows and records five caught observations. Legacy result semantics, mutable descriptor collections and file-resolution boundaries need beta decisions/hardening; [contract decisions](docs/beta-readiness/CONTRACT-DECISIONS.md) remain Proposed. No runtime behavior or beta acceptance changes.
+
+
+The local [restricted-resolution APIs](docs/RESTRICTED_RESOLUTION.md) add an explicit bounded file resolver and a controlled schema-only XSLT factory. Canonical containment, reparse-point refusal, full XML/DTD checks and published Core policy cover direct/nested schema reads. Stable host-owned filesystem paths are required; this is not an atomic sandbox. Current local suite:306 cases (280 implementation/26 public consumer), plus45 separate release controls. Published alpha remains272 cases; the source candidate is not a new release.

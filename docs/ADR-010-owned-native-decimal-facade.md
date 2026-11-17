@@ -41,3 +41,6 @@ We propose an owned synchronous scalar facade whose session retains the sole Cor
 - [ADR-009 profile](ADR-009-native-decimal-session-profile.md)
 - [Internal adapter](NATIVE-SESSION-ADAPTER.md)
 - [Prototype evidence](native-session-facade/2026-11-15/README.md)
+
+
+17 November2026 beta review: [API contract audit](beta-readiness/API-CONTRACT-AUDIT.md) and [decision draft](beta-readiness/CONTRACT-DECISIONS.md) propose current boundaries. Status remains Proposed; no acceptance is inferred from alpha publication.
