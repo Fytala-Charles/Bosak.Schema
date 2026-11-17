@@ -1,5 +1,7 @@
 # Owned native decimal public entry point proposal
 
+> 17 November 2026: the [public implementation candidate](NATIVE-DECIMAL-PUBLIC-API.md) supersedes the implementation-pending statements below. Historical prototype evidence is preserved; global acceptance and API freeze remain pending.
+
 Date: 2026-11-15. **Proposed, not public or accepted.** The internal NativeDecimalSession prototype and eight workflow cases make the design executable for review. [ADR-010](ADR-010-owned-native-decimal-facade.md) and [qualification](native-session-facade/2026-11-15/README.md). No API freeze, package/tag or external consumer acceptance is claimed.
 
 ## 1. Boundary demonstrated by the prototype

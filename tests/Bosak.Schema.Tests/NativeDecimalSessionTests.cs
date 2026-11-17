@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Qualify the internal synchronous facade prototype                                                 |
+//                      | Charles Korthout | 0.2   | 17-11-2026     | Exercise the retained internal implementation behind the public entry point
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -117,14 +118,14 @@ public sealed class NativeDecimalSessionTests
     [Fact]
     public void Create_InvalidSchemaOrCapacities_RefusesOrThrowsWithoutSession()
     {
-        var malformed = NativeDecimalSession.Create("<xs:schema", new(256, 256), Limits);
+        var malformed = NativeDecimalSessionCore.Create("<xs:schema", new(256, 256), Limits);
         Assert.Equal(NativeOutcome.Invalid, malformed.Outcome);
         Assert.Null(malformed.Value);
-        var unsupported = NativeDecimalSession.Create(Schema.Replace("xs:decimal", "xs:string", StringComparison.Ordinal), new(256, 256), Limits);
+        var unsupported = NativeDecimalSessionCore.Create(Schema.Replace("xs:decimal", "xs:string", StringComparison.Ordinal), new(256, 256), Limits);
         Assert.Equal(NativeOutcome.Unsupported, unsupported.Outcome);
         Assert.Null(unsupported.Value);
-        Assert.Throws<ArgumentOutOfRangeException>(() => NativeDecimalSession.Create(Schema, default, Limits));
-        Assert.Throws<ArgumentException>(() => NativeDecimalSession.Create(Schema, new(256, 256), default));
+        Assert.Throws<ArgumentOutOfRangeException>(() => NativeDecimalSessionCore.Create(Schema, default, Limits));
+        Assert.Throws<ArgumentException>(() => NativeDecimalSessionCore.Create(Schema, new(256, 256), default));
     }
 
     /// <summary>Checks malformed assessment context releases input ownership before a subsequent valid capture.</summary>
@@ -142,16 +143,16 @@ public sealed class NativeDecimalSessionTests
     public void Assess_AllOptionalAbsent_ReturnsEmptyDecimalViewWithoutSyntheticValue()
     {
         const string schema = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' minOccurs='0'/></xs:sequence><xs:assert test='empty(amount)'/></xs:complexType></xs:element></xs:schema>";
-        using var session = NativeDecimalSession.Create(schema, new(256, 256), Limits).Value!;
+        using var session = NativeDecimalSessionCore.Create(schema, new(256, 256), Limits).Value!;
         using var document = session.Assess("<order/>", Date, 60).Value!;
         Assert.Equal(0, document.DecimalCount);
         Assert.Throws<ArgumentOutOfRangeException>(() => document.ReadDecimal(0));
         Assert.Empty(XDocument.Parse(document.ExportXml()).Root!.Elements());
     }
 
-    private static NativeDecimalSession Create(SchemaQueryLimits? limits = null)
+    private static NativeDecimalSessionCore Create(SchemaQueryLimits? limits = null)
     {
-        var result = NativeDecimalSession.Create(Schema, new(256, 256), limits ?? Limits);
+        var result = NativeDecimalSessionCore.Create(Schema, new(256, 256), limits ?? Limits);
         Assert.True(result.Outcome == NativeOutcome.Valid, result.Diagnostic);
         return result.Value!;
     }

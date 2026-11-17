@@ -1,5 +1,7 @@
 # Internal native decimal session adapter
 
+> 17 November 2026: the [public implementation candidate](NATIVE-DECIMAL-PUBLIC-API.md) supersedes the implementation-pending statements below. Historical prototype evidence is preserved; global acceptance and API freeze remain pending.
+
 Date: 2026-11-15. Base: committed backend `aba6967`. Scope: internal implementation of the [finite decimal session profile](NATIVE-SESSION-PROFILE.md) on published Core 1.81.2. [Qualification receipt](native-session-adapter/2026-11-15/README.md). No public factory/API freeze or release is delivered.
 
 ## 1. Assessment and authority

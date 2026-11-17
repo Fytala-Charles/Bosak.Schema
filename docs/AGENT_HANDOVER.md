@@ -1,3 +1,17 @@
+# Public native decimal entry candidate - 17 November 2026
+
+Last updated: 2026-11-17
+
+Isolated worktree `.worktrees/Schema.PublicDecimal`, branch `feature/public-native-decimal-session`, based on local clean Schema df40a17. Original public checkout preserved. The 17 November public-entry candidate implements `NativeDecimalSession`, `NativeDecimalDocument`, immutable options/context and owned results with fixed bounded stage diagnostics. It keeps Core 1.81.2 and the finite backend grammar unchanged. The 0.5 development line has 272 passing cases: 249 implementation cases (243 retained plus six lifecycle/cleanup controls) and 23 separate public-consumer cases without friend access. The consumer also passes through the locally packed Schema binary and published Core dependencies; this repeats its case catalog and is not additive coverage. [Contract and qualification](NATIVE-DECIMAL-PUBLIC-API.md). Hosted review, overall profile acceptance, API freeze and package publication remain separate.
+
+Implementation not committed/pushed. AGENTS.md Git rule requires explicit commit/push instruction; continuation of implementation does not waive it. Exact source/evidence inventory and review payload live in docs/native-decimal-public/2026-11-17. Raw logs/local nupkg and diagnostic scripts stay in the Core workspace .guard-tmp/schema-public-decimal-20261117, with source-only copies in the dossier. First sandbox restore failed NU1900; network-enabled audited build passes. Package-consumer initial command incorrectly passed --source to dotnet test; separate restore then hit command-line source-path normalization; explicit NuGet.Config corrected the harness, and unchanged product/consumer passes. Original errors remain retained. No engine edits, historical Core135-case rerun, C45/global acceptance, package publication, tag or Braid integration.
+
+Next: explicit commit/push approval for this concrete candidate and predecessor local commits aba6967/939ba9a/df40a17, then hosted review. Do not advance Core optional source pin automatically. Braid PR5 is already merged as9fac4441 and main44034731777 green; a focused native smoke review is the next Braid step after Schema hosted review. New native human acceptance has not been performed.
+
+---
+
+Historical handover entries below retain original dates and scope.
+
 # Bosak.Schema agent handover
 
 Last updated: 2026-11-15

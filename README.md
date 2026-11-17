@@ -19,9 +19,9 @@ The implementation targets .NET 10 and references published Bosak 1.81.2 package
 
 The initial public source is derived from Fytala's private schema source at `fa0da3e2d9972706a5a86616ef285af4daf5037b`, with the owner-approved Apache transition on 29 October 2026. Billing, key-generation, deployment material and private Git history remain outside this repository. See [provenance](docs/APACHE-TRANSITION.md).
 
-The dependency upgrade is merged in [Schema PR #1](https://github.com/Fytala-Charles/Bosak.Schema/pull/1). The adoption baseline retained **124 standalone cases**; the separate historical [Core optional integration](https://github.com/Fytala-Charles/Bosak/blob/main/docs/schema-integration-1812/README.md) exercised **135 cases**, including those public Schema tests and bounded price/ownership controls. Schema remains on its **0.4 development line** through MinVer; no new Schema NuGet release is announced. See [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and the [roadmap](ROADMAP.md).
+The dependency upgrade is merged in [Schema PR #1](https://github.com/Fytala-Charles/Bosak.Schema/pull/1). The adoption baseline retained **124 standalone cases**; the separate historical [Core optional integration](https://github.com/Fytala-Charles/Bosak/blob/main/docs/schema-integration-1812/README.md) exercised **135 cases**, including those public Schema tests and bounded price/ownership controls. The public-entry candidate advances MinVer to the **0.5 development line**; no new Schema NuGet release is announced. See [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and the [roadmap](ROADMAP.md).
 
-The next native provider/session scope is [defined as a proposed decimal-only profile](docs/NATIVE-SESSION-PROFILE.md). Its internal backend, Core adapter and [owned-facade prototype](docs/NATIVE-DECIMAL-PUBLIC-API-PROPOSAL.md) now support the native assess/read/export/dispose workflow. The standalone suite has **243 cases**: 124 retained regressions, seven scalar probes, 76 backend, 28 adapter and eight facade cases. Overall profile/public API acceptance remains pending; there is no public native factory yet.
+The candidate [owned decimal session API](docs/NATIVE-DECIMAL-PUBLIC-API.md) supports native assessment of a finite decimal-only schema profile, exact scalar reads and detached XML export. Callers supply explicit limits and assessment context. Complete XSD 1.1 and broader provider integration remain outside this profile; public API review and package publication are pending.
 
 ## 2. Quick Start
 
@@ -52,8 +52,9 @@ The public solution needs the .NET 10 SDK; it has no Azure, payment-service, key
 | Path | Purpose |
 |---|---|
 | `src/Bosak.Schema` | Schema compilation, models, validation and activation-free integration |
-| `src/Bosak.Schema/Assessment` | Internal finite native decimal backend, Core authority/advisor/input adapter and sequential host runner |
+| `src/Bosak.Schema/Assessment` | Public owned decimal workflow over the internal finite backend, Core adapter and sequential runner |
 | `tests/Bosak.Schema.Tests` | Schema and Apache compatibility regressions |
+| `tests/Bosak.Schema.PublicConsumer.Tests` | Public contract consumer without internal access; source and local-package lanes |
 | `tests/TestData/Schemas` | Locally authored schema fixtures |
 | `docs` | Architecture, integration, roadmap and transition decisions |
 | `tools` | Build and documentation checks |
@@ -64,4 +65,4 @@ Existing schema factory signatures remain intact. The old `License` entry points
 
 Fytala retains copyright and trademark ownership; Apache-2.0 grants the rights stated in the license. Branding does not grant trademark rights. The new license applies to this public source release; old proprietary releases and private licensing-product agreements are separate historical artifacts.
 
-*Last updated: 2026-11-15*
+*Last updated: 2026-11-17*

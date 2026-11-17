@@ -1,5 +1,7 @@
 # Native decimal assessment/session profile
 
+> 17 November 2026: the [public implementation candidate](NATIVE-DECIMAL-PUBLIC-API.md) supersedes the implementation-pending statements below. Historical prototype evidence is preserved; global acceptance and API freeze remain pending.
+
 > Proposed implementation and qualification contract for REQ-009 on published Core 1.81.2.
 
 ## 1. Status and candidate

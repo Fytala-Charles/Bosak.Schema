@@ -1,5 +1,7 @@
 # ADR-010: Owned synchronous native decimal facade
 
+> 17 November 2026: the [public implementation candidate](NATIVE-DECIMAL-PUBLIC-API.md) supersedes the implementation-pending statements below. Historical prototype evidence is preserved; global acceptance and API freeze remain pending.
+
 **Status:** Proposed
 **Date:** 2026-11-15
 **Deciders:** Repository owner; public contract acceptance pending
