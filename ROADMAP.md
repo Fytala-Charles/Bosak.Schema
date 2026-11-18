@@ -4,8 +4,6 @@
   <p>An open schema foundation with staged validation and integration.</p>
 </div>
 
-**Publication verified — 29 October 2026:** Public GitHub repository and Apache-2.0 detection verified; all 114 tests and the content-commit CI pass. [Publication receipt](docs/PUBLICATION.json). Historical GitHub transition receipt; the current NuGet release is recorded below.
-
 # Bosak.Schema Roadmap
 
 > An open schema foundation with staged validation and integration.
@@ -13,49 +11,21 @@
 
 ## 1. Current Milestone
 
-Schema services remain Apache-2.0 and activation-free; the public decimal-entry candidate advances the development minimum to 0.5. Public source contains the schema implementation/tests only; the original commercial infrastructure and full Git history remain private. Core 1.81.2 dependency adoption is now merged in Schema PR #1. The Core optional source integration is refreshed to the merged Schema revision in Core PR #472. No new Schema NuGet release/tag is announced.
+**Bosak.Schema 0.5.0-beta.1 is published and verified**, with an accepted bounded decimal-session contract. [NuGet](https://www.nuget.org/packages/Bosak.Schema/0.5.0-beta.1), [GitHub prerelease](https://github.com/Fytala-Charles/Bosak.Schema/releases/tag/v0.5.0-beta.1), [release scope and receipt](docs/BETA1_RELEASE.md). Services remain Apache-2.0 and activation-free. Public Core dependency minima remain 1.81.2.
 
 ## 2. Next Milestones
 
-1. Define the next bounded native provider/session adoption against the released Core surface and recorded source/design requirements; preserve explicit supported/refused profiles.
-2. Qualify complete component/universe identity, compatible-schema handoff, PSVI/atomic flow and bounded resource ownership.
-3. Implement or explicitly refuse remaining XSD 1.1 structural/assessment coverage.
-4. Build/test real consumers and unchanged binaries, then run the full engine/conformance gates before API freeze or release.
+1. Keep public documentation aligned with the verified release and explicit exclusions.
+2. Exercise an identified package-only consumer workflow; distinguish representative fixtures from real application acceptance.
+3. Record unsupported constructs and usability/lifetime findings, then scope beta.2 from that evidence.
+4. Review Braid/XmlDb adoption separately after the bounded Schema consumer workflow is understood.
 
-The 17 November public-entry candidate implements `NativeDecimalSession`, `NativeDecimalDocument`, immutable options/context and owned results with fixed bounded stage diagnostics. It keeps Core 1.81.2 and the finite backend grammar unchanged. The 0.5 development line has 272 passing cases: 249 implementation cases (243 retained plus six lifecycle/cleanup controls) and 23 separate public-consumer cases without friend access. The consumer also passes through the locally packed Schema binary and published Core dependencies; this repeats its case catalog and is not additive coverage. [Contract and qualification](docs/NATIVE-DECIMAL-PUBLIC-API.md). The alpha is published; overall profile acceptance and API freeze remain pending.
+Broader XSD 1.1/component-universe/PSVI and general Core C45/ADR006 work requires separate design, immutable specification adoption and acceptance. No automatic scope expansion or new release is authorized by this roadmap.
 
 ## 3. Validation and Limits
 
-The standalone solution passes 272 cases with Core pins at 1.81.2: 249 implementation cases and 23 external public-consumer cases. The Release build with NuGet auditing and official documentation checks pass. The historical Core optional source integration has 135 cases including the original 124 upstream cases; it is not requalified by this delivery. Full XSD 1.1, global profile acceptance and performance budgets remain separate. Billing/key-generation, Folio, XmlDb and Braid workflows remain outside this change.
+345 source cases (312 implementation/33 public),33 package-only cases, retained 124 legacy/23 published-alpha cases per control/replacement lane and nine signed Core dependency payloads passed. A fresh registry-only33-case consumer passed after publication. Catalogs overlap; these are not additive totals.54 release controls and six workload integrity controls are separate from product coverage.
 
-The [dependency adoption](docs/CORE-1.81.2-ADOPTION.md) and historical source/binary controls establish only their recorded compatibility scope. Broader component-universe interchange, native operation leases, concurrent disposal and complete structural assessment remain work. Select representative workloads and explicit budgets before making Schema performance claims; Core's scoped release deferral is not performance acceptance. Keep Schema package publication and consumer adoption decisions separate from the already published Core release.
+The [native API](docs/NATIVE-DECIMAL-PUBLIC-API.md), [restricted resolution](docs/RESTRICTED_RESOLUTION.md), [descriptor ownership](docs/DESCRIPTOR_SNAPSHOTS.md) and [legacy validation](docs/LEGACY_VALIDATION.md) define the supported limits. [Workload measurements](docs/BETA_QUALIFICATION.md) are bounded local observations, not a production SLA. Full XSD 1.1, general provider interchange and a perpetual API freeze remain unaccepted. Historical source integration receipts retain their original revisions; publication does not requalify them.
 
-*Last updated: 2026-11-17*
-
-
-**Current release — 17 November 2026:** [Bosak.Schema 0.5.0-alpha.0.7](https://www.nuget.org/packages/Bosak.Schema/0.5.0-alpha.0.7) is published and independently verified. Product coverage is 272 cases; 45 separate release controls pass. Beta readiness remains proposed; full XSD 1.1/API freeze/performance acceptance is not implied.
-
-Schema beta readiness is now the next priority before Braid/XmlDb adoption. The [beta gap assessment](docs/beta-readiness/ASSESSMENT.md) proposes a bounded decimal-session beta and distinguishes a broader validator target. Scope and public-contract decisions remain pending; no beta version or semantic change is made.
-
-
-The [public API audit](docs/beta-readiness/API-CONTRACT-AUDIT.md) classifies all39 published types/313 contract rows and records five caught observations. Legacy result semantics, mutable descriptor collections and file-resolution boundaries need beta decisions/hardening; [contract decisions](docs/beta-readiness/CONTRACT-DECISIONS.md) remain Proposed. No runtime behavior or beta acceptance changes.
-
-
-The local [restricted-resolution APIs](docs/RESTRICTED_RESOLUTION.md) add an explicit bounded file resolver and a controlled schema-only XSLT factory. Canonical containment, reparse-point refusal, full XML/DTD checks and published Core policy cover direct/nested schema reads. Stable host-owned filesystem paths are required; this is not an atomic sandbox. Restricted-resolution checkpoint:306 cases (280 implementation/26 public consumer), plus45 separate release controls. Published alpha remains272 cases; the source candidate is not a new release.
-
-
-Compiler-produced [descriptor snapshots](docs/DESCRIPTOR_SNAPSHOTS.md) now own immutable outer/nested collections. Caller-created positional records retain their existing ownership behavior. The descriptor-snapshot checkpoint passed319 product cases (290 implementation/29 external) and45 separate release controls; public signatures remain40 types/317 rows. This is local beta-readiness work; the published alpha and legacy validation meanings are unchanged.
-
-
-[Legacy validation](docs/LEGACY_VALIDATION.md) now refuses models with compile diagnostics before assertion/facet/static-check work, preserving original findings. For clean models, success remains operation-scoped and does not certify structural validity. Local suite345 cases (312 implementation/33 external), plus45 release controls; public40types/317rows unchanged. The published alpha remains unchanged; this source fix is not a beta release.
-
-
-The owner selected a bounded decimal-session beta with explicit exclusions. The [beta qualification](docs/BETA_QUALIFICATION.md) records five measured standalone workflows and a reproducible watchdog-controlled diagnostic. Product345 and release45 checks remain green; six separate runner controls qualify measurement integrity. Timing/memory results are local observations, not a production SLA. API/ADR acceptance and exact beta packaging/publication remain pending.
-
-
-The [bounded beta contract review](docs/BETA_CONTRACT_REVIEW.md) records the owner-accepted bounded public API/ADR decisions and compatibility evidence. ADR009/010 were accepted for this bounded scope on17 November2026. A clean-source alpha compatibility package passes package-only and retained-binary checks; no beta tag/artifact or publication is implied.
-
-
-## Beta.1 preparation — 17 November 2026
-
-Bounded ADR009/010 acceptance is merged in PR12; source `2a5abf6fb663313dc32bfeca5bbb8740bbe987ae`, main44174792275 green. [Beta.1 preparation](docs/BETA1_PREPARATION.md) records the exact product/tag plan and fresh local beta package.345 source,33 package-only, retained124/23 control/replacement cases and nine signed Core1.81.2 payloads pass;54 release and six runner controls pass separately. The controller candidate requires the reviewed beta tag and both retained lanes. No remote beta tag or NuGet beta publication; controller delivery, hosted preparation and exact hosted-artifact approval remain pending. Accepted bounded application scope does not close general CoreC45/ADR006 or production SLA/full-XSD acceptance.
+*Last updated: 2026-11-18*

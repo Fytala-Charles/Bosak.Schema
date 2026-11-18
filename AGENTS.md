@@ -137,7 +137,7 @@ public CanonicalEvidenceSet Parse(string payload, ParseOptions? options = null)
 |--------------|---------|
 | `Bosak.Schema.Tests` | Activation-free factories, schema compilation/validation and legacy API compatibility |
 
-The public-entry candidate solution has 272 cases: 249 implementation cases (243 retained plus six lifecycle controls) and 23 public-consumer cases in Bosak.Schema.PublicConsumer.Tests without friend access. Both source and locally packed binary lanes are exercised; repeated case catalogs are not additive coverage. Core stays at 1.81.2, MinVer development minimum is 0.5, and Schema PR #3 and Core consumer PR #503 are merged/hosted green; package delivery is under local review, while explicit profile/ADR/API-freeze acceptance and publication remain separate.
+The published beta source solution has 345 cases: 312 implementation and 33 public-consumer cases without friend access. Published-package and retained-binary lanes repeat scoped catalogs and are not additive coverage. Core qualification uses 1.81.2; the bounded ADR009/010 contract is accepted. See docs/BETA1_RELEASE.md for exact publication identities and exclusions.
 
 ### 5.2 Test Patterns
 
@@ -228,7 +228,7 @@ After **every** successful implementation step, update the following canonical d
 
 ---
 
-*Last updated: 2026-11-17*
+*Last updated: 2026-11-18*
 
 
 
@@ -236,7 +236,7 @@ After **every** successful implementation step, update the following canonical d
 
 Schema services require no activation. Legacy License/ActivatedLicense types are compatibility shapes only. No private Git history, credential issuer/verifier, signing material, licensing/payment infrastructure, private deployment documents or commercial test vectors may be copied here. Preserve Fytala copyright/SPDX notices and record semantic adoption evidence before new standards behavior. Full XSD 1.1 support and core/session API acceptance remain pending.
 
-## Current dependency and documentation checkpoint
+## Historical dependency and documentation checkpoint
 
 Product and test Core references select published 1.81.2 after Schema PR #1. The public-entry candidate advances Schema's MinVer development minimum to 0.5; no new Schema package release is implied. Standalone124-case regression coverage and the separate Core 135-case optional integration have distinct scopes. Use `docs/AGENT_HANDOVER.md` for current state and `docs/DEVELOPMENT_HISTORY.md` for archived local review notices; older inputs keep their original source hashes and do not replace current package pins. Full XSD 1.1 structural/native session/lease coverage and performance acceptance remain separate tasks.
 
@@ -271,6 +271,11 @@ Read docs/BETA_QUALIFICATION.md before measuring workloads. Build tools/Bosak.Sc
 Use docs/BETA_CONTRACT_REVIEW.md for the current concrete ADR009/010 proposal. The owner accepted ADR009/010 for the bounded Schema beta scope on17 November2026; broader acceptance is not inferred. Local alpha compatibility packages are not beta artifacts. General Core C45/ADR006, production SLAs, exact beta tag/controller/artifact and publication remain separate; do not infer their acceptance from package/binary passes.
 
 
-## Beta.1 release candidate
+## Beta.1 release candidate — historical 17 November checkpoint
 
 Read docs/BETA1_PREPARATION.md before release operations. Exact source2a5abf6fb663313dc32bfeca5bbb8740bbe987ae/tagv0.5.0-beta.1; controller requires345/33 and retained124/23 lanes, nine signed Core1.81.2 payloads.32 Python +22 GitHub provenance controls, six runner controls. Local manifest zero controller is never hosted evidence. No remote tag or beta publication yet; do not infer publication authority from preparation. Historical dossiers remain unchanged.
+
+
+## Current published beta
+
+Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read docs/BETA1_RELEASE.md and docs/beta1-publication/RECEIPT.json for current status. Earlier guides/dossiers retain their original checkpoint claims and hashes; run historical verifiers at their recorded revisions. The release controller remains pinned to this already-published version and must not be dispatched for a duplicate push. Future versions require fresh review and explicit approval. GitHub Packages is separate and unused.

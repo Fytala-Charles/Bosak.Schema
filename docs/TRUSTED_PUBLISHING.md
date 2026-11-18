@@ -1,6 +1,6 @@
 # Schema NuGet trusted-publishing setup
 
-17 November 2026. The alpha was published and independently verified using the configured trusted publisher. The beta controller is a local review candidate; publication of a beta remains a separate decision. [Scope and evidence](trusted-publishing/README.md).
+18 November 2026. Beta.1 was published and independently verified using the configured trusted publisher. [Current release and exact receipt](BETA1_RELEASE.md). Future versions need their own reviewed controller, artifact and approval. [Scope and evidence](trusted-publishing/README.md).
 
 ## Owner configuration after workflow review
 
@@ -23,7 +23,7 @@ The workflow obtains a short-lived key using NuGet/login@v1 only in the publish 
 ## Preparation, review, publication
 
 1. After reviewing/merging the workflow and completing hosted build/test/docs/controls, dispatch **Schema release** on main with publish=false. Preparation is the default and performs no NuGet login/push.
-2. The local beta controller admits accepted product source2a5abf6fb663313dc32bfeca5bbb8740bbe987ae, tagv0.5.0-beta.1 at that commit and ordinary MinVer version0.5.0-beta.1. Deliver the reviewed controller/tag before dispatch. It requires345source/33package-only cases, retained124legacy and23published-alpha cases per control/replacement lane, plus nine Core1.81.2 signatures/payloads, then seals one package/manifest. These catalogs overlap. [Exact plan and local artifact](BETA1_PREPARATION.md).
+2. The delivered beta controller admits accepted product source2a5abf6fb663313dc32bfeca5bbb8740bbe987ae, tagv0.5.0-beta.1 at that commit and ordinary MinVer version0.5.0-beta.1. Beta.1 controller/tag delivery is complete; this exact version is already published and must not be pushed again. It requires345source/33package-only cases, retained124legacy and23published-alpha cases per control/replacement lane, plus nine Core1.81.2 signatures/payloads, then seals one package/manifest. These catalogs overlap. [Exact plan and local artifact](BETA1_PREPARATION.md).
 3. Download the successful first-attempt preparation run's schema-nuget artifact, verify its artifact digest, manifest source/controller/product identities, exact package bytes, case receipts and exclusions. Review the resulting manifest SHA-256 and package SHA-256. Hosted builds may differ from the earlier locally prepared archive; preserve both receipts and obtain a new exact-artifact decision. Never assert that a rebuild retained the local digest without checking it.
 4. Obtain explicit publication approval for the selected run, version, manifest hash, package digest and NuGet.org destination. Confirm configured policy/owner rights and recheck registry absence.
 5. Dispatch the workflow on main with publish=true, source_run_id=<reviewed successful preparation run>, expected_manifest_sha256=<reviewed manifest digest>. The publisher rejects PR/fork/non-main/wrong-workflow/failed/rerun/publish-source runs, incomplete metadata and expired/duplicate artifacts before download. It verifies all files/source/dependencies/manifest and registry absence before OIDC, and repeats file/registry verification immediately before pushing one exact package. It never rebuilds, uses a wildcard package glob or suppresses duplicate conflicts.
@@ -33,7 +33,7 @@ No dispatch or publication is executed by this documentation. A failed preparati
 
 ## Local qualification and limits
 
-Run the54release controls using the commands in AGENTS.md, full solution build/test, and `pwsh tools/check-docs.ps1 -ProjectPath . -Strict`. Synthetic control ZIP/TRX files are not product executions; network/GitHub responses are mocked and no test logs in or pushes. The separate real package rehearsal verifies the preserved local package but uses an invalid-for-hosted all-zero controller placeholder; it is not a successful GitHub preparation and cannot be selected by the publisher.
+Run the54 release controls using the commands in AGENTS.md, full solution build/test, and `pwsh tools/check-docs.ps1 -ProjectPath . -Strict`. Synthetic control ZIP/TRX files are not product executions; network/GitHub responses are mocked and no test logs in or pushes. The separate real package rehearsal verifies the preserved local package but uses an invalid-for-hosted all-zero controller placeholder; it is not a successful GitHub preparation and cannot be selected by the publisher.
 
 SDK10.0.301, productCore1.81.2 minima and source pin remain explicit. No engine C# changes, package/tag/version publication, API/foundation acceptance, full XSD1.1 claim, broad concurrency guarantee or performance budget is introduced by this operational route. Original package review/preparation dossiers remain immutable historical receipts.
 

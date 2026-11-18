@@ -1,3 +1,7 @@
+## Beta.1 publication documentation — 18 November 2026
+
+Base52a4997daba109bc5daec03522e9fe98725b78aa. Owner requested next steps after beta publication/GitHub prerelease. Canonical current-release docs now point to verified0.5.0-beta.1 and explicit accepted scope/exclusions; dated dossiers remain unchanged. Publication44245557198/preparation44244606595, exact hashes and GitHub asset identities are in docs/beta1-publication/RECEIPT.json. No engine/package/workflow/dependency/version changes or additional publication. [Release guide](../docs/BETA1_RELEASE.md). Worktree .worktrees/Schema.BetaReleaseDocs / docs/schema-beta1-publication. Commit/push/PR still require explicit instruction under AGENTS. Owner selected the public invoice fixture. The package-only trial passes exact reads/XML, supported violation, namespace/attribute refusal, quota/disposal and pre-cancel recovery; all nine Core signatures/payloads verified. No new engine defect or beta.2 expansion justified. See ../docs/BETA1_INVOICE_TRIAL.md. Representative coverage is separate from product totals and is not production-user acceptance.
+
 ﻿
 
 ## Beta.1 preparation — 17 November 2026
@@ -10,7 +14,7 @@ Worktree .worktrees/Schema.BetaRelease, branch release/schema-beta1-preparation;
 
 Owner response: "Approve, please commit and push and open PR" to the explicit bounded ADR009/010 decision and31-file review delivery question. Recorded Accepted status for these application-facing Schema contracts, scoped publicCore1.81.2 consumption and listed exclusions. GeneralCoreC45/ADR006 acceptance, productionSLA, beta tag/artifact and publication remain separate/unapproved. Product/source compatibility package and all prior evidence unchanged. Deliver this31-file accepted-contract review as instructed, run hosted checks, then review/merge/main before exact beta source/tag/controller decisions.
 
-Last updated: 2026-11-17
+Last updated: 2026-11-18
 
 # Bounded beta contract review — 17 November 2026
 
