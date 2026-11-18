@@ -1,3 +1,7 @@
+## Beta.1 publication documentation — 18 November 2026
+
+Base52a4997daba109bc5daec03522e9fe98725b78aa. Owner requested next steps after beta publication/GitHub prerelease. Canonical current-release docs now point to verified0.5.0-beta.1 and explicit accepted scope/exclusions; dated dossiers remain unchanged. Publication44245557198/preparation44244606595, exact hashes and GitHub asset identities are in docs/beta1-publication/RECEIPT.json. No engine/package/workflow/dependency/version changes or additional publication. [Release guide](BETA1_RELEASE.md). Worktree .worktrees/Schema.BetaReleaseDocs / docs/schema-beta1-publication. Commit/push/PR still require explicit instruction under AGENTS. Owner selected the public invoice fixture. The package-only trial passes exact reads/XML, supported violation, namespace/attribute refusal, quota/disposal and pre-cancel recovery; all nine Core signatures/payloads verified. No new engine defect or beta.2 expansion justified. See BETA1_INVOICE_TRIAL.md. Representative coverage is separate from product totals and is not production-user acceptance.
+
 
 
 ## Beta.1 preparation — 17 November 2026
@@ -70,7 +74,7 @@ Next: commit/push/PR approval, review/merge/main validation, then a new preparat
 
 # Schema trusted-publishing route prepared locally - 17 November 2026
 
-Last updated: 2026-11-17
+Last updated: 2026-11-18
 
 Owner selected NuGet trusted publishing after metadata inspection found Schema has no secrets/variables/environment or publisher workflow configured. Isolated .worktrees/Schema.TrustedPublishing / ci/schema-trusted-publishing based on merged1783d1a. A [trusted-publishing route](TRUSTED_PUBLISHING.md) is prepared locally following the owner's selection. The new release workflow is manual and preparation-only by default; its publisher verifies a successful same-repository/main/first-attempt preparation, the exact reviewed manifest/package and registry absence before OIDC login and again before one push. Product source/version/Core dependencies are unchanged. No workflow dispatch, policy/account update, login or publication has occurred. A hosted preparation will create its own artifact/digest for review; the earlier local package remains preserved.
 
