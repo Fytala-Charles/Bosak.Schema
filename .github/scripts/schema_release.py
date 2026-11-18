@@ -14,8 +14,12 @@ import zipfile
 
 REPOSITORY = "Fytala-Charles/Bosak.Schema"
 LEGACY = "c953ebe0057bea1616d3e4f891f7b0a5fc4bd99b"
-SOURCE = "1783d1a99b37e206b10592c24b3a5fa3ac126969"
-VERSION = "0.5.0-alpha.0.7"
+ALPHA_SOURCE = "1783d1a99b37e206b10592c24b3a5fa3ac126969"
+ALPHA_VERSION = "0.5.0-alpha.0.7"
+ALPHA_SHA256 = "6a11b8980b6f7cca68beec160845bff83edf317b51e27fcfd06775da22f48722"
+SOURCE = "2a5abf6fb663313dc32bfeca5bbb8740bbe987ae"
+VERSION = "0.5.0-beta.1"
+TAG = "v" + VERSION
 DEPENDENCIES = {"Bosak.XPath.Api", "Bosak.XPath.Providers", "Bosak.Xslt", "Bosak.XQuery"}
 CORE_ASSEMBLIES = DEPENDENCIES | {"Bosak.XPath.Core", "Bosak.XPath.Parser", "Bosak.XPath.Compiler", "Bosak.XPath.Runtime", "Bosak.XPath.Standard"}
 TRX = {"t": "http://microsoft.com/schemas/VisualStudio/TeamTest/2010"}
@@ -40,13 +44,14 @@ def save(path, value):
 
 def source_identity(root, revision):
     require(re.fullmatch(r"[0-9a-f]{40}", revision) is not None, "Immutable source commit required")
-    require(revision == SOURCE, "This first release controller only admits the reviewed source")
+    require(revision == SOURCE, "This release controller only admits the reviewed source")
     git = lambda *args: subprocess.check_output(["git", "-C", str(root), *args], text=True).strip()
     require(git("rev-parse", "HEAD") == revision, "Source checkout mismatch")
     require(not git("status", "--porcelain"), "Source checkout must be clean")
     remote = git("remote", "get-url", "origin").removesuffix(".git").rstrip("/")
     require(remote.lower() == "https://github.com/" + REPOSITORY.lower(), "Wrong source repository")
     subprocess.run(["git", "-C", str(root), "merge-base", "--is-ancestor", revision, "origin/main"], check=True)
+    require(git("rev-parse", "refs/tags/" + TAG + "^{commit}") == revision, "Reviewed beta tag mismatch")
     return git("rev-parse", "HEAD^{tree}")
 
 
@@ -110,16 +115,22 @@ def seal(directory, root, revision, version, controller, results):
     package = package_info(packages[0], root, revision, version)
     source_cases = case_catalog(results / "source")
     consumer_cases = case_catalog(results / "consumer")
-    require(sorted(map(len, source_cases)) == [23, 249] and len(consumer_cases) == 1 and len(consumer_cases[0]) == 23, "Wrong qualification catalogs")
-    require(consumer_cases[0] == next(rows for rows in source_cases if len(rows) == 23), "Package consumer catalog drift")
+    require(sorted(map(len, source_cases)) == [33, 312] and len(consumer_cases) == 1 and len(consumer_cases[0]) == 33, "Wrong qualification catalogs")
+    require(consumer_cases[0] == next(rows for rows in source_cases if len(rows) == 33), "Package consumer catalog drift")
     legacy = read_json(results / "legacy.json")
     require(legacy.get("baselineCommit") == LEGACY and legacy.get("count") == 124 and legacy.get("onlySchemaDllChanged") is True and legacy.get("sameCases") is True, "Legacy lane incomplete")
     legacy_control = case_catalog(results / "legacy-control")
     legacy_candidate = case_catalog(results / "legacy-candidate")
     require(len(legacy_control) == len(legacy_candidate) == 1 and len(legacy_control[0]) == 124 and legacy_control == legacy_candidate, "Legacy TRX drift")
+    published = read_json(results / "published.json")
+    require(published.get("baselineCommit") == ALPHA_SOURCE and published.get("count") == 23 and published.get("onlySchemaDllChanged") is True and published.get("sameCases") is True, "Published alpha lane incomplete")
+    a, b = case_catalog(results / "published-control"), case_catalog(results / "published-candidate")
+    require(len(a) == len(b) == 1 and len(a[0]) == 23 and a == b, "Published alpha TRX drift")
+    alpha = read_json(results / "published-identity.json")
+    require(alpha.get("packageSha256") == ALPHA_SHA256 and alpha.get("packageOnly") is True and alpha.get("schemaSignatureExitCode") == 0 and len(alpha.get("core", [])) == 9 and {d["id"] for d in alpha["core"]} == CORE_ASSEMBLIES and all(d["version"] == "1.81.2" and d["identical"] and d["signatureExitCode"] == 0 for d in alpha["core"]), "Published alpha identity incomplete")
     identity = read_json(results / "consumer-identity.json")
     require(identity.get("packageSha256") == package["sha256"] and identity.get("packageOnly") is True and len(identity.get("core", [])) == 9 and {d["id"] for d in identity["core"]} == CORE_ASSEMBLIES and all(d["version"] == "1.81.2" and d["identical"] and d["signatureExitCode"] == 0 for d in identity["core"]), "Package/dependency identity incomplete")
-    manifest = {"schemaVersion": 1, "repository": REPOSITORY, "sourceCommit": revision, "sourceTree": tree, "controllerCommit": controller, "version": version, "package": package, "qualification": {"sourceCases": 272, "packageCases": 23, "legacyCasesPerLane": 124, "coreDependencies": "1.81.2", "coreSignatureAndPayloadIdentity": True, "catalogsOverlap": True}}
+    manifest = {"schemaVersion": 1, "repository": REPOSITORY, "sourceCommit": revision, "sourceTree": tree, "sourceTag": TAG, "controllerCommit": controller, "version": version, "package": package, "qualification": {"sourceCases": 345, "packageCases": 33, "legacyCasesPerLane": 124, "publishedAlphaCasesPerLane": 23, "publishedAlphaSha256": ALPHA_SHA256, "coreDependencies": "1.81.2", "coreSignatureAndPayloadIdentity": True, "catalogsOverlap": True}}
     save(directory / "release-manifest.json", manifest)
     return digest((directory / "release-manifest.json").read_bytes())
 
@@ -130,12 +141,12 @@ def verify(directory, root, revision, version, controller, expected):
     require(manifest_path.is_file() and not manifest_path.is_symlink() and manifest_path.stat().st_size <= 128 * 1024, "Invalid manifest")
     require(digest(manifest_path.read_bytes()) == expected.lower(), "Manifest digest mismatch")
     manifest = read_json(manifest_path)
-    require(manifest.get("schemaVersion") == 1 and manifest.get("repository") == REPOSITORY and manifest.get("sourceCommit") == revision and manifest.get("controllerCommit") == controller and manifest.get("version") == version, "Manifest provenance mismatch")
+    require(manifest.get("sourceTag") == TAG and manifest.get("schemaVersion") == 1 and manifest.get("repository") == REPOSITORY and manifest.get("sourceCommit") == revision and manifest.get("controllerCommit") == controller and manifest.get("version") == version, "Manifest provenance mismatch")
     require(source_identity(root, revision) == manifest.get("sourceTree"), "Source tree mismatch")
     expected_files = {"release-manifest.json", f"Bosak.Schema.{version}.nupkg"}
     require({f.name for f in directory.iterdir()} == expected_files, "Unexpected artifact set")
     require(package_info(directory / f"Bosak.Schema.{version}.nupkg", root, revision, version) == manifest.get("package"), "Package payload mismatch")
-    require(manifest.get("qualification") == {"sourceCases": 272, "packageCases": 23, "legacyCasesPerLane": 124, "coreDependencies": "1.81.2", "coreSignatureAndPayloadIdentity": True, "catalogsOverlap": True}, "Qualification profile mismatch")
+    require(manifest.get("qualification") == {"sourceCases": 345, "packageCases": 33, "legacyCasesPerLane": 124, "publishedAlphaCasesPerLane": 23, "publishedAlphaSha256": ALPHA_SHA256, "coreDependencies": "1.81.2", "coreSignatureAndPayloadIdentity": True, "catalogsOverlap": True}, "Qualification profile mismatch")
     return manifest
 
 
@@ -159,8 +170,9 @@ def command(args, log):
         subprocess.run(args, check=True, stdout=output, stderr=subprocess.STDOUT, timeout=180)
 
 
-def legacy_check(baseline, package, results):
-    root = baseline.parent / "legacy-layouts"
+def legacy_check(baseline, package, results, published=False):
+    label, count, assembly, commit = ("published", 23, "Bosak.Schema.PublicConsumer.Tests.dll", ALPHA_SOURCE) if published else ("legacy", 124, "Bosak.Schema.Tests.dll", LEGACY)
+    root = baseline.parent / (label + "-layouts")
     require(not root.exists(), "Existing legacy layouts must be preserved")
     records = []
     for name in ["control", "candidate"]:
@@ -170,19 +182,24 @@ def legacy_check(baseline, package, results):
             with zipfile.ZipFile(package) as archive:
                 (target / "Bosak.Schema.dll").write_bytes(archive.read("lib/net10.0/Bosak.Schema.dll"))
         before = {f.relative_to(target).as_posix(): digest(f.read_bytes()) for f in target.rglob("*") if f.is_file()}
-        command(["dotnet", "vstest", str(target / "Bosak.Schema.Tests.dll"), "--logger:trx", "--ResultsDirectory:" + str(results / ("legacy-" + name))], results / ("legacy-" + name + ".log"))
+        command(["dotnet", "vstest", str(target / assembly), "--logger:trx", "--ResultsDirectory:" + str(results / (label + "-" + name))], results / (label + "-" + name + ".log"))
         require(before == {rel: digest((target / rel).read_bytes()) for rel in before}, "Legacy layout mutated")
         records.append(before)
     require(set(records[0]) == set(records[1]) and [name for name in records[0] if records[0][name] != records[1][name]] == ["Bosak.Schema.dll"], "Unexpected legacy replacement")
-    a, b = case_catalog(results / "legacy-control"), case_catalog(results / "legacy-candidate")
-    require(a == b and len(a) == 1 and len(a[0]) == 124, "Legacy case mismatch")
-    save(results / "legacy.json", {"baselineCommit": LEGACY, "count": 124, "onlySchemaDllChanged": True, "sameCases": True, "inventories": records})
+    a, b = case_catalog(results / (label + "-control")), case_catalog(results / (label + "-candidate"))
+    require(a == b and len(a) == 1 and len(a[0]) == count, "Retained case mismatch")
+    save(results / (label + ".json"), {"baselineCommit": commit, "count": count, "onlySchemaDllChanged": True, "sameCases": True, "inventories": records})
 
 
-def consumer_identity(package, cache, output, assets, results):
+def consumer_identity(package, cache, output, assets, results, published=False):
     data = read_json(assets)
     require(not any(item["type"] == "project" for item in data["libraries"].values()), "Consumer source override refused")
-    own = cache / "bosak.schema" / VERSION
+    version = ALPHA_VERSION if published else VERSION
+    require(data["libraries"].get("Bosak.Schema/" + version, {}).get("type") == "package", "Schema package reference mismatch")
+    if published:
+        require(digest(package.read_bytes()) == ALPHA_SHA256, "Published alpha archive mismatch")
+        command(["dotnet", "nuget", "verify", "--all", str(package)], results / "published-schema.signature.log")
+    own = cache / "bosak.schema" / version
     require((own / package.name.lower()).read_bytes() == package.read_bytes(), "Cached package mismatch")
     with zipfile.ZipFile(package) as archive:
         require(archive.read("lib/net10.0/Bosak.Schema.dll") == (own / "lib/net10.0/Bosak.Schema.dll").read_bytes() == (output / "Bosak.Schema.dll").read_bytes(), "Runtime Schema mismatch")
@@ -198,15 +215,15 @@ def consumer_identity(package, cache, output, assets, results):
             require(".signature.p7s" in archive.namelist(), "Core signature missing")
             leaf = "lib/net10.0/" + name + ".dll"
             require(archive.read(leaf) == (folder / leaf).read_bytes() == (output / (name + ".dll")).read_bytes(), "Core payload drift")
-        command(["dotnet", "nuget", "verify", "--all", str(archive_path)], results / (name + ".signature.log"))
+        command(["dotnet", "nuget", "verify", "--all", str(archive_path)], results / (("published-" if published else "") + name + ".signature.log"))
         rows.append({"id": name, "version": version, "identical": True, "signatureExitCode": 0, "archiveSha256": digest(archive_path.read_bytes())})
     require(len(rows) == 9 and {r["id"] for r in rows} == CORE_ASSEMBLIES, "Incomplete Core closure")
-    save(results / "consumer-identity.json", {"packageSha256": digest(package.read_bytes()), "packageOnly": True, "core": rows})
+    save(results / ("published-identity.json" if published else "consumer-identity.json"), {"packageSha256": digest(package.read_bytes()), "packageOnly": True, "schemaSignatureExitCode": 0 if published else None, "core": rows})
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("operation", choices=["seal", "verify", "absent", "legacy", "consumer"])
+    parser.add_argument("operation", choices=["seal", "verify", "absent", "legacy", "consumer", "published", "published-consumer"])
     for arg in ["directory", "source-root", "source-commit", "version", "controller-commit", "expected-manifest", "results", "baseline", "package", "cache", "output", "assets"]:
         parser.add_argument("--" + arg)
     args = parser.parse_args()
@@ -217,10 +234,10 @@ def main():
         if args.operation == "absent":
             registry_absent(args.version)
         print("Verified reviewed package" + ("; registry version absent" if args.operation == "absent" else ""))
-    elif args.operation == "legacy":
-        legacy_check(Path(args.baseline), Path(args.package), Path(args.results))
+    elif args.operation in ["legacy", "published"]:
+        legacy_check(Path(args.baseline), Path(args.package), Path(args.results), args.operation == "published")
     else:
-        consumer_identity(Path(args.package), Path(args.cache), Path(args.output), Path(args.assets), Path(args.results))
+        consumer_identity(Path(args.package), Path(args.cache), Path(args.output), Path(args.assets), Path(args.results), args.operation == "published-consumer")
 
 
 if __name__ == "__main__":

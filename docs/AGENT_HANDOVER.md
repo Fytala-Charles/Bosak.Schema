@@ -1,3 +1,11 @@
+
+
+## Beta.1 preparation — 17 November 2026
+
+Bounded ADR009/010 acceptance is merged in PR12; source `2a5abf6fb663313dc32bfeca5bbb8740bbe987ae`, main44174792275 green. [Beta.1 preparation](BETA1_PREPARATION.md) records the exact product/tag plan and fresh local beta package.345 source,33 package-only, retained124/23 control/replacement cases and nine signed Core1.81.2 payloads pass;54 release and six runner controls pass separately. The controller candidate requires the reviewed beta tag and both retained lanes. No remote beta tag or NuGet beta publication; controller delivery, hosted preparation and exact hosted-artifact approval remain pending. Accepted bounded application scope does not close general CoreC45/ADR006 or production SLA/full-XSD acceptance.
+
+Worktree .worktrees/Schema.BetaRelease, branch release/schema-beta1-preparation; base2a5abf6. Local packet .guard-tmp/schema-beta1-20261117. No commit/push yet: AGENTS requires explicit request. Local tag is isolated from shared repository refs.
+
 ## Owner accepted bounded beta ADR/API decisions — 17 November 2026
 
 Owner response: "Approve, please commit and push and open PR" to the explicit bounded ADR009/010 decision and31-file review delivery question. Recorded Accepted status for these application-facing Schema contracts, scoped publicCore1.81.2 consumption and listed exclusions. GeneralCoreC45/ADR006 acceptance, productionSLA, beta tag/artifact and publication remain separate/unapproved. Product/source compatibility package and all prior evidence unchanged. Deliver this31-file accepted-contract review as instructed, run hosted checks, then review/merge/main before exact beta source/tag/controller decisions.

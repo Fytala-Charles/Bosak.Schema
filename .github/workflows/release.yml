@@ -26,8 +26,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  SOURCE_COMMIT: 1783d1a99b37e206b10592c24b3a5fa3ac126969
-  PACKAGE_VERSION: 0.5.0-alpha.0.7
+  SOURCE_COMMIT: 2a5abf6fb663313dc32bfeca5bbb8740bbe987ae
+  PACKAGE_VERSION: 0.5.0-beta.1
 
 defaults:
   run:
@@ -68,6 +68,11 @@ jobs:
           fetch-depth: 0
           path: baseline
           persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: 1783d1a99b37e206b10592c24b3a5fa3ac126969
+          path: published-source
+          persist-credentials: false
       - name: Build and test exact accepted source
         run: |
           dotnet build source/Bosak.Schema.slnx -c Release --artifacts-path "$env:RUNNER_TEMP/source-build"
@@ -93,6 +98,18 @@ jobs:
           dotnet build baseline/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj -c Release --artifacts-path "$env:RUNNER_TEMP/baseline-build"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python controller/.github/scripts/schema_release.py legacy --baseline "$env:RUNNER_TEMP/baseline-build/bin/Bosak.Schema.Tests/release" --package "$env:RUNNER_TEMP/package/Bosak.Schema.$env:PACKAGE_VERSION.nupkg" --results "$env:RUNNER_TEMP/results"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Qualify retained published-alpha public consumer binaries
+        run: |
+          $config = Join-Path $env:RUNNER_TEMP 'Published.NuGet.Config'
+          '<configuration><packageSources><clear/><add key="nuget.org" value="https://api.nuget.org/v3/index.json"/></packageSources></configuration>' | Set-Content -LiteralPath $config -Encoding utf8
+          dotnet restore published-source/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj -p:SchemaConsumerPackageVersion=0.5.0-alpha.0.7 --artifacts-path "$env:RUNNER_TEMP/published" --packages "$env:RUNNER_TEMP/published-cache" --configfile $config
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet build published-source/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj -c Release --no-restore -p:SchemaConsumerPackageVersion=0.5.0-alpha.0.7 --artifacts-path "$env:RUNNER_TEMP/published"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python controller/.github/scripts/schema_release.py published-consumer --package "$env:RUNNER_TEMP/published-cache/bosak.schema/0.5.0-alpha.0.7/bosak.schema.0.5.0-alpha.0.7.nupkg" --cache "$env:RUNNER_TEMP/published-cache" --output "$env:RUNNER_TEMP/published/bin/Bosak.Schema.PublicConsumer.Tests/release" --assets "$env:RUNNER_TEMP/published/obj/Bosak.Schema.PublicConsumer.Tests/project.assets.json" --results "$env:RUNNER_TEMP/results"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python controller/.github/scripts/schema_release.py published --baseline "$env:RUNNER_TEMP/published/bin/Bosak.Schema.PublicConsumer.Tests/release" --package "$env:RUNNER_TEMP/package/Bosak.Schema.$env:PACKAGE_VERSION.nupkg" --results "$env:RUNNER_TEMP/results"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Seal qualified immutable package manifest
         run: |

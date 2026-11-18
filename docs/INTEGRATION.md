@@ -120,3 +120,8 @@ The owner selected a bounded decimal-session beta with explicit exclusions. The 
 
 
 The [bounded beta contract review](BETA_CONTRACT_REVIEW.md) records the owner-accepted bounded public API/ADR decisions and compatibility evidence. ADR009/010 were accepted for this bounded scope on17 November2026. A clean-source alpha compatibility package passes package-only and retained-binary checks; no beta tag/artifact or publication is implied.
+
+
+## Beta.1 preparation — 17 November 2026
+
+Bounded ADR009/010 acceptance is merged in PR12; source `2a5abf6fb663313dc32bfeca5bbb8740bbe987ae`, main44174792275 green. [Beta.1 preparation](BETA1_PREPARATION.md) records the exact product/tag plan and fresh local beta package.345 source,33 package-only, retained124/23 control/replacement cases and nine signed Core1.81.2 payloads pass;54 release and six runner controls pass separately. The controller candidate requires the reviewed beta tag and both retained lanes. No remote beta tag or NuGet beta publication; controller delivery, hosted preparation and exact hosted-artifact approval remain pending. Accepted bounded application scope does not close general CoreC45/ADR006 or production SLA/full-XSD acceptance.
