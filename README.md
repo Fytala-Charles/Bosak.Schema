@@ -69,7 +69,7 @@ Existing schema factory signatures remain intact. The old `License` entry points
 
 Fytala retains copyright and trademark ownership; Apache-2.0 grants the rights stated in the license. Branding does not grant trademark rights. The new license applies to this public source release; old proprietary releases and private licensing-product agreements are separate historical artifacts.
 
-*Last updated: 2026-11-18*
+*Last updated: 2026-11-19*
 
 See the [next-beta assessment](docs/beta2-gap-assessment/README.md) for proposed diagnostic improvements and the evidence required before expanding the native grammar.
 
@@ -80,3 +80,5 @@ The [shared specification coverage programme](docs/specification-coverage/PROGRA
 The [shared coverage programme](docs/specification-coverage/PROGRAM.md) now records a local namespace/optional-assertion candidate with separate minimum/current-Core consumers; see its [bounded progress](docs/specification-coverage/M1-CANDIDATE-DELTA.json).
 
 The [packaged0.6guidance](docs/package-readme06-reconciled/README.md) distinguishes the new diagnostic/namespace profile from published beta.1 and verifies consumer examples.
+
+The development profile also supports [reusable named complex types](docs/m2a-named-types/README.md) within the bounded decimal workflow. Named simple types, derivation, attributes and imports remain excluded. Published beta.1 retains its original scope.

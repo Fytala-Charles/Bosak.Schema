@@ -1,0 +1,1277 @@
+[
+  {
+    "id": "M2A-01",
+    "label": "named type before root",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-02",
+    "label": "forward reference",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:element name='order' type='p:OrderType'/><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-03",
+    "label": "second root shares type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/><xs:element name='quote' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:quote xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:quote>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-04",
+    "label": "alternate schema prefix",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:tns='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='tns:tax gt 0'/></xs:complexType><xs:element name='order' type='tns:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-05",
+    "label": "type uses actual default namespace",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' xmlns='urn:orders'><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-06",
+    "label": "QName whitespace collapse",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='  p:OrderType  '/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-07",
+    "label": "type element separate symbol spaces",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='order'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-08",
+    "label": "no namespace named type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='tax gt 0'/></xs:complexType><xs:element name='order' type='OrderType'/></xs:schema>",
+    "instance": "<order><amount>12.50</amount><tax>2</tax></order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-09",
+    "label": "zero assertions",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-10",
+    "label": "eight assertions",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-11",
+    "label": "unused valid type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='Unused'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-12",
+    "label": "mixed anonymous and named roots",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/><xs:element name='quote'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<o:quote xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:quote>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-13",
+    "label": "multiple different types select right body",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/><xs:complexType name='OtherType'><xs:sequence><xs:element name='net' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='quote' type='p:OtherType'/></xs:schema>",
+    "instance": "<o:quote xmlns:o='urn:orders'><o:net>12.50</o:net><o:tax>2</o:tax></o:quote>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-14",
+    "label": "wrong root namespace",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:other'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-15",
+    "label": "unknown root",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:missing xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:missing>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-16",
+    "label": "wrong child namespace",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><amount>12.50</amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-17",
+    "label": "wrong order",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:tax>2</o:tax><o:amount>12.5</o:amount></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-18",
+    "label": "false assertion",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>0</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-19",
+    "label": "bad decimal",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>oops</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-20",
+    "label": "missing child",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-21",
+    "label": "extra child",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax><o:tax>3</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-22",
+    "label": "unresolved type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:Missing'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-23",
+    "label": "undefined prefix",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='missing:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-24",
+    "label": "malformed QName",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p::OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-25",
+    "label": "wrong URI type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element xmlns:p='urn:other' name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-26",
+    "label": "default namespace not target",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-27",
+    "label": "xpath default is not QName default",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' xpathDefaultNamespace='##targetNamespace'><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-28",
+    "label": "duplicate type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-29",
+    "label": "duplicate root",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-30",
+    "label": "inline and type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-31",
+    "label": "unused invalid named type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='Unused'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-32",
+    "label": "unused unsupported type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='Unused'><xs:complexContent/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-33",
+    "label": "named simple type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:simpleType name='Money'><xs:restriction base='xs:decimal'/></xs:simpleType><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-34",
+    "label": "derivation",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:complexContent><xs:extension base='xs:anyType'/></xs:complexContent></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-35",
+    "label": "element reference",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/><xs:element ref='p:order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "Attributes",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-36",
+    "label": "import",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:import namespace='urn:other'/><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-37",
+    "label": "recursive local complex",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='p:OrderType'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-38",
+    "label": "named type attrs",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType' mixed='true'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "Attributes",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-39",
+    "label": "no roots",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-40",
+    "label": "seventeen types",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='T0'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T1'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T2'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T3'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T4'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T5'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T6'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T7'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T8'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T9'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T10'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T11'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T12'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T13'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T14'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T15'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T16'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "RepresentationCapacity",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-41",
+    "label": "seventeen roots",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='r0' type='p:OrderType'/><xs:element name='r1' type='p:OrderType'/><xs:element name='r2' type='p:OrderType'/><xs:element name='r3' type='p:OrderType'/><xs:element name='r4' type='p:OrderType'/><xs:element name='r5' type='p:OrderType'/><xs:element name='r6' type='p:OrderType'/><xs:element name='r7' type='p:OrderType'/><xs:element name='r8' type='p:OrderType'/><xs:element name='r9' type='p:OrderType'/><xs:element name='r10' type='p:OrderType'/><xs:element name='r11' type='p:OrderType'/><xs:element name='r12' type='p:OrderType'/><xs:element name='r13' type='p:OrderType'/><xs:element name='r14' type='p:OrderType'/><xs:element name='r15' type='p:OrderType'/><xs:element name='r16' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "RepresentationCapacity",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-42",
+    "label": "primitive root",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='xs:decimal'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-43",
+    "label": "nine assertions",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-44",
+    "label": "sixteen global types",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T1'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T2'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T3'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T4'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T5'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T6'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T7'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T8'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T9'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T10'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T11'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T12'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T13'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T14'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='T15'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-45",
+    "label": "sixteen global roots",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/><xs:element name='r0' type='p:OrderType'/><xs:element name='r1' type='p:OrderType'/><xs:element name='r2' type='p:OrderType'/><xs:element name='r3' type='p:OrderType'/><xs:element name='r4' type='p:OrderType'/><xs:element name='r5' type='p:OrderType'/><xs:element name='r6' type='p:OrderType'/><xs:element name='r7' type='p:OrderType'/><xs:element name='r8' type='p:OrderType'/><xs:element name='r9' type='p:OrderType'/><xs:element name='r10' type='p:OrderType'/><xs:element name='r11' type='p:OrderType'/><xs:element name='r12' type='p:OrderType'/><xs:element name='r13' type='p:OrderType'/><xs:element name='r14' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-46",
+    "label": "type QName uses root namespace scope",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' xmlns:q='urn:orders' type='q:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-47",
+    "label": "assertion uses named type namespace scope",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType xmlns:q='urn:orders' name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='q:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-48",
+    "label": "root QName scope cannot leak into named type assertions",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='q:tax gt 0'/></xs:complexType><xs:element xmlns:q='urn:orders' name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "AssertionGrammar",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-49",
+    "label": "malformed type name",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='bad:name'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-50",
+    "label": "empty type QName",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type=' '/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  },
+  {
+    "id": "M2A-51",
+    "label": "unused unresolved local type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:complexType name='Unused'><xs:sequence><xs:element name='amount' type='p:Missing'/><xs:element name='tax' type='p:Missing'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "values": [
+      "12.5",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "2.6",
+      "3.3.2",
+      "3.3.3",
+      "3.3.4",
+      "3.4.2",
+      "3.4.3",
+      "3.4.4",
+      "4.2"
+    ],
+    "caseKind": "authored regression; not official W3C"
+  }
+]
