@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 15-11-2026     | Share hardened bounded input capture with the internal Core adapter                       |
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Adopt bounded expanded names and optional native assertions                              |
+//                      | Charles Korthout | 0.5   | 19-11-2026     | Adopt bounded named complex types and shared expanded component identity                  |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -47,6 +48,9 @@ internal sealed class NativeDecimalSchema
         this.limits = limits;
     }
 
+    private ImmutableDictionary<XName, NativeDecimalSchema> roots = ImmutableDictionary<XName, NativeDecimalSchema>.Empty;
+    internal IEnumerable<NativeDecimalSchema> Roots => roots.Values;
+    internal ImmutableArray<NativeType> NamedTypes { get; private set; } = [];
     internal NativeDeclaration Root { get; }
     internal ImmutableArray<NativeDeclaration> Children { get; }
 
@@ -65,62 +69,122 @@ internal sealed class NativeDecimalSchema
             var targetNamespace = TargetNamespace(root);
             var defaultForm = Form(root, "elementFormDefault", "unqualified");
             var assertionNamespace = AssertionNamespace(root, targetNamespace, "");
-            var global = Single(root, "element");
-            Attributes(global, "name");
-            var rootName = Name(global);
-            var complex = Single(global, "complexType");
-            Attributes(complex);
-            var members = Elements(complex);
-            Require(members.Count is >= 1 and <= 9 && members[0].Name == Xs + "sequence" &&
-                members.Skip(1).All(e => e.Name == Xs + "assert"), "Expected sequence then zero to eight assertions.", NativeDecimalUnsupportedReason.DeclarationShape);
-            var sequence = members[0];
-            Attributes(sequence);
-            var declarations = Elements(sequence);
-            Require(declarations.Count is >= 1 and <= 16, "Expected one to sixteen decimal declarations.", NativeDecimalUnsupportedReason.DeclarationShape);
-            var children = ImmutableArray.CreateBuilder<NativeDeclaration>();
-            var names = new HashSet<string>(StringComparer.Ordinal);
-            var maximum = 0;
-            var decimalType = new NativeType("decimal", false);
+            var globals = Elements(root);
+            Require(globals.All(e => e.Name == Xs + "element" || e.Name == Xs + "complexType"),
+                "Only global roots and named complex types are supported.", NativeDecimalUnsupportedReason.DeclarationShape);
+            var types = globals.Where(e => e.Name == Xs + "complexType").ToArray();
+            var declarations = globals.Where(e => e.Name == Xs + "element").ToArray();
+            Require(types.Length <= 16 && declarations.Length <= 16, "Global component ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            Require(declarations.Length != 0, "At least one root declaration is required.", NativeDecimalUnsupportedReason.DeclarationShape);
+            var decimalType = new NativeType("decimal", false, Xs.NamespaceName);
+            var named = new Dictionary<XName, NativeDecimalSchema>();
+            // Compile all types eagerly, including unused declarations, before resolving roots.
+            foreach (var type in types)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                Attributes(type, "name");
+                var name = Name(type, NativeDecimalUnsupportedReason.DeclarationShape);
+                var key = XName.Get(name, targetNamespace);
+                Require(!named.ContainsKey(key), "Duplicate named type.", NativeDecimalUnsupportedReason.DeclarationShape);
+                var identity = new NativeType(name, true, targetNamespace);
+                named.Add(key, CompileComplex(type, new NativeDeclaration(name, identity, 1, 1, targetNamespace),
+                    targetNamespace, defaultForm, assertionNamespace, decimalType, limits, cancellationToken));
+            }
+            var compiled = ImmutableDictionary.CreateBuilder<XName, NativeDecimalSchema>();
+            NativeDecimalSchema? first = null;
             foreach (var declaration in declarations)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                Require(declaration.Name == Xs + "element", "Only local decimal elements are supported.", NativeDecimalUnsupportedReason.DeclarationShape);
-                Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form");
-                Require(Elements(declaration).Count == 0, "Local declarations must be empty.", NativeDecimalUnsupportedReason.DeclarationShape);
+                Attributes(declaration, "name", "type");
                 var name = Name(declaration);
-                var namespaceUri = Form(declaration, "form", defaultForm) == "qualified" ? targetNamespace : "";
-                var expandedName = XName.Get(name, namespaceUri).ToString();
-                Require(names.Add(expandedName), "Local declaration names must be unique.", NativeDecimalUnsupportedReason.DeclarationShape);
-                Require(IsDecimalType(declaration), "The local type must resolve to xs:decimal.", NativeDecimalUnsupportedReason.ValueType);
-                var min = Occurs(declaration, "minOccurs", 1);
-                var max = Occurs(declaration, "maxOccurs", 1);
-                Require(min is 0 or 1 && max is >= 1 and <= 16 && min <= max, "Occurrence limits are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-                maximum += max;
-                Require(maximum <= 16, "Aggregate maximum exceeds sixteen.", NativeDecimalUnsupportedReason.DeclarationShape);
-                children.Add(new NativeDeclaration(name, decimalType, min, max, namespaceUri));
+                var key = XName.Get(name, targetNamespace);
+                Require(!compiled.ContainsKey(key), "Duplicate root declaration.", NativeDecimalUnsupportedReason.DeclarationShape);
+                NativeDecimalSchema plan;
+                if (declaration.Attribute("type") is not null)
+                {
+                    Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
+                    Require(named.TryGetValue(ResolveTypeName(declaration), out var shared), "Unresolved root complex type.", NativeDecimalUnsupportedReason.ValueType);
+                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits);
+                }
+                else
+                {
+                    var complex = Single(declaration, "complexType");
+                    Attributes(complex);
+                    plan = CompileComplex(complex, new NativeDeclaration(name, new NativeType(null, true), 1, 1, targetNamespace),
+                        targetNamespace, defaultForm, assertionNamespace, decimalType, limits, cancellationToken);
+                }
+                compiled.Add(key, plan);
+                first ??= plan;
             }
-
-            var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
-            foreach (var assertion in members.Skip(1))
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                Attributes(assertion, "test", "xpathDefaultNamespace");
-                var defaultNamespace = AssertionNamespace(assertion, targetNamespace, assertionNamespace);
-                Require(Elements(assertion).Count == 0, "Assertion children are unsupported.", NativeDecimalUnsupportedReason.AssertionGrammar);
-                var expression = (string?)assertion.Attribute("test");
-                Require(expression is not null, "Assertion test is required.", NativeDecimalUnsupportedReason.AssertionGrammar);
-                plans.Add(NativeDecimalAssertion.Compile(expression!, names, limits,
-                    name => ResolveAssertionName(assertion, name, defaultNamespace, names)));
-            }
-
-            return NativeResult<NativeDecimalSchema>.Valid(new NativeDecimalSchema(
-                new NativeDeclaration(rootName, new NativeType(null, true), 1, 1, targetNamespace),
-                children.ToImmutable(), plans.ToImmutable(), limits));
+            first!.roots = compiled.ToImmutable();
+            first.NamedTypes = named.Values.Select(p => p.Root.Type).ToImmutableArray();
+            return NativeResult<NativeDecimalSchema>.Valid(first);
         }
         catch (NativeProfileException ex)
         {
             return NativeResult<NativeDecimalSchema>.Failure(ex.Outcome, ex.Message, ex.UnsupportedReason);
         }
+    }
+
+    private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
+        string targetNamespace, string defaultForm, string assertionNamespace, NativeType decimalType,
+        NativeNumericLimits limits, CancellationToken cancellationToken)
+    {
+        var members = Elements(complex);
+        Require(members.Count is >= 1 and <= 9 && members[0].Name == Xs + "sequence" &&
+            members.Skip(1).All(e => e.Name == Xs + "assert"), "Expected sequence then zero to eight assertions.", NativeDecimalUnsupportedReason.DeclarationShape);
+        var sequence = members[0];
+        Attributes(sequence);
+        var declarations = Elements(sequence);
+        Require(declarations.Count is >= 1 and <= 16, "Expected one to sixteen decimal declarations.", NativeDecimalUnsupportedReason.DeclarationShape);
+        var children = ImmutableArray.CreateBuilder<NativeDeclaration>();
+        var names = new HashSet<string>(StringComparer.Ordinal);
+        var maximum = 0;
+        foreach (var declaration in declarations)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Require(declaration.Name == Xs + "element", "Only local decimal elements are supported.", NativeDecimalUnsupportedReason.DeclarationShape);
+            Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form");
+            Require(Elements(declaration).Count == 0, "Local declarations must be empty.", NativeDecimalUnsupportedReason.DeclarationShape);
+            var name = Name(declaration);
+            var namespaceUri = Form(declaration, "form", defaultForm) == "qualified" ? targetNamespace : "";
+            var expandedName = XName.Get(name, namespaceUri).ToString();
+            Require(names.Add(expandedName), "Local declaration names must be unique.", NativeDecimalUnsupportedReason.DeclarationShape);
+            Require(IsDecimalType(declaration), "The local type must resolve to xs:decimal.", NativeDecimalUnsupportedReason.ValueType);
+            var min = Occurs(declaration, "minOccurs", 1);
+            var max = Occurs(declaration, "maxOccurs", 1);
+            Require(min is 0 or 1 && max is >= 1 and <= 16 && min <= max, "Occurrence limits are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+            maximum += max;
+            Require(maximum <= 16, "Aggregate maximum exceeds sixteen.", NativeDecimalUnsupportedReason.DeclarationShape);
+            children.Add(new NativeDeclaration(name, decimalType, min, max, namespaceUri));
+        }
+
+        var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
+        foreach (var assertion in members.Skip(1))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Attributes(assertion, "test", "xpathDefaultNamespace");
+            var defaultNamespace = AssertionNamespace(assertion, targetNamespace, assertionNamespace);
+            Require(Elements(assertion).Count == 0, "Assertion children are unsupported.", NativeDecimalUnsupportedReason.AssertionGrammar);
+            var expression = (string?)assertion.Attribute("test");
+            Require(expression is not null, "Assertion test is required.", NativeDecimalUnsupportedReason.AssertionGrammar);
+            plans.Add(NativeDecimalAssertion.Compile(expression!, names, limits,
+                name => ResolveAssertionName(assertion, name, defaultNamespace, names)));
+        }
+
+        return new NativeDecimalSchema(root, children.ToImmutable(), plans.ToImmutable(), limits);
+    }
+
+    private static XName ResolveTypeName(XElement element)
+    {
+        var token = Collapse((string?)element.Attribute("type") ?? "");
+        var parts = token.Split(':');
+        Require(parts.Length is 1 or 2 && parts.All(p => p.Length != 0), "Malformed type QName.", NativeDecimalUnsupportedReason.ValueType);
+        try { foreach (var part in parts) XmlConvert.VerifyNCName(part); }
+        catch (XmlException) { throw new NativeProfileException(NativeOutcome.Unsupported, "Malformed type QName.", NativeDecimalUnsupportedReason.ValueType); }
+        var ns = parts.Length == 1 ? element.GetDefaultNamespace().NamespaceName : element.GetNamespaceOfPrefix(parts[0])?.NamespaceName;
+        Require(ns is not null, "Undefined type prefix.", NativeDecimalUnsupportedReason.ValueType);
+        return XName.Get(parts[^1], ns!);
     }
 
     internal NativeResult<NativeAssessedDocument> Assess(string instance, CancellationToken cancellationToken = default)
@@ -132,14 +196,14 @@ internal sealed class NativeDecimalSchema
             var document = Parse(instance, 65536, cancellationToken);
             var root = document.Root!;
             InstanceAttributes(root);
-            Check(root.Name == Root.ExpandedName, "Unexpected root element.");
+            Check(roots.TryGetValue(root.Name, out var selected), "Unexpected root element.");
             foreach (var text in root.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only root contains non-whitespace text.");
             var values = new Dictionary<string, List<XdmExactDecimal>>(StringComparer.Ordinal);
             var elements = ImmutableArray.CreateBuilder<NativeElementState>();
-            elements.Add(new NativeElementState(Root, null));
+            elements.Add(new NativeElementState(selected!.Root, null));
             var nodes = root.Elements().ToArray();
             var index = 0;
-            foreach (var declaration in Children)
+            foreach (var declaration in selected!.Children)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 var present = new List<XdmExactDecimal>();
@@ -162,7 +226,7 @@ internal sealed class NativeDecimalSchema
             }
 
             Check(index == nodes.Length, "Unexpected child or sequence order.");
-            foreach (var assertion in assertions)
+            foreach (var assertion in selected!.assertions)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 Check(assertion.Evaluate(values), "Assertion evaluated false.");
@@ -301,12 +365,12 @@ internal sealed class NativeDecimalSchema
         return names.Contains(name) ? name : null;
     }
 
-    private static string Name(XElement element)
+    private static string Name(XElement element, NativeDecimalUnsupportedReason invalidReason = NativeDecimalUnsupportedReason.Unspecified)
     {
         var name = (string?)element.Attribute("name");
         Require(!string.IsNullOrEmpty(name), "Declaration name is required.", NativeDecimalUnsupportedReason.DeclarationShape);
         try { XmlConvert.VerifyNCName(name!); }
-        catch (XmlException) { throw new NativeProfileException(NativeOutcome.Unsupported, "Declaration name is not an NCName."); }
+        catch (XmlException) { throw new NativeProfileException(NativeOutcome.Unsupported, "Declaration name is not an NCName.", invalidReason); }
         return name!;
     }
 
@@ -355,10 +419,11 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "")
 {
     internal string? Name { get; } = name;
     internal bool HasNoTypedValue { get; } = hasNoTypedValue;
+    internal string NamespaceUri { get; } = namespaceUri;
 }
 internal sealed class NativeDeclaration(string name, NativeType type, int minOccurs, int maxOccurs, string namespaceUri = "")
 {

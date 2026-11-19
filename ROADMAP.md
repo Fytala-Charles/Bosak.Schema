@@ -48,3 +48,13 @@ The [bounded namespace/optional-assertion candidate](docs/specification-coverage
 ## README reconciliation after M1
 
 The [packaged guidance update](docs/package-readme06-reconciled/README.md) follows the merged namespace slice. Specification coverage remains the priority; release-controller/count decisions must use the later reviewed profile, not the historical365/53plan.
+
+
+## M2A scope proposal - 19 November 2026
+
+M1 is merged (Schema PR17/Core PR504), with packaged guidance reconciled in Schema PR16. The next [bounded named-complex-type proposal](docs/m2a-named-types/PLAN.md) defines QName references, component reuse, actual Core identity/atomization and explicit refusal controls. Planning only; no runtime/API/pin/publication change or additional passed-test claim. REQ-009 remains In Progress.
+
+
+## M2A implementation candidate - 19 November 2026
+
+The [named-complex-type slice](docs/m2a-named-types/README.md) is locally implemented and qualified:465source cases(320implementation/145public),145minimum-Core package cases,52current-Core cases and retained124/23/33binary catalogs pass; scopes overlap. Up to16global types and16root declarations, full expanded-name lookup, eager unused-type checks, shared type identity and original Core facts are supported within the decimal-only profile. No Core engine/API/pin or published package/controller change. REQ-009 remains In Progress; broader M2 datatypes/facets/attributes and official W3C qualification remain pending.

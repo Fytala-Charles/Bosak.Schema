@@ -228,7 +228,7 @@ After **every** successful implementation step, update the following canonical d
 
 ---
 
-*Last updated: 2026-11-18*
+*Last updated: 2026-11-19*
 
 
 
@@ -287,3 +287,7 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## M1 namespace development candidate
 
 19November2026: local409cases(315implementation/94public),41authored namespace cases+threeactualCore controls. Read docs/m1-namespaces/ADOPTION.md before semantic edits. Preserve expanded-name identity, assertion namespace capture, zero-to-eight assertions, limits and explicit unsupported boundaries.94package-only/42current-Core and124/23/33retained lanes overlap. Core runtime/pins and published beta.1 remain unchanged.
+
+## M2A named complex type candidate
+
+19November2026:465source cases(320implementation/145public). Read docs/m2a-named-types/ADOPTION.md before semantic edits. Preserve16global type/root ceilings, eager unused-definition refusal, QName/default namespace resolution, shared type identity and foreign/disposed authority guards.145minimum-Core/52current-Core/124-23-33retained lanes overlap. Core pins, published beta.1 and release controller remain unchanged.

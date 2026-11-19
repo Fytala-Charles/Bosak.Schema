@@ -53,3 +53,7 @@ Last updated: 2026-11-18
 Last updated: 2026-11-17
 
 PR11 merged/main green6d4e1e2bae2ee7889791e9a9dd22a2034cf3ab05. review/schema-beta-contract has concrete Proposed ADR009/010/public facade decisions; originals retained. Clean normalMinVer alpha0.14 compatibility package passes345source/33package/124legacy+23public retained binary catalogs and nineCore1.81.2 signatures. Counts overlap. No acceptance, tag, beta artifact, commit/push or publication. See docs/BETA_CONTRACT_REVIEW.md.
+
+## 19 November 2026 - M2A candidate
+
+Named complex types/QName root references are implemented locally;465source/145minimum-Core/52current-Core and retained124-23-33pass. See docs/m2a-named-types/README.md and adoption before semantic edits. Branch docs/m2a-named-complex-type-scope at0d9e72a plus unstaged changes; no commit/push/publication. Core pins/engine unchanged.

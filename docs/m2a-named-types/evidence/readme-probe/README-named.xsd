@@ -1,0 +1,11 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:t="urn:orders" targetNamespace="urn:orders"
+           elementFormDefault="qualified">
+  <xs:element name="order" type="t:OrderType"/>
+  <xs:element name="quote" type="t:OrderType"/>
+  <xs:complexType name="OrderType">
+    <xs:sequence>
+      <xs:element name="amount" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 15-11-2026     | Reject uninitialized lookup names with explicit argument diagnostics                        |
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Adopt bounded expanded names and optional native assertions                              |
+//                      | Charles Korthout | 0.5   | 19-11-2026     | Adopt bounded named complex types and shared expanded component identity                  |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -37,8 +38,12 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     {
         this.schema = schema;
         RootDeclaration = Add(schema.Root);
-        Add(schema.Root.Type);
-        foreach (var declaration in schema.Children) { Add(declaration); Add(declaration.Type); }
+        foreach (var plan in schema.Roots)
+        {
+            Add(plan.Root); Add(plan.Root.Type);
+            foreach (var declaration in plan.Children) { Add(declaration); Add(declaration.Type); }
+        }
+        foreach (var type in schema.NamedTypes) Add(type);
         DecimalType = components[schema.Children[0].Type];
     }
 
@@ -75,16 +80,18 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     {
         cancellationToken.ThrowIfCancellationRequested();
         ValidateName(name);
-        return name.NamespaceUri == "http://www.w3.org/2001/XMLSchema" && name.LocalName == "decimal"
-            ? NativeCoreResult<ISchemaComponentHandle>.Supported(DecimalType)
+        if (name.NamespaceUri == "http://www.w3.org/2001/XMLSchema" && name.LocalName == "decimal")
+            return NativeCoreResult<ISchemaComponentHandle>.Supported(DecimalType);
+        var type = schema.NamedTypes.FirstOrDefault(t => t.Name == name.LocalName && t.NamespaceUri == name.NamespaceUri);
+        return type is not null ? NativeCoreResult<ISchemaComponentHandle>.Supported(components[type])
             : NativeCoreResult<ISchemaComponentHandle>.Unsupported("BSK-NATIVE-TYPE");
     }
     public SchemaResult<ISchemaComponentHandle> ResolveElementDeclaration(SchemaExpandedName name, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ValidateName(name);
-        return name.NamespaceUri == schema.Root.NamespaceUri && name.LocalName == schema.Root.Name
-            ? NativeCoreResult<ISchemaComponentHandle>.Supported(RootDeclaration)
+        var root = schema.Roots.FirstOrDefault(p => p.Root.NamespaceUri == name.NamespaceUri && p.Root.Name == name.LocalName);
+        return root is not null ? NativeCoreResult<ISchemaComponentHandle>.Supported(components[root.Root])
             : NativeCoreResult<ISchemaComponentHandle>.NotFound();
     }
     public SchemaResult<ISchemaComponentHandle> ResolveAttributeDeclaration(SchemaExpandedName name, CancellationToken cancellationToken)
@@ -163,7 +170,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             if (request.RequestedType is not null) provider.Validate(request.RequestedType, cancellationToken);
             if (request.GoverningDeclaration is not null) provider.Validate(request.GoverningDeclaration, cancellationToken);
             if (request.Mode != SchemaAssessmentMode.Strict || request.RequestedType is not null ||
-                request.GoverningDeclaration is not null && !ReferenceEquals(request.GoverningDeclaration, provider.RootDeclaration))
+                request.GoverningDeclaration is not null && !provider.schema.Roots.Any(p => ReferenceEquals(request.GoverningDeclaration, provider.components[p.Root])))
                 return Assessment.Failure(SchemaAssessmentStatus.Unsupported, "BSK-NATIVE-MODE", "Only strict root assessment is supported.", request.Limits);
             if (input.IsAssessed)
                 return Assessment.Failure(SchemaAssessmentStatus.Unsupported, "BSK-NATIVE-REASSESSMENT", "Original assessment cannot be replaced.", request.Limits);
@@ -171,6 +178,9 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             if (result.Outcome != NativeOutcome.Valid)
                 return Assessment.Failure(result.Outcome == NativeOutcome.Invalid ? SchemaAssessmentStatus.Invalid : SchemaAssessmentStatus.Unsupported,
                     "BSK-NATIVE-" + result.Outcome.ToString().ToUpperInvariant(), result.Diagnostic!, request.Limits, result.UnsupportedReason);
+            if (request.GoverningDeclaration is not null &&
+                !ReferenceEquals(request.GoverningDeclaration, provider.components[result.Value!.Elements[0].Declaration]))
+                return Assessment.Failure(SchemaAssessmentStatus.Unsupported, "BSK-NATIVE-MODE", "Governing declaration does not match root.", request.Limits);
             var origin = new Origin(this, input, date, timezone);
             var states = result.Value!.Elements;
             var facts = states.Select((state, index) => new Facts(input, input.ElementNodes[index], origin,
@@ -212,6 +222,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         }
         internal NativeSchemaInput Input { get; }
         internal NativeSessionNode Node { get; }
+        internal NativeType NativeType { get { Input.Check(); return state.Declaration.Type; } }
         public ISchemaComponentHandle Type { get { Input.Check(); return type; } }
         public ISchemaComponentHandle Declaration { get { Input.Check(); return declaration; } }
         public ISchemaAssessmentOrigin Origin => origin;

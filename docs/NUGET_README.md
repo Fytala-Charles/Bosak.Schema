@@ -4,7 +4,7 @@
 
 Apache-2.0 schema integration and staged XSD 1.1 services for .NET 10. Schema services require no activation, license key or subscription.
 
-The owned, synchronous native decimal-session API was introduced in 0.5.0-beta.1. The 0.6 development line adds detected Unsupported reasons and a bounded namespace-aware decimal profile with optional assertions. It assesses a finite decimal-only schema profile, reads exact scalar values and exports detached XML. Existing schema compilation, validation and schema-aware XSLT helpers remain available. Complete XSD 1.1 validation is not implemented.
+The owned, synchronous native decimal-session API was introduced in 0.5.0-beta.1. The 0.6 development line adds detected Unsupported reasons and a bounded namespace-aware decimal profile with optional assertions and reusable global named complex types. It assesses a finite decimal-only schema profile, reads exact scalar values and exports detached XML. Existing schema compilation, validation and schema-aware XSLT helpers remain available. Complete XSD 1.1 validation is not implemented.
 
 ## Install
 
@@ -51,7 +51,7 @@ The sample reads `12.5`, `2` and `1`; export retains the decimal lexical spellin
 
 Inspect Valid, Invalid and Unsupported before using Value. Invalid and Unsupported return no owned session/document. Arguments, cancellation, capacity exhaustion and lifecycle faults throw documented exceptions. Operations on one session must be sequential; overlap refuses. Disposal waits for admitted synchronous work and revokes owned access. Returned exact decimals and XML are detached, with no transferable schema authority.
 
-The native route accepts strings and a finite grammar only: one anonymous element-only root, an ordered bounded sequence of decimal children and supported assertions. Named user types, attributes, imports, lists/unions, general query syntax, stream/reader overloads and positive cross-universe handoff remain outside the 0.6 profile; namespace support does not imply those capabilities. See the [complete contract](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/NATIVE-DECIMAL-PUBLIC-API.md) and [finite grammar](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/NATIVE-DECIMAL-GRAMMAR.md).
+The native route accepts strings and a finite grammar only: one to sixteen element-only root declarations, each with an inline complex type or a QName reference to a global named complex type, an ordered bounded sequence of decimal children and zero-to-eight supported assertions. Up to sixteen global named complex types are admitted and all are checked, including unused types. Named simple types, derivation, attributes, imports, element references, lists/unions, general query syntax, stream/reader overloads and positive cross-universe handoff remain outside the 0.6 profile. The linked immutable M1 contract predates this named-complex-type extension; see its [baseline contract](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/NATIVE-DECIMAL-PUBLIC-API.md) and [finite grammar](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/NATIVE-DECIMAL-GRAMMAR.md).
 
 ## Namespace-aware decimal documents (0.6 API)
 
@@ -83,11 +83,36 @@ children. QName assertion operands resolve schema/assertion namespace bindings;
 `xpathDefaultNamespace` admits local, target, declaration-site default namespace
 and explicit absolute URI settings within the finite expression grammar.
 
-Namespaces alone do not admit named types, imports, attributes, strings/facets or
+Namespaces alone do not admit imports, attributes, strings/facets or
 general XPath. The profile deliberately restricts namespace URIs and capacities.
 See the immutable [M1 adoption](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/m1-namespaces/ADOPTION.md)
 for exact bounds and deviations. Unsupported still means missing coverage or
 representation, not a supported structural violation.
+
+## Reusable named complex type (0.6 development only)
+
+A global complex type can precede or follow its root references. Type QNames use
+the reference element's in-scope prefix/default bindings; xpathDefaultNamespace
+is only for assertions. For example, replace the anonymous schema above with:
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:t="urn:orders" targetNamespace="urn:orders"
+           elementFormDefault="qualified">
+  <xs:element name="order" type="t:OrderType"/>
+  <xs:element name="quote" type="t:OrderType"/>
+  <xs:complexType name="OrderType">
+    <xs:sequence>
+      <xs:element name="amount" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+```
+
+The preceding order instance still reads `12.5`; a `quote` root in `urn:orders`
+uses the same type. Unknown types/prefixes, duplicate declarations and excluded
+unused definitions refuse compilation, with no owned session. This is a local
+development profile; published 0.5.0-beta.1 does not gain these features.
 
 ## Detected Unsupported reasons (0.6 API)
 

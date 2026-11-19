@@ -1,5 +1,7 @@
 # Owned native decimal public API
 
+Development M2A,19November2026: the [named-complex-type adoption](m2a-named-types/ADOPTION.md) supersedes the anonymous/single-root restriction below for the local0.6candidate. Up to16named complex types/16roots; named simple types, derivation, attributes/imports remain excluded. Historical published profiles and receipts are unchanged.
+
 Development M1,19November2026: the [namespace/optional-assertion candidate](m1-namespaces/README.md) supersedes the unqualified/mandatory-assertion restriction below for the local0.6candidate only. Published beta.1 and the original adoption remain historical at their pins. New exact grammar/boundaries: [M1 adoption](m1-namespaces/ADOPTION.md).
 
 
