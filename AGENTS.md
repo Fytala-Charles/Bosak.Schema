@@ -283,3 +283,7 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## Unsupported-reason development candidate
 
 19November2026: the local0.6candidate has365source cases(312implementation/53public), including20new detected-reason controls. Published beta.1 remains345. Preserve stage codes/messages, refusal order and grammar; use docs/unsupported-reasons/CONTRACT.md. Package-only53 and retained124/23 lanes overlap source coverage. No commit/push/publication without explicit request.
+
+## M1 namespace development candidate
+
+19November2026: local409cases(315implementation/94public),41authored namespace cases+threeactualCore controls. Read docs/m1-namespaces/ADOPTION.md before semantic edits. Preserve expanded-name identity, assertion namespace capture, zero-to-eight assertions, limits and explicit unsupported boundaries.94package-only/42current-Core and124/23/33retained lanes overlap. Core runtime/pins and published beta.1 remain unchanged.

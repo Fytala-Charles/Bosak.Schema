@@ -1,5 +1,8 @@
 # Owned native decimal public API
 
+Development M1,19November2026: the [namespace/optional-assertion candidate](m1-namespaces/README.md) supersedes the unqualified/mandatory-assertion restriction below for the local0.6candidate only. Published beta.1 and the original adoption remain historical at their pins. New exact grammar/boundaries: [M1 adoption](m1-namespaces/ADOPTION.md).
+
+
 Development candidate,19November2026: [bounded Unsupported reasons](unsupported-reasons/README.md) add a read-only detected category. This API addition is not in published beta.1; existing stage codes/messages and grammar are unchanged.
 
 

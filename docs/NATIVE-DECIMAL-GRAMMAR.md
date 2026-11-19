@@ -1,5 +1,8 @@
 # Native decimal backend grammar
 
+Development M1,19November2026: the [namespace/optional-assertion candidate](m1-namespaces/README.md) supersedes the unqualified/mandatory-assertion restriction below for the local0.6candidate only. Published beta.1 and the original adoption remain historical at their pins. New exact grammar/boundaries: [M1 adoption](m1-namespaces/ADOPTION.md).
+
+
 Date: 2026-11-15. Implementation basis: [adoption record](NATIVE-DECIMAL-SPECIFICATION-ADOPTION.md). This is the executable backend subset of the proposed [session profile](NATIVE-SESSION-PROFILE.md); the Core adapter remains separate. The first backend stays internal until provider qualification establishes a public entry point.
 
 ## Input and schema grammar

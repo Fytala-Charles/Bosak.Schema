@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 19-11-2026     | Retain diagnostic refusal controls after deliberate M1 admissions                        |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -41,8 +42,8 @@ public sealed class NativeDecimalDiagnosticReasonTests
     {
         string input = change switch
         {
-            "namespace" => Schema.Replace("<xs:schema ", "<xs:schema targetNamespace='urn:PRIVATE-MARKER' "),
-            "shape" => Schema.Replace("<xs:assert test='a gt 0'/>", ""),
+            "namespace" => Schema.Replace("<xs:schema ", "<xs:schema attributeFormDefault='qualified' "),
+            "shape" => Schema.Replace("<xs:sequence>", "<xs:choice>").Replace("</xs:sequence>", "</xs:choice>"),
             "type" => Schema.Replace("xs:decimal", "xs:string"),
             "attribute" => Schema.Replace("<xs:schema ", "<xs:schema secret='PRIVATE-MARKER' "),
             "assertion" => Schema.Replace("a gt 0", "sum(a) gt 0"),
@@ -75,8 +76,8 @@ public sealed class NativeDecimalDiagnosticReasonTests
     /// <param name="attributes">Authored attributes in the intended input order.</param>
     /// <param name="reason">Expected first detected reason.</param>
     [Theory]
-    [InlineData("secret='PRIVATE-MARKER' targetNamespace='urn:PRIVATE-MARKER'", NativeDecimalUnsupportedReason.Attributes)]
-    [InlineData("targetNamespace='urn:PRIVATE-MARKER' secret='PRIVATE-MARKER'", NativeDecimalUnsupportedReason.Namespace)]
+    [InlineData("secret='PRIVATE-MARKER' attributeFormDefault='qualified'", NativeDecimalUnsupportedReason.Attributes)]
+    [InlineData("attributeFormDefault='qualified' secret='PRIVATE-MARKER'", NativeDecimalUnsupportedReason.Namespace)]
     public void Create_MultipleUnsupportedAttributes_UsesFirstDetectedRefusal(string attributes, NativeDecimalUnsupportedReason reason) =>
         Refused(NativeDecimalSession.Create(Schema.Replace("<xs:schema ", "<xs:schema " + attributes + " "), Options), NativeDecimalOutcome.Unsupported, "SCHEMA", reason);
 
@@ -107,10 +108,10 @@ public sealed class NativeDecimalDiagnosticReasonTests
     [Theory]
     [InlineData("orders.xsd")]
     [InlineData("sku.xsd")]
-    public void PublicLegacyExamples_AreStillUnsupportedWithNamespaceReason(string file)
+    public void PublicLegacyExamples_StillRefuseBroaderDeclarationShape(string file)
     {
         var input = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "TestData", "Schemas", file));
-        Refused(NativeDecimalSession.Create(input, Options), NativeDecimalOutcome.Unsupported, "SCHEMA", NativeDecimalUnsupportedReason.Namespace);
+        Refused(NativeDecimalSession.Create(input, Options), NativeDecimalOutcome.Unsupported, "SCHEMA", NativeDecimalUnsupportedReason.DeclarationShape);
     }
 
     /// <summary>Valid results remain diagnostic-free and enum values remain explicitly versioned.</summary>

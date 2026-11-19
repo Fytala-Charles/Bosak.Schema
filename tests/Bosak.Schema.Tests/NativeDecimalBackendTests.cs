@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Implement bounded native decimal backend                                                 |
+//                      | Charles Korthout | 0.2   | 19-11-2026     | Qualify deliberate namespace and zero-assertion admissions                                 |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -147,7 +148,7 @@ public sealed class NativeDecimalBackendTests
     /// <param name="before">Text in the supported schema.</param>
     /// <param name="after">Unsupported replacement.</param>
     [Theory]
-    [InlineData("<xs:schema", "<xs:schema targetNamespace='urn:foreign'")]
+    [InlineData("<xs:schema", "<xs:schema attributeFormDefault='qualified'")]
     [InlineData("<xs:complexType>", "<xs:complexType mixed='true'>")]
     [InlineData("name=\"tax\" type=\"xs:decimal\"", "name=\"tax\" type=\"xs:string\"")]
     [InlineData("name=\"tax\" type=\"xs:decimal\"", "name=\"tax\" type=\"xs:decimal\" nillable=\"true\"")]
@@ -265,7 +266,7 @@ public sealed class NativeDecimalBackendTests
         Failure(NativeDecimalSchema.Compile(eight.Replace("</xs:complexType>", assertion + "</xs:complexType>", StringComparison.Ordinal), Limits), NativeOutcome.Unsupported);
         var noAssertions = XDocument.Parse(Schema());
         noAssertions.Descendants(XName.Get("assert", "http://www.w3.org/2001/XMLSchema")).Remove();
-        Failure(NativeDecimalSchema.Compile(noAssertions.ToString(SaveOptions.DisableFormatting), Limits), NativeOutcome.Unsupported);
+        Assert.Equal(NativeOutcome.Valid, NativeDecimalSchema.Compile(noAssertions.ToString(SaveOptions.DisableFormatting), Limits).Outcome);
         var nodeLimit = Schema().Replace("<xs:sequence>", "<xs:sequence>" + string.Concat(Enumerable.Repeat("<!--x-->", 249)), StringComparison.Ordinal);
         Assert.Equal(NativeOutcome.Valid, NativeDecimalSchema.Compile(nodeLimit, Limits).Outcome);
         Failure(NativeDecimalSchema.Compile(nodeLimit.Replace("<xs:sequence>", "<xs:sequence><!--one-more-->", StringComparison.Ordinal), Limits), NativeOutcome.Unsupported);
