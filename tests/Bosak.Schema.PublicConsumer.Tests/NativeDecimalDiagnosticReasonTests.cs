@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Retain diagnostic refusal controls after deliberate M1 admissions                        |
+//                      | Charles Korthout | 0.2   | 19-11-2026     | Record nondecimal-base reason after named simple type admission                           |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -105,13 +106,14 @@ public sealed class NativeDecimalDiagnosticReasonTests
 
     /// <summary>Replays complete public legacy schemas as native refusals without claiming to enumerate every gap.</summary>
     /// <param name="file">Bundled public example filename.</param>
+    /// <param name="reason">Detected reason at the current supported grammar boundary.</param>
     [Theory]
-    [InlineData("orders.xsd")]
-    [InlineData("sku.xsd")]
-    public void PublicLegacyExamples_StillRefuseBroaderDeclarationShape(string file)
+    [InlineData("orders.xsd", NativeDecimalUnsupportedReason.DeclarationShape)]
+    [InlineData("sku.xsd", NativeDecimalUnsupportedReason.ValueType)]
+    public void PublicLegacyExamples_StillRefuseBroaderDeclarationShape(string file, NativeDecimalUnsupportedReason reason)
     {
         var input = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "TestData", "Schemas", file));
-        Refused(NativeDecimalSession.Create(input, Options), NativeDecimalOutcome.Unsupported, "SCHEMA", NativeDecimalUnsupportedReason.DeclarationShape);
+        Refused(NativeDecimalSession.Create(input, Options), NativeDecimalOutcome.Unsupported, "SCHEMA", reason);
     }
 
     /// <summary>Valid results remain diagnostic-free and enum values remain explicitly versioned.</summary>

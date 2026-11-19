@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Adopt bounded expanded names and optional native assertions                              |
 //                      | Charles Korthout | 0.5   | 19-11-2026     | Adopt bounded named complex types and shared expanded component identity                  |
+//                      | Charles Korthout | 0.6   | 19-11-2026     | Adopt named decimal restrictions and original named scalar type identity                  |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -44,7 +45,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             foreach (var declaration in plan.Children) { Add(declaration); Add(declaration.Type); }
         }
         foreach (var type in schema.NamedTypes) Add(type);
-        DecimalType = components[schema.Children[0].Type];
+        DecimalType = Add(schema.DecimalType);
     }
 
     private Component Add(object value)

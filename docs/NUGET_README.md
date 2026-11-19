@@ -4,7 +4,7 @@
 
 Apache-2.0 schema integration and staged XSD 1.1 services for .NET 10. Schema services require no activation, license key or subscription.
 
-The owned, synchronous native decimal-session API was introduced in 0.5.0-beta.1. The 0.6 development line adds detected Unsupported reasons and a bounded namespace-aware decimal profile with optional assertions and reusable global named complex types. It assesses a finite decimal-only schema profile, reads exact scalar values and exports detached XML. Existing schema compilation, validation and schema-aware XSLT helpers remain available. Complete XSD 1.1 validation is not implemented.
+The owned, synchronous native decimal-session API was introduced in 0.5.0-beta.1. The 0.6 development line adds detected Unsupported reasons and a bounded namespace-aware decimal profile with optional assertions and reusable global named complex types and direct named decimal restrictions with selected facets. It assesses a finite decimal-only schema profile, reads exact scalar values and exports detached XML. Existing schema compilation, validation and schema-aware XSLT helpers remain available. Complete XSD 1.1 validation is not implemented.
 
 ## Install
 
@@ -51,7 +51,7 @@ The sample reads `12.5`, `2` and `1`; export retains the decimal lexical spellin
 
 Inspect Valid, Invalid and Unsupported before using Value. Invalid and Unsupported return no owned session/document. Arguments, cancellation, capacity exhaustion and lifecycle faults throw documented exceptions. Operations on one session must be sequential; overlap refuses. Disposal waits for admitted synchronous work and revokes owned access. Returned exact decimals and XML are detached, with no transferable schema authority.
 
-The native route accepts strings and a finite grammar only: one to sixteen element-only root declarations, each with an inline complex type or a QName reference to a global named complex type, an ordered bounded sequence of decimal children and zero-to-eight supported assertions. Up to sixteen global named complex types are admitted and all are checked, including unused types. Named simple types, derivation, attributes, imports, element references, lists/unions, general query syntax, stream/reader overloads and positive cross-universe handoff remain outside the 0.6 profile. The linked immutable M1 contract predates this named-complex-type extension; see its [baseline contract](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/NATIVE-DECIMAL-PUBLIC-API.md) and [finite grammar](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/NATIVE-DECIMAL-GRAMMAR.md).
+The native route accepts strings and a finite grammar only: one to sixteen element-only root declarations, each with an inline complex type or a QName reference to a global named complex type, an ordered bounded sequence of decimal children and zero-to-eight supported assertions. Up to sixteen combined global named simple/complex types are admitted and all are checked, including unused types. Other simple types, restriction chains, attributes, imports, element references, lists/unions, general query syntax, stream/reader overloads and positive cross-universe handoff remain outside the 0.6 profile. The linked immutable M1 contract predates these named-type/facet extensions; see its [baseline contract](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/NATIVE-DECIMAL-PUBLIC-API.md) and [finite grammar](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/NATIVE-DECIMAL-GRAMMAR.md).
 
 ## Namespace-aware decimal documents (0.6 API)
 
@@ -192,3 +192,44 @@ The established descriptor/assertion services and schema-aware XSLT route have t
 - [Apache-2.0 license](https://github.com/Fytala-Charles/Bosak.Schema/blob/9fd4e6acd20b34446d736ab0ec3fa2d439f9e337/LICENSE.md) and [NOTICE](https://github.com/Fytala-Charles/Bosak.Schema/blob/9fd4e6acd20b34446d736ab0ec3fa2d439f9e337/NOTICE)
 
 Copyright 2026 Fytala. Trademark rights are retained. Full XSD 1.1, permanent API/foundation acceptance, general compatibility and performance qualification remain separate milestones.
+
+## Named decimal restrictions (0.6 development only)
+
+Local decimal children can reference a global simple type restricted directly
+from xs:decimal. Selected facets are minInclusive, minExclusive, maxInclusive,
+maxExclusive, totalDigits and fractionDigits. Facets constrain decimal values;
+lexical input capacities remain separate. All present repeated children are checked.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:t="urn:orders" targetNamespace="urn:orders"
+           elementFormDefault="qualified">
+  <xs:simpleType name="MoneyType">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:totalDigits value="12"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="OrderType">
+    <xs:sequence>
+      <xs:element name="amount" type="t:MoneyType" minOccurs="0" maxOccurs="2"/>
+      <xs:element name="tax" type="xs:decimal"/>
+    </xs:sequence>
+    <xs:assert test="count(t:amount) eq 2 and t:tax gt 0"/>
+  </xs:complexType>
+  <xs:element name="order" type="t:OrderType"/>
+</xs:schema>
+```
+
+Use an order in urn:orders with amounts12.50 and2 and tax1; exact reads are12.5,2,1.
+A negative amount or too many fractional value-space digits is Invalid.
+An excessive supplied lexical digit/scale count is Unsupported even if removing
+zeros would produce a value within the facets. Unknown bases/facets, inconsistent
+components and unsupported unused definitions refuse compilation.
+
+The combined global-type limit is16; totalDigits is1..256 and fractionDigits0..256.
+Named nondecimal types, restriction chains, fixed/whiteSpace/pattern/enumeration
+facets, attributes and imports remain excluded. Named leaf annotations and atomic
+provenance preserve original type identity internally; exported XML and scalar
+values carry no transferable PSVI. Published beta.1 retains its original scope.
