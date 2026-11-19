@@ -295,3 +295,7 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## M2B decimal restriction candidate
 
 19November2026:534source cases(324implementation/210public). Read docs/m2b-decimal-restrictions/ADOPTION.md before semantic edits. Preserve exact value-space facets, representation-before-facet gates, combined16type limit, eager unused-definition refusal and named declared/actual provenance. No general derivation relation or new datatype/attribute/import support; no commit/push/publication without explicit request.
+
+## M2C1 string/decimal candidate
+
+19November2026:614source cases(334implementation/280public). Read docs/m2c-string-facade/ADOPTION.md before semantic edits. New NativeSchemaSession opt-in shares the native owner/gate; legacy NativeDecimalSession stays decimal-only. Preserve XML string text, explicit UTF16/output capacities, original typed facts and bounded export/cancellation. No Boolean/integer/named string facets or Core engine/pin/publication expansion. API/C45 freeze remains separate; no commit/push without explicit request.

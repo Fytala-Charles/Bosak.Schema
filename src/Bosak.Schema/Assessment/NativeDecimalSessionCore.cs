@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Prototype an owned synchronous native scalar facade                                                 |
 //                      | Charles Korthout | 0.2   | 17-11-2026     | Keep the owned implementation behind the public facade; attempt all cleanup actions
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
+//                      | Charles Korthout | 0.4   | 19-11-2026     | Share explicit mixed scalar profile with preserved decimal compatibility                  |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -33,6 +34,7 @@ internal sealed class NativeDecimalSessionCore : IDisposable
     private readonly HashSet<Document> documents = new(ReferenceEqualityComparer.Instance);
     private int busy;
     private bool closed;
+    private NativeSchemaSessionOptions? scalarOptions;
 
     private NativeDecimalSessionCore(SchemaQuerySession session)
     {
@@ -50,6 +52,18 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         return result.Kind == SchemaResultKind.Supported
             ? NativeResult<NativeDecimalSessionCore>.Valid(new NativeDecimalSessionCore(result.Value))
             : NativeResult<NativeDecimalSessionCore>.Failure(NativeOutcome.Unsupported, result.DiagnosticCode ?? "Unsupported native scalar session.");
+    }
+
+    internal static NativeResult<NativeDecimalSessionCore> CreateMixed(string schema, NativeSchemaSessionOptions options,
+        CancellationToken cancellationToken = default)
+    {
+        var compiled = NativeDecimalSchema.Compile(schema, options.NumericLimits, cancellationToken, options.MaxStringCharacters);
+        if (compiled.Outcome != NativeOutcome.Valid)
+            return NativeResult<NativeDecimalSessionCore>.Failure(compiled.Outcome, compiled.Diagnostic!, compiled.UnsupportedReason);
+        var result = SchemaQuerySession.CompileXPath("$value", options.QueryLimits, assessor: new NativeSchemaProvider(compiled.Value!), cancellationToken: cancellationToken);
+        if (result.Kind != SchemaResultKind.Supported)
+            return NativeResult<NativeDecimalSessionCore>.Failure(NativeOutcome.Unsupported, "Unsupported native scalar session.");
+        return NativeResult<NativeDecimalSessionCore>.Valid(new NativeDecimalSessionCore(result.Value) { scalarOptions = options });
     }
 
     internal NativeResult<Document> Assess(string instance, DateTimeOffset currentDateTime, int implicitTimezoneOffsetMinutes,
@@ -82,7 +96,13 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         }
     }, cancellationToken);
 
-    private XdmExactDecimal ReadDecimal(Document document, int leafIndex, CancellationToken cancellationToken) => Work(() =>
+    private XdmExactDecimal ReadDecimal(Document document, int leafIndex, CancellationToken cancellationToken) =>
+        Work(() => ReadValue(document, leafIndex, value => value.ExactDecimalValue, cancellationToken), cancellationToken);
+
+    private NativeScalarValue ReadScalar(Document document, int leafIndex, CancellationToken cancellationToken) =>
+        Work(() => ReadValue(document, leafIndex, NativeScalarValue.FromValue, cancellationToken), cancellationToken);
+
+    private T ReadValue<T>(Document document, int leafIndex, Func<XdmValue, T> project, CancellationToken cancellationToken)
     {
         Check(document);
         if (leafIndex < 0 || leafIndex >= document.Assessment.Facts.Length - 1)
@@ -93,14 +113,15 @@ internal sealed class NativeDecimalSessionCore : IDisposable
             if (value.Kind != SchemaResultKind.Supported) throw new NotSupportedException(value.DiagnosticCode);
             var scalar = operation.ReadTypedValue(document.Snapshot, value.Value);
             if (scalar.Kind != SchemaResultKind.Supported) throw new NotSupportedException(scalar.DiagnosticCode);
-            return operation.Evaluate(new EvaluationContext().WithVariable("value", scalar.Value)).ExactDecimalValue;
+            return project(operation.Evaluate(new EvaluationContext().WithVariable("value", scalar.Value)));
         }, cancellationToken);
-    }, cancellationToken);
+    }
 
     private string Export(Document document, CancellationToken cancellationToken) => Work(() =>
     {
         Check(document);
-        return document.Input.Root.ToXmlString();
+        return scalarOptions is null ? document.Input.Root.ToXmlString()
+            : NativeBoundedTextWriter.Export(document.Input, scalarOptions.MaxExportCharacters, cancellationToken);
     }, cancellationToken);
 
     private int LeafCount(Document document) => Work(() =>
@@ -166,6 +187,7 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         internal SchemaQuerySnapshot Snapshot { get; }
         internal NativeSchemaProvider.Assessment Assessment { get; }
         internal int DecimalCount => owner.LeafCount(this);
+        internal NativeScalarValue ReadScalar(int leafIndex, CancellationToken cancellationToken = default) => owner.ReadScalar(this, leafIndex, cancellationToken);
         internal XdmExactDecimal ReadDecimal(int leafIndex, CancellationToken cancellationToken = default) => owner.ReadDecimal(this, leafIndex, cancellationToken);
         internal string ExportXml(CancellationToken cancellationToken = default) => owner.Export(this, cancellationToken);
         /// <summary>Revokes this document and releases its owned admission.</summary>

@@ -1,0 +1,111 @@
+{
+  "status": "Proposed signatures only; no implementation, release or API acceptance",
+  "namespace": "Bosak.Schema",
+  "slice": "M2C1 string + existing decimal profile only",
+  "types": [
+    {
+      "name": "NativeSchemaSession",
+      "kind": "public sealed class : IDisposable",
+      "members": [
+        "static NativeSchemaResult<NativeSchemaSession> Create(string schema, NativeSchemaSessionOptions options, CancellationToken cancellationToken = default)",
+        "NativeSchemaResult<NativeSchemaDocument> Assess(string instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken = default)",
+        "void Dispose()"
+      ]
+    },
+    {
+      "name": "NativeSchemaDocument",
+      "kind": "public sealed class : IDisposable",
+      "members": [
+        "int ScalarCount { get; }",
+        "NativeScalarValue ReadScalar(int leafIndex, CancellationToken cancellationToken = default)",
+        "string ExportXml(CancellationToken cancellationToken = default)",
+        "void Dispose()"
+      ]
+    },
+    {
+      "name": "NativeScalarValue",
+      "kind": "public sealed class",
+      "members": [
+        "NativeScalarKind Kind { get; }",
+        "string StringValue { get; }",
+        "XdmExactDecimal DecimalValue { get; }"
+      ]
+    },
+    {
+      "name": "NativeScalarKind",
+      "kind": "public enum",
+      "members": [
+        "String = 1",
+        "Decimal = 2"
+      ]
+    },
+    {
+      "name": "NativeSchemaSessionOptions",
+      "kind": "public sealed class",
+      "members": [
+        "NativeSchemaSessionOptions(int maxNativeCoefficientDigits, int maxNativeScale, int maxStringCharacters, int maxExportCharacters, int maxOpenDocuments, int maxCachedScalarValuesPerDocument, int maxTypedResultAtoms, int maxQueryCoefficientDigits, int maxQueryScale)",
+        "int MaxNativeCoefficientDigits { get; }",
+        "int MaxNativeScale { get; }",
+        "int MaxStringCharacters { get; }",
+        "int MaxExportCharacters { get; }",
+        "int MaxOpenDocuments { get; }",
+        "int MaxCachedScalarValuesPerDocument { get; }",
+        "int MaxTypedResultAtoms { get; }",
+        "int MaxQueryCoefficientDigits { get; }",
+        "int MaxQueryScale { get; }"
+      ]
+    },
+    {
+      "name": "NativeSchemaAssessmentContext",
+      "kind": "public sealed class",
+      "members": [
+        "NativeSchemaAssessmentContext(DateTimeOffset currentDateTime, int implicitTimezoneOffsetMinutes)",
+        "DateTimeOffset CurrentDateTime { get; }",
+        "int ImplicitTimezoneOffsetMinutes { get; }"
+      ]
+    },
+    {
+      "name": "NativeSchemaOutcome",
+      "kind": "public enum",
+      "members": [
+        "Valid = 0",
+        "Invalid = 1",
+        "Unsupported = 2"
+      ]
+    },
+    {
+      "name": "NativeSchemaUnsupportedReason",
+      "kind": "public enum",
+      "members": [
+        "Unspecified = 0",
+        "Namespace = 1",
+        "DeclarationShape = 2",
+        "ValueType = 3",
+        "Attributes = 4",
+        "AssertionGrammar = 5",
+        "RepresentationCapacity = 6"
+      ]
+    },
+    {
+      "name": "NativeSchemaDiagnostic",
+      "kind": "public sealed class",
+      "members": [
+        "string Code { get; }",
+        "string Message { get; }",
+        "NativeSchemaUnsupportedReason UnsupportedReason { get; }"
+      ]
+    },
+    {
+      "name": "NativeSchemaResult<T>",
+      "kind": "public sealed class where T : class",
+      "members": [
+        "NativeSchemaOutcome Outcome { get; }",
+        "T? Value { get; }",
+        "ImmutableArray<NativeSchemaDiagnostic> Diagnostics { get; }",
+        "bool DiagnosticsTruncated { get; }"
+      ]
+    }
+  ],
+  "constructors": "Only options/context have public constructors; session/document/scalar/result/diagnostic are producer-only",
+  "futureSlices": "Boolean/Integer enum values and getters are not in this surface; future additions require their own reviewed adoption"
+}

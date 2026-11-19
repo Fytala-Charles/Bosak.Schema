@@ -1,5 +1,7 @@
 # Native decimal backend grammar
 
+M2C1,19November2026: the separate [string/decimal candidate](m2c-string-facade/README.md) does not widen this decimal-only facade. Its new scalar indexing/read/export contract is explicit opt-in; the historical decimal route and its exclusions remain.
+
 Development M2B,19November2026: [named decimal restriction adoption](m2b-decimal-restrictions/ADOPTION.md) adds direct xs:decimal simple types and selected inclusive/exclusive range plus total/fractionDigits facets. Combined16types/16roots; named leaf identity preserved. Earlier restrictions below remain historical; no other datatype, chain, attribute/import or release expansion.
 
 Development M2A,19November2026: the [named-complex-type adoption](m2a-named-types/ADOPTION.md) supersedes the anonymous/single-root restriction below for the local0.6candidate. Up to16named complex types/16roots; named simple types, derivation, attributes/imports remain excluded. Historical published profiles and receipts are unchanged.

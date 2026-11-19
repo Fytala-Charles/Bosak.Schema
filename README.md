@@ -84,3 +84,5 @@ The [packaged0.6guidance](docs/package-readme06-reconciled/README.md) distinguis
 The development profile also supports [reusable named complex types](docs/m2a-named-types/README.md) within the bounded decimal workflow. Named simple types, derivation, attributes and imports remain excluded. Published beta.1 retains its original scope.
 
 The development profile also admits [named decimal restrictions and selected facets](docs/m2b-decimal-restrictions/README.md) for reusable monetary values. Other datatypes, restriction chains, attributes and imports remain outside this bounded native profile.
+
+The local development profile adds an [opt-in string/decimal owned facade](docs/m2c-string-facade/README.md) with checked detached scalar values and bounded XML export. The published beta and existing decimal-only API retain their original scope.

@@ -13,11 +13,13 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Implement internal native decimal Core adapter                                                 |
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
+//                      | Charles Korthout | 0.3   | 19-11-2026     | Share explicit mixed scalar profile with preserved decimal compatibility                  |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
 using System.Collections.Immutable;
 using System.Xml.Linq;
+using System.Xml;
 using Bosak.XPath.Core.Schema;
 using Bosak.XPath.Core.Xdm;
 using Bosak.XPath.Providers.Xml;
@@ -53,6 +55,13 @@ internal sealed class NativeSchemaInput : ISchemaAssessmentInput, IQueryOperatio
         cancellationToken.ThrowIfCancellationRequested();
         try { return NativeResult<NativeSchemaInput>.Valid(new NativeSchemaInput(xml, NativeDecimalSchema.Parse(xml, 65536, cancellationToken))); }
         catch (NativeProfileException ex) { return NativeResult<NativeSchemaInput>.Failure(ex.Outcome, ex.Message, ex.UnsupportedReason); }
+    }
+
+    internal void WriteRootTo(XmlWriter writer, CancellationToken cancellationToken)
+    {
+        Check(cancellationToken);
+        document.Root!.WriteTo(writer);
+        cancellationToken.ThrowIfCancellationRequested();
     }
 
     internal string Xml { get { Check(); return xml; } }
