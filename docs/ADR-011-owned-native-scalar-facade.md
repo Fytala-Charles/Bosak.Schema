@@ -71,3 +71,7 @@ After merged M2C1, the [bounded Boolean adoption and qualification](m2c-boolean/
 ## M2C3 local checkpoint - 19 November 2026
 
 The [integer adoption](m2c-integer/ADOPTION.md) proposes and locally implements exactly Integer=4 and checked IntegerValue:BigInteger without new public types. Prior String/Decimal/Boolean members remain. Native coefficient digit capacity covers integer supplies; query capacity remains separate. No integer assertion/derived-family support or general API/C45 acceptance is inferred; ADR status remains Proposed.
+
+## M2D1 local checkpoint - 19 November 2026
+
+The [string restriction adoption](m2d-string-restrictions/ADOPTION.md) locally adds direct named xs:string restrictions with selected Unicode length/enumeration facets. The owned scalar surface is unchanged, and MaxStringCharacters now explicitly bounds parsed enumeration values as well as leaves. Original named component provenance remains internal; general API/C45 acceptance and broader derivation remain separate. ADR status remains Proposed.

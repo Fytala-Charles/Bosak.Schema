@@ -51,7 +51,7 @@ The sample reads `12.5`, `2` and `1`; export retains the decimal lexical spellin
 
 Inspect Valid, Invalid and Unsupported before using Value. Invalid and Unsupported return no owned session/document. Arguments, cancellation, capacity exhaustion and lifecycle faults throw documented exceptions. Operations on one session must be sequential; overlap refuses. Disposal waits for admitted synchronous work and revokes owned access. Returned exact decimals and XML are detached, with no transferable schema authority.
 
-The native route accepts strings and a finite grammar only: one to sixteen element-only root declarations, each with an inline complex type or a QName reference to a global named complex type, an ordered bounded sequence of decimal children and zero-to-eight supported assertions. Up to sixteen combined global named simple/complex types are admitted and all are checked, including unused types. Other simple types, restriction chains, attributes, imports, element references, lists/unions, general query syntax, stream/reader overloads and positive cross-universe handoff remain outside the 0.6 profile. The linked immutable M1 contract predates these named-type/facet extensions; see its [baseline contract](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/NATIVE-DECIMAL-PUBLIC-API.md) and [finite grammar](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/NATIVE-DECIMAL-GRAMMAR.md).
+NativeDecimalSession accepts string inputs and a finite grammar only: one to sixteen element-only root declarations, each with an inline complex type or a QName reference to a global named complex type, an ordered bounded sequence of decimal children and zero-to-eight supported assertions. Up to sixteen combined global named simple/complex types are admitted and all are checked, including unused types. Other simple types, restriction chains, attributes, imports, element references, lists/unions, general query syntax, stream/reader overloads and positive cross-universe handoff remain outside its 0.6 decimal profile. The linked immutable M1 contract predates these named-type/facet extensions; see its [baseline contract](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/NATIVE-DECIMAL-PUBLIC-API.md) and [finite grammar](https://github.com/Fytala-Charles/Bosak.Schema/blob/394635228573989f437b649a679cd70d7d997e40/docs/NATIVE-DECIMAL-GRAMMAR.md).
 
 ## Namespace-aware decimal documents (0.6 API)
 
@@ -229,8 +229,8 @@ zeros would produce a value within the facets. Unknown bases/facets, inconsisten
 components and unsupported unused definitions refuse compilation.
 
 The combined global-type limit is16; totalDigits is1..256 and fractionDigits0..256.
-Named nondecimal types, restriction chains, fixed/whiteSpace/pattern/enumeration
-facets, attributes and imports remain excluded. Named leaf annotations and atomic
+On NativeDecimalSession, named nondecimal types, restriction chains,
+fixed/whiteSpace/pattern/enumeration facets, attributes and imports remain excluded. Named leaf annotations and atomic
 provenance preserve original type identity internally; exported XML and scalar
 values carry no transferable PSVI. Published beta.1 retains its original scope.
 
@@ -239,8 +239,8 @@ values carry no transferable PSVI. Published beta.1 retains its original scope.
 NativeSchemaSession is a separate synchronous entry point for primitive strings
 and the existing decimal/named-decimal profile. NativeDecimalSession retains its
 decimal-only meaning. String whitespace/Unicode are preserved after XML parsing;
-Primitive Boolean and built-in integer leaves are also supported; named string
-restrictions and string facets remain excluded.
+Primitive Boolean and built-in integer leaves are also supported. Named string
+restrictions support the selected facets described below.
 
 ```csharp
 using Bosak.Schema;
@@ -391,3 +391,60 @@ Console.WriteLine(document.ExportXml());
 The exact value is9223372036854775808; export preserves the supplied plus sign
 and leading zero. Wrong-kind getters throw InvalidOperationException. Detached
 BigInteger values survive disposal without carrying schema authority.
+
+## Named string restrictions (0.6 development only)
+
+NativeSchemaSession admits global simple types directly restricted from xs:string
+with length, minLength, maxLength and enumeration. Length counts Unicode characters,
+so one supplementary character counts one, while a base character plus a combining
+mark counts two. MaxStringCharacters still counts UTF-16 units before facet checks
+and also bounds each parsed enumeration value. Each type permits at most16supplied
+enumeration entries, including duplicates. Matching preserves parsed whitespace,
+case and Unicode sequence; there is no Unicode normalization. XML attribute
+normalization applies to facet values before comparison.
+
+Length/minLength/maxLength values are bounded to0..65536 with a256character lexical
+ceiling. A direct restriction cannot combine length with minLength/maxLength;
+minLength and maxLength may coexist when consistent. Enumeration entries form
+alternatives and intersect with the other supplied facets. Pattern, whitespace
+overrides, restriction chains and anonymous string types remain excluded.
+NativeDecimalSession remains decimal-only; string assertion references remain
+outside the decimal-only native assertion grammar. Published beta.1 is unchanged.
+
+```csharp
+using Bosak.Schema;
+
+var schema = """
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Label"><xs:restriction base="xs:string">
+    <xs:length value="2"/>
+    <xs:enumeration value="😀A"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="r"><xs:complexType><xs:sequence>
+    <xs:element name="label" type="Label"/>
+  </xs:sequence></xs:complexType></xs:element>
+</xs:schema>
+""";
+var options = new NativeSchemaSessionOptions(256, 256, 3, 65536, 1, 4, 1, 256, 256);
+var created = NativeSchemaSession.Create(schema, options);
+if (created.Outcome != NativeSchemaOutcome.Valid)
+{
+    Console.Error.WriteLine(created.Diagnostics[0].Code);
+    return;
+}
+using var session = created.Value!;
+var assessed = session.Assess("<r><label>😀A</label></r>",
+    new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch, 0));
+if (assessed.Outcome != NativeSchemaOutcome.Valid)
+{
+    Console.Error.WriteLine(assessed.Diagnostics[0].Code);
+    return;
+}
+using var document = assessed.Value!;
+Console.WriteLine(document.ReadScalar(0).StringValue);
+Console.WriteLine(document.ExportXml());
+```
+
+The label has two Unicode characters and three UTF-16 units. An in-bound facet
+mismatch is Invalid; explicit representation overflow is Unsupported. Original
+named type facts remain internal; returned strings and XML carry no authority.

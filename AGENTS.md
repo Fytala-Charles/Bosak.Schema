@@ -307,3 +307,7 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## M2C3 integer candidate
 
 19November2026:748source cases(347implementation/401public). Read docs/m2c-integer/ADOPTION.md before semantic edits. Exact built-in integer leaves retain original typed facts, BigInteger values, supplied-digit capacity and fixed256UTF16lexical ceiling. Preserve legacy decimal refusal and separate read/query capacities. Integer assertions/derived restrictions remain excluded. No commit/push/publication without explicit request.
+
+## M2D1 string restriction candidate
+
+19November2026:837source cases(355implementation/482public). Read docs/m2d-string-restrictions/ADOPTION.md before semantic edits. Only opt-in direct named xs:string restrictions admit Unicode scalar length/minLength/maxLength and exact ordinal enumeration. Preserve parsed UTF16representation limits,16supplied enumeration ceiling, original named facts, legacy decimal refusal and decimal-only assertions. Pattern/whiteSpace/anonymous types/restriction chains remain excluded. No commit/push/publication without explicit request.
