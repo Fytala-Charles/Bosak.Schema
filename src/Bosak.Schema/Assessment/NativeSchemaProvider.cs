@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Implement internal native decimal Core adapter                                                 |
 //                      | Charles Korthout | 0.2   | 15-11-2026     | Reject uninitialized lookup names with explicit argument diagnostics                        |
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
+//                      | Charles Korthout | 0.4   | 19-11-2026     | Adopt bounded expanded names and optional native assertions                              |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -82,7 +83,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     {
         cancellationToken.ThrowIfCancellationRequested();
         ValidateName(name);
-        return name.NamespaceUri.Length == 0 && name.LocalName == schema.Root.Name
+        return name.NamespaceUri == schema.Root.NamespaceUri && name.LocalName == schema.Root.Name
             ? NativeCoreResult<ISchemaComponentHandle>.Supported(RootDeclaration)
             : NativeCoreResult<ISchemaComponentHandle>.NotFound();
     }

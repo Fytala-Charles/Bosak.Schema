@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Implement bounded native decimal backend                                                 |
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
+//                      | Charles Korthout | 0.3   | 19-11-2026     | Adopt bounded expanded names and optional native assertions                              |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -27,9 +28,10 @@ internal sealed class NativeDecimalAssertion
     private readonly Predicate predicate;
     private NativeDecimalAssertion(Predicate predicate) => this.predicate = predicate;
 
-    internal static NativeDecimalAssertion Compile(string expression, HashSet<string> names, NativeNumericLimits limits)
+    internal static NativeDecimalAssertion Compile(string expression, HashSet<string> names, NativeNumericLimits limits,
+        Func<string, string?>? resolveName = null)
     {
-        try { return CompileCore(expression, names, limits); }
+        try { return CompileCore(expression, names, limits, resolveName ?? (name => names.Contains(name) ? name : null)); }
         catch (NativeProfileException ex) when (ex.Outcome == NativeOutcome.Unsupported &&
             ex.UnsupportedReason != NativeDecimalUnsupportedReason.RepresentationCapacity)
         {
@@ -37,7 +39,7 @@ internal sealed class NativeDecimalAssertion
         }
     }
 
-    private static NativeDecimalAssertion CompileCore(string expression, HashSet<string> names, NativeNumericLimits limits)
+    private static NativeDecimalAssertion CompileCore(string expression, HashSet<string> names, NativeNumericLimits limits, Func<string, string?> resolveName)
     {
         NativeDecimalSchema.Require(expression.Length <= 512, "Assertion exceeds 512 characters.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         var tokens = new List<string>();
@@ -50,7 +52,7 @@ internal sealed class NativeDecimalAssertion
             tokens.Add(expression[start..index]);
             NativeDecimalSchema.Require(tokens.Count <= 128, "Assertion exceeds 128 tokens.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         }
-        var parser = new Parser(tokens, names, limits);
+        var parser = new Parser(tokens, resolveName, limits);
         var plan = parser.ParseOr();
         NativeDecimalSchema.Require(parser.AtEnd, "Trailing assertion tokens.");
         return new NativeDecimalAssertion(plan);
@@ -108,7 +110,7 @@ internal sealed class NativeDecimalAssertion
         }
     }
 
-    private sealed class Parser(List<string> tokens, HashSet<string> names, NativeNumericLimits limits)
+    private sealed class Parser(List<string> tokens, Func<string, string?> resolveName, NativeNumericLimits limits)
     {
         private int position;
         private int depth;
@@ -166,15 +168,16 @@ internal sealed class NativeDecimalAssertion
                 depth--;
                 return new Operand(name, true, null);
             }
-            if (names.Contains(Peek())) return new Operand(Next(), false, null);
+            var resolved = resolveName(Peek());
+            if (resolved is not null) { Next(); return new Operand(resolved, false, null); }
             return new Operand(null, false, NativeDecimalSchema.ParseDecimal(Next(), limits, NativeOutcome.Unsupported));
         }
 
         private string ChildName()
         {
-            var name = Next();
-            NativeDecimalSchema.Require(names.Contains(name), "Assertion references an unknown child.");
-            return name;
+            var name = resolveName(Next());
+            NativeDecimalSchema.Require(name is not null, "Assertion references an unknown child.");
+            return name!;
         }
 
         private string Peek(int offset = 0) => position + offset < tokens.Count ? tokens[position + offset] : "";

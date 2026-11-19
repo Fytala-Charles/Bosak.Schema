@@ -4,6 +4,11 @@
   <p>An open schema foundation with staged validation and integration.</p>
 </div>
 
+## Specification coverage priority - 19 November 2026
+
+Prioritize the [shared specification programme](docs/specification-coverage/PROGRAM.md): an accountable coverage ledger, then namespace-aware decimal assessment and optional assertions, followed by coherent named types, attributes, datatypes and structural/application profiles. Release packaging is secondary to demonstrated coverage.
+
+
 # Bosak.Schema Roadmap
 
 > An open schema foundation with staged validation and integration.
@@ -35,3 +40,7 @@ The [native API](docs/NATIVE-DECIMAL-PUBLIC-API.md), [restricted resolution](doc
 ## Diagnostic development candidate
 
 [Bounded Unsupported reasons](docs/unsupported-reasons/README.md) are implemented and qualified locally. Review this additive API before any release/controller decision; broader namespaces, attributes and datatypes remain separate scopes. The0.6development minimum is not a beta.2 publication decision.
+
+## M1 local progress
+
+The [bounded namespace/optional-assertion candidate](docs/specification-coverage/M1-CANDIDATE-DELTA.json) is implemented and locally qualified. Wider component/attribute/datatype and structural milestones remain open; official W3C suite selection/admission remains separate from authored controls.

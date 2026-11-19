@@ -12,5 +12,6 @@
     <PackageReference Include="Bosak.Schema" Version="$(SchemaConsumerPackageVersion)" Condition="'$(SchemaConsumerPackageVersion)' != ''" />
     <None Include="../TestData/Schemas/orders.xsd;../TestData/Schemas/sku.xsd" CopyToOutputDirectory="PreserveNewest" Link="TestData/Schemas/%(Filename)%(Extension)" />
     <None Include="../TestData/Schemas/native-decimal.*" CopyToOutputDirectory="PreserveNewest" Link="TestData/Schemas/%(Filename)%(Extension)" />
+    <None Include="../TestData/Namespaces/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/Namespaces/%(Filename)%(Extension)" />
   </ItemGroup>
 </Project>

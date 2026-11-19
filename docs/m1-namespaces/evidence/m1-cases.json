@@ -1,0 +1,782 @@
+[
+  {
+    "id": "M1-01",
+    "label": "qualified prefix independence",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-02",
+    "label": "default namespace instance",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<order xmlns='urn:orders'><amount>12.50</amount></order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-03",
+    "label": "implicit unqualified local",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' ><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><amount>12.50</amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-04",
+    "label": "explicit unqualified default",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='unqualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><amount>12.50</amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-05",
+    "label": "local unqualified override",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' form='unqualified'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><amount>12.50</amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-06",
+    "label": "local qualified override",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='unqualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' form='qualified'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-07",
+    "label": "default namespace undeclaration",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' ><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<order xmlns='urn:orders'><amount xmlns=''>12.50</amount></order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-08",
+    "label": "preserve no namespace profile",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders'  ><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<order><amount>12.50</amount></order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-09",
+    "label": "qualified form without target",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders'  elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<order><amount>12.50</amount></order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-10",
+    "label": "wrong root namespace",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:other'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-11",
+    "label": "wrong child namespace",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount xmlns:q='urn:other'>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-12",
+    "label": "qualified child required",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><amount>12.50</amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-13",
+    "label": "unqualified child required",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' ><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-14",
+    "label": "namespace URI case significant",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:Orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-15",
+    "label": "namespace URI escape significant",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='http://example.test/%6frders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<order xmlns='http://example.test/orders'><amount>12.50</amount></order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-16",
+    "label": "assertion default ##targetNamespace",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' xpathDefaultNamespace='##targetNamespace'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert test='amount gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-17",
+    "label": "assertion default urn:orders",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' xpathDefaultNamespace='urn:orders'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert test='amount gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-18",
+    "label": "assertion default ##defaultNamespace",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' xpathDefaultNamespace='##defaultNamespace' xmlns='urn:orders'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert test='amount gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-19",
+    "label": "local assertion default",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' xpathDefaultNamespace='##local'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert test='amount gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><amount>12.50</amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-20",
+    "label": "assertion override",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' xpathDefaultNamespace='##local'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert xpathDefaultNamespace='##targetNamespace' test='amount gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-21",
+    "label": "local QName prefix",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert xmlns:b='urn:orders' test='count(b:amount) eq 1 and b:amount gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-22",
+    "label": "false namespaced assertion",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert test='p:amount lt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-23",
+    "label": "schema default binding captured",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' xmlns='urn:orders' xpathDefaultNamespace='##defaultNamespace'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert xmlns='urn:other' test='amount gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-24",
+    "label": "same local different expanded declarations",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='amount' type='xs:decimal' form='unqualified'/></xs:sequence><xs:assert test='p:amount eq 1 and amount eq 2'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>1</q:amount><amount>2</amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "1",
+      "2"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-25",
+    "label": "unsupported target ",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='' ><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "Namespace",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-26",
+    "label": "unsupported target relative/path",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='relative/path' ><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "Namespace",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-27",
+    "label": "unsupported target urn:two words",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:two words' ><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "Namespace",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-28",
+    "label": "unsupported target http://www.w3.org/2001/XMLSchema",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='http://www.w3.org/2001/XMLSchema' ><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "Namespace",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-29",
+    "label": "unsupported form/context elementFormDefault='invalid'",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='invalid'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "Namespace",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-30",
+    "label": "unsupported form/context form='invalid'",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' ><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' form='invalid'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "Namespace",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-31",
+    "label": "unsupported form/context xpathDefaultNamespace='##unknown'",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' xpathDefaultNamespace='##unknown'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "Namespace",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-32",
+    "label": "unsupported QName x:amount gt 0",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert  test='x:amount gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "AssertionGrammar",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-33",
+    "label": "unsupported QName p:amount gt 0xmlns:p='urn:other'",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert xmlns:p='urn:other' test='p:amount gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "AssertionGrammar",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-34",
+    "label": "unsupported QName p:missing gt 0",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert  test='p:missing gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "AssertionGrammar",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-35",
+    "label": "unsupported QName :amount gt 0",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert  test=':amount gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "AssertionGrammar",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-36",
+    "label": "unsupported QName p: gt 0",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert  test='p: gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "AssertionGrammar",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-37",
+    "label": "application attributes still refused",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order secret='marker' xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "unsupportedReason": "Attributes",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-38",
+    "label": "named type still refused",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='p:Money' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-39",
+    "label": "import still refused",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' ><xs:import namespace='urn:other'/><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-40",
+    "label": "eight assertions allowed",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  },
+  {
+    "id": "M1-41",
+    "label": "nine assertions refuse",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' /></xs:sequence><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/><xs:assert test='p:amount gt 0'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<q:order xmlns:q='urn:orders'><q:amount>12.50</q:amount></q:order>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "values": [
+      "12.5"
+    ],
+    "specification": "structures",
+    "sections": [
+      "3.3",
+      "3.4",
+      "3.13"
+    ],
+    "caseKind": "authored normative regression; not an official W3C suite ID"
+  }
+]
