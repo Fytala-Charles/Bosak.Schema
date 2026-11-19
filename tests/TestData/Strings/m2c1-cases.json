@@ -940,9 +940,9 @@
     "label": "excluded leaf xs:boolean",
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:boolean'/><xs:element name='amount' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
-    "expectedCompile": "Unsupported",
-    "expectedAssessment": "Valid",
-    "unsupportedReason": "ValueType",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
     "maxStringCharacters": 256,
     "values": [
       {
@@ -959,7 +959,8 @@
       "Structures3.3.4",
       "XML1.0 2.11/4.1"
     ],
-    "officialW3cCase": false
+    "officialW3cCase": false,
+    "m2c2Admission": "Boolean declaration admitted; old identifier text remains invalid as a Boolean."
   },
   {
     "id": "M2C1-38",

@@ -1,8 +1,8 @@
 // ===========================================================================================================================================================
 // AUTHOR               : Charles Korthout
 // CREATE DATE          : 19 November 2026
-// PURPOSE              : Defines explicit immutable limits for opt-in string and decimal sessions.
-// SPECIAL NOTES        : Bounded opt-in string/decimal profile; existing decimal facade remains unchanged.
+// PURPOSE              : Defines explicit immutable limits for opt-in native scalar sessions.
+// SPECIAL NOTES        : Bounded opt-in scalar profile; existing decimal facade remains unchanged.
 //
 // COPYRIGHT            : Fytala
 // LICENSE              : LICENSE.md (Apache-2.0)
@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 

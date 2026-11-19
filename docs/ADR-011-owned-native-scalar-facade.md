@@ -62,3 +62,8 @@ remain separate. No existing acceptance is extended by inference.
 ## M2C1 local implementation - 19 November 2026
 
 The ten-type string/decimal surface is implemented as a local candidate. See [adoption and qualification](m2c-string-facade/README.md). Original proposal source is preserved in that dossier; this records implementation, not global API/ADR acceptance, C45 freeze or publication. Legacy decimal APIs remain unchanged.
+
+
+## M2C2 local Boolean increment - 19 November 2026
+
+After merged M2C1, the [bounded Boolean adoption and qualification](m2c-boolean/README.md) appends Boolean=3 and a BooleanValue getter without changing earlier members. This is a local implementation checkpoint, not general API/C45 acceptance or publication.

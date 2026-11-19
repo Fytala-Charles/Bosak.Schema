@@ -86,3 +86,5 @@ The development profile also supports [reusable named complex types](docs/m2a-na
 The development profile also admits [named decimal restrictions and selected facets](docs/m2b-decimal-restrictions/README.md) for reusable monetary values. Other datatypes, restriction chains, attributes and imports remain outside this bounded native profile.
 
 The local development profile adds an [opt-in string/decimal owned facade](docs/m2c-string-facade/README.md) with checked detached scalar values and bounded XML export. The published beta and existing decimal-only API retain their original scope.
+
+The opt-in scalar development profile also assesses [primitive Boolean leaves](docs/m2c-boolean/README.md), preserving actual true/false values through Core. Boolean assertions and custom Boolean restrictions remain excluded.
