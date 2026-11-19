@@ -18,6 +18,7 @@
 //                      | Charles Korthout | 0.5   | 19-11-2026     | Adopt bounded named complex types and shared expanded component identity                  |
 //                      | Charles Korthout | 0.6   | 19-11-2026     | Adopt named decimal restrictions and original named scalar type identity                  |
 //                      | Charles Korthout | 0.7   | 19-11-2026     | Share explicit mixed scalar profile with preserved decimal compatibility                  |
+//                      | Charles Korthout | 0.8   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -48,6 +49,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         foreach (var type in schema.NamedTypes) Add(type);
         DecimalType = Add(schema.DecimalType);
         if (schema.StringType is { } stringType) Add(stringType);
+        if (schema.BooleanType is { } booleanType) Add(booleanType);
     }
 
     private Component Add(object value)
@@ -87,6 +89,8 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             return NativeCoreResult<ISchemaComponentHandle>.Supported(DecimalType);
         if (name.NamespaceUri == "http://www.w3.org/2001/XMLSchema" && name.LocalName == "string" && schema.StringType is { } stringType)
             return NativeCoreResult<ISchemaComponentHandle>.Supported(components[stringType]);
+        if (name.NamespaceUri == "http://www.w3.org/2001/XMLSchema" && name.LocalName == "boolean" && schema.BooleanType is { } booleanType)
+            return NativeCoreResult<ISchemaComponentHandle>.Supported(components[booleanType]);
         var type = schema.NamedTypes.FirstOrDefault(t => t.Name == name.LocalName && t.NamespaceUri == name.NamespaceUri);
         return type is not null ? NativeCoreResult<ISchemaComponentHandle>.Supported(components[type])
             : NativeCoreResult<ISchemaComponentHandle>.Unsupported("BSK-NATIVE-TYPE");
@@ -225,6 +229,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             Input = input; Node = node; this.origin = origin; this.type = type; this.declaration = declaration; this.state = state;
             if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar));
             else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, XdmValue.FromString(text));
+            else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical));
         }
         internal NativeSchemaInput Input { get; }
         internal NativeSessionNode Node { get; }

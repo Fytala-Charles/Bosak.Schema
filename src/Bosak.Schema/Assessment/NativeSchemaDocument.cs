@@ -2,7 +2,7 @@
 // AUTHOR               : Charles Korthout
 // CREATE DATE          : 19 November 2026
 // PURPOSE              : Exposes detached typed scalar values and bounded XML from owned assessment.
-// SPECIAL NOTES        : Bounded opt-in string/decimal profile; existing decimal facade remains unchanged.
+// SPECIAL NOTES        : Bounded opt-in scalar profile; existing decimal facade remains unchanged.
 //
 // COPYRIGHT            : Fytala
 // LICENSE              : LICENSE.md (Apache-2.0)
@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -32,7 +33,7 @@ public sealed class NativeSchemaDocument : IDisposable
     /// <summary>Reads one present leaf through the issued scalar route and returns its detached typed value.</summary>
     /// <param name="leafIndex">Zero-based present-leaf index in instance order.</param>
     /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
-    /// <returns>A detached string or exact decimal usable after document and session disposal.</returns>
+    /// <returns>A detached string, Boolean or exact decimal usable after document and session disposal.</returns>
     /// <exception cref="ArgumentOutOfRangeException">The index is outside the present leaves.</exception>
     /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
     /// <exception cref="NotSupportedException">Overlapping work or a value outside explicit query limits is refused.</exception>

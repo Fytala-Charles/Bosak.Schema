@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 19-11-2026     | Keep refusal probe on excluded integer after Boolean admission                              |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -114,7 +115,7 @@ public sealed class NativeSchemaContractTests
     {
         foreach(var t in new[]{typeof(NativeSchemaSession),typeof(NativeSchemaDocument),typeof(NativeScalarValue),typeof(NativeSchemaDiagnostic),typeof(NativeSchemaResult<NativeSchemaDocument>)})Assert.Empty(t.GetConstructors());
         Assert.Equal(1,(int)NativeScalarKind.String);Assert.Equal(2,(int)NativeScalarKind.Decimal);
-        var result=NativeSchemaSession.Create(Schema.Replace("type='xs:string'","type='xs:boolean'"),Options());
+        var result=NativeSchemaSession.Create(Schema.Replace("type='xs:string'","type='xs:integer'"),Options());
         Assert.Equal(NativeSchemaOutcome.Unsupported,result.Outcome);Assert.Null(result.Value);Assert.False(result.DiagnosticsTruncated);
         var diagnostic=Assert.Single(result.Diagnostics);Assert.Equal(NativeSchemaUnsupportedReason.ValueType,diagnostic.UnsupportedReason);
         Assert.Equal("The input or representation is outside the supported native scalar profile.",diagnostic.Message);Assert.True(diagnostic.Message.Length<=160);

@@ -239,7 +239,8 @@ values carry no transferable PSVI. Published beta.1 retains its original scope.
 NativeSchemaSession is a separate synchronous entry point for primitive strings
 and the existing decimal/named-decimal profile. NativeDecimalSession retains its
 decimal-only meaning. String whitespace/Unicode are preserved after XML parsing;
-booleans, integers, named string restrictions and string facets remain excluded.
+Primitive Boolean leaves are also supported; integers, named string restrictions
+and string facets remain excluded.
 
 ```csharp
 using Bosak.Schema;
@@ -294,3 +295,49 @@ bound. These limits are not XSD length facets, deadlines or memory SLAs. Export
 checks cancellation during bounded writes and refuses overflow without a partial
 return; it is not canonical/byte-preserving XML. Published beta.1 does not include
 this new facade. All operation/ownership and whole-schema refusal rules still apply.
+
+## Boolean leaves in the opt-in facade (0.6 development only)
+
+NativeSchemaSession also admits primitive xs:boolean. After XML-whitespace
+collapse, true/1 yield true and false/0 yield false. Other representable tokens
+are Invalid. The original Boolean text is bounded to256UTF-16code units before
+collapse, independently of MaxStringCharacters; capacity overflow is Unsupported.
+NativeDecimalSession remains decimal-only.
+
+```csharp
+using Bosak.Schema;
+
+var schema = """
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="r"><xs:complexType><xs:sequence>
+    <xs:element name="paid" type="xs:boolean"/>
+  </xs:sequence></xs:complexType></xs:element>
+</xs:schema>
+""";
+var options = new NativeSchemaSessionOptions(256, 256, 1, 65536, 1, 4, 1, 1, 0);
+var created = NativeSchemaSession.Create(schema, options);
+if (created.Outcome != NativeSchemaOutcome.Valid)
+{
+    Console.Error.WriteLine(created.Diagnostics[0].Code);
+    return;
+}
+using var session = created.Value!;
+var assessed = session.Assess("<r><paid>0</paid></r>",
+    new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch, 0));
+if (assessed.Outcome != NativeSchemaOutcome.Valid)
+{
+    Console.Error.WriteLine(assessed.Diagnostics[0].Code);
+    return;
+}
+using var document = assessed.Value!;
+var scalar = document.ReadScalar(0);
+if (scalar.Kind != NativeScalarKind.Boolean)
+    throw new InvalidOperationException("Expected a Boolean scalar.");
+Console.WriteLine(scalar.BooleanValue ? "true" : "false");
+Console.WriteLine(document.ExportXml());
+```
+
+The value is false, not an absent scalar; XML export retains lexical0.
+StringValue/DecimalValue getters on Boolean values refuse, and BooleanValue on
+other kinds refuses. Boolean assertions, named Boolean restrictions/facets and
+integer support are separate work. This local profile is not published beta.1.

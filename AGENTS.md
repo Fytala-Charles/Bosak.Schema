@@ -299,3 +299,7 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## M2C1 string/decimal candidate
 
 19November2026:614source cases(334implementation/280public). Read docs/m2c-string-facade/ADOPTION.md before semantic edits. New NativeSchemaSession opt-in shares the native owner/gate; legacy NativeDecimalSession stays decimal-only. Preserve XML string text, explicit UTF16/output capacities, original typed facts and bounded export/cancellation. No Boolean/integer/named string facets or Core engine/pin/publication expansion. API/C45 freeze remains separate; no commit/push without explicit request.
+
+## M2C2 Boolean candidate
+
+19November2026:671source cases(340implementation/331public). Read docs/m2c-boolean/ADOPTION.md before semantic edits. Opt-in Boolean leaves use true/false/1/0 after XML-whitespace collapse with an independent256UTF16lexical ceiling. Preserve false-vs-absence, actual Boolean facts/provenance and legacy decimal refusal. Boolean assertions/restrictions and integer support remain excluded. No commit/push/publication without explicit request.
