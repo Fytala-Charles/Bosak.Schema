@@ -61,3 +61,7 @@ Named complex types/QName root references are implemented locally;465source/145m
 ## 19 November 2026 - M2B candidate
 
 Direct named decimal restrictions and selected facets implemented locally;534source cases pass. See docs/m2b-decimal-restrictions/README.md and adoption; baseline6861c04 plus unstaged changes. Core engine/pins/controller and published beta.1 unchanged.
+
+## 19 November 2026 - M2C1 implementation
+
+Ten-type opt-in string/decimal facade implemented locally;614source cases pass. See docs/m2c-string-facade/ADOPTION.md and qualification before edits. Legacy decimal semantics and Core pins unchanged. No commit/push/publication.

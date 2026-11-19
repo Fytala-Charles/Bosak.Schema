@@ -233,3 +233,64 @@ Named nondecimal types, restriction chains, fixed/whiteSpace/pattern/enumeration
 facets, attributes and imports remain excluded. Named leaf annotations and atomic
 provenance preserve original type identity internally; exported XML and scalar
 values carry no transferable PSVI. Published beta.1 retains its original scope.
+
+## Opt-in string and decimal facade (0.6 development only)
+
+NativeSchemaSession is a separate synchronous entry point for primitive strings
+and the existing decimal/named-decimal profile. NativeDecimalSession retains its
+decimal-only meaning. String whitespace/Unicode are preserved after XML parsing;
+booleans, integers, named string restrictions and string facets remain excluded.
+
+```csharp
+using Bosak.Schema;
+
+var schema = """
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="r"><xs:complexType><xs:sequence>
+    <xs:element name="id" type="xs:string"/>
+    <xs:element name="amount" type="xs:decimal"/>
+  </xs:sequence></xs:complexType></xs:element>
+</xs:schema>
+""";
+var options = new NativeSchemaSessionOptions(256, 256, 256, 65536, 1, 4, 1, 256, 256);
+var context = new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch, 0);
+var created = NativeSchemaSession.Create(schema, options);
+if (created.Outcome != NativeSchemaOutcome.Valid)
+{
+    Console.Error.WriteLine(created.Diagnostics[0].Code);
+    return;
+}
+using var session = created.Value!;
+var assessed = session.Assess("<r><id> INV-001 </id><amount>12.50</amount></r>", context);
+if (assessed.Outcome != NativeSchemaOutcome.Valid)
+{
+    Console.Error.WriteLine(assessed.Diagnostics[0].Code);
+    return;
+}
+using var document = assessed.Value!;
+for (var index = 0; index < document.ScalarCount; index++)
+{
+    var scalar = document.ReadScalar(index);
+    switch (scalar.Kind)
+    {
+        case NativeScalarKind.String:
+            Console.WriteLine(scalar.StringValue);
+            break;
+        case NativeScalarKind.Decimal:
+            Console.WriteLine(scalar.DecimalValue.ToInvariantString(256));
+            break;
+        default:
+            throw new NotSupportedException("This application does not handle this scalar kind.");
+    }
+}
+Console.WriteLine(document.ExportXml());
+```
+
+The exact reads are the preserved string ` INV-001 ` and decimal `12.5`.
+Wrong-kind access throws InvalidOperationException. Returned values and XML are
+detached and survive closure without PSVI/authority. String capacity counts UTF-16
+code units; output capacity measures serialized XML before appending beyond the
+bound. These limits are not XSD length facets, deadlines or memory SLAs. Export
+checks cancellation during bounded writes and refuses overflow without a partial
+return; it is not canonical/byte-preserving XML. Published beta.1 does not include
+this new facade. All operation/ownership and whole-schema refusal rules still apply.
