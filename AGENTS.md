@@ -303,3 +303,7 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## M2C2 Boolean candidate
 
 19November2026:671source cases(340implementation/331public). Read docs/m2c-boolean/ADOPTION.md before semantic edits. Opt-in Boolean leaves use true/false/1/0 after XML-whitespace collapse with an independent256UTF16lexical ceiling. Preserve false-vs-absence, actual Boolean facts/provenance and legacy decimal refusal. Boolean assertions/restrictions and integer support remain excluded. No commit/push/publication without explicit request.
+
+## M2C3 integer candidate
+
+19November2026:748source cases(347implementation/401public). Read docs/m2c-integer/ADOPTION.md before semantic edits. Exact built-in integer leaves retain original typed facts, BigInteger values, supplied-digit capacity and fixed256UTF16lexical ceiling. Preserve legacy decimal refusal and separate read/query capacities. Integer assertions/derived restrictions remain excluded. No commit/push/publication without explicit request.

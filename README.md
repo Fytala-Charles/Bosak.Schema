@@ -88,3 +88,5 @@ The development profile also admits [named decimal restrictions and selected fac
 The local development profile adds an [opt-in string/decimal owned facade](docs/m2c-string-facade/README.md) with checked detached scalar values and bounded XML export. The published beta and existing decimal-only API retain their original scope.
 
 The opt-in scalar development profile also assesses [primitive Boolean leaves](docs/m2c-boolean/README.md), preserving actual true/false values through Core. Boolean assertions and custom Boolean restrictions remain excluded.
+
+The opt-in development facade also supports [bounded exact integer leaves](docs/m2c-integer/README.md). Published beta.1 retains its documented scope.

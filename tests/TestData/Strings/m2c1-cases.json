@@ -967,9 +967,8 @@
     "label": "excluded leaf xs:integer",
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:integer'/><xs:element name='amount' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
-    "expectedCompile": "Unsupported",
-    "expectedAssessment": "Valid",
-    "unsupportedReason": "ValueType",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
     "maxStringCharacters": 256,
     "values": [
       {
@@ -986,7 +985,8 @@
       "Structures3.3.4",
       "XML1.0 2.11/4.1"
     ],
-    "officialW3cCase": false
+    "officialW3cCase": false,
+    "intentionalM2C3Delta": "Built-in integer now compiles; unchanged historical instance text is integer-invalid."
   },
   {
     "id": "M2C1-39",

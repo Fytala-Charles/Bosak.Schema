@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
+//                      | Charles Korthout | 0.3   | 19-11-2026     | Add bounded exact integer leaves with original typed provenance                           |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -25,7 +26,7 @@ namespace Bosak.Schema;
 public sealed class NativeSchemaSessionOptions
 {
     /// <summary>Creates explicit native, string, export and Core admission limits.</summary>
-    /// <param name="maxNativeCoefficientDigits">Native supplied coefficient digits before normalization.</param>
+    /// <param name="maxNativeCoefficientDigits">Native supplied decimal coefficient or integer digits before normalization.</param>
     /// <param name="maxNativeScale">Native supplied decimal scale before normalization.</param>
     /// <param name="maxStringCharacters">Parsed string capacity in UTF-16 code units.</param>
     /// <param name="maxExportCharacters">Serialized XML capacity in UTF-16 code units.</param>
@@ -57,7 +58,7 @@ public sealed class NativeSchemaSessionOptions
         MaxQueryScale = maxQueryScale;
     }
 
-    /// <summary>Gets native supplied coefficient digits before normalization.</summary>
+    /// <summary>Gets native supplied decimal coefficient or integer digits before normalization.</summary>
     public int MaxNativeCoefficientDigits { get; }
     /// <summary>Gets native supplied decimal scale before normalization.</summary>
     public int MaxNativeScale { get; }
