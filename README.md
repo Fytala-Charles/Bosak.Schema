@@ -82,3 +82,5 @@ The [shared coverage programme](docs/specification-coverage/PROGRAM.md) now reco
 The [packaged0.6guidance](docs/package-readme06-reconciled/README.md) distinguishes the new diagnostic/namespace profile from published beta.1 and verifies consumer examples.
 
 The development profile also supports [reusable named complex types](docs/m2a-named-types/README.md) within the bounded decimal workflow. Named simple types, derivation, attributes and imports remain excluded. Published beta.1 retains its original scope.
+
+The development profile also admits [named decimal restrictions and selected facets](docs/m2b-decimal-restrictions/README.md) for reusable monetary values. Other datatypes, restriction chains, attributes and imports remain outside this bounded native profile.

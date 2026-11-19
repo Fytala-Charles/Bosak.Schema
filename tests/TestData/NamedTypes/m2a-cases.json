@@ -804,9 +804,9 @@
     "label": "named simple type",
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified' ><xs:simpleType name='Money'><xs:restriction base='xs:decimal'/></xs:simpleType><xs:complexType name='OrderType'><xs:sequence><xs:element name='amount' type='xs:decimal'/><xs:element name='tax' type='xs:decimal'/></xs:sequence><xs:assert test='p:tax gt 0'/></xs:complexType><xs:element name='order' type='p:OrderType'/></xs:schema>",
     "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.50</o:amount><o:tax>2</o:tax></o:order>",
-    "expectedCompile": "Unsupported",
+    "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
-    "unsupportedReason": "DeclarationShape",
+    "unsupportedReason": null,
     "values": [
       "12.5",
       "2"
@@ -822,7 +822,8 @@
       "3.4.4",
       "4.2"
     ],
-    "caseKind": "authored regression; not official W3C"
+    "caseKind": "authored regression; not official W3C",
+    "m2bAdmission": "Unused valid direct named decimal restriction now compiled; original M2A dossier remains historical."
   },
   {
     "id": "M2A-34",

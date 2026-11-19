@@ -291,3 +291,7 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## M2A named complex type candidate
 
 19November2026:465source cases(320implementation/145public). Read docs/m2a-named-types/ADOPTION.md before semantic edits. Preserve16global type/root ceilings, eager unused-definition refusal, QName/default namespace resolution, shared type identity and foreign/disposed authority guards.145minimum-Core/52current-Core/124-23-33retained lanes overlap. Core pins, published beta.1 and release controller remain unchanged.
+
+## M2B decimal restriction candidate
+
+19November2026:534source cases(324implementation/210public). Read docs/m2b-decimal-restrictions/ADOPTION.md before semantic edits. Preserve exact value-space facets, representation-before-facet gates, combined16type limit, eager unused-definition refusal and named declared/actual provenance. No general derivation relation or new datatype/attribute/import support; no commit/push/publication without explicit request.

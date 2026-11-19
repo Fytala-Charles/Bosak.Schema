@@ -1,0 +1,1365 @@
+[
+  {
+    "id": "M2B-01",
+    "label": "unrestricted named decimal",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-02",
+    "label": "MoneyType proposal",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n           xmlns:t=\"urn:orders\" targetNamespace=\"urn:orders\"\n           elementFormDefault=\"qualified\">\n  <xs:simpleType name=\"MoneyType\">\n    <xs:restriction base=\"xs:decimal\">\n      <xs:minInclusive value=\"0\"/>\n      <xs:totalDigits value=\"12\"/>\n      <xs:fractionDigits value=\"2\"/>\n    </xs:restriction>\n  </xs:simpleType>\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"amount\" type=\"t:MoneyType\" minOccurs=\"0\" maxOccurs=\"2\"/>\n      <xs:element name=\"tax\" type=\"xs:decimal\"/>\n    </xs:sequence>\n    <xs:assert test=\"count(t:amount) eq 2 and t:tax gt 0\"/>\n  </xs:complexType>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
+    "instance": "<o:order xmlns:o=\"urn:orders\"><o:amount>12.50</o:amount><o:amount>2</o:amount><o:tax>1</o:tax></o:order>\n",
+    "values": [
+      "12.5",
+      "2",
+      "1"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-03",
+    "label": "minInclusive admitted",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>1</o:amount></o:order>",
+    "values": [
+      "1"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-04",
+    "label": "minInclusive violation",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>0.999</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-05",
+    "label": "minExclusive admitted",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minExclusive value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>1.001</o:amount></o:order>",
+    "values": [
+      "1.001"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-06",
+    "label": "minExclusive violation",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minExclusive value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>1</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-07",
+    "label": "maxInclusive admitted",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:maxInclusive value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>1</o:amount></o:order>",
+    "values": [
+      "1"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-08",
+    "label": "maxInclusive violation",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:maxInclusive value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>1.001</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-09",
+    "label": "maxExclusive admitted",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:maxExclusive value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>0.999</o:amount></o:order>",
+    "values": [
+      "0.999"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-10",
+    "label": "maxExclusive violation",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:maxExclusive value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>1</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-11",
+    "label": "fractionDigits value-space 12.5000",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-12",
+    "label": "fractionDigits value-space 12.501",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.501</o:amount></o:order>",
+    "values": [
+      "12.501"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-13",
+    "label": "fractionDigits value-space 1000.000",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:fractionDigits value='0'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>1000.000</o:amount></o:order>",
+    "values": [
+      "1000"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-14",
+    "label": "fractionDigits value-space .1",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:fractionDigits value='0'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>.1</o:amount></o:order>",
+    "values": [
+      "0.1"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-15",
+    "label": "totalDigits value-space 00012.5000",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='3'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>00012.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-16",
+    "label": "totalDigits value-space 12.5",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-17",
+    "label": "totalDigits value-space 0",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>0</o:amount></o:order>",
+    "values": [
+      "0"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-18",
+    "label": "totalDigits value-space -0.000",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>-0.000</o:amount></o:order>",
+    "values": [
+      "0"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-19",
+    "label": "totalDigits value-space 0.001",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>0.001</o:amount></o:order>",
+    "values": [
+      "0.001"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-20",
+    "label": "totalDigits value-space 0.001",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='3'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>0.001</o:amount></o:order>",
+    "values": [
+      "0.001"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-21",
+    "label": "totalDigits value-space 1000",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='3'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>1000</o:amount></o:order>",
+    "values": [
+      "1000"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-22",
+    "label": "totalDigits value-space 1000",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='4'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>1000</o:amount></o:order>",
+    "values": [
+      "1000"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-23",
+    "label": "inclusive singleton",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='2'/><xs:maxInclusive value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>2.00</o:amount></o:order>",
+    "values": [
+      "2"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-24",
+    "label": "exclusive empty space compiles",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minExclusive value='2'/><xs:maxExclusive value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>2</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-25",
+    "label": "empty intersection not schema error",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='.1'/><xs:maxInclusive value='.2'/><xs:fractionDigits value='0'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>0</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-26",
+    "label": "optional absent no fabricated scalar",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'></o:order>",
+    "values": [],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-27",
+    "label": "every repeated leaf checked",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12</o:amount><o:amount>-1</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-28",
+    "label": "signed whitespace integer facets",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value=' +0003 '/><xs:fractionDigits value=' -0 '/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.000</o:amount></o:order>",
+    "values": [
+      "12"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-29",
+    "label": "large exact decimal boundary",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='123456789012345678901234567890123456789.12'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>123456789012345678901234567890123456789.12</o:amount></o:order>",
+    "values": [
+      "123456789012345678901234567890123456789.12"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-30",
+    "label": "negative exact bound",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minExclusive value='-1.25'/><xs:maxInclusive value='-0.5'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>-.75</o:amount></o:order>",
+    "values": [
+      "-0.75"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-31",
+    "label": "lexical scale capacity before facets",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "unsupportedReason": "RepresentationCapacity",
+    "limits": [
+      256,
+      2
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-32",
+    "label": "lexical digit capacity before facets",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>00012</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "unsupportedReason": "RepresentationCapacity",
+    "limits": [
+      3,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-33",
+    "label": "inconsistent inclusive bounds",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='2'/><xs:maxInclusive value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-34",
+    "label": "mixed equal lower inclusive",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='2'/><xs:maxExclusive value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-35",
+    "label": "mixed equal lower exclusive",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minExclusive value='2'/><xs:maxInclusive value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-36",
+    "label": "exclusive reversed",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minExclusive value='2'/><xs:maxExclusive value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-37",
+    "label": "both lower facets",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/><xs:minExclusive value='0'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-38",
+    "label": "both upper facets",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:maxInclusive value='1'/><xs:maxExclusive value='1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-39",
+    "label": "duplicate facet",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:fractionDigits value='2'/><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-40",
+    "label": "zero totalDigits",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='0'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-41",
+    "label": "negative totalDigits",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='-1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-42",
+    "label": "negative fractionDigits",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:fractionDigits value='-1'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-43",
+    "label": "fractionDigits exceeds totalDigits",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='2'/><xs:fractionDigits value='3'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-44",
+    "label": "large facet integer ceiling",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='257'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "RepresentationCapacity",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-45",
+    "label": "huge facet integer",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:fractionDigits value='999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "RepresentationCapacity",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-46",
+    "label": "malformed facet integer",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:fractionDigits value='2.0'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-47",
+    "label": "bad range literal",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='1e2'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-48",
+    "label": "unknown facet",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:pattern value='.*'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-49",
+    "label": "explicit whiteSpace",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-50",
+    "label": "fixed attribute",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='2' fixed='true'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "Attributes",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-51",
+    "label": "missing value",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-52",
+    "label": "facet element children",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='2'><xs:annotation/></xs:totalDigits></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-53",
+    "label": "undefined base prefix",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='q:decimal'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-54",
+    "label": "nondecimal base",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-55",
+    "label": "user base chain",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='t:Money'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-56",
+    "label": "shared simple complex name",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:complexType name='Money'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "DeclarationShape",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-57",
+    "label": "unused invalid definition",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused'><xs:restriction base='xs:decimal'><xs:totalDigits value='0'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-58",
+    "label": "root scalar still excluded",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Money'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-59",
+    "label": "forward local reference",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/><xs:simpleType name='Money'><xs:restriction base='xs:decimal'/></xs:simpleType></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-60",
+    "label": "default namespace leaf type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element xmlns='urn:orders' name='amount' type='Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-61",
+    "label": "wrong namespace named type",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element xmlns:t='urn:other' name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-62",
+    "label": "max integer facets admitted",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:totalDigits value='256'/><xs:fractionDigits value='256'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-63",
+    "label": "range representation capacity",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='1.111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111'/></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "RepresentationCapacity",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-64",
+    "label": "combined simple complex type ceiling 16",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused1'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused2'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused3'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused4'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused5'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused6'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused7'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused8'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused9'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused10'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused11'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused12'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused13'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused14'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": null,
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "intentional combined global-type capacity"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2B-65",
+    "label": "combined simple complex type ceiling 17",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused1'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused2'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused3'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused4'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused5'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused6'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused7'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused8'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused9'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused10'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused11'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused12'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused13'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused14'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='Unused15'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "RepresentationCapacity",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "intentional combined global-type capacity"
+    ],
+    "officialW3cCase": false
+  }
+]

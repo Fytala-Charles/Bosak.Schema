@@ -57,3 +57,7 @@ PR11 merged/main green6d4e1e2bae2ee7889791e9a9dd22a2034cf3ab05. review/schema-be
 ## 19 November 2026 - M2A candidate
 
 Named complex types/QName root references are implemented locally;465source/145minimum-Core/52current-Core and retained124-23-33pass. See docs/m2a-named-types/README.md and adoption before semantic edits. Branch docs/m2a-named-complex-type-scope at0d9e72a plus unstaged changes; no commit/push/publication. Core pins/engine unchanged.
+
+## 19 November 2026 - M2B candidate
+
+Direct named decimal restrictions and selected facets implemented locally;534source cases pass. See docs/m2b-decimal-restrictions/README.md and adoption; baseline6861c04 plus unstaged changes. Core engine/pins/controller and published beta.1 unchanged.

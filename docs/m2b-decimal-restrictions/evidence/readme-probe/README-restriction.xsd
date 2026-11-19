@@ -1,0 +1,19 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:t="urn:orders" targetNamespace="urn:orders"
+           elementFormDefault="qualified">
+  <xs:simpleType name="MoneyType">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:totalDigits value="12"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="OrderType">
+    <xs:sequence>
+      <xs:element name="amount" type="t:MoneyType" minOccurs="0" maxOccurs="2"/>
+      <xs:element name="tax" type="xs:decimal"/>
+    </xs:sequence>
+    <xs:assert test="count(t:amount) eq 2 and t:tax gt 0"/>
+  </xs:complexType>
+  <xs:element name="order" type="t:OrderType"/>
+</xs:schema>
