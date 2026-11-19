@@ -20,6 +20,7 @@
 //                      | Charles Korthout | 0.7   | 19-11-2026     | Share explicit mixed scalar profile with preserved decimal compatibility                  |
 //                      | Charles Korthout | 0.8   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
 //                      | Charles Korthout | 0.9   | 19-11-2026     | Add bounded exact integer leaves with original typed provenance                           |
+//                      | Charles Korthout | 1.0   | 19-11-2026     | Add bounded named string restrictions with Unicode length and exact enumeration facets      |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -106,9 +107,15 @@ internal sealed class NativeDecimalSchema
                 var name = Name(type);
                 var restriction = Single(type, "restriction");
                 Attributes(restriction, "base");
-                Require(ResolveTypeName(restriction, "base") == Xs + "decimal", "Only direct decimal restrictions are admitted.", NativeDecimalUnsupportedReason.ValueType);
-                simple.Add(XName.Get(name, targetNamespace), new NativeType(name, false, targetNamespace,
-                    NativeDecimalFacets.Compile(restriction, limits)));
+                var baseName = ResolveTypeName(restriction, "base");
+                NativeType restricted;
+                if (baseName == Xs + "decimal")
+                    restricted = new NativeType(name, false, targetNamespace, NativeDecimalFacets.Compile(restriction, limits));
+                else if (stringType is not null && baseName == Xs + "string")
+                    restricted = new NativeType(name, false, targetNamespace, isString: true,
+                        stringFacets: NativeStringFacets.Compile(restriction, maxStringCharacters!.Value));
+                else throw new NativeProfileException(NativeOutcome.Unsupported, "Only admitted direct decimal or string restrictions are supported.", NativeDecimalUnsupportedReason.ValueType);
+                simple.Add(XName.Get(name, targetNamespace), restricted);
             }
             // Compile all complex types eagerly, including unused declarations.
             foreach (var type in types.Where(t => t.Name == Xs + "complexType"))
@@ -264,6 +271,7 @@ internal sealed class NativeDecimalSchema
                     if (declaration.Type.IsString)
                     {
                         Require(leaf.Value.Length <= maxStringCharacters!.Value, "String capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+                        Check(declaration.Type.StringFacets?.Accepts(leaf.Value) ?? true, "String facet violation.");
                         elements.Add(new NativeElementState(declaration, null, leaf.Value));
                     }
                     else if (declaration.Type.IsBoolean)
@@ -492,8 +500,9 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null)
 {
+    internal NativeStringFacets? StringFacets { get; } = stringFacets;
     internal bool IsInteger { get; } = isInteger;
     internal bool IsBoolean { get; } = isBoolean;
     internal bool IsString { get; } = isString;
