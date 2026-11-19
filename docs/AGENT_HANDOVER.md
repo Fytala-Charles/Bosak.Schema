@@ -1,13 +1,18 @@
 ## Beta.1 publication documentation — 18 November 2026
 
-## Packaged README candidate - 19 November 2026
+## Packaged guidance reconciled after M1 - 19 November 2026
 
-The packaged README now distinguishes the0.6diagnostic API from published0.5.0-beta.1, documents all seven detected reasons and Unspecified/future-value tolerance, and preserves stage-code/message, outcome and grammar boundaries. All three actual C#blocks compile against the local0.6package; public workflow and diagnostic branch probes pass, and ten immutable link destinations are verified. This is documentation only; no new product test count, package build, controller change, tag or publication. Final product source selection waits for review/merge of this package-text change. [Evidence](package-readme06/README.md).
+PR16package guidance is reconciled with merged M1. The0.6candidate supports bounded namespaces/form rules, QName assertions and zero-to-eight assertions; published0.5.0-beta.1 is unchanged. Earlier365/53prerelease planning and alpha.0.2example receipts remain historical. Current M1 source qualification is409(315+94), with94minimum-Core and42current-Core package cases. Release packaging remains secondary to specification coverage; no tag/controller/publication change. [Reconciliation](package-readme06-reconciled/README.md).
 
 
-## Next prerelease review - 19 November 2026
+## M1 namespace candidate - 19 November 2026
 
-The next prerelease review recommends0.6.0-beta.1 for the merged additive diagnostics, with no tag or publication authorization. Final product source is not selected until the packaged README is updated/reviewed. Controller changes must require365/53catalogs, retain124/23lanes and add a fixed signed published-beta.1/33case compatibility lane; existing provenance/OIDC/artifact/absence guards remain. This is a review proposal only; published beta.1 and runtime/controller/workflow are unchanged. [Review](prerelease06-review/README.md).
+The local M1 candidate adds namespace-aware expanded declaration names, qualified/unqualified local forms, QName assertion binding and zero-to-eight assertions within the finite decimal shape. All409source cases pass (315implementation/94public), including41authored clause-mapped cases and three real Core-session controls. Package-only94cases pass with Core1.81.2; a separate42case public lane passes with published Core1.81.17. Retained124/23/33binary catalogs pass with onlySchema.dll replaced; these lanes overlap. No Core runtime/API/source-wrapper pin, published package, version/tag or release-controller change. [Evidence](m1-namespaces/README.md).
+
+
+## Shared specification coverage priority - 19 November 2026
+
+Owner priority is specification coverage and useful external application workflows across Bosak and Bosak.Schema. The shared24-area matrix separates bounded native behavior, legacy/descriptor support, refusal and unassessed work;365historical Schema case IDs are indexed without claiming conformance. M1 proposes namespace-aware decimal documents with optional assertions, followed by coherent named-type/attribute/datatype and structural slices. No runtime or release change. [Programme](specification-coverage/PROGRAM.md), [owner requirement](REQ-009-SPECIFICATION-COVERAGE.md).
 
 
 ## Bounded Unsupported-reason candidate - 19 November 2026

@@ -4,6 +4,11 @@
   <p>An open schema foundation with staged validation and integration.</p>
 </div>
 
+## Specification coverage priority - 19 November 2026
+
+Prioritize the [shared specification programme](docs/specification-coverage/PROGRAM.md): an accountable coverage ledger, then namespace-aware decimal assessment and optional assertions, followed by coherent named types, attributes, datatypes and structural/application profiles. Release packaging is secondary to demonstrated coverage.
+
+
 # Bosak.Schema Roadmap
 
 > An open schema foundation with staged validation and integration.
@@ -36,8 +41,10 @@ The [native API](docs/NATIVE-DECIMAL-PUBLIC-API.md), [restricted resolution](doc
 
 [Bounded Unsupported reasons](docs/unsupported-reasons/README.md) are implemented and qualified locally. Review this additive API before any release/controller decision; broader namespaces, attributes and datatypes remain separate scopes. The0.6development minimum is not a beta.2 publication decision.
 
-## Next prerelease review
+## M1 local progress
 
-[Proposed0.6.0-beta.1 preparation](docs/prerelease06-review/README.md) starts with packaged consumer guidance, then an immutable product pin and a separately qualified controller. Preserve existing compatibility lanes and add published-beta.1 binary coverage. No version/tag/publication decision is inferred from this review.
+The [bounded namespace/optional-assertion candidate](docs/specification-coverage/M1-CANDIDATE-DELTA.json) is implemented and locally qualified. Wider component/attribute/datatype and structural milestones remain open; official W3C suite selection/admission remains separate from authored controls.
 
-The [0.6package README update](docs/package-readme06/README.md) is prepared locally with compiled examples. Review/merge it before pinning the exact release source and implementing the proposed controller changes.
+## README reconciliation after M1
+
+The [packaged guidance update](docs/package-readme06-reconciled/README.md) follows the merged namespace slice. Specification coverage remains the priority; release-controller/count decisions must use the later reviewed profile, not the historical365/53plan.

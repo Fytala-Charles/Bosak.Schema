@@ -75,6 +75,8 @@ See the [next-beta assessment](docs/beta2-gap-assessment/README.md) for proposed
 
 A [development candidate for clearer Unsupported diagnostics](docs/unsupported-reasons/README.md) reports one detected category while retaining the bounded grammar. Published beta.1 remains unchanged.
 
-The [next prerelease plan](docs/prerelease06-review/README.md) reviews versioning and compatibility gates for clearer diagnostics. Published beta.1 remains current.
+The [shared specification coverage programme](docs/specification-coverage/PROGRAM.md) defines the next Schema/Core interoperability milestones and the evidence required for supported profiles.
 
-The [packaged consumer guidance update](docs/package-readme06/README.md) documents the0.6detected-reason API separately from beta.1 and verifies its examples before release source selection.
+The [shared coverage programme](docs/specification-coverage/PROGRAM.md) now records a local namespace/optional-assertion candidate with separate minimum/current-Core consumers; see its [bounded progress](docs/specification-coverage/M1-CANDIDATE-DELTA.json).
+
+The [packaged0.6guidance](docs/package-readme06-reconciled/README.md) distinguishes the new diagnostic/namespace profile from published beta.1 and verifies consumer examples.
