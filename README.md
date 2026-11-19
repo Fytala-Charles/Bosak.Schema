@@ -74,3 +74,7 @@ Fytala retains copyright and trademark ownership; Apache-2.0 grants the rights s
 See the [next-beta assessment](docs/beta2-gap-assessment/README.md) for proposed diagnostic improvements and the evidence required before expanding the native grammar.
 
 A [development candidate for clearer Unsupported diagnostics](docs/unsupported-reasons/README.md) reports one detected category while retaining the bounded grammar. Published beta.1 remains unchanged.
+
+The [next prerelease plan](docs/prerelease06-review/README.md) reviews versioning and compatibility gates for clearer diagnostics. Published beta.1 remains current.
+
+The [packaged consumer guidance update](docs/package-readme06/README.md) documents the0.6detected-reason API separately from beta.1 and verifies its examples before release source selection.

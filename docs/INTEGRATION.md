@@ -4,6 +4,16 @@
   <p>Use schema services without activation and with explicit supported coverage.</p>
 </div>
 
+## Packaged README candidate - 19 November 2026
+
+The packaged README now distinguishes the0.6diagnostic API from published0.5.0-beta.1, documents all seven detected reasons and Unspecified/future-value tolerance, and preserves stage-code/message, outcome and grammar boundaries. All three actual C#blocks compile against the local0.6package; public workflow and diagnostic branch probes pass, and ten immutable link destinations are verified. This is documentation only; no new product test count, package build, controller change, tag or publication. Final product source selection waits for review/merge of this package-text change. [Evidence](package-readme06/README.md).
+
+
+## Next prerelease review - 19 November 2026
+
+The next prerelease review recommends0.6.0-beta.1 for the merged additive diagnostics, with no tag or publication authorization. Final product source is not selected until the packaged README is updated/reviewed. Controller changes must require365/53catalogs, retain124/23lanes and add a fixed signed published-beta.1/33case compatibility lane; existing provenance/OIDC/artifact/absence guards remain. This is a review proposal only; published beta.1 and runtime/controller/workflow are unchanged. [Review](prerelease06-review/README.md).
+
+
 ## Bounded Unsupported-reason candidate - 19 November 2026
 
 The local development candidate adds `NativeDecimalDiagnostic.UnsupportedReason` and the fixed `NativeDecimalUnsupportedReason` enum. Existing stage codes/messages, outcomes and grammar are preserved; categories describe one detected refusal and may be Unspecified. All365source cases pass (312 implementation/53public, including20new controls), as do53package-only cases and retained124/23 unchanged-binary replacement catalogs. These lanes overlap and are not additive. The54release and six workload-integrity controls pass. MinVer minimum advances to0.6 for this additive feature;0.6.0-alpha.0.2 is local/unsigned only. Published0.5.0-beta.1 and allCore1.81.2 pins remain unchanged. No commit/push, tag or publication. [Candidate](unsupported-reasons/README.md).
