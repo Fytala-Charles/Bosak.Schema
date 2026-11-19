@@ -67,3 +67,7 @@ The ten-type string/decimal surface is implemented as a local candidate. See [ad
 ## M2C2 local Boolean increment - 19 November 2026
 
 After merged M2C1, the [bounded Boolean adoption and qualification](m2c-boolean/README.md) appends Boolean=3 and a BooleanValue getter without changing earlier members. This is a local implementation checkpoint, not general API/C45 acceptance or publication.
+
+## M2C3 local checkpoint - 19 November 2026
+
+The [integer adoption](m2c-integer/ADOPTION.md) proposes and locally implements exactly Integer=4 and checked IntegerValue:BigInteger without new public types. Prior String/Decimal/Boolean members remain. Native coefficient digit capacity covers integer supplies; query capacity remains separate. No integer assertion/derived-family support or general API/C45 acceptance is inferred; ADR status remains Proposed.

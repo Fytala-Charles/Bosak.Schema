@@ -19,6 +19,7 @@
 //                      | Charles Korthout | 0.6   | 19-11-2026     | Adopt named decimal restrictions and original named scalar type identity                  |
 //                      | Charles Korthout | 0.7   | 19-11-2026     | Share explicit mixed scalar profile with preserved decimal compatibility                  |
 //                      | Charles Korthout | 0.8   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
+//                      | Charles Korthout | 0.9   | 19-11-2026     | Add bounded exact integer leaves with original typed provenance                           |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -57,6 +58,7 @@ internal sealed class NativeDecimalSchema
     internal NativeType DecimalType { get; private set; } = null!;
     internal NativeType? StringType { get; private set; }
     internal NativeType? BooleanType { get; private set; }
+    internal NativeType? IntegerType { get; private set; }
     private int? maxStringCharacters;
     internal NativeDeclaration Root { get; }
     internal ImmutableArray<NativeDeclaration> Children { get; }
@@ -87,6 +89,7 @@ internal sealed class NativeDecimalSchema
             var decimalType = new NativeType("decimal", false, Xs.NamespaceName);
             var stringType = maxStringCharacters is null ? null : new NativeType("string", false, Xs.NamespaceName, isString: true);
             var booleanType = maxStringCharacters is null ? null : new NativeType("boolean", false, Xs.NamespaceName, isBoolean: true);
+            var integerType = maxStringCharacters is null ? null : new NativeType("integer", false, Xs.NamespaceName, isInteger: true);
             var named = new Dictionary<XName, NativeDecimalSchema>();
             var simple = new Dictionary<XName, NativeType>();
             var typeNames = new HashSet<XName>();
@@ -116,7 +119,7 @@ internal sealed class NativeDecimalSchema
                 var key = XName.Get(name, targetNamespace);
                 var identity = new NativeType(name, true, targetNamespace);
                 named.Add(key, CompileComplex(type, new NativeDeclaration(name, identity, 1, 1, targetNamespace),
-                    targetNamespace, defaultForm, assertionNamespace, decimalType, stringType, booleanType, simple, limits, cancellationToken));
+                    targetNamespace, defaultForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken));
             }
             var compiled = ImmutableDictionary.CreateBuilder<XName, NativeDecimalSchema>();
             NativeDecimalSchema? first = null;
@@ -139,7 +142,7 @@ internal sealed class NativeDecimalSchema
                     var complex = Single(declaration, "complexType");
                     Attributes(complex);
                     plan = CompileComplex(complex, new NativeDeclaration(name, new NativeType(null, true), 1, 1, targetNamespace),
-                        targetNamespace, defaultForm, assertionNamespace, decimalType, stringType, booleanType, simple, limits, cancellationToken);
+                        targetNamespace, defaultForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken);
                 }
                 compiled.Add(key, plan);
                 first ??= plan;
@@ -149,6 +152,7 @@ internal sealed class NativeDecimalSchema
             first.DecimalType = decimalType;
             first.StringType = stringType;
             first.BooleanType = booleanType;
+            first.IntegerType = integerType;
             first.maxStringCharacters = maxStringCharacters;
             return NativeResult<NativeDecimalSchema>.Valid(first);
         }
@@ -159,7 +163,7 @@ internal sealed class NativeDecimalSchema
     }
 
     private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
-        string targetNamespace, string defaultForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType,
+        string targetNamespace, string defaultForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
         Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken)
     {
         var members = Elements(complex);
@@ -186,6 +190,7 @@ internal sealed class NativeDecimalSchema
             if (IsDecimalType(declaration)) localType = decimalType;
             else if (stringType is not null && ResolveTypeName(declaration) == Xs + "string") localType = stringType;
             else if (booleanType is not null && ResolveTypeName(declaration) == Xs + "boolean") localType = booleanType;
+            else if (integerType is not null && ResolveTypeName(declaration) == Xs + "integer") localType = integerType;
             else
             {
                 Require(simple.TryGetValue(ResolveTypeName(declaration), out var resolved), "The local type must resolve to an admitted decimal type.", NativeDecimalUnsupportedReason.ValueType);
@@ -199,7 +204,7 @@ internal sealed class NativeDecimalSchema
             children.Add(new NativeDeclaration(name, localType, min, max, namespaceUri));
         }
 
-        var assertionNames = children.Where(c => !c.Type.IsString && !c.Type.IsBoolean).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
+        var assertionNames = children.Where(c => !c.Type.IsString && !c.Type.IsBoolean && !c.Type.IsInteger).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
         foreach (var assertion in members.Skip(1))
         {
@@ -267,6 +272,16 @@ internal sealed class NativeDecimalSchema
                         var lexical = Collapse(leaf.Value);
                         Check(lexical is "true" or "false" or "1" or "0", "Invalid Boolean lexical form.");
                         elements.Add(new NativeElementState(declaration, null, BooleanValue: lexical is "true" or "1"));
+                    }
+                    else if (declaration.Type.IsInteger)
+                    {
+                        Require(leaf.Value.Length <= 256, "Integer lexical capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+                        var lexical = Collapse(leaf.Value);
+                        var start = lexical.Length > 0 && lexical[0] is '+' or '-' ? 1 : 0;
+                        Check(lexical.Length > start && lexical.Skip(start).All(c => c is >= '0' and <= '9'), "Invalid integer lexical form.");
+                        Require(lexical.Length - start <= limits.MaxDigits, "Integer digit capacity exceeded before normalization.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+                        var value = BigInteger.Parse(lexical, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture);
+                        elements.Add(new NativeElementState(declaration, null, IntegerValue: value));
                     }
                     else
                     {
@@ -477,8 +492,9 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false)
 {
+    internal bool IsInteger { get; } = isInteger;
     internal bool IsBoolean { get; } = isBoolean;
     internal bool IsString { get; } = isString;
     internal NativeDecimalFacets? Facets { get; } = facets;
@@ -495,7 +511,7 @@ internal sealed class NativeDeclaration(string name, NativeType type, int minOcc
     internal int MinOccurs { get; } = minOccurs;
     internal int MaxOccurs { get; } = maxOccurs;
 }
-internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null)
+internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null)
 {
     internal bool IsNilled => false;
 }

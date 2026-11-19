@@ -239,8 +239,8 @@ values carry no transferable PSVI. Published beta.1 retains its original scope.
 NativeSchemaSession is a separate synchronous entry point for primitive strings
 and the existing decimal/named-decimal profile. NativeDecimalSession retains its
 decimal-only meaning. String whitespace/Unicode are preserved after XML parsing;
-Primitive Boolean leaves are also supported; integers, named string restrictions
-and string facets remain excluded.
+Primitive Boolean and built-in integer leaves are also supported; named string
+restrictions and string facets remain excluded.
 
 ```csharp
 using Bosak.Schema;
@@ -339,5 +339,55 @@ Console.WriteLine(document.ExportXml());
 
 The value is false, not an absent scalar; XML export retains lexical0.
 StringValue/DecimalValue getters on Boolean values refuse, and BooleanValue on
-other kinds refuses. Boolean assertions, named Boolean restrictions/facets and
-integer support are separate work. This local profile is not published beta.1.
+other kinds refuses. Boolean assertions and named Boolean restrictions/facets remain separate work. This local profile is not published beta.1.
+
+## Exact integer leaves in the opt-in facade (0.6 development only)
+
+NativeSchemaSession also admits built-in xs:integer leaves with exact BigInteger
+values. XML whitespace collapses; signs and leading zeroes are accepted, while
+fractional/exponent forms and non-ASCII digits are Invalid. Original parsed text
+has a fixed256UTF-16character ceiling before collapse. MaxNativeCoefficientDigits
+counts all supplied digits including leading zeroes, excluding sign; overflow is
+Unsupported/RepresentationCapacity. The separate Core query digit limit can refuse
+a read; export and subsequent in-bound reads remain available. Decimal scale and
+string capacities do not constrain integer values. NativeDecimalSession remains
+decimal-only. Integer assertions, derived integer families and named integer
+restrictions/facets remain excluded; this profile is not published beta.1.
+
+```csharp
+using System.Globalization;
+using Bosak.Schema;
+
+var schema = """
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="r"><xs:complexType><xs:sequence>
+    <xs:element name="quantity" type="xs:integer"/>
+  </xs:sequence></xs:complexType></xs:element>
+</xs:schema>
+""";
+var options = new NativeSchemaSessionOptions(256, 0, 1, 65536, 1, 4, 1, 256, 0);
+var created = NativeSchemaSession.Create(schema, options);
+if (created.Outcome != NativeSchemaOutcome.Valid)
+{
+    Console.Error.WriteLine(created.Diagnostics[0].Code);
+    return;
+}
+using var session = created.Value!;
+var assessed = session.Assess("<r><quantity>+09223372036854775808</quantity></r>",
+    new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch, 0));
+if (assessed.Outcome != NativeSchemaOutcome.Valid)
+{
+    Console.Error.WriteLine(assessed.Diagnostics[0].Code);
+    return;
+}
+using var document = assessed.Value!;
+var scalar = document.ReadScalar(0);
+if (scalar.Kind != NativeScalarKind.Integer)
+    throw new InvalidOperationException("Expected an integer scalar.");
+Console.WriteLine(scalar.IntegerValue.ToString(CultureInfo.InvariantCulture));
+Console.WriteLine(document.ExportXml());
+```
+
+The exact value is9223372036854775808; export preserves the supplied plus sign
+and leading zero. Wrong-kind getters throw InvalidOperationException. Detached
+BigInteger values survive disposal without carrying schema authority.

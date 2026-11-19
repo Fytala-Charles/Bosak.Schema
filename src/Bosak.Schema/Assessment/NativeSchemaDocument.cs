@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
+//                      | Charles Korthout | 0.3   | 19-11-2026     | Document bounded exact integer leaf support                                                |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -41,7 +42,7 @@ public sealed class NativeSchemaDocument : IDisposable
     public NativeScalarValue ReadScalar(int leafIndex, CancellationToken cancellationToken = default) =>
         document.ReadScalar(leafIndex, cancellationToken);
 
-    /// <summary>Exports detached XML retaining decimal lexical spelling, without PSVI or authority.</summary>
+    /// <summary>Exports detached XML retaining scalar lexical spelling, without PSVI or authority.</summary>
     /// <param name="cancellationToken">Cancellation checked before and during bounded serialization.</param>
     /// <returns>Detached XML text; not a canonical XSD serialization or byte-preserving source copy.</returns>
     /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>

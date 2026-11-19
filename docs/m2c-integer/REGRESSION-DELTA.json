@@ -1,0 +1,115 @@
+{
+  "cases": [
+    {
+      "file": "tests/TestData/Strings/m2c1-cases.json",
+      "id": "M2C1-38",
+      "before": {
+        "id": "M2C1-38",
+        "label": "excluded leaf xs:integer",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:integer'/><xs:element name='amount' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "unsupportedReason": "ValueType",
+        "maxStringCharacters": 256,
+        "values": [
+          {
+            "kind": "String",
+            "value": " INV-001 "
+          },
+          {
+            "kind": "Decimal",
+            "value": "12.5"
+          }
+        ],
+        "sections": [
+          "Datatypes3.3.1/4.3.6",
+          "Structures3.3.4",
+          "XML1.0 2.11/4.1"
+        ],
+        "officialW3cCase": false
+      },
+      "after": {
+        "id": "M2C1-38",
+        "label": "excluded leaf xs:integer",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:integer'/><xs:element name='amount' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Invalid",
+        "maxStringCharacters": 256,
+        "values": [
+          {
+            "kind": "String",
+            "value": " INV-001 "
+          },
+          {
+            "kind": "Decimal",
+            "value": "12.5"
+          }
+        ],
+        "sections": [
+          "Datatypes3.3.1/4.3.6",
+          "Structures3.3.4",
+          "XML1.0 2.11/4.1"
+        ],
+        "officialW3cCase": false,
+        "intentionalM2C3Delta": "Built-in integer now compiles; unchanged historical instance text is integer-invalid."
+      }
+    },
+    {
+      "file": "tests/TestData/Booleans/m2c2-cases.json",
+      "id": "M2C2-43",
+      "before": {
+        "id": "M2C2-43",
+        "label": "other primitive integer still refuses",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='paid' type='xs:integer' minOccurs='0' maxOccurs='2'/><xs:element name='amount' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<o:order xmlns:o='urn:orders'><o:paid>true</o:paid><o:amount>1</o:amount></o:order>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "unsupportedReason": "ValueType",
+        "maxStringCharacters": 256,
+        "values": [
+          {
+            "kind": "Boolean",
+            "value": true
+          },
+          {
+            "kind": "Decimal",
+            "value": "1"
+          }
+        ],
+        "sections": [
+          "Datatypes3.3.2.1-3.3.2.3/4.3.6",
+          "Structures3.3.4"
+        ],
+        "officialW3cCase": false
+      },
+      "after": {
+        "id": "M2C2-43",
+        "label": "other primitive integer still refuses",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='paid' type='xs:integer' minOccurs='0' maxOccurs='2'/><xs:element name='amount' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<o:order xmlns:o='urn:orders'><o:paid>true</o:paid><o:amount>1</o:amount></o:order>",
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Invalid",
+        "maxStringCharacters": 256,
+        "values": [
+          {
+            "kind": "Boolean",
+            "value": true
+          },
+          {
+            "kind": "Decimal",
+            "value": "1"
+          }
+        ],
+        "sections": [
+          "Datatypes3.3.2.1-3.3.2.3/4.3.6",
+          "Structures3.3.4"
+        ],
+        "officialW3cCase": false,
+        "intentionalM2C3Delta": "Built-in integer now compiles; unchanged historical instance text is integer-invalid."
+      }
+    }
+  ],
+  "publicContractProbe": "xs:integer -> xs:date; integer now supported only in opt-in facade"
+}

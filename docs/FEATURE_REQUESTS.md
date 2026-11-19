@@ -44,7 +44,7 @@ The published **0.5.0-beta.1** provides owned `NativeDecimalSession` and `Native
 |---|---|---|
 | Apache/public transition | Implemented and GitHub publication verified | Schema-only Apache-2.0; activation-free services; private infrastructure excluded |
 | Packaged0.6consumer guidance | Reconciled after M1; no publication | [Examples and evidence](package-readme06-reconciled/README.md); earlier planning receipts retain original scope |
-| Shared specification coverage | Owner-prioritized; M1/M2A/M2B/M2C1 merged, M2C2 locally qualified | [REQ-009 programme](REQ-009-SPECIFICATION-COVERAGE.md); shared CoreREQ-142;24areas with explicit evidence limits |
+| Shared specification coverage | Owner-prioritized; M1/M2A/M2B/M2C1 merged, M2C2 merged; M2C3 locally qualified | [REQ-009 programme](REQ-009-SPECIFICATION-COVERAGE.md); shared CoreREQ-142;24areas with explicit evidence limits |
 | [REQ-009](ADR-005-xsd11-compiled-model-and-validation.md) staged XSD 1.1 support | In Progress | Compiled descriptors, assertion/facet evaluation, alternative applicability/filtering and selected metadata |
 | [Core 1.81.2 dependency adoption](CORE-1.81.2-ADOPTION.md) | Merged | Four product references and one test provider reference updated; no C# adaptation |
 | Core optional source integration | Refreshed in Core PR #503 | Merged Schema9fd4e6a pinned with58 source/test/fixture/legal inputs;260 implementation/legacy plus nine public current-Core cases. Original135-case receipt remains historical. |
@@ -121,3 +121,7 @@ The [adopted string/decimal facade](m2c-string-facade/README.md) adds the ten re
 ## M2C2 Boolean implementation candidate - 19 November 2026
 
 M2C1 merged in PR20 at16355ea; fresh main CI passes614source cases and54release controls. The [bounded Boolean candidate](m2c-boolean/README.md) adds Boolean=3 and a checked BooleanValue getter to the opt-in facade, actual Boolean provenance/atomization and a fixed256code-unit lexical ceiling before XML-whitespace collapse.671source cases(340implementation/331public)pass locally, with intentional prior-refusal deltas recorded separately. Legacy decimal facade unchanged; Boolean assertions/restrictions and integer support remain excluded. No Core engine/pin or release/publication change; REQ-009 and overall API/C45 acceptance remain In Progress.
+
+## M2C3 exact integer implementation candidate - 19 November 2026
+
+M2C2 merged in PR21 at20cc520; fresh main CI44602002427 passed671source cases and54release controls. The [bounded integer candidate](m2c-integer/README.md) admits built-in xs:integer (a decimal restriction, not a primitive datatype), checked detached BigInteger values and original integer provenance/atomization.748source cases(347implementation/401public)pass locally. Raw lexical ceiling256UTF16code units; MaxNativeCoefficientDigits includes supplied leading zeroes, excludes sign and is enforced before normalization. Existing separate query digit limits can refuse a read without poisoning export/smaller reads. Legacy decimal facade remains decimal-only. Integer assertions, derived families and named integer restrictions/facets remain excluded. Local qualification is not a new release, official W3C-suite conformance or general API/C45 acceptance; no Core engine/pin/controller/publication change. REQ-009 remains In Progress.

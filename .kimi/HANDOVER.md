@@ -69,3 +69,7 @@ Ten-type opt-in string/decimal facade implemented locally;614source cases pass. 
 ## 19 November 2026 - M2C2 Boolean candidate
 
 PR20 merged/main green; primitive Boolean support implemented locally with671source passes. See docs/m2c-boolean/ADOPTION.md and qualification. Core engine/pins/controller unchanged; no commit/push/publication of Boolean work.
+
+## 19 November 2026 - bounded integer candidate
+
+M2C2 merged20cc520/main CI green671/54. Isolated feature/native-integer-scalars locally implements M2C3 with748source tests; see docs/m2c-integer/README.md and ADOPTION.md. No new release/Core pin. Source remains uncommitted pending explicit commit/push request.
