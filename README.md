@@ -78,3 +78,5 @@ A [development candidate for clearer Unsupported diagnostics](docs/unsupported-r
 The [shared specification coverage programme](docs/specification-coverage/PROGRAM.md) defines the next Schema/Core interoperability milestones and the evidence required for supported profiles.
 
 The [shared coverage programme](docs/specification-coverage/PROGRAM.md) now records a local namespace/optional-assertion candidate with separate minimum/current-Core consumers; see its [bounded progress](docs/specification-coverage/M1-CANDIDATE-DELTA.json).
+
+The [packaged0.6guidance](docs/package-readme06-reconciled/README.md) distinguishes the new diagnostic/namespace profile from published beta.1 and verifies consumer examples.

@@ -44,3 +44,7 @@ The [native API](docs/NATIVE-DECIMAL-PUBLIC-API.md), [restricted resolution](doc
 ## M1 local progress
 
 The [bounded namespace/optional-assertion candidate](docs/specification-coverage/M1-CANDIDATE-DELTA.json) is implemented and locally qualified. Wider component/attribute/datatype and structural milestones remain open; official W3C suite selection/admission remains separate from authored controls.
+
+## README reconciliation after M1
+
+The [packaged guidance update](docs/package-readme06-reconciled/README.md) follows the merged namespace slice. Specification coverage remains the priority; release-controller/count decisions must use the later reviewed profile, not the historical365/53plan.
