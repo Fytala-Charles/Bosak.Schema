@@ -10,6 +10,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="3.0.2"><PrivateAssets>all</PrivateAssets></PackageReference>
     <ProjectReference Include="../../src/Bosak.Schema/Bosak.Schema.csproj" Condition="'$(SchemaConsumerPackageVersion)' == ''" />
     <PackageReference Include="Bosak.Schema" Version="$(SchemaConsumerPackageVersion)" Condition="'$(SchemaConsumerPackageVersion)' != ''" />
+    <None Include="../TestData/Schemas/orders.xsd;../TestData/Schemas/sku.xsd" CopyToOutputDirectory="PreserveNewest" Link="TestData/Schemas/%(Filename)%(Extension)" />
     <None Include="../TestData/Schemas/native-decimal.*" CopyToOutputDirectory="PreserveNewest" Link="TestData/Schemas/%(Filename)%(Extension)" />
   </ItemGroup>
 </Project>

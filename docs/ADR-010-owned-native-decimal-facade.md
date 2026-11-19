@@ -28,3 +28,7 @@ The default qualified dependency combination is published Core1.81.2. Its use by
 ## Approval boundary
 
 Owner explicitly accepted this as the reviewed bounded beta contract baseline on17 November2026, with subsequent breaking changes explicitly reviewed/documented; it is not a perpetual1.0 freeze. API/ADR acceptance does not approve production SLAs, all caller policies, a beta tag/artifact, or NuGet publication. [Concrete review package](BETA_CONTRACT_REVIEW.md).
+
+## Candidate additive diagnostic extension - 19 November 2026
+
+The accepted beta.1 contract above remains historical and unchanged. The [local Unsupported-reason candidate](unsupported-reasons/README.md) proposes an additive read-only category with Unspecified fallback, preserving stage codes/messages and ownership. Candidate qualification does not extend general CoreC45/provider acceptance or authorize publication.

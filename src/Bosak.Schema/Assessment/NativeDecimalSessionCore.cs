@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Prototype an owned synchronous native scalar facade                                                 |
 //                      | Charles Korthout | 0.2   | 17-11-2026     | Keep the owned implementation behind the public facade; attempt all cleanup actions
+//                      | Charles Korthout | 0.3   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -44,7 +45,7 @@ internal sealed class NativeDecimalSessionCore : IDisposable
     {
         var compiled = NativeDecimalSchema.Compile(schema, numericLimits, cancellationToken);
         if (compiled.Outcome != NativeOutcome.Valid)
-            return NativeResult<NativeDecimalSessionCore>.Failure(compiled.Outcome, compiled.Diagnostic!);
+            return NativeResult<NativeDecimalSessionCore>.Failure(compiled.Outcome, compiled.Diagnostic!, compiled.UnsupportedReason);
         var result = SchemaQuerySession.CompileXPath("$value", queryLimits, assessor: new NativeSchemaProvider(compiled.Value!), cancellationToken: cancellationToken);
         return result.Kind == SchemaResultKind.Supported
             ? NativeResult<NativeDecimalSessionCore>.Valid(new NativeDecimalSessionCore(result.Value))
@@ -55,7 +56,7 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         CancellationToken cancellationToken = default) => Work(() =>
     {
         var captured = NativeSchemaInput.Capture(instance, cancellationToken);
-        if (captured.Outcome != NativeOutcome.Valid) return NativeResult<Document>.Failure(captured.Outcome, captured.Diagnostic!);
+        if (captured.Outcome != NativeOutcome.Valid) return NativeResult<Document>.Failure(captured.Outcome, captured.Diagnostic!, captured.UnsupportedReason);
         var input = captured.Value!;
         SchemaQuerySnapshot? snapshot = null;
         var transferred = false;
@@ -65,7 +66,7 @@ internal sealed class NativeDecimalSessionCore : IDisposable
                 new(input, SchemaAssessmentMode.Strict, null, null, new Episode(currentDateTime, implicitTimezoneOffsetMinutes), null), cancellationToken);
             if (assessment.Status != SchemaAssessmentStatus.Valid)
                 return NativeResult<Document>.Failure(assessment.Status == SchemaAssessmentStatus.Invalid ? NativeOutcome.Invalid : NativeOutcome.Unsupported,
-                    assessment.Diagnostics.FirstOrDefault()?.Message ?? "Native assessment refused.");
+                    assessment.Diagnostics.FirstOrDefault()?.Message ?? "Native assessment refused.", assessment.UnsupportedReason);
             var admitted = session.OpenSnapshot(input, input, assessment.Origin, cancellationToken: cancellationToken);
             if (admitted.Kind != SchemaResultKind.Supported)
                 return NativeResult<Document>.Failure(NativeOutcome.Unsupported, admitted.DiagnosticCode ?? "Native snapshot admission refused.");

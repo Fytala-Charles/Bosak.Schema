@@ -279,3 +279,7 @@ Read docs/BETA1_PREPARATION.md before release operations. Exact source2a5abf6fb6
 ## Current published beta
 
 Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read docs/BETA1_RELEASE.md and docs/beta1-publication/RECEIPT.json for current status. Earlier guides/dossiers retain their original checkpoint claims and hashes; run historical verifiers at their recorded revisions. The release controller remains pinned to this already-published version and must not be dispatched for a duplicate push. Future versions require fresh review and explicit approval. GitHub Packages is separate and unused.
+
+## Unsupported-reason development candidate
+
+19November2026: the local0.6candidate has365source cases(312implementation/53public), including20new detected-reason controls. Published beta.1 remains345. Preserve stage codes/messages, refusal order and grammar; use docs/unsupported-reasons/CONTRACT.md. Package-only53 and retained124/23 lanes overlap source coverage. No commit/push/publication without explicit request.

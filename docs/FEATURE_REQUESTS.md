@@ -4,6 +4,16 @@
   <p>Current public schema scope, status and acceptance boundaries.</p>
 </div>
 
+## Bounded Unsupported-reason candidate - 19 November 2026
+
+The local development candidate adds `NativeDecimalDiagnostic.UnsupportedReason` and the fixed `NativeDecimalUnsupportedReason` enum. Existing stage codes/messages, outcomes and grammar are preserved; categories describe one detected refusal and may be Unspecified. All365source cases pass (312 implementation/53public, including20new controls), as do53package-only cases and retained124/23 unchanged-binary replacement catalogs. These lanes overlap and are not additive. The54release and six workload-integrity controls pass. MinVer minimum advances to0.6 for this additive feature;0.6.0-alpha.0.2 is local/unsigned only. Published0.5.0-beta.1 and allCore1.81.2 pins remain unchanged. No commit/push, tag or publication. [Candidate](unsupported-reasons/README.md).
+
+
+## Beta.2 gap assessment - 19 November 2026
+
+A public-example beta.2 gap assessment finds no confirmed new beta.1 defect. Namespace support alone would not admit the existing sku/orders schemas. The proposed first bounded slice is clearer Unsupported reason categories, preserving stage codes, input-free diagnostics and current grammar; API/design acceptance and a concrete application priority remain pending. Beta.1 stays current; no implementation or release change. [Assessment](beta2-gap-assessment/README.md).
+
+
 # Bosak.Schema Feature Requests
 
 > Current public schema scope, status and acceptance boundaries.
@@ -23,6 +33,8 @@ The published **0.5.0-beta.1** provides owned `NativeDecimalSession` and `Native
 | Core optional source integration | Refreshed in Core PR #503 | Merged Schema9fd4e6a pinned with58 source/test/fixture/legal inputs;260 implementation/legacy plus nine public current-Core cases. Original135-case receipt remains historical. |
 | Core schema-session integration | Internal native scalar adapter delivered; overall acceptance pending | Bounded original facts/scalar flow and host lifetime controls; broader component/compatibility/public consumer qualification pending |
 | NuGet trusted publishing | Beta.1 publication verified | Manual prepare/publish separation;54 release controls; beta 345/33 and retained 124/23 qualification; hosted beta delivered; post-publication registry consumer verified |
+| Bounded Unsupported reasons | Local implementation/qualification; API/release review pending | [Candidate](unsupported-reasons/README.md);365source/53package-only, unchanged stage codes and grammar |
+| Beta.2 gap assessment | Public examples selected; diagnostic-first candidate implemented locally | [Public-example assessment](beta2-gap-assessment/README.md); bounded Unsupported reasons proposed before broader grammar |
 | Representative invoice consumer | Passed using published beta; production acceptance excluded | [Trial](BETA1_INVOICE_TRIAL.md); no observed engine defect or beta.2 expansion justified |
 | Complete XSD 1.1 structural validation | Incomplete | No complete current implementation or blanket conformance claim |
 | Native decimal structural backend | Implemented internally; 76 cases pass | Complete finite grammar only; [evidence](native-decimal-backend/2026-11-15/README.md) |
@@ -51,4 +63,4 @@ The transition does not implement the proposed core session API, change frozen W
 
 The 3 November [O1/O2 versioned responses](core-disposition-responses/2026-11-03-v2/README.md) are scoped historical design acceptance, not proof of current native adapter/runtime delivery. Their original source/proposal hashes and the unsigned [confirmation drafts](core-disposition-inbox/2026-11-03/README.md) remain unchanged. The published Core 1.81.2 release and its budget deferral do not complete Schema's native provider/session or performance requirements. See [history](DEVELOPMENT_HISTORY.md).
 
-*Last updated: 2026-11-18*
+*Last updated: 2026-11-19*

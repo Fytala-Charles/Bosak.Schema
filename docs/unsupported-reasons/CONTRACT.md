@@ -1,0 +1,11 @@
+# Bounded Unsupported reasons: implementation contract
+
+19 November 2026. User requested continuation of the diagnostic-first recommendation and selected existing public examples. This authorizes the local implementation candidate; it does not approve publication or general API/provider acceptance.
+
+Add NativeDecimalUnsupportedReason with stable numeric values Unspecified=0, Namespace=1, DeclarationShape=2, ValueType=3, Attributes=4, AssertionGrammar=5 and RepresentationCapacity=6. NativeDecimalDiagnostic.UnsupportedReason is a read-only value. Only an Unsupported diagnostic can carry a nonzero reason; Invalid uses Unspecified and Valid still has no diagnostics. Existing constructors remain inaccessible and stage codes/messages remain byte-for-byte unchanged.
+
+Attach reasons at existing refusal checks, never by inspecting exception messages or performing a new input pre-scan. Preserve existing validation order, outcomes, cancellation, quotas, ownership and disposal. The first actually detected refusal supplies one category, not an exhaustive report; unmapped policy/environment/transport refusals use Unspecified. In particular, namespaced instance names previously Invalid remain Invalid. Namespace applies to existing refused schema namespace settings, not every namespace-related input.
+
+Assertion compilation maps grammar refusals to AssertionGrammar while explicit lexical/token/depth and numeric capacities retain RepresentationCapacity. Attributes and namespaces use the first forbidden attribute in existing document order; do not search ahead for a preferred category. Structural checks and value-type checks classify only their existing refusals. No arbitrary input, names, paths, locations, exception graph or authority is added to diagnostics.
+
+No XSD grammar or assessment semantics are adopted or expanded. The immutable XSD/XPath/XDM specification identities and affected sections remain those in NATIVE-DECIMAL-SPECIFICATION-ADOPTION.md and NATIVE-DECIMAL-SPECIFICATION-SOURCES.json at ec25a98da920348a89e0cff96c3af33e921f651c. Existing intentional deviations remain in force. These product-defined diagnostic categories are not W3C error codes. The contract's hash below fixes this basis before source edits. SemVer feature intent is the next 0.6 development line; no beta.2 tag, version override or publication is authorized.

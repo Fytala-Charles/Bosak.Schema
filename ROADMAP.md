@@ -13,6 +13,8 @@
 
 **Bosak.Schema 0.5.0-beta.1 is published and verified**, with an accepted bounded decimal-session contract. [NuGet](https://www.nuget.org/packages/Bosak.Schema/0.5.0-beta.1), [GitHub prerelease](https://github.com/Fytala-Charles/Bosak.Schema/releases/tag/v0.5.0-beta.1), [release scope and receipt](docs/BETA1_RELEASE.md). Services remain Apache-2.0 and activation-free. Public Core dependency minima remain 1.81.2.
 
+See the [beta.2 gap assessment](docs/beta2-gap-assessment/README.md): a bounded Unsupported-reason improvement is proposed; no beta.2 grammar expansion or release is selected.
+
 ## 2. Next Milestones
 
 1. Keep public documentation aligned with the verified release and explicit exclusions.
@@ -28,4 +30,8 @@ Broader XSD 1.1/component-universe/PSVI and general Core C45/ADR006 work require
 
 The [native API](docs/NATIVE-DECIMAL-PUBLIC-API.md), [restricted resolution](docs/RESTRICTED_RESOLUTION.md), [descriptor ownership](docs/DESCRIPTOR_SNAPSHOTS.md) and [legacy validation](docs/LEGACY_VALIDATION.md) define the supported limits. [Workload measurements](docs/BETA_QUALIFICATION.md) are bounded local observations, not a production SLA. Full XSD 1.1, general provider interchange and a perpetual API freeze remain unaccepted. Historical source integration receipts retain their original revisions; publication does not requalify them.
 
-*Last updated: 2026-11-18*
+*Last updated: 2026-11-19*
+
+## Diagnostic development candidate
+
+[Bounded Unsupported reasons](docs/unsupported-reasons/README.md) are implemented and qualified locally. Review this additive API before any release/controller decision; broader namespaces, attributes and datatypes remain separate scopes. The0.6development minimum is not a beta.2 publication decision.

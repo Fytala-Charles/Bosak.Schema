@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 17-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -42,7 +43,7 @@ public sealed class NativeDecimalSession : IDisposable
         var result = NativeDecimalSessionCore.Create(schema, options.NumericLimits, options.QueryLimits, cancellationToken);
         return result.Outcome == NativeOutcome.Valid
             ? NativeDecimalResult<NativeDecimalSession>.Success(new(result.Value!))
-            : NativeDecimalResult<NativeDecimalSession>.Refused(result.Outcome, "SCHEMA");
+            : NativeDecimalResult<NativeDecimalSession>.Refused(result.Outcome, "SCHEMA", result.UnsupportedReason);
     }
 
     /// <summary>Completely assesses owned instance text before admitting a document.</summary>
@@ -63,7 +64,7 @@ public sealed class NativeDecimalSession : IDisposable
         var result = core.Assess(instance, context.CurrentDateTime, context.ImplicitTimezoneOffsetMinutes, cancellationToken);
         return result.Outcome == NativeOutcome.Valid
             ? NativeDecimalResult<NativeDecimalDocument>.Success(new(result.Value!))
-            : NativeDecimalResult<NativeDecimalDocument>.Refused(result.Outcome, "INSTANCE");
+            : NativeDecimalResult<NativeDecimalDocument>.Refused(result.Outcome, "INSTANCE", result.UnsupportedReason);
     }
 
     /// <summary>Revokes this session and all documents, then attempts every owned cleanup action once.</summary>

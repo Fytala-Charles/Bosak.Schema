@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Implement internal native decimal Core adapter                                                 |
 //                      | Charles Korthout | 0.2   | 15-11-2026     | Reject uninitialized lookup names with explicit argument diagnostics                        |
+//                      | Charles Korthout | 0.3   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -168,7 +169,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             var result = provider.schema.Assess(input.Xml, cancellationToken);
             if (result.Outcome != NativeOutcome.Valid)
                 return Assessment.Failure(result.Outcome == NativeOutcome.Invalid ? SchemaAssessmentStatus.Invalid : SchemaAssessmentStatus.Unsupported,
-                    "BSK-NATIVE-" + result.Outcome.ToString().ToUpperInvariant(), result.Diagnostic!, request.Limits);
+                    "BSK-NATIVE-" + result.Outcome.ToString().ToUpperInvariant(), result.Diagnostic!, request.Limits, result.UnsupportedReason);
             var origin = new Origin(this, input, date, timezone);
             var states = result.Value!.Elements;
             var facts = states.Select((state, index) => new Facts(input, input.ElementNodes[index], origin,
@@ -262,10 +263,12 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         {
             this.input = input; this.origin = origin; Facts = facts; Status = SchemaAssessmentStatus.Valid;
         }
-        private Assessment(SchemaAssessmentStatus status, ImmutableArray<SchemaAssessmentDiagnostic> diagnostics, bool truncated)
+        private Assessment(SchemaAssessmentStatus status, ImmutableArray<SchemaAssessmentDiagnostic> diagnostics, bool truncated,
+            NativeDecimalUnsupportedReason reason)
         {
-            Status = status; Diagnostics = diagnostics; DiagnosticsTruncated = truncated;
+            Status = status; Diagnostics = diagnostics; DiagnosticsTruncated = truncated; UnsupportedReason = reason;
         }
+        internal NativeDecimalUnsupportedReason UnsupportedReason { get; }
         internal ImmutableArray<Facts> Facts { get; } = [];
         public SchemaAssessmentStatus Status { get; }
         public ISchemaAssessmentEvidence? Evidence => origin is null ? null : this;
@@ -274,7 +277,8 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         public bool DiagnosticsTruncated { get; }
         public ISchemaAssessmentOrigin Origin => origin ?? throw new InvalidOperationException("No original evidence.");
         public bool IsComplete => Status == SchemaAssessmentStatus.Valid;
-        internal static Assessment Failure(SchemaAssessmentStatus status, string code, string message, SchemaAssessmentLimits? limits)
+        internal static Assessment Failure(SchemaAssessmentStatus status, string code, string message, SchemaAssessmentLimits? limits,
+            NativeDecimalUnsupportedReason reason = NativeDecimalUnsupportedReason.Unspecified)
         {
             var budget = 256L;
             if (limits is not null)
@@ -282,9 +286,9 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
                 if (limits.MaxDiagnostics <= 0 || limits.MaxDiagnosticCharacters <= 0) throw new ArgumentException("Diagnostic limits must be positive.", nameof(limits));
                 budget = Math.Min(budget, limits.MaxDiagnosticCharacters);
             }
-            if (budget < code.Length) return new Assessment(status, [], true);
+            if (budget < code.Length) return new Assessment(status, [], true, reason);
             var length = (int)Math.Min(message.Length, budget - code.Length);
-            return new Assessment(status, [new SchemaAssessmentDiagnostic(code, message[..length], null)], length < message.Length);
+            return new Assessment(status, [new SchemaAssessmentDiagnostic(code, message[..length], null)], length < message.Length, reason);
         }
     }
 }

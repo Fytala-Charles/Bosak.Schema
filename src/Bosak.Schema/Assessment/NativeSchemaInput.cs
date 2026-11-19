@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Implement internal native decimal Core adapter                                                 |
+//                      | Charles Korthout | 0.2   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -51,7 +52,7 @@ internal sealed class NativeSchemaInput : ISchemaAssessmentInput, IQueryOperatio
         ArgumentNullException.ThrowIfNull(xml);
         cancellationToken.ThrowIfCancellationRequested();
         try { return NativeResult<NativeSchemaInput>.Valid(new NativeSchemaInput(xml, NativeDecimalSchema.Parse(xml, 65536, cancellationToken))); }
-        catch (NativeProfileException ex) { return NativeResult<NativeSchemaInput>.Failure(ex.Outcome, ex.Message); }
+        catch (NativeProfileException ex) { return NativeResult<NativeSchemaInput>.Failure(ex.Outcome, ex.Message, ex.UnsupportedReason); }
     }
 
     internal string Xml { get { Check(); return xml; } }
