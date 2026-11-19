@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Implement bounded native decimal backend                                                 |
+//                      | Charles Korthout | 0.2   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -28,7 +29,17 @@ internal sealed class NativeDecimalAssertion
 
     internal static NativeDecimalAssertion Compile(string expression, HashSet<string> names, NativeNumericLimits limits)
     {
-        NativeDecimalSchema.Require(expression.Length <= 512, "Assertion exceeds 512 characters.");
+        try { return CompileCore(expression, names, limits); }
+        catch (NativeProfileException ex) when (ex.Outcome == NativeOutcome.Unsupported &&
+            ex.UnsupportedReason != NativeDecimalUnsupportedReason.RepresentationCapacity)
+        {
+            throw new NativeProfileException(ex.Outcome, ex.Message, NativeDecimalUnsupportedReason.AssertionGrammar);
+        }
+    }
+
+    private static NativeDecimalAssertion CompileCore(string expression, HashSet<string> names, NativeNumericLimits limits)
+    {
+        NativeDecimalSchema.Require(expression.Length <= 512, "Assertion exceeds 512 characters.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         var tokens = new List<string>();
         for (var index = 0; index < expression.Length;)
         {
@@ -37,7 +48,7 @@ internal sealed class NativeDecimalAssertion
             if (expression[start] is not '(' and not ')')
                 while (index < expression.Length && expression[index] is not (' ' or '\t' or '\r' or '\n' or '(' or ')')) index++;
             tokens.Add(expression[start..index]);
-            NativeDecimalSchema.Require(tokens.Count <= 128, "Assertion exceeds 128 tokens.");
+            NativeDecimalSchema.Require(tokens.Count <= 128, "Assertion exceeds 128 tokens.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         }
         var parser = new Parser(tokens, names, limits);
         var plan = parser.ParseOr();
@@ -182,7 +193,7 @@ internal sealed class NativeDecimalAssertion
         private void Enter()
         {
             depth++;
-            NativeDecimalSchema.Require(depth <= 16, "Assertion nesting exceeds sixteen.");
+            NativeDecimalSchema.Require(depth <= 16, "Assertion nesting exceeds sixteen.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         }
     }
 }

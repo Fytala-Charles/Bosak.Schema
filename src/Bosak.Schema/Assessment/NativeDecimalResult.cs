@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 17-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -33,11 +34,15 @@ public enum NativeDecimalOutcome
 /// <summary>Contains a stable bounded stage code and fixed message with no input text or exception graph.</summary>
 public sealed class NativeDecimalDiagnostic
 {
-    internal NativeDecimalDiagnostic(string code, string message) { Code = code; Message = message; }
+    internal NativeDecimalDiagnostic(string code, string message, NativeDecimalUnsupportedReason unsupportedReason)
+    { Code = code; Message = message; UnsupportedReason = unsupportedReason; }
     /// <summary>Gets the stable BSK-NATIVE-{SCHEMA|INSTANCE}-{INVALID|UNSUPPORTED} code.</summary>
     public string Code { get; }
     /// <summary>Gets a fixed stage message of at most 160 characters, without caller input.</summary>
     public string Message { get; }
+    /// <summary>Gets one detected Unsupported category, or Unspecified for unmapped refusals and Invalid.</summary>
+    /// <remarks>Not exhaustive; callers must tolerate Unspecified and future categories.</remarks>
+    public NativeDecimalUnsupportedReason UnsupportedReason { get; }
 }
 
 /// <summary>Contains an owned value only for Valid, or one immutable bounded refusal diagnostic.</summary>
@@ -59,12 +64,13 @@ public sealed class NativeDecimalResult<T> where T : class
     public bool DiagnosticsTruncated => false;
 
     internal static NativeDecimalResult<T> Success(T value) => new(NativeDecimalOutcome.Valid, value, []);
-    internal static NativeDecimalResult<T> Refused(NativeOutcome outcome, string stage)
+    internal static NativeDecimalResult<T> Refused(NativeOutcome outcome, string stage, NativeDecimalUnsupportedReason reason = NativeDecimalUnsupportedReason.Unspecified)
     {
         var invalid = outcome == NativeOutcome.Invalid;
         return new(invalid ? NativeDecimalOutcome.Invalid : NativeDecimalOutcome.Unsupported, null,
             [new($"BSK-NATIVE-{stage}-{(invalid ? "INVALID" : "UNSUPPORTED")}",
                 invalid ? "The input is malformed or violates the supported native decimal profile."
-                    : "The input or representation is outside the supported native decimal profile.")]);
+                    : "The input or representation is outside the supported native decimal profile.",
+                invalid ? NativeDecimalUnsupportedReason.Unspecified : reason)]);
     }
 }

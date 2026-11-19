@@ -70,3 +70,7 @@ Existing schema factory signatures remain intact. The old `License` entry points
 Fytala retains copyright and trademark ownership; Apache-2.0 grants the rights stated in the license. Branding does not grant trademark rights. The new license applies to this public source release; old proprietary releases and private licensing-product agreements are separate historical artifacts.
 
 *Last updated: 2026-11-18*
+
+See the [next-beta assessment](docs/beta2-gap-assessment/README.md) for proposed diagnostic improvements and the evidence required before expanding the native grammar.
+
+A [development candidate for clearer Unsupported diagnostics](docs/unsupported-reasons/README.md) reports one detected category while retaining the bounded grammar. Published beta.1 remains unchanged.

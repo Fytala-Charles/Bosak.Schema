@@ -1,5 +1,8 @@
 # Owned native decimal public API
 
+Development candidate,19November2026: [bounded Unsupported reasons](unsupported-reasons/README.md) add a read-only detected category. This API addition is not in published beta.1; existing stage codes/messages and grammar are unchanged.
+
+
 Date: 17 November 2026. Scope: the owned API shipped in0.5.0-alpha.0.7; current bounded beta contract acceptance under REQ-009 and [ADR-010](ADR-010-owned-native-decimal-facade.md) was accepted for the bounded Schema beta scope on17 November2026. [Pre-implementation basis](native-decimal-public/2026-11-17/BASIS.json) retains the historical specification hashes, sections and intentional restrictions unchanged. The finite backend and assertion evaluator are unchanged from df40a17; public ownership and host-policy behavior is implemented here.
 
 ## Public contract
