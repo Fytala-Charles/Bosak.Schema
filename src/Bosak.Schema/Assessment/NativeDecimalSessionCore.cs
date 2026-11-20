@@ -18,6 +18,7 @@
 //                      | Charles Korthout | 0.5   | 19-11-2026     | Add detached root attribute reads while preserving leaf-only counts and typed read indexes |
 //                      | Charles Korthout | 0.6   | 20-11-2026     | Read the original root scalar separately from unchanged leaf and attribute indexes       |
 //                      | Charles Korthout | 0.7   | 20-11-2026     | Read terminal scalar facts without exposing nested element-only containers as values     |
+//                      | Charles Korthout | 0.8   | 20-11-2026     | Read detached descendant attributes through original owner-bound facts and shared gate   |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -150,7 +151,23 @@ internal sealed class NativeDecimalSessionCore : IDisposable
             throw new ArgumentOutOfRangeException(nameof(attributeIndex));
         var fact = document.Assessment.AttributeFacts[attributeIndex];
         var value = ReadFact(document, fact, NativeScalarValue.FromValue, cancellationToken);
-        return new NativeAttributeValue(fact.NativeDeclaration.NamespaceUri, fact.NativeDeclaration.Name, value);
+        return new NativeAttributeValue(fact.NativeDeclaration.NamespaceUri, fact.NativeDeclaration.Name, value, fact.OwnerElementPath);
+    }, cancellationToken);
+
+    private int DescendantAttributeCount(Document document) => Work(() =>
+    {
+        Check(document);
+        return document.Assessment.DescendantAttributeFacts.Length;
+    }, default);
+
+    private NativeAttributeValue ReadDescendantAttribute(Document document, int attributeIndex, CancellationToken cancellationToken) => Work(() =>
+    {
+        Check(document);
+        if (attributeIndex < 0 || attributeIndex >= document.Assessment.DescendantAttributeFacts.Length)
+            throw new ArgumentOutOfRangeException(nameof(attributeIndex));
+        var fact = document.Assessment.DescendantAttributeFacts[attributeIndex];
+        var value = ReadFact(document, fact, NativeScalarValue.FromValue, cancellationToken);
+        return new NativeAttributeValue(fact.NativeDeclaration.NamespaceUri, fact.NativeDeclaration.Name, value, fact.OwnerElementPath);
     }, cancellationToken);
 
     private string Export(Document document, CancellationToken cancellationToken) => Work(() =>
@@ -226,6 +243,8 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         internal bool HasRootScalar => owner.HasRootScalar(this);
         internal NativeScalarValue ReadRootScalar(CancellationToken cancellationToken = default) => owner.ReadRootScalar(this, cancellationToken);
         internal int AttributeCount => owner.AttributeCount(this);
+        internal int DescendantAttributeCount => owner.DescendantAttributeCount(this);
+        internal NativeAttributeValue ReadDescendantAttribute(int attributeIndex, CancellationToken cancellationToken = default) => owner.ReadDescendantAttribute(this, attributeIndex, cancellationToken);
         internal NativeAttributeValue ReadAttribute(int attributeIndex, CancellationToken cancellationToken = default) => owner.ReadAttribute(this, attributeIndex, cancellationToken);
         internal NativeScalarValue ReadScalar(int leafIndex, CancellationToken cancellationToken = default) => owner.ReadScalar(this, leafIndex, cancellationToken);
         internal XdmExactDecimal ReadDecimal(int leafIndex, CancellationToken cancellationToken = default) => owner.ReadDecimal(this, leafIndex, cancellationToken);

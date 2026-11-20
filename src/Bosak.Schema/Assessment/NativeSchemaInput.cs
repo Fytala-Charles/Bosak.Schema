@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Share explicit mixed scalar profile with preserved decimal compatibility                  |
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Keep actual root attribute wrappers in the original guarded capture                      |
+//                      | Charles Korthout | 0.5   | 20-11-2026     | Resolve original attributes by checked captured owner index, path and expanded names     |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -107,7 +108,23 @@ internal sealed class NativeSchemaInput : ISchemaAssessmentInput, IQueryOperatio
     internal NativeSessionNode RootAttributeNode(XName name)
     {
         Check();
-        var attribute = document.Root!.Attribute(name) ?? throw new InvalidOperationException("Assessed root attribute is absent from the capture.");
+        return ElementAttributeNode(0, [], document.Root!.Name, name);
+    }
+
+    internal NativeSessionNode ElementAttributeNode(int ownerIndex, ImmutableArray<int> ownerPath, XName ownerName, XName attributeName)
+    {
+        Check();
+        if (ownerIndex < 0 || ownerIndex >= ElementNodes.Length || ownerPath.IsDefault)
+            throw new InvalidOperationException("Assessed attribute owner is outside the capture.");
+        var owner = document.Root!;
+        foreach (var segment in ownerPath)
+        {
+            if (segment < 0) throw new InvalidOperationException("Invalid assessed owner path.");
+            owner = owner.Elements().ElementAtOrDefault(segment) ?? throw new InvalidOperationException("Assessed owner path is absent.");
+        }
+        if (owner.Name != ownerName || !ReferenceEquals(Wrap(new XDocumentNode(owner)), ElementNodes[ownerIndex]))
+            throw new InvalidOperationException("Assessed owner does not match the original captured node.");
+        var attribute = owner.Attribute(attributeName) ?? throw new InvalidOperationException("Assessed attribute is absent from the original owner.");
         return Wrap(new XDocumentNode(attribute));
     }
 

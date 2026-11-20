@@ -98,3 +98,5 @@ The opt-in development facade supports [bounded root attributes with separate ty
 The opt-in development facade supports [decimal simple-content roots with separate typed reads](docs/decimal-simple-content/README.md), including price/currency documents.
 
 See the [bounded nested-sequence development profile](docs/nested-sequences/README.md) for terminal scalar reads and explicit structural limits.
+
+See [owner-aware nested attributes](docs/nested-attributes/README.md) for detached descendant values and document-relative owner paths.

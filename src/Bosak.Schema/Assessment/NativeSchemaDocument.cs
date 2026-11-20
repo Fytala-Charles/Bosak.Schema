@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Expose separate root attribute reads without changing existing leaf indexes              |
 //                      | Charles Korthout | 0.5   | 20-11-2026     | Expose independent root scalar availability and original simple-content typed reads      |
 //                      | Charles Korthout | 0.6   | 20-11-2026     | Document terminal-only document-order scalar reads for nested sequences                  |
+//                      | Charles Korthout | 0.7   | 20-11-2026     | Expose separate descendant attribute reads without changing root or scalar indexes       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -74,6 +75,22 @@ public sealed class NativeSchemaDocument : IDisposable
     /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
     public NativeAttributeValue ReadAttribute(int attributeIndex, CancellationToken cancellationToken = default) =>
         document.ReadAttribute(attributeIndex, cancellationToken);
+
+    /// <summary>Gets the count of present declared attributes on descendant element-only containers, excluding root attributes.</summary>
+    /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
+    /// <exception cref="NotSupportedException">Another session operation is admitted.</exception>
+    public int DescendantAttributeCount => document.DescendantAttributeCount;
+
+    /// <summary>Reads a descendant attribute in owner preorder then schema declaration order.</summary>
+    /// <param name="attributeIndex">Zero-based present descendant attribute index; independent of root and scalar indexes.</param>
+    /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
+    /// <returns>A detached owner path, expanded name and scalar usable after document and session disposal.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">The index is outside the present descendant attributes.</exception>
+    /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
+    /// <exception cref="NotSupportedException">Overlapping work or a value outside explicit query/cache limits is refused.</exception>
+    /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
+    public NativeAttributeValue ReadDescendantAttribute(int attributeIndex, CancellationToken cancellationToken = default) =>
+        document.ReadDescendantAttribute(attributeIndex, cancellationToken);
 
     /// <summary>Exports detached XML retaining scalar lexical spelling, without PSVI or authority.</summary>
     /// <param name="cancellationToken">Cancellation checked before and during bounded serialization.</param>

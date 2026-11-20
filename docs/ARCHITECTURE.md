@@ -190,3 +190,41 @@ recursion, unbounded repetition and assertions in nested schemas remain excluded
 No new public API, Core pin or published package/controller change; REQ-009 and
 general API/C45 acceptance remain In Progress. Package/retained/API evidence is
 recorded separately in the candidate dossier, not inferred from source tests.
+
+
+## Nested container attribute proposal - 20 November 2026
+
+PR26 merged at3e067cd; fresh main CI44706432874 passed1,125source cases,
+54release controls and six workload controls. The [nested-attribute proposal](nested-attributes/PLAN.md)
+and proposed ADR014 define separate descendant reads plus immutable owner-element
+paths, preserving existing root/terminal indexes. Reuse current local attribute
+semantics on nested element-only complex containers, with64potential attribute
+uses including root/optional expansions. Planning only: no runtime/API, semantic
+adoption or new passed product case. Nested simple content/leaf attributes remain
+excluded. REQ-009 and general API/C45 acceptance remain In Progress; published
+beta.1, Core pins and release controller are unchanged.
+
+
+## Nested attribute feasibility and before-code adoption - 20 November 2026
+
+The [nested attribute evidence](nested-attributes/FEASIBILITY.md) records69public-only controls per signed
+Core1.81.2/1.81.17lane (19new/50inherited),18signature/source/payload identities
+and four actual pre-implementation Schema/API controls. Exact node/fact binding
+rejects authentic same-authority facts swapped across owners. Path prototypes
+are detached locators, not facade implementation or authority. Separate dated
+Structures/Datatypes/XML/XDM semantic adoption now precedes production edits.
+Product source/API and1,125source catalog remain unchanged; broader API/C45,
+official suite and publication acceptance remain separate. REQ-009 is In Progress.
+
+
+## Owner-aware nested attribute candidate - 20 November 2026
+
+The [adopted nested-attribute candidate](nested-attributes/README.md) implements separate descendant
+reads and detached immutable owner-element paths with unchanged root/terminal
+indexes. Source1,200cases(404implementation/796public)pass:1,123prior outcomes
+unchanged, exactly NS-049/NS-075former refusals deliberately admitted,75new cases.
+Original owner/path/index/name checks precede fact publication; aggregate64uses
+include root/optional/repeated branches, with16perowner and existing nested limits.
+Three additive members/no new public type; nested simple content and scalar-leaf
+attributes remain excluded. Package/API/retained proof is separate from source
+counts. REQ-009 remains In Progress; no Core pin or publication/controller change.

@@ -837,19 +837,13 @@
   },
   {
     "id": "NS-049",
-    "label": "nested attribute definition",
+    "label": "optional nested attribute definition now admitted",
     "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\" ><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence><xs:attribute name=\"x\" type=\"xs:string\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r><a><v>12.50</v></a></r>",
-    "expectedCompile": "Unsupported",
+    "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
     "values": [
-      "ABC-0001",
-      "2",
-      "12.5",
-      "XYZ-0002",
-      "1",
-      "3.75",
-      "false"
+      "12.5"
     ],
     "attributes": 0
   },
@@ -1229,12 +1223,14 @@
   },
   {
     "id": "NS-075",
-    "label": "unused invalid descendant attribute",
+    "label": "unused descendant attribute definition now admitted",
     "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Unused\"><xs:sequence><xs:element name=\"n\" ><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence><xs:attribute name=\"x\" type=\"xs:string\"/></xs:complexType></xs:element></xs:sequence></xs:complexType><xs:element name=\"r\" ><xs:complexType><xs:sequence><xs:element name=\"a\" ><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r><a><v>1</v></a></r>",
-    "expectedCompile": "Unsupported",
+    "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
-    "values": [],
+    "values": [
+      "1"
+    ],
     "attributes": 0
   },
   {
