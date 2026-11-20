@@ -411,3 +411,22 @@ budget and shared facets. Package-only952minimum/952current and retained124/23/3
 pass. Frozenpilot7matches/14Unsupported/0errors; no fullconformance claim.
 Native advisor stays scalar-only; legacy data(.) on absent QName is unqualified.
 No public API/Corepin/publication change; commit/push requires explicit request.
+
+## Post-PR30 specification planning
+
+20 November2026: merged base5bfbb1e has the exact reviewed PR30 tree. Read
+ docs/specification-next/README.md and INTEGER-CONTRACT-PROPOSAL.md before next
+work. Integer restriction scope is proposed, not adopted/implemented. Preserve
+frozen21case/42file corpus, sevenmatches/fourteenUnsupported checkpoint, scalar
+query boundary and historical receipts. New semantics need exact adoption first.
+No source/API/pin/publication change; commit/push requires explicit request.
+
+## Integer restriction implementation
+
+20 November2026: read docs/integer-restrictions/ADOPTION.md and route clarification.
+Exact named/anonymous integer facets and named attribute uses are qualified;
+preserve fixedfractionDigits0, BigInteger, original identities and old limits.
+1,482source(427/1,055), package1,055/1,055,retained124/23/33andAPI52/392pass.
+Two prior opt-in admissions only; legacyM2B-54 stays refused. Frozenpilot9matches/
+12Unsupported/0errors is selected validity evidence, not fullXSD. Nativeadvisor
+stays scalar-only; no Corepin/API/publication change. No commit/push requested.

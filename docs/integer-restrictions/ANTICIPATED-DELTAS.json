@@ -1,0 +1,92 @@
+{
+  "base": "5bfbb1e798cdf18bac6ac7bb15705b1a0e50bc65",
+  "rowHashFormat": "UTF8 JSON sorted keys compact separators ensure_ascii=False",
+  "rows": [
+    {
+      "file": "tests/TestData/AnonymousSimpleRestrictions/cases.json",
+      "id": "AS-034",
+      "original": {
+        "id": "AS-034",
+        "label": "excluded base integer",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r><v>1</v></r>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "values": [],
+        "reason": "ValueType",
+        "clauses": [
+          "Structures3.3.2-3.3.4",
+          "Structures3.16.2.1-2",
+          "Datatypes4.1-4.3"
+        ]
+      },
+      "originalRowSha256": "e929dc6f154542ecff9d83631d217ee553dfe6c17bb7d199c42ba50bebe5eeff",
+      "targetCompile": "Valid",
+      "targetAssessment": "Valid",
+      "targetValues": [
+        "1"
+      ],
+      "scope": "Adopted target, not executed"
+    },
+    {
+      "file": "tests/TestData/DecimalFacets/m2b-cases.json",
+      "id": "M2B-54",
+      "original": {
+        "id": "M2B-54",
+        "label": "nondecimal base",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+        "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+        "values": [
+          "12.5"
+        ],
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "unsupportedReason": "ValueType",
+        "limits": [
+          256,
+          256
+        ],
+        "sections": [
+          "Datatypes4.3.7-4.3.12",
+          "Structures3.16"
+        ],
+        "officialW3cCase": false
+      },
+      "originalRowSha256": "ee452bdc980a2d182900f2d406629ce0195b7c6cb7263446ab8b3b9de7f303c3",
+      "targetCompile": "Valid",
+      "targetAssessment": "Invalid",
+      "targetValues": [],
+      "scope": "Adopted target, not executed"
+    },
+    {
+      "file": "tests/TestData/Integers/m2c3-cases.json",
+      "id": "M2C3-67",
+      "original": {
+        "id": "M2C3-67",
+        "description": "Unused named integer restriction remains excluded",
+        "sections": [
+          "Datatypes3.4.13.1-3",
+          "Datatypes4.3.6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='Count'><xs:restriction base='xs:integer'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n' type='xs:integer'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r><n>1</n></r>",
+        "maxNativeCoefficientDigits": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      },
+      "originalRowSha256": "b372e0f7584975b4fa0ce624b023af445559b76069d080cbb0c89e1ec53f535b",
+      "targetCompile": "Valid",
+      "targetAssessment": "Valid",
+      "targetValues": [
+        {
+          "kind": "Integer",
+          "value": "1"
+        }
+      ],
+      "scope": "Adopted target, not executed"
+    }
+  ]
+}

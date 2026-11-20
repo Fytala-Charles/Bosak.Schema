@@ -56,6 +56,21 @@ var result = SchemaServices.CreateValidationService()
 
 Always inspect compile/validation diagnostics and the [coverage status](FEATURE_REQUESTS.md). A successful supported assertion evaluation is not a claim of complete XSD 1.1 structural validation. The stream compiler prohibits DTD resolution; imports/includes require an explicit `ISchemaResourceResolver`. The caller owns its input stream/tree.
 
+### Native scalar development profile
+
+Use `NativeSchemaSession` for the bounded 0.6 development profile. Published
+0.5.0-beta.1 retains its reviewed decimal-session scope.
+
+| Integer route | Development behavior | Boundary |
+|---|---|---|
+| Built-in xs:integer | Exact BigInteger values | Supplied-digit, lexical and query-read capacities |
+| Direct named/local anonymous restriction | Exact range facets, totalDigits and fixed fractionDigits zero | No chains, derived integer families, pattern or integer assertions |
+| Named restricted local application attributes | Same integer facets on root and descendant uses | Existing owner/use counts and declared attribute rules |
+| Owned scalar reads | Original named/anonymous type evidence and detached values | General native node-query/C45 acceptance remains separate |
+
+[Integer contract and qualification](integer-restrictions/README.md) records
+Unsupported capacity/profile refusal separately from Invalid facet violations.
+
 ## 3. Schema-Aware XSLT
 
 `SchemaAwareXslt.CreateCompiler()` enables the existing schema-aware compiler path. Its directory overload preserves the existing resolver behavior; pass an appropriate directory and resource policy for your host. This path still uses the core's established `XmlSchemaSet` integration and does not turn it into a complete XSD 1.1 processor.
@@ -345,3 +360,27 @@ API52types/392rows unchanged. Owned scalar reads are qualified; native general
 node queries remain refused and legacy null-QName data(.) is unqualified.
 No Corepin, published beta.1, tag/controller or generalC45/full-XSD acceptance change.
 [Implementation and qualification](anonymous-simple-restrictions/implementation/README.md). REQ-009 remains In Progress.
+
+## Specification priorities after PR30 ? 20 November 2026
+
+PR30 is merged at5bfbb1e798cdf18bac6ac7bb15705b1a0e50bc65 with the exact reviewed
+a637a5d tree. The remaining frozen14Unsupported cases comprise10schema compile
+refusals and4instance refusals; the pilot stays7validitymatches/0mismatches/errors.
+Next recommendation is bounded direct integer restrictions, followed by separately
+contracted typed-node integration and other ranked gaps. The integer contract is
+proposed only: no adoption, engine change or new outcomes. GeneralCoreC45/query
+acceptance remains separate; published beta.1 and all Core pins remain unchanged.
+[Ranked gaps and next contract](specification-next/README.md). REQ-009 remains In Progress.
+
+## Integer restriction implementation — 20 November 2026
+
+Bounded direct named/anonymous xs:integer restrictions are locally qualified:
+exact BigInteger bounds/totalDigits/fixedfractionDigits0, including named root
+and descendant attribute uses. Source1,482passes(427implementation/1,055public),
+1,371prior unaffected/twoadopted admissions/109new. M2B-54legacyrow stays unchanged;
+its separate opt-in payload becomes Invalid. Package-only1,055minimum/1,055current
+and retained124/23/33pass; all18Core signatures/payloads and API52types/392rows
+verify. Frozenpilot9matches/12Unsupported/0mismatches/errors, exactlytwointeger
+validity advances with unchanged fixtures. No Corepin, publicAPI, query-profile,
+publishedbeta.1/tag/controller or generalC45/fullXSDacceptance change.
+[Adoption and qualification](integer-restrictions/README.md). REQ-009 remains In Progress.

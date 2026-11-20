@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 20-11-2026     | Admit direct opt-in integer restrictions with exact original type identity                 |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -33,7 +34,10 @@ internal sealed partial class NativeDecimalSchema
         if (maxStringCharacters is not null && baseName == Xs + "string")
             return new NativeType(name, false, namespaceUri, isString: true,
                 stringFacets: NativeStringFacets.Compile(restriction, maxStringCharacters.Value));
-        throw new NativeProfileException(NativeOutcome.Unsupported, "Only admitted direct decimal or string restrictions are supported.", NativeDecimalUnsupportedReason.ValueType);
+        if (maxStringCharacters is not null && baseName == Xs + "integer")
+            return new NativeType(name, false, namespaceUri, isInteger: true,
+                integerFacets: NativeIntegerFacets.Compile(restriction, limits));
+        throw new NativeProfileException(NativeOutcome.Unsupported, "Only admitted direct scalar restrictions are supported.", NativeDecimalUnsupportedReason.ValueType);
     }
 
     private static Dictionary<XElement, NativeType> CompileAnonymousRestrictions(XElement schema,
