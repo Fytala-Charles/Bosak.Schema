@@ -23,6 +23,7 @@
 //                      | Charles Korthout | 1.0   | 19-11-2026     | Publish complete original attribute facts with separate element and attribute collections |
 //                      | Charles Korthout | 1.1   | 20-11-2026     | Retain complex root governing identity with its distinct decimal atomic content type     |
 //                      | Charles Korthout | 1.2   | 20-11-2026     | Register nested declaration components and project terminal scalar facts separately      |
+//                      | Charles Korthout | 1.3   | 20-11-2026     | Publish exact original owner-aware attributes with separate root and descendant projections |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -214,7 +215,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
                 provider.components[state.Declaration.Type], provider.components[state.Declaration], state,
                 provider.components[state.Declaration.Type.ContentType ?? state.Declaration.Type])).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
-            var attributeFacts = result.Value.Attributes.Select(state => new Facts(input, input.RootAttributeNode(state.Declaration.ExpandedName), origin,
+            var attributeFacts = result.Value.Attributes.Select(state => new Facts(input, input.ElementAttributeNode(state.OwnerElementIndex, state.OwnerElementPath, states[state.OwnerElementIndex].Declaration.ExpandedName, state.Declaration.ExpandedName), origin,
                 provider.components[state.Declaration.Type], provider.components[state.Declaration], state,
                 provider.components[state.Declaration.Type.ContentType ?? state.Declaration.Type])).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
@@ -258,6 +259,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         internal NativeSchemaInput Input { get; }
         internal NativeSessionNode Node { get; }
         internal string? NormalizedStringValue { get { Input.Check(); return state.NormalizedStringValue; } }
+        internal ImmutableArray<int> OwnerElementPath { get { Input.Check(); return state.OwnerElementPath; } }
         internal NativeDeclaration NativeDeclaration { get { Input.Check(); return state.Declaration; } }
         internal NativeType NativeType { get { Input.Check(); return state.Declaration.Type; } }
         public ISchemaComponentHandle Type { get { Input.Check(); return type; } }
@@ -310,9 +312,12 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         private readonly Origin? origin;
         internal Assessment(NativeSchemaInput input, Origin origin, ImmutableArray<Facts> facts, ImmutableArray<Facts> attributeFacts = default)
         {
-            this.input = input; this.origin = origin; ElementFacts = facts; AttributeFacts = attributeFacts.IsDefault ? [] : attributeFacts;
+            this.input = input; this.origin = origin; ElementFacts = facts;
+            var allAttributes = attributeFacts.IsDefault ? [] : attributeFacts;
+            AttributeFacts = allAttributes.Where(f => f.OwnerElementPath.IsEmpty).ToImmutableArray();
+            DescendantAttributeFacts = allAttributes.Where(f => !f.OwnerElementPath.IsEmpty).ToImmutableArray();
             ScalarFacts = facts.Skip(1).Where(f => !f.HasNoTypedValue).ToImmutableArray();
-            Facts = facts.AddRange(AttributeFacts); Status = SchemaAssessmentStatus.Valid;
+            Facts = facts.AddRange(allAttributes); Status = SchemaAssessmentStatus.Valid;
         }
         private Assessment(SchemaAssessmentStatus status, ImmutableArray<SchemaAssessmentDiagnostic> diagnostics, bool truncated,
             NativeDecimalUnsupportedReason reason)
@@ -324,6 +329,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         internal ImmutableArray<Facts> ElementFacts { get; } = [];
         internal ImmutableArray<Facts> ScalarFacts { get; } = [];
         internal ImmutableArray<Facts> AttributeFacts { get; } = [];
+        internal ImmutableArray<Facts> DescendantAttributeFacts { get; } = [];
         public SchemaAssessmentStatus Status { get; }
         public ISchemaAssessmentEvidence? Evidence => origin is null ? null : this;
         public IXdmNode? ValidatedRoot { get { input?.Check(); return input?.Root; } }

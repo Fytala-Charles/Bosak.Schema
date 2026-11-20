@@ -631,3 +631,59 @@ Optional branches and repetition count toward compile-time budgets. New nested
 schemas are assertion-free. Choice/all, recursion, unbounded repetition, nested
 attributes/simple content, mixed content, composition and defaults/nil remain
 excluded. NativeDecimalSession and published beta.1 retain their original scope.
+
+
+## Development: owner-aware nested attributes
+
+The 0.6 development profile supports required/optional local attributes on nested
+element-only containers. Existing AttributeCount/ReadAttribute remain root-only;
+DescendantAttributeCount/ReadDescendantAttribute enumerate present descendant
+attributes by owner preorder then schema declaration order. Scalars stay separate.
+
+```csharp
+using Bosak.Schema;
+
+var schema = """
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Line"><xs:sequence>
+    <xs:element name="amount" type="xs:decimal"/>
+  </xs:sequence><xs:attribute name="currency" type="xs:string" use="required"/></xs:complexType>
+  <xs:element name="order"><xs:complexType><xs:sequence>
+    <xs:element name="line" type="Line" maxOccurs="2"/>
+  </xs:sequence><xs:attribute name="id" type="xs:string"/></xs:complexType></xs:element>
+</xs:schema>
+""";
+var options = new NativeSchemaSessionOptions(256, 256, 256, 65536, 1, 16, 1, 256, 256);
+var created = NativeSchemaSession.Create(schema, options);
+if (created.Outcome != NativeSchemaOutcome.Valid)
+    throw new InvalidOperationException(created.Diagnostics[0].Code);
+using var session = created.Value!;
+var assessed = session.Assess("<order id='ROOT'><line currency='EUR'><amount>12.50</amount></line><line currency='USD'><amount>3.75</amount></line></order>",
+    new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch, 0));
+if (assessed.Outcome != NativeSchemaOutcome.Valid)
+    throw new InvalidOperationException(assessed.Diagnostics[0].Code);
+using var document = assessed.Value!;
+Console.WriteLine(document.ReadAttribute(0).Value.StringValue);
+for (var i = 0; i < document.DescendantAttributeCount; i++)
+{
+    var attribute = document.ReadDescendantAttribute(i);
+    Console.WriteLine($"{string.Join(".", attribute.OwnerElementPath)}: {attribute.LocalName}={attribute.Value.StringValue}");
+}
+Console.WriteLine(document.ScalarCount);
+Console.WriteLine(document.ExportXml());
+```
+
+Outputs begin ROOT, `0: currency=EUR`, `1: currency=USD`, 2. OwnerElementPath is an
+immutable array of zero-based ELEMENT-child indexes from the assessed root,
+ignoring text and namespace nodes. Root attribute paths are empty/nondefault.
+These detached paths describe present XML only; optional omission can shift later
+paths, and equal paths across documents convey no identity or schema authority.
+Detached name/value/path results remain usable after disposal. No live node or
+path-based query interface is exposed.
+
+Up to 16 uses per owner and 64 total potential attribute occurrences INCLUDING
+root uses, absent optionals and maximum repetition are admitted. Existing depth,
+terminal, string/numeric and independent query/cache limits still apply. Scalar
+leaf attributes, nested simple content, defaults/fixed/inheritable/prohibited,
+global refs/groups/wildcards and assertions in nested schemas remain excluded.
+Published beta.1 and NativeDecimalSession keep their prior scope.

@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Add bounded exact integer leaves with original typed provenance                           |
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Document shared leaf and enumeration UTF16 representation capacity                         |
 //                      | Charles Korthout | 0.5   | 19-11-2026     | Document root attribute strings under the existing UTF16 capacity                         |
+//                      | Charles Korthout | 0.6   | 20-11-2026     | Document shared UTF16 capacity for original root and descendant attribute strings        |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -30,7 +31,7 @@ public sealed class NativeSchemaSessionOptions
     /// <summary>Creates explicit native, string, export and Core admission limits.</summary>
     /// <param name="maxNativeCoefficientDigits">Native supplied decimal coefficient or integer digits before normalization.</param>
     /// <param name="maxNativeScale">Native supplied decimal scale before normalization.</param>
-    /// <param name="maxStringCharacters">Parsed leaf, root attribute and enumeration string capacity in UTF-16 code units.</param>
+    /// <param name="maxStringCharacters">Parsed leaf, root/descendant attribute and enumeration string capacity in UTF-16 code units.</param>
     /// <param name="maxExportCharacters">Serialized XML capacity in UTF-16 code units.</param>
     /// <param name="maxOpenDocuments">Simultaneously admitted document count.</param>
     /// <param name="maxCachedScalarValuesPerDocument">Core scalar cache capacity per document.</param>
@@ -64,7 +65,7 @@ public sealed class NativeSchemaSessionOptions
     public int MaxNativeCoefficientDigits { get; }
     /// <summary>Gets native supplied decimal scale before normalization.</summary>
     public int MaxNativeScale { get; }
-    /// <summary>Gets parsed leaf, root attribute and enumeration string capacity in UTF-16 code units.</summary>
+    /// <summary>Gets parsed leaf, root/descendant attribute and enumeration string capacity in UTF-16 code units.</summary>
     public int MaxStringCharacters { get; }
     /// <summary>Gets serialized XML capacity in UTF-16 code units.</summary>
     public int MaxExportCharacters { get; }

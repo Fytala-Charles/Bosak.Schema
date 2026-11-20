@@ -338,3 +338,18 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## Nested-sequence implementation candidate
 
 20 November 2026: local1,125source cases(395implementation/730public), prior1,036unchanged. Read docs/nested-sequences/ADOPTION.md before semantic edits. Separate complete element facts from terminal scalar projection; preserve local/global declaration identity, eager cycle/expansion/refusal gates, legacy facade and lifetime rules. Package/retained qualification is separate. No commit/push without explicit request.
+
+
+## Nested container attribute planning
+
+20 November 2026: read docs/nested-attributes/PLAN.md, CONTRACT.md and proposedADR014 before descendant-attribute work. Base3e067cd/main1,125cases remains unchanged. Three-member/path proposal is not implemented or semantically adopted. Keep root/terminal indexes and original owner/use facts; explicit commit/push rule still applies.
+
+
+## Nested container attribute pre-implementation adoption
+
+20 November 2026: read docs/nested-attributes/ADOPTION.md before implementation.69synthetic public Core controls per signed lane and four native/API baseline controls pass, not new native support. Bind facts to exact original attribute owner/node, preserve root/scalar indexing and64total potential-use budget. Production/API remains unchanged; no commit/push without explicit request.
+
+
+## Nested attribute implementation candidate
+
+20 November 2026: local1,200source cases(404implementation/796public);1,123prior unchanged and NS-049/075intentional admission recorded before edits. Read docs/nested-attributes/ADOPTION.md before semantic work. Preserve exact captured owner/fact identity, separate root/descendant/scalar indexes, detached immutable paths and64total potentialuses includingroot/optional/repetition. Three new API members, no new type. No commit/push without explicit request.

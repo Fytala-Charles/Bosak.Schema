@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-20",
+  "baseCommit": "3e067cd73bd779a4539cd14e870950b0bc99430b",
+  "kind": "Authored planning adaptation of the previously authored nested fixture; not executed native support",
+  "source": "tests/TestData/NestedSequences/nested-order.xsd",
+  "sourceSha256": "51a957f03fe5b79831ad1e62114f21b133ca5f2cf8ddb2b5409fcfd2948cc48d",
+  "changes": [
+    "Required string currency and optional Boolean paid on LineType",
+    "Two repeated line owners with EUR/false and USD/absent optional"
+  ],
+  "sha256": {
+    "nested-order.xsd": "4e4a62a8d92c4f35b40f5fe68c053281e1fe65b9c18e45aee678a9917d624c8c",
+    "nested-order.xml": "1c328778a24c97f33e3081d881ce31a13da4533f9d30b0b7e639cc575a0511e6"
+  },
+  "expectedAfterImplementation": {
+    "scalarCount": 7,
+    "rootAttributeCount": 1,
+    "rootOwnerElementPath": [],
+    "descendantAttributeCount": 3,
+    "worstCaseTotalAttributeUses": 5,
+    "descendants": [
+      {
+        "path": [
+          0
+        ],
+        "name": "currency",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          0
+        ],
+        "name": "paid",
+        "value": false
+      },
+      {
+        "path": [
+          1
+        ],
+        "name": "currency",
+        "value": "USD"
+      }
+    ]
+  },
+  "nativeRun": "Not performed in planning; delivered engine deliberately refuses this shape"
+}

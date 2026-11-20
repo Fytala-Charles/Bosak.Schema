@@ -24,6 +24,7 @@
 //                      | Charles Korthout | 1.1   | 19-11-2026     | Adopt opt-in local root attributes without changing leaf indexes or legacy profiles         |
 //                      | Charles Korthout | 1.2   | 20-11-2026     | Adopt bounded decimal simple-content roots with original complex type identity             |
 //                      | Charles Korthout | 1.3   | 20-11-2026     | Adopt bounded nested sequences and preserve complete original element assessment         |
+//                      | Charles Korthout | 1.4   | 20-11-2026     | Capture original nested attribute owner paths and indexes without changing scalar order  |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -79,8 +80,7 @@ internal sealed partial class NativeDecimalSchema
             var document = Parse(schema, 32768, cancellationToken);
             var root = document.Root!;
             Require(root.Name == Xs + "schema", "Schema root or namespace is unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
-            var attributeProfile = maxStringCharacters is not null && root.Elements(Xs + "complexType")
-                .Concat(root.Elements(Xs + "element").SelectMany(e => e.Elements(Xs + "complexType")))
+            var attributeProfile = maxStringCharacters is not null && root.Descendants(Xs + "complexType")
                 .Any(c => c.Elements(Xs + "attribute").Any() || c.Elements(Xs + "simpleContent").Elements(Xs + "extension").Elements(Xs + "attribute").Any());
             if (attributeProfile) Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault", "attributeFormDefault");
             else Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault");
@@ -344,7 +344,7 @@ internal sealed partial class NativeDecimalSchema
             if (selected.NestedProfile)
             {
                 var nestedElements = ImmutableArray.CreateBuilder<NativeElementState>();
-                AssessContainer(root, selected.Root, selected, nestedElements, cancellationToken, isRoot: true);
+                AssessContainer(root, selected.Root, selected, nestedElements, attributeStates, [], cancellationToken, isRoot: true);
                 cancellationToken.ThrowIfCancellationRequested();
                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, nestedElements.ToImmutable(), attributeStates.ToImmutable()));
             }
@@ -630,6 +630,8 @@ internal sealed class NativeDeclaration(string name, NativeType type, int minOcc
 }
 internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null)
 {
+    internal ImmutableArray<int> OwnerElementPath { get; init; } = [];
+    internal int OwnerElementIndex { get; init; }
     internal bool IsNilled => false;
 }
 internal sealed class NativeAssessedDocument(XDocument document, ImmutableArray<NativeElementState> elements, ImmutableArray<NativeElementState> attributes = default)

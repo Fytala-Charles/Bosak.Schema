@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 20-11-2026     | Adopt nested local attributes with bounded total uses and original owner identity        |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -105,8 +106,8 @@ internal sealed partial class NativeDecimalSchema
                     type = container.Root.Type;
                 }
                 if (container is not null)
-                    Require(container.Root.Type.ContentType is null && container.AttributeUses.Length == 0,
-                        "Descendant attributes and simple content are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+                    Require(container.Root.Type.ContentType is null,
+                        "Nested simple content is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
                 children.Add(new NativeDeclaration(name, type, min, max, ns) { Container = container });
             }
             var attributes = CompileAttributes(members.Skip(1).ToArray(), targetNamespace, attributeForm,
@@ -150,28 +151,46 @@ internal sealed partial class NativeDecimalSchema
         return first;
     }
 
-    private static (int Nodes, int Scalars, int Depth) NestedBudget(NativeDecimalSchema plan, CancellationToken cancellationToken)
+    private static (int Nodes, int Scalars, int Depth, int Attributes) NestedBudget(NativeDecimalSchema plan, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        if (plan.Root.Type.ContentType is not null) return (1, 1, 1);
-        var nodes = 1; var scalars = 0; var depth = 1;
+        if (plan.Root.Type.ContentType is not null) return (1, 1, 1, plan.AttributeUses.Length);
+        var nodes = 1; var scalars = 0; var depth = 1; var attributes = plan.AttributeUses.Length;
         foreach (var child in plan.Children)
         {
-            var budget = child.Container is { } nested ? NestedBudget(nested, cancellationToken) : (Nodes: 1, Scalars: 1, Depth: 1);
+            var budget = child.Container is { } nested ? NestedBudget(nested, cancellationToken) : (Nodes: 1, Scalars: 1, Depth: 1, Attributes: 0);
             // Every child budget was bounded before multiplication; each maximum is at most16.
             nodes += child.MaxOccurs * budget.Nodes;
             scalars += child.MaxOccurs * budget.Scalars;
             depth = Math.Max(depth, 1 + budget.Depth);
-            Require(nodes <= 64 && scalars <= 16 && depth <= 4, "Expanded nested representation ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            attributes += child.MaxOccurs * budget.Attributes;
+            Require(nodes <= 64 && scalars <= 16 && depth <= 4 && attributes <= 64, "Expanded nested representation ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         }
-        return (nodes, scalars, depth);
+        return (nodes, scalars, depth, attributes);
     }
 
     private void AssessContainer(XElement element, NativeDeclaration declaration, NativeDecimalSchema plan,
-        ImmutableArray<NativeElementState>.Builder states, CancellationToken cancellationToken, bool isRoot = false)
+        ImmutableArray<NativeElementState>.Builder states, ImmutableArray<NativeElementState>.Builder attributes,
+        ImmutableArray<int> ownerPath, CancellationToken cancellationToken, bool isRoot = false)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        if (!isRoot) InstanceAttributes(element);
+        if (!isRoot)
+        {
+            if (plan.AttributeUses.IsEmpty) InstanceAttributes(element);
+            else
+            {
+                Require(element.Attributes().All(a => a.IsNamespaceDeclaration || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
+                    "Special attribute requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
+                foreach (var use in plan.AttributeUses)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    var attribute = element.Attribute(use.ExpandedName);
+                    Check(attribute is not null || use.MinOccurs == 0, "Required descendant attribute is missing.");
+                    if (attribute is not null) attributes.Add(AssessScalar(attribute.Value, use) with { OwnerElementPath = ownerPath, OwnerElementIndex = states.Count });
+                }
+                Check(element.Attributes().All(a => a.IsNamespaceDeclaration || plan.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared descendant attribute.");
+            }
+        }
         foreach (var text in element.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only container contains non-whitespace text.");
         Require(element.Nodes().All(n => n is XElement or XText), "Container comments or processing instructions are unsupported.");
         states.Add(new NativeElementState(declaration, null));
@@ -182,8 +201,9 @@ internal sealed partial class NativeDecimalSchema
             while (index < nodes.Length && nodes[index].Name == child.ExpandedName)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+                var childPath = ownerPath.Add(index);
                 var node = nodes[index++];
-                if (child.Container is { } nested) AssessContainer(node, child, nested, states, cancellationToken);
+                if (child.Container is { } nested) AssessContainer(node, child, nested, states, attributes, childPath, cancellationToken);
                 else
                 {
                     InstanceAttributes(node);
