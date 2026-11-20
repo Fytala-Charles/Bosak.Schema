@@ -25,6 +25,7 @@
 //                      | Charles Korthout | 1.2   | 20-11-2026     | Adopt bounded decimal simple-content roots with original complex type identity             |
 //                      | Charles Korthout | 1.3   | 20-11-2026     | Adopt bounded nested sequences and preserve complete original element assessment         |
 //                      | Charles Korthout | 1.4   | 20-11-2026     | Capture original nested attribute owner paths and indexes without changing scalar order  |
+//                      | Charles Korthout | 1.5   | 20-11-2026     | Admit unfetched location hints only under the explicitly supplied mixed scalar schema    |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -319,7 +320,7 @@ internal sealed partial class NativeDecimalSchema
             var attributeStates = ImmutableArray.CreateBuilder<NativeElementState>();
             if (found && selected!.AttributeUses.Length != 0)
             {
-                Require(root.Attributes().All(a => a.IsNamespaceDeclaration || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
+                Require(root.Attributes().All(a => IsNamespaceOrLocationHint(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
                     "Special attribute requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
                 foreach (var use in selected.AttributeUses)
                 {
@@ -328,7 +329,7 @@ internal sealed partial class NativeDecimalSchema
                     Check(attribute is not null || use.MinOccurs == 0, "Required root attribute is missing.");
                     if (attribute is not null) attributeStates.Add(AssessScalar(attribute.Value, use));
                 }
-                Check(root.Attributes().All(a => a.IsNamespaceDeclaration || selected.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared root attribute.");
+                Check(root.Attributes().All(a => IsNamespaceOrLocationHint(a) || selected.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared root attribute.");
             }
             else InstanceAttributes(root);
             Check(found, "Unexpected root element.");
@@ -494,8 +495,12 @@ internal sealed partial class NativeDecimalSchema
                 ? NativeDecimalUnsupportedReason.Namespace : NativeDecimalUnsupportedReason.Attributes);
     }
 
-    private static void InstanceAttributes(XElement element) =>
-        Require(element.Attributes().All(a => a.IsNamespaceDeclaration), "Instance application attributes and xsi requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
+    private bool IsNamespaceOrLocationHint(XAttribute attribute) => attribute.IsNamespaceDeclaration ||
+        maxStringCharacters is not null && attribute.Name.NamespaceName == "http://www.w3.org/2001/XMLSchema-instance" &&
+        attribute.Name.LocalName is "schemaLocation" or "noNamespaceSchemaLocation";
+
+    private void InstanceAttributes(XElement element) =>
+        Require(element.Attributes().All(IsNamespaceOrLocationHint), "Instance application attributes and xsi requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
 
     private static string TargetNamespace(XElement schema)
     {

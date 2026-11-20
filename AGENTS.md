@@ -363,3 +363,22 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## Nested decimal simple-content implementation
 
 20 November2026: read docs/nested-simple-content/ADOPTION.md before semantic edits. Local1,255cases(415implementation/840public),1,198prior unchanged/two adopted admissions/55new. Preserve complex declared versus actual decimal provenance, root/local declaration identity, original captured owner paths up to3segments at depth4, scalar/root index separation and old budgets. No new public API or Corepin. No commit/push without explicit request.
+
+## Frozen upstream conformance pilot
+
+20 November 2026: read docs/conformance-pilot/README.md and MEASUREMENT-CONTRACT.md
+before pilot work. Preserve the 21 cases, original 42 Git-blob files, notices,
+expected validity and frozen manifest bytes. Unsupported is never a match; all
+21 baseline cases are Unsupported. Do not rewrite fixtures or relax xsi:type
+handling to obtain passes. New semantics require specification adoption first.
+Driver is manual and nonpackable; no new gate or release. Explicit commit/push rule applies.
+
+## Explicit-schema hint policy
+
+20 November 2026: read docs/schema-location-hints/ADOPTION.md before semantic edits.
+Only opt-in NativeSchemaSession admits exact xsi location hints without fetching;
+preserve original XML, typed application indexes, legacy refusal and xsi:type/nil
+refusal. 1,302 source tests pass, including all 1,255 prior outcomes and 47 new cases.
+Frozen upstream baseline stays sealed; candidate separately yields 1 match / 20
+Unsupported / zero mismatches/errors. Candidate harness requires exact source and
+runtime evidence. No full-suite claim, API/pin/publication change or implicit delivery.

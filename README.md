@@ -102,3 +102,9 @@ See the [bounded nested-sequence development profile](docs/nested-sequences/READ
 See [owner-aware nested attributes](docs/nested-attributes/README.md) for detached descendant values and document-relative owner paths.
 
 See [nested decimal simple content](docs/nested-simple-content/README.md) for price/currency terminals through existing scalar and owner-aware attribute reads.
+
+The [upstream validity pilot](docs/conformance-pilot/README.md) records current
+interoperability gaps and the limits of conformance evidence.
+
+The opt-in development profile accepts [unfetched schema-location hints](docs/schema-location-hints/README.md)
+while retaining the explicitly supplied schema. Published beta.1 is unchanged.

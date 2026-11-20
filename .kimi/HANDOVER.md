@@ -1,3 +1,5 @@
+Last updated: 2026-11-20
+
 # Packaged guidance reconciled after M1 - 19 November 2026
 
 PR16 now follows merged M1 main3946352. New examples and namespace/diagnostic guidance verified against actual local M1 package; original receipts remain historical. No runtime/tests/dependency/workflow difference from M1 main. See [reconciliation](../docs/package-readme06-reconciled/README.md). Coverage remains primary; no tag/publication/controller changes.
@@ -224,3 +226,36 @@ zero public API delta(52types/392rows),12actual packaged README blocks and54rele
 sixworkload controls pass. Workload consumer builds cleanly. Local unsigned
 0.6.0-alpha.0.15 retainsbase32f8214metadata; source hashes identify actual code.
 No commit/push, registry/controller/tag or Corepin change.
+
+## Upstream conformance pilot — 20 November 2026
+
+20 November 2026: the unchanged PR28 engine was measured against a frozen,
+clause-mapped upstream XSD 1.1 pilot (21 cases / 15 groups / 42 original files).
+All 21 are Unsupported: 16 during compilation and five during assessment;
+zero Valid/Invalid comparisons means no positive conformance claim. Source
+regression remains 1,255 passing cases (415 implementation / 840 public), with
+10 separate harness integrity controls. No engine/API/Core pin or release change.
+Next: adopt a scoped schema-location hint policy under an explicitly supplied
+schema, keeping xsi:type separate, then assess anonymous decimal/string restrictions.
+[Pilot and gap evidence](../docs/conformance-pilot/README.md). REQ-009 remains In Progress.
+
+## Explicit-schema location hints — 20 November 2026
+
+The opt-in NativeSchemaSession preserves exact xsi location-hint attributes
+without fetching them or changing the explicitly supplied schema. Legacy decimal
+refusals and xsi:type/nil refusal remain unchanged. Original parsed hints are
+exported but do not enter typed application-attribute indexes; built-in hint PSVI
+is outside this bounded policy. All 1,255 previous source outcomes are unchanged;
+47 new public cases give 1,302 passing tests (415 implementation / 887 public).
+The unchanged upstream pilot advances to one validity match / zero mismatches /
+20 Unsupported / zero errors; four invalid xsi:type cases remain Unsupported.
+One case is not whole-suite conformance. No API/Core pin or publication change.
+[Adoption and qualification](../docs/schema-location-hints/README.md). REQ-009 remains In Progress.
+
+## Pilot and hint delivery review — 20 November 2026
+
+Fixed baseline harness refusal of untracked production files; 15 controls pass.
+Candidate rerun remains 1 validity match / 20 Unsupported / zero mismatches/errors.
+Production/runtime bytes and original sealed packets are unchanged. PR title/body
+are prepared; no delivery performed pending explicit commit/push request under
+AGENTS Git Rules. [Review](../docs/schema-location-hints/delivery-review/README.md).

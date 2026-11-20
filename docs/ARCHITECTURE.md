@@ -254,3 +254,28 @@ node text versus lexical export and depth4three-segment owners are explicit;
 original budgets and zero public API delta remain. Signed Core feasibility and
 adoption precede implementation; compatibility/retained/API evidence is separate.
 No Core pin/controller/publication change; REQ-009/generalAPI/C45 stay In Progress.
+
+## Upstream conformance pilot — 20 November 2026
+
+20 November 2026: the unchanged PR28 engine was measured against a frozen,
+clause-mapped upstream XSD 1.1 pilot (21 cases / 15 groups / 42 original files).
+All 21 are Unsupported: 16 during compilation and five during assessment;
+zero Valid/Invalid comparisons means no positive conformance claim. Source
+regression remains 1,255 passing cases (415 implementation / 840 public), with
+10 separate harness integrity controls. No engine/API/Core pin or release change.
+Next: adopt a scoped schema-location hint policy under an explicitly supplied
+schema, keeping xsi:type separate, then assess anonymous decimal/string restrictions.
+[Pilot and gap evidence](conformance-pilot/README.md). REQ-009 remains In Progress.
+
+## Explicit-schema location hints — 20 November 2026
+
+The opt-in NativeSchemaSession preserves exact xsi location-hint attributes
+without fetching them or changing the explicitly supplied schema. Legacy decimal
+refusals and xsi:type/nil refusal remain unchanged. Original parsed hints are
+exported but do not enter typed application-attribute indexes; built-in hint PSVI
+is outside this bounded policy. All 1,255 previous source outcomes are unchanged;
+47 new public cases give 1,302 passing tests (415 implementation / 887 public).
+The unchanged upstream pilot advances to one validity match / zero mismatches /
+20 Unsupported / zero errors; four invalid xsi:type cases remain Unsupported.
+One case is not whole-suite conformance. No API/Core pin or publication change.
+[Adoption and qualification](schema-location-hints/README.md). REQ-009 remains In Progress.
