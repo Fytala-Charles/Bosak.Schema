@@ -1,0 +1,80 @@
+{
+  "status": "Before-production static review; no executed admissions",
+  "base": "1438f719863d0c13f976f1b0eb683e146a3511e5",
+  "sourceCatalogScan": "JSON cases.json rows with inline local element/simpleType; C# theory review still required",
+  "priorCase": {
+    "file": "tests/TestData/NestedSequences/cases.json",
+    "id": "NS-051",
+    "rowSha256": "e80d5f339e07cc4b100e976a3ab4b51b72ac7c2d9b3d8536033aeb281794a848",
+    "hashFormat": "UTF8 JSON sorted keys, compact separators, ensure_ascii=False",
+    "original": {
+      "id": "NS-051",
+      "label": "inline simple type",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\" ><xs:complexType><xs:sequence><xs:element name=\"v\"><xs:simpleType><xs:restriction base=\"xs:decimal\"/></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a><v>12.50</v></a></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Valid",
+      "values": [
+        "ABC-0001",
+        "2",
+        "12.5",
+        "XYZ-0002",
+        "1",
+        "3.75",
+        "false"
+      ],
+      "attributes": 0
+    },
+    "beforeCompile": "Unsupported",
+    "targetCompile": "Valid",
+    "targetAssessment": "Valid",
+    "targetValues": [
+      "12.5"
+    ],
+    "warning": "Original seven-value placeholder was unreachable; target is not executed"
+  },
+  "upstreamTargets": [
+    {
+      "id": "MS-DataTypes2006-07-15/decimal_maxInclusive001_1041/decimal_maxInclusive001_1041.v",
+      "schema": "msData/datatypes/Facets/decimal/decimal_maxInclusive001.xsd",
+      "expected": "valid",
+      "status": "Static eligibility only; not executed",
+      "originalSchemaSha256": "db52508ecaaf3c01f8697fee862404929f7990d7b097905f6f785f84b9da7e7e"
+    },
+    {
+      "id": "MS-DataTypes2006-07-15/decimal_maxInclusive002_1042/decimal_maxInclusive002_1042.i",
+      "schema": "msData/datatypes/Facets/decimal/decimal_maxInclusive002.xsd",
+      "expected": "invalid",
+      "status": "Static eligibility only; not executed",
+      "originalSchemaSha256": "db52508ecaaf3c01f8697fee862404929f7990d7b097905f6f785f84b9da7e7e"
+    },
+    {
+      "id": "MS-DataTypes2006-07-15/decimal_totalDigits002_1058/decimal_totalDigits002_1058.v",
+      "schema": "msData/datatypes/Facets/decimal/decimal_totalDigits002.xsd",
+      "expected": "valid",
+      "status": "Static eligibility only; not executed",
+      "originalSchemaSha256": "fa7cce609289b4e0244d856f59aa80c62c7d45c5dd8860907b0b1839a1c23df1"
+    },
+    {
+      "id": "MS-DataTypes2006-07-15/decimal_totalDigits001_1057/decimal_totalDigits001_1057.i",
+      "schema": "msData/datatypes/Facets/decimal/decimal_totalDigits001.xsd",
+      "expected": "invalid",
+      "status": "Static eligibility only; not executed",
+      "originalSchemaSha256": "b186cad479a88392ef60d5fe0dc51eb5d4dcb36074005f21508cb9ff814e6d95"
+    },
+    {
+      "id": "MS-DataTypes2006-07-15/string_length002_1021/string_length002_1021.v",
+      "schema": "msData/datatypes/Facets/string/string_length002.xsd",
+      "expected": "valid",
+      "status": "Static eligibility only; not executed",
+      "originalSchemaSha256": "7705189dac0c32bce997c6f20fc2b29ab99f49073ea08371e85325f23dee2940"
+    },
+    {
+      "id": "MS-DataTypes2006-07-15/string_length001_1020/string_length001_1020.i",
+      "schema": "msData/datatypes/Facets/string/string_length001.xsd",
+      "expected": "invalid",
+      "status": "Static eligibility only; not executed",
+      "originalSchemaSha256": "572b308cf68561af15e27e605442ded4b27e269441eebe62e9e6a8a531550b71"
+    }
+  ]
+}

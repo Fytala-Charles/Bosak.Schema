@@ -239,3 +239,38 @@ The unchanged upstream pilot advances to one validity match / zero mismatches /
 20 Unsupported / zero errors; four invalid xsi:type cases remain Unsupported.
 One case is not whole-suite conformance. No API/Core pin or publication change.
 [Adoption and qualification](docs/schema-location-hints/README.md). REQ-009 remains In Progress.
+
+## Anonymous restriction adoption ? 20 November 2026
+
+PR29 merged at1438f719863d0c13f976f1b0eb683e146a3511e5 with the exact reviewed tree.
+Main CI44752564556 passes1,302source cases(415implementation/887public), release
+refusal controls, six workload controls and documentation hygiene. The next
+anonymous local decimal/string restriction adoption is recorded before production
+edits. Anonymous identity/provenance transport requires feasibility qualification;
+no implementation or new upstream matches yet. NS-051 and six original upstream
+eligibility targets are pinned, preserving integer and other profile exclusions.
+[Adoption and qualification plan](docs/anonymous-simple-restrictions/README.md). REQ-009 remains In Progress.
+
+## Anonymous restriction feasibility — 20 November 2026
+
+Before-code public Core feasibility passes90controls per separately restored
+signed1.81.2/1.81.17lane(13newanonymous/77inherited), with18package signatures
+and source/archive/cache/runtime identities verified. Original anonymous simple
+type handles survive node atomization/direct reads, repeated/distinct identity,
+foreign refusal and expiry. Six separate actual Schema baseline controls pass;
+anonymous types still refuse. No production/API/pin/package or upstream outcome
+change. Native implementation and source/package/retained qualification remain.
+[Before-code evidence](docs/anonymous-simple-restrictions/FEASIBILITY.md). REQ-009 remains In Progress.
+
+## Anonymous restriction implementation — 20 November 2026
+
+Anonymous local decimal/string restrictions are locally implemented under the
+original adoption: shared facets, original unnamed identities and combined16local
+definition budget. Source1,373passes(421implementation/952public),1,301prior
+unaffected/NS-051adopted admission/71new. Package-only952minimum/952current and
+retained124/23/33pass with exact signature/payload checks. Frozenpilot now7matches,
+14Unsupported,0mismatches/errors; six targeted cases advance unchanged. Public
+API52types/392rows unchanged. Owned scalar reads are qualified; native general
+node queries remain refused and legacy null-QName data(.) is unqualified.
+No Corepin, published beta.1, tag/controller or generalC45/full-XSD acceptance change.
+[Implementation and qualification](docs/anonymous-simple-restrictions/implementation/README.md). REQ-009 remains In Progress.

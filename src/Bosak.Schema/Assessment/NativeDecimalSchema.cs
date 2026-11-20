@@ -26,6 +26,7 @@
 //                      | Charles Korthout | 1.3   | 20-11-2026     | Adopt bounded nested sequences and preserve complete original element assessment         |
 //                      | Charles Korthout | 1.4   | 20-11-2026     | Capture original nested attribute owner paths and indexes without changing scalar order  |
 //                      | Charles Korthout | 1.5   | 20-11-2026     | Admit unfetched location hints only under the explicitly supplied mixed scalar schema    |
+//                      | Charles Korthout | 1.6   | 20-11-2026     | Reuse direct facets for original anonymous local decimal and string definitions          |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -115,22 +116,14 @@ internal sealed partial class NativeDecimalSchema
                 cancellationToken.ThrowIfCancellationRequested();
                 Attributes(type, "name");
                 var name = Name(type);
-                var restriction = Single(type, "restriction");
-                Attributes(restriction, "base");
-                var baseName = ResolveTypeName(restriction, "base");
-                NativeType restricted;
-                if (baseName == Xs + "decimal")
-                    restricted = new NativeType(name, false, targetNamespace, NativeDecimalFacets.Compile(restriction, limits));
-                else if (stringType is not null && baseName == Xs + "string")
-                    restricted = new NativeType(name, false, targetNamespace, isString: true,
-                        stringFacets: NativeStringFacets.Compile(restriction, maxStringCharacters!.Value));
-                else throw new NativeProfileException(NativeOutcome.Unsupported, "Only admitted direct decimal or string restrictions are supported.", NativeDecimalUnsupportedReason.ValueType);
+                var restricted = CompileRestriction(type, name, targetNamespace, limits, maxStringCharacters);
                 simple.Add(XName.Get(name, targetNamespace), restricted);
             }
+            var anonymousSimple = CompileAnonymousRestrictions(root, limits, maxStringCharacters, cancellationToken);
             if (stringType is not null && HasNestedDeclarations(root, types, targetNamespace))
                 return NativeResult<NativeDecimalSchema>.Valid(CompileNestedSchema(root, types, declarations, targetNamespace,
                     defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType!, integerType!, simple,
-                    limits, maxStringCharacters!.Value, cancellationToken));
+                    limits, maxStringCharacters!.Value, cancellationToken, anonymousSimple));
             // Compile all complex types eagerly, including unused declarations.
             foreach (var type in types.Where(t => t.Name == Xs + "complexType"))
             {
@@ -140,7 +133,7 @@ internal sealed partial class NativeDecimalSchema
                 var key = XName.Get(name, targetNamespace);
                 var identity = new NativeType(name, true, targetNamespace);
                 named.Add(key, CompileComplex(type, new NativeDeclaration(name, identity, 1, 1, targetNamespace),
-                    targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken));
+                    targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple));
             }
             var compiled = ImmutableDictionary.CreateBuilder<XName, NativeDecimalSchema>();
             NativeDecimalSchema? first = null;
@@ -163,7 +156,7 @@ internal sealed partial class NativeDecimalSchema
                     var complex = Single(declaration, "complexType");
                     Attributes(complex);
                     plan = CompileComplex(complex, new NativeDeclaration(name, new NativeType(null, true), 1, 1, targetNamespace),
-                        targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken);
+                        targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple);
                 }
                 compiled.Add(key, plan);
                 first ??= plan;
@@ -185,7 +178,7 @@ internal sealed partial class NativeDecimalSchema
 
     private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
         string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
-        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken)
+        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple)
     {
         var members = Elements(complex);
         if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
@@ -208,12 +201,19 @@ internal sealed partial class NativeDecimalSchema
             cancellationToken.ThrowIfCancellationRequested();
             Require(declaration.Name == Xs + "element", "Only local decimal elements are supported.", NativeDecimalUnsupportedReason.DeclarationShape);
             Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form");
-            Require(Elements(declaration).Count == 0, "Local declarations must be empty.", NativeDecimalUnsupportedReason.DeclarationShape);
+            var inline = Elements(declaration);
             var name = Name(declaration);
             var namespaceUri = Form(declaration, "form", defaultForm) == "qualified" ? targetNamespace : "";
             var expandedName = XName.Get(name, namespaceUri).ToString();
             Require(names.Add(expandedName), "Local declaration names must be unique.", NativeDecimalUnsupportedReason.DeclarationShape);
-            var localType = ResolveScalarType(declaration, decimalType, stringType, booleanType, integerType, simple);
+            NativeType localType;
+            if (inline.Count == 0) localType = ResolveScalarType(declaration, decimalType, stringType, booleanType, integerType, simple);
+            else
+            {
+                Require(inline.Count == 1 && declaration.Attribute("type") is null && anonymousSimple.ContainsKey(inline[0]),
+                    "Expected one admitted anonymous simple type.", NativeDecimalUnsupportedReason.DeclarationShape);
+                localType = anonymousSimple[inline[0]];
+            }
             var min = Occurs(declaration, "minOccurs", 1);
             var max = Occurs(declaration, "maxOccurs", 1);
             Require(min is 0 or 1 && max is >= 1 and <= 16 && min <= max, "Occurrence limits are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
