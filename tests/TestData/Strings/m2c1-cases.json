@@ -680,9 +680,9 @@
     "label": "nondecimal assertion exists(t:id)",
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:string'/><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:assert test='exists(t:id)'/></xs:complexType></xs:element></xs:schema>",
     "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
-    "expectedCompile": "Unsupported",
+    "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
-    "unsupportedReason": "AssertionGrammar",
+    "unsupportedReason": null,
     "maxStringCharacters": 256,
     "values": [
       {
@@ -699,16 +699,17 @@
       "Structures3.3.4",
       "XML1.0 2.11/4.1"
     ],
-    "officialW3cCase": false
+    "officialW3cCase": false,
+    "semanticAdmission": "2026-11-20 bounded string assertions; docs/string-assertions/ADMISSIONS.json"
   },
   {
     "id": "M2C1-28",
     "label": "nondecimal assertion count(t:id) eq 1",
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:string'/><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:assert test='count(t:id) eq 1'/></xs:complexType></xs:element></xs:schema>",
     "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
-    "expectedCompile": "Unsupported",
+    "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
-    "unsupportedReason": "AssertionGrammar",
+    "unsupportedReason": null,
     "maxStringCharacters": 256,
     "values": [
       {
@@ -725,16 +726,17 @@
       "Structures3.3.4",
       "XML1.0 2.11/4.1"
     ],
-    "officialW3cCase": false
+    "officialW3cCase": false,
+    "semanticAdmission": "2026-11-20 bounded string assertions; docs/string-assertions/ADMISSIONS.json"
   },
   {
     "id": "M2C1-29",
     "label": "nondecimal assertion empty(t:id)",
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:string'/><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:assert test='empty(t:id)'/></xs:complexType></xs:element></xs:schema>",
     "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
-    "expectedCompile": "Unsupported",
-    "expectedAssessment": "Valid",
-    "unsupportedReason": "AssertionGrammar",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "unsupportedReason": null,
     "maxStringCharacters": 256,
     "values": [
       {
@@ -751,7 +753,8 @@
       "Structures3.3.4",
       "XML1.0 2.11/4.1"
     ],
-    "officialW3cCase": false
+    "officialW3cCase": false,
+    "semanticAdmission": "2026-11-20 bounded string assertions; docs/string-assertions/ADMISSIONS.json"
   },
   {
     "id": "M2C1-30",

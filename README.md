@@ -150,3 +150,9 @@ and the existing decimal/scalar facades are unchanged. See [implementation adopt
 
 
 The development owned node-data API has [bounded owner acceptance](docs/native-node-data-acceptance/README.md).
+
+
+The 0.6 development mixed native profile also supports [bounded string equality assertions](docs/string-assertions/README.md) over immediate string children, with explicit cardinality, namespace and capacity limits.
+
+
+[Bounded string assertion review](docs/string-assertions-review/README.md) records the development slice and its delivery scope.

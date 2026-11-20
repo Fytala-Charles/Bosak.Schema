@@ -793,3 +793,25 @@ and the existing decimal/scalar facades are unchanged. See the package XML docum
 
 
 The repository owner accepted the bounded two-type/seven-method node-data API on 20 November 2026. General Core C45 and full XSD 1.1 acceptance remain separate. Earlier pending-acceptance wording describes the qualification checkpoint.
+
+
+## Bounded string assertions (0.6 development)
+
+The opt-in scalar and owned node-data sessions admit string equality assertions
+on declared immediate children of flat complex content. Primitive and existing
+named/anonymous string restrictions use exact parsed string values. Quoted XPath
+literals support doubled quote escaping. `eq`/`ne` require at most one value per
+operand; multiple values make assessment Invalid. `=`/`!=` test whether any pair
+matches the comparison; an empty operand gives false. Equality uses codepoint
+semantics, without trimming, case folding or Unicode normalization.
+
+Existing exists/empty/count checks now accept string children, including present
+empty strings. They compose with existing decimal comparisons and and/or under
+the original namespace and capacity rules. Attribute expressions, nested
+assertions, string ordering, Boolean/integer operands, general XPath and
+configurable collation remain outside this slice. The decimal-only facade keeps
+its previous grammar. False assertions publish no document or native facts.
+
+The public XML documentation describes the owned session types; string assertions extend the existing schema profile without new API members.
+The frozen W3C fixtures/expectations are unchanged. No public API, Core source/pin,
+release-controller, tag or published-package change is included.

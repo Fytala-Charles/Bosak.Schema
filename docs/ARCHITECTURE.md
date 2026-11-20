@@ -424,3 +424,65 @@ feasibility, implementation and review packets; those originals remain unchanged
 All qualified source/binary identities remain unchanged. General C45/ADR006,
 full-XSD/general XPath and release/publication decisions remain separate.
 [Owner acceptance](<native-node-data-acceptance/README.md>).
+
+
+## Bounded string assertions (0.6 development)
+
+The opt-in scalar and owned node-data sessions admit string equality assertions
+on declared immediate children of flat complex content. Primitive and existing
+named/anonymous string restrictions use exact parsed string values. Quoted XPath
+literals support doubled quote escaping. `eq`/`ne` require at most one value per
+operand; multiple values make assessment Invalid. `=`/`!=` test whether any pair
+matches the comparison; an empty operand gives false. Equality uses codepoint
+semantics, without trimming, case folding or Unicode normalization.
+
+Existing exists/empty/count checks now accept string children, including present
+empty strings. They compose with existing decimal comparisons and and/or under
+the original namespace and capacity rules. Attribute expressions, nested
+assertions, string ordering, Boolean/integer operands, general XPath and
+configurable collation remain outside this slice. The decimal-only facade keeps
+its previous grammar. False assertions publish no document or native facts.
+
+See [bounded string assertion evidence](string-assertions/README.md) for adoption, seven explicit authored admissions and qualification.
+The frozen W3C fixtures/expectations are unchanged. No public API, Core source/pin,
+release-controller, tag or published-package change is included.
+
+
+### String assertion qualification ? 20 November 2026
+
+The local string-assertion candidate passes 1,886 source cases (520 implementation /
+1,366 public), including 271 added controls and seven explicitly recorded authored
+admissions. Both package-only Core lanes pass 1,366; retained 124/23/33 callers
+pass, with no public API delta (54 types / 401 rows). Nine pure-string controls
+agree with published minimum Core. The unchanged frozen pilot is now 10 matches /
+11 Unsupported / zero mismatch or harness errors. Counts overlap. Core pins and
+published beta.1 stay unchanged; alpha.0.20 is local unsigned qualification only.
+No commit/push has been performed. See [string assertion evidence](string-assertions/README.md).
+
+
+### String assertion delivery review ? 20 November 2026
+
+Local code/contract review found no blocking implementation issue. The six sealed
+packets, qualified source/binary identities, exact seven authored admissions and
+unchanged frozen corpus verify. Other 180 rows in the three amended fixture files
+are unchanged. PR title/body are prepared; explicit commit/push/PR authorization
+is pending. No implementation or qualification result changed in this review.
+[Review and prepared delivery](string-assertions-review/README.md).
+
+
+### String assertion delivery authorized ? 20 November 2026
+
+The owner approved commit, push and open PR for the reviewed bounded slice.
+The qualified implementation and sealed evidence are unchanged. Earlier pending
+statements are historical; merge and publication remain separate.
+[Delivery authorization](string-assertions-delivery/README.md).
+
+
+### PR33 lifecycle-test correction ? 20 November 2026
+
+The initial hosted run failed two pre-existing lifecycle entry waits under
+concurrent blocking-worker load. Dedicated test-only workers now run the same
+barrier protocol across eight lifecycle classes; assertions/timeouts are unchanged.
+All25focused lifecycle and1,886full source cases pass with unchanged named outcomes.
+Product source/API and prior package/pilot/signature evidence are unchanged.
+[Original failure and correction](<string-assertions-ci/README.md>).

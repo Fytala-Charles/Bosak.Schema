@@ -28,6 +28,7 @@
 //                      | Charles Korthout | 1.5   | 20-11-2026     | Admit unfetched location hints only under the explicitly supplied mixed scalar schema    |
 //                      | Charles Korthout | 1.6   | 20-11-2026     | Reuse direct facets for original anonymous local decimal and string definitions          |
 //                      | Charles Korthout | 1.7   | 20-11-2026     | Enforce exact integer facets on original element and attribute scalar facts                 |
+//                      | Charles Korthout | 1.8   | 20-11-2026     | Assess bounded string assertions from original immediate scalar child values             |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -225,7 +226,8 @@ internal sealed partial class NativeDecimalSchema
 
         var attributeUses = CompileAttributes(attributeMembers, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
 
-        var assertionNames = children.Where(c => !c.Type.IsString && !c.Type.IsBoolean && !c.Type.IsInteger).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
+        var assertionNames = children.Where(c => !c.Type.IsBoolean && !c.Type.IsInteger).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
+        var stringNames = stringType is null ? null : children.Where(c => c.Type.IsString).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
         foreach (var assertion in assertionMembers)
         {
@@ -236,7 +238,7 @@ internal sealed partial class NativeDecimalSchema
             var expression = (string?)assertion.Attribute("test");
             Require(expression is not null, "Assertion test is required.", NativeDecimalUnsupportedReason.AssertionGrammar);
             plans.Add(NativeDecimalAssertion.Compile(expression!, assertionNames, limits,
-                name => ResolveAssertionName(assertion, name, defaultNamespace, assertionNames)));
+                name => ResolveAssertionName(assertion, name, defaultNamespace, assertionNames), stringNames));
         }
 
         return new NativeDecimalSchema(root, children.ToImmutable(), plans.ToImmutable(), limits) { AttributeUses = attributeUses };
@@ -352,6 +354,7 @@ internal sealed partial class NativeDecimalSchema
             }
             foreach (var text in root.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only root contains non-whitespace text.");
             var values = new Dictionary<string, List<XdmExactDecimal>>(StringComparer.Ordinal);
+            var strings = new Dictionary<string, List<string>>(StringComparer.Ordinal);
             var elements = ImmutableArray.CreateBuilder<NativeElementState>();
             elements.Add(new NativeElementState(selected!.Root, null));
             var nodes = root.Elements().ToArray();
@@ -360,6 +363,7 @@ internal sealed partial class NativeDecimalSchema
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 var present = new List<XdmExactDecimal>();
+                var textValues = new List<string>();
                 var occurrences = 0;
                 while (index < nodes.Length && nodes[index].Name == declaration.ExpandedName)
                 {
@@ -370,19 +374,21 @@ internal sealed partial class NativeDecimalSchema
                     Require(leaf.Nodes().All(n => n is XText), "Decimal leaf comments or processing instructions are unsupported.");
                     var state = AssessScalar(leaf.Value, declaration);
                     if (state.TypedValue is { } numeric) present.Add(numeric);
+                    if (state.StringValue is { } textValue) textValues.Add(textValue);
                     elements.Add(state);
                     Check(++occurrences <= declaration.MaxOccurs, "Maximum occurrence exceeded.");
                 }
 
                 Check(occurrences >= declaration.MinOccurs, "Required child is missing or out of order.");
                 values.Add(declaration.ExpandedName.ToString(), present);
+                if (declaration.Type.IsString) strings.Add(declaration.ExpandedName.ToString(), textValues);
             }
 
             Check(index == nodes.Length, "Unexpected child or sequence order.");
             foreach (var assertion in selected!.assertions)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                Check(assertion.Evaluate(values), "Assertion evaluated false.");
+                Check(assertion.Evaluate(values, strings), "Assertion evaluated false.");
             }
 
             cancellationToken.ThrowIfCancellationRequested();

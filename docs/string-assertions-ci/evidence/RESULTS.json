@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-20",
+  "originalHead": "b21bec96bcbeda2a4e1e6fad005928da8f8a9e8c",
+  "originalHostedRun": 44816791727,
+  "originalHostedFailures": 2,
+  "diagnosis": "Blocking Task.Run lifecycle workers delayed under concurrent thread-pool load",
+  "correction": "Dedicated LongRunning TaskScheduler.Default workers for identical lifecycle barrier pattern",
+  "productionSourceUnchanged": true,
+  "testFiles": {
+    "tests/Bosak.Schema.Tests/NativeAttributeLifecycleTests.cs": "a8f50c6fa4ad3d3b95ba06922bfbacc739a292aa642fa5aa554623c3c0785b42",
+    "tests/Bosak.Schema.Tests/NativeDecimalLifecycleTests.cs": "973f4f76a62a8c092d3d23af90c1fd56d1c3b4c61ff3f10cc5265652935e9a2f",
+    "tests/Bosak.Schema.Tests/NativeNestedAttributeLifecycleTests.cs": "0771b6ac29f4ab3032305219e7707db2f5d2ee48e7ae7f6fe69473c7e6c66a2d",
+    "tests/Bosak.Schema.Tests/NativeNestedLifecycleTests.cs": "b82275793345f6d76378805823c59bdff21d8ebb4753afd00dfde8f8a9f06cdb",
+    "tests/Bosak.Schema.Tests/NativeNestedSimpleContentLifecycleTests.cs": "7334069e7ca35dbdde2f0ed8e28500f72d1f8168621fc0953d262cddb387ef8e",
+    "tests/Bosak.Schema.Tests/NativeNodeDataLifecycleTests.cs": "93efde0092e835b443769820d58c8849f221859078ee76363ab061afbb818c67",
+    "tests/Bosak.Schema.Tests/NativeSchemaLifecycleTests.cs": "f1014a8e7d7f58b8090b4aa9e174628044cb308c7089f4fb0945be34f5ded83f",
+    "tests/Bosak.Schema.Tests/NativeSimpleContentLifecycleTests.cs": "c801f5b6f2317d52839e5d8b9cc48677763812cbde02f70825399f542daafed8",
+    "tests/Bosak.Schema.Tests/NativeLifecycleWorker.cs": "cc4759be30c8177f8a7dcb12e7a03bcd9260607328d1fad1a17ea16484334886"
+  },
+  "focusedLifecyclePassed": 25,
+  "fullSourcePassed": 1886,
+  "implementationPassed": 520,
+  "publicPassed": 1366,
+  "allPriorNamedOutcomesUnchanged": true,
+  "assertionsTimeoutsAndBarriersUnchanged": true,
+  "noTestsSkipped": true
+}
