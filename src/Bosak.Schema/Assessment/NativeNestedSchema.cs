@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 20-11-2026     | Adopt nested local attributes with bounded total uses and original owner identity        |
 //                      | Charles Korthout | 0.3   | 20-11-2026     | Adopt nested decimal simple content as original complex scalar-bearing terminals         |
+//                      | Charles Korthout | 0.4   | 20-11-2026     | Preserve unfetched location hints separately from descendant application attributes      |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -177,7 +178,7 @@ internal sealed partial class NativeDecimalSchema
             if (plan.AttributeUses.IsEmpty) InstanceAttributes(element);
             else
             {
-                Require(element.Attributes().All(a => a.IsNamespaceDeclaration || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
+                Require(element.Attributes().All(a => IsNamespaceOrLocationHint(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
                     "Special attribute requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
                 foreach (var use in plan.AttributeUses)
                 {
@@ -186,7 +187,7 @@ internal sealed partial class NativeDecimalSchema
                     Check(attribute is not null || use.MinOccurs == 0, "Required descendant attribute is missing.");
                     if (attribute is not null) attributes.Add(AssessScalar(attribute.Value, use) with { OwnerElementPath = ownerPath, OwnerElementIndex = states.Count });
                 }
-                Check(element.Attributes().All(a => a.IsNamespaceDeclaration || plan.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared descendant attribute.");
+                Check(element.Attributes().All(a => IsNamespaceOrLocationHint(a) || plan.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared descendant attribute.");
             }
         }
         if (plan.Root.Type.ContentType is { } contentType)

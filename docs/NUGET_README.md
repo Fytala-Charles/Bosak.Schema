@@ -743,3 +743,10 @@ at depth4may have three-segment OwnerElementPath values. No new public member or
 path-based selector is added. Complex-base chains/restriction, other base families,
 assertions, mixed content, defaults/nil/composition and primitive simple-type leaf
 attributes remain excluded. NativeDecimalSession and published beta.1 are unchanged.
+
+The opt-in NativeSchemaSession on the 0.6 development line accepts instance
+`xsi:schemaLocation` and `xsi:noNamespaceSchemaLocation` as unfetched hints.
+The explicitly supplied schema remains authoritative; hints stay in exported XML
+and do not add typed application attribute slots. `xsi:type` and `xsi:nil` remain
+unsupported, and the legacy NativeDecimalSession retains hint refusal. This does
+not change published 0.5.0-beta.1 or claim general schema discovery/full XSD PSVI.
