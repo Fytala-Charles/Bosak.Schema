@@ -1,0 +1,54 @@
+[
+  {
+    "id": "AS-034",
+    "label": "excluded base integer",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "clauses": [
+      "Structures3.3.2-3.3.4",
+      "Structures3.16.2.1-2",
+      "Datatypes4.1-4.3"
+    ]
+  },
+  {
+    "id": "M2B-54",
+    "label": "nondecimal base",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "values": [
+      "12.5"
+    ],
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "unsupportedReason": "ValueType",
+    "limits": [
+      256,
+      256
+    ],
+    "sections": [
+      "Datatypes4.3.7-4.3.12",
+      "Structures3.16"
+    ],
+    "officialW3cCase": false
+  },
+  {
+    "id": "M2C3-67",
+    "description": "Unused named integer restriction remains excluded",
+    "sections": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6",
+      "Structures3.3.4"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='Count'><xs:restriction base='xs:integer'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n' type='xs:integer'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><n>1</n></r>",
+    "maxNativeCoefficientDigits": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "values": [],
+    "unsupportedReason": "ValueType"
+  }
+]

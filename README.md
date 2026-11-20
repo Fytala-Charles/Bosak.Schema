@@ -111,3 +111,6 @@ while retaining the explicitly supplied schema. Published beta.1 is unchanged.
 
 The opt-in development profile supports [anonymous local decimal/string restrictions](docs/anonymous-simple-restrictions/implementation/README.md)
 with the same bounded facets as named restrictions and original anonymous type identity.
+
+The opt-in development profile includes [bounded integer restrictions](docs/integer-restrictions/README.md)
+with exact range and digit facets for local elements and admitted attribute uses.

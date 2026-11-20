@@ -27,6 +27,7 @@
 //                      | Charles Korthout | 1.4   | 20-11-2026     | Capture original nested attribute owner paths and indexes without changing scalar order  |
 //                      | Charles Korthout | 1.5   | 20-11-2026     | Admit unfetched location hints only under the explicitly supplied mixed scalar schema    |
 //                      | Charles Korthout | 1.6   | 20-11-2026     | Reuse direct facets for original anonymous local decimal and string definitions          |
+//                      | Charles Korthout | 1.7   | 20-11-2026     | Enforce exact integer facets on original element and attribute scalar facts                 |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -410,12 +411,8 @@ internal sealed partial class NativeDecimalSchema
         }
         else if (declaration.Type.IsInteger)
         {
-            Require(text.Length <= 256, "Integer lexical capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
-            var lexical = Collapse(text);
-            var start = lexical.Length > 0 && lexical[0] is '+' or '-' ? 1 : 0;
-            Check(lexical.Length > start && lexical.Skip(start).All(c => c is >= '0' and <= '9'), "Invalid integer lexical form.");
-            Require(lexical.Length - start <= limits.MaxDigits, "Integer digit capacity exceeded before normalization.", NativeDecimalUnsupportedReason.RepresentationCapacity);
-            var value = BigInteger.Parse(lexical, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture);
+            var value = NativeIntegerFacets.ParseValue(text, limits, NativeOutcome.Invalid);
+            Check(declaration.Type.IntegerFacets?.Accepts(value) ?? true, "Integer facet violation.");
             return new NativeElementState(declaration, null, IntegerValue: value);
         }
         else
@@ -609,8 +606,9 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null)
 {
+    internal NativeIntegerFacets? IntegerFacets { get; } = integerFacets;
     internal NativeType? ContentType { get; } = contentType;
     internal bool IsComplex => HasNoTypedValue || ContentType is not null;
     internal NativeStringFacets? StringFacets { get; } = stringFacets;

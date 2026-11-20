@@ -274,3 +274,27 @@ API52types/392rows unchanged. Owned scalar reads are qualified; native general
 node queries remain refused and legacy null-QName data(.) is unqualified.
 No Corepin, published beta.1, tag/controller or generalC45/full-XSD acceptance change.
 [Implementation and qualification](docs/anonymous-simple-restrictions/implementation/README.md). REQ-009 remains In Progress.
+
+## Specification priorities after PR30 ? 20 November 2026
+
+PR30 is merged at5bfbb1e798cdf18bac6ac7bb15705b1a0e50bc65 with the exact reviewed
+a637a5d tree. The remaining frozen14Unsupported cases comprise10schema compile
+refusals and4instance refusals; the pilot stays7validitymatches/0mismatches/errors.
+Next recommendation is bounded direct integer restrictions, followed by separately
+contracted typed-node integration and other ranked gaps. The integer contract is
+proposed only: no adoption, engine change or new outcomes. GeneralCoreC45/query
+acceptance remains separate; published beta.1 and all Core pins remain unchanged.
+[Ranked gaps and next contract](docs/specification-next/README.md). REQ-009 remains In Progress.
+
+## Integer restriction implementation — 20 November 2026
+
+Bounded direct named/anonymous xs:integer restrictions are locally qualified:
+exact BigInteger bounds/totalDigits/fixedfractionDigits0, including named root
+and descendant attribute uses. Source1,482passes(427implementation/1,055public),
+1,371prior unaffected/twoadopted admissions/109new. M2B-54legacyrow stays unchanged;
+its separate opt-in payload becomes Invalid. Package-only1,055minimum/1,055current
+and retained124/23/33pass; all18Core signatures/payloads and API52types/392rows
+verify. Frozenpilot9matches/12Unsupported/0mismatches/errors, exactlytwointeger
+validity advances with unchanged fixtures. No Corepin, publicAPI, query-profile,
+publishedbeta.1/tag/controller or generalC45/fullXSDacceptance change.
+[Adoption and qualification](docs/integer-restrictions/README.md). REQ-009 remains In Progress.

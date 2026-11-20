@@ -758,3 +758,11 @@ no type QName is invented. Integer derivation, anonymous attribute/root scalar
 schemas and general schema-aware node queries remain outside this profile.
 Legacy NativeDecimalSession behavior is unchanged. This is development support,
 not a change to the published 0.5.0-beta.1 package or full XSD 1.1 conformance.
+
+The 0.6 development profile supports direct named and local anonymous restrictions
+of `xs:integer`: exact inclusive/exclusive bounds, totalDigits, and inherited fixed
+fractionDigits zero. Values and bounds use BigInteger without decimal conversion.
+Named integer restrictions also enforce facets on admitted local application
+attributes. Existing representation limits still apply; integer assertions,
+restriction chains, derived integer families and broader query profiles remain
+excluded. Legacy NativeDecimalSession and published 0.5.0-beta.1 are unchanged.

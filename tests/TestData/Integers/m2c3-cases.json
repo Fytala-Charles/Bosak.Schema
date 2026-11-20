@@ -1141,7 +1141,7 @@
   },
   {
     "id": "M2C3-67",
-    "description": "Unused named integer restriction remains excluded",
+    "description": "Unused named integer restriction is checked and admitted",
     "sections": [
       "Datatypes3.4.13.1-3",
       "Datatypes4.3.6",
@@ -1150,10 +1150,10 @@
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='Count'><xs:restriction base='xs:integer'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n' type='xs:integer'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r><n>1</n></r>",
     "maxNativeCoefficientDigits": 256,
-    "expectedCompile": "Unsupported",
-    "expectedAssessment": "Unsupported",
-    "values": [],
-    "unsupportedReason": "ValueType"
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [{"kind": "Integer", "value": "1"}],
+    "unsupportedReason": null
   },
   {
     "id": "M2C3-68",

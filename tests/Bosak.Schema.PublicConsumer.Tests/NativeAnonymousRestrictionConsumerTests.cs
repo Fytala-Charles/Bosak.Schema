@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 20-11-2026     | Project the adopted anonymous integer scalar without changing prior decimal/string cases |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -46,7 +47,7 @@ public sealed class NativeAnonymousRestrictionConsumerTests
         using var session=created.Value!;var xml=row.GetProperty("instance").GetString()!;var assessed=session.Assess(xml,Context);Assert.Equal(row.GetProperty("expectedAssessment").GetString(),assessed.Outcome.ToString());
         if(assessed.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(assessed.Value);return;}
         using var document=assessed.Value!;var expected=row.GetProperty("values").EnumerateArray().Select(v=>v.GetString()).ToArray();Assert.Equal(expected.Length,document.ScalarCount);
-        for(var i=0;i<expected.Length;i++){var value=document.ReadScalar(i);Assert.Equal(expected[i],value.Kind==NativeScalarKind.String?value.StringValue:value.DecimalValue.ToInvariantString(256));}
+        for(var i=0;i<expected.Length;i++){var value=document.ReadScalar(i);Assert.Equal(expected[i],value.Kind==NativeScalarKind.String?value.StringValue:value.Kind==NativeScalarKind.Integer?value.IntegerValue.ToString(System.Globalization.CultureInfo.InvariantCulture):value.DecimalValue.ToInvariantString(256));}
         Assert.True(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(document.ExportXml())));
     }
     /// <summary>Anonymous restrictions do not widen the legacy decimal facade.</summary>

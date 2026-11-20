@@ -1,0 +1,251 @@
+{
+  "prior": 1373,
+  "current": 1482,
+  "implementation": 427,
+  "publicConsumer": 1055,
+  "unaffectedPriorCases": 1371,
+  "adoptedPriorAdmissions": 2,
+  "newCases": 109,
+  "comparison": "Same named test outcomes; only the two adopted rows normalize changed display labels to stable method+case ID",
+  "originalSchemaAndXmlUnchanged": true,
+  "legacyM2b54RowUnchanged": true,
+  "rows": [
+    {
+      "id": "AS-034",
+      "file": "tests/TestData/AnonymousSimpleRestrictions/cases.json",
+      "before": {
+        "id": "AS-034",
+        "label": "excluded base integer",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r><v>1</v></r>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "values": [],
+        "reason": "ValueType",
+        "clauses": [
+          "Structures3.3.2-3.3.4",
+          "Structures3.16.2.1-2",
+          "Datatypes4.1-4.3"
+        ]
+      },
+      "after": {
+        "id": "AS-034",
+        "label": "admitted direct integer restriction",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r><v>1</v></r>",
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Valid",
+        "values": [
+          "1"
+        ],
+        "reason": null,
+        "clauses": [
+          "Structures3.3.2-3.3.4",
+          "Structures3.16.2.1-2",
+          "Datatypes4.1-4.3"
+        ]
+      },
+      "route": "Opt-in prior compile admission"
+    },
+    {
+      "id": "M2B-54",
+      "file": "tests/TestData/DecimalFacets/m2b-cases.json",
+      "before": {
+        "id": "M2B-54",
+        "label": "nondecimal base",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+        "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+        "values": [
+          "12.5"
+        ],
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "unsupportedReason": "ValueType",
+        "limits": [
+          256,
+          256
+        ],
+        "sections": [
+          "Datatypes4.3.7-4.3.12",
+          "Structures3.16"
+        ],
+        "officialW3cCase": false
+      },
+      "after": {
+        "id": "M2B-54",
+        "label": "nondecimal base",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+        "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+        "values": [
+          "12.5"
+        ],
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "unsupportedReason": "ValueType",
+        "limits": [
+          256,
+          256
+        ],
+        "sections": [
+          "Datatypes4.3.7-4.3.12",
+          "Structures3.16"
+        ],
+        "officialW3cCase": false
+      },
+      "route": "Legacy decimal remains Unsupported; separate opt-in control compiles Valid and assesses Invalid"
+    },
+    {
+      "id": "M2C3-67",
+      "file": "tests/TestData/Integers/m2c3-cases.json",
+      "before": {
+        "id": "M2C3-67",
+        "description": "Unused named integer restriction remains excluded",
+        "sections": [
+          "Datatypes3.4.13.1-3",
+          "Datatypes4.3.6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='Count'><xs:restriction base='xs:integer'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n' type='xs:integer'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r><n>1</n></r>",
+        "maxNativeCoefficientDigits": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      },
+      "after": {
+        "id": "M2C3-67",
+        "description": "Unused named integer restriction is checked and admitted",
+        "sections": [
+          "Datatypes3.4.13.1-3",
+          "Datatypes4.3.6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='Count'><xs:restriction base='xs:integer'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n' type='xs:integer'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r><n>1</n></r>",
+        "maxNativeCoefficientDigits": 256,
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Valid",
+        "values": [
+          {
+            "kind": "Integer",
+            "value": "1"
+          }
+        ],
+        "unsupportedReason": null
+      },
+      "route": "Opt-in prior compile admission"
+    }
+  ],
+  "newTestNames": [
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.CancellationAndDisposal_PreserveRecovery",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-001\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-001\\\",\\r\\n    \\\"label\\\": \\\"F\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-002\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-002\\\",\\r\\n    \\\"label\\\": \\\"F\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-003\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-003\\\",\\r\\n    \\\"label\\\": \\\"F\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-004\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-004\\\",\\r\\n    \\\"label\\\": \\\"F\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-005\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-005\\\",\\r\\n    \\\"label\\\": \\\"F\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-006\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-006\\\",\\r\\n    \\\"label\\\": \\\"F\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-007\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-007\\\",\\r\\n    \\\"label\\\": \\\"F\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-008\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-008\\\",\\r\\n    \\\"label\\\": \\\"F\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-009\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-009\\\",\\r\\n    \\\"label\\\": \\\"F\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-010\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-010\\\",\\r\\n    \\\"label\\\": \\\"F\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-011\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-011\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-012\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-012\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-013\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-013\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-014\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-014\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-015\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-015\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-016\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-016\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-017\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-017\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-018\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-018\\\",\\r\\n    \\\"label\\\": \\\"e\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-019\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-019\\\",\\r\\n    \\\"label\\\": \\\"e\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-020\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-020\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-021\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-021\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-022\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-022\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-023\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-023\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-024\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-024\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-025\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-025\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-026\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-026\\\",\\r\\n    \\\"label\\\": \\\"t\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-027\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-027\\\",\\r\\n    \\\"label\\\": \\\"a\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-028\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-028\\\",\\r\\n    \\\"label\\\": \\\"e\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-029\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-029\\\",\\r\\n    \\\"label\\\": \\\"e\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-030\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-030\\\",\\r\\n    \\\"label\\\": \\\"T\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-031\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-031\\\",\\r\\n    \\\"label\\\": \\\"T\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-032\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-032\\\",\\r\\n    \\\"label\\\": \\\"T\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-033\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-033\\\",\\r\\n    \\\"label\\\": \\\"T\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-034\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-034\\\",\\r\\n    \\\"label\\\": \\\"T\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-035\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-035\\\",\\r\\n    \\\"label\\\": \\\"T\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-036\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-036\\\",\\r\\n    \\\"label\\\": \\\"T\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-037\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-037\\\",\\r\\n    \\\"label\\\": \\\"T\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-038\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-038\\\",\\r\\n    \\\"label\\\": \\\"T\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-039\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-039\\\",\\r\\n    \\\"label\\\": \\\"T\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-040\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-040\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-041\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-041\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-042\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-042\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-043\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-043\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-044\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-044\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-045\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-045\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-046\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-046\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-047\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-047\\\",\\r\\n    \\\"label\\\": \\\"e\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-048\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-048\\\",\\r\\n    \\\"label\\\": \\\"e\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-049\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-049\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-050\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-050\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-051\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-051\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-052\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-052\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-053\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-053\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-054\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-054\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-055\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-055\\\",\\r\\n    \\\"label\\\": \\\"t\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-056\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-056\\\",\\r\\n    \\\"label\\\": \\\"a\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-057\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-057\\\",\\r\\n    \\\"label\\\": \\\"e\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-058\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-058\\\",\\r\\n    \\\"label\\\": \\\"e\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-059\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-059\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-060\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-060\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-061\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-061\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-062\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-062\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-063\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-063\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-064\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-064\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-065\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-065\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-066\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-066\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-067\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-067\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-068\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-068\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-069\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-069\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-070\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-070\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-071\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-071\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-072\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-072\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-073\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-073\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-074\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-074\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-075\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-075\\\",\\r\\n    \\\"label\\\": \\\"r\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-076\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-076\\\",\\r\\n    \\\"label\\\": \\\"f\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-077\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-077\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-078\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-078\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-079\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-079\\\",\\r\\n    \\\"label\\\": \\\"o\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-080\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-080\\\",\\r\\n    \\\"label\\\": \\\"r\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-081\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-081\\\",\\r\\n    \\\"label\\\": \\\"r\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-082\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-082\\\",\\r\\n    \\\"label\\\": \\\"r\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-083\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-083\\\",\\r\\n    \\\"label\\\": \\\"m\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-084\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-084\\\",\\r\\n    \\\"label\\\": \\\"d\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-085\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-085\\\",\\r\\n    \\\"label\\\": \\\"d\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-086\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-086\\\",\\r\\n    \\\"label\\\": \\\"s\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-087\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-087\\\",\\r\\n    \\\"label\\\": \\\"x\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-088\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-088\\\",\\r\\n    \\\"label\\\": \\\"x\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-089\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-089\\\",\\r\\n    \\\"label\\\": \\\"u\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-090\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-090\\\",\\r\\n    \\\"label\\\": \\\"i\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-091\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-091\\\",\\r\\n    \\\"label\\\": \\\"a\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-092\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-092\\\",\\r\\n    \\\"label\\\": \\\"u\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-093\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-093\\\",\\r\\n    \\\"label\\\": \\\"u\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-094\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-094\\\",\\r\\n    \\\"label\\\": \\\"g\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-095\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-095\\\",\\r\\n    \\\"label\\\": \\\"g\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-096\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-096\\\",\\r\\n    \\\"label\\\": \\\"e\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-097\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-097\\\",\\r\\n    \\\"label\\\": \\\"e\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-098\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-098\\\",\\r\\n    \\\"label\\\": \\\"e\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.IntegerRestrictions_ValidateExactOriginalValues(id: \"IR-099\", payload: \"{\\r\\n    \\\"id\\\": \\\"IR-099\\\",\\r\\n    \\\"label\\\": \\\"o\"\u00b7\u00b7\u00b7)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.LegacyFacade_DoesNotAdmitIntegerRestriction(anonymous: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.LegacyFacade_DoesNotAdmitIntegerRestriction(anonymous: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeIntegerRestrictionConsumerTests.QueryCapacity_KeepsExportAndSmallValuesUsable",
+    "Bosak.Schema.Tests.NativeIntegerRestrictionCoreTests.IntegerAuthority_RejectsForeignAndExpiredValues(named: False)",
+    "Bosak.Schema.Tests.NativeIntegerRestrictionCoreTests.IntegerAuthority_RejectsForeignAndExpiredValues(named: True)",
+    "Bosak.Schema.Tests.NativeIntegerRestrictionCoreTests.IntegerFacts_PreserveExactOriginalTypeAndOwner(named: False)",
+    "Bosak.Schema.Tests.NativeIntegerRestrictionCoreTests.IntegerFacts_PreserveExactOriginalTypeAndOwner(named: True)",
+    "Bosak.Schema.Tests.NativeIntegerRestrictionCoreTests.InvalidIntegerAttributes_DoNotPublishFacts(root: False)",
+    "Bosak.Schema.Tests.NativeIntegerRestrictionCoreTests.InvalidIntegerAttributes_DoNotPublishFacts(root: True)"
+  ]
+}
