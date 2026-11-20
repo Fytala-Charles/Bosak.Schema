@@ -155,3 +155,29 @@ include root/optional/repeated branches, with16perowner and existing nested limi
 Three additive members/no new public type; nested simple content and scalar-leaf
 attributes remain excluded. Package/API/retained proof is separate from source
 counts. REQ-009 remains In Progress; no Core pin or publication/controller change.
+
+
+## Nested decimal simple-content proposal - 20 November 2026
+
+PR27 merged at32f8214; fresh main CI44726412611 passed1,200source cases,
+54release/sixworkload controls and documentation hygiene. The [next proposal](nested-simple-content/PLAN.md)
+and proposedADR015 define complex decimal simple-content terminals in existing
+ReadScalar order, original complex/atomic provenance and depth4three-segment
+attribute-owner paths, with unchanged root reads/budgets and zero public API delta.
+Planning only: no production change, semantic adoption or new passed feature case.
+Potential NS-062/NA-046compile admissions need explicit before-code baselines and
+instance outcomes. REQ-009/generalAPI/C45 remain In Progress; publishedbeta.1 and
+Core pins/controller unchanged.
+
+
+## Nested decimal simple-content implementation - 20 November2026
+
+The [adopted nested decimal candidate](nested-simple-content/README.md) implements direct decimal/named-decimal
+complex scalar-bearing terminals and existing owner-aware attributes.1,255source
+cases(415implementation/840public)pass;1,198prior unchanged, exact NS-062/NA-046
+compile admissions now have Invalid supplied instances,55new controls. Root reads
+and existing valid indexes remain separate. Complex/atomic provenance, normalized
+node text versus lexical export and depth4three-segment owners are explicit;
+original budgets and zero public API delta remain. Signed Core feasibility and
+adoption precede implementation; compatibility/retained/API evidence is separate.
+No Core pin/controller/publication change; REQ-009/generalAPI/C45 stay In Progress.

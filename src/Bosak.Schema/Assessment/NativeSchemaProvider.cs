@@ -24,6 +24,7 @@
 //                      | Charles Korthout | 1.1   | 20-11-2026     | Retain complex root governing identity with its distinct decimal atomic content type     |
 //                      | Charles Korthout | 1.2   | 20-11-2026     | Register nested declaration components and project terminal scalar facts separately      |
 //                      | Charles Korthout | 1.3   | 20-11-2026     | Publish exact original owner-aware attributes with separate root and descendant projections |
+//                      | Charles Korthout | 1.4   | 20-11-2026     | Register actual decimal content types for nested original complex terminal facts         |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -65,6 +66,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         {
             var known = components.ContainsKey(declaration);
             Add(declaration); Add(declaration.Type);
+            if (declaration.Type.ContentType is { } contentType) Add(contentType);
             if (!known && declaration.Container is { } child) RegisterChildren(child);
         }
     }

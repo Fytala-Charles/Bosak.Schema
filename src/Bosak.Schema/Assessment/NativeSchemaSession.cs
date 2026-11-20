@@ -18,12 +18,13 @@
 //                      | Charles Korthout | 0.5   | 20-11-2026     | Document opt-in decimal simple-content root assessment                                   |
 //                      | Charles Korthout | 0.6   | 20-11-2026     | Document bounded nested element-only sequences with existing scalar reads                |
 //                      | Charles Korthout | 0.7   | 20-11-2026     | Document nested container attributes and preserved root/scalar access semantics          |
+//                      | Charles Korthout | 0.8   | 20-11-2026     | Document decimal simple content on root and nested scalar-bearing complex elements       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
 namespace Bosak.Schema;
 
-/// <summary>Owns finite scalar documents with nested sequences, container attributes and decimal simple content.</summary>
+/// <summary>Owns finite scalar documents with nested sequences, attributes and root or nested decimal simple content.</summary>
 /// <remarks>String input only. Operations on one session must be sequential; overlapping operations throw
 /// <see cref="NotSupportedException"/>. Disposal waits for admitted synchronous work. No callbacks, raw
 /// provider authority, general query syntax or cross-universe handoff are exposed.</remarks>

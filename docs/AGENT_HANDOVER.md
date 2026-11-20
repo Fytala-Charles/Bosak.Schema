@@ -342,3 +342,38 @@ eleven actual packaged README blocks,54release/sixworkload controls and workload
 consumer build pass. Exact local package0.6.0-alpha.0.14 retainsbase3e067cdmetadata;
 actual source/evidence hashes are in docs/nested-attributes. Original sealed
 receipts unchanged; no commit/push, publication or Corepin change.
+
+
+## Nested decimal simple-content proposal - 20 November 2026
+
+PR27 merged at32f8214; fresh main CI44726412611 passed1,200source cases,
+54release/sixworkload controls and documentation hygiene. The [next proposal](nested-simple-content/PLAN.md)
+and proposedADR015 define complex decimal simple-content terminals in existing
+ReadScalar order, original complex/atomic provenance and depth4three-segment
+attribute-owner paths, with unchanged root reads/budgets and zero public API delta.
+Planning only: no production change, semantic adoption or new passed feature case.
+Potential NS-062/NA-046compile admissions need explicit before-code baselines and
+instance outcomes. REQ-009/generalAPI/C45 remain In Progress; publishedbeta.1 and
+Core pins/controller unchanged.
+
+
+## Nested decimal simple-content implementation - 20 November2026
+
+The [adopted nested decimal candidate](nested-simple-content/README.md) implements direct decimal/named-decimal
+complex scalar-bearing terminals and existing owner-aware attributes.1,255source
+cases(415implementation/840public)pass;1,198prior unchanged, exact NS-062/NA-046
+compile admissions now have Invalid supplied instances,55new controls. Root reads
+and existing valid indexes remain separate. Complex/atomic provenance, normalized
+node text versus lexical export and depth4three-segment owners are explicit;
+original budgets and zero public API delta remain. Signed Core feasibility and
+adoption precede implementation; compatibility/retained/API evidence is separate.
+No Core pin/controller/publication change; REQ-009/generalAPI/C45 stay In Progress.
+
+
+Nested decimal simple-content compatibility is qualified:840minimum-Core package
+cases and839current-reference cases plus one identity control, retained124/23/33
+callers with onlySchemaDLLchanged,18signed dependencies/source/payload identities,
+zero public API delta(52types/392rows),12actual packaged README blocks and54release/
+sixworkload controls pass. Workload consumer builds cleanly. Local unsigned
+0.6.0-alpha.0.15 retainsbase32f8214metadata; source hashes identify actual code.
+No commit/push, registry/controller/tag or Corepin change.

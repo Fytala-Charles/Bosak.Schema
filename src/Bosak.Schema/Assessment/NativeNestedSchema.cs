@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 20-11-2026     | Adopt nested local attributes with bounded total uses and original owner identity        |
+//                      | Charles Korthout | 0.3   | 20-11-2026     | Adopt nested decimal simple content as original complex scalar-bearing terminals         |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -105,9 +106,6 @@ internal sealed partial class NativeDecimalSchema
                     container = Complex(inline[0], new NativeDeclaration(name, new NativeType(null, true), 1, 1, ns));
                     type = container.Root.Type;
                 }
-                if (container is not null)
-                    Require(container.Root.Type.ContentType is null,
-                        "Nested simple content is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
                 children.Add(new NativeDeclaration(name, type, min, max, ns) { Container = container });
             }
             var attributes = CompileAttributes(members.Skip(1).ToArray(), targetNamespace, attributeForm,
@@ -190,6 +188,15 @@ internal sealed partial class NativeDecimalSchema
                 }
                 Check(element.Attributes().All(a => a.IsNamespaceDeclaration || plan.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared descendant attribute.");
             }
+        }
+        if (plan.Root.Type.ContentType is { } contentType)
+        {
+            Check(!element.HasElements, "Simple-content terminal cannot contain child elements.");
+            Require(element.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
+            var atomicDeclaration = new NativeDeclaration(declaration.Name, contentType, 1, 1, declaration.NamespaceUri);
+            states.Add(AssessScalar(element.Value, atomicDeclaration) with { Declaration = declaration, NormalizedStringValue = Collapse(element.Value) });
+            cancellationToken.ThrowIfCancellationRequested();
+            return;
         }
         foreach (var text in element.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only container contains non-whitespace text.");
         Require(element.Nodes().All(n => n is XElement or XText), "Container comments or processing instructions are unsupported.");

@@ -687,3 +687,59 @@ terminal, string/numeric and independent query/cache limits still apply. Scalar
 leaf attributes, nested simple content, defaults/fixed/inheritable/prohibited,
 global refs/groups/wildcards and assertions in nested schemas remain excluded.
 Published beta.1 and NativeDecimalSession keep their prior scope.
+
+
+## Development: nested decimal simple content
+
+The 0.6 development profile admits named/anonymous complex decimal simple-content
+terminals inside nested sequences. They occupy existing descendant scalar slots
+in document order; root scalar reads remain separate. Their attributes use the
+existing owner-aware descendant reads.
+
+```csharp
+using Bosak.Schema;
+
+var schema = """
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Price"><xs:simpleContent><xs:extension base="xs:decimal">
+    <xs:attribute name="currency" type="xs:string" use="required"/>
+  </xs:extension></xs:simpleContent></xs:complexType>
+  <xs:element name="order"><xs:complexType><xs:sequence>
+    <xs:element name="price" type="Price" maxOccurs="2"/>
+  </xs:sequence></xs:complexType></xs:element>
+</xs:schema>
+""";
+var options = new NativeSchemaSessionOptions(256, 256, 256, 65536, 1, 16, 1, 256, 256);
+var created = NativeSchemaSession.Create(schema, options);
+if (created.Outcome != NativeSchemaOutcome.Valid)
+    throw new InvalidOperationException(created.Diagnostics[0].Code);
+using var session = created.Value!;
+var assessed = session.Assess("<order><price currency='EUR'>12.50</price><price currency='USD'>3.75</price></order>",
+    new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch, 0));
+if (assessed.Outcome != NativeSchemaOutcome.Valid)
+    throw new InvalidOperationException(assessed.Diagnostics[0].Code);
+using var document = assessed.Value!;
+for (var i = 0; i < document.ScalarCount; i++)
+    Console.WriteLine(document.ReadScalar(i).DecimalValue.ToInvariantString(256));
+for (var i = 0; i < document.DescendantAttributeCount; i++)
+{
+    var attribute = document.ReadDescendantAttribute(i);
+    Console.WriteLine($"{string.Join(".", attribute.OwnerElementPath)}: {attribute.LocalName}={attribute.Value.StringValue}");
+}
+Console.WriteLine(document.HasRootScalar);
+Console.WriteLine(document.ExportXml());
+```
+
+Outputs begin12.5,3.75,`0: currency=EUR`,`1: currency=USD`,False; export retains
+12.50. Scalar and attribute lists have independent indexes; this example's shape
+has one currency per price, which should not be generalized to arbitrary schemas.
+Complex price annotations remain distinct from their actual decimal atomic type.
+Their node string-values use collapsed lexical text, while export retains parsed
+lexical XML. Original element-only ancestors have no typed value (FOTY0012).
+
+Only direct xs:decimal or admitted named-decimal bases are supported. Existing
+depth4/16terminal/64attribute-use budgets remain; scalar-bearing complex owners
+at depth4may have three-segment OwnerElementPath values. No new public member or
+path-based selector is added. Complex-base chains/restriction, other base families,
+assertions, mixed content, defaults/nil/composition and primitive simple-type leaf
+attributes remain excluded. NativeDecimalSession and published beta.1 are unchanged.

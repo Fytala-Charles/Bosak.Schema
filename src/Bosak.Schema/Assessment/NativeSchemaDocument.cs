@@ -18,6 +18,7 @@
 //                      | Charles Korthout | 0.5   | 20-11-2026     | Expose independent root scalar availability and original simple-content typed reads      |
 //                      | Charles Korthout | 0.6   | 20-11-2026     | Document terminal-only document-order scalar reads for nested sequences                  |
 //                      | Charles Korthout | 0.7   | 20-11-2026     | Expose separate descendant attribute reads without changing root or scalar indexes       |
+//                      | Charles Korthout | 0.8   | 20-11-2026     | Document scalar-bearing complex terminals in the unchanged descendant read projection    |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -35,8 +36,8 @@ public sealed class NativeSchemaDocument : IDisposable
     /// <exception cref="NotSupportedException">Another session operation is admitted.</exception>
     public int ScalarCount => document.DecimalCount;
 
-    /// <summary>Reads one present leaf through the issued scalar route and returns its detached typed value.</summary>
-    /// <param name="leafIndex">Zero-based terminal-leaf index in document order; containers and attributes are excluded.</param>
+    /// <summary>Reads one scalar-bearing descendant through original facts and returns its detached typed value.</summary>
+    /// <param name="leafIndex">Zero-based terminal-leaf index in document order; element-only containers and attributes are excluded.</param>
     /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
     /// <returns>A detached string, Boolean, exact integer or exact decimal usable after document and session disposal.</returns>
     /// <exception cref="ArgumentOutOfRangeException">The index is outside the present leaves.</exception>
