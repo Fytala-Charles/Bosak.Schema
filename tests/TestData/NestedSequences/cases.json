@@ -1068,8 +1068,8 @@
     "label": "nested simple content",
     "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"T\"><xs:simpleContent><xs:extension base=\"xs:decimal\"/></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\" type=\"T\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r><a><v>12.50</v></a></r>",
-    "expectedCompile": "Unsupported",
-    "expectedAssessment": "Valid",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
     "values": [
       "ABC-0001",
       "2",

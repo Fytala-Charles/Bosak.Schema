@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:t="urn:bosak:nested-plan"
+ targetNamespace="urn:bosak:nested-plan" elementFormDefault="qualified">
+  <xs:complexType name="OrderType">
+    <xs:sequence>
+      <xs:element name="line" type="t:LineType" minOccurs="1" maxOccurs="2"/>
+      <xs:element name="approved" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="LineType">
+    <xs:sequence>
+      <xs:element name="sku" type="xs:string"/>
+      <xs:element name="quantity" type="xs:integer"/>
+      <xs:element name="price" type="t:PriceType"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="PriceType">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal">
+        <xs:attribute name="currency" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+<xs:element name="price" type="t:PriceType"/>
+  <xs:element name="order" type="t:OrderType"/>
+</xs:schema>

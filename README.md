@@ -100,3 +100,5 @@ The opt-in development facade supports [decimal simple-content roots with separa
 See the [bounded nested-sequence development profile](docs/nested-sequences/README.md) for terminal scalar reads and explicit structural limits.
 
 See [owner-aware nested attributes](docs/nested-attributes/README.md) for detached descendant values and document-relative owner paths.
+
+See [nested decimal simple content](docs/nested-simple-content/README.md) for price/currency terminals through existing scalar and owner-aware attribute reads.

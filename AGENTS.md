@@ -353,3 +353,13 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## Nested attribute implementation candidate
 
 20 November 2026: local1,200source cases(404implementation/796public);1,123prior unchanged and NS-049/075intentional admission recorded before edits. Read docs/nested-attributes/ADOPTION.md before semantic work. Preserve exact captured owner/fact identity, separate root/descendant/scalar indexes, detached immutable paths and64total potentialuses includingroot/optional/repetition. Three new API members, no new type. No commit/push without explicit request.
+
+
+## Nested decimal simple-content planning
+
+20 November2026: read docs/nested-simple-content/PLAN.md and CONTRACT.md before this next slice. Base32f8214/main1,200cases verified. Proposed zeroAPI delta, scalar-bearing complex terminals and depth4three-segment owner paths are not adopted or implemented yet. Preserve prior receipts and explicit commit/push rule.
+
+
+## Nested decimal simple-content implementation
+
+20 November2026: read docs/nested-simple-content/ADOPTION.md before semantic edits. Local1,255cases(415implementation/840public),1,198prior unchanged/two adopted admissions/55new. Preserve complex declared versus actual decimal provenance, root/local declaration identity, original captured owner paths up to3segments at depth4, scalar/root index separation and old budgets. No new public API or Corepin. No commit/push without explicit request.

@@ -1,0 +1,1265 @@
+[
+  {
+    "id": "NC-001",
+    "label": "representative nested price with original PriceType XML block",
+    "schema": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:bosak:nested-plan\"\n targetNamespace=\"urn:bosak:nested-plan\" elementFormDefault=\"qualified\">\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"line\" type=\"t:LineType\" minOccurs=\"1\" maxOccurs=\"2\"/>\n      <xs:element name=\"approved\" type=\"xs:boolean\" minOccurs=\"0\"/>\n    </xs:sequence>\n    <xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/>\n  </xs:complexType>\n  <xs:complexType name=\"LineType\">\n    <xs:sequence>\n      <xs:element name=\"sku\" type=\"xs:string\"/>\n      <xs:element name=\"quantity\" type=\"xs:integer\"/>\n      <xs:element name=\"price\" type=\"t:PriceType\"/>\n    </xs:sequence>\n  </xs:complexType>\n<xs:complexType name=\"PriceType\">\n    <xs:simpleContent>\n      <xs:extension base=\"xs:decimal\">\n        <xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/>\n      </xs:extension>\n    </xs:simpleContent>\n  </xs:complexType>\n<xs:element name=\"price\" type=\"t:PriceType\"/>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
+    "instance": "<order xmlns=\"urn:bosak:nested-plan\" id=\"ORDER-1\">\n  <line><sku>ABC-0001</sku><quantity>2</quantity><price currency=\"EUR\">12.50</price></line>\n  <line><sku>XYZ-0002</sku><quantity>1</quantity><price currency=\"USD\">3.75</price></line>\n  <approved>false</approved>\n</order>\n",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 1
+  },
+  {
+    "id": "NC-002",
+    "label": "normalized decimal lexical distinct from exported spelling",
+    "schema": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:bosak:nested-plan\"\n targetNamespace=\"urn:bosak:nested-plan\" elementFormDefault=\"qualified\">\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"line\" type=\"t:LineType\" minOccurs=\"1\" maxOccurs=\"2\"/>\n      <xs:element name=\"approved\" type=\"xs:boolean\" minOccurs=\"0\"/>\n    </xs:sequence>\n    <xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/>\n  </xs:complexType>\n  <xs:complexType name=\"LineType\">\n    <xs:sequence>\n      <xs:element name=\"sku\" type=\"xs:string\"/>\n      <xs:element name=\"quantity\" type=\"xs:integer\"/>\n      <xs:element name=\"price\" type=\"t:PriceType\"/>\n    </xs:sequence>\n  </xs:complexType>\n<xs:complexType name=\"PriceType\">\n    <xs:simpleContent>\n      <xs:extension base=\"xs:decimal\">\n        <xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/>\n      </xs:extension>\n    </xs:simpleContent>\n  </xs:complexType>\n<xs:element name=\"price\" type=\"t:PriceType\"/>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
+    "instance": "<order xmlns=\"urn:bosak:nested-plan\" id=\"ORDER-1\">\n  <line><sku>ABC-0001</sku><quantity>2</quantity><price currency=\"EUR\"> \t+0012.50&#xD; </price></line>\n  <line><sku>XYZ-0002</sku><quantity>1</quantity><price currency=\"USD\">3.75</price></line>\n  <approved>false</approved>\n</order>\n",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 1
+  },
+  {
+    "id": "NC-003",
+    "label": "CDATA decimal text",
+    "schema": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:bosak:nested-plan\"\n targetNamespace=\"urn:bosak:nested-plan\" elementFormDefault=\"qualified\">\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"line\" type=\"t:LineType\" minOccurs=\"1\" maxOccurs=\"2\"/>\n      <xs:element name=\"approved\" type=\"xs:boolean\" minOccurs=\"0\"/>\n    </xs:sequence>\n    <xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/>\n  </xs:complexType>\n  <xs:complexType name=\"LineType\">\n    <xs:sequence>\n      <xs:element name=\"sku\" type=\"xs:string\"/>\n      <xs:element name=\"quantity\" type=\"xs:integer\"/>\n      <xs:element name=\"price\" type=\"t:PriceType\"/>\n    </xs:sequence>\n  </xs:complexType>\n<xs:complexType name=\"PriceType\">\n    <xs:simpleContent>\n      <xs:extension base=\"xs:decimal\">\n        <xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/>\n      </xs:extension>\n    </xs:simpleContent>\n  </xs:complexType>\n<xs:element name=\"price\" type=\"t:PriceType\"/>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
+    "instance": "<order xmlns=\"urn:bosak:nested-plan\" id=\"ORDER-1\">\n  <line><sku>ABC-0001</sku><quantity>2</quantity><price currency=\"EUR\"><![CDATA[12.50]]></price></line>\n  <line><sku>XYZ-0002</sku><quantity>1</quantity><price currency=\"USD\">3.75</price></line>\n  <approved>false</approved>\n</order>\n",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 1
+  },
+  {
+    "id": "NC-004",
+    "label": "exact fifty digit decimal",
+    "schema": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:bosak:nested-plan\"\n targetNamespace=\"urn:bosak:nested-plan\" elementFormDefault=\"qualified\">\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"line\" type=\"t:LineType\" minOccurs=\"1\" maxOccurs=\"2\"/>\n      <xs:element name=\"approved\" type=\"xs:boolean\" minOccurs=\"0\"/>\n    </xs:sequence>\n    <xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/>\n  </xs:complexType>\n  <xs:complexType name=\"LineType\">\n    <xs:sequence>\n      <xs:element name=\"sku\" type=\"xs:string\"/>\n      <xs:element name=\"quantity\" type=\"xs:integer\"/>\n      <xs:element name=\"price\" type=\"t:PriceType\"/>\n    </xs:sequence>\n  </xs:complexType>\n<xs:complexType name=\"PriceType\">\n    <xs:simpleContent>\n      <xs:extension base=\"xs:decimal\">\n        <xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/>\n      </xs:extension>\n    </xs:simpleContent>\n  </xs:complexType>\n<xs:element name=\"price\" type=\"t:PriceType\"/>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
+    "instance": "<order xmlns=\"urn:bosak:nested-plan\" id=\"ORDER-1\">\n  <line><sku>ABC-0001</sku><quantity>2</quantity><price currency=\"EUR\">12345678901234567890123456789012345678901234567890</price></line>\n  <line><sku>XYZ-0002</sku><quantity>1</quantity><price currency=\"USD\">3.75</price></line>\n  <approved>false</approved>\n</order>\n",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12345678901234567890123456789012345678901234567890",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 1
+  },
+  {
+    "id": "NC-005",
+    "label": "direct named terminal",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">12.50</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "12.5"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-006",
+    "label": "inline anonymous complex terminal",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" ><xs:complexType><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">12.50</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "12.5"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-007",
+    "label": "depth four owner path three segments",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><a><b><price currency=\"EUR\">1</price></b></a></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          0,
+          0
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-008",
+    "label": "absent optional terminal has no phantom scalar or attributes",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" minOccurs=\"0\"/></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r/>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "attributes": [],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-009",
+    "label": "present leading primitive shifts scalar and owner index",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"before\" type=\"xs:string\"/><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><before>A</before><price currency=\"EUR\">1</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "A",
+      "1"
+    ],
+    "attributes": [
+      {
+        "path": [
+          1
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-010",
+    "label": "decimal lexical 0",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">0</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "0"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-011",
+    "label": "decimal lexical -0.000",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">-0.000</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "0"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-012",
+    "label": "decimal lexical +.5",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">+.5</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "0.5"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-013",
+    "label": "decimal lexical 1.",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">1.</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-014",
+    "label": "decimal lexical 111111111111",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-015",
+    "label": "named decimal restriction content",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Money\"><xs:restriction base=\"xs:decimal\"><xs:minInclusive value=\"0\"/><xs:fractionDigits value=\"2\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"Money\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">12.50</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "12.5"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-016",
+    "label": "no attribute uses on scalar-bearing complex terminal",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price>1</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "attributes": [],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-017",
+    "label": "sixteen scalar terminals and sixty four potential uses",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\"/><xs:attribute name=\"a0\" type=\"xs:string\"/><xs:attribute name=\"a1\" type=\"xs:string\"/><xs:attribute name=\"a2\" type=\"xs:string\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" minOccurs=\"0\" maxOccurs=\"16\"/></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price>1</price><price>1</price><price>1</price><price>1</price><price>1</price><price>1</price><price>1</price><price>1</price><price>1</price><price>1</price><price>1</price><price>1</price><price>1</price><price>1</price><price>1</price><price>1</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+    ],
+    "attributes": [],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-018",
+    "label": "child markup Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\"><v/></price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-019",
+    "label": "empty decimal Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\"></price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-020",
+    "label": "bad decimal Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">NaN</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-021",
+    "label": "missing required currency",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price>12.50</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-022",
+    "label": "unknown enabled attribute",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\" unknown=\"X\">12.50</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-023",
+    "label": "named facet violation",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Money\"><xs:restriction base=\"xs:decimal\"><xs:minInclusive value=\"0\"/><xs:fractionDigits value=\"2\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"Money\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">-1</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-024",
+    "label": "named fraction facet violation",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Money\"><xs:restriction base=\"xs:decimal\"><xs:minInclusive value=\"0\"/><xs:fractionDigits value=\"2\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"Money\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">1.001</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-025",
+    "label": "comment refused",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">1<!--x--></price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-026",
+    "label": "PI refused",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">1<?x y?></price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-027",
+    "label": "reserved attribute request",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\" xml:lang=\"en\">12.50</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-028",
+    "label": "raw lexical capacity",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-029",
+    "label": "attribute-free complex retains ordinary attribute refusal",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r><price currency=\"EUR\">12.50</price></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-030",
+    "label": "depth five refused",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"c\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r/>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-031",
+    "label": "seventeenth scalar refused",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" maxOccurs=\"16\"/><xs:element name=\"extra\" type=\"xs:decimal\"/></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r/>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-032",
+    "label": "sixty five potential uses including root refused",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\"/><xs:attribute name=\"a0\" type=\"xs:string\"/><xs:attribute name=\"a1\" type=\"xs:string\"/><xs:attribute name=\"a2\" type=\"xs:string\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" maxOccurs=\"16\"/></xs:sequence><xs:attribute name=\"id\" type=\"xs:string\"/></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r/>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-033",
+    "label": "other simple-content family string refused",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:string\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r/>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-034",
+    "label": "other simple-content family integer refused",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r/>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-035",
+    "label": "simpleContent restriction refused",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:restriction base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r/>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-036",
+    "label": "complex-base extension chain refused",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Base\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"Base\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r/>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-037",
+    "label": "nested assertion refused",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:assert test=\"true()\"/><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r/>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-038",
+    "label": "unbounded terminal refused",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" maxOccurs=\"unbounded\"/></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r/>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  },
+  {
+    "id": "NC-039",
+    "label": "simple-type leaf attribute remains unsupported grammar",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"primitive\" type=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\"/></xs:element></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+    "instance": "<r/>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": [
+      {
+        "path": [
+          0,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "EUR"
+      },
+      {
+        "path": [
+          1,
+          2
+        ],
+        "name": "currency",
+        "namespace": "",
+        "value": "USD"
+      }
+    ],
+    "rootAttributes": 0
+  }
+]

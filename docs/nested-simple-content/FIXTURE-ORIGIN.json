@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-20",
+  "baseCommit": "32f8214c670a84286bd28e0a3d51e1d5ffb4f1f7",
+  "kind": "Authored composition of prior nested order plus unchanged public PriceType XML block; not full orders support",
+  "sources": {
+    "tests/TestData/Schemas/orders.xsd": "fb4172a5ae8ed7866dc1c2b2d00c7d21e6884d99339c5df00518b323a049cef1",
+    "tests/TestData/NestedSequences/nested-order.xsd": "51a957f03fe5b79831ad1e62114f21b133ca5f2cf8ddb2b5409fcfd2948cc48d"
+  },
+  "unchangedPriceTypeBlockSha256": "f44a7df5a382ac94a22b76c294b9f38a6246c0df95a147e77a82fc2395e0f937",
+  "unchangedStandalonePriceDeclarationSha256": "e229574d00fec5360dd8cad48d396042f2984871474b42d4a75789a0a39c5d0c",
+  "namespaceNote": "Enclosing targetNamespace changes to urn:bosak:nested-plan; unchanged block text does not preserve original expanded component identity",
+  "sha256": {
+    "nested-order.xsd": "53fba8756f34a242b229e1c1f404e19d9ea2c285a8bbc4572cb33fe6c06d4206",
+    "nested-order.xml": "11255912a30403147ef861a8e03c6f2d90e6639a9e16490b263673f8d94becba"
+  },
+  "expectedAfterImplementation": {
+    "scalarCount": 7,
+    "scalarValues": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "rootAttributeCount": 1,
+    "descendantAttributeCount": 2,
+    "attributeOwners": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "values": [
+      "EUR",
+      "USD"
+    ],
+    "standalonePriceRootScalarCount": 0
+  },
+  "nativeNewFixtureAssessment": "Not performed in planning; currently unsupported"
+}
