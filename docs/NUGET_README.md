@@ -750,3 +750,11 @@ The explicitly supplied schema remains authoritative; hints stay in exported XML
 and do not add typed application attribute slots. `xsi:type` and `xsi:nil` remain
 unsupported, and the legacy NativeDecimalSession retains hint refusal. This does
 not change published 0.5.0-beta.1 or claim general schema discovery/full XSD PSVI.
+
+The 0.6 development profile also admits anonymous local element types directly
+restricted from `xs:decimal` or `xs:string`, using the same bounded facets as named
+restrictions. Types retain their anonymous identity through owned scalar reads;
+no type QName is invented. Integer derivation, anonymous attribute/root scalar
+schemas and general schema-aware node queries remain outside this profile.
+Legacy NativeDecimalSession behavior is unchanged. This is development support,
+not a change to the published 0.5.0-beta.1 package or full XSD 1.1 conformance.

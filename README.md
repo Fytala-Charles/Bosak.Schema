@@ -108,3 +108,6 @@ interoperability gaps and the limits of conformance evidence.
 
 The opt-in development profile accepts [unfetched schema-location hints](docs/schema-location-hints/README.md)
 while retaining the explicitly supplied schema. Published beta.1 is unchanged.
+
+The opt-in development profile supports [anonymous local decimal/string restrictions](docs/anonymous-simple-restrictions/implementation/README.md)
+with the same bounded facets as named restrictions and original anonymous type identity.

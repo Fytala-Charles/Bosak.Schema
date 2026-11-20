@@ -382,3 +382,32 @@ refusal. 1,302 source tests pass, including all 1,255 prior outcomes and 47 new 
 Frozen upstream baseline stays sealed; candidate separately yields 1 match / 20
 Unsupported / zero mismatches/errors. Candidate harness requires exact source and
 runtime evidence. No full-suite claim, API/pin/publication change or implicit delivery.
+
+## Anonymous local restriction adoption
+
+20 November 2026: read docs/anonymous-simple-restrictions/ADOPTION.md before
+production edits. Base merged PR29/main1438f71 has1,302passing source tests.
+Adopt only opt-in local decimal/string direct restrictions with original anonymous
+identity; require public Core feasibility before implementation. NS-051 original
+row and six upstream targets are pinned, not executed admissions. Combined16local
+anonymous definition budget, legacy refusals and immutable corpus remain protected.
+No implementation/API/pin/publication change; commit/push needs explicit request.
+
+## Anonymous simple-type transport feasibility
+
+20 November 2026: FEASIBILITY.md records90synthetic transport controls per signed
+Core lane(13new/77inherited),18signature/payload checks and six actual unchanged
+Schema baseline controls. Transport succeeds, but native anonymous restrictions
+remain Unsupported. Read original ADOPTION.md before implementation, preserve
+NS-051 receipt and sealed corpus. No production/API/Corepin/publication change;
+native/package/retained qualification remains pending. No commit/push requested.
+
+## Anonymous local restriction implementation
+
+20 November2026: read original ADOPTION.md and implementation/README.md.
+1,373source cases pass(421/952); NS-051 is the one adopted prior admission.
+Preserve original anonymous type identities, eager combined16local definition
+budget and shared facets. Package-only952minimum/952current and retained124/23/33
+pass. Frozenpilot7matches/14Unsupported/0errors; no fullconformance claim.
+Native advisor stays scalar-only; legacy data(.) on absent QName is unqualified.
+No public API/Corepin/publication change; commit/push requires explicit request.

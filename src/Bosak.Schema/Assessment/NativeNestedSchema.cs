@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 20-11-2026     | Adopt nested local attributes with bounded total uses and original owner identity        |
 //                      | Charles Korthout | 0.3   | 20-11-2026     | Adopt nested decimal simple content as original complex scalar-bearing terminals         |
 //                      | Charles Korthout | 0.4   | 20-11-2026     | Preserve unfetched location hints separately from descendant application attributes      |
+//                      | Charles Korthout | 0.5   | 20-11-2026     | Share original anonymous simple definitions and the eager combined local type budget      |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -41,14 +42,13 @@ internal sealed partial class NativeDecimalSchema
     private static NativeDecimalSchema CompileNestedSchema(XElement schema, XElement[] types, XElement[] declarations,
         string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace,
         NativeType decimalType, NativeType stringType, NativeType booleanType, NativeType integerType,
-        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, int maxStringCharacters, CancellationToken cancellationToken)
+        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, int maxStringCharacters, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple)
     {
         Require(!schema.Descendants(Xs + "assert").Any(), "Nested schemas must be assertion-free.", NativeDecimalUnsupportedReason.AssertionGrammar);
         var definitions = types.Where(t => t.Name == Xs + "complexType")
             .ToDictionary(t => XName.Get(Name(t), targetNamespace));
         var named = new Dictionary<XName, NativeDecimalSchema>();
         var visiting = new HashSet<XName>();
-        var anonymousCount = 0;
 
         NativeDecimalSchema Resolve(XName name)
         {
@@ -69,7 +69,7 @@ internal sealed partial class NativeDecimalSchema
             var members = Elements(complex);
             if (members.Count == 1 && members[0].Name == Xs + "simpleContent")
                 return CompileComplex(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
-                    decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken);
+                    decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple);
             Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && members.Skip(1).All(e => e.Name == Xs + "attribute"),
                 "Expected an element-only sequence and root attributes.", NativeDecimalUnsupportedReason.DeclarationShape);
             var sequence = members[0];
@@ -99,10 +99,11 @@ internal sealed partial class NativeDecimalSchema
                     if (definitions.ContainsKey(typeName)) { container = Resolve(typeName); type = container.Root.Type; }
                     else type = ResolveScalarType(local, decimalType, stringType, booleanType, integerType, simple);
                 }
+                else if (inline.Count == 1 && anonymousSimple.TryGetValue(inline[0], out var anonymousType))
+                    type = anonymousType;
                 else
                 {
                     Require(inline.Count == 1 && inline[0].Name == Xs + "complexType", "Expected an inline complex type.", NativeDecimalUnsupportedReason.DeclarationShape);
-                    Require(++anonymousCount <= 16, "Local anonymous type ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
                     Attributes(inline[0]);
                     container = Complex(inline[0], new NativeDeclaration(name, new NativeType(null, true), 1, 1, ns));
                     type = container.Root.Type;
