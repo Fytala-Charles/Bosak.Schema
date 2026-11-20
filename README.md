@@ -114,3 +114,39 @@ with the same bounded facets as named restrictions and original anonymous type i
 
 The opt-in development profile includes [bounded integer restrictions](docs/integer-restrictions/README.md)
 with exact range and digit facets for local elements and admitted attribute uses.
+
+See the [original-node atomization proposal](docs/typed-node-contract/README.md)
+for the next planned integration step and its current boundaries.
+
+[Native atomization feasibility](docs/typed-node-contract/FEASIBILITY.md) records
+the isolated candidate results and the remaining adoption/API decisions.
+
+
+## Original-node scalar data (0.6 development candidate)
+
+`NativeSchemaNodeDataSession` is a separate owned session for fixed original-node
+atomization. Create it with existing explicit `NativeSchemaSessionOptions`, then
+Assess with `NativeSchemaAssessmentContext`. A valid assessment returns an owned
+`NativeSchemaNodeDataDocument`. `ReadElement(ImmutableArray<int>)` selects original
+element-child indexes (empty selects root, maximum three segments).
+`ReadAttribute(ownerElementPath, namespaceUri, localName)` selects a present original
+attribute by expanded name. Both return one detached `NativeScalarValue`.
+`ExportXml` returns bounded parsed lexical XML. Dispose documents and session.
+
+The existing bounded schema grammar and native scalar families apply. Element-only
+containers refuse reads with NotSupportedException carrying FOTY0012. Default paths,
+invalid names and missing targets throw documented argument exceptions; query/cache
+capacity and unassessed hint attributes are Unsupported read operations, not Invalid
+instance assessments. Operations are sequential; overlap is refused and disposal
+waits for admitted synchronous work. No expression, raw node, provider authority,
+callback, general XPath, list/nil support or transferable PSVI is exposed.
+
+This additive API is implemented locally for review. ADR-016 owner API acceptance,
+general Core C45 and full XSD 1.1 conformance remain pending. Published 0.5.0-beta.1
+and the existing decimal/scalar facades are unchanged. See [implementation adoption](docs/native-node-data/ADOPTION.md).
+
+
+[Owned node-data contract review](docs/native-node-data-review/README.md) describes the current development API and its acceptance boundary.
+
+
+The development owned node-data API has [bounded owner acceptance](docs/native-node-data-acceptance/README.md).

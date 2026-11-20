@@ -1,0 +1,51 @@
+diff --git "a/D:\\Development\\Bosak\\.guard-tmp\\schema-native-node-data-20261120\\original\\Assessment\\NativeSchemaProvider.cs" "b/D:\\Development\\Bosak\\.guard-tmp\\schema-native-node-data-20261120\\candidate\\Assessment\\NativeSchemaProvider.cs"
+index 3754ef8..8aa4018 100644
+--- "a/D:\\Development\\Bosak\\.guard-tmp\\schema-native-node-data-20261120\\original\\Assessment\\NativeSchemaProvider.cs"
++++ "b/D:\\Development\\Bosak\\.guard-tmp\\schema-native-node-data-20261120\\candidate\\Assessment\\NativeSchemaProvider.cs"
+@@ -25,6 +25,7 @@
+ //                      | Charles Korthout | 1.2   | 20-11-2026     | Register nested declaration components and project terminal scalar facts separately      |
+ //                      | Charles Korthout | 1.3   | 20-11-2026     | Publish exact original owner-aware attributes with separate root and descendant projections |
+ //                      | Charles Korthout | 1.4   | 20-11-2026     | Register actual decimal content types for nested original complex terminal facts         |
++//                      | Charles Korthout | 1.5   | 20-11-2026     | Isolated original-node data feasibility mode; production scalar binding unchanged          |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -39,13 +40,17 @@ namespace Bosak.Schema;
+ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
+ {
+     private readonly NativeDecimalSchema schema;
++    private readonly bool originalNodeData;
++    private readonly string? expectedNodeFingerprint;
+     private readonly Dictionary<object, Component> components = new(ReferenceEqualityComparer.Instance);
+     internal Component RootDeclaration { get; }
+     internal Component DecimalType { get; }
+ 
+-    internal NativeSchemaProvider(NativeDecimalSchema schema)
++    internal NativeSchemaProvider(NativeDecimalSchema schema, bool originalNodeData = false, string? expectedNodeFingerprint = null)
+     {
+         this.schema = schema;
++        this.originalNodeData = originalNodeData;
++        this.expectedNodeFingerprint = expectedNodeFingerprint;
+         RootDeclaration = Add(schema.Root);
+         foreach (var plan in schema.Roots)
+         {
+@@ -87,14 +92,15 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
+     {
+         cancellationToken.ThrowIfCancellationRequested();
+         ArgumentNullException.ThrowIfNull(environment);
+-        // Only the released engine-issued scalar environment with an empty namespace context is adopted.
++        // Isolated feasibility only: retain scalar default; original data mode pins a separately captured default-operation fingerprint.
+         if (environment.GetType().Assembly != typeof(SchemaQuerySession).Assembly ||
+             environment.HostLanguage != QueryHostLanguage.XPath || environment.HostVersion != "3.1" ||
+             environment.XdmSpecificationRevision.AbsoluteUri != "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/" ||
+-            environment.BehaviorProfile != "bosak-typed-identity-v1" ||
+-            environment.DescriptorFormatVersion != "bosak-public-typed-identity-descriptor-v1" ||
++            environment.BehaviorProfile != (originalNodeData ? "bosak-original-node-data-v1" : "bosak-typed-identity-v1") ||
++            environment.DescriptorFormatVersion != (originalNodeData ? "bosak-original-node-data-descriptor-v1" : "bosak-public-typed-identity-descriptor-v1") ||
+             string.IsNullOrEmpty(environment.StaticContextFingerprint) ||
+-            environment.StaticContext.Namespaces.Count != 0)
++            environment.StaticContext.Namespaces.Count != 0 ||
++            originalNodeData && (expectedNodeFingerprint is null || environment.StaticContextFingerprint != expectedNodeFingerprint))
+             return NativeCoreResult<ISchemaAssessmentAdvisor>.Unsupported("BSK-NATIVE-ENVIRONMENT");
+         return NativeCoreResult<ISchemaAssessmentAdvisor>.Supported(new Advisor(this, environment));
+     }

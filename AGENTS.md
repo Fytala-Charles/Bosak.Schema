@@ -228,7 +228,7 @@ After **every** successful implementation step, update the following canonical d
 
 ---
 
-*Last updated: 2026-11-19*
+*Last updated: 2026-11-20*
 
 
 
@@ -430,3 +430,84 @@ preserve fixedfractionDigits0, BigInteger, original identities and old limits.
 Two prior opt-in admissions only; legacyM2B-54 stays refused. Frozenpilot9matches/
 12Unsupported/0errors is selected validity evidence, not fullXSD. Nativeadvisor
 stays scalar-only; no Corepin/API/publication change. No commit/push requested.
+
+## Original-node atomization contract proposal
+
+20 November2026: merged PR31/main43f14db is verified at1,482source cases. Read
+ docs/typed-node-contract and proposed ADR016 before node integration. Released
+Core has an exact bounded original-node-data profile; do not promise arbitrary
+XPath or relax existing scalar Bind. Proposed separate owned data session must
+assess in its own environment and resolve exact original targets; no rebind of
+existing scalar documents. Feasibility/adoption/API review remain pending; no
+source/API/Corepin/publication change. Commit/push requires explicit request.
+
+## Actual native original-node data feasibility
+
+20 November2026: FEASIBILITY.md records73native controls per signed Core lane,
+eight baseline controls and1,482unchanged candidate regression outcomes. Two
+isolated source copies change: provider data-mode/context binding and guarded
+ISchemaAnnotatedNode facts. Real src/ stays unchanged. Preserve iteration failures;
+Core FOTY0012 is InvalidOperationException, proposed facade mapping still pending.
+Before production edits record semantic adoption and resolve API/lifetime gates.
+No public API/Corepin/package/publication or new pilot change; no commit/push request.
+
+
+## Original-node scalar data (0.6 development candidate)
+
+`NativeSchemaNodeDataSession` is a separate owned session for fixed original-node
+atomization. Create it with existing explicit `NativeSchemaSessionOptions`, then
+Assess with `NativeSchemaAssessmentContext`. A valid assessment returns an owned
+`NativeSchemaNodeDataDocument`. `ReadElement(ImmutableArray<int>)` selects original
+element-child indexes (empty selects root, maximum three segments).
+`ReadAttribute(ownerElementPath, namespaceUri, localName)` selects a present original
+attribute by expanded name. Both return one detached `NativeScalarValue`.
+`ExportXml` returns bounded parsed lexical XML. Dispose documents and session.
+
+The existing bounded schema grammar and native scalar families apply. Element-only
+containers refuse reads with NotSupportedException carrying FOTY0012. Default paths,
+invalid names and missing targets throw documented argument exceptions; query/cache
+capacity and unassessed hint attributes are Unsupported read operations, not Invalid
+instance assessments. Operations are sequential; overlap is refused and disposal
+waits for admitted synchronous work. No expression, raw node, provider authority,
+callback, general XPath, list/nil support or transferable PSVI is exposed.
+
+This additive API is implemented locally for review. ADR-016 owner API acceptance,
+general Core C45 and full XSD 1.1 conformance remain pending. Published 0.5.0-beta.1
+and the existing decimal/scalar facades are unchanged. See [implementation adoption](docs/native-node-data/ADOPTION.md).
+
+
+## Owned node-data qualification ? 20 November 2026
+
+Local candidate on base `43f14dbf56c36e5185e705af901678c42c8d1aff` passes
+1,615 source cases (503 implementation / 1,112 public), preserving all 1,482 prior
+named outcomes. Package-only minimum Core 1.81.2 passes 1,112; Core 1.81.17 passes
+1,111 shared cases plus its explicit current-version check. The deliberately
+minimum-version-only surface test is excluded only from that current lane.
+Retained 124/23/33 unchanged callers pass with only Schema.dll replaced. Counts
+overlap. All 392 prior public surface rows are preserved; two sealed owned types
+add nine rows (54 types / 401 rows total). Frozen pilot remains 9 matches / 12
+Unsupported / zero mismatch or harness error. No new XSD expectations or grammar.
+
+The local unsigned package is `0.6.0-alpha.0.19`; published beta.1, Core source/pins,
+release controllers and tags are unchanged. The earlier sealed proposal and
+feasibility packets are unchanged. Owner API acceptance/ADR-016 and delivery
+remain pending. No commit or push has been performed for this candidate.
+
+
+## Owned node-data contract review ? 20 November 2026
+
+The local code/API self-review found no blocking implementation issue. The current
+review addendum supersedes the sealed original ADR's historical pending-implementation
+wording; ADR-016 owner acceptance and explicit commit/push/PR authorization are
+still pending. Qualification and sealed packets are unchanged. [Review and prepared delivery](docs/native-node-data-review/README.md).
+
+
+## Bounded ADR-016/API accepted ? 20 November 2026
+
+The owner accepted the reviewed two-type/seven-method owned original-node data
+contract and authorized commit, push and PR delivery. This dated acceptance
+supersedes historical pending-owner-acceptance wording in the sealed ADR/proposal,
+feasibility, implementation and review packets; those originals remain unchanged.
+All qualified source/binary identities remain unchanged. General C45/ADR006,
+full-XSD/general XPath and release/publication decisions remain separate.
+[Owner acceptance](<docs/native-node-data-acceptance/README.md>).

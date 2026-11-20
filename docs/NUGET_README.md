@@ -766,3 +766,30 @@ Named integer restrictions also enforce facets on admitted local application
 attributes. Existing representation limits still apply; integer assertions,
 restriction chains, derived integer families and broader query profiles remain
 excluded. Legacy NativeDecimalSession and published 0.5.0-beta.1 are unchanged.
+
+
+## Original-node scalar data (0.6 development candidate)
+
+`NativeSchemaNodeDataSession` is a separate owned session for fixed original-node
+atomization. Create it with existing explicit `NativeSchemaSessionOptions`, then
+Assess with `NativeSchemaAssessmentContext`. A valid assessment returns an owned
+`NativeSchemaNodeDataDocument`. `ReadElement(ImmutableArray<int>)` selects original
+element-child indexes (empty selects root, maximum three segments).
+`ReadAttribute(ownerElementPath, namespaceUri, localName)` selects a present original
+attribute by expanded name. Both return one detached `NativeScalarValue`.
+`ExportXml` returns bounded parsed lexical XML. Dispose documents and session.
+
+The existing bounded schema grammar and native scalar families apply. Element-only
+containers refuse reads with NotSupportedException carrying FOTY0012. Default paths,
+invalid names and missing targets throw documented argument exceptions; query/cache
+capacity and unassessed hint attributes are Unsupported read operations, not Invalid
+instance assessments. Operations are sequential; overlap is refused and disposal
+waits for admitted synchronous work. No expression, raw node, provider authority,
+callback, general XPath, list/nil support or transferable PSVI is exposed.
+
+This additive API is implemented locally for review. ADR-016 owner API acceptance,
+general Core C45 and full XSD 1.1 conformance remain pending. Published 0.5.0-beta.1
+and the existing decimal/scalar facades are unchanged. See the package XML documentation for complete signatures and exception contracts.
+
+
+The repository owner accepted the bounded two-type/seven-method node-data API on 20 November 2026. General Core C45 and full XSD 1.1 acceptance remain separate. Earlier pending-acceptance wording describes the qualification checkpoint.
