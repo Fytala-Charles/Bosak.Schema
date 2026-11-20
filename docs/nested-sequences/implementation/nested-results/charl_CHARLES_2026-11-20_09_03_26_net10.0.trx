@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="b23e3764-f654-4ef0-a2b7-4b994f46db1f" name="charl@CHARLES 2026-11-20 09:03:26" runUser="CHARLES\charl" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-20T09:03:26.1655597+01:00" queuing="2026-11-20T09:03:26.1655600+01:00" start="2026-11-20T09:03:25.2560415+01:00" finish="2026-11-20T09:03:26.1702497+01:00" />
+  <TestSettings name="default" id="33b6a304-3ce7-44d7-a4a5-0f0536a20202">
+    <Deployment runDeploymentRoot="charl_CHARLES_2026-11-20_09_03_26" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="4286d1e5-ff4e-4b85-8bbf-7ae966d08a16" testId="f20556fe-14e4-46a4-def2-2fc4ad317c1f" testName="Bosak.Schema.Tests.NativeNestedCoreTests.CompleteFacts_AlignWithOriginalNodesAndLocalDeclarations" computerName="CHARLES" duration="00:00:00.0074660" startTime="2026-11-20T09:03:26.0565183+01:00" endTime="2026-11-20T09:03:26.0700875+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4286d1e5-ff4e-4b85-8bbf-7ae966d08a16">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Throws() Failure: Exception type was not an exact match&#xD;
+Expected: typeof(Bosak.XPath.Runtime.Vm.XPathErrorException)&#xD;
+Actual:   typeof(System.InvalidOperationException)&#xD;
+---- System.InvalidOperationException : FOTY0012: The argument node does not have a typed value.</Message>
+          <StackTrace>   at Bosak.Schema.Tests.NativeNestedCoreTests.CompleteFacts_AlignWithOriginalNodesAndLocalDeclarations() in D:\Development\Bosak\.worktrees\Schema.NestedContent\tests\Bosak.Schema.Tests\NativeNestedCoreTests.cs:line 54&#xD;
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+----- Inner Stack Trace -----&#xD;
+   at Bosak.XPath.Standard.Functions.FunctionLibrary.Data(XdmValue value)&#xD;
+   at Bosak.XPath.Standard.Functions.FunctionLibrary.Data_1(EvaluationContext ctx, ReadOnlySpan`1 args)&#xD;
+   at Bosak.XPath.Runtime.Vm.VmEngine.ExecuteBlock(IrModule module, EvaluationContext context, XdmValue[] registers, Int32 startIp)&#xD;
+   at Bosak.XPath.Runtime.Vm.VmEngine.Execute(IrModule module, EvaluationContext context)&#xD;
+   at Bosak.XPath.Api.XPath31Expression.Evaluate(EvaluationContext context)&#xD;
+   at Bosak.XPath.Api.XPath31Expression.Evaluate(IXdmNode contextItem)&#xD;
+   at Bosak.Schema.Tests.NativeNestedCoreTests.&lt;&gt;c__DisplayClass6_0.&lt;CompleteFacts_AlignWithOriginalNodesAndLocalDeclarations&gt;b__0() in D:\Development\Bosak\.worktrees\Schema.NestedContent\tests\Bosak.Schema.Tests\NativeNestedCoreTests.cs:line 54</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="27f52238-9e0c-4306-9ae4-7fe179184220" testId="17b57716-5e3d-765a-c82f-3fccd69efb19" testName="Bosak.Schema.Tests.NativeNestedCoreTests.DeepFailure_DoesNotPublishFacts(xml: &quot;&lt;r&gt;&lt;a&gt;&lt;v&gt;1&lt;/v&gt;&lt;/a&gt;&lt;b x='x'&gt;&lt;v&gt;2&lt;/v&gt;&lt;/b&gt;&lt;/r&gt;&quot;)" computerName="CHARLES" duration="00:00:00.0007249" startTime="2026-11-20T09:03:25.8883082+01:00" endTime="2026-11-20T09:03:25.8883580+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="27f52238-9e0c-4306-9ae4-7fe179184220" />
+    <UnitTestResult executionId="e3f29fc3-8612-4b6f-a98c-e9858e013e43" testId="383e0837-f80f-db50-981f-f30835b68b3b" testName="Bosak.Schema.Tests.NativeNestedCoreTests.DeepFailure_DoesNotPublishFacts(xml: &quot;&lt;r&gt;&lt;a&gt;&lt;v&gt;1&lt;/v&gt;&lt;/a&gt;&lt;b&gt;&lt;v&gt;bad&lt;/v&gt;&lt;/b&gt;&lt;/r&gt;&quot;)" computerName="CHARLES" duration="00:00:00.0684145" startTime="2026-11-20T09:03:25.8082055+01:00" endTime="2026-11-20T09:03:25.8819571+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e3f29fc3-8612-4b6f-a98c-e9858e013e43" />
+    <UnitTestResult executionId="ea4d7e89-f12b-46ca-99d5-b4f639045e67" testId="ae9c9288-8412-1c9c-6a19-8fb4921a0814" testName="Bosak.Schema.Tests.NativeNestedCoreTests.OriginalTerminalFacts_AtomizeAndRetainProvenance" computerName="CHARLES" duration="00:00:00.1673478" startTime="2026-11-20T09:03:25.8893396+01:00" endTime="2026-11-20T09:03:26.0505767+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ea4d7e89-f12b-46ca-99d5-b4f639045e67" />
+    <UnitTestResult executionId="6df4e160-6bf6-4d64-bfdc-a39159f78b34" testId="3e4d6771-9168-2d68-5065-22b673dce9e1" testName="Bosak.Schema.Tests.NativeNestedCoreTests.Overlap_RefusesAndRecovers" computerName="CHARLES" duration="00:00:00.0057113" startTime="2026-11-20T09:03:26.0507694+01:00" endTime="2026-11-20T09:03:26.0563711+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6df4e160-6bf6-4d64-bfdc-a39159f78b34" />
+    <UnitTestResult executionId="ff245371-7733-4864-83cf-24a42dc9feed" testId="ac28c748-2912-5979-eb54-67c3b01ae574" testName="Bosak.Schema.Tests.NativeNestedCoreTests.DeepFailure_DoesNotPublishFacts(xml: &quot;&lt;r&gt;&lt;a&gt;&lt;v&gt;1&lt;/v&gt;&lt;/a&gt;&lt;b/&gt;&lt;/r&gt;&quot;)" computerName="CHARLES" duration="00:00:00.0001419" startTime="2026-11-20T09:03:25.8887700+01:00" endTime="2026-11-20T09:03:25.8887934+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ff245371-7733-4864-83cf-24a42dc9feed" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Bosak.Schema.Tests.NativeNestedCoreTests.DeepFailure_DoesNotPublishFacts(xml: &quot;&lt;r&gt;&lt;a&gt;&lt;v&gt;1&lt;/v&gt;&lt;/a&gt;&lt;b/&gt;&lt;/r&gt;&quot;)" storage="d:\development\bosak\.worktrees\schema.nestedcontent\tests\bosak.schema.tests\bin\release\net10.0\bosak.schema.tests.dll" id="ac28c748-2912-5979-eb54-67c3b01ae574">
+      <Execution id="ff245371-7733-4864-83cf-24a42dc9feed" />
+      <TestMethod codeBase="D:\Development\Bosak\.worktrees\Schema.NestedContent\tests\Bosak.Schema.Tests\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Bosak.Schema.Tests.NativeNestedCoreTests" name="DeepFailure_DoesNotPublishFacts" />
+    </UnitTest>
+    <UnitTest name="Bosak.Schema.Tests.NativeNestedCoreTests.DeepFailure_DoesNotPublishFacts(xml: &quot;&lt;r&gt;&lt;a&gt;&lt;v&gt;1&lt;/v&gt;&lt;/a&gt;&lt;b x='x'&gt;&lt;v&gt;2&lt;/v&gt;&lt;/b&gt;&lt;/r&gt;&quot;)" storage="d:\development\bosak\.worktrees\schema.nestedcontent\tests\bosak.schema.tests\bin\release\net10.0\bosak.schema.tests.dll" id="17b57716-5e3d-765a-c82f-3fccd69efb19">
+      <Execution id="27f52238-9e0c-4306-9ae4-7fe179184220" />
+      <TestMethod codeBase="D:\Development\Bosak\.worktrees\Schema.NestedContent\tests\Bosak.Schema.Tests\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Bosak.Schema.Tests.NativeNestedCoreTests" name="DeepFailure_DoesNotPublishFacts" />
+    </UnitTest>
+    <UnitTest name="Bosak.Schema.Tests.NativeNestedCoreTests.CompleteFacts_AlignWithOriginalNodesAndLocalDeclarations" storage="d:\development\bosak\.worktrees\schema.nestedcontent\tests\bosak.schema.tests\bin\release\net10.0\bosak.schema.tests.dll" id="f20556fe-14e4-46a4-def2-2fc4ad317c1f">
+      <Execution id="4286d1e5-ff4e-4b85-8bbf-7ae966d08a16" />
+      <TestMethod codeBase="D:\Development\Bosak\.worktrees\Schema.NestedContent\tests\Bosak.Schema.Tests\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Bosak.Schema.Tests.NativeNestedCoreTests" name="CompleteFacts_AlignWithOriginalNodesAndLocalDeclarations" />
+    </UnitTest>
+    <UnitTest name="Bosak.Schema.Tests.NativeNestedCoreTests.DeepFailure_DoesNotPublishFacts(xml: &quot;&lt;r&gt;&lt;a&gt;&lt;v&gt;1&lt;/v&gt;&lt;/a&gt;&lt;b&gt;&lt;v&gt;bad&lt;/v&gt;&lt;/b&gt;&lt;/r&gt;&quot;)" storage="d:\development\bosak\.worktrees\schema.nestedcontent\tests\bosak.schema.tests\bin\release\net10.0\bosak.schema.tests.dll" id="383e0837-f80f-db50-981f-f30835b68b3b">
+      <Execution id="e3f29fc3-8612-4b6f-a98c-e9858e013e43" />
+      <TestMethod codeBase="D:\Development\Bosak\.worktrees\Schema.NestedContent\tests\Bosak.Schema.Tests\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Bosak.Schema.Tests.NativeNestedCoreTests" name="DeepFailure_DoesNotPublishFacts" />
+    </UnitTest>
+    <UnitTest name="Bosak.Schema.Tests.NativeNestedCoreTests.Overlap_RefusesAndRecovers" storage="d:\development\bosak\.worktrees\schema.nestedcontent\tests\bosak.schema.tests\bin\release\net10.0\bosak.schema.tests.dll" id="3e4d6771-9168-2d68-5065-22b673dce9e1">
+      <Execution id="6df4e160-6bf6-4d64-bfdc-a39159f78b34" />
+      <TestMethod codeBase="D:\Development\Bosak\.worktrees\Schema.NestedContent\tests\Bosak.Schema.Tests\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Bosak.Schema.Tests.NativeNestedCoreTests" name="Overlap_RefusesAndRecovers" />
+    </UnitTest>
+    <UnitTest name="Bosak.Schema.Tests.NativeNestedCoreTests.OriginalTerminalFacts_AtomizeAndRetainProvenance" storage="d:\development\bosak\.worktrees\schema.nestedcontent\tests\bosak.schema.tests\bin\release\net10.0\bosak.schema.tests.dll" id="ae9c9288-8412-1c9c-6a19-8fb4921a0814">
+      <Execution id="ea4d7e89-f12b-46ca-99d5-b4f639045e67" />
+      <TestMethod codeBase="D:\Development\Bosak\.worktrees\Schema.NestedContent\tests\Bosak.Schema.Tests\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Bosak.Schema.Tests.NativeNestedCoreTests" name="OriginalTerminalFacts_AtomizeAndRetainProvenance" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="f20556fe-14e4-46a4-def2-2fc4ad317c1f" executionId="4286d1e5-ff4e-4b85-8bbf-7ae966d08a16" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17b57716-5e3d-765a-c82f-3fccd69efb19" executionId="27f52238-9e0c-4306-9ae4-7fe179184220" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="383e0837-f80f-db50-981f-f30835b68b3b" executionId="e3f29fc3-8612-4b6f-a98c-e9858e013e43" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ae9c9288-8412-1c9c-6a19-8fb4921a0814" executionId="ea4d7e89-f12b-46ca-99d5-b4f639045e67" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3e4d6771-9168-2d68-5065-22b673dce9e1" executionId="6df4e160-6bf6-4d64-bfdc-a39159f78b34" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ac28c748-2912-5979-eb54-67c3b01ae574" executionId="ff245371-7733-4864-83cf-24a42dc9feed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="6" executed="6" passed="5" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.0.2+dd36e86129 (64-bit .NET 10.0.11)&#xD;
+[xUnit.net 00:00:00.08]   Discovering: Bosak.Schema.Tests&#xD;
+[xUnit.net 00:00:00.14]   Discovered:  Bosak.Schema.Tests&#xD;
+[xUnit.net 00:00:00.16]   Starting:    Bosak.Schema.Tests&#xD;
+[xUnit.net 00:00:00.44]       Assert.Throws() Failure: Exception type was not an exact match&#xD;
+[xUnit.net 00:00:00.44]       Expected: typeof(Bosak.XPath.Runtime.Vm.XPathErrorException)&#xD;
+[xUnit.net 00:00:00.44]       Actual:   typeof(System.InvalidOperationException)&#xD;
+[xUnit.net 00:00:00.44]       ---- System.InvalidOperationException : FOTY0012: The argument node does not have a typed value.&#xD;
+[xUnit.net 00:00:00.44]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.44]         D:\Development\Bosak\.worktrees\Schema.NestedContent\tests\Bosak.Schema.Tests\NativeNestedCoreTests.cs(54,0): at Bosak.Schema.Tests.NativeNestedCoreTests.CompleteFacts_AlignWithOriginalNodesAndLocalDeclarations()&#xD;
+[xUnit.net 00:00:00.44]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+[xUnit.net 00:00:00.44]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:00.44]         ----- Inner Stack Trace -----&#xD;
+[xUnit.net 00:00:00.44]            at Bosak.XPath.Standard.Functions.FunctionLibrary.Data(XdmValue value)&#xD;
+[xUnit.net 00:00:00.44]            at Bosak.XPath.Standard.Functions.FunctionLibrary.Data_1(EvaluationContext ctx, ReadOnlySpan`1 args)&#xD;
+[xUnit.net 00:00:00.44]            at Bosak.XPath.Runtime.Vm.VmEngine.ExecuteBlock(IrModule module, EvaluationContext context, XdmValue[] registers, Int32 startIp)&#xD;
+[xUnit.net 00:00:00.44]            at Bosak.XPath.Runtime.Vm.VmEngine.Execute(IrModule module, EvaluationContext context)&#xD;
+[xUnit.net 00:00:00.44]            at Bosak.XPath.Api.XPath31Expression.Evaluate(EvaluationContext context)&#xD;
+[xUnit.net 00:00:00.44]            at Bosak.XPath.Api.XPath31Expression.Evaluate(IXdmNode contextItem)&#xD;
+[xUnit.net 00:00:00.44]         D:\Development\Bosak\.worktrees\Schema.NestedContent\tests\Bosak.Schema.Tests\NativeNestedCoreTests.cs(54,0): at Bosak.Schema.Tests.NativeNestedCoreTests.&lt;&gt;c__DisplayClass6_0.&lt;CompleteFacts_AlignWithOriginalNodesAndLocalDeclarations&gt;b__0()&#xD;
+[xUnit.net 00:00:00.45]   Finished:    Bosak.Schema.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-20T09:03:26.0724126+01:00">
+        <Text>[xUnit.net 00:00:00.44]     Bosak.Schema.Tests.NativeNestedCoreTests.CompleteFacts_AlignWithOriginalNodesAndLocalDeclarations [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

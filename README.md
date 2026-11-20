@@ -96,3 +96,5 @@ The opt-in development facade also supports [named string length and enumeration
 The opt-in development facade supports [bounded root attributes with separate typed reads](docs/m2e-root-attributes/README.md), preserving leaf indexes and the published beta.1 boundary.
 
 The opt-in development facade supports [decimal simple-content roots with separate typed reads](docs/decimal-simple-content/README.md), including price/currency documents.
+
+See the [bounded nested-sequence development profile](docs/nested-sequences/README.md) for terminal scalar reads and explicit structural limits.

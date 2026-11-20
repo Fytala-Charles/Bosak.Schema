@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Adopt bounded named complex types and shared expanded component identity                  |
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Expose original local attribute declaration metadata under the existing owner guard      |
 //                      | Charles Korthout | 0.5   | 20-11-2026     | Decouple complex annotation from typed-value absence and retain normalized root text     |
+//                      | Charles Korthout | 0.6   | 20-11-2026     | Keep local complex declarations distinct from global element metadata                     |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -59,7 +60,7 @@ internal sealed class NativeSessionNode(NativeSchemaInput input, XDocumentNode r
     public (string NamespaceUri, string LocalName)? SchemaTypeAnnotation =>
         Read<(string, string)?>(() => Facts?.NativeType is { Name: { } name } type ? (type.NamespaceUri, name) : null);
     public (string NamespaceUri, string LocalName)? SchemaElementDeclaration =>
-        Read<(string, string)?>(() => Facts?.NativeType.IsComplex == true ? (raw.NamespaceUri, raw.LocalName) : null);
+        Read<(string, string)?>(() => Facts?.NativeType.IsComplex == true && ReferenceEquals(this, input.Root) ? (raw.NamespaceUri, raw.LocalName) : null);
     public (string NamespaceUri, string LocalName)? SchemaAttributeDeclaration =>
         Read<(string, string)?>(() => Facts?.NativeDeclaration is { IsAttribute: true } d ? (d.NamespaceUri, d.Name) : null);
     public bool IsNilled => Read(() => false);

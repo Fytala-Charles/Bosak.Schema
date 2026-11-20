@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Share explicit mixed scalar profile with preserved decimal compatibility                  |
 //                      | Charles Korthout | 0.5   | 19-11-2026     | Add detached root attribute reads while preserving leaf-only counts and typed read indexes |
 //                      | Charles Korthout | 0.6   | 20-11-2026     | Read the original root scalar separately from unchanged leaf and attribute indexes       |
+//                      | Charles Korthout | 0.7   | 20-11-2026     | Read terminal scalar facts without exposing nested element-only containers as values     |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -107,9 +108,9 @@ internal sealed class NativeDecimalSessionCore : IDisposable
     private T ReadValue<T>(Document document, int leafIndex, Func<XdmValue, T> project, CancellationToken cancellationToken)
     {
         Check(document);
-        if (leafIndex < 0 || leafIndex >= document.Assessment.ElementFacts.Length - 1)
+        if (leafIndex < 0 || leafIndex >= document.Assessment.ScalarFacts.Length)
             throw new ArgumentOutOfRangeException(nameof(leafIndex));
-        return ReadFact(document, document.Assessment.ElementFacts[leafIndex + 1], project, cancellationToken);
+        return ReadFact(document, document.Assessment.ScalarFacts[leafIndex], project, cancellationToken);
     }
 
     private T ReadFact<T>(Document document, NativeSchemaProvider.Facts fact, Func<XdmValue, T> project, CancellationToken cancellationToken)
@@ -162,7 +163,7 @@ internal sealed class NativeDecimalSessionCore : IDisposable
     private int LeafCount(Document document) => Work(() =>
     {
         Check(document);
-        return document.Assessment.ElementFacts.Length - 1;
+        return document.Assessment.ScalarFacts.Length;
     }, default);
 
     internal T Work<T>(Func<T> work, CancellationToken cancellationToken)

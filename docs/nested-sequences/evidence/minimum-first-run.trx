@@ -1,0 +1,717 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6796d825-8d17-4d52-935e-de35cb534af3" name="charl@CHARLES 2026-11-20 08:49:18" runUser="CHARLES\charl" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-20T08:49:18.1151825+01:00" queuing="2026-11-20T08:49:18.1151826+01:00" start="2026-11-20T08:49:15.7979483+01:00" finish="2026-11-20T08:49:19.2608530+01:00" />
+  <TestSettings name="default" id="7835d9a5-206c-466c-8830-9c8bb73480ba">
+    <Deployment runDeploymentRoot="charl_CHARLES_2026-11-20_08_49_18" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="2b84c9df-236f-4910-9e97-3785bce1c1d0" testId="cf4c528d-3c7f-c786-a5a3-8935612ac67f" testName="AttributeTransportProbe.NestedTests.ClosedNestedInput_IsRefused" computerName="CHARLES" duration="00:00:00.0004182" startTime="2026-11-20T08:49:18.5118283+01:00" endTime="2026-11-20T08:49:18.5118608+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2b84c9df-236f-4910-9e97-3785bce1c1d0" />
+    <UnitTestResult executionId="2bfa6959-4f42-4917-8c5b-39fdfb78f037" testId="ae6d8fb5-46c3-b917-ffad-559783256a7c" testName="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 3)" computerName="CHARLES" duration="00:00:00.5957278" startTime="2026-11-20T08:49:17.7820615+01:00" endTime="2026-11-20T08:49:18.3713665+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2bfa6959-4f42-4917-8c5b-39fdfb78f037" />
+    <UnitTestResult executionId="a10f0f5d-b993-483b-8f56-44ea1dd3514d" testId="7eb1c5ae-ad46-f415-cf0c-7703068c9704" testName="AttributeTransportProbe.NestedTests.Navigation_RetainsOriginalIdentityAndDeclarations" computerName="CHARLES" duration="00:00:00.0038497" startTime="2026-11-20T08:49:18.4630186+01:00" endTime="2026-11-20T08:49:18.4662728+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a10f0f5d-b993-483b-8f56-44ea1dd3514d" />
+    <UnitTestResult executionId="7fa9e417-2449-403c-87ed-1e662563d02d" testId="4e051a4e-c4bc-2b37-7814-de8d737227da" testName="AttributeTransportProbe.TransportTests.ForeignValueAndSnapshot_AreRefused" computerName="CHARLES" duration="00:00:00.0023876" startTime="2026-11-20T08:49:18.0945634+01:00" endTime="2026-11-20T08:49:18.0962444+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7fa9e417-2449-403c-87ed-1e662563d02d" />
+    <UnitTestResult executionId="3e91b9f4-bcd1-4c76-bcb1-f73bb97a8e9b" testId="e050dfa6-f3b7-b6d3-89a8-d99677c26063" testName="AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(index: 1)" computerName="CHARLES" duration="00:00:00.0507919" startTime="2026-11-20T08:49:18.5633903+01:00" endTime="2026-11-20T08:49:18.6137829+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3e91b9f4-bcd1-4c76-bcb1-f73bb97a8e9b">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Original governing type differs from typed value.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+   at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+   at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(Int32 index) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 70&#xD;
+   at InvokeStub_NestedTests.ContainerData_RefusesAndLeafRecovers(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="465202ea-059f-4f5e-90d3-3e942fa72343" testId="716ff123-0fff-ea4e-ba19-cec1271f75ca" testName="AttributeTransportProbe.RootFactsTests.RootMetadataAlone_IsRefused" computerName="CHARLES" duration="00:00:00.0004249" startTime="2026-11-20T08:49:17.7820787+01:00" endTime="2026-11-20T08:49:17.7821404+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="465202ea-059f-4f5e-90d3-3e942fa72343" />
+    <UnitTestResult executionId="f4364b10-365e-4547-b0eb-12551df0b633" testId="c46ed4f2-2666-da20-f0f8-ef9e3e88cbea" testName="AttributeTransportProbe.AttributeFactsTests.AttributeEvidence_ExpiresWithSnapshot" computerName="CHARLES" duration="00:00:00.0997845" startTime="2026-11-20T08:49:19.1127156+01:00" endTime="2026-11-20T08:49:19.2125633+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f4364b10-365e-4547-b0eb-12551df0b633" />
+    <UnitTestResult executionId="c7d1f940-d751-46f6-a952-b3e26001b70b" testId="ec51269c-4b87-5921-3dce-28f9adade8ba" testName="AttributeTransportProbe.RootFactsTests.ComplexRootData_RetainsDecimalAndDistinctTypeEvidence(lexical: &quot;12.50&quot;)" computerName="CHARLES" duration="00:00:00.1074935" startTime="2026-11-20T08:49:18.5101255+01:00" endTime="2026-11-20T08:49:18.6174942+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c7d1f940-d751-46f6-a952-b3e26001b70b" />
+    <UnitTestResult executionId="edeaff62-bdf2-4575-9c59-acd2094766c8" testId="e2143c33-5c41-d451-c794-e923b0d28c66" testName="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 0)" computerName="CHARLES" duration="00:00:00.0022137" startTime="2026-11-20T08:49:18.0936737+01:00" endTime="2026-11-20T08:49:18.0937184+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="edeaff62-bdf2-4575-9c59-acd2094766c8" />
+    <UnitTestResult executionId="e02aca40-38ba-48e8-a844-3c8e2eea415a" testId="999b24aa-9242-da02-75ee-8c132b48bc85" testName="AttributeTransportProbe.RootFactsTests.ComplexRootData_RetainsDecimalAndDistinctTypeEvidence(lexical: &quot;12345678901234567890123456789012345678901234567890&quot;)" computerName="CHARLES" duration="00:00:00.1150421" startTime="2026-11-20T08:49:18.6176222+01:00" endTime="2026-11-20T08:49:18.7327141+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e02aca40-38ba-48e8-a844-3c8e2eea415a" />
+    <UnitTestResult executionId="e2ef7412-a0d3-4411-916a-b0e971722edc" testId="40e225c9-e438-6fb1-93b7-b4564abb7404" testName="AttributeTransportProbe.AttributeFactsTests.AttributeFacts_UseExistingTypedReadRoute" computerName="CHARLES" duration="00:00:00.0007020" startTime="2026-11-20T08:49:19.1120952+01:00" endTime="2026-11-20T08:49:19.1122937+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e2ef7412-a0d3-4411-916a-b0e971722edc" />
+    <UnitTestResult executionId="c339aa28-f1a9-409d-9fff-706909f07233" testId="43769c3f-cf1c-ca32-ba54-4ce405d2e8de" testName="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 1)" computerName="CHARLES" duration="00:00:00.1186918" startTime="2026-11-20T08:49:18.3715578+01:00" endTime="2026-11-20T08:49:18.4900987+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c339aa28-f1a9-409d-9fff-706909f07233" />
+    <UnitTestResult executionId="b84969f1-3f3a-467a-a3bd-0d8920dc5bc5" testId="740ca695-a9a0-918a-14b3-4de2af9f3063" testName="AttributeTransportProbe.RootFactsTests.ComplexRootData_RetainsDecimalAndDistinctTypeEvidence(lexical: &quot;-12.50&quot;)" computerName="CHARLES" duration="00:00:00.1185392" startTime="2026-11-20T08:49:18.3995122+01:00" endTime="2026-11-20T08:49:18.5099870+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b84969f1-3f3a-467a-a3bd-0d8920dc5bc5" />
+    <UnitTestResult executionId="0f0963d1-11f2-443c-bc64-2521cbf79647" testId="d7076832-5ed8-1495-36d7-be8a3b3ddb88" testName="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 6)" computerName="CHARLES" duration="00:00:00.7941452" startTime="2026-11-20T08:49:17.2742528+01:00" endTime="2026-11-20T08:49:18.0716094+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0f0963d1-11f2-443c-bc64-2521cbf79647" />
+    <UnitTestResult executionId="6f918fdb-9486-45c6-89c7-de1e25f703ba" testId="29924637-11f7-f7b6-29f1-0d7d833585fa" testName="AttributeTransportProbe.AttributeFactsTests.AttributeWithoutIssuedFacts_IsRefused" computerName="CHARLES" duration="00:00:00.4963629" startTime="2026-11-20T08:49:17.2742936+01:00" endTime="2026-11-20T08:49:17.7776501+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6f918fdb-9486-45c6-89c7-de1e25f703ba" />
+    <UnitTestResult executionId="9f25b336-9ff9-4615-bd39-852a84132e67" testId="db751907-5155-af7b-6adb-058873efe705" testName="AttributeTransportProbe.AttributeFactsTests.ForeignAttributeNodeAndFacts_AreRefused" computerName="CHARLES" duration="00:00:00.0008599" startTime="2026-11-20T08:49:19.1108614+01:00" endTime="2026-11-20T08:49:19.1115527+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9f25b336-9ff9-4615-bd39-852a84132e67" />
+    <UnitTestResult executionId="8bc42b12-f6da-4476-962a-4a12181c45a2" testId="e08826ad-f200-5180-90d8-aac96fc12f05" testName="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 7)" computerName="CHARLES" duration="00:00:00.1044803" startTime="2026-11-20T08:49:18.7125689+01:00" endTime="2026-11-20T08:49:18.8165279+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8bc42b12-f6da-4476-962a-4a12181c45a2" />
+    <UnitTestResult executionId="48e60ae6-a06e-455f-85bf-e67697cd33c4" testId="13c2dcef-1cb3-c411-2b68-9ad064396e26" testName="AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 6, lexical: &quot;1&quot;)" computerName="CHARLES" duration="00:00:00.0498214" startTime="2026-11-20T08:49:18.4129023+01:00" endTime="2026-11-20T08:49:18.4623383+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="48e60ae6-a06e-455f-85bf-e67697cd33c4">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Original governing type differs from typed value.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+   at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+   at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Int32 index, String lexical) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 59&#xD;
+   at InvokeStub_NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9a8985f7-3358-41b0-ac36-7918d57eae5a" testId="d0bd6042-5553-d194-2a01-0741aec6539c" testName="AttributeTransportProbe.RootFactsTests.ComplexRootIdentity_ReadsOriginalDecimal" computerName="CHARLES" duration="00:00:00.0015432" startTime="2026-11-20T08:49:18.8473420+01:00" endTime="2026-11-20T08:49:18.8487732+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9a8985f7-3358-41b0-ac36-7918d57eae5a" />
+    <UnitTestResult executionId="af74e5a2-d08b-45df-a508-0d573e13598a" testId="fbe652c4-b740-d102-93c9-0c933223f342" testName="AttributeTransportProbe.RootFactsTests.ComplexRootData_RetainsDecimalAndDistinctTypeEvidence(lexical: &quot;0&quot;)" computerName="CHARLES" duration="00:00:00.3358326" startTime="2026-11-20T08:49:18.0556261+01:00" endTime="2026-11-20T08:49:18.3913534+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="af74e5a2-d08b-45df-a508-0d573e13598a" />
+    <UnitTestResult executionId="df67c80a-6664-42ef-8e87-9cd6c2870165" testId="fafc5403-3a2a-ef89-9034-168defebdc03" testName="AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 2, lexical: &quot;12.5&quot;)" computerName="CHARLES" duration="00:00:00.2440324" startTime="2026-11-20T08:49:17.9668929+01:00" endTime="2026-11-20T08:49:18.2074817+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="df67c80a-6664-42ef-8e87-9cd6c2870165">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Original governing type differs from typed value.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+   at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+   at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Int32 index, String lexical) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 59&#xD;
+   at InvokeStub_NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="87e6fff7-4b9b-47b3-8744-17cbaff426b3" testId="a11db437-d877-4544-7c1c-7ba3eb7db61e" testName="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 1)" computerName="CHARLES" duration="00:00:00.0023273" startTime="2026-11-20T08:49:18.0941671+01:00" endTime="2026-11-20T08:49:18.0942200+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="87e6fff7-4b9b-47b3-8744-17cbaff426b3" />
+    <UnitTestResult executionId="6ef005c4-c08f-4d45-a32e-abea36399f1c" testId="d264b1e5-3926-2f0a-8971-cebf7ddd7d4d" testName="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 3)" computerName="CHARLES" duration="00:00:00.0037003" startTime="2026-11-20T08:49:18.0940558+01:00" endTime="2026-11-20T08:49:18.0940996+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6ef005c4-c08f-4d45-a32e-abea36399f1c" />
+    <UnitTestResult executionId="a4e2f385-388a-4250-81f1-f97526461024" testId="ec4a7728-9e2e-cb91-2c5b-5525d93ae4b6" testName="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 6)" computerName="CHARLES" duration="00:00:00.0943427" startTime="2026-11-20T08:49:18.9188951+01:00" endTime="2026-11-20T08:49:19.0130701+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a4e2f385-388a-4250-81f1-f97526461024" />
+    <UnitTestResult executionId="398e3c7c-cf7b-40ca-93c4-2c3d4719d6d6" testId="e3a5d8a7-8fe2-c276-b343-a724872f6f8c" testName="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 7)" computerName="CHARLES" duration="00:00:00.0028656" startTime="2026-11-20T08:49:18.0937902+01:00" endTime="2026-11-20T08:49:18.0938274+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="398e3c7c-cf7b-40ca-93c4-2c3d4719d6d6" />
+    <UnitTestResult executionId="22bfab37-4566-4c1f-b7ab-01e2885da289" testId="efd72a02-0a39-fca2-61bc-5de49659ca37" testName="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 4)" computerName="CHARLES" duration="00:00:00.1021357" startTime="2026-11-20T08:49:18.8166722+01:00" endTime="2026-11-20T08:49:18.9186709+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="22bfab37-4566-4c1f-b7ab-01e2885da289" />
+    <UnitTestResult executionId="46062360-3ee6-49ee-beeb-7278b0bc5146" testId="483887a0-2c26-2440-002b-7e146383b54d" testName="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 5)" computerName="CHARLES" duration="00:00:00.0025060" startTime="2026-11-20T08:49:18.0933319+01:00" endTime="2026-11-20T08:49:18.0934108+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="46062360-3ee6-49ee-beeb-7278b0bc5146" />
+    <UnitTestResult executionId="7525f1c5-c241-44d0-a540-a70676fdc18e" testId="f7d25ef6-d5f3-2505-7447-992c75d29abe" testName="AttributeTransportProbe.NestedTests.ForeignNestedNodeAndFacts_AreRefused" computerName="CHARLES" duration="00:00:00.0007739" startTime="2026-11-20T08:49:18.6652826+01:00" endTime="2026-11-20T08:49:18.6653311+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7525f1c5-c241-44d0-a540-a70676fdc18e" />
+    <UnitTestResult executionId="05a2101a-728c-4fe6-990d-a770549a177c" testId="a2c6d6d5-ccda-a018-82dd-f8448499fe1c" testName="AttributeTransportProbe.RootFactsTests.RootEvidence_ExpiresWithSnapshot" computerName="CHARLES" duration="00:00:00.1133707" startTime="2026-11-20T08:49:18.7337005+01:00" endTime="2026-11-20T08:49:18.8471708+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="05a2101a-728c-4fe6-990d-a770549a177c" />
+    <UnitTestResult executionId="d2861a8f-dc51-47a8-91d5-196fc2fd30ef" testId="b6e54b7b-3071-5999-60e4-d1092886d0b6" testName="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 4)" computerName="CHARLES" duration="00:00:00.0023356" startTime="2026-11-20T08:49:18.0942856+01:00" endTime="2026-11-20T08:49:18.0943310+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d2861a8f-dc51-47a8-91d5-196fc2fd30ef" />
+    <UnitTestResult executionId="6c2ff8f9-b71f-488e-b2dc-9078f1d27556" testId="39b6817f-e85c-7f1c-6bdd-761ddc0af7c5" testName="AttributeTransportProbe.NestedTests.MissingNestedFacts_AreRefused" computerName="CHARLES" duration="00:00:00.0005063" startTime="2026-11-20T08:49:18.5146034+01:00" endTime="2026-11-20T08:49:18.5146401+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6c2ff8f9-b71f-488e-b2dc-9078f1d27556" />
+    <UnitTestResult executionId="9d137204-43d4-4e54-bdc4-b4ca6a5e5f35" testId="86ece6bc-e1a7-a531-eeab-449914b88350" testName="AttributeTransportProbe.TransportTests.SnapshotEvidence_Expires_AndSessionDisposalRefusesWork" computerName="CHARLES" duration="00:00:00.0022223" startTime="2026-11-20T08:49:18.0973090+01:00" endTime="2026-11-20T08:49:18.0985365+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9d137204-43d4-4e54-bdc4-b4ca6a5e5f35" />
+    <UnitTestResult executionId="db53b049-78e7-4580-8427-b06de993dda3" testId="9a1a8600-7a84-8837-ecf7-d8ea70e98056" testName="AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(index: 0)" computerName="CHARLES" duration="00:00:00.0501259" startTime="2026-11-20T08:49:18.6144043+01:00" endTime="2026-11-20T08:49:18.6643311+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db53b049-78e7-4580-8427-b06de993dda3">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Original governing type differs from typed value.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+   at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+   at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(Int32 index) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 70&#xD;
+   at InvokeStub_NestedTests.ContainerData_RefusesAndLeafRecovers(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6b30d559-3078-48c6-8368-8bb2e9fa2bf8" testId="b5a8a776-799d-c23f-fcdc-7988f949561e" testName="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 2)" computerName="CHARLES" duration="00:00:00.0022969" startTime="2026-11-20T08:49:18.0938958+01:00" endTime="2026-11-20T08:49:18.0939897+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6b30d559-3078-48c6-8368-8bb2e9fa2bf8" />
+    <UnitTestResult executionId="c64b01c3-12b7-423f-8da0-5c034f2f07c1" testId="b15a3f63-f1c7-323e-15c2-2eaf66458330" testName="AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 7, lexical: &quot;false&quot;)" computerName="CHARLES" duration="00:00:00.1472301" startTime="2026-11-20T08:49:18.2081333+01:00" endTime="2026-11-20T08:49:18.3550287+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c64b01c3-12b7-423f-8da0-5c034f2f07c1">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Original governing type differs from typed value.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+   at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+   at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Int32 index, String lexical) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 59&#xD;
+   at InvokeStub_NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b547ec8e-530f-44ed-8a3b-fc8d2061bd20" testId="51c9618d-55b4-5922-6685-d982c4418ca4" testName="AttributeTransportProbe.TransportTests.PlainAtomic_CannotAcquireAuthority" computerName="CHARLES" duration="00:00:00.0004076" startTime="2026-11-20T08:49:18.1069458+01:00" endTime="2026-11-20T08:49:18.1072403+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b547ec8e-530f-44ed-8a3b-fc8d2061bd20" />
+    <UnitTestResult executionId="8a6c184c-0f04-4e9c-a0b3-99bb71d02490" testId="f6e3fb0d-210d-a91c-ddca-b0ef0e4a3290" testName="AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 3, lexical: &quot;2&quot;)" computerName="CHARLES" duration="00:00:00.6323324" startTime="2026-11-20T08:49:17.2732712+01:00" endTime="2026-11-20T08:49:17.9633979+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8a6c184c-0f04-4e9c-a0b3-99bb71d02490">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Original governing type differs from typed value.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+   at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+   at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Int32 index, String lexical) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 59&#xD;
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d30cf09f-9c10-4945-a066-7dc31524981a" testId="fcffd6a7-4295-9fb8-2deb-aa322b0feeaf" testName="AttributeTransportProbe.AttributeFactsTests.ClosedAttributeInput_RefusesOriginalData" computerName="CHARLES" duration="00:00:00.0003274" startTime="2026-11-20T08:49:19.1123607+01:00" endTime="2026-11-20T08:49:19.1126565+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d30cf09f-9c10-4945-a066-7dc31524981a" />
+    <UnitTestResult executionId="29a64079-872a-4ae5-b4de-f513f9a81491" testId="d112ec66-d3a9-ddbd-fb0a-03a21a54e261" testName="AttributeTransportProbe.RootFactsTests.ForeignRootAndFacts_AreRefused" computerName="CHARLES" duration="00:00:00.4962670" startTime="2026-11-20T08:49:17.2742799+01:00" endTime="2026-11-20T08:49:17.7752500+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="29a64079-872a-4ae5-b4de-f513f9a81491" />
+    <UnitTestResult executionId="9ff51620-9fd4-4e18-9861-534d9b4e40ae" testId="7bea4900-752c-c33f-ec89-df45a25e6651" testName="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 0)" computerName="CHARLES" duration="00:00:00.1116843" startTime="2026-11-20T08:49:18.6001878+01:00" endTime="2026-11-20T08:49:18.7118219+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9ff51620-9fd4-4e18-9861-534d9b4e40ae" />
+    <UnitTestResult executionId="82d03fa6-4a2d-4fa8-a404-8d212e660afa" testId="6692de60-2e27-cf8a-eee5-fe3408f1ba20" testName="AttributeTransportProbe.NestedTests.NestedEvidence_ExpiresWithSnapshot" computerName="CHARLES" duration="00:00:00.0446654" startTime="2026-11-20T08:49:18.4664356+01:00" endTime="2026-11-20T08:49:18.5111665+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="82d03fa6-4a2d-4fa8-a404-8d212e660afa">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Original governing type differs from typed value.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+   at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+   at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at AttributeTransportProbe.NestedTests.NestedEvidence_ExpiresWithSnapshot() in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 100&#xD;
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="574bd96f-5ed1-4a83-97dd-d4af04d44e09" testId="c5eddf30-853c-f676-18e9-ac9c8d62a095" testName="AttributeTransportProbe.TransportTests.Runtime_UsesExpectedPublishedVersion" computerName="CHARLES" duration="00:00:00.0078896" startTime="2026-11-20T08:49:18.0990045+01:00" endTime="2026-11-20T08:49:18.1067976+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="574bd96f-5ed1-4a83-97dd-d4af04d44e09" />
+    <UnitTestResult executionId="80b43490-28a5-4f7b-8bd8-6aca47e2cfc5" testId="4dde49f1-e107-c40e-4130-fcef9045ce7c" testName="AttributeTransportProbe.TransportTests.RevokedInput_RefusesReads" computerName="CHARLES" duration="00:00:00.0003282" startTime="2026-11-20T08:49:18.0986690+01:00" endTime="2026-11-20T08:49:18.0988519+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="80b43490-28a5-4f7b-8bd8-6aca47e2cfc5" />
+    <UnitTestResult executionId="2181c7a1-0725-4233-9b3b-beed371c5508" testId="f1ec9f52-7b6c-53f0-65d6-90e79d309132" testName="AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 5, lexical: &quot;3.75&quot;)" computerName="CHARLES" duration="00:00:00.0568870" startTime="2026-11-20T08:49:18.3560255+01:00" endTime="2026-11-20T08:49:18.4122192+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2181c7a1-0725-4233-9b3b-beed371c5508">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Original governing type differs from typed value.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+   at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+   at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Int32 index, String lexical) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 59&#xD;
+   at InvokeStub_NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="83db9bf5-286e-49e1-a7b0-06ef218b8819" testId="0a49902e-fbda-f700-c1d2-2f77fd8def83" testName="AttributeTransportProbe.RootFactsTests.ComplexRootData_RetainsDecimalAndDistinctTypeEvidence(lexical: &quot;+0.000&quot;)" computerName="CHARLES" duration="00:00:00.2793707" startTime="2026-11-20T08:49:17.7822321+01:00" endTime="2026-11-20T08:49:18.0554548+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="83db9bf5-286e-49e1-a7b0-06ef218b8819" />
+    <UnitTestResult executionId="016e311e-dd68-4f50-9edf-2b33380b99dd" testId="952e419d-857e-f5a2-8f90-4b95e8cc1ed4" testName="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 5)" computerName="CHARLES" duration="00:00:00.0975057" startTime="2026-11-20T08:49:19.0132217+01:00" endTime="2026-11-20T08:49:19.1106941+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="016e311e-dd68-4f50-9edf-2b33380b99dd" />
+    <UnitTestResult executionId="b4a0d6b2-6e96-468e-b3d6-4f2959252a83" testId="b2635861-b07a-5c79-9f4b-946f0ada04b9" testName="AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(index: 4)" computerName="CHARLES" duration="00:00:00.0502667" startTime="2026-11-20T08:49:18.5147251+01:00" endTime="2026-11-20T08:49:18.5627551+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b4a0d6b2-6e96-468e-b3d6-4f2959252a83">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Original governing type differs from typed value.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+   at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+   at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+   at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+   at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 51&#xD;
+   at AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(Int32 index) in D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs:line 70&#xD;
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="bdd9bddf-89c3-4d00-ac37-a32da60932ac" testId="4fa062a6-7b2c-a15a-de53-33174e7a2b08" testName="AttributeTransportProbe.RootFactsTests.ClosedRootInput_RefusesRead" computerName="CHARLES" duration="00:00:00.0006787" startTime="2026-11-20T08:49:18.7328737+01:00" endTime="2026-11-20T08:49:18.7334209+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bdd9bddf-89c3-4d00-ac37-a32da60932ac" />
+    <UnitTestResult executionId="64590cf8-5729-4fdf-a265-b80ccfd6984b" testId="58bf6785-51c9-ca2e-a29c-1372c5195353" testName="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 2)" computerName="CHARLES" duration="00:00:00.1098451" startTime="2026-11-20T08:49:18.4902444+01:00" endTime="2026-11-20T08:49:18.6000449+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="64590cf8-5729-4fdf-a265-b80ccfd6984b" />
+    <UnitTestResult executionId="b7252282-51ed-4775-b1dd-3c3760cb5fc7" testId="975250bc-13bd-296c-b1d2-382b018d0a91" testName="AttributeTransportProbe.TransportTests.CompleteContainer_ViewExpiresAtOperationEnd" computerName="CHARLES" duration="00:00:00.0037314" startTime="2026-11-20T08:49:18.0944341+01:00" endTime="2026-11-20T08:49:18.0944759+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b7252282-51ed-4775-b1dd-3c3760cb5fc7" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 2, lexical: &quot;12.5&quot;)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="fafc5403-3a2a-ef89-9034-168defebdc03">
+      <Execution id="df67c80a-6664-42ef-8e87-9cd6c2870165" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="NestedLeafData_PreservesPayloadAndOrigin" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.ForeignValueAndSnapshot_AreRefused" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="4e051a4e-c4bc-2b37-7814-de8d737227da">
+      <Execution id="7fa9e417-2449-403c-87ed-1e662563d02d" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="ForeignValueAndSnapshot_AreRefused" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 3)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="ae6d8fb5-46c3-b917-ffad-559783256a7c">
+      <Execution id="2bfa6959-4f42-4917-8c5b-39fdfb78f037" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="OriginalAttributeData_PreservesPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 1)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="43769c3f-cf1c-ca32-ba54-4ce405d2e8de">
+      <Execution id="c339aa28-f1a9-409d-9fff-706909f07233" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="OriginalAttributeData_PreservesPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 3)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="d264b1e5-3926-2f0a-8971-cebf7ddd7d4d">
+      <Execution id="6ef005c4-c08f-4d45-a32e-abea36399f1c" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 0)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="e2143c33-5c41-d451-c794-e923b0d28c66">
+      <Execution id="edeaff62-bdf2-4575-9c59-acd2094766c8" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.NestedTests.ForeignNestedNodeAndFacts_AreRefused" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="f7d25ef6-d5f3-2505-7447-992c75d29abe">
+      <Execution id="7525f1c5-c241-44d0-a540-a70676fdc18e" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="ForeignNestedNodeAndFacts_AreRefused" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 5)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="952e419d-857e-f5a2-8f90-4b95e8cc1ed4">
+      <Execution id="016e311e-dd68-4f50-9edf-2b33380b99dd" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="OriginalAttributeData_PreservesPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.RootFactsTests.ComplexRootData_RetainsDecimalAndDistinctTypeEvidence(lexical: &quot;+0.000&quot;)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="0a49902e-fbda-f700-c1d2-2f77fd8def83">
+      <Execution id="83db9bf5-286e-49e1-a7b0-06ef218b8819" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.RootFactsTests" name="ComplexRootData_RetainsDecimalAndDistinctTypeEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.ClosedAttributeInput_RefusesOriginalData" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="fcffd6a7-4295-9fb8-2deb-aa322b0feeaf">
+      <Execution id="d30cf09f-9c10-4945-a066-7dc31524981a" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="ClosedAttributeInput_RefusesOriginalData" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 4)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="b6e54b7b-3071-5999-60e4-d1092886d0b6">
+      <Execution id="d2861a8f-dc51-47a8-91d5-196fc2fd30ef" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 6, lexical: &quot;1&quot;)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="13c2dcef-1cb3-c411-2b68-9ad064396e26">
+      <Execution id="48e60ae6-a06e-455f-85bf-e67697cd33c4" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="NestedLeafData_PreservesPayloadAndOrigin" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.RootFactsTests.ComplexRootIdentity_ReadsOriginalDecimal" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="d0bd6042-5553-d194-2a01-0741aec6539c">
+      <Execution id="9a8985f7-3358-41b0-ac36-7918d57eae5a" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.RootFactsTests" name="ComplexRootIdentity_ReadsOriginalDecimal" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 5)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="483887a0-2c26-2440-002b-7e146383b54d">
+      <Execution id="46062360-3ee6-49ee-beeb-7278b0bc5146" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.AttributeWithoutIssuedFacts_IsRefused" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="29924637-11f7-f7b6-29f1-0d7d833585fa">
+      <Execution id="6f918fdb-9486-45c6-89c7-de1e25f703ba" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="AttributeWithoutIssuedFacts_IsRefused" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 2)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="58bf6785-51c9-ca2e-a29c-1372c5195353">
+      <Execution id="64590cf8-5729-4fdf-a265-b80ccfd6984b" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="OriginalAttributeData_PreservesPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(index: 4)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="b2635861-b07a-5c79-9f4b-946f0ada04b9">
+      <Execution id="b4a0d6b2-6e96-468e-b3d6-4f2959252a83" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="ContainerData_RefusesAndLeafRecovers" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.SnapshotEvidence_Expires_AndSessionDisposalRefusesWork" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="86ece6bc-e1a7-a531-eeab-449914b88350">
+      <Execution id="9d137204-43d4-4e54-bdc4-b4ca6a5e5f35" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="SnapshotEvidence_Expires_AndSessionDisposalRefusesWork" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 7)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="e3a5d8a7-8fe2-c276-b343-a724872f6f8c">
+      <Execution id="398e3c7c-cf7b-40ca-93c4-2c3d4719d6d6" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.ForeignAttributeNodeAndFacts_AreRefused" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="db751907-5155-af7b-6adb-058873efe705">
+      <Execution id="9f25b336-9ff9-4615-bd39-852a84132e67" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="ForeignAttributeNodeAndFacts_AreRefused" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.NestedTests.Navigation_RetainsOriginalIdentityAndDeclarations" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="7eb1c5ae-ad46-f415-cf0c-7703068c9704">
+      <Execution id="a10f0f5d-b993-483b-8f56-44ea1dd3514d" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="Navigation_RetainsOriginalIdentityAndDeclarations" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.RootFactsTests.ClosedRootInput_RefusesRead" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="4fa062a6-7b2c-a15a-de53-33174e7a2b08">
+      <Execution id="bdd9bddf-89c3-4d00-ac37-a32da60932ac" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.RootFactsTests" name="ClosedRootInput_RefusesRead" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 6)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="d7076832-5ed8-1495-36d7-be8a3b3ddb88">
+      <Execution id="0f0963d1-11f2-443c-bc64-2521cbf79647" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.CompleteContainer_ViewExpiresAtOperationEnd" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="975250bc-13bd-296c-b1d2-382b018d0a91">
+      <Execution id="b7252282-51ed-4775-b1dd-3c3760cb5fc7" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="CompleteContainer_ViewExpiresAtOperationEnd" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.Runtime_UsesExpectedPublishedVersion" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="c5eddf30-853c-f676-18e9-ac9c8d62a095">
+      <Execution id="574bd96f-5ed1-4a83-97dd-d4af04d44e09" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="Runtime_UsesExpectedPublishedVersion" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 5, lexical: &quot;3.75&quot;)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="f1ec9f52-7b6c-53f0-65d6-90e79d309132">
+      <Execution id="2181c7a1-0725-4233-9b3b-beed371c5508" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="NestedLeafData_PreservesPayloadAndOrigin" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.RootFactsTests.ComplexRootData_RetainsDecimalAndDistinctTypeEvidence(lexical: &quot;12345678901234567890123456789012345678901234567890&quot;)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="999b24aa-9242-da02-75ee-8c132b48bc85">
+      <Execution id="e02aca40-38ba-48e8-a844-3c8e2eea415a" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.RootFactsTests" name="ComplexRootData_RetainsDecimalAndDistinctTypeEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.NestedTests.NestedEvidence_ExpiresWithSnapshot" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="6692de60-2e27-cf8a-eee5-fe3408f1ba20">
+      <Execution id="82d03fa6-4a2d-4fa8-a404-8d212e660afa" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="NestedEvidence_ExpiresWithSnapshot" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.PlainAtomic_CannotAcquireAuthority" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="51c9618d-55b4-5922-6685-d982c4418ca4">
+      <Execution id="b547ec8e-530f-44ed-8a3b-fc8d2061bd20" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="PlainAtomic_CannotAcquireAuthority" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.RootFactsTests.RootMetadataAlone_IsRefused" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="716ff123-0fff-ea4e-ba19-cec1271f75ca">
+      <Execution id="465202ea-059f-4f5e-90d3-3e942fa72343" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.RootFactsTests" name="RootMetadataAlone_IsRefused" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.RootFactsTests.ComplexRootData_RetainsDecimalAndDistinctTypeEvidence(lexical: &quot;0&quot;)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="fbe652c4-b740-d102-93c9-0c933223f342">
+      <Execution id="af74e5a2-d08b-45df-a508-0d573e13598a" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.RootFactsTests" name="ComplexRootData_RetainsDecimalAndDistinctTypeEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 7, lexical: &quot;false&quot;)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="b15a3f63-f1c7-323e-15c2-2eaf66458330">
+      <Execution id="c64b01c3-12b7-423f-8da0-5c034f2f07c1" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="NestedLeafData_PreservesPayloadAndOrigin" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 1)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="a11db437-d877-4544-7c1c-7ba3eb7db61e">
+      <Execution id="87e6fff7-4b9b-47b3-8744-17cbaff426b3" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.RevokedInput_RefusesReads" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="4dde49f1-e107-c40e-4130-fcef9045ce7c">
+      <Execution id="80b43490-28a5-4f7b-8bd8-6aca47e2cfc5" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="RevokedInput_RefusesReads" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.NestedTests.MissingNestedFacts_AreRefused" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="39b6817f-e85c-7f1c-6bdd-761ddc0af7c5">
+      <Execution id="6c2ff8f9-b71f-488e-b2dc-9078f1d27556" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="MissingNestedFacts_AreRefused" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.RootFactsTests.ComplexRootData_RetainsDecimalAndDistinctTypeEvidence(lexical: &quot;-12.50&quot;)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="740ca695-a9a0-918a-14b3-4de2af9f3063">
+      <Execution id="b84969f1-3f3a-467a-a3bd-0d8920dc5bc5" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.RootFactsTests" name="ComplexRootData_RetainsDecimalAndDistinctTypeEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.AttributeFacts_UseExistingTypedReadRoute" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="40e225c9-e438-6fb1-93b7-b4564abb7404">
+      <Execution id="e2ef7412-a0d3-4411-916a-b0e971722edc" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="AttributeFacts_UseExistingTypedReadRoute" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.NestedTests.ClosedNestedInput_IsRefused" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="cf4c528d-3c7f-c786-a5a3-8935612ac67f">
+      <Execution id="2b84c9df-236f-4910-9e97-3785bce1c1d0" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="ClosedNestedInput_IsRefused" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 4)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="efd72a02-0a39-fca2-61bc-5de49659ca37">
+      <Execution id="22bfab37-4566-4c1f-b7ab-01e2885da289" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="OriginalAttributeData_PreservesPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 3, lexical: &quot;2&quot;)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="f6e3fb0d-210d-a91c-ddca-b0ef0e4a3290">
+      <Execution id="8a6c184c-0f04-4e9c-a0b3-99bb71d02490" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="NestedLeafData_PreservesPayloadAndOrigin" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.RootFactsTests.ForeignRootAndFacts_AreRefused" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="d112ec66-d3a9-ddbd-fb0a-03a21a54e261">
+      <Execution id="29a64079-872a-4ae5-b4de-f513f9a81491" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.RootFactsTests" name="ForeignRootAndFacts_AreRefused" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.TransportTests.PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence(kind: 2)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="b5a8a776-799d-c23f-fcdc-7988f949561e">
+      <Execution id="6b30d559-3078-48c6-8368-8bb2e9fa2bf8" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.TransportTests" name="PublicReadAndEvaluate_RetainsPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.RootFactsTests.RootEvidence_ExpiresWithSnapshot" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="a2c6d6d5-ccda-a018-82dd-f8448499fe1c">
+      <Execution id="05a2101a-728c-4fe6-990d-a770549a177c" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.RootFactsTests" name="RootEvidence_ExpiresWithSnapshot" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.AttributeEvidence_ExpiresWithSnapshot" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="c46ed4f2-2666-da20-f0f8-ef9e3e88cbea">
+      <Execution id="f4364b10-365e-4547-b0eb-12551df0b633" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="AttributeEvidence_ExpiresWithSnapshot" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 7)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="e08826ad-f200-5180-90d8-aac96fc12f05">
+      <Execution id="8bc42b12-f6da-4476-962a-4a12181c45a2" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="OriginalAttributeData_PreservesPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 0)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="7bea4900-752c-c33f-ec89-df45a25e6651">
+      <Execution id="9ff51620-9fd4-4e18-9861-534d9b4e40ae" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="OriginalAttributeData_PreservesPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(index: 1)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="e050dfa6-f3b7-b6d3-89a8-d99677c26063">
+      <Execution id="3e91b9f4-bcd1-4c76-bcb1-f73bb97a8e9b" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="ContainerData_RefusesAndLeafRecovers" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.AttributeFactsTests.OriginalAttributeData_PreservesPayloadAndOriginalEvidence(kind: 6)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="ec4a7728-9e2e-cb91-2c5b-5525d93ae4b6">
+      <Execution id="a4e2f385-388a-4250-81f1-f97526461024" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.AttributeFactsTests" name="OriginalAttributeData_PreservesPayloadAndOriginalEvidence" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(index: 0)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="9a1a8600-7a84-8837-ecf7-d8ea70e98056">
+      <Execution id="db53b049-78e7-4580-8427-b06de993dda3" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.NestedTests" name="ContainerData_RefusesAndLeafRecovers" />
+    </UnitTest>
+    <UnitTest name="AttributeTransportProbe.RootFactsTests.ComplexRootData_RetainsDecimalAndDistinctTypeEvidence(lexical: &quot;12.50&quot;)" storage="d:\development\bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\release\net10.0\probe.dll" id="ec51269c-4b87-5921-3dce-28f9adade8ba">
+      <Execution id="c7d1f940-d751-46f6-a952-b3e26001b70b" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\minimum\bin\Release\net10.0\Probe.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="AttributeTransportProbe.RootFactsTests" name="ComplexRootData_RetainsDecimalAndDistinctTypeEvidence" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="cf4c528d-3c7f-c786-a5a3-8935612ac67f" executionId="2b84c9df-236f-4910-9e97-3785bce1c1d0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ae6d8fb5-46c3-b917-ffad-559783256a7c" executionId="2bfa6959-4f42-4917-8c5b-39fdfb78f037" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7eb1c5ae-ad46-f415-cf0c-7703068c9704" executionId="a10f0f5d-b993-483b-8f56-44ea1dd3514d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4e051a4e-c4bc-2b37-7814-de8d737227da" executionId="7fa9e417-2449-403c-87ed-1e662563d02d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e050dfa6-f3b7-b6d3-89a8-d99677c26063" executionId="3e91b9f4-bcd1-4c76-bcb1-f73bb97a8e9b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="716ff123-0fff-ea4e-ba19-cec1271f75ca" executionId="465202ea-059f-4f5e-90d3-3e942fa72343" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c46ed4f2-2666-da20-f0f8-ef9e3e88cbea" executionId="f4364b10-365e-4547-b0eb-12551df0b633" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ec51269c-4b87-5921-3dce-28f9adade8ba" executionId="c7d1f940-d751-46f6-a952-b3e26001b70b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e2143c33-5c41-d451-c794-e923b0d28c66" executionId="edeaff62-bdf2-4575-9c59-acd2094766c8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="999b24aa-9242-da02-75ee-8c132b48bc85" executionId="e02aca40-38ba-48e8-a844-3c8e2eea415a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="40e225c9-e438-6fb1-93b7-b4564abb7404" executionId="e2ef7412-a0d3-4411-916a-b0e971722edc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="43769c3f-cf1c-ca32-ba54-4ce405d2e8de" executionId="c339aa28-f1a9-409d-9fff-706909f07233" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="740ca695-a9a0-918a-14b3-4de2af9f3063" executionId="b84969f1-3f3a-467a-a3bd-0d8920dc5bc5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d7076832-5ed8-1495-36d7-be8a3b3ddb88" executionId="0f0963d1-11f2-443c-bc64-2521cbf79647" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="29924637-11f7-f7b6-29f1-0d7d833585fa" executionId="6f918fdb-9486-45c6-89c7-de1e25f703ba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="db751907-5155-af7b-6adb-058873efe705" executionId="9f25b336-9ff9-4615-bd39-852a84132e67" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e08826ad-f200-5180-90d8-aac96fc12f05" executionId="8bc42b12-f6da-4476-962a-4a12181c45a2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13c2dcef-1cb3-c411-2b68-9ad064396e26" executionId="48e60ae6-a06e-455f-85bf-e67697cd33c4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d0bd6042-5553-d194-2a01-0741aec6539c" executionId="9a8985f7-3358-41b0-ac36-7918d57eae5a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fbe652c4-b740-d102-93c9-0c933223f342" executionId="af74e5a2-d08b-45df-a508-0d573e13598a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fafc5403-3a2a-ef89-9034-168defebdc03" executionId="df67c80a-6664-42ef-8e87-9cd6c2870165" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a11db437-d877-4544-7c1c-7ba3eb7db61e" executionId="87e6fff7-4b9b-47b3-8744-17cbaff426b3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d264b1e5-3926-2f0a-8971-cebf7ddd7d4d" executionId="6ef005c4-c08f-4d45-a32e-abea36399f1c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ec4a7728-9e2e-cb91-2c5b-5525d93ae4b6" executionId="a4e2f385-388a-4250-81f1-f97526461024" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e3a5d8a7-8fe2-c276-b343-a724872f6f8c" executionId="398e3c7c-cf7b-40ca-93c4-2c3d4719d6d6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="efd72a02-0a39-fca2-61bc-5de49659ca37" executionId="22bfab37-4566-4c1f-b7ab-01e2885da289" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="483887a0-2c26-2440-002b-7e146383b54d" executionId="46062360-3ee6-49ee-beeb-7278b0bc5146" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f7d25ef6-d5f3-2505-7447-992c75d29abe" executionId="7525f1c5-c241-44d0-a540-a70676fdc18e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a2c6d6d5-ccda-a018-82dd-f8448499fe1c" executionId="05a2101a-728c-4fe6-990d-a770549a177c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b6e54b7b-3071-5999-60e4-d1092886d0b6" executionId="d2861a8f-dc51-47a8-91d5-196fc2fd30ef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="39b6817f-e85c-7f1c-6bdd-761ddc0af7c5" executionId="6c2ff8f9-b71f-488e-b2dc-9078f1d27556" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="86ece6bc-e1a7-a531-eeab-449914b88350" executionId="9d137204-43d4-4e54-bdc4-b4ca6a5e5f35" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9a1a8600-7a84-8837-ecf7-d8ea70e98056" executionId="db53b049-78e7-4580-8427-b06de993dda3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b5a8a776-799d-c23f-fcdc-7988f949561e" executionId="6b30d559-3078-48c6-8368-8bb2e9fa2bf8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b15a3f63-f1c7-323e-15c2-2eaf66458330" executionId="c64b01c3-12b7-423f-8da0-5c034f2f07c1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="51c9618d-55b4-5922-6685-d982c4418ca4" executionId="b547ec8e-530f-44ed-8a3b-fc8d2061bd20" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f6e3fb0d-210d-a91c-ddca-b0ef0e4a3290" executionId="8a6c184c-0f04-4e9c-a0b3-99bb71d02490" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fcffd6a7-4295-9fb8-2deb-aa322b0feeaf" executionId="d30cf09f-9c10-4945-a066-7dc31524981a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d112ec66-d3a9-ddbd-fb0a-03a21a54e261" executionId="29a64079-872a-4ae5-b4de-f513f9a81491" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7bea4900-752c-c33f-ec89-df45a25e6651" executionId="9ff51620-9fd4-4e18-9861-534d9b4e40ae" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6692de60-2e27-cf8a-eee5-fe3408f1ba20" executionId="82d03fa6-4a2d-4fa8-a404-8d212e660afa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c5eddf30-853c-f676-18e9-ac9c8d62a095" executionId="574bd96f-5ed1-4a83-97dd-d4af04d44e09" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4dde49f1-e107-c40e-4130-fcef9045ce7c" executionId="80b43490-28a5-4f7b-8bd8-6aca47e2cfc5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f1ec9f52-7b6c-53f0-65d6-90e79d309132" executionId="2181c7a1-0725-4233-9b3b-beed371c5508" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0a49902e-fbda-f700-c1d2-2f77fd8def83" executionId="83db9bf5-286e-49e1-a7b0-06ef218b8819" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="952e419d-857e-f5a2-8f90-4b95e8cc1ed4" executionId="016e311e-dd68-4f50-9edf-2b33380b99dd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b2635861-b07a-5c79-9f4b-946f0ada04b9" executionId="b4a0d6b2-6e96-468e-b3d6-4f2959252a83" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4fa062a6-7b2c-a15a-de53-33174e7a2b08" executionId="bdd9bddf-89c3-4d00-ac37-a32da60932ac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="58bf6785-51c9-ca2e-a29c-1372c5195353" executionId="64590cf8-5729-4fdf-a265-b80ccfd6984b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="975250bc-13bd-296c-b1d2-382b018d0a91" executionId="b7252282-51ed-4775-b1dd-3c3760cb5fc7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="50" executed="50" passed="41" failed="9" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.0.2+dd36e86129 (64-bit .NET 10.0.11)&#xD;
+[xUnit.net 00:00:00.28]   Discovering: Probe&#xD;
+[xUnit.net 00:00:00.32]   Discovered:  Probe&#xD;
+[xUnit.net 00:00:00.34]   Starting:    Probe&#xD;
+[xUnit.net 00:00:01.05]       System.ArgumentException : Original governing type differs from typed value.&#xD;
+[xUnit.net 00:00:01.05]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.05]            at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.05]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.05]            at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.05]            at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.05]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op)&#xD;
+[xUnit.net 00:00:01.05]            at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+[xUnit.net 00:00:01.05]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.05]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.05]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+[xUnit.net 00:00:01.05]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+[xUnit.net 00:00:01.05]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.05]            at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:01.05]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node)&#xD;
+[xUnit.net 00:00:01.05]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(59,0): at AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Int32 index, String lexical)&#xD;
+[xUnit.net 00:00:01.05]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+[xUnit.net 00:00:01.05]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:01.29]       System.ArgumentException : Original governing type differs from typed value.&#xD;
+[xUnit.net 00:00:01.29]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.29]            at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.29]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.29]            at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.29]            at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.29]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op)&#xD;
+[xUnit.net 00:00:01.29]            at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+[xUnit.net 00:00:01.29]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.29]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.29]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+[xUnit.net 00:00:01.29]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+[xUnit.net 00:00:01.29]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.29]            at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:01.29]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node)&#xD;
+[xUnit.net 00:00:01.29]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(59,0): at AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Int32 index, String lexical)&#xD;
+[xUnit.net 00:00:01.29]            at InvokeStub_NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Object, Span`1)&#xD;
+[xUnit.net 00:00:01.29]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:01.44]       System.ArgumentException : Original governing type differs from typed value.&#xD;
+[xUnit.net 00:00:01.44]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.44]            at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.44]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.44]            at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.44]            at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.44]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op)&#xD;
+[xUnit.net 00:00:01.44]            at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+[xUnit.net 00:00:01.44]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.44]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.44]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+[xUnit.net 00:00:01.44]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+[xUnit.net 00:00:01.44]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.44]            at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:01.44]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node)&#xD;
+[xUnit.net 00:00:01.44]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(59,0): at AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Int32 index, String lexical)&#xD;
+[xUnit.net 00:00:01.44]            at InvokeStub_NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Object, Span`1)&#xD;
+[xUnit.net 00:00:01.44]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:01.49]       System.ArgumentException : Original governing type differs from typed value.&#xD;
+[xUnit.net 00:00:01.49]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.49]            at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.49]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.49]            at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.49]            at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.49]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op)&#xD;
+[xUnit.net 00:00:01.49]            at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+[xUnit.net 00:00:01.49]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.49]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.49]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+[xUnit.net 00:00:01.49]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+[xUnit.net 00:00:01.49]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.49]            at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:01.49]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node)&#xD;
+[xUnit.net 00:00:01.49]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(59,0): at AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Int32 index, String lexical)&#xD;
+[xUnit.net 00:00:01.49]            at InvokeStub_NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Object, Span`1)&#xD;
+[xUnit.net 00:00:01.49]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:01.54]       System.ArgumentException : Original governing type differs from typed value.&#xD;
+[xUnit.net 00:00:01.54]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.54]            at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.54]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.54]            at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.54]            at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.54]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op)&#xD;
+[xUnit.net 00:00:01.54]            at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+[xUnit.net 00:00:01.54]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.54]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.54]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+[xUnit.net 00:00:01.54]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+[xUnit.net 00:00:01.54]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.54]            at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:01.54]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node)&#xD;
+[xUnit.net 00:00:01.54]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(59,0): at AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Int32 index, String lexical)&#xD;
+[xUnit.net 00:00:01.54]            at InvokeStub_NestedTests.NestedLeafData_PreservesPayloadAndOrigin(Object, Span`1)&#xD;
+[xUnit.net 00:00:01.54]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:01.59]       System.ArgumentException : Original governing type differs from typed value.&#xD;
+[xUnit.net 00:00:01.59]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.59]            at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.59]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.59]            at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.59]            at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.59]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op)&#xD;
+[xUnit.net 00:00:01.59]            at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+[xUnit.net 00:00:01.59]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.59]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.59]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+[xUnit.net 00:00:01.59]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+[xUnit.net 00:00:01.59]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.59]            at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:01.59]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node)&#xD;
+[xUnit.net 00:00:01.59]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(100,0): at AttributeTransportProbe.NestedTests.NestedEvidence_ExpiresWithSnapshot()&#xD;
+[xUnit.net 00:00:01.59]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+[xUnit.net 00:00:01.59]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:01.64]       System.ArgumentException : Original governing type differs from typed value.&#xD;
+[xUnit.net 00:00:01.64]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.64]            at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.64]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.64]            at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.64]            at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.65]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op)&#xD;
+[xUnit.net 00:00:01.65]            at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+[xUnit.net 00:00:01.65]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.65]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.65]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+[xUnit.net 00:00:01.65]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+[xUnit.net 00:00:01.65]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.65]            at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:01.65]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node)&#xD;
+[xUnit.net 00:00:01.65]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(70,0): at AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(Int32 index)&#xD;
+[xUnit.net 00:00:01.65]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+[xUnit.net 00:00:01.65]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:01.70]       System.ArgumentException : Original governing type differs from typed value.&#xD;
+[xUnit.net 00:00:01.70]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.70]            at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.70]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.70]            at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.70]            at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.70]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op)&#xD;
+[xUnit.net 00:00:01.70]            at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+[xUnit.net 00:00:01.70]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.70]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.70]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+[xUnit.net 00:00:01.70]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+[xUnit.net 00:00:01.70]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.70]            at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:01.70]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node)&#xD;
+[xUnit.net 00:00:01.70]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(70,0): at AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(Int32 index)&#xD;
+[xUnit.net 00:00:01.70]            at InvokeStub_NestedTests.ContainerData_RefusesAndLeafRecovers(Object, Span`1)&#xD;
+[xUnit.net 00:00:01.70]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:01.75]       System.ArgumentException : Original governing type differs from typed value.&#xD;
+[xUnit.net 00:00:01.75]       Stack Trace:&#xD;
+[xUnit.net 00:00:01.75]            at Bosak.XPath.Runtime.Vm.QueryNodeFactsReader.Atomize(XdmNodeKind expectedKind, Int32 maxCached, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.75]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Operation.AtomizeOriginalNode(Snapshot snapshot, IQueryNodeFactsIssuer issuer, ISchemaAssessmentInput input, ISchemaAssessmentOrigin origin, IXdmNode node, ISchemaNodeFacts facts, XdmNodeKind kind, Int32 maxCached, Int32 atoms, Int32 digits, Int32 scale, Int32 faultAfter)&#xD;
+[xUnit.net 00:00:01.75]            at Bosak.XPath.Api.Schema.OriginalNodeDataPlan.Evaluate(Operation operation, SchemaAdvisorBinding binding, ImmutableArray`1 snapshots, SchemaQueryLimits limits, EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.75]            at Bosak.XPath.Api.Schema.SchemaQueryOperation.Evaluate(EvaluationContext context)&#xD;
+[xUnit.net 00:00:01.75]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.&lt;&gt;c__DisplayClass1_0.&lt;Evaluate&gt;b__0(SchemaQueryOperation op)&#xD;
+[xUnit.net 00:00:01.75]            at Bosak.XPath.Api.Schema.SchemaQuerySession.&lt;&gt;c__DisplayClass46_0`1.&lt;Run&gt;b__0(Operation op)&#xD;
+[xUnit.net 00:00:01.75]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.75]         --- End of stack trace from previous location ---&#xD;
+[xUnit.net 00:00:01.75]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.Completion.ThrowIfFailed()&#xD;
+[xUnit.net 00:00:01.75]            at Bosak.XPath.Runtime.Vm.QueryProviderOperationScope.SetThrowingCompletionAsync(Task`1 report, TaskCompletionSource completion)&#xD;
+[xUnit.net 00:00:01.75]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.Run[T](SchemaQueryEnvironment environment, ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:01.75]            at Bosak.XPath.Api.Schema.SchemaQuerySession.Run[T](ImmutableArray`1 snapshots, Func`2 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:01.75]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(51,0): at AttributeTransportProbe.NestedTests.Evaluate(Fixture f, ProbeAttributeNode node)&#xD;
+[xUnit.net 00:00:01.75]         D:\Development\Bosak\.guard-tmp\schema-nested-sequences-20261120\NestedTests.cs(70,0): at AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(Int32 index)&#xD;
+[xUnit.net 00:00:01.75]            at InvokeStub_NestedTests.ContainerData_RefusesAndLeafRecovers(Object, Span`1)&#xD;
+[xUnit.net 00:00:01.75]            at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:02.30]   Finished:    Probe&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-20T08:49:17.9653472+01:00">
+        <Text>[xUnit.net 00:00:01.05]     AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 3, lexical: "2") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-20T08:49:18.2078907+01:00">
+        <Text>[xUnit.net 00:00:01.29]     AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 2, lexical: "12.5") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-20T08:49:18.3554698+01:00">
+        <Text>[xUnit.net 00:00:01.44]     AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 7, lexical: "false") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-20T08:49:18.4125964+01:00">
+        <Text>[xUnit.net 00:00:01.49]     AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 5, lexical: "3.75") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-20T08:49:18.4627346+01:00">
+        <Text>[xUnit.net 00:00:01.54]     AttributeTransportProbe.NestedTests.NestedLeafData_PreservesPayloadAndOrigin(index: 6, lexical: "1") [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-20T08:49:18.5115827+01:00">
+        <Text>[xUnit.net 00:00:01.59]     AttributeTransportProbe.NestedTests.NestedEvidence_ExpiresWithSnapshot [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-20T08:49:18.5631787+01:00">
+        <Text>[xUnit.net 00:00:01.64]     AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(index: 4) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-20T08:49:18.6142270+01:00">
+        <Text>[xUnit.net 00:00:01.70]     AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(index: 1) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-20T08:49:18.6649674+01:00">
+        <Text>[xUnit.net 00:00:01.75]     AttributeTransportProbe.NestedTests.ContainerData_RefusesAndLeafRecovers(index: 0) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

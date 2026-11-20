@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Document bounded exact integer leaf support                                                |
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Expose separate root attribute reads without changing existing leaf indexes              |
 //                      | Charles Korthout | 0.5   | 20-11-2026     | Expose independent root scalar availability and original simple-content typed reads      |
+//                      | Charles Korthout | 0.6   | 20-11-2026     | Document terminal-only document-order scalar reads for nested sequences                  |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -34,7 +35,7 @@ public sealed class NativeSchemaDocument : IDisposable
     public int ScalarCount => document.DecimalCount;
 
     /// <summary>Reads one present leaf through the issued scalar route and returns its detached typed value.</summary>
-    /// <param name="leafIndex">Zero-based present-leaf index in instance order.</param>
+    /// <param name="leafIndex">Zero-based terminal-leaf index in document order; containers and attributes are excluded.</param>
     /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
     /// <returns>A detached string, Boolean, exact integer or exact decimal usable after document and session disposal.</returns>
     /// <exception cref="ArgumentOutOfRangeException">The index is outside the present leaves.</exception>
