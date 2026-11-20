@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Share explicit mixed scalar profile with preserved decimal compatibility                  |
 //                      | Charles Korthout | 0.5   | 19-11-2026     | Add detached root attribute reads while preserving leaf-only counts and typed read indexes |
+//                      | Charles Korthout | 0.6   | 20-11-2026     | Read the original root scalar separately from unchanged leaf and attribute indexes       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -123,6 +124,18 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         }, cancellationToken);
     }
 
+    private bool HasRootScalar(Document document) => Work(() =>
+    {
+        Check(document);
+        return !document.Assessment.ElementFacts[0].HasNoTypedValue;
+    }, default);
+
+    private NativeScalarValue ReadRootScalar(Document document, CancellationToken cancellationToken) => Work(() =>
+    {
+        Check(document);
+        return ReadFact(document, document.Assessment.ElementFacts[0], NativeScalarValue.FromValue, cancellationToken);
+    }, cancellationToken);
+
     private int AttributeCount(Document document) => Work(() =>
     {
         Check(document);
@@ -209,6 +222,8 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         internal SchemaQuerySnapshot Snapshot { get; }
         internal NativeSchemaProvider.Assessment Assessment { get; }
         internal int DecimalCount => owner.LeafCount(this);
+        internal bool HasRootScalar => owner.HasRootScalar(this);
+        internal NativeScalarValue ReadRootScalar(CancellationToken cancellationToken = default) => owner.ReadRootScalar(this, cancellationToken);
         internal int AttributeCount => owner.AttributeCount(this);
         internal NativeAttributeValue ReadAttribute(int attributeIndex, CancellationToken cancellationToken = default) => owner.ReadAttribute(this, attributeIndex, cancellationToken);
         internal NativeScalarValue ReadScalar(int leafIndex, CancellationToken cancellationToken = default) => owner.ReadScalar(this, leafIndex, cancellationToken);

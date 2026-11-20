@@ -526,3 +526,58 @@ with quantity in urn:orders. Read capacity/overlap/cancellation/closed-owner and
 wrong-kind rules match existing scalar reads; bounded export retains parsed XML
 lexical spelling, not portable PSVI or canonical XSD text. This development slice
 is not part of published beta.1 or a full XSD implementation.
+
+## Decimal simple-content root values (0.6 development only)
+
+NativeSchemaSession admits anonymous/named root complex types with direct
+simpleContent/extension from xs:decimal or an admitted named decimal restriction.
+Existing root attributes/forms and limits apply. HasRootScalar reports whether
+the root has an admitted typed scalar; ReadRootScalar reads it separately.
+ScalarCount/ReadScalar remain leaf-only, and attribute indexes do not move.
+Existing element-only roots report HasRootScalar=false and ReadRootScalar refuses
+with FOTY0012. Decimal simple-content roots have zero leaf scalars.
+
+```csharp
+using Bosak.Schema;
+
+var schema = """
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:t="urn:price" targetNamespace="urn:price">
+  <xs:complexType name="PriceType"><xs:simpleContent><xs:extension base="xs:decimal">
+    <xs:attribute name="currency" type="xs:string" use="required"/>
+  </xs:extension></xs:simpleContent></xs:complexType>
+  <xs:element name="price" type="t:PriceType"/>
+</xs:schema>
+""";
+var options = new NativeSchemaSessionOptions(256, 256, 256, 65536, 1, 8, 1, 256, 256);
+var created = NativeSchemaSession.Create(schema, options);
+if (created.Outcome != NativeSchemaOutcome.Valid)
+{
+    Console.Error.WriteLine(created.Diagnostics[0].Code);
+    return;
+}
+using var session = created.Value!;
+var assessed = session.Assess("<p:price xmlns:p='urn:price' currency='EUR'>12.50</p:price>",
+    new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch, 0));
+if (assessed.Outcome != NativeSchemaOutcome.Valid)
+{
+    Console.Error.WriteLine(assessed.Diagnostics[0].Code);
+    return;
+}
+using var document = assessed.Value!;
+if (!document.HasRootScalar)
+    throw new InvalidOperationException("Expected a root decimal value.");
+Console.WriteLine(document.ReadRootScalar().DecimalValue.ToInvariantString(256));
+Console.WriteLine(document.ScalarCount);
+Console.WriteLine(document.ReadAttribute(0).Value.StringValue);
+Console.WriteLine(document.ExportXml());
+```
+
+The outputs begin12.5,0,EUR. The root's schema annotation remains complex PriceType;
+its actual atomic type is decimal. Root schema string-value collapses decimal
+whitespace; XML export retains parsed lexical text. Detached root values survive
+disposal without authority. Numeric representation/query/cache and all owner/
+cancellation/overlap/export rules remain explicit. NativeDecimalSession stays
+unchanged. Restriction/complex-base chains, other simple-content base families,
+assertions, nested/mixed content and broader defaults/imports remain excluded.
+This development slice does not make the entire orders fixture supported and is
+not part of published beta.1 or a full XSD implementation.

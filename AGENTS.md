@@ -319,3 +319,7 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## M2E1 root attribute candidate
 
 19November2026:950source cases(372implementation/578public), all837prior outcomes unchanged. Read docs/m2e-root-attributes/ADOPTION.md before semantic edits. Root-only opt-in attributes have separate counts/indexes/original facts and detached typed reads. Preserve declaration-order optional omission, form/type/normalization/capacity rules, no partial facts, legacy decimal refusal, same gate/lifetime and old no-attribute/leaf-attribute behavior. Sealed planning dossier remains historical. No commit/push/publication without explicit request.
+
+## Decimal simple-content candidate
+
+20November2026:1036source cases(386implementation/650public), all950prior outcomes unchanged. Read docs/decimal-simple-content/ADOPTION.md before edits. Only direct decimal simpleContent extension with current root attributes is admitted. HasRootScalar/ReadRootScalar never change leaf/attribute indexes; root complex annotation/declared type differs from actual decimal atomic type. Preserve normalized root string-value versus lexical export, old rootFOTY0012, owner/cache/gate and legacy decimal refusal. No commit/push/publication without explicit request.

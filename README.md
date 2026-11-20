@@ -94,3 +94,5 @@ The opt-in development facade also supports [bounded exact integer leaves](docs/
 The opt-in development facade also supports [named string length and enumeration restrictions](docs/m2d-string-restrictions/README.md).
 
 The opt-in development facade supports [bounded root attributes with separate typed reads](docs/m2e-root-attributes/README.md), preserving leaf indexes and the published beta.1 boundary.
+
+The opt-in development facade supports [decimal simple-content roots with separate typed reads](docs/decimal-simple-content/README.md), including price/currency documents.
