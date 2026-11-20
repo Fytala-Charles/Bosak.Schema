@@ -1,7 +1,7 @@
 // ===========================================================================================================================================================
 // AUTHOR               : Charles Korthout
 // CREATE DATE          : 15 November 2026
-// PURPOSE              : Binds native decimal assessment to authority-owned Core session facts.
+// PURPOSE              : Binds native schema assessment to original authority-owned Core facts.
 // SPECIAL NOTES        : Internal Core 1.81.2 adapter; finite profile only, no public native factory.
 //
 // COPYRIGHT            : Fytala
@@ -20,6 +20,7 @@
 //                      | Charles Korthout | 0.7   | 19-11-2026     | Share explicit mixed scalar profile with preserved decimal compatibility                  |
 //                      | Charles Korthout | 0.8   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
 //                      | Charles Korthout | 0.9   | 19-11-2026     | Add bounded exact integer leaves with original typed provenance                           |
+//                      | Charles Korthout | 1.0   | 19-11-2026     | Publish complete original attribute facts with separate element and attribute collections |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -30,7 +31,7 @@ using Bosak.XPath.Core.Xdm;
 
 namespace Bosak.Schema;
 
-/// <summary>Binds native decimal assessment to authority-owned Core session facts.</summary>
+/// <summary>Binds native schema assessment to original authority-owned Core facts.</summary>
 internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
 {
     private readonly NativeDecimalSchema schema;
@@ -45,7 +46,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         foreach (var plan in schema.Roots)
         {
             Add(plan.Root); Add(plan.Root.Type);
-            foreach (var declaration in plan.Children) { Add(declaration); Add(declaration.Type); }
+            foreach (var declaration in plan.Children.Concat(plan.AttributeUses)) { Add(declaration); Add(declaration.Type); }
         }
         foreach (var type in schema.NamedTypes) Add(type);
         DecimalType = Add(schema.DecimalType);
@@ -199,9 +200,12 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             var facts = states.Select((state, index) => new Facts(input, input.ElementNodes[index], origin,
                 provider.components[state.Declaration.Type], provider.components[state.Declaration], state)).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
-            if (!input.Publish(origin, facts))
+            var attributeFacts = result.Value.Attributes.Select(state => new Facts(input, input.RootAttributeNode(state.Declaration.ExpandedName), origin,
+                provider.components[state.Declaration.Type], provider.components[state.Declaration], state)).ToImmutableArray();
+            cancellationToken.ThrowIfCancellationRequested();
+            if (!input.Publish(origin, facts.AddRange(attributeFacts)))
                 return Assessment.Failure(SchemaAssessmentStatus.Unsupported, "BSK-NATIVE-REASSESSMENT", "Original assessment cannot be replaced.", request.Limits);
-            return new Assessment(input, origin, facts);
+            return new Assessment(input, origin, facts, attributeFacts);
         }
 
         public SchemaResult<ISchemaTypedValue> ConstructSimpleValue(XdmValue input, ISchemaComponentHandle targetType,
@@ -238,6 +242,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         }
         internal NativeSchemaInput Input { get; }
         internal NativeSessionNode Node { get; }
+        internal NativeDeclaration NativeDeclaration { get { Input.Check(); return state.Declaration; } }
         internal NativeType NativeType { get { Input.Check(); return state.Declaration.Type; } }
         public ISchemaComponentHandle Type { get { Input.Check(); return type; } }
         public ISchemaComponentHandle Declaration { get { Input.Check(); return declaration; } }
@@ -287,9 +292,10 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     {
         private readonly NativeSchemaInput? input;
         private readonly Origin? origin;
-        internal Assessment(NativeSchemaInput input, Origin origin, ImmutableArray<Facts> facts)
+        internal Assessment(NativeSchemaInput input, Origin origin, ImmutableArray<Facts> facts, ImmutableArray<Facts> attributeFacts = default)
         {
-            this.input = input; this.origin = origin; Facts = facts; Status = SchemaAssessmentStatus.Valid;
+            this.input = input; this.origin = origin; ElementFacts = facts; AttributeFacts = attributeFacts.IsDefault ? [] : attributeFacts;
+            Facts = facts.AddRange(AttributeFacts); Status = SchemaAssessmentStatus.Valid;
         }
         private Assessment(SchemaAssessmentStatus status, ImmutableArray<SchemaAssessmentDiagnostic> diagnostics, bool truncated,
             NativeDecimalUnsupportedReason reason)
@@ -298,6 +304,8 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         }
         internal NativeDecimalUnsupportedReason UnsupportedReason { get; }
         internal ImmutableArray<Facts> Facts { get; } = [];
+        internal ImmutableArray<Facts> ElementFacts { get; } = [];
+        internal ImmutableArray<Facts> AttributeFacts { get; } = [];
         public SchemaAssessmentStatus Status { get; }
         public ISchemaAssessmentEvidence? Evidence => origin is null ? null : this;
         public IXdmNode? ValidatedRoot { get { input?.Check(); return input?.Root; } }

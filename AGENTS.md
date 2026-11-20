@@ -311,3 +311,11 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## M2D1 string restriction candidate
 
 19November2026:837source cases(355implementation/482public). Read docs/m2d-string-restrictions/ADOPTION.md before semantic edits. Only opt-in direct named xs:string restrictions admit Unicode scalar length/minLength/maxLength and exact ordinal enumeration. Preserve parsed UTF16representation limits,16supplied enumeration ceiling, original named facts, legacy decimal refusal and decimal-only assertions. Pattern/whiteSpace/anonymous types/restriction chains remain excluded. No commit/push/publication without explicit request.
+
+## M2E1 attribute contract planning
+
+19November2026: current837source suite is unchanged after PR23 merge098fdaf. Read docs/m2e-attributes/CONTRACT.md and proposed ADR012 before attribute adoption/implementation.27synthetic public Core probes per minimum/current lane qualify attribute facts/transport only, not native XSD validation. Proposed root-only separate attribute reads preserve leaf indexing and old decimal behavior; no new API/adoption or release acceptance yet. No commit/push/publication without explicit request.
+
+## M2E1 root attribute candidate
+
+19November2026:950source cases(372implementation/578public), all837prior outcomes unchanged. Read docs/m2e-root-attributes/ADOPTION.md before semantic edits. Root-only opt-in attributes have separate counts/indexes/original facts and detached typed reads. Preserve declaration-order optional omission, form/type/normalization/capacity rules, no partial facts, legacy decimal refusal, same gate/lifetime and old no-attribute/leaf-attribute behavior. Sealed planning dossier remains historical. No commit/push/publication without explicit request.

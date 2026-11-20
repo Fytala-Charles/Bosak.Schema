@@ -448,3 +448,81 @@ Console.WriteLine(document.ExportXml());
 The label has two Unicode characters and three UTF-16 units. An in-bound facet
 mismatch is Invalid; explicit representation overflow is Unsupported. Original
 named type facts remain internal; returned strings and XML carry no authority.
+
+## Separate root attribute reads (0.6 development only)
+
+NativeSchemaSession admits up to16local required/optional attributes on an
+assessed root's anonymous or named complex type, after its sequence and before
+assertions. Attribute types use existing scalar families and admitted named
+string/decimal restrictions. form/attributeFormDefault distinguish qualified and
+unqualified names; a default XML namespace does not qualify unprefixed attributes.
+Namespace declarations are not scalar attributes.
+
+ScalarCount/ReadScalar remain leaf-only. AttributeCount/ReadAttribute use separate
+present-root-attribute indexes in schema declaration order, omitting absent optional
+uses regardless of XML attribute order. A present empty string, false or zero is
+a real value. NativeAttributeValue exposes detached NamespaceUri, LocalName and
+Value; it carries no schema authority and survives document/session disposal.
+
+For an attribute-enabled root, missing required or undeclared ordinary root
+attributes are Invalid. Roots with no attribute uses keep their earlier
+Unsupported/Attributes behavior. Leaf attributes, defaults/fixed, global refs,
+groups/wildcards, anonymous types, xml/xsi requests and attribute assertions remain
+excluded. NativeDecimalSession remains decimal-only. XML attribute normalization
+precedes datatype processing; UTF16string and native numeric/Boolean limits match
+leaf limits, and query/cache capacities remain separate read constraints.
+
+```csharp
+using System.Globalization;
+using Bosak.Schema;
+
+var schema = """
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:t="urn:orders"
+           targetNamespace="urn:orders" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:simpleType name="Currency"><xs:restriction base="xs:string">
+    <xs:length value="3"/><xs:enumeration value="EUR"/><xs:enumeration value="USD"/>
+  </xs:restriction></xs:simpleType>
+  <xs:complexType name="Order"><xs:sequence>
+    <xs:element name="id" type="xs:string"/><xs:element name="amount" type="xs:decimal"/>
+  </xs:sequence>
+    <xs:attribute name="currency" type="t:Currency" use="required"/>
+    <xs:attribute name="paid" type="xs:boolean"/>
+    <xs:attribute name="quantity" type="xs:integer" form="qualified" use="required"/>
+  </xs:complexType>
+  <xs:element name="order" type="t:Order"/>
+</xs:schema>
+""";
+var options = new NativeSchemaSessionOptions(256, 256, 256, 65536, 1, 32, 1, 256, 256);
+var created = NativeSchemaSession.Create(schema, options);
+if (created.Outcome != NativeSchemaOutcome.Valid)
+{
+    Console.Error.WriteLine(created.Diagnostics[0].Code);
+    return;
+}
+using var session = created.Value!;
+var assessed = session.Assess("""
+<o:order xmlns:o="urn:orders" o:quantity="9223372036854775808" paid="0" currency="EUR"><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>
+""", new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch, 0));
+if (assessed.Outcome != NativeSchemaOutcome.Valid)
+{
+    Console.Error.WriteLine(assessed.Diagnostics[0].Code);
+    return;
+}
+using var document = assessed.Value!;
+Console.WriteLine(document.ReadScalar(0).StringValue);
+Console.WriteLine(document.ReadScalar(1).DecimalValue.ToInvariantString(256));
+for (var index = 0; index < document.AttributeCount; index++)
+{
+    var attribute = document.ReadAttribute(index);
+    Console.WriteLine("{" + attribute.NamespaceUri + "}" + attribute.LocalName + ": " + attribute.Value.Kind);
+}
+Console.WriteLine(document.ReadAttribute(2).Value.IntegerValue.ToString(CultureInfo.InvariantCulture));
+Console.WriteLine(document.ExportXml());
+```
+
+The two leaf indexes remain id and amount. The three attribute indexes are
+currency/String, paid/Boolean(false) and quantity/Integer(9223372036854775808),
+with quantity in urn:orders. Read capacity/overlap/cancellation/closed-owner and
+wrong-kind rules match existing scalar reads; bounded export retains parsed XML
+lexical spelling, not portable PSVI or canonical XSD text. This development slice
+is not part of published beta.1 or a full XSD implementation.

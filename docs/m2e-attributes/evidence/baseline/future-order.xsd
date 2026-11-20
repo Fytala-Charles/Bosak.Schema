@@ -1,0 +1,14 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:t="urn:orders"
+           targetNamespace="urn:orders" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:simpleType name="Currency"><xs:restriction base="xs:string">
+    <xs:length value="3"/><xs:enumeration value="EUR"/><xs:enumeration value="USD"/>
+  </xs:restriction></xs:simpleType>
+  <xs:complexType name="Order"><xs:sequence>
+    <xs:element name="id" type="xs:string"/><xs:element name="amount" type="xs:decimal"/>
+  </xs:sequence>
+    <xs:attribute name="currency" type="t:Currency" use="required"/>
+    <xs:attribute name="paid" type="xs:boolean"/>
+    <xs:attribute name="quantity" type="xs:integer" form="qualified" use="required"/>
+  </xs:complexType>
+  <xs:element name="order" type="t:Order"/>
+</xs:schema>

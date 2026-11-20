@@ -1,7 +1,7 @@
 // ===========================================================================================================================================================
 // AUTHOR               : Charles Korthout
 // CREATE DATE          : 19 November 2026
-// PURPOSE              : Owns synchronous opt-in string, decimal, Boolean and integer schema assessment.
+// PURPOSE              : Owns synchronous opt-in scalar schema assessment with local root attributes.
 // SPECIAL NOTES        : Bounded opt-in scalar profile; existing decimal facade remains unchanged.
 //
 // COPYRIGHT            : Fytala
@@ -14,12 +14,13 @@
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Document bounded exact integer leaf support                                                |
+//                      | Charles Korthout | 0.4   | 19-11-2026     | Document the adopted opt-in local root attribute profile                                  |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
 namespace Bosak.Schema;
 
-/// <summary>Owns a synchronous session for the finite native string/decimal/Boolean/integer schema profile.</summary>
+/// <summary>Owns a synchronous session for finite native scalar leaves and local root attributes.</summary>
 /// <remarks>String input only. Operations on one session must be sequential; overlapping operations throw
 /// <see cref="NotSupportedException"/>. Disposal waits for admitted synchronous work. No callbacks, raw
 /// provider authority, general query syntax or cross-universe handoff are exposed.</remarks>
