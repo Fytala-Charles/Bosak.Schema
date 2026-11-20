@@ -85,3 +85,7 @@ PR23 merged098fdaf/main CI green837/54/6. Isolated docs/native-attribute-contrac
 ## 19 November 2026 - root attribute implementation
 
 M2E1 is locally implemented under docs/m2e-root-attributes with950source cases and unchanged prior837outcomes. Separate owned attribute reads preserve leaf indexing and original facts. Proposed ADR012/general API acceptance and publication remain separate; source is uncommitted. Prior docs/m2e-attributes planning receipts remain sealed.
+
+## 20 November 2026 - decimal simple content
+
+Isolated feature/native-decimal-simple-content ond4eca99 implements direct decimal simple-content root reads with1036source cases. See docs/decimal-simple-content/README.md and ADOPTION.md. Prior950outcomes unchanged; proposal/actual qualification separate, no Core pin/release or general API acceptance. Source is uncommitted.

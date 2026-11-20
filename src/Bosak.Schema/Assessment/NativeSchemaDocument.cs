@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Document bounded exact integer leaf support                                                |
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Expose separate root attribute reads without changing existing leaf indexes              |
+//                      | Charles Korthout | 0.5   | 20-11-2026     | Expose independent root scalar availability and original simple-content typed reads      |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -42,6 +43,20 @@ public sealed class NativeSchemaDocument : IDisposable
     /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
     public NativeScalarValue ReadScalar(int leafIndex, CancellationToken cancellationToken = default) =>
         document.ReadScalar(leafIndex, cancellationToken);
+
+    /// <summary>Gets whether the assessed root has an admitted scalar typed value.</summary>
+    /// <remarks>False for existing element-only roots; independent of leaf and attribute counts.</remarks>
+    /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
+    /// <exception cref="NotSupportedException">Another session operation is admitted.</exception>
+    public bool HasRootScalar => document.HasRootScalar;
+
+    /// <summary>Reads a decimal simple-content root through its original typed facts.</summary>
+    /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
+    /// <returns>A detached decimal scalar usable after document and session disposal.</returns>
+    /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
+    /// <exception cref="NotSupportedException">The root has no typed scalar (FOTY0012), overlapping work is admitted, or query limits are exceeded.</exception>
+    /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
+    public NativeScalarValue ReadRootScalar(CancellationToken cancellationToken = default) => document.ReadRootScalar(cancellationToken);
 
     /// <summary>Gets the count of present declared root attributes, omitting absent optional uses.</summary>
     /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>

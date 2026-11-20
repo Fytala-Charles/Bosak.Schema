@@ -1,0 +1,13 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="urn:fytala:bosak:schema:test"
+           xmlns:t="urn:fytala:bosak:schema:test"
+           elementFormDefault="qualified">
+<xs:complexType name="PriceType">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal">
+        <xs:attribute name="currency" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+<xs:element name="price" type="t:PriceType"/>
+</xs:schema>

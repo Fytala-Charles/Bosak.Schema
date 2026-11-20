@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Retain expanded root declaration identity in guarded node annotations                      |
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Adopt bounded named complex types and shared expanded component identity                  |
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Expose original local attribute declaration metadata under the existing owner guard      |
+//                      | Charles Korthout | 0.5   | 20-11-2026     | Decouple complex annotation from typed-value absence and retain normalized root text     |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -36,7 +37,7 @@ internal sealed class NativeSessionNode(NativeSchemaInput input, XDocumentNode r
     public string NamespaceUri => Read(() => raw.NamespaceUri);
     public string Prefix => Read(() => raw.Prefix);
     public string EncodedPrefix => Read(() => raw.EncodedPrefix);
-    public string StringValue => Read(() => raw.StringValue);
+    public string StringValue => Read(() => Facts?.NormalizedStringValue ?? raw.StringValue);
     public XdmValue TypedValue
     {
         get
@@ -52,13 +53,13 @@ internal sealed class NativeSessionNode(NativeSchemaInput input, XDocumentNode r
         }
     }
     public bool HasNoTypedValue => Read(() => Facts?.HasNoTypedValue ?? raw.HasNoTypedValue);
-    public bool IsComplexType => Read(() => Facts?.HasNoTypedValue ?? raw.IsComplexType);
+    public bool IsComplexType => Read(() => Facts?.NativeType.IsComplex ?? raw.IsComplexType);
     public bool IsId => Read(() => false);
     public bool IsIdref => Read(() => false);
     public (string NamespaceUri, string LocalName)? SchemaTypeAnnotation =>
         Read<(string, string)?>(() => Facts?.NativeType is { Name: { } name } type ? (type.NamespaceUri, name) : null);
     public (string NamespaceUri, string LocalName)? SchemaElementDeclaration =>
-        Read<(string, string)?>(() => Facts is { HasNoTypedValue: true } ? (raw.NamespaceUri, raw.LocalName) : null);
+        Read<(string, string)?>(() => Facts?.NativeType.IsComplex == true ? (raw.NamespaceUri, raw.LocalName) : null);
     public (string NamespaceUri, string LocalName)? SchemaAttributeDeclaration =>
         Read<(string, string)?>(() => Facts?.NativeDeclaration is { IsAttribute: true } d ? (d.NamespaceUri, d.Name) : null);
     public bool IsNilled => Read(() => false);

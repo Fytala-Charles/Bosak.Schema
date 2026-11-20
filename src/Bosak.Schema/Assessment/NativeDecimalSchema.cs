@@ -22,6 +22,7 @@
 //                      | Charles Korthout | 0.9   | 19-11-2026     | Add bounded exact integer leaves with original typed provenance                           |
 //                      | Charles Korthout | 1.0   | 19-11-2026     | Add bounded named string restrictions with Unicode length and exact enumeration facets      |
 //                      | Charles Korthout | 1.1   | 19-11-2026     | Adopt opt-in local root attributes without changing leaf indexes or legacy profiles         |
+//                      | Charles Korthout | 1.2   | 20-11-2026     | Adopt bounded decimal simple-content roots with original complex type identity             |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -79,7 +80,7 @@ internal sealed class NativeDecimalSchema
             Require(root.Name == Xs + "schema", "Schema root or namespace is unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
             var attributeProfile = maxStringCharacters is not null && root.Elements(Xs + "complexType")
                 .Concat(root.Elements(Xs + "element").SelectMany(e => e.Elements(Xs + "complexType")))
-                .Any(c => c.Elements(Xs + "attribute").Any());
+                .Any(c => c.Elements(Xs + "attribute").Any() || c.Elements(Xs + "simpleContent").Elements(Xs + "extension").Elements(Xs + "attribute").Any());
             if (attributeProfile) Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault", "attributeFormDefault");
             else Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault");
             var attributeForm = attributeProfile ? Form(root, "attributeFormDefault", "unqualified") : "unqualified";
@@ -181,6 +182,8 @@ internal sealed class NativeDecimalSchema
         Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken)
     {
         var members = Elements(complex);
+        if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
+            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken);
         var attributeMembers = members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray();
         var assertionMembers = members.Skip(1 + attributeMembers.Length).ToArray();
         Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && assertionMembers.Length <= 8 &&
@@ -213,6 +216,31 @@ internal sealed class NativeDecimalSchema
             children.Add(new NativeDeclaration(name, localType, min, max, namespaceUri));
         }
 
+        var attributeUses = CompileAttributes(attributeMembers, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
+
+        var assertionNames = children.Where(c => !c.Type.IsString && !c.Type.IsBoolean && !c.Type.IsInteger).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
+        var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
+        foreach (var assertion in assertionMembers)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Attributes(assertion, "test", "xpathDefaultNamespace");
+            var defaultNamespace = AssertionNamespace(assertion, targetNamespace, assertionNamespace);
+            Require(Elements(assertion).Count == 0, "Assertion children are unsupported.", NativeDecimalUnsupportedReason.AssertionGrammar);
+            var expression = (string?)assertion.Attribute("test");
+            Require(expression is not null, "Assertion test is required.", NativeDecimalUnsupportedReason.AssertionGrammar);
+            plans.Add(NativeDecimalAssertion.Compile(expression!, assertionNames, limits,
+                name => ResolveAssertionName(assertion, name, defaultNamespace, assertionNames)));
+        }
+
+        return new NativeDecimalSchema(root, children.ToImmutable(), plans.ToImmutable(), limits) { AttributeUses = attributeUses };
+    }
+
+    private static ImmutableArray<NativeDeclaration> CompileAttributes(IReadOnlyList<XElement> attributeMembers,
+        string targetNamespace, string attributeForm, NativeType decimalType, NativeType? stringType, NativeType? booleanType,
+        NativeType? integerType, Dictionary<XName, NativeType> simple, CancellationToken cancellationToken)
+    {
+        Require(attributeMembers.All(e => e.Name == Xs + "attribute"), "Only local attributes are admitted here.", NativeDecimalUnsupportedReason.DeclarationShape);
+        Require(attributeMembers.Count <= 16, "Root attribute use ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         var attributeUses = ImmutableArray.CreateBuilder<NativeDeclaration>();
         var attributeNames = new HashSet<XName>();
         foreach (var attribute in attributeMembers)
@@ -231,21 +259,23 @@ internal sealed class NativeDecimalSchema
             attributeUses.Add(new NativeDeclaration(name, type, use == "required" ? 1 : 0, 1, ns, isAttribute: true));
         }
 
-        var assertionNames = children.Where(c => !c.Type.IsString && !c.Type.IsBoolean && !c.Type.IsInteger).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
-        var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
-        foreach (var assertion in assertionMembers)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            Attributes(assertion, "test", "xpathDefaultNamespace");
-            var defaultNamespace = AssertionNamespace(assertion, targetNamespace, assertionNamespace);
-            Require(Elements(assertion).Count == 0, "Assertion children are unsupported.", NativeDecimalUnsupportedReason.AssertionGrammar);
-            var expression = (string?)assertion.Attribute("test");
-            Require(expression is not null, "Assertion test is required.", NativeDecimalUnsupportedReason.AssertionGrammar);
-            plans.Add(NativeDecimalAssertion.Compile(expression!, assertionNames, limits,
-                name => ResolveAssertionName(assertion, name, defaultNamespace, assertionNames)));
-        }
+        return attributeUses.ToImmutable();
+    }
 
-        return new NativeDecimalSchema(root, children.ToImmutable(), plans.ToImmutable(), limits) { AttributeUses = attributeUses.ToImmutable() };
+    private static NativeDecimalSchema CompileSimpleContent(XElement content, NativeDeclaration root,
+        string targetNamespace, string attributeForm, NativeType decimalType, NativeType stringType, NativeType? booleanType,
+        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken)
+    {
+        Attributes(content);
+        var extension = Single(content, "extension");
+        Attributes(extension, "base");
+        var baseName = ResolveTypeName(extension, "base");
+        NativeType? baseType = baseName == Xs + "decimal" ? decimalType : simple.GetValueOrDefault(baseName);
+        Require(baseType is not null && !baseType.IsString && !baseType.IsBoolean && !baseType.IsInteger,
+            "Only direct admitted decimal simple-content bases are supported.", NativeDecimalUnsupportedReason.ValueType);
+        var uses = CompileAttributes(Elements(extension), targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
+        var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri, contentType: baseType);
+        return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { AttributeUses = uses };
     }
 
     private static NativeType ResolveScalarType(XElement declaration, NativeType decimalType, NativeType? stringType,
@@ -297,6 +327,15 @@ internal sealed class NativeDecimalSchema
             }
             else InstanceAttributes(root);
             Check(found, "Unexpected root element.");
+            if (selected!.Root.Type.ContentType is { } contentType)
+            {
+                Check(!root.HasElements, "Simple-content root cannot contain child elements.");
+                Require(root.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
+                var scalarDeclaration = new NativeDeclaration(selected.Root.Name, contentType, 1, 1, selected.Root.NamespaceUri);
+                var state = AssessScalar(root.Value, scalarDeclaration) with { Declaration = selected.Root, NormalizedStringValue = Collapse(root.Value) };
+                cancellationToken.ThrowIfCancellationRequested();
+                return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [state], attributeStates.ToImmutable()));
+            }
             foreach (var text in root.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only root contains non-whitespace text.");
             var values = new Dictionary<string, List<XdmExactDecimal>>(StringComparer.Ordinal);
             var elements = ImmutableArray.CreateBuilder<NativeElementState>();
@@ -553,8 +592,10 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null)
 {
+    internal NativeType? ContentType { get; } = contentType;
+    internal bool IsComplex => HasNoTypedValue || ContentType is not null;
     internal NativeStringFacets? StringFacets { get; } = stringFacets;
     internal bool IsInteger { get; } = isInteger;
     internal bool IsBoolean { get; } = isBoolean;
@@ -574,7 +615,7 @@ internal sealed class NativeDeclaration(string name, NativeType type, int minOcc
     internal int MinOccurs { get; } = minOccurs;
     internal int MaxOccurs { get; } = maxOccurs;
 }
-internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null)
+internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null)
 {
     internal bool IsNilled => false;
 }

@@ -21,6 +21,7 @@
 //                      | Charles Korthout | 0.8   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
 //                      | Charles Korthout | 0.9   | 19-11-2026     | Add bounded exact integer leaves with original typed provenance                           |
 //                      | Charles Korthout | 1.0   | 19-11-2026     | Publish complete original attribute facts with separate element and attribute collections |
+//                      | Charles Korthout | 1.1   | 20-11-2026     | Retain complex root governing identity with its distinct decimal atomic content type     |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -46,6 +47,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         foreach (var plan in schema.Roots)
         {
             Add(plan.Root); Add(plan.Root.Type);
+            if (plan.Root.Type.ContentType is { } contentType) Add(contentType);
             foreach (var declaration in plan.Children.Concat(plan.AttributeUses)) { Add(declaration); Add(declaration.Type); }
         }
         foreach (var type in schema.NamedTypes) Add(type);
@@ -198,10 +200,12 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             var origin = new Origin(this, input, date, timezone);
             var states = result.Value!.Elements;
             var facts = states.Select((state, index) => new Facts(input, input.ElementNodes[index], origin,
-                provider.components[state.Declaration.Type], provider.components[state.Declaration], state)).ToImmutableArray();
+                provider.components[state.Declaration.Type], provider.components[state.Declaration], state,
+                provider.components[state.Declaration.Type.ContentType ?? state.Declaration.Type])).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
             var attributeFacts = result.Value.Attributes.Select(state => new Facts(input, input.RootAttributeNode(state.Declaration.ExpandedName), origin,
-                provider.components[state.Declaration.Type], provider.components[state.Declaration], state)).ToImmutableArray();
+                provider.components[state.Declaration.Type], provider.components[state.Declaration], state,
+                provider.components[state.Declaration.Type.ContentType ?? state.Declaration.Type])).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
             if (!input.Publish(origin, facts.AddRange(attributeFacts)))
                 return Assessment.Failure(SchemaAssessmentStatus.Unsupported, "BSK-NATIVE-REASSESSMENT", "Original assessment cannot be replaced.", request.Limits);
@@ -232,16 +236,17 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         private readonly Origin origin;
         private readonly NativeElementState state;
         private readonly IssuedValue? value;
-        internal Facts(NativeSchemaInput input, NativeSessionNode node, Origin origin, Component type, Component declaration, NativeElementState state)
+        internal Facts(NativeSchemaInput input, NativeSessionNode node, Origin origin, Component type, Component declaration, NativeElementState state, Component? actualType = null)
         {
             Input = input; Node = node; this.origin = origin; this.type = type; this.declaration = declaration; this.state = state;
-            if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar));
-            else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, XdmValue.FromString(text));
-            else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical));
-            else if (state.IntegerValue is { } integer) value = new IssuedValue(input, origin, type, XdmValue.FromInteger(integer));
+            if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
+            else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, XdmValue.FromString(text), actualType);
+            else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical), actualType);
+            else if (state.IntegerValue is { } integer) value = new IssuedValue(input, origin, type, XdmValue.FromInteger(integer), actualType);
         }
         internal NativeSchemaInput Input { get; }
         internal NativeSessionNode Node { get; }
+        internal string? NormalizedStringValue { get { Input.Check(); return state.NormalizedStringValue; } }
         internal NativeDeclaration NativeDeclaration { get { Input.Check(); return state.Declaration; } }
         internal NativeType NativeType { get { Input.Check(); return state.Declaration.Type; } }
         public ISchemaComponentHandle Type { get { Input.Check(); return type; } }
@@ -257,7 +262,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         }
     }
 
-    private sealed class IssuedValue(NativeSchemaInput input, Origin origin, Component type, XdmValue scalar) : ISchemaTypedValue
+    private sealed class IssuedValue(NativeSchemaInput input, Origin origin, Component type, XdmValue scalar, Component? actualType = null) : ISchemaTypedValue
     {
         internal NativeSchemaInput Input => input;
         internal Origin Origin => origin;
@@ -272,7 +277,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             input.Check();
             yield return Item();
         }
-        private SchemaAtomicItem Item() => new(scalar, new Provenance(input, origin, type));
+        private SchemaAtomicItem Item() => new(scalar, new Provenance(input, origin, type, actualType ?? type));
         public bool TryGetSingleAtomic(out SchemaAtomicItem item)
         {
             input.Check();
@@ -281,10 +286,10 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         }
     }
 
-    private sealed class Provenance(NativeSchemaInput input, Origin origin, Component type) : ISchemaAtomicProvenance
+    private sealed class Provenance(NativeSchemaInput input, Origin origin, Component type, Component actualType) : ISchemaAtomicProvenance
     {
         public ISchemaComponentHandle DeclaredType { get { input.Check(); return type; } }
-        public ISchemaComponentHandle ActualType { get { input.Check(); return type; } }
+        public ISchemaComponentHandle ActualType { get { input.Check(); return actualType; } }
         public ISchemaAssessmentOrigin OriginalAssessment { get { input.Check(); return origin; } }
     }
 
