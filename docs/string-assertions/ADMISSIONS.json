@@ -1,0 +1,338 @@
+[
+  {
+    "file": "tests/TestData/Strings/m2c1-cases.json",
+    "id": "M2C1-27",
+    "originalFileSha256": "d4c8a044e5be79c5db2b0b9bb18706340d555bdc2606e642d4ce539a55302d6f",
+    "before": {
+      "id": "M2C1-27",
+      "label": "nondecimal assertion exists(t:id)",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:string'/><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:assert test='exists(t:id)'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": "AssertionGrammar",
+      "maxStringCharacters": 256,
+      "values": [
+        {
+          "kind": "String",
+          "value": " INV-001 "
+        },
+        {
+          "kind": "Decimal",
+          "value": "12.5"
+        }
+      ],
+      "sections": [
+        "Datatypes3.3.1/4.3.6",
+        "Structures3.3.4",
+        "XML1.0 2.11/4.1"
+      ],
+      "officialW3cCase": false
+    },
+    "after": {
+      "id": "M2C1-27",
+      "label": "nondecimal assertion exists(t:id)",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:string'/><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:assert test='exists(t:id)'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "maxStringCharacters": 256,
+      "values": [
+        {
+          "kind": "String",
+          "value": " INV-001 "
+        },
+        {
+          "kind": "Decimal",
+          "value": "12.5"
+        }
+      ],
+      "sections": [
+        "Datatypes3.3.1/4.3.6",
+        "Structures3.3.4",
+        "XML1.0 2.11/4.1"
+      ],
+      "officialW3cCase": false,
+      "semanticAdmission": "2026-11-20 bounded string assertions; docs/string-assertions/ADMISSIONS.json"
+    }
+  },
+  {
+    "file": "tests/TestData/Strings/m2c1-cases.json",
+    "id": "M2C1-28",
+    "originalFileSha256": "d4c8a044e5be79c5db2b0b9bb18706340d555bdc2606e642d4ce539a55302d6f",
+    "before": {
+      "id": "M2C1-28",
+      "label": "nondecimal assertion count(t:id) eq 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:string'/><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:assert test='count(t:id) eq 1'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": "AssertionGrammar",
+      "maxStringCharacters": 256,
+      "values": [
+        {
+          "kind": "String",
+          "value": " INV-001 "
+        },
+        {
+          "kind": "Decimal",
+          "value": "12.5"
+        }
+      ],
+      "sections": [
+        "Datatypes3.3.1/4.3.6",
+        "Structures3.3.4",
+        "XML1.0 2.11/4.1"
+      ],
+      "officialW3cCase": false
+    },
+    "after": {
+      "id": "M2C1-28",
+      "label": "nondecimal assertion count(t:id) eq 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:string'/><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:assert test='count(t:id) eq 1'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "maxStringCharacters": 256,
+      "values": [
+        {
+          "kind": "String",
+          "value": " INV-001 "
+        },
+        {
+          "kind": "Decimal",
+          "value": "12.5"
+        }
+      ],
+      "sections": [
+        "Datatypes3.3.1/4.3.6",
+        "Structures3.3.4",
+        "XML1.0 2.11/4.1"
+      ],
+      "officialW3cCase": false,
+      "semanticAdmission": "2026-11-20 bounded string assertions; docs/string-assertions/ADMISSIONS.json"
+    }
+  },
+  {
+    "file": "tests/TestData/Strings/m2c1-cases.json",
+    "id": "M2C1-29",
+    "originalFileSha256": "d4c8a044e5be79c5db2b0b9bb18706340d555bdc2606e642d4ce539a55302d6f",
+    "before": {
+      "id": "M2C1-29",
+      "label": "nondecimal assertion empty(t:id)",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:string'/><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:assert test='empty(t:id)'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": "AssertionGrammar",
+      "maxStringCharacters": 256,
+      "values": [
+        {
+          "kind": "String",
+          "value": " INV-001 "
+        },
+        {
+          "kind": "Decimal",
+          "value": "12.5"
+        }
+      ],
+      "sections": [
+        "Datatypes3.3.1/4.3.6",
+        "Structures3.3.4",
+        "XML1.0 2.11/4.1"
+      ],
+      "officialW3cCase": false
+    },
+    "after": {
+      "id": "M2C1-29",
+      "label": "nondecimal assertion empty(t:id)",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:string'/><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:assert test='empty(t:id)'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "maxStringCharacters": 256,
+      "values": [
+        {
+          "kind": "String",
+          "value": " INV-001 "
+        },
+        {
+          "kind": "Decimal",
+          "value": "12.5"
+        }
+      ],
+      "sections": [
+        "Datatypes3.3.1/4.3.6",
+        "Structures3.3.4",
+        "XML1.0 2.11/4.1"
+      ],
+      "officialW3cCase": false,
+      "semanticAdmission": "2026-11-20 bounded string assertions; docs/string-assertions/ADMISSIONS.json"
+    }
+  },
+  {
+    "file": "tests/TestData/StringFacets/m2d1-cases.json",
+    "id": "M2D1-75",
+    "originalFileSha256": "725bb09d14453e77f5b1870fdbbb357d878ea3e90e7facbdad65f5afdadd6335",
+    "before": {
+      "id": "M2D1-75",
+      "description": "Named string assertion excluded count(s) eq 1",
+      "sections": [
+        "Datatypes3.3.1",
+        "Datatypes4.3.1-3/4.3.5-6",
+        "Structures3.3.4"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence><xs:assert xpathDefaultNamespace=\"urn:s\" test=\"count(s) eq 1\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+      "maxStringCharacters": 256,
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Unsupported",
+      "values": [],
+      "unsupportedReason": "AssertionGrammar"
+    },
+    "after": {
+      "id": "M2D1-75",
+      "description": "Named string assertion admitted count(s) eq 1",
+      "sections": [
+        "Datatypes3.3.1",
+        "Datatypes4.3.1-3/4.3.5-6",
+        "Structures3.3.4"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence><xs:assert xpathDefaultNamespace=\"urn:s\" test=\"count(s) eq 1\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+      "maxStringCharacters": 256,
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "abc"
+        }
+      ],
+      "unsupportedReason": null,
+      "semanticAdmission": "2026-11-20 bounded string assertions; docs/string-assertions/ADMISSIONS.json"
+    }
+  },
+  {
+    "file": "tests/TestData/StringFacets/m2d1-cases.json",
+    "id": "M2D1-76",
+    "originalFileSha256": "725bb09d14453e77f5b1870fdbbb357d878ea3e90e7facbdad65f5afdadd6335",
+    "before": {
+      "id": "M2D1-76",
+      "description": "Named string assertion excluded exists(s)",
+      "sections": [
+        "Datatypes3.3.1",
+        "Datatypes4.3.1-3/4.3.5-6",
+        "Structures3.3.4"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence><xs:assert xpathDefaultNamespace=\"urn:s\" test=\"exists(s)\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+      "maxStringCharacters": 256,
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Unsupported",
+      "values": [],
+      "unsupportedReason": "AssertionGrammar"
+    },
+    "after": {
+      "id": "M2D1-76",
+      "description": "Named string assertion admitted exists(s)",
+      "sections": [
+        "Datatypes3.3.1",
+        "Datatypes4.3.1-3/4.3.5-6",
+        "Structures3.3.4"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence><xs:assert xpathDefaultNamespace=\"urn:s\" test=\"exists(s)\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+      "maxStringCharacters": 256,
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "abc"
+        }
+      ],
+      "unsupportedReason": null,
+      "semanticAdmission": "2026-11-20 bounded string assertions; docs/string-assertions/ADMISSIONS.json"
+    }
+  },
+  {
+    "file": "tests/TestData/StringFacets/m2d1-cases.json",
+    "id": "M2D1-77",
+    "originalFileSha256": "725bb09d14453e77f5b1870fdbbb357d878ea3e90e7facbdad65f5afdadd6335",
+    "before": {
+      "id": "M2D1-77",
+      "description": "Named string assertion excluded empty(s)",
+      "sections": [
+        "Datatypes3.3.1",
+        "Datatypes4.3.1-3/4.3.5-6",
+        "Structures3.3.4"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence><xs:assert xpathDefaultNamespace=\"urn:s\" test=\"empty(s)\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+      "maxStringCharacters": 256,
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Unsupported",
+      "values": [],
+      "unsupportedReason": "AssertionGrammar"
+    },
+    "after": {
+      "id": "M2D1-77",
+      "description": "Named string assertion admitted empty(s)",
+      "sections": [
+        "Datatypes3.3.1",
+        "Datatypes4.3.1-3/4.3.5-6",
+        "Structures3.3.4"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence><xs:assert xpathDefaultNamespace=\"urn:s\" test=\"empty(s)\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+      "maxStringCharacters": 256,
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "values": [],
+      "unsupportedReason": null,
+      "semanticAdmission": "2026-11-20 bounded string assertions; docs/string-assertions/ADMISSIONS.json"
+    }
+  },
+  {
+    "file": "tests/TestData/AnonymousSimpleRestrictions/cases.json",
+    "id": "AS-033",
+    "originalFileSha256": "c26e22fbf6b56c4d6adcf842862d9ba6aeb495d72665d1e32f919062fdbe0034",
+    "before": {
+      "id": "AS-033",
+      "label": "string assertion remains excluded",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:string\"></xs:restriction></xs:simpleType></xs:element></xs:sequence><xs:assert test=\"exists(v)\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>x</v></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Valid",
+      "values": [],
+      "reason": "AssertionGrammar",
+      "clauses": [
+        "Structures3.3.2-3.3.4",
+        "Structures3.16.2.1-2",
+        "Datatypes4.1-4.3"
+      ]
+    },
+    "after": {
+      "id": "AS-033",
+      "label": "anonymous string presence assertion admitted",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:string\"></xs:restriction></xs:simpleType></xs:element></xs:sequence><xs:assert test=\"exists(v)\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>x</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "values": [
+        "x"
+      ],
+      "reason": null,
+      "clauses": [
+        "Structures3.3.2-3.3.4",
+        "Structures3.16.2.1-2",
+        "Datatypes4.1-4.3"
+      ],
+      "semanticAdmission": "2026-11-20 bounded string assertions; docs/string-assertions/ADMISSIONS.json"
+    }
+  }
+]

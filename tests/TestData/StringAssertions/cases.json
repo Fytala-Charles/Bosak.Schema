@@ -1,0 +1,2837 @@
+[
+  {
+    "id": "SA-001",
+    "label": "literal sequence eq []",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-002",
+    "label": "literal sequence eq ['']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v></v></r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": ""
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-003",
+    "label": "literal sequence eq ['A']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-004",
+    "label": "literal sequence eq ['B']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>B</v></r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-005",
+    "label": "literal sequence eq ['A', 'B']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>B</v></r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-006",
+    "label": "literal sequence eq ['A', 'A']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>A</v></r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-007",
+    "label": "literal sequence ne []",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "v ne 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-008",
+    "label": "literal sequence ne ['']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v></v></r>",
+    "expression": "v ne 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": ""
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-009",
+    "label": "literal sequence ne ['A']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v ne 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-010",
+    "label": "literal sequence ne ['B']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>B</v></r>",
+    "expression": "v ne 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-011",
+    "label": "literal sequence ne ['A', 'B']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>B</v></r>",
+    "expression": "v ne 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-012",
+    "label": "literal sequence ne ['A', 'A']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>A</v></r>",
+    "expression": "v ne 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-013",
+    "label": "literal sequence = []",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "v = 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-014",
+    "label": "literal sequence = ['']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v></v></r>",
+    "expression": "v = 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": ""
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-015",
+    "label": "literal sequence = ['A']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v = 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-016",
+    "label": "literal sequence = ['B']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>B</v></r>",
+    "expression": "v = 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-017",
+    "label": "literal sequence = ['A', 'B']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>B</v></r>",
+    "expression": "v = 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-018",
+    "label": "literal sequence = ['A', 'A']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>A</v></r>",
+    "expression": "v = 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-019",
+    "label": "literal sequence != []",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "v != 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-020",
+    "label": "literal sequence != ['']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v></v></r>",
+    "expression": "v != 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": ""
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-021",
+    "label": "literal sequence != ['A']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v != 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-022",
+    "label": "literal sequence != ['B']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>B</v></r>",
+    "expression": "v != 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-023",
+    "label": "literal sequence != ['A', 'B']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>B</v></r>",
+    "expression": "v != 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-024",
+    "label": "literal sequence != ['A', 'A']",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>A</v></r>",
+    "expression": "v != 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-025",
+    "label": "child pair eq ([], [])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "v eq w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-026",
+    "label": "child pair eq ([], ['A'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><w>A</w></r>",
+    "expression": "v eq w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-027",
+    "label": "child pair eq (['A'], [])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v eq w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-028",
+    "label": "child pair eq (['A'], ['A'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><w>A</w></r>",
+    "expression": "v eq w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-029",
+    "label": "child pair eq (['A'], ['B'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><w>B</w></r>",
+    "expression": "v eq w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-030",
+    "label": "child pair eq (['A', 'B'], ['A', 'B'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>B</v><w>A</w><w>B</w></r>",
+    "expression": "v eq w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-031",
+    "label": "child pair eq (['A', 'A'], ['A'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>A</v><w>A</w></r>",
+    "expression": "v eq w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-032",
+    "label": "child pair eq ([], ['A', 'B'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><w>A</w><w>B</w></r>",
+    "expression": "v eq w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-033",
+    "label": "child pair ne ([], [])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "v ne w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-034",
+    "label": "child pair ne ([], ['A'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><w>A</w></r>",
+    "expression": "v ne w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-035",
+    "label": "child pair ne (['A'], [])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v ne w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-036",
+    "label": "child pair ne (['A'], ['A'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><w>A</w></r>",
+    "expression": "v ne w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-037",
+    "label": "child pair ne (['A'], ['B'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><w>B</w></r>",
+    "expression": "v ne w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-038",
+    "label": "child pair ne (['A', 'B'], ['A', 'B'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>B</v><w>A</w><w>B</w></r>",
+    "expression": "v ne w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-039",
+    "label": "child pair ne (['A', 'A'], ['A'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>A</v><w>A</w></r>",
+    "expression": "v ne w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-040",
+    "label": "child pair ne ([], ['A', 'B'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ne w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><w>A</w><w>B</w></r>",
+    "expression": "v ne w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-041",
+    "label": "child pair = ([], [])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "v = w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-042",
+    "label": "child pair = ([], ['A'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><w>A</w></r>",
+    "expression": "v = w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-043",
+    "label": "child pair = (['A'], [])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v = w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-044",
+    "label": "child pair = (['A'], ['A'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><w>A</w></r>",
+    "expression": "v = w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-045",
+    "label": "child pair = (['A'], ['B'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><w>B</w></r>",
+    "expression": "v = w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-046",
+    "label": "child pair = (['A', 'B'], ['A', 'B'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>B</v><w>A</w><w>B</w></r>",
+    "expression": "v = w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-047",
+    "label": "child pair = (['A', 'A'], ['A'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>A</v><w>A</w></r>",
+    "expression": "v = w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-048",
+    "label": "child pair = ([], ['A', 'B'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><w>A</w><w>B</w></r>",
+    "expression": "v = w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-049",
+    "label": "child pair != ([], [])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "v != w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-050",
+    "label": "child pair != ([], ['A'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><w>A</w></r>",
+    "expression": "v != w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-051",
+    "label": "child pair != (['A'], [])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v != w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-052",
+    "label": "child pair != (['A'], ['A'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><w>A</w></r>",
+    "expression": "v != w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-053",
+    "label": "child pair != (['A'], ['B'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><w>B</w></r>",
+    "expression": "v != w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-054",
+    "label": "child pair != (['A', 'B'], ['A', 'B'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>B</v><w>A</w><w>B</w></r>",
+    "expression": "v != w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-055",
+    "label": "child pair != (['A', 'A'], ['A'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>A</v><w>A</w></r>",
+    "expression": "v != w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-056",
+    "label": "child pair != ([], ['A', 'B'])",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v != w\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><w>A</w><w>B</w></r>",
+    "expression": "v != w",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-057",
+    "label": "empty literal",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v></v></r>",
+    "expression": "v eq ''",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": ""
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-058",
+    "label": "double delimiter",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &quot;A&quot;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v eq \"A\"",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-059",
+    "label": "escaped apostrophe",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;can&#x27;&#x27;t&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>can&#x27;t</v></r>",
+    "expression": "v eq 'can''t'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "can't"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-060",
+    "label": "escaped double",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &quot;say &quot;&quot;yes&quot;&quot;&quot;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>say &quot;yes&quot;</v></r>",
+    "expression": "v eq \"say \"\"yes\"\"\"",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "say \"yes\""
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-061",
+    "label": "backslash literal",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;a\\nb&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>a\\nb</v></r>",
+    "expression": "v eq 'a\\nb'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "a\\nb"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-062",
+    "label": "literal spaces",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27; A &#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v> A </v></r>",
+    "expression": "v eq ' A '",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": " A "
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-063",
+    "label": "literal tokens",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;(and) != or eq&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>(and) != or eq</v></r>",
+    "expression": "v eq '(and) != or eq'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "(and) != or eq"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-064",
+    "label": "supplementary",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;??&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>??</v></r>",
+    "expression": "v eq '??'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "??"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-065",
+    "label": "combining unequal",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;?&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>é</v></r>",
+    "expression": "v eq '?'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "é"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-066",
+    "label": "case significant",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;I&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>i</v></r>",
+    "expression": "v eq 'I'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "i"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-067",
+    "label": "XML once",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;&amp;amp;&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>&amp;amp;</v></r>",
+    "expression": "v eq '&amp;'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "&amp;"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-068",
+    "label": "entity characters",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;&lt;&amp;&gt;&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>&lt;&amp;&gt;</v></r>",
+    "expression": "v eq '<&>'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "<&>"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-069",
+    "label": "no spaces",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v=&#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v='A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-070",
+    "label": "reverse literal",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"&#x27;A&#x27;=v\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "'A'=v",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-071",
+    "label": "literal only",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"&#x27;A&#x27; eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "'A' eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-072",
+    "label": "no trim",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v> A </v></r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": " A "
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-073",
+    "label": "presence/count/logical exists(v)",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"exists(v)\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "exists(v)",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-074",
+    "label": "presence/count/logical exists(v)",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"exists(v)\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v></v></r>",
+    "expression": "exists(v)",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": ""
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-075",
+    "label": "presence/count/logical empty(v)",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"empty(v)\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "empty(v)",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-076",
+    "label": "presence/count/logical empty(v)",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"empty(v)\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v></v></r>",
+    "expression": "empty(v)",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": ""
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-077",
+    "label": "presence/count/logical count(v) eq 0",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"count(v) eq 0\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "count(v) eq 0",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-078",
+    "label": "presence/count/logical count(v) eq 1",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"count(v) eq 1\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v></v></r>",
+    "expression": "count(v) eq 1",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": ""
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-079",
+    "label": "presence/count/logical count(v) eq 2",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"count(v) eq 2\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>B</v></r>",
+    "expression": "count(v) eq 2",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-080",
+    "label": "presence/count/logical empty(v) or v eq 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"empty(v) or v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "empty(v) or v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-081",
+    "label": "presence/count/logical exists(v) and v eq 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"exists(v) and v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "exists(v) and v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-082",
+    "label": "presence/count/logical v = 'A' and v != 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = &#x27;A&#x27; and v != &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>B</v></r>",
+    "expression": "v = 'A' and v != 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-083",
+    "label": "presence/count/logical v eq 'A' or v ne 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27; or v ne &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>B</v></r>",
+    "expression": "v eq 'A' or v ne 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-084",
+    "label": "presence/count/logical 'x' eq 'x' or v eq 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"&#x27;x&#x27; eq &#x27;x&#x27; or v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><v>B</v></r>",
+    "expression": "'x' eq 'x' or v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-085",
+    "label": "presence/count/logical ('x' eq 'x' or 'x' eq 'y') and n eq 1.25",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"(&#x27;x&#x27; eq &#x27;x&#x27; or &#x27;x&#x27; eq &#x27;y&#x27;) and n eq 1.25\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v><n>1.25</n></r>",
+    "expression": "('x' eq 'x' or 'x' eq 'y') and n eq 1.25",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "kind": "Decimal",
+        "value": "1.25"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-086",
+    "label": "named original type",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Label\"><xs:restriction base=\"xs:string\"><xs:maxLength value=\"256\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"Label\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-087",
+    "label": "anonymous original type",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  minOccurs=\"0\" maxOccurs=\"4\"><xs:simpleType><xs:restriction base=\"xs:string\"><xs:maxLength value=\"256\"/></xs:restriction></xs:simpleType></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-088",
+    "label": "namespace ('##targetNamespace', \"v = 'A'\", '')",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" targetNamespace=\"urn:a\" xmlns:t=\"urn:a\" elementFormDefault=\"qualified\" xpathDefaultNamespace=\"##targetNamespace\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<p:r xmlns:p=\"urn:a\"><p:v>A</p:v></p:r>",
+    "expression": "v = 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-089",
+    "label": "namespace (None, \"t:v eq 'A'\", '')",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" targetNamespace=\"urn:a\" xmlns:t=\"urn:a\" elementFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"t:v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<p:r xmlns:p=\"urn:a\"><p:v>A</p:v></p:r>",
+    "expression": "t:v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-090",
+    "label": "namespace (None, \"v eq 'A'\", '')",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" targetNamespace=\"urn:a\" xmlns:t=\"urn:a\" elementFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<p:r xmlns:p=\"urn:a\"><p:v>A</p:v></p:r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-091",
+    "label": "namespace ('##local', \"v eq 'A'\", '')",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" targetNamespace=\"urn:a\" xmlns:t=\"urn:a\" elementFormDefault=\"qualified\" xpathDefaultNamespace=\"##local\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<p:r xmlns:p=\"urn:a\"><p:v>A</p:v></p:r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-092",
+    "label": "namespace ('urn:a', \"v eq 'A'\", '')",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" targetNamespace=\"urn:a\" xmlns:t=\"urn:a\" elementFormDefault=\"qualified\" xpathDefaultNamespace=\"urn:a\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<p:r xmlns:p=\"urn:a\"><p:v>A</p:v></p:r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-093",
+    "label": "namespace ('##local', \"v eq 'A'\", 'xpathDefaultNamespace=\"##targetNamespace\"')",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" targetNamespace=\"urn:a\" xmlns:t=\"urn:a\" elementFormDefault=\"qualified\" xpathDefaultNamespace=\"##local\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" xpathDefaultNamespace=\"##targetNamespace\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<p:r xmlns:p=\"urn:a\"><p:v>A</p:v></p:r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-094",
+    "label": "namespace (None, \"q:v eq 'A'\", 'xmlns:q=\"urn:a\"')",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" targetNamespace=\"urn:a\" xmlns:t=\"urn:a\" elementFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"q:v eq &#x27;A&#x27;\" xmlns:q=\"urn:a\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<p:r xmlns:p=\"urn:a\"><p:v>A</p:v></p:r>",
+    "expression": "q:v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-095",
+    "label": "namespace (None, \"t:v eq 'A'\", 'xmlns:t=\"urn:wrong\"')",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" targetNamespace=\"urn:a\" xmlns:t=\"urn:a\" elementFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"t:v eq &#x27;A&#x27;\" xmlns:t=\"urn:wrong\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<p:r xmlns:p=\"urn:a\"><p:v>A</p:v></p:r>",
+    "expression": "t:v eq 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-096",
+    "label": "unqualified local under target",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" targetNamespace=\"urn:a\" xmlns:t=\"urn:a\" elementFormDefault=\"unqualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<p:r xmlns:p=\"urn:a\"><v>A</v></p:r>",
+    "expression": "v eq 'A'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "reason": null,
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-097",
+    "label": "refused grammar v lt 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v lt &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v lt 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-098",
+    "label": "refused grammar v le 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v le &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v le 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-099",
+    "label": "refused grammar v gt 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v gt &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v gt 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-100",
+    "label": "refused grammar v ge 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ge &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v ge 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-101",
+    "label": "refused grammar v eq 1",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq 1\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v eq 1",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-102",
+    "label": "refused grammar n eq v",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"n eq v\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "n eq v",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-103",
+    "label": "refused grammar count(v) eq v",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"count(v) eq v\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "count(v) eq v",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-104",
+    "label": "refused grammar n = 1",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"n = 1\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "n = 1",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-105",
+    "label": "refused grammar v = 'A' trailing",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v = &#x27;A&#x27; trailing\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v = 'A' trailing",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-106",
+    "label": "refused grammar v eq 'unterminated",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;unterminated\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v eq 'unterminated",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-107",
+    "label": "refused grammar v ! \"A\"",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v ! &quot;A&quot;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v ! \"A\"",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-108",
+    "label": "refused grammar v='A'='A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v=&#x27;A&#x27;=&#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v='A'='A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-109",
+    "label": "refused grammar @v eq 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"@v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "@v eq 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-110",
+    "label": "refused grammar v[1] eq 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v[1] eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v[1] eq 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-111",
+    "label": "refused grammar string(v) eq 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"string(v) eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "string(v) eq 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-112",
+    "label": "refused grammar contains(v,'A')",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"contains(v,&#x27;A&#x27;)\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "contains(v,'A')",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-113",
+    "label": "refused grammar v eq 'a' + 'b'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;a&#x27; + &#x27;b&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v eq 'a' + 'b'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-114",
+    "label": "refused grammar unknown eq 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"unknown eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "unknown eq 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-115",
+    "label": "refused grammar p:v eq 'A'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"p:v eq &#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "p:v eq 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-116",
+    "label": "refused grammar v eq 'a' 'b'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;a&#x27; &#x27;b&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v eq 'a' 'b'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-117",
+    "label": "literal expression capacity",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v eq &#x27;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v eq 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "RepresentationCapacity",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-118",
+    "label": "nesting capacity",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"(((((((((((((((((v eq &#x27;A&#x27;)))))))))))))))))\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "(((((((((((((((((v eq 'A')))))))))))))))))",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "RepresentationCapacity",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-119",
+    "label": "token capacity",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27; or v=&#x27;A&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>A</v></r>",
+    "expression": "v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A' or v='A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "RepresentationCapacity",
+    "maxStringCharacters": 1024,
+    "values": [
+      {
+        "kind": "String",
+        "value": "A"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-120",
+    "label": "string representation capacity",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"></xs:element><xs:element name=\"w\" type=\"xs:string\" minOccurs=\"0\" maxOccurs=\"4\"/><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"v=&#x27;AB&#x27;\" /></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>AB</v></r>",
+    "expression": "v='AB'",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "reason": "RepresentationCapacity",
+    "maxStringCharacters": 1,
+    "values": [
+      {
+        "kind": "String",
+        "value": "AB"
+      }
+    ],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-121",
+    "label": "nested assertion excluded",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"><xs:complexType><xs:sequence><xs:element name=\"w\" type=\"xs:string\"/></xs:sequence><xs:assert test=\"w eq &apos;A&apos;\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r></r>",
+    "expression": "w eq 'A'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-122",
+    "label": "boolean assertion operands remain excluded",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:boolean\"/></xs:sequence><xs:assert test=\"exists(v)\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expression": "exists(v)",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Invalid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-123",
+    "label": "boolean assertion operands remain excluded",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:boolean\"/></xs:sequence><xs:assert test=\"v eq &apos;true&apos;\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expression": "v eq 'true'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Invalid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-124",
+    "label": "integer assertion operands remain excluded",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:integer\"/></xs:sequence><xs:assert test=\"count(v) eq 1\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expression": "count(v) eq 1",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Invalid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  },
+  {
+    "id": "SA-125",
+    "label": "integer assertion operands remain excluded",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:integer\"/></xs:sequence><xs:assert test=\"v = &apos;1&apos;\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expression": "v = '1'",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Invalid",
+    "reason": "AssertionGrammar",
+    "maxStringCharacters": 1024,
+    "values": [],
+    "clauses": [
+      "Structures3.13.4",
+      "XPath2.0 3.1.1/3.5.1-2/3.6",
+      "FO2.0 7.3.1/7.3.3/15.1/15.4.1"
+    ]
+  }
+]
