@@ -1,0 +1,58 @@
+{
+  "status": "Proposed only; no implementation/API acceptance",
+  "baselinePublicTypes": 51,
+  "baselinePublicRows": 381,
+  "newType": {
+    "name": "Bosak.Schema.NativeAttributeValue",
+    "kind": "sealed class",
+    "publicConstructors": [],
+    "properties": [
+      {
+        "name": "NamespaceUri",
+        "type": "System.String",
+        "access": "get"
+      },
+      {
+        "name": "LocalName",
+        "type": "System.String",
+        "access": "get"
+      },
+      {
+        "name": "Value",
+        "type": "Bosak.Schema.NativeScalarValue",
+        "access": "get"
+      }
+    ]
+  },
+  "existingTypeAdditions": {
+    "type": "Bosak.Schema.NativeSchemaDocument",
+    "properties": [
+      {
+        "name": "AttributeCount",
+        "type": "System.Int32",
+        "access": "get"
+      }
+    ],
+    "methods": [
+      {
+        "name": "ReadAttribute",
+        "returns": "Bosak.Schema.NativeAttributeValue",
+        "parameters": [
+          {
+            "name": "attributeIndex",
+            "type": "System.Int32"
+          },
+          {
+            "name": "cancellationToken",
+            "type": "System.Threading.CancellationToken",
+            "default": "default"
+          }
+        ]
+      }
+    ]
+  },
+  "newPublicTypes": 1,
+  "newPublicMembers": 5,
+  "changedOrRemovedMembers": [],
+  "leafIndexMeaningUnchanged": true
+}

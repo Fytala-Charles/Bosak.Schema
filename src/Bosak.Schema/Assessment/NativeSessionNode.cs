@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Implement internal native decimal Core adapter                                                 |
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Retain expanded root declaration identity in guarded node annotations                      |
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Adopt bounded named complex types and shared expanded component identity                  |
+//                      | Charles Korthout | 0.4   | 19-11-2026     | Expose original local attribute declaration metadata under the existing owner guard      |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -58,7 +59,8 @@ internal sealed class NativeSessionNode(NativeSchemaInput input, XDocumentNode r
         Read<(string, string)?>(() => Facts?.NativeType is { Name: { } name } type ? (type.NamespaceUri, name) : null);
     public (string NamespaceUri, string LocalName)? SchemaElementDeclaration =>
         Read<(string, string)?>(() => Facts is { HasNoTypedValue: true } ? (raw.NamespaceUri, raw.LocalName) : null);
-    public (string NamespaceUri, string LocalName)? SchemaAttributeDeclaration => Read<(string, string)?>(() => null);
+    public (string NamespaceUri, string LocalName)? SchemaAttributeDeclaration =>
+        Read<(string, string)?>(() => Facts?.NativeDeclaration is { IsAttribute: true } d ? (d.NamespaceUri, d.Name) : null);
     public bool IsNilled => Read(() => false);
     public bool IsConstructedElement => Read(() => false);
     public IXdmNode? Parent => Read(() => raw.Parent is XDocumentNode parent ? input.Wrap(parent) : null);

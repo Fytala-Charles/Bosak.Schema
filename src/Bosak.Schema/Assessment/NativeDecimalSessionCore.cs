@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 17-11-2026     | Keep the owned implementation behind the public facade; attempt all cleanup actions
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Share explicit mixed scalar profile with preserved decimal compatibility                  |
+//                      | Charles Korthout | 0.5   | 19-11-2026     | Add detached root attribute reads while preserving leaf-only counts and typed read indexes |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -105,17 +106,38 @@ internal sealed class NativeDecimalSessionCore : IDisposable
     private T ReadValue<T>(Document document, int leafIndex, Func<XdmValue, T> project, CancellationToken cancellationToken)
     {
         Check(document);
-        if (leafIndex < 0 || leafIndex >= document.Assessment.Facts.Length - 1)
+        if (leafIndex < 0 || leafIndex >= document.Assessment.ElementFacts.Length - 1)
             throw new ArgumentOutOfRangeException(nameof(leafIndex));
+        return ReadFact(document, document.Assessment.ElementFacts[leafIndex + 1], project, cancellationToken);
+    }
+
+    private T ReadFact<T>(Document document, NativeSchemaProvider.Facts fact, Func<XdmValue, T> project, CancellationToken cancellationToken)
+    {
         return runner.Run([document.Snapshot], operation =>
         {
-            var value = document.Assessment.Facts[leafIndex + 1].ReadTypedValue(cancellationToken);
+            var value = fact.ReadTypedValue(cancellationToken);
             if (value.Kind != SchemaResultKind.Supported) throw new NotSupportedException(value.DiagnosticCode);
             var scalar = operation.ReadTypedValue(document.Snapshot, value.Value);
             if (scalar.Kind != SchemaResultKind.Supported) throw new NotSupportedException(scalar.DiagnosticCode);
             return project(operation.Evaluate(new EvaluationContext().WithVariable("value", scalar.Value)));
         }, cancellationToken);
     }
+
+    private int AttributeCount(Document document) => Work(() =>
+    {
+        Check(document);
+        return document.Assessment.AttributeFacts.Length;
+    }, default);
+
+    private NativeAttributeValue ReadAttribute(Document document, int attributeIndex, CancellationToken cancellationToken) => Work(() =>
+    {
+        Check(document);
+        if (attributeIndex < 0 || attributeIndex >= document.Assessment.AttributeFacts.Length)
+            throw new ArgumentOutOfRangeException(nameof(attributeIndex));
+        var fact = document.Assessment.AttributeFacts[attributeIndex];
+        var value = ReadFact(document, fact, NativeScalarValue.FromValue, cancellationToken);
+        return new NativeAttributeValue(fact.NativeDeclaration.NamespaceUri, fact.NativeDeclaration.Name, value);
+    }, cancellationToken);
 
     private string Export(Document document, CancellationToken cancellationToken) => Work(() =>
     {
@@ -127,7 +149,7 @@ internal sealed class NativeDecimalSessionCore : IDisposable
     private int LeafCount(Document document) => Work(() =>
     {
         Check(document);
-        return document.Assessment.Facts.Length - 1;
+        return document.Assessment.ElementFacts.Length - 1;
     }, default);
 
     internal T Work<T>(Func<T> work, CancellationToken cancellationToken)
@@ -187,6 +209,8 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         internal SchemaQuerySnapshot Snapshot { get; }
         internal NativeSchemaProvider.Assessment Assessment { get; }
         internal int DecimalCount => owner.LeafCount(this);
+        internal int AttributeCount => owner.AttributeCount(this);
+        internal NativeAttributeValue ReadAttribute(int attributeIndex, CancellationToken cancellationToken = default) => owner.ReadAttribute(this, attributeIndex, cancellationToken);
         internal NativeScalarValue ReadScalar(int leafIndex, CancellationToken cancellationToken = default) => owner.ReadScalar(this, leafIndex, cancellationToken);
         internal XdmExactDecimal ReadDecimal(int leafIndex, CancellationToken cancellationToken = default) => owner.ReadDecimal(this, leafIndex, cancellationToken);
         internal string ExportXml(CancellationToken cancellationToken = default) => owner.Export(this, cancellationToken);

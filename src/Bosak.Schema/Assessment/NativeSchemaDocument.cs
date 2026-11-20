@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Document bounded exact integer leaf support                                                |
+//                      | Charles Korthout | 0.4   | 19-11-2026     | Expose separate root attribute reads without changing existing leaf indexes              |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -26,7 +27,7 @@ public sealed class NativeSchemaDocument : IDisposable
     private readonly NativeDecimalSessionCore.Document document;
     internal NativeSchemaDocument(NativeDecimalSessionCore.Document document) => this.document = document;
 
-    /// <summary>Gets the count of present string/decimal leaves; absent optional children have no index.</summary>
+    /// <summary>Gets the count of present scalar leaves; absent optional children have no index.</summary>
     /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
     /// <exception cref="NotSupportedException">Another session operation is admitted.</exception>
     public int ScalarCount => document.DecimalCount;
@@ -34,13 +35,29 @@ public sealed class NativeSchemaDocument : IDisposable
     /// <summary>Reads one present leaf through the issued scalar route and returns its detached typed value.</summary>
     /// <param name="leafIndex">Zero-based present-leaf index in instance order.</param>
     /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
-    /// <returns>A detached string, Boolean or exact decimal usable after document and session disposal.</returns>
+    /// <returns>A detached string, Boolean, exact integer or exact decimal usable after document and session disposal.</returns>
     /// <exception cref="ArgumentOutOfRangeException">The index is outside the present leaves.</exception>
     /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
     /// <exception cref="NotSupportedException">Overlapping work or a value outside explicit query limits is refused.</exception>
     /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
     public NativeScalarValue ReadScalar(int leafIndex, CancellationToken cancellationToken = default) =>
         document.ReadScalar(leafIndex, cancellationToken);
+
+    /// <summary>Gets the count of present declared root attributes, omitting absent optional uses.</summary>
+    /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
+    /// <exception cref="NotSupportedException">Another session operation is admitted.</exception>
+    public int AttributeCount => document.AttributeCount;
+
+    /// <summary>Reads a present root attribute in schema declaration order through original typed facts.</summary>
+    /// <param name="attributeIndex">Zero-based present root attribute index; independent of leaf indexes.</param>
+    /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
+    /// <returns>A detached expanded name and scalar usable after document and session disposal.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">The index is outside the present root attributes.</exception>
+    /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
+    /// <exception cref="NotSupportedException">Overlapping work or a value outside explicit query limits is refused.</exception>
+    /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
+    public NativeAttributeValue ReadAttribute(int attributeIndex, CancellationToken cancellationToken = default) =>
+        document.ReadAttribute(attributeIndex, cancellationToken);
 
     /// <summary>Exports detached XML retaining scalar lexical spelling, without PSVI or authority.</summary>
     /// <param name="cancellationToken">Cancellation checked before and during bounded serialization.</param>

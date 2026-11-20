@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 15-11-2026     | Implement internal native decimal Core adapter                                                 |
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Carry bounded Unsupported reasons without changing refusal outcomes                       |
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Share explicit mixed scalar profile with preserved decimal compatibility                  |
+//                      | Charles Korthout | 0.4   | 19-11-2026     | Keep actual root attribute wrappers in the original guarded capture                      |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -101,6 +102,13 @@ internal sealed class NativeSchemaInput : ISchemaAssessmentInput, IQueryOperatio
             nodes.Add(raw.UnderlyingObject, node);
             return node;
         }
+    }
+
+    internal NativeSessionNode RootAttributeNode(XName name)
+    {
+        Check();
+        var attribute = document.Root!.Attribute(name) ?? throw new InvalidOperationException("Assessed root attribute is absent from the capture.");
+        return Wrap(new XDocumentNode(attribute));
     }
 
     internal bool Publish(NativeSchemaProvider.Origin origin, ImmutableArray<NativeSchemaProvider.Facts> facts)

@@ -21,6 +21,7 @@
 //                      | Charles Korthout | 0.8   | 19-11-2026     | Add bounded opt-in Boolean values while preserving decimal and string contracts             |
 //                      | Charles Korthout | 0.9   | 19-11-2026     | Add bounded exact integer leaves with original typed provenance                           |
 //                      | Charles Korthout | 1.0   | 19-11-2026     | Add bounded named string restrictions with Unicode length and exact enumeration facets      |
+//                      | Charles Korthout | 1.1   | 19-11-2026     | Adopt opt-in local root attributes without changing leaf indexes or legacy profiles         |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -63,6 +64,7 @@ internal sealed class NativeDecimalSchema
     private int? maxStringCharacters;
     internal NativeDeclaration Root { get; }
     internal ImmutableArray<NativeDeclaration> Children { get; }
+    internal ImmutableArray<NativeDeclaration> AttributeUses { get; private set; } = [];
 
     internal static NativeResult<NativeDecimalSchema> Compile(string schema, NativeNumericLimits limits, CancellationToken cancellationToken = default, int? maxStringCharacters = null)
     {
@@ -75,7 +77,12 @@ internal sealed class NativeDecimalSchema
             var document = Parse(schema, 32768, cancellationToken);
             var root = document.Root!;
             Require(root.Name == Xs + "schema", "Schema root or namespace is unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
-            Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault");
+            var attributeProfile = maxStringCharacters is not null && root.Elements(Xs + "complexType")
+                .Concat(root.Elements(Xs + "element").SelectMany(e => e.Elements(Xs + "complexType")))
+                .Any(c => c.Elements(Xs + "attribute").Any());
+            if (attributeProfile) Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault", "attributeFormDefault");
+            else Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault");
+            var attributeForm = attributeProfile ? Form(root, "attributeFormDefault", "unqualified") : "unqualified";
             Require(root.Attribute("version") is null || (string?)root.Attribute("version") == "1.1", "Only schema version 1.1 is admitted.");
             var targetNamespace = TargetNamespace(root);
             var defaultForm = Form(root, "elementFormDefault", "unqualified");
@@ -126,7 +133,7 @@ internal sealed class NativeDecimalSchema
                 var key = XName.Get(name, targetNamespace);
                 var identity = new NativeType(name, true, targetNamespace);
                 named.Add(key, CompileComplex(type, new NativeDeclaration(name, identity, 1, 1, targetNamespace),
-                    targetNamespace, defaultForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken));
+                    targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken));
             }
             var compiled = ImmutableDictionary.CreateBuilder<XName, NativeDecimalSchema>();
             NativeDecimalSchema? first = null;
@@ -142,14 +149,14 @@ internal sealed class NativeDecimalSchema
                 {
                     Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                     Require(named.TryGetValue(ResolveTypeName(declaration), out var shared), "Unresolved root complex type.", NativeDecimalUnsupportedReason.ValueType);
-                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits);
+                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses };
                 }
                 else
                 {
                     var complex = Single(declaration, "complexType");
                     Attributes(complex);
                     plan = CompileComplex(complex, new NativeDeclaration(name, new NativeType(null, true), 1, 1, targetNamespace),
-                        targetNamespace, defaultForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken);
+                        targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken);
                 }
                 compiled.Add(key, plan);
                 first ??= plan;
@@ -170,12 +177,16 @@ internal sealed class NativeDecimalSchema
     }
 
     private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
-        string targetNamespace, string defaultForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
+        string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
         Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken)
     {
         var members = Elements(complex);
-        Require(members.Count is >= 1 and <= 9 && members[0].Name == Xs + "sequence" &&
-            members.Skip(1).All(e => e.Name == Xs + "assert"), "Expected sequence then zero to eight assertions.", NativeDecimalUnsupportedReason.DeclarationShape);
+        var attributeMembers = members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray();
+        var assertionMembers = members.Skip(1 + attributeMembers.Length).ToArray();
+        Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && assertionMembers.Length <= 8 &&
+            assertionMembers.All(e => e.Name == Xs + "assert") && (stringType is not null || attributeMembers.Length == 0),
+            "Expected sequence, admitted attributes then zero to eight assertions.", NativeDecimalUnsupportedReason.DeclarationShape);
+        Require(attributeMembers.Length <= 16, "Root attribute use ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         var sequence = members[0];
         Attributes(sequence);
         var declarations = Elements(sequence);
@@ -193,16 +204,7 @@ internal sealed class NativeDecimalSchema
             var namespaceUri = Form(declaration, "form", defaultForm) == "qualified" ? targetNamespace : "";
             var expandedName = XName.Get(name, namespaceUri).ToString();
             Require(names.Add(expandedName), "Local declaration names must be unique.", NativeDecimalUnsupportedReason.DeclarationShape);
-            NativeType localType;
-            if (IsDecimalType(declaration)) localType = decimalType;
-            else if (stringType is not null && ResolveTypeName(declaration) == Xs + "string") localType = stringType;
-            else if (booleanType is not null && ResolveTypeName(declaration) == Xs + "boolean") localType = booleanType;
-            else if (integerType is not null && ResolveTypeName(declaration) == Xs + "integer") localType = integerType;
-            else
-            {
-                Require(simple.TryGetValue(ResolveTypeName(declaration), out var resolved), "The local type must resolve to an admitted decimal type.", NativeDecimalUnsupportedReason.ValueType);
-                localType = resolved!;
-            }
+            var localType = ResolveScalarType(declaration, decimalType, stringType, booleanType, integerType, simple);
             var min = Occurs(declaration, "minOccurs", 1);
             var max = Occurs(declaration, "maxOccurs", 1);
             Require(min is 0 or 1 && max is >= 1 and <= 16 && min <= max, "Occurrence limits are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
@@ -211,9 +213,27 @@ internal sealed class NativeDecimalSchema
             children.Add(new NativeDeclaration(name, localType, min, max, namespaceUri));
         }
 
+        var attributeUses = ImmutableArray.CreateBuilder<NativeDeclaration>();
+        var attributeNames = new HashSet<XName>();
+        foreach (var attribute in attributeMembers)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Attributes(attribute, "name", "type", "use", "form");
+            Require(Elements(attribute).Count == 0, "Attribute children are unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
+            var name = Name(attribute, NativeDecimalUnsupportedReason.DeclarationShape);
+            var ns = Form(attribute, "form", attributeForm) == "qualified" ? targetNamespace : "";
+            Require(name != "xmlns" && ns is not "http://www.w3.org/2000/xmlns/" and not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace",
+                "Reserved attribute declaration.", NativeDecimalUnsupportedReason.Attributes);
+            Require(attributeNames.Add(XName.Get(name, ns)), "Duplicate expanded attribute declaration.", NativeDecimalUnsupportedReason.DeclarationShape);
+            var use = Collapse((string?)attribute.Attribute("use") ?? "optional");
+            Require(use is "optional" or "required", "Unsupported attribute use.", NativeDecimalUnsupportedReason.DeclarationShape);
+            var type = ResolveScalarType(attribute, decimalType, stringType, booleanType, integerType, simple);
+            attributeUses.Add(new NativeDeclaration(name, type, use == "required" ? 1 : 0, 1, ns, isAttribute: true));
+        }
+
         var assertionNames = children.Where(c => !c.Type.IsString && !c.Type.IsBoolean && !c.Type.IsInteger).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
-        foreach (var assertion in members.Skip(1))
+        foreach (var assertion in assertionMembers)
         {
             cancellationToken.ThrowIfCancellationRequested();
             Attributes(assertion, "test", "xpathDefaultNamespace");
@@ -225,7 +245,19 @@ internal sealed class NativeDecimalSchema
                 name => ResolveAssertionName(assertion, name, defaultNamespace, assertionNames)));
         }
 
-        return new NativeDecimalSchema(root, children.ToImmutable(), plans.ToImmutable(), limits);
+        return new NativeDecimalSchema(root, children.ToImmutable(), plans.ToImmutable(), limits) { AttributeUses = attributeUses.ToImmutable() };
+    }
+
+    private static NativeType ResolveScalarType(XElement declaration, NativeType decimalType, NativeType? stringType,
+        NativeType? booleanType, NativeType? integerType, Dictionary<XName, NativeType> simple)
+    {
+        if (IsDecimalType(declaration)) return decimalType;
+        var name = ResolveTypeName(declaration);
+        if (stringType is not null && name == Xs + "string") return stringType;
+        if (booleanType is not null && name == Xs + "boolean") return booleanType;
+        if (integerType is not null && name == Xs + "integer") return integerType;
+        Require(simple.TryGetValue(name, out var resolved), "The local type must resolve to an admitted scalar type.", NativeDecimalUnsupportedReason.ValueType);
+        return resolved!;
     }
 
     private static XName ResolveTypeName(XElement element, string attribute = "type")
@@ -248,8 +280,23 @@ internal sealed class NativeDecimalSchema
         {
             var document = Parse(instance, 65536, cancellationToken);
             var root = document.Root!;
-            InstanceAttributes(root);
-            Check(roots.TryGetValue(root.Name, out var selected), "Unexpected root element.");
+            var found = roots.TryGetValue(root.Name, out var selected);
+            var attributeStates = ImmutableArray.CreateBuilder<NativeElementState>();
+            if (found && selected!.AttributeUses.Length != 0)
+            {
+                Require(root.Attributes().All(a => a.IsNamespaceDeclaration || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
+                    "Special attribute requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
+                foreach (var use in selected.AttributeUses)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    var attribute = root.Attribute(use.ExpandedName);
+                    Check(attribute is not null || use.MinOccurs == 0, "Required root attribute is missing.");
+                    if (attribute is not null) attributeStates.Add(AssessScalar(attribute.Value, use));
+                }
+                Check(root.Attributes().All(a => a.IsNamespaceDeclaration || selected.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared root attribute.");
+            }
+            else InstanceAttributes(root);
+            Check(found, "Unexpected root element.");
             foreach (var text in root.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only root contains non-whitespace text.");
             var values = new Dictionary<string, List<XdmExactDecimal>>(StringComparer.Ordinal);
             var elements = ImmutableArray.CreateBuilder<NativeElementState>();
@@ -268,37 +315,9 @@ internal sealed class NativeDecimalSchema
                     InstanceAttributes(leaf);
                     Check(!leaf.HasElements, "Decimal leaf contains nested elements.");
                     Require(leaf.Nodes().All(n => n is XText), "Decimal leaf comments or processing instructions are unsupported.");
-                    if (declaration.Type.IsString)
-                    {
-                        Require(leaf.Value.Length <= maxStringCharacters!.Value, "String capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
-                        Check(declaration.Type.StringFacets?.Accepts(leaf.Value) ?? true, "String facet violation.");
-                        elements.Add(new NativeElementState(declaration, null, leaf.Value));
-                    }
-                    else if (declaration.Type.IsBoolean)
-                    {
-                        Require(leaf.Value.Length <= 256, "Boolean lexical capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
-                        var lexical = Collapse(leaf.Value);
-                        Check(lexical is "true" or "false" or "1" or "0", "Invalid Boolean lexical form.");
-                        elements.Add(new NativeElementState(declaration, null, BooleanValue: lexical is "true" or "1"));
-                    }
-                    else if (declaration.Type.IsInteger)
-                    {
-                        Require(leaf.Value.Length <= 256, "Integer lexical capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
-                        var lexical = Collapse(leaf.Value);
-                        var start = lexical.Length > 0 && lexical[0] is '+' or '-' ? 1 : 0;
-                        Check(lexical.Length > start && lexical.Skip(start).All(c => c is >= '0' and <= '9'), "Invalid integer lexical form.");
-                        Require(lexical.Length - start <= limits.MaxDigits, "Integer digit capacity exceeded before normalization.", NativeDecimalUnsupportedReason.RepresentationCapacity);
-                        var value = BigInteger.Parse(lexical, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture);
-                        elements.Add(new NativeElementState(declaration, null, IntegerValue: value));
-                    }
-                    else
-                    {
-                        Require(leaf.Value.Length <= 256, "Decimal lexical length exceeds 256 characters.", NativeDecimalUnsupportedReason.RepresentationCapacity);
-                        var value = ParseDecimal(Collapse(leaf.Value), limits, NativeOutcome.Invalid);
-                        Check(declaration.Type.Facets?.Accepts(value) ?? true, "Decimal facet violation.");
-                        present.Add(value);
-                        elements.Add(new NativeElementState(declaration, value));
-                    }
+                    var state = AssessScalar(leaf.Value, declaration);
+                    if (state.TypedValue is { } numeric) present.Add(numeric);
+                    elements.Add(state);
                     Check(++occurrences <= declaration.MaxOccurs, "Maximum occurrence exceeded.");
                 }
 
@@ -314,11 +333,45 @@ internal sealed class NativeDecimalSchema
             }
 
             cancellationToken.ThrowIfCancellationRequested();
-            return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, elements.ToImmutable()));
+            return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, elements.ToImmutable(), attributeStates.ToImmutable()));
         }
         catch (NativeProfileException ex)
         {
             return NativeResult<NativeAssessedDocument>.Failure(ex.Outcome, ex.Message, ex.UnsupportedReason);
+        }
+    }
+
+    private NativeElementState AssessScalar(string text, NativeDeclaration declaration)
+    {
+        if (declaration.Type.IsString)
+        {
+            Require(text.Length <= maxStringCharacters!.Value, "String capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            Check(declaration.Type.StringFacets?.Accepts(text) ?? true, "String facet violation.");
+            return new NativeElementState(declaration, null, text);
+        }
+        else if (declaration.Type.IsBoolean)
+        {
+            Require(text.Length <= 256, "Boolean lexical capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            var lexical = Collapse(text);
+            Check(lexical is "true" or "false" or "1" or "0", "Invalid Boolean lexical form.");
+            return new NativeElementState(declaration, null, BooleanValue: lexical is "true" or "1");
+        }
+        else if (declaration.Type.IsInteger)
+        {
+            Require(text.Length <= 256, "Integer lexical capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            var lexical = Collapse(text);
+            var start = lexical.Length > 0 && lexical[0] is '+' or '-' ? 1 : 0;
+            Check(lexical.Length > start && lexical.Skip(start).All(c => c is >= '0' and <= '9'), "Invalid integer lexical form.");
+            Require(lexical.Length - start <= limits.MaxDigits, "Integer digit capacity exceeded before normalization.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            var value = BigInteger.Parse(lexical, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture);
+            return new NativeElementState(declaration, null, IntegerValue: value);
+        }
+        else
+        {
+            Require(text.Length <= 256, "Decimal lexical length exceeds 256 characters.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            var value = ParseDecimal(Collapse(text), limits, NativeOutcome.Invalid);
+            Check(declaration.Type.Facets?.Accepts(value) ?? true, "Decimal facet violation.");
+            return new NativeElementState(declaration, value);
         }
     }
 
@@ -511,8 +564,9 @@ internal sealed class NativeType(string? name, bool hasNoTypedValue, string name
     internal bool HasNoTypedValue { get; } = hasNoTypedValue;
     internal string NamespaceUri { get; } = namespaceUri;
 }
-internal sealed class NativeDeclaration(string name, NativeType type, int minOccurs, int maxOccurs, string namespaceUri = "")
+internal sealed class NativeDeclaration(string name, NativeType type, int minOccurs, int maxOccurs, string namespaceUri = "", bool isAttribute = false)
 {
+    internal bool IsAttribute { get; } = isAttribute;
     internal string Name { get; } = name;
     internal string NamespaceUri { get; } = namespaceUri;
     internal XName ExpandedName { get; } = XName.Get(name, namespaceUri);
@@ -524,10 +578,11 @@ internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExac
 {
     internal bool IsNilled => false;
 }
-internal sealed class NativeAssessedDocument(XDocument document, ImmutableArray<NativeElementState> elements)
+internal sealed class NativeAssessedDocument(XDocument document, ImmutableArray<NativeElementState> elements, ImmutableArray<NativeElementState> attributes = default)
 {
     private readonly XDocument document = document;
     internal ImmutableArray<NativeElementState> Elements { get; } = elements;
+    internal ImmutableArray<NativeElementState> Attributes { get; } = attributes.IsDefault ? [] : attributes;
     internal XDocument CreateDocumentCopy() => new(document);
 }
 internal sealed class NativeProfileException(NativeOutcome outcome, string message,

@@ -77,3 +77,11 @@ M2C2 merged20cc520/main CI green671/54. Isolated feature/native-integer-scalars 
 ## 19 November 2026 - string restriction candidate
 
 M2C3 merged014cb28/main CI green748/54/6. Isolated feature/native-string-restrictions locally implements M2D1 with837source cases; see docs/m2d-string-restrictions/README.md and ADOPTION.md. No new public member/Core pin/release. Source remains uncommitted pending explicit commit/push request.
+
+## 19 November 2026 - root attribute contract
+
+PR23 merged098fdaf/main CI green837/54/6. Isolated docs/native-attribute-contract prepares concrete M2E1 root attribute API/ADR012 and27synthetic public Core probes per lane. Source/API unchanged; actual attribute validation is not implemented. See docs/m2e-attributes/README.md and CONTRACT.md. Proposal remains uncommitted.
+
+## 19 November 2026 - root attribute implementation
+
+M2E1 is locally implemented under docs/m2e-root-attributes with950source cases and unchanged prior837outcomes. Separate owned attribute reads preserve leaf indexing and original facts. Proposed ADR012/general API acceptance and publication remain separate; source is uncommitted. Prior docs/m2e-attributes planning receipts remain sealed.

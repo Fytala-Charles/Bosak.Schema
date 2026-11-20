@@ -1,0 +1,2455 @@
+[
+  {
+    "id": "M2E1-001",
+    "description": "Required unqualified string",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "x"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-002",
+    "description": "Present empty string is an entry",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code=''><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": ""
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-003",
+    "description": "Optional omitted has no index",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='optional'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' ><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-004",
+    "description": "Absent default optional has no index",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' ><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-005",
+    "description": "Required missing",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' ><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-006",
+    "description": "Undeclared ordinary attribute",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x' extra='q'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-007",
+    "description": "Leaf application attribute stays excluded",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount a='q'>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "M2E1-008",
+    "description": "Root xsi request stays excluded",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "M2E1-009",
+    "description": "Root xml base stays excluded",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x' xml:base='urn:other'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "M2E1-010",
+    "description": "Namespace declarations not entries",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x' xmlns:p='urn:unused'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "x"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-011",
+    "description": "Qualified attribute form",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required' form='qualified'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' xmlns:p='urn:a' p:code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "urn:a",
+        "localName": "code",
+        "kind": "String",
+        "value": "x"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-012",
+    "description": "Default namespace never qualifies attribute",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required' form='qualified'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-013",
+    "description": "Qualified attribute under alternate prefix",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required' form='qualified'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' xmlns:other='urn:a' other:code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "urn:a",
+        "localName": "code",
+        "kind": "String",
+        "value": "x"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-014",
+    "description": "Wrong qualified namespace",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required' form='qualified'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' xmlns:p='urn:wrong' p:code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-015",
+    "description": "Qualified attribute default",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' attributeFormDefault='qualified'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' xmlns:p='urn:a' p:code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "urn:a",
+        "localName": "code",
+        "kind": "String",
+        "value": "x"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-016",
+    "description": "Unqualified form overrides qualified default",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' attributeFormDefault='qualified'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required' form='unqualified'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "x"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-017",
+    "description": "Qualified form overrides unqualified default",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' attributeFormDefault='unqualified'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required' form='qualified'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' xmlns:p='urn:a' p:code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "urn:a",
+        "localName": "code",
+        "kind": "String",
+        "value": "x"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-018",
+    "description": "Same local name different expanded names",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/><xs:attribute name='code' type='xs:string' use='required' form='qualified'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='a' xmlns:p='urn:a' p:code='b'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "a"
+      },
+      {
+        "namespaceUri": "urn:a",
+        "localName": "code",
+        "kind": "String",
+        "value": "b"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-019",
+    "description": "XML order does not change attribute indexes",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:string' use='required'/><xs:attribute name='b' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' b='B' a='A'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "a",
+        "kind": "String",
+        "value": "A"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "b",
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-020",
+    "description": "Skip optional hole in schema use order",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:string' use='optional'/><xs:attribute name='b' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' b='B'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "b",
+        "kind": "String",
+        "value": "B"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-021",
+    "description": "Boolean lexical true",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:boolean' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='true'><amount>12.50</amount></r>",
+    "maxStringCharacters": 1,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "Boolean",
+        "value": "true"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-022",
+    "description": "Boolean lexical false",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:boolean' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='false'><amount>12.50</amount></r>",
+    "maxStringCharacters": 1,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "Boolean",
+        "value": "false"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-023",
+    "description": "Boolean lexical 1",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:boolean' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='1'><amount>12.50</amount></r>",
+    "maxStringCharacters": 1,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "Boolean",
+        "value": "true"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-024",
+    "description": "Boolean lexical 0",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:boolean' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='0'><amount>12.50</amount></r>",
+    "maxStringCharacters": 1,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "Boolean",
+        "value": "false"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-025",
+    "description": "Boolean lexical  &#x9;0&#xD; ",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:boolean' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code=' &#x9;0&#xD; '><amount>12.50</amount></r>",
+    "maxStringCharacters": 1,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "Boolean",
+        "value": "false"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-026",
+    "description": "Invalid Boolean 'TRUE'",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:boolean' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='TRUE'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-027",
+    "description": "Invalid Boolean '-0'",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:boolean' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='-0'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-028",
+    "description": "Invalid Boolean ''",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:boolean' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code=''><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-029",
+    "description": "Invalid Boolean '2'",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:boolean' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='2'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-030",
+    "description": "Integer exact 0",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:integer' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='0'><amount>12</amount></r>",
+    "maxStringCharacters": 1,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 0,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "Integer",
+        "value": "0"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-031",
+    "description": "Integer exact -0",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:integer' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='-0'><amount>12</amount></r>",
+    "maxStringCharacters": 1,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 0,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "Integer",
+        "value": "0"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-032",
+    "description": "Integer exact +00012",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:integer' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='+00012'><amount>12</amount></r>",
+    "maxStringCharacters": 1,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 0,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "Integer",
+        "value": "12"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-033",
+    "description": "Integer exact 9223372036854775808",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:integer' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='9223372036854775808'><amount>12</amount></r>",
+    "maxStringCharacters": 1,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 0,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "Integer",
+        "value": "9223372036854775808"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-034",
+    "description": "Integer exact -999999999999999999999999",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:integer' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='-99999999999999999999999999999999999999999999999999'><amount>12</amount></r>",
+    "maxStringCharacters": 1,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 0,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "Integer",
+        "value": "-99999999999999999999999999999999999999999999999999"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-035",
+    "description": "Invalid integer 1.0",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:integer' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='1.0'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-036",
+    "description": "Invalid integer 1e2",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:integer' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='1e2'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-037",
+    "description": "Invalid integer ??",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:integer' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='??'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-038",
+    "description": "Integer digit capacity before zero normalization",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:integer' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='0001'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 3,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "M2E1-039",
+    "description": "Raw integer lexical ceiling",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:integer' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "M2E1-040",
+    "description": "Raw Boolean lexical ceiling",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:boolean' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='                                                                                                                                                                                                                                                                0'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "M2E1-041",
+    "description": "Decimal preserves exact value",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:decimal' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='+012.500'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-042",
+    "description": "Invalid decimal attr",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:decimal' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='1e2'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-043",
+    "description": "Decimal digit capacity",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:decimal' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='1234'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 3,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "M2E1-044",
+    "description": "Decimal scale capacity",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:decimal' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='1.25'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 1,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "M2E1-045",
+    "description": "Leaf capacity still applies after valid attribute",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 2,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "M2E1-046",
+    "description": "String whitespace preserved after XML",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code=' a  b '><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": " a  b "
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-047",
+    "description": "Literal tab normalized by XML attr parsing",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='a\tb'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "a b"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-048",
+    "description": "Literal newline normalized by XML",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='a\nb'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "a b"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-049",
+    "description": "Referenced tab preserved",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='a&#x9;b'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "a\tb"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-050",
+    "description": "Referenced CR/LF preserved and exported",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='a&#xD;&#xA;b'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "a\r\nb"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-051",
+    "description": "Attribute entities parsed before value",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='a&amp;b&lt;c'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "a&b<c"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-052",
+    "description": "String capacity before facets",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='abcd'><amount>12.50</amount></r>",
+    "maxStringCharacters": 3,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "M2E1-053",
+    "description": "Supplementary string UTF16 boundary",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='😀'><amount>12.50</amount></r>",
+    "maxStringCharacters": 2,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "😀"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-054",
+    "description": "Supplementary string above UTF16 boundary",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='😀'><amount>12.50</amount></r>",
+    "maxStringCharacters": 1,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "M2E1-055",
+    "description": "Named string character length and enumeration",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1'/><xs:enumeration value='😀'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='t:Label' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='😀'><amount>12.50</amount></r>",
+    "maxStringCharacters": 2,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "😀"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-056",
+    "description": "Named string mismatch",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1'/><xs:enumeration value='😀'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='t:Label' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-057",
+    "description": "Named decimal range",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='1'/><xs:maxInclusive value='20'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='t:Money' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='12.50'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-058",
+    "description": "Named decimal range violation",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='1'/><xs:maxInclusive value='20'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='t:Money' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='0'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-059",
+    "description": "Root attribute validation does not bypass leaf assertion",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/><xs:assert xpathDefaultNamespace='urn:a' test='amount gt 20'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-060",
+    "description": "Root attribute does not bypass bad leaf",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>bad</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-061",
+    "description": "Named complex root",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType><xs:element name='r' type='t:Order'/><xs:element name='quote' type='t:Order'/></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "x"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-062",
+    "description": "Second root references same named complex uses",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType><xs:element name='r' type='t:Order'/><xs:element name='quote' type='t:Order'/></xs:schema>",
+    "instance": "<quote xmlns='urn:a' code='x'><amount>12.50</amount></quote>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "code",
+        "kind": "String",
+        "value": "x"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-063",
+    "description": "Sixteen root attribute uses",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='a0' type='xs:string' use='required'/><xs:attribute name='a1' type='xs:string' use='required'/><xs:attribute name='a2' type='xs:string' use='required'/><xs:attribute name='a3' type='xs:string' use='required'/><xs:attribute name='a4' type='xs:string' use='required'/><xs:attribute name='a5' type='xs:string' use='required'/><xs:attribute name='a6' type='xs:string' use='required'/><xs:attribute name='a7' type='xs:string' use='required'/><xs:attribute name='a8' type='xs:string' use='required'/><xs:attribute name='a9' type='xs:string' use='required'/><xs:attribute name='a10' type='xs:string' use='required'/><xs:attribute name='a11' type='xs:string' use='required'/><xs:attribute name='a12' type='xs:string' use='required'/><xs:attribute name='a13' type='xs:string' use='required'/><xs:attribute name='a14' type='xs:string' use='required'/><xs:attribute name='a15' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' a15='v' a14='v' a13='v' a12='v' a11='v' a10='v' a9='v' a8='v' a7='v' a6='v' a5='v' a4='v' a3='v' a2='v' a1='v' a0='v'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "a0",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a1",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a2",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a3",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a4",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a5",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a6",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a7",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a8",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a9",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a10",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a11",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a12",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a13",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a14",
+        "kind": "String",
+        "value": "v"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "a15",
+        "kind": "String",
+        "value": "v"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-064",
+    "description": "Seventeenth root use ceiling",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='a0' type='xs:string' use='required'/><xs:attribute name='a1' type='xs:string' use='required'/><xs:attribute name='a2' type='xs:string' use='required'/><xs:attribute name='a3' type='xs:string' use='required'/><xs:attribute name='a4' type='xs:string' use='required'/><xs:attribute name='a5' type='xs:string' use='required'/><xs:attribute name='a6' type='xs:string' use='required'/><xs:attribute name='a7' type='xs:string' use='required'/><xs:attribute name='a8' type='xs:string' use='required'/><xs:attribute name='a9' type='xs:string' use='required'/><xs:attribute name='a10' type='xs:string' use='required'/><xs:attribute name='a11' type='xs:string' use='required'/><xs:attribute name='a12' type='xs:string' use='required'/><xs:attribute name='a13' type='xs:string' use='required'/><xs:attribute name='a14' type='xs:string' use='required'/><xs:attribute name='a15' type='xs:string' use='required'/><xs:attribute name='extra' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "M2E1-065",
+    "description": "Duplicate expanded declaration",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "M2E1-066",
+    "description": "Missing attribute type",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "ValueType"
+  },
+  {
+    "id": "M2E1-067",
+    "description": "Unsupported attribute type",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:date' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "ValueType"
+  },
+  {
+    "id": "M2E1-068",
+    "description": "Unknown QName prefix",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='missing:Label' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "ValueType"
+  },
+  {
+    "id": "M2E1-069",
+    "description": "Missing attribute name",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "M2E1-070",
+    "description": "Reserved xmlns name",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='xmlns' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "M2E1-071",
+    "description": "Qualified xsi declaration namespace",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='http://www.w3.org/2001/XMLSchema-instance' targetNamespace='http://www.w3.org/2001/XMLSchema-instance' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required' form='qualified'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "Namespace"
+  },
+  {
+    "id": "M2E1-072",
+    "description": "Excluded use prohibited",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='prohibited'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "M2E1-073",
+    "description": "Excluded use unknown",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='unknown'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "M2E1-074",
+    "description": "Excluded use REQUIRED",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='REQUIRED'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "M2E1-075",
+    "description": "Invalid attribute form",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required' form='other'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "Namespace"
+  },
+  {
+    "id": "M2E1-076",
+    "description": "Excluded declaration flag default='x'",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required' default='x'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "M2E1-077",
+    "description": "Excluded declaration flag fixed='x'",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required' fixed='x'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "M2E1-078",
+    "description": "Excluded declaration flag inheritable='true'",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required' inheritable='true'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "M2E1-079",
+    "description": "Excluded declaration flag ref='t:a'",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required' ref='t:a'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "M2E1-080",
+    "description": "Inline attribute simple type",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code'><xs:simpleType><xs:restriction base='xs:string'/></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "M2E1-081",
+    "description": "Attribute group excluded",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attributeGroup ref='t:group'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "M2E1-082",
+    "description": "Any attribute excluded",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:anyAttribute/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "M2E1-083",
+    "description": "Attribute after assertion excluded",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:assert test='amount gt 0'/><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "M2E1-084",
+    "description": "Attribute assertion excluded @code eq 1",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/><xs:assert test='@code eq 1'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "AssertionGrammar"
+  },
+  {
+    "id": "M2E1-085",
+    "description": "Attribute assertion excluded exists(@code)",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/><xs:assert test='exists(@code)'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "AssertionGrammar"
+  },
+  {
+    "id": "M2E1-086",
+    "description": "Attribute assertion excluded count(@code) eq 1",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/><xs:assert test='count(@code) eq 1'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "unsupportedReason": "AssertionGrammar"
+  },
+  {
+    "id": "M2E1-087",
+    "description": "Duplicate physical attribute invalid XML",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='x' code='y'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "attributes": [],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-088",
+    "description": "Unprefixed attribute separate from same-name leaf",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='amount' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' amount='x'><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "amount",
+        "kind": "String",
+        "value": "x"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  },
+  {
+    "id": "M2E1-089",
+    "description": "Four families and repeated leaf indexes",
+    "sections": [
+      "Structures3.2/3.4/3.5",
+      "XML1.0 3.3.3",
+      "Existing datatype adoptions"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal' maxOccurs='2'/></xs:sequence><xs:attribute name='s' type='xs:string' use='required'/><xs:attribute name='b' type='xs:boolean' use='required'/><xs:attribute name='i' type='xs:integer' use='required'/><xs:attribute name='d' type='xs:decimal' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' d='12.50' i='9223372036854775808' b='0' s=''><amount>12.50</amount></r>",
+    "maxStringCharacters": 256,
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "s",
+        "kind": "String",
+        "value": ""
+      },
+      {
+        "namespaceUri": "",
+        "localName": "b",
+        "kind": "Boolean",
+        "value": "false"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "i",
+        "kind": "Integer",
+        "value": "9223372036854775808"
+      },
+      {
+        "namespaceUri": "",
+        "localName": "d",
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ],
+    "leaves": [
+      {
+        "kind": "Decimal",
+        "value": "12.5"
+      }
+    ]
+  }
+]
