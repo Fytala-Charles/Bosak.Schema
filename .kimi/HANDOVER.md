@@ -89,3 +89,55 @@ M2E1 is locally implemented under docs/m2e-root-attributes with950source cases a
 ## 20 November 2026 - decimal simple content
 
 Isolated feature/native-decimal-simple-content ond4eca99 implements direct decimal simple-content root reads with1036source cases. See docs/decimal-simple-content/README.md and ADOPTION.md. Prior950outcomes unchanged; proposal/actual qualification separate, no Core pin/release or general API acceptance. Source is uncommitted.
+
+
+## Bounded nested-sequence proposal - 20 November 2026
+
+PR25 merged at c34e9fe; fresh main CI44695518279 passed 1,036 source cases,
+54 release controls and six workload controls. The [nested-sequence proposal](../docs/nested-sequences/PLAN.md)
+defines acyclic named/anonymous element-only nesting, finite occurrences and an
+internal terminal-scalar projection preserving existing flat indexes. Proposed
+limits are depth 4, 64 expanded element nodes and 16 terminal scalar occurrences
+per root. Root attributes remain separate; nested attributes/simple content,
+choice/all, recursion, unbounded repetition and nested-profile assertions remain
+excluded. Planning only: no new implementation, API, semantic adoption, passed
+feature count, Core pin or publication. REQ-009 remains In Progress.
+
+
+## Nested transport feasibility and semantic adoption - 20 November 2026
+
+The [nested dossier](../docs/nested-sequences/FEASIBILITY.md) records 50 public-only synthetic controls per signed
+Core1.81.2/1.81.17 lane (13 new, 37 inherited), 18 package signature/source/payload
+checks and an actual pre-implementation Schema refusal. These are transport and
+baseline controls, not new product cases or nested validation. A separate exact
+Structures/XDM adoption now precedes production changes. All production files,
+the 1,036-case source catalog, public API and Core pins remain unchanged. Actual
+nested assessment and terminal-only projection implementation are next; REQ-009
+remains In Progress. No commit/push or publication.
+
+
+## Nested-sequence implementation candidate - 20 November 2026
+
+The [adopted nested-sequence candidate](../docs/nested-sequences/README.md) locally implements acyclic named/
+anonymous element-only nesting, finite occurrence rules and separate terminal
+scalar reads. Existing root attributes/scalar datatypes are reused; complete
+original element facts include containers, while ScalarCount/ReadScalar exclude
+them. All 1,036 prior source outcomes remain unchanged. The full local suite is
+1,125 cases (395 implementation/730 public), including 76 authored nested cases,
+four public operation controls and nine actual provider/lifecycle controls.
+Depth 4, 16 terminal scalars, defensive 64 element nodes and 16 local anonymous
+types are explicit profile ceilings. Nested attributes/simple content, choice/all,
+recursion, unbounded repetition and assertions in nested schemas remain excluded.
+No new public API, Core pin or published package/controller change; REQ-009 and
+general API/C45 acceptance remain In Progress. Package/retained/API evidence is
+recorded separately in the candidate dossier, not inferred from source tests.
+
+
+Nested qualification is complete locally: package-only730minimum-Core and
+729unchanged current-reference public cases plus one current-version identity
+control pass; retained124/23/33callers pass with onlySchemaDLLchanged. API52types/
+389rows is unchanged. All ten actual packaged README C#blocks,18Core signatures/
+payload identities,54release and six workload controls pass. Exact source hashes
+and overlapping lane scopes are in docs/nested-sequences/QUALIFICATION-RESULTS.json.
+Local unsigned0.6.0-alpha.0.13 retains basec34e9femetadata; it is not a published
+release. No commit/push, tag/controller or Core integration-pin change.

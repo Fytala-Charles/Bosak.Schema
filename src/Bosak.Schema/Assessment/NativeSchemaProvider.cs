@@ -22,6 +22,7 @@
 //                      | Charles Korthout | 0.9   | 19-11-2026     | Add bounded exact integer leaves with original typed provenance                           |
 //                      | Charles Korthout | 1.0   | 19-11-2026     | Publish complete original attribute facts with separate element and attribute collections |
 //                      | Charles Korthout | 1.1   | 20-11-2026     | Retain complex root governing identity with its distinct decimal atomic content type     |
+//                      | Charles Korthout | 1.2   | 20-11-2026     | Register nested declaration components and project terminal scalar facts separately      |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -48,13 +49,23 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         {
             Add(plan.Root); Add(plan.Root.Type);
             if (plan.Root.Type.ContentType is { } contentType) Add(contentType);
-            foreach (var declaration in plan.Children.Concat(plan.AttributeUses)) { Add(declaration); Add(declaration.Type); }
+            RegisterChildren(plan);
         }
         foreach (var type in schema.NamedTypes) Add(type);
         DecimalType = Add(schema.DecimalType);
         if (schema.StringType is { } stringType) Add(stringType);
         if (schema.BooleanType is { } booleanType) Add(booleanType);
         if (schema.IntegerType is { } integerType) Add(integerType);
+    }
+
+    private void RegisterChildren(NativeDecimalSchema plan)
+    {
+        foreach (var declaration in plan.Children.Concat(plan.AttributeUses))
+        {
+            var known = components.ContainsKey(declaration);
+            Add(declaration); Add(declaration.Type);
+            if (!known && declaration.Container is { } child) RegisterChildren(child);
+        }
     }
 
     private Component Add(object value)
@@ -300,6 +311,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         internal Assessment(NativeSchemaInput input, Origin origin, ImmutableArray<Facts> facts, ImmutableArray<Facts> attributeFacts = default)
         {
             this.input = input; this.origin = origin; ElementFacts = facts; AttributeFacts = attributeFacts.IsDefault ? [] : attributeFacts;
+            ScalarFacts = facts.Skip(1).Where(f => !f.HasNoTypedValue).ToImmutableArray();
             Facts = facts.AddRange(AttributeFacts); Status = SchemaAssessmentStatus.Valid;
         }
         private Assessment(SchemaAssessmentStatus status, ImmutableArray<SchemaAssessmentDiagnostic> diagnostics, bool truncated,
@@ -310,6 +322,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         internal NativeDecimalUnsupportedReason UnsupportedReason { get; }
         internal ImmutableArray<Facts> Facts { get; } = [];
         internal ImmutableArray<Facts> ElementFacts { get; } = [];
+        internal ImmutableArray<Facts> ScalarFacts { get; } = [];
         internal ImmutableArray<Facts> AttributeFacts { get; } = [];
         public SchemaAssessmentStatus Status { get; }
         public ISchemaAssessmentEvidence? Evidence => origin is null ? null : this;

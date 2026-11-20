@@ -323,3 +323,18 @@ Bosak.Schema0.5.0-beta.1 is published on NuGet.org and GitHub Releases. Read doc
 ## Decimal simple-content candidate
 
 20November2026:1036source cases(386implementation/650public), all950prior outcomes unchanged. Read docs/decimal-simple-content/ADOPTION.md before edits. Only direct decimal simpleContent extension with current root attributes is admitted. HasRootScalar/ReadRootScalar never change leaf/attribute indexes; root complex annotation/declared type differs from actual decimal atomic type. Preserve normalized root string-value versus lexical export, old rootFOTY0012, owner/cache/gate and legacy decimal refusal. No commit/push/publication without explicit request.
+
+
+## Nested-sequence planning
+
+20 November 2026: PR25/main c34e9fe is verified at 1,036 source cases. Read docs/nested-sequences/PLAN.md and CONTRACT.md before nested work. These are proposals, not semantic adoption or implemented support. Preserve full element facts and separate terminal scalar indexing; no commit/push without explicit request.
+
+
+## Nested-sequence pre-implementation adoption
+
+20 November 2026: read docs/nested-sequences/ADOPTION.md before production edits. Separate public Core feasibility is 50 synthetic controls per minimum/current lane, not native validation. 1,036 source cases remain unchanged; the64node budget is defensive under depth4/16terminal bounds. Preserve old receipts and explicit commit/push rule.
+
+
+## Nested-sequence implementation candidate
+
+20 November 2026: local1,125source cases(395implementation/730public), prior1,036unchanged. Read docs/nested-sequences/ADOPTION.md before semantic edits. Separate complete element facts from terminal scalar projection; preserve local/global declaration identity, eager cycle/expansion/refusal gates, legacy facade and lifetime rules. Package/retained qualification is separate. No commit/push without explicit request.

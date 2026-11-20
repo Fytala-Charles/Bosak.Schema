@@ -23,6 +23,7 @@
 //                      | Charles Korthout | 1.0   | 19-11-2026     | Add bounded named string restrictions with Unicode length and exact enumeration facets      |
 //                      | Charles Korthout | 1.1   | 19-11-2026     | Adopt opt-in local root attributes without changing leaf indexes or legacy profiles         |
 //                      | Charles Korthout | 1.2   | 20-11-2026     | Adopt bounded decimal simple-content roots with original complex type identity             |
+//                      | Charles Korthout | 1.3   | 20-11-2026     | Adopt bounded nested sequences and preserve complete original element assessment         |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -38,7 +39,7 @@ using Bosak.XPath.Core.Xdm;
 namespace Bosak.Schema;
 
 /// <summary>Compiles and assesses the internal finite native decimal schema profile.</summary>
-internal sealed class NativeDecimalSchema
+internal sealed partial class NativeDecimalSchema
 {
     private static readonly XNamespace Xs = "http://www.w3.org/2001/XMLSchema";
     private static readonly UTF8Encoding Utf8 = new(false, true);
@@ -125,6 +126,10 @@ internal sealed class NativeDecimalSchema
                 else throw new NativeProfileException(NativeOutcome.Unsupported, "Only admitted direct decimal or string restrictions are supported.", NativeDecimalUnsupportedReason.ValueType);
                 simple.Add(XName.Get(name, targetNamespace), restricted);
             }
+            if (stringType is not null && HasNestedDeclarations(root, types, targetNamespace))
+                return NativeResult<NativeDecimalSchema>.Valid(CompileNestedSchema(root, types, declarations, targetNamespace,
+                    defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType!, integerType!, simple,
+                    limits, maxStringCharacters!.Value, cancellationToken));
             // Compile all complex types eagerly, including unused declarations.
             foreach (var type in types.Where(t => t.Name == Xs + "complexType"))
             {
@@ -335,6 +340,13 @@ internal sealed class NativeDecimalSchema
                 var state = AssessScalar(root.Value, scalarDeclaration) with { Declaration = selected.Root, NormalizedStringValue = Collapse(root.Value) };
                 cancellationToken.ThrowIfCancellationRequested();
                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [state], attributeStates.ToImmutable()));
+            }
+            if (selected.NestedProfile)
+            {
+                var nestedElements = ImmutableArray.CreateBuilder<NativeElementState>();
+                AssessContainer(root, selected.Root, selected, nestedElements, cancellationToken, isRoot: true);
+                cancellationToken.ThrowIfCancellationRequested();
+                return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, nestedElements.ToImmutable(), attributeStates.ToImmutable()));
             }
             foreach (var text in root.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only root contains non-whitespace text.");
             var values = new Dictionary<string, List<XdmExactDecimal>>(StringComparer.Ordinal);
@@ -607,6 +619,7 @@ internal sealed class NativeType(string? name, bool hasNoTypedValue, string name
 }
 internal sealed class NativeDeclaration(string name, NativeType type, int minOccurs, int maxOccurs, string namespaceUri = "", bool isAttribute = false)
 {
+    internal NativeDecimalSchema? Container { get; init; }
     internal bool IsAttribute { get; } = isAttribute;
     internal string Name { get; } = name;
     internal string NamespaceUri { get; } = namespaceUri;

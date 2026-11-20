@@ -581,3 +581,53 @@ unchanged. Restriction/complex-base chains, other simple-content base families,
 assertions, nested/mixed content and broader defaults/imports remain excluded.
 This development slice does not make the entire orders fixture supported and is
 not part of published beta.1 or a full XSD implementation.
+
+
+## Development: bounded nested sequences
+
+The 0.6 development profile admits acyclic named or anonymous element-only nested
+sequences through NativeSchemaSession. ScalarCount/ReadScalar enumerate terminal
+simple-typed leaves in document order, excluding containers and root attributes.
+Existing flat-document indexes remain unchanged. For example:
+
+```csharp
+using Bosak.Schema;
+
+var schema = """
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Line"><xs:sequence>
+    <xs:element name="sku" type="xs:string"/>
+    <xs:element name="amount" type="xs:decimal"/>
+  </xs:sequence></xs:complexType>
+  <xs:element name="order"><xs:complexType><xs:sequence>
+    <xs:element name="line" type="Line" maxOccurs="2"/>
+  </xs:sequence><xs:attribute name="id" type="xs:string" use="required"/></xs:complexType></xs:element>
+</xs:schema>
+""";
+var options = new NativeSchemaSessionOptions(256, 256, 256, 65536, 1, 8, 1, 256, 256);
+var created = NativeSchemaSession.Create(schema, options);
+if (created.Outcome != NativeSchemaOutcome.Valid)
+    throw new InvalidOperationException(created.Diagnostics[0].Code);
+using var session = created.Value!;
+var assessed = session.Assess("<order id='ORDER-1'><line><sku>ABC-0001</sku><amount>12.50</amount></line></order>",
+    new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch, 0));
+if (assessed.Outcome != NativeSchemaOutcome.Valid)
+    throw new InvalidOperationException(assessed.Diagnostics[0].Code);
+using var document = assessed.Value!;
+Console.WriteLine(document.ScalarCount);
+Console.WriteLine(document.ReadScalar(0).StringValue);
+Console.WriteLine(document.ReadScalar(1).DecimalValue.ToInvariantString(256));
+Console.WriteLine(document.ReadAttribute(0).Value.StringValue);
+Console.WriteLine(document.ExportXml());
+```
+
+Outputs begin 2, ABC-0001, 12.5, ORDER-1; XML export retains 12.50. Element-only
+containers have no typed value (FOTY0012); HasRootScalar remains false. Worst-case
+expansion is limited to depth 4 including the root, 16 terminal scalars and 64
+element nodes (the node ceiling is defensive under the other limits). Sequences
+have 1-16 unique expanded child names, minOccurs 0/1 and finite maxOccurs 1-16;
+root/type counts and local anonymous types have separate 16-component ceilings.
+Optional branches and repetition count toward compile-time budgets. New nested
+schemas are assertion-free. Choice/all, recursion, unbounded repetition, nested
+attributes/simple content, mixed content, composition and defaults/nil remain
+excluded. NativeDecimalSession and published beta.1 retain their original scope.
