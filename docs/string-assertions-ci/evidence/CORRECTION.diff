@@ -1,0 +1,243 @@
+diff --git a/tests/Bosak.Schema.Tests/NativeAttributeLifecycleTests.cs b/tests/Bosak.Schema.Tests/NativeAttributeLifecycleTests.cs
+index 3afc8de..b20294b 100644
+--- a/tests/Bosak.Schema.Tests/NativeAttributeLifecycleTests.cs
++++ b/tests/Bosak.Schema.Tests/NativeAttributeLifecycleTests.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 20-11-2026     | Use dedicated workers for blocking lifecycle barriers to avoid pool scheduling contention |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -35,7 +36,7 @@ public sealed class NativeAttributeLifecycleTests
+         using var entered = new ManualResetEventSlim();
+         using var release = new ManualResetEventSlim();
+         using var closing = new ManualResetEventSlim();
+-        var work = Task.Run(() => session.Work(() =>
++        var work = NativeLifecycleWorker.Start(() => session.Work(() =>
+         {
+             entered.Set();
+             if (!release.Wait(TimeSpan.FromSeconds(10))) throw new TimeoutException("Lifecycle barrier expired.");
+@@ -48,7 +49,7 @@ public sealed class NativeAttributeLifecycleTests
+             Assert.True(entered.Wait(TimeSpan.FromSeconds(10)));
+             Assert.Throws<NotSupportedException>(() => doc.ReadAttribute(0));
+             Assert.Throws<NotSupportedException>(() => doc.AttributeCount);
+-            close = Task.Run(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
++            close = NativeLifecycleWorker.Start(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
+             Assert.True(closing.Wait(TimeSpan.FromSeconds(10)));
+             Assert.False(close.IsCompleted);
+             Assert.False(doc.Input.ResourcesReleased);
+diff --git a/tests/Bosak.Schema.Tests/NativeDecimalLifecycleTests.cs b/tests/Bosak.Schema.Tests/NativeDecimalLifecycleTests.cs
+index 686e730..825f1a5 100644
+--- a/tests/Bosak.Schema.Tests/NativeDecimalLifecycleTests.cs
++++ b/tests/Bosak.Schema.Tests/NativeDecimalLifecycleTests.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 17-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 20-11-2026     | Use dedicated workers for blocking lifecycle barriers to avoid pool scheduling contention |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -35,7 +36,7 @@ public sealed class NativeDecimalLifecycleTests
+         using var entered = new ManualResetEventSlim();
+         using var release = new ManualResetEventSlim();
+         using var closing = new ManualResetEventSlim();
+-        var work = Task.Run(() => session.Work(() =>
++        var work = NativeLifecycleWorker.Start(() => session.Work(() =>
+         {
+             entered.Set();
+             if (!release.Wait(TimeSpan.FromSeconds(10))) throw new TimeoutException("Lifecycle barrier expired.");
+@@ -47,7 +48,7 @@ public sealed class NativeDecimalLifecycleTests
+         {
+             Assert.True(entered.Wait(TimeSpan.FromSeconds(10)));
+             Assert.Throws<NotSupportedException>(() => doc.ReadDecimal(0));
+-            close = Task.Run(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
++            close = NativeLifecycleWorker.Start(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
+             Assert.True(closing.Wait(TimeSpan.FromSeconds(10)));
+             Assert.False(close.IsCompleted);
+             Assert.False(doc.Input.ResourcesReleased);
+diff --git a/tests/Bosak.Schema.Tests/NativeNestedAttributeLifecycleTests.cs b/tests/Bosak.Schema.Tests/NativeNestedAttributeLifecycleTests.cs
+index d7eeeba..077a8c5 100644
+--- a/tests/Bosak.Schema.Tests/NativeNestedAttributeLifecycleTests.cs
++++ b/tests/Bosak.Schema.Tests/NativeNestedAttributeLifecycleTests.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 20-11-2026     | Use dedicated workers for blocking lifecycle barriers to avoid pool scheduling contention |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -35,7 +36,7 @@ public sealed class NativeNestedAttributeLifecycleTests
+         using var entered = new ManualResetEventSlim();
+         using var release = new ManualResetEventSlim();
+         using var closing = new ManualResetEventSlim();
+-        var work = Task.Run(() => session.Work(() =>
++        var work = NativeLifecycleWorker.Start(() => session.Work(() =>
+         {
+             entered.Set();
+             if (!release.Wait(TimeSpan.FromSeconds(10))) throw new TimeoutException("Lifecycle barrier expired.");
+@@ -48,7 +49,7 @@ public sealed class NativeNestedAttributeLifecycleTests
+             Assert.True(entered.Wait(TimeSpan.FromSeconds(10)));
+             Assert.Throws<NotSupportedException>(() => doc.ReadDescendantAttribute(0));
+             Assert.Throws<NotSupportedException>(() => doc.DescendantAttributeCount);
+-            close = Task.Run(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
++            close = NativeLifecycleWorker.Start(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
+             Assert.True(closing.Wait(TimeSpan.FromSeconds(10)));
+             Assert.False(close.IsCompleted);
+             Assert.False(doc.Input.ResourcesReleased);
+diff --git a/tests/Bosak.Schema.Tests/NativeNestedLifecycleTests.cs b/tests/Bosak.Schema.Tests/NativeNestedLifecycleTests.cs
+index 3beb78b..f558097 100644
+--- a/tests/Bosak.Schema.Tests/NativeNestedLifecycleTests.cs
++++ b/tests/Bosak.Schema.Tests/NativeNestedLifecycleTests.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 20-11-2026     | Use dedicated workers for blocking lifecycle barriers to avoid pool scheduling contention |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -35,7 +36,7 @@ public sealed class NativeNestedLifecycleTests
+         using var entered = new ManualResetEventSlim();
+         using var release = new ManualResetEventSlim();
+         using var closing = new ManualResetEventSlim();
+-        var work = Task.Run(() => session.Work(() =>
++        var work = NativeLifecycleWorker.Start(() => session.Work(() =>
+         {
+             entered.Set();
+             if (!release.Wait(TimeSpan.FromSeconds(10))) throw new TimeoutException("Lifecycle barrier expired.");
+@@ -48,7 +49,7 @@ public sealed class NativeNestedLifecycleTests
+             Assert.True(entered.Wait(TimeSpan.FromSeconds(10)));
+             Assert.Throws<NotSupportedException>(() => doc.ReadScalar(0));
+             Assert.Throws<NotSupportedException>(() => doc.HasRootScalar);
+-            close = Task.Run(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
++            close = NativeLifecycleWorker.Start(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
+             Assert.True(closing.Wait(TimeSpan.FromSeconds(10)));
+             Assert.False(close.IsCompleted);
+             Assert.False(doc.Input.ResourcesReleased);
+diff --git a/tests/Bosak.Schema.Tests/NativeNestedSimpleContentLifecycleTests.cs b/tests/Bosak.Schema.Tests/NativeNestedSimpleContentLifecycleTests.cs
+index 94779da..4acbe47 100644
+--- a/tests/Bosak.Schema.Tests/NativeNestedSimpleContentLifecycleTests.cs
++++ b/tests/Bosak.Schema.Tests/NativeNestedSimpleContentLifecycleTests.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 20-11-2026     | Use dedicated workers for blocking lifecycle barriers to avoid pool scheduling contention |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -35,7 +36,7 @@ public sealed class NativeNestedSimpleContentLifecycleTests
+         using var entered = new ManualResetEventSlim();
+         using var release = new ManualResetEventSlim();
+         using var closing = new ManualResetEventSlim();
+-        var work = Task.Run(() => session.Work(() =>
++        var work = NativeLifecycleWorker.Start(() => session.Work(() =>
+         {
+             entered.Set();
+             if (!release.Wait(TimeSpan.FromSeconds(10))) throw new TimeoutException("Lifecycle barrier expired.");
+@@ -48,7 +49,7 @@ public sealed class NativeNestedSimpleContentLifecycleTests
+             Assert.True(entered.Wait(TimeSpan.FromSeconds(10)));
+             Assert.Throws<NotSupportedException>(() => doc.ReadDescendantAttribute(0));
+             Assert.Throws<NotSupportedException>(() => doc.DescendantAttributeCount);
+-            close = Task.Run(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
++            close = NativeLifecycleWorker.Start(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
+             Assert.True(closing.Wait(TimeSpan.FromSeconds(10)));
+             Assert.False(close.IsCompleted);
+             Assert.False(doc.Input.ResourcesReleased);
+diff --git a/tests/Bosak.Schema.Tests/NativeNodeDataLifecycleTests.cs b/tests/Bosak.Schema.Tests/NativeNodeDataLifecycleTests.cs
+index 8af7451..010a7f1 100644
+--- a/tests/Bosak.Schema.Tests/NativeNodeDataLifecycleTests.cs
++++ b/tests/Bosak.Schema.Tests/NativeNodeDataLifecycleTests.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 20-11-2026     | Use dedicated workers for blocking lifecycle barriers to avoid pool scheduling contention |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -34,7 +35,7 @@ public sealed class NativeNodeDataLifecycleTests
+         using var session=Open();using var doc=session.Assess("<r><v>1</v></r>",Context).Value!;var core=Core(session);
+         core.Work(()=>{Assert.Throws<NotSupportedException>(()=>doc.ReadElement([0]));return 0;},default);
+         using var entered=new ManualResetEventSlim();using var release=new ManualResetEventSlim();
+-        var admitted=Task.Run(()=>core.Work(()=>{entered.Set();Assert.True(release.Wait(TimeSpan.FromSeconds(20)));return 0;},default));
++        var admitted=NativeLifecycleWorker.Start(()=>core.Work(()=>{entered.Set();Assert.True(release.Wait(TimeSpan.FromSeconds(20)));return 0;},default));
+         try{Assert.True(entered.Wait(TimeSpan.FromSeconds(20)));Assert.Throws<NotSupportedException>(()=>doc.ReadElement([0]));Assert.Throws<NotSupportedException>(()=>session.Assess("<r><v>1</v></r>",Context));}finally{release.Set();}
+         await admitted;Assert.Equal("1",doc.ReadElement([0]).DecimalValue.ToInvariantString(256));
+     }
+@@ -45,9 +46,9 @@ public sealed class NativeNodeDataLifecycleTests
+     {
+         using var session=Open();var doc=session.Assess("<r><v>1</v></r>",Context).Value!;var core=Core(session);
+         using var entered=new ManualResetEventSlim();using var release=new ManualResetEventSlim();using var disposing=new ManualResetEventSlim();
+-        var admitted=Task.Run(()=>core.Work(()=>{entered.Set();Assert.True(release.Wait(TimeSpan.FromSeconds(20)));return 0;},default));
++        var admitted=NativeLifecycleWorker.Start(()=>core.Work(()=>{entered.Set();Assert.True(release.Wait(TimeSpan.FromSeconds(20)));return 0;},default));
+         Task? disposal=null;
+-        try{Assert.True(entered.Wait(TimeSpan.FromSeconds(20)));disposal=Task.Run(()=>{disposing.Set();if(wholeSession)session.Dispose();else doc.Dispose();});Assert.True(disposing.Wait(TimeSpan.FromSeconds(20)));Assert.NotSame(disposal, await Task.WhenAny(disposal,Task.Delay(100)));}
++        try{Assert.True(entered.Wait(TimeSpan.FromSeconds(20)));disposal=NativeLifecycleWorker.Start(()=>{disposing.Set();if(wholeSession)session.Dispose();else doc.Dispose();});Assert.True(disposing.Wait(TimeSpan.FromSeconds(20)));Assert.NotSame(disposal, await Task.WhenAny(disposal,Task.Delay(100)));}
+         finally{release.Set();}
+         await admitted;await disposal!;Assert.Throws<ObjectDisposedException>(()=>doc.ReadElement([0]));
+         if(!wholeSession){using var next=session.Assess("<r><v>2</v></r>",Context).Value!;Assert.Equal("2",next.ReadElement([0]).DecimalValue.ToInvariantString(256));}
+diff --git a/tests/Bosak.Schema.Tests/NativeSchemaLifecycleTests.cs b/tests/Bosak.Schema.Tests/NativeSchemaLifecycleTests.cs
+index 592efe7..aaf0489 100644
+--- a/tests/Bosak.Schema.Tests/NativeSchemaLifecycleTests.cs
++++ b/tests/Bosak.Schema.Tests/NativeSchemaLifecycleTests.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 20-11-2026     | Use dedicated workers for blocking lifecycle barriers to avoid pool scheduling contention |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -35,7 +36,7 @@ public sealed class NativeSchemaLifecycleTests
+         using var entered = new ManualResetEventSlim();
+         using var release = new ManualResetEventSlim();
+         using var closing = new ManualResetEventSlim();
+-        var work = Task.Run(() => session.Work(() =>
++        var work = NativeLifecycleWorker.Start(() => session.Work(() =>
+         {
+             entered.Set();
+             if (!release.Wait(TimeSpan.FromSeconds(10))) throw new TimeoutException("Lifecycle barrier expired.");
+@@ -47,7 +48,7 @@ public sealed class NativeSchemaLifecycleTests
+         {
+             Assert.True(entered.Wait(TimeSpan.FromSeconds(10)));
+             Assert.Throws<NotSupportedException>(() => doc.ReadScalar(0));
+-            close = Task.Run(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
++            close = NativeLifecycleWorker.Start(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
+             Assert.True(closing.Wait(TimeSpan.FromSeconds(10)));
+             Assert.False(close.IsCompleted);
+             Assert.False(doc.Input.ResourcesReleased);
+diff --git a/tests/Bosak.Schema.Tests/NativeSimpleContentLifecycleTests.cs b/tests/Bosak.Schema.Tests/NativeSimpleContentLifecycleTests.cs
+index d8ce9b9..9e69f08 100644
+--- a/tests/Bosak.Schema.Tests/NativeSimpleContentLifecycleTests.cs
++++ b/tests/Bosak.Schema.Tests/NativeSimpleContentLifecycleTests.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 20-11-2026     | Use dedicated workers for blocking lifecycle barriers to avoid pool scheduling contention |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -35,7 +36,7 @@ public sealed class NativeSimpleContentLifecycleTests
+         using var entered = new ManualResetEventSlim();
+         using var release = new ManualResetEventSlim();
+         using var closing = new ManualResetEventSlim();
+-        var work = Task.Run(() => session.Work(() =>
++        var work = NativeLifecycleWorker.Start(() => session.Work(() =>
+         {
+             entered.Set();
+             if (!release.Wait(TimeSpan.FromSeconds(10))) throw new TimeoutException("Lifecycle barrier expired.");
+@@ -48,7 +49,7 @@ public sealed class NativeSimpleContentLifecycleTests
+             Assert.True(entered.Wait(TimeSpan.FromSeconds(10)));
+             Assert.Throws<NotSupportedException>(() => doc.ReadRootScalar());
+             Assert.Throws<NotSupportedException>(() => doc.HasRootScalar);
+-            close = Task.Run(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
++            close = NativeLifecycleWorker.Start(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
+             Assert.True(closing.Wait(TimeSpan.FromSeconds(10)));
+             Assert.False(close.IsCompleted);
+             Assert.False(doc.Input.ResourcesReleased);

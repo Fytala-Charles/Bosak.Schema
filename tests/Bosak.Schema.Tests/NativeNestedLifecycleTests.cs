@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 20-11-2026     | Use dedicated workers for blocking lifecycle barriers to avoid pool scheduling contention |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -35,7 +36,7 @@ public sealed class NativeNestedLifecycleTests
         using var entered = new ManualResetEventSlim();
         using var release = new ManualResetEventSlim();
         using var closing = new ManualResetEventSlim();
-        var work = Task.Run(() => session.Work(() =>
+        var work = NativeLifecycleWorker.Start(() => session.Work(() =>
         {
             entered.Set();
             if (!release.Wait(TimeSpan.FromSeconds(10))) throw new TimeoutException("Lifecycle barrier expired.");
@@ -48,7 +49,7 @@ public sealed class NativeNestedLifecycleTests
             Assert.True(entered.Wait(TimeSpan.FromSeconds(10)));
             Assert.Throws<NotSupportedException>(() => doc.ReadScalar(0));
             Assert.Throws<NotSupportedException>(() => doc.HasRootScalar);
-            close = Task.Run(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
+            close = NativeLifecycleWorker.Start(() => { closing.Set(); if (closeSession) session.Dispose(); else doc.Dispose(); });
             Assert.True(closing.Wait(TimeSpan.FromSeconds(10)));
             Assert.False(close.IsCompleted);
             Assert.False(doc.Input.ResourcesReleased);

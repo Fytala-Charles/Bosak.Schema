@@ -626,3 +626,13 @@ The owner approved commit, push and open PR for the reviewed bounded slice.
 The qualified implementation and sealed evidence are unchanged. Earlier pending
 statements are historical; merge and publication remain separate.
 [Delivery authorization](string-assertions-delivery/README.md).
+
+
+### PR33 lifecycle-test correction ? 20 November 2026
+
+The initial hosted run failed two pre-existing lifecycle entry waits under
+concurrent blocking-worker load. Dedicated test-only workers now run the same
+barrier protocol across eight lifecycle classes; assertions/timeouts are unchanged.
+All25focused lifecycle and1,886full source cases pass with unchanged named outcomes.
+Product source/API and prior package/pilot/signature evidence are unchanged.
+[Original failure and correction](<string-assertions-ci/README.md>).
