@@ -44,8 +44,9 @@ The published **0.5.0-beta.1** provides owned `NativeDecimalSession` and `Native
 |---|---|---|
 | Apache/public transition | Implemented and GitHub publication verified | Schema-only Apache-2.0; activation-free services; private infrastructure excluded |
 | Packaged0.6consumer guidance | Reconciled after M1; no publication | [Examples and evidence](package-readme06-reconciled/README.md); earlier planning receipts retain original scope |
-| Shared specification coverage | Owner-prioritized; bounded namespaces/types/scalars/attributes/nesting and anonymous restrictions merged through PR30; direct integer restrictions locally qualified | [REQ-009 programme](REQ-009-SPECIFICATION-COVERAGE.md); shared CoreREQ-142;24areas with explicit evidence limits |
-| Direct integer restrictions | Locally qualified, uncommitted | [Exact bounds/digits, named/anonymous and attribute uses](integer-restrictions/README.md); owned scalar route; no publication |
+| Shared specification coverage | Owner-prioritized; bounded namespaces/types/scalars/attributes/nesting and integer restrictions merged through PR31; owned original-node data implemented locally for review | [REQ-009 programme](REQ-009-SPECIFICATION-COVERAGE.md); shared CoreREQ-142;24areas with explicit evidence limits |
+| Direct integer restrictions | Merged PR31; main verified | [Exact bounds/digits, named/anonymous and attribute uses](integer-restrictions/README.md); owned scalar route; no publication |
+| Native original-node atomization | Bounded ADR-016/API owner accepted; qualified locally | [Owned implementation](native-node-data/README.md); fixed operation, existing bounded grammar |
 | [REQ-009](ADR-005-xsd11-compiled-model-and-validation.md) staged XSD 1.1 support | In Progress | Compiled descriptors, assertion/facet evaluation, alternative applicability/filtering and selected metadata |
 | [Core 1.81.2 dependency adoption](CORE-1.81.2-ADOPTION.md) | Merged | Four product references and one test provider reference updated; no C# adaptation |
 | Core optional source integration | Refreshed in Core PR #503 | Merged Schema9fd4e6a pinned with58 source/test/fixture/legal inputs;260 implementation/legacy plus nine public current-Core cases. Original135-case receipt remains historical. |
@@ -332,3 +333,89 @@ verify. Frozenpilot9matches/12Unsupported/0mismatches/errors, exactlytwointeger
 validity advances with unchanged fixtures. No Corepin, publicAPI, query-profile,
 publishedbeta.1/tag/controller or generalC45/fullXSDacceptance change.
 [Adoption and qualification](integer-restrictions/README.md). REQ-009 remains In Progress.
+
+## Original-node data contract proposal ? 20 November 2026
+
+PR31 is merged at43f14dbf56c36e5185e705af901678c42c8d1aff with the exact reviewed
+21939a1tree. Main CI44774979540 passes1,482source(427implementation/1,055public),
+release controls, sixworkload and documentation hygiene. The next proposed API
+is a separate owned original-node data session, not arbitrary XPath. It binds
+released Core's exact original-node-data profile before native assessment,
+resolves original element/attribute targets, and returns detached scalars. Old
+scalar guards/episodes remain unchanged; feasibility/adoption/API review pending.
+Frozenpilot9matches/12Unsupported unchanged. No production/API/Corepin or
+published beta.1/tag/controller change, and no new generalC45/PSVI acceptance.
+[Contract, proposed API and qualification](typed-node-contract/README.md). REQ-009 remains In Progress.
+
+## Actual native node-data feasibility — 20 November 2026
+
+Actual native original-node data feasibility passes73controls per signed
+Core1.81.2/1.81.17lane and eight before-code controls. The isolated two-file
+candidate preserves all1,482existing named test outcomes on minimum Core and
+API52types/392rows;18Core signatures/payload identities verify. Native nodes need
+the guarded original-fact interface in addition to explicit provider mode/context.
+Core FOTY0012 is InvalidOperationException; proposed facade mapping/adoption/API
+review remain pending. Production source/guards/API/Corepins and frozen9/12pilot
+are unchanged; this is native transport feasibility, not new XSD conformance.
+[Native evidence and remaining decisions](typed-node-contract/FEASIBILITY.md). REQ-009 remains In Progress.
+
+
+## Original-node scalar data (0.6 development candidate)
+
+`NativeSchemaNodeDataSession` is a separate owned session for fixed original-node
+atomization. Create it with existing explicit `NativeSchemaSessionOptions`, then
+Assess with `NativeSchemaAssessmentContext`. A valid assessment returns an owned
+`NativeSchemaNodeDataDocument`. `ReadElement(ImmutableArray<int>)` selects original
+element-child indexes (empty selects root, maximum three segments).
+`ReadAttribute(ownerElementPath, namespaceUri, localName)` selects a present original
+attribute by expanded name. Both return one detached `NativeScalarValue`.
+`ExportXml` returns bounded parsed lexical XML. Dispose documents and session.
+
+The existing bounded schema grammar and native scalar families apply. Element-only
+containers refuse reads with NotSupportedException carrying FOTY0012. Default paths,
+invalid names and missing targets throw documented argument exceptions; query/cache
+capacity and unassessed hint attributes are Unsupported read operations, not Invalid
+instance assessments. Operations are sequential; overlap is refused and disposal
+waits for admitted synchronous work. No expression, raw node, provider authority,
+callback, general XPath, list/nil support or transferable PSVI is exposed.
+
+This additive API is implemented locally for review. ADR-016 owner API acceptance,
+general Core C45 and full XSD 1.1 conformance remain pending. Published 0.5.0-beta.1
+and the existing decimal/scalar facades are unchanged. See [implementation adoption](native-node-data/ADOPTION.md).
+
+
+## Owned node-data qualification ? 20 November 2026
+
+Local candidate on base `43f14dbf56c36e5185e705af901678c42c8d1aff` passes
+1,615 source cases (503 implementation / 1,112 public), preserving all 1,482 prior
+named outcomes. Package-only minimum Core 1.81.2 passes 1,112; Core 1.81.17 passes
+1,111 shared cases plus its explicit current-version check. The deliberately
+minimum-version-only surface test is excluded only from that current lane.
+Retained 124/23/33 unchanged callers pass with only Schema.dll replaced. Counts
+overlap. All 392 prior public surface rows are preserved; two sealed owned types
+add nine rows (54 types / 401 rows total). Frozen pilot remains 9 matches / 12
+Unsupported / zero mismatch or harness error. No new XSD expectations or grammar.
+
+The local unsigned package is `0.6.0-alpha.0.19`; published beta.1, Core source/pins,
+release controllers and tags are unchanged. The earlier sealed proposal and
+feasibility packets are unchanged. Owner API acceptance/ADR-016 and delivery
+remain pending. No commit or push has been performed for this candidate.
+
+
+## Owned node-data contract review ? 20 November 2026
+
+The local code/API self-review found no blocking implementation issue. The current
+review addendum supersedes the sealed original ADR's historical pending-implementation
+wording; ADR-016 owner acceptance and explicit commit/push/PR authorization are
+still pending. Qualification and sealed packets are unchanged. [Review and prepared delivery](native-node-data-review/README.md).
+
+
+## Bounded ADR-016/API accepted ? 20 November 2026
+
+The owner accepted the reviewed two-type/seven-method owned original-node data
+contract and authorized commit, push and PR delivery. This dated acceptance
+supersedes historical pending-owner-acceptance wording in the sealed ADR/proposal,
+feasibility, implementation and review packets; those originals remain unchanged.
+All qualified source/binary identities remain unchanged. General C45/ADR006,
+full-XSD/general XPath and release/publication decisions remain separate.
+[Owner acceptance](<native-node-data-acceptance/README.md>).

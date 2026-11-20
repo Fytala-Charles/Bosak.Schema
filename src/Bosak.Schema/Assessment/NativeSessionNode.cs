@@ -17,22 +17,26 @@
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Expose original local attribute declaration metadata under the existing owner guard      |
 //                      | Charles Korthout | 0.5   | 20-11-2026     | Decouple complex annotation from typed-value absence and retain normalized root text     |
 //                      | Charles Korthout | 0.6   | 20-11-2026     | Keep local complex declarations distinct from global element metadata                     |
+//                      | Charles Korthout | 0.7   | 20-11-2026     | Expose guarded original-node data interface; exact published facts and lifetime guard  |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
 using Bosak.XPath.Core.Xdm;
+using Bosak.XPath.Core.Schema;
 using Bosak.XPath.Providers.Xml;
 using Bosak.XPath.Runtime.Vm;
 
 namespace Bosak.Schema;
 
 /// <summary>Projects guarded native nodes without exposing mutable XML storage.</summary>
-internal sealed class NativeSessionNode(NativeSchemaInput input, XDocumentNode raw) : IXdmNode
+internal sealed class NativeSessionNode(NativeSchemaInput input, XDocumentNode raw) : ISchemaAnnotatedNode
 {
     internal NativeSchemaInput Input => input;
     private T Read<T>(Func<T> read) { input.Check(); return read(); }
     private NativeSchemaProvider.Facts? Facts => input.FactsFor(this);
     public XdmNodeKind NodeKind => Read(() => raw.NodeKind);
+    /// <inheritdoc/>
+    public ISchemaNodeFacts OriginalSchemaFacts => Read<ISchemaNodeFacts>(() => Facts ?? throw new NotSupportedException("No original native facts."));
     public string LocalName => Read(() => raw.LocalName);
     public string EncodedLocalName => Read(() => raw.EncodedLocalName);
     public string NamespaceUri => Read(() => raw.NamespaceUri);

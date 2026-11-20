@@ -1,0 +1,1290 @@
+[
+  {
+    "id": "ND-001",
+    "label": "string primitive flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:string\"/></xs:sequence><xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"\"><v></v></r>",
+    "path": [
+      0
+    ],
+    "kind": "string",
+    "expected": "",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "string",
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "ND-002",
+    "label": "string primitive depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:string\"/></xs:sequence><xs:attribute name=\"code\" type=\"xs:string\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"\"><t:a><t:b t:code=\"\"><t:v></t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "string",
+    "expected": "",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "string",
+        "expected": ""
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "string",
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "ND-003",
+    "label": "string named flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:string\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"T\"/></xs:sequence><xs:attribute name=\"id\" type=\"T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"\"><v></v></r>",
+    "path": [
+      0
+    ],
+    "kind": "string",
+    "expected": "",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "string",
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "ND-004",
+    "label": "string named depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:string\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"t:T\"/></xs:sequence><xs:attribute name=\"code\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"\"><t:a><t:b t:code=\"\"><t:v></t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "string",
+    "expected": "",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "string",
+        "expected": ""
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "string",
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "ND-005",
+    "label": "string anonymous flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:string\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"\"><v></v></r>",
+    "path": [
+      0
+    ],
+    "kind": "string",
+    "expected": "",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "string",
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "ND-006",
+    "label": "string anonymous depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:string\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"code\" type=\"xs:string\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"\"><t:a><t:b t:code=\"\"><t:v></t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "string",
+    "expected": "",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "string",
+        "expected": ""
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "string",
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "id": "ND-007",
+    "label": "string primitive flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:string\"/></xs:sequence><xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"??e?&#13;&#10;&#9;\"><v>??e?&#13;&#10;&#9;</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "string",
+    "expected": "??e?\r\n\t",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "string",
+        "expected": "??e?\r\n\t"
+      }
+    ]
+  },
+  {
+    "id": "ND-008",
+    "label": "string primitive depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:string\"/></xs:sequence><xs:attribute name=\"code\" type=\"xs:string\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"??e?&#13;&#10;&#9;\"><t:a><t:b t:code=\"??e?&#13;&#10;&#9;\"><t:v>??e?&#13;&#10;&#9;</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "string",
+    "expected": "??e?\r\n\t",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "string",
+        "expected": "??e?\r\n\t"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "string",
+        "expected": "??e?\r\n\t"
+      }
+    ]
+  },
+  {
+    "id": "ND-009",
+    "label": "string named flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:string\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"T\"/></xs:sequence><xs:attribute name=\"id\" type=\"T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"??e?&#13;&#10;&#9;\"><v>??e?&#13;&#10;&#9;</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "string",
+    "expected": "??e?\r\n\t",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "string",
+        "expected": "??e?\r\n\t"
+      }
+    ]
+  },
+  {
+    "id": "ND-010",
+    "label": "string named depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:string\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"t:T\"/></xs:sequence><xs:attribute name=\"code\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"??e?&#13;&#10;&#9;\"><t:a><t:b t:code=\"??e?&#13;&#10;&#9;\"><t:v>??e?&#13;&#10;&#9;</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "string",
+    "expected": "??e?\r\n\t",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "string",
+        "expected": "??e?\r\n\t"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "string",
+        "expected": "??e?\r\n\t"
+      }
+    ]
+  },
+  {
+    "id": "ND-011",
+    "label": "string anonymous flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:string\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"??e?&#13;&#10;&#9;\"><v>??e?&#13;&#10;&#9;</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "string",
+    "expected": "??e?\r\n\t",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "string",
+        "expected": "??e?\r\n\t"
+      }
+    ]
+  },
+  {
+    "id": "ND-012",
+    "label": "string anonymous depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:string\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"code\" type=\"xs:string\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"??e?&#13;&#10;&#9;\"><t:a><t:b t:code=\"??e?&#13;&#10;&#9;\"><t:v>??e?&#13;&#10;&#9;</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "string",
+    "expected": "??e?\r\n\t",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "string",
+        "expected": "??e?\r\n\t"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "string",
+        "expected": "??e?\r\n\t"
+      }
+    ]
+  },
+  {
+    "id": "ND-013",
+    "label": "boolean primitive flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:boolean\"/></xs:sequence><xs:attribute name=\"id\" type=\"xs:boolean\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"false\"><v>false</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "boolean",
+    "expected": "false",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "boolean",
+        "expected": "false"
+      }
+    ]
+  },
+  {
+    "id": "ND-014",
+    "label": "boolean primitive depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:boolean\"/></xs:sequence><xs:attribute name=\"code\" type=\"xs:boolean\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:boolean\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"false\"><t:a><t:b t:code=\"false\"><t:v>false</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "boolean",
+    "expected": "false",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "boolean",
+        "expected": "false"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "boolean",
+        "expected": "false"
+      }
+    ]
+  },
+  {
+    "id": "ND-015",
+    "label": "boolean primitive flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:boolean\"/></xs:sequence><xs:attribute name=\"id\" type=\"xs:boolean\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"true\"><v>true</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "boolean",
+    "expected": "true",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "boolean",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "ND-016",
+    "label": "boolean primitive depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:boolean\"/></xs:sequence><xs:attribute name=\"code\" type=\"xs:boolean\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:boolean\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"true\"><t:a><t:b t:code=\"true\"><t:v>true</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "boolean",
+    "expected": "true",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "boolean",
+        "expected": "true"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "boolean",
+        "expected": "true"
+      }
+    ]
+  },
+  {
+    "id": "ND-017",
+    "label": "integer primitive flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:integer\"/></xs:sequence><xs:attribute name=\"id\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"-0\"><v>-0</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "integer",
+    "expected": "0",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "integer",
+        "expected": "0"
+      }
+    ]
+  },
+  {
+    "id": "ND-018",
+    "label": "integer primitive depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:integer\"/></xs:sequence><xs:attribute name=\"code\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"-0\"><t:a><t:b t:code=\"-0\"><t:v>-0</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "integer",
+    "expected": "0",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "integer",
+        "expected": "0"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "integer",
+        "expected": "0"
+      }
+    ]
+  },
+  {
+    "id": "ND-019",
+    "label": "integer named flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"T\"/></xs:sequence><xs:attribute name=\"id\" type=\"T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"-0\"><v>-0</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "integer",
+    "expected": "0",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "integer",
+        "expected": "0"
+      }
+    ]
+  },
+  {
+    "id": "ND-020",
+    "label": "integer named depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"t:T\"/></xs:sequence><xs:attribute name=\"code\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"-0\"><t:a><t:b t:code=\"-0\"><t:v>-0</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "integer",
+    "expected": "0",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "integer",
+        "expected": "0"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "integer",
+        "expected": "0"
+      }
+    ]
+  },
+  {
+    "id": "ND-021",
+    "label": "integer anonymous flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:integer\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"-0\"><v>-0</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "integer",
+    "expected": "0",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "integer",
+        "expected": "0"
+      }
+    ]
+  },
+  {
+    "id": "ND-022",
+    "label": "integer anonymous depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:integer\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"code\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"-0\"><t:a><t:b t:code=\"-0\"><t:v>-0</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "integer",
+    "expected": "0",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "integer",
+        "expected": "0"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "integer",
+        "expected": "0"
+      }
+    ]
+  },
+  {
+    "id": "ND-023",
+    "label": "integer primitive flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:integer\"/></xs:sequence><xs:attribute name=\"id\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"12345678901234567890123456789012345678901234567890\"><v>12345678901234567890123456789012345678901234567890</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "integer",
+    "expected": "12345678901234567890123456789012345678901234567890",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "integer",
+        "expected": "12345678901234567890123456789012345678901234567890"
+      }
+    ]
+  },
+  {
+    "id": "ND-024",
+    "label": "integer primitive depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:integer\"/></xs:sequence><xs:attribute name=\"code\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"12345678901234567890123456789012345678901234567890\"><t:a><t:b t:code=\"12345678901234567890123456789012345678901234567890\"><t:v>12345678901234567890123456789012345678901234567890</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "integer",
+    "expected": "12345678901234567890123456789012345678901234567890",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "integer",
+        "expected": "12345678901234567890123456789012345678901234567890"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "integer",
+        "expected": "12345678901234567890123456789012345678901234567890"
+      }
+    ]
+  },
+  {
+    "id": "ND-025",
+    "label": "integer named flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"T\"/></xs:sequence><xs:attribute name=\"id\" type=\"T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"12345678901234567890123456789012345678901234567890\"><v>12345678901234567890123456789012345678901234567890</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "integer",
+    "expected": "12345678901234567890123456789012345678901234567890",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "integer",
+        "expected": "12345678901234567890123456789012345678901234567890"
+      }
+    ]
+  },
+  {
+    "id": "ND-026",
+    "label": "integer named depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"t:T\"/></xs:sequence><xs:attribute name=\"code\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"12345678901234567890123456789012345678901234567890\"><t:a><t:b t:code=\"12345678901234567890123456789012345678901234567890\"><t:v>12345678901234567890123456789012345678901234567890</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "integer",
+    "expected": "12345678901234567890123456789012345678901234567890",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "integer",
+        "expected": "12345678901234567890123456789012345678901234567890"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "integer",
+        "expected": "12345678901234567890123456789012345678901234567890"
+      }
+    ]
+  },
+  {
+    "id": "ND-027",
+    "label": "integer anonymous flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:integer\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"12345678901234567890123456789012345678901234567890\"><v>12345678901234567890123456789012345678901234567890</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "integer",
+    "expected": "12345678901234567890123456789012345678901234567890",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "integer",
+        "expected": "12345678901234567890123456789012345678901234567890"
+      }
+    ]
+  },
+  {
+    "id": "ND-028",
+    "label": "integer anonymous depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:integer\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"code\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"12345678901234567890123456789012345678901234567890\"><t:a><t:b t:code=\"12345678901234567890123456789012345678901234567890\"><t:v>12345678901234567890123456789012345678901234567890</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "integer",
+    "expected": "12345678901234567890123456789012345678901234567890",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "integer",
+        "expected": "12345678901234567890123456789012345678901234567890"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "integer",
+        "expected": "12345678901234567890123456789012345678901234567890"
+      }
+    ]
+  },
+  {
+    "id": "ND-029",
+    "label": "integer primitive flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:integer\"/></xs:sequence><xs:attribute name=\"id\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"-12345678901234567890123456789012345678901234567890\"><v>-12345678901234567890123456789012345678901234567890</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "integer",
+    "expected": "-12345678901234567890123456789012345678901234567890",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "integer",
+        "expected": "-12345678901234567890123456789012345678901234567890"
+      }
+    ]
+  },
+  {
+    "id": "ND-030",
+    "label": "integer primitive depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:integer\"/></xs:sequence><xs:attribute name=\"code\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"-12345678901234567890123456789012345678901234567890\"><t:a><t:b t:code=\"-12345678901234567890123456789012345678901234567890\"><t:v>-12345678901234567890123456789012345678901234567890</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "integer",
+    "expected": "-12345678901234567890123456789012345678901234567890",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "integer",
+        "expected": "-12345678901234567890123456789012345678901234567890"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "integer",
+        "expected": "-12345678901234567890123456789012345678901234567890"
+      }
+    ]
+  },
+  {
+    "id": "ND-031",
+    "label": "integer named flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"T\"/></xs:sequence><xs:attribute name=\"id\" type=\"T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"-12345678901234567890123456789012345678901234567890\"><v>-12345678901234567890123456789012345678901234567890</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "integer",
+    "expected": "-12345678901234567890123456789012345678901234567890",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "integer",
+        "expected": "-12345678901234567890123456789012345678901234567890"
+      }
+    ]
+  },
+  {
+    "id": "ND-032",
+    "label": "integer named depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"t:T\"/></xs:sequence><xs:attribute name=\"code\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"-12345678901234567890123456789012345678901234567890\"><t:a><t:b t:code=\"-12345678901234567890123456789012345678901234567890\"><t:v>-12345678901234567890123456789012345678901234567890</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "integer",
+    "expected": "-12345678901234567890123456789012345678901234567890",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "integer",
+        "expected": "-12345678901234567890123456789012345678901234567890"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "integer",
+        "expected": "-12345678901234567890123456789012345678901234567890"
+      }
+    ]
+  },
+  {
+    "id": "ND-033",
+    "label": "integer anonymous flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:integer\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"-12345678901234567890123456789012345678901234567890\"><v>-12345678901234567890123456789012345678901234567890</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "integer",
+    "expected": "-12345678901234567890123456789012345678901234567890",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "integer",
+        "expected": "-12345678901234567890123456789012345678901234567890"
+      }
+    ]
+  },
+  {
+    "id": "ND-034",
+    "label": "integer anonymous depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:integer\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"code\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:integer\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"-12345678901234567890123456789012345678901234567890\"><t:a><t:b t:code=\"-12345678901234567890123456789012345678901234567890\"><t:v>-12345678901234567890123456789012345678901234567890</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "integer",
+    "expected": "-12345678901234567890123456789012345678901234567890",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "integer",
+        "expected": "-12345678901234567890123456789012345678901234567890"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "integer",
+        "expected": "-12345678901234567890123456789012345678901234567890"
+      }
+    ]
+  },
+  {
+    "id": "ND-035",
+    "label": "decimal primitive flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:decimal\"/></xs:sequence><xs:attribute name=\"id\" type=\"xs:decimal\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"-0.00\"><v>-0.00</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "decimal",
+    "expected": "0",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "decimal",
+        "expected": "0"
+      }
+    ]
+  },
+  {
+    "id": "ND-036",
+    "label": "decimal primitive depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:decimal\"/></xs:sequence><xs:attribute name=\"code\" type=\"xs:decimal\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:decimal\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"-0.00\"><t:a><t:b t:code=\"-0.00\"><t:v>-0.00</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "decimal",
+    "expected": "0",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "decimal",
+        "expected": "0"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "decimal",
+        "expected": "0"
+      }
+    ]
+  },
+  {
+    "id": "ND-037",
+    "label": "decimal named flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:decimal\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"T\"/></xs:sequence><xs:attribute name=\"id\" type=\"T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"-0.00\"><v>-0.00</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "decimal",
+    "expected": "0",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "decimal",
+        "expected": "0"
+      }
+    ]
+  },
+  {
+    "id": "ND-038",
+    "label": "decimal named depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:decimal\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"t:T\"/></xs:sequence><xs:attribute name=\"code\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"-0.00\"><t:a><t:b t:code=\"-0.00\"><t:v>-0.00</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "decimal",
+    "expected": "0",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "decimal",
+        "expected": "0"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "decimal",
+        "expected": "0"
+      }
+    ]
+  },
+  {
+    "id": "ND-039",
+    "label": "decimal anonymous flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:decimal\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:decimal\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"-0.00\"><v>-0.00</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "decimal",
+    "expected": "0",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "decimal",
+        "expected": "0"
+      }
+    ]
+  },
+  {
+    "id": "ND-040",
+    "label": "decimal anonymous depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:decimal\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"code\" type=\"xs:decimal\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:decimal\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"-0.00\"><t:a><t:b t:code=\"-0.00\"><t:v>-0.00</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "decimal",
+    "expected": "0",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "decimal",
+        "expected": "0"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "decimal",
+        "expected": "0"
+      }
+    ]
+  },
+  {
+    "id": "ND-041",
+    "label": "decimal primitive flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:decimal\"/></xs:sequence><xs:attribute name=\"id\" type=\"xs:decimal\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"12345678901234567890123456789012345678901234567890.125\"><v>12345678901234567890123456789012345678901234567890.125</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "decimal",
+    "expected": "12345678901234567890123456789012345678901234567890.125",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "decimal",
+        "expected": "12345678901234567890123456789012345678901234567890.125"
+      }
+    ]
+  },
+  {
+    "id": "ND-042",
+    "label": "decimal primitive depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"xs:decimal\"/></xs:sequence><xs:attribute name=\"code\" type=\"xs:decimal\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:decimal\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"12345678901234567890123456789012345678901234567890.125\"><t:a><t:b t:code=\"12345678901234567890123456789012345678901234567890.125\"><t:v>12345678901234567890123456789012345678901234567890.125</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "decimal",
+    "expected": "12345678901234567890123456789012345678901234567890.125",
+    "mode": "primitive",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "decimal",
+        "expected": "12345678901234567890123456789012345678901234567890.125"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "decimal",
+        "expected": "12345678901234567890123456789012345678901234567890.125"
+      }
+    ]
+  },
+  {
+    "id": "ND-043",
+    "label": "decimal named flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:decimal\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"T\"/></xs:sequence><xs:attribute name=\"id\" type=\"T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"12345678901234567890123456789012345678901234567890.125\"><v>12345678901234567890123456789012345678901234567890.125</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "decimal",
+    "expected": "12345678901234567890123456789012345678901234567890.125",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "decimal",
+        "expected": "12345678901234567890123456789012345678901234567890.125"
+      }
+    ]
+  },
+  {
+    "id": "ND-044",
+    "label": "decimal named depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:simpleType name=\"T\"><xs:restriction base=\"xs:decimal\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"t:T\"/></xs:sequence><xs:attribute name=\"code\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"t:T\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"12345678901234567890123456789012345678901234567890.125\"><t:a><t:b t:code=\"12345678901234567890123456789012345678901234567890.125\"><t:v>12345678901234567890123456789012345678901234567890.125</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "decimal",
+    "expected": "12345678901234567890123456789012345678901234567890.125",
+    "mode": "named",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "decimal",
+        "expected": "12345678901234567890123456789012345678901234567890.125"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "decimal",
+        "expected": "12345678901234567890123456789012345678901234567890.125"
+      }
+    ]
+  },
+  {
+    "id": "ND-045",
+    "label": "decimal anonymous flat",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:decimal\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:decimal\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r id=\"12345678901234567890123456789012345678901234567890.125\"><v>12345678901234567890123456789012345678901234567890.125</v></r>",
+    "path": [
+      0
+    ],
+    "kind": "decimal",
+    "expected": "12345678901234567890123456789012345678901234567890.125",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "id",
+        "kind": "decimal",
+        "expected": "12345678901234567890123456789012345678901234567890.125"
+      }
+    ]
+  },
+  {
+    "id": "ND-046",
+    "label": "decimal anonymous depth4",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:native:data\" targetNamespace=\"urn:native:data\" elementFormDefault=\"qualified\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\"><xs:simpleType><xs:restriction base=\"xs:decimal\"/></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"code\" type=\"xs:decimal\" use=\"required\"/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence><xs:attribute name=\"id\" type=\"xs:decimal\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "xml": "<t:r xmlns:t=\"urn:native:data\" t:id=\"12345678901234567890123456789012345678901234567890.125\"><t:a><t:b t:code=\"12345678901234567890123456789012345678901234567890.125\"><t:v>12345678901234567890123456789012345678901234567890.125</t:v></t:b></t:a></t:r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "decimal",
+    "expected": "12345678901234567890123456789012345678901234567890.125",
+    "mode": "anonymous",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "urn:native:data",
+        "name": "id",
+        "kind": "decimal",
+        "expected": "12345678901234567890123456789012345678901234567890.125"
+      },
+      {
+        "path": [
+          0,
+          0
+        ],
+        "namespace": "urn:native:data",
+        "name": "code",
+        "kind": "decimal",
+        "expected": "12345678901234567890123456789012345678901234567890.125"
+      }
+    ]
+  },
+  {
+    "id": "ND-047",
+    "label": "decimal complex simple content",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r currency=\"EUR\"> 12.50 </r>",
+    "path": [],
+    "kind": "decimal",
+    "expected": "12.5",
+    "mode": "complex",
+    "attrs": [
+      {
+        "path": [],
+        "namespace": "",
+        "name": "currency",
+        "kind": "string",
+        "expected": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "ND-048",
+    "label": "decimal complex simple content",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\"><xs:complexType><xs:sequence><xs:element name=\"b\"><xs:complexType><xs:sequence><xs:element name=\"v\"><xs:complexType><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "xml": "<r><a><b><v currency=\"EUR\"> 12.50 </v></b></a></r>",
+    "path": [
+      0,
+      0,
+      0
+    ],
+    "kind": "decimal",
+    "expected": "12.5",
+    "mode": "complex",
+    "attrs": [
+      {
+        "path": [
+          0,
+          0,
+          0
+        ],
+        "namespace": "",
+        "name": "currency",
+        "kind": "string",
+        "expected": "EUR"
+      }
+    ]
+  }
+]

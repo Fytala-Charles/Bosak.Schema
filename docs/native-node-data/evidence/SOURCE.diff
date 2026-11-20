@@ -1,0 +1,107 @@
+diff --git a/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs b/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs
+index 3754ef8..039ca09 100644
+--- a/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs
++++ b/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs
+@@ -25,6 +25,7 @@
+ //                      | Charles Korthout | 1.2   | 20-11-2026     | Register nested declaration components and project terminal scalar facts separately      |
+ //                      | Charles Korthout | 1.3   | 20-11-2026     | Publish exact original owner-aware attributes with separate root and descendant projections |
+ //                      | Charles Korthout | 1.4   | 20-11-2026     | Register actual decimal content types for nested original complex terminal facts         |
++//                      | Charles Korthout | 1.5   | 20-11-2026     | Adopt opt-in original-node data binding; preserve scalar default          |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -39,13 +40,17 @@ namespace Bosak.Schema;
+ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
+ {
+     private readonly NativeDecimalSchema schema;
++    private readonly bool originalNodeData;
++    private readonly string? expectedNodeFingerprint;
+     private readonly Dictionary<object, Component> components = new(ReferenceEqualityComparer.Instance);
+     internal Component RootDeclaration { get; }
+     internal Component DecimalType { get; }
+ 
+-    internal NativeSchemaProvider(NativeDecimalSchema schema)
++    internal NativeSchemaProvider(NativeDecimalSchema schema, bool originalNodeData = false, string? expectedNodeFingerprint = null)
+     {
+         this.schema = schema;
++        this.originalNodeData = originalNodeData;
++        this.expectedNodeFingerprint = expectedNodeFingerprint;
+         RootDeclaration = Add(schema.Root);
+         foreach (var plan in schema.Roots)
+         {
+@@ -87,14 +92,15 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
+     {
+         cancellationToken.ThrowIfCancellationRequested();
+         ArgumentNullException.ThrowIfNull(environment);
+-        // Only the released engine-issued scalar environment with an empty namespace context is adopted.
++        // Retain scalar default; original data mode requires the captured default-operation fingerprint.
+         if (environment.GetType().Assembly != typeof(SchemaQuerySession).Assembly ||
+             environment.HostLanguage != QueryHostLanguage.XPath || environment.HostVersion != "3.1" ||
+             environment.XdmSpecificationRevision.AbsoluteUri != "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/" ||
+-            environment.BehaviorProfile != "bosak-typed-identity-v1" ||
+-            environment.DescriptorFormatVersion != "bosak-public-typed-identity-descriptor-v1" ||
++            environment.BehaviorProfile != (originalNodeData ? "bosak-original-node-data-v1" : "bosak-typed-identity-v1") ||
++            environment.DescriptorFormatVersion != (originalNodeData ? "bosak-original-node-data-descriptor-v1" : "bosak-public-typed-identity-descriptor-v1") ||
+             string.IsNullOrEmpty(environment.StaticContextFingerprint) ||
+-            environment.StaticContext.Namespaces.Count != 0)
++            environment.StaticContext.Namespaces.Count != 0 ||
++            originalNodeData && (expectedNodeFingerprint is null || environment.StaticContextFingerprint != expectedNodeFingerprint))
+             return NativeCoreResult<ISchemaAssessmentAdvisor>.Unsupported("BSK-NATIVE-ENVIRONMENT");
+         return NativeCoreResult<ISchemaAssessmentAdvisor>.Supported(new Advisor(this, environment));
+     }
+diff --git a/src/Bosak.Schema/Assessment/NativeSessionNode.cs b/src/Bosak.Schema/Assessment/NativeSessionNode.cs
+index c85ba80..f72fa1c 100644
+--- a/src/Bosak.Schema/Assessment/NativeSessionNode.cs
++++ b/src/Bosak.Schema/Assessment/NativeSessionNode.cs
+@@ -17,22 +17,26 @@
+ //                      | Charles Korthout | 0.4   | 19-11-2026     | Expose original local attribute declaration metadata under the existing owner guard      |
+ //                      | Charles Korthout | 0.5   | 20-11-2026     | Decouple complex annotation from typed-value absence and retain normalized root text     |
+ //                      | Charles Korthout | 0.6   | 20-11-2026     | Keep local complex declarations distinct from global element metadata                     |
++//                      | Charles Korthout | 0.7   | 20-11-2026     | Expose guarded original-node data interface; exact published facts and lifetime guard  |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+ using Bosak.XPath.Core.Xdm;
++using Bosak.XPath.Core.Schema;
+ using Bosak.XPath.Providers.Xml;
+ using Bosak.XPath.Runtime.Vm;
+ 
+ namespace Bosak.Schema;
+ 
+ /// <summary>Projects guarded native nodes without exposing mutable XML storage.</summary>
+-internal sealed class NativeSessionNode(NativeSchemaInput input, XDocumentNode raw) : IXdmNode
++internal sealed class NativeSessionNode(NativeSchemaInput input, XDocumentNode raw) : ISchemaAnnotatedNode
+ {
+     internal NativeSchemaInput Input => input;
+     private T Read<T>(Func<T> read) { input.Check(); return read(); }
+     private NativeSchemaProvider.Facts? Facts => input.FactsFor(this);
+     public XdmNodeKind NodeKind => Read(() => raw.NodeKind);
++    /// <inheritdoc/>
++    public ISchemaNodeFacts OriginalSchemaFacts => Read<ISchemaNodeFacts>(() => Facts ?? throw new NotSupportedException("No original native facts."));
+     public string LocalName => Read(() => raw.LocalName);
+     public string EncodedLocalName => Read(() => raw.EncodedLocalName);
+     public string NamespaceUri => Read(() => raw.NamespaceUri);
+diff --git a/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj b/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
+index 1edcd03..fd917f4 100644
+--- a/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
++++ b/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
+@@ -27,4 +27,7 @@
+     <None Include="../TestData/AnonymousSimpleRestrictions/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/AnonymousSimpleRestrictions/%(Filename)%(Extension)" />
+     <None Include="../TestData/IntegerRestrictions/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/IntegerRestrictions/%(Filename)%(Extension)" />
+   </ItemGroup>
++  <ItemGroup>
++    <None Include="../TestData/NodeData/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NodeData/%(Filename)%(Extension)" />
++  </ItemGroup>
+ </Project>
+diff --git a/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj b/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj
+index f1302fa..f5df97e 100644
+--- a/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj
++++ b/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj
+@@ -28,4 +28,7 @@
+     <None Include="..\TestData\Schemas\native-decimal.*" CopyToOutputDirectory="PreserveNewest" Link="TestData\Schemas\%(Filename)%(Extension)" />
+   </ItemGroup>
+ 
++  <ItemGroup>
++    <None Include="../TestData/NodeData/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NodeData/%(Filename)%(Extension)" />
++  </ItemGroup>
+ </Project>
