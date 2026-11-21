@@ -1,0 +1,160 @@
+{
+  "date": "2026-11-21",
+  "scope": "Exactly two authored schema-form admissions; original payloads retained",
+  "entries": [
+    {
+      "file": "tests/TestData/NestedAttributes/cases.json",
+      "id": "NA-050",
+      "before": {
+        "id": "NA-050",
+        "label": "attribute-free schema does not admit form default",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\" ><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r/>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "scalars": [
+          "ABC-0001",
+          "2",
+          "12.5",
+          "XYZ-0002",
+          "1",
+          "3.75",
+          "false"
+        ],
+        "rootAttributes": 0,
+        "descendants": [
+          {
+            "path": [
+              0
+            ],
+            "namespace": "",
+            "name": "currency",
+            "kind": "String",
+            "value": "EUR"
+          },
+          {
+            "path": [
+              0
+            ],
+            "namespace": "",
+            "name": "paid",
+            "kind": "Boolean",
+            "value": "false"
+          },
+          {
+            "path": [
+              1
+            ],
+            "namespace": "",
+            "name": "currency",
+            "kind": "String",
+            "value": "USD"
+          }
+        ]
+      },
+      "after": {
+        "id": "NA-050",
+        "label": "No-use form default is legal; required child still missing",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\" ><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r/>",
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Invalid",
+        "scalars": [
+          "ABC-0001",
+          "2",
+          "12.5",
+          "XYZ-0002",
+          "1",
+          "3.75",
+          "false"
+        ],
+        "rootAttributes": 0,
+        "descendants": [
+          {
+            "path": [
+              0
+            ],
+            "namespace": "",
+            "name": "currency",
+            "kind": "String",
+            "value": "EUR"
+          },
+          {
+            "path": [
+              0
+            ],
+            "namespace": "",
+            "name": "paid",
+            "kind": "Boolean",
+            "value": "false"
+          },
+          {
+            "path": [
+              1
+            ],
+            "namespace": "",
+            "name": "currency",
+            "kind": "String",
+            "value": "USD"
+          }
+        ]
+      }
+    },
+    {
+      "file": "tests/TestData/SimpleContent/cases.json",
+      "id": "SC-067",
+      "before": {
+        "id": "SC-067",
+        "description": "No-use attributeFormDefault keeps previous refusal",
+        "sections": [
+          "Structures3.4.2.2/3.4.4",
+          "Datatypes3.3.3/4.3.6",
+          "XDM3.3.1.2/6.2"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' attributeFormDefault='qualified'><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+        "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "expectedRoot": "12.5",
+        "maxNativeCoefficientDigits": 256,
+        "maxNativeScale": 256,
+        "maxStringCharacters": 256,
+        "attributes": [
+          {
+            "namespaceUri": "",
+            "localName": "currency",
+            "kind": "String",
+            "value": "EUR"
+          }
+        ],
+        "unsupportedReason": "Namespace"
+      },
+      "after": {
+        "id": "SC-067",
+        "description": "No-use form default is legal; undeclared currency remains unsupported",
+        "sections": [
+          "Structures3.4.2.2/3.4.4",
+          "Datatypes3.3.3/4.3.6",
+          "XDM3.3.1.2/6.2"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' attributeFormDefault='qualified'><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+        "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Unsupported",
+        "expectedRoot": "12.5",
+        "maxNativeCoefficientDigits": 256,
+        "maxNativeScale": 256,
+        "maxStringCharacters": 256,
+        "attributes": [
+          {
+            "namespaceUri": "",
+            "localName": "currency",
+            "kind": "String",
+            "value": "EUR"
+          }
+        ],
+        "unsupportedReason": "Attributes"
+      }
+    }
+  ]
+}

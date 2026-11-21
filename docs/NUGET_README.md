@@ -837,3 +837,21 @@ application-attribute scalar. `xsi:nil`, imports, complex inheritance, block/fin
 abstract types, lists/unions and additional scalar families remain excluded.
 NativeDecimalSession and published0.5.0-beta.1 are unchanged. This is bounded
 development support; no full XSD1.1 or general PSVI claim is made.
+
+
+### Namespace names and schema form defaults (0.6 development)
+
+NativeSchemaSession and NativeSchemaNodeDataSession accept bounded nonempty
+relative target namespace references, such as `orders/v1`, as exact namespace
+names. They are never resolved against a base URI or fetched. Different case,
+percent escapes and dot segments remain different names. Relative namespace names
+are deprecated by Namespaces1.0; using an absolute namespace is still portable.
+This bounded profile retains its no-whitespace/.NET URI lexical predicate and
+reserved/empty target exclusions; it does not implement every anyURI/IRI string.
+
+Legal `attributeFormDefault="qualified"` or `"unqualified"` is accepted even when
+there are no application attribute declarations. Existing form overrides and
+namespace-aware attributes keep their behavior. Explicit xpathDefaultNamespace
+URI literals remain absolute-only; symbolic `##targetNamespace` and
+`##defaultNamespace` capture the exact namespace name. NativeDecimalSession keeps
+its previous absolute-only namespace/form limits. Published beta.1 is unchanged.
