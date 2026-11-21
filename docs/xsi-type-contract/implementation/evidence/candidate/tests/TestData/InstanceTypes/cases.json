@@ -1,0 +1,716 @@
+{
+  "date": "2026-11-20",
+  "status": "Authored qualification plan only; not executed tests",
+  "payloadCases": 33,
+  "scenarioGates": 27,
+  "totalPlannedRows": 60,
+  "rows": [
+    {
+      "id": "XT-001",
+      "label": "No request retains original identities",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v>9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-002",
+      "label": "Primitive identity override",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"xs:decimal\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-003",
+      "label": "Direct decimal restriction selected",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-004",
+      "label": "Selected decimal facet is enforced",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">11</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-005",
+      "label": "Same named restriction identity",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"t:Limited\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-006",
+      "label": "Cannot weaken named restriction to primitive",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"t:Limited\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"xs:decimal\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-007",
+      "label": "Sibling with identical facets is not a derived type",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"t:Limited\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Sibling\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-008",
+      "label": "Direct string restriction selected",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:string\"><xs:maxLength value=\"1\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:string\"><xs:maxLength value=\"1\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:string\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">A</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-009",
+      "label": "Selected string facet is enforced",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:string\"><xs:maxLength value=\"1\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:string\"><xs:maxLength value=\"1\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:string\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">AB</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-010",
+      "label": "Direct integer restriction selected",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:integer\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-011",
+      "label": "Selected integer facet is enforced",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:integer\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">11</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-012",
+      "label": "Primitive Boolean same type",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:boolean\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"xs:boolean\">true</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-013",
+      "label": "Same named complex root",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" i:type=\"t:Root\"><t:v>9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-014",
+      "label": "Element-only complex root cannot be replaced by its atomic child type",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" i:type=\"xs:decimal\"><t:v>9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-015",
+      "label": "Prefix QName resolved from instance scope",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-016",
+      "label": "Unprefixed QName uses instance default namespace",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-017",
+      "label": "QName XML whitespace collapses",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\" \t t:Limited \n \">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-018",
+      "label": "QName empty value is invalid",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-019",
+      "label": "Unknown built-in name is absent",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"xs:unknownType\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-020",
+      "label": "Unknown user component is absent",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Missing\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-021",
+      "label": "Unbound prefix is invalid",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"missing:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-022",
+      "label": "Digit initial local name is invalid",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"23.789\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-023",
+      "label": "Multiple colons invalid",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Other:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-024",
+      "label": "Whitespace within QName invalid",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t: Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-025",
+      "label": "Two QName values are invalid",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited xs:decimal\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-026",
+      "label": "Known but unsupported date is not absent",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"xs:date\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Unsupported/ValueType",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-027",
+      "label": "Known but unsupported anyType is not absent",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"xs:anyType\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Unsupported/ValueType",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-028",
+      "label": "Known but unsupported error is not absent",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"xs:error\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Unsupported/ValueType",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-029",
+      "label": "Known valid decimal-to-integer derivation is deferred",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"xs:integer\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Unsupported/ValueType",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-030",
+      "label": "Unrelated primitive cannot substitute for declared decimal",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"xs:string\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-031",
+      "label": "Raw parsed QName cap255",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"                                                                                                                                                                                                                                                      t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-032",
+      "label": "Raw parsed QName cap256",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"                                                                                                                                                                                                                                                       t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-033",
+      "label": "Raw parsed QName cap257",
+      "status": "Authored production qualification input",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"                                                                                                                                                                                                                                                        t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Unsupported/RepresentationCapacity",
+      "clauses": [
+        "Structures2.7.1/3.3.4.1-3/3.17.6.3",
+        "Datatypes3.3.18/4.3.6"
+      ]
+    },
+    {
+      "id": "XT-034",
+      "label": "Instance prefix shadowing chooses actual local binding",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Bind t to another URI on the scalar owner; do not use the root binding",
+      "proposedBoundedOutcome": "Invalid",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v xmlns:q=\"urn:other\" i:type=\"q:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid"
+    },
+    {
+      "id": "XT-035",
+      "label": "Default namespace undeclaration clears unprefixed type namespace",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Declare xmlns=\"\" on an otherwise prefixed scalar owner, use unprefixed Limited",
+      "proposedBoundedOutcome": "Invalid",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v xmlns=\"\" i:type=\"Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid"
+    },
+    {
+      "id": "XT-036",
+      "label": "Different prefix with same URI selects same type",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Bind an alias to urn:types and select alias:Limited",
+      "proposedBoundedOutcome": "Valid",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v xmlns:q=\"urn:types\" i:type=\"q:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    },
+    {
+      "id": "XT-037",
+      "label": "Namespace URI case/escape distinctions are preserved",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Use a distinct URI spelling whose type component is absent",
+      "proposedBoundedOutcome": "Invalid",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v xmlns:q=\"urn:Types\" i:type=\"q:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid"
+    },
+    {
+      "id": "XT-038",
+      "label": "Literal xsi prefix in a different namespace is an application attribute",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Declare that application attribute in the schema; it must not select a type",
+      "proposedBoundedOutcome": "Valid",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence><xs:attribute name=\"type\" type=\"xs:string\" form=\"qualified\"/></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:xsi=\"urn:types\" xsi:type=\"ordinary\" xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v>9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    },
+    {
+      "id": "XT-039",
+      "label": "Unqualified declared type attribute is an ordinary string",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Declare no-namespace application attribute type; no instance-type selection",
+      "proposedBoundedOutcome": "Valid",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence><xs:attribute name=\"type\" type=\"xs:string\"/></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r type=\"anything\" xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v>9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    },
+    {
+      "id": "XT-040",
+      "label": "Unknown special xsi attributes keep prior refusal",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Do not relax nil or arbitrary special-attribute guards",
+      "proposedBoundedOutcome": "Unsupported/Attributes",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\" i:other=\"false\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Unsupported/Attributes"
+    },
+    {
+      "id": "XT-041",
+      "label": "xsi:nil false remains outside slice",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Even with an otherwise supported xsi:type",
+      "proposedBoundedOutcome": "Unsupported/Attributes",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\" i:nil=\"false\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Unsupported/Attributes"
+    },
+    {
+      "id": "XT-042",
+      "label": "Anonymous simple declared type cannot be named by alias",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Primitive or sibling named restriction is not derived from that anonymous type",
+      "proposedBoundedOutcome": "Invalid",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\"><xs:simpleType><xs:restriction base=\"xs:decimal\"/></xs:simpleType></xs:element></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid"
+    },
+    {
+      "id": "XT-043",
+      "label": "Same named nested container type",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Preserve original owner declaration and element-only FOTY0012",
+      "proposedBoundedOutcome": "Valid",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:complexType name=\"Box\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence><xs:attribute name=\"id\" type=\"xs:string\"/></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"box\" type=\"t:Box\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:box i:type=\"t:Box\" id=\"A\"><t:v>9</t:v></t:box></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "path": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "XT-044",
+      "label": "Same named complex simple-content type",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Preserve complex G and distinct atomic content C",
+      "proposedBoundedOutcome": "Valid",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:complexType name=\"Box\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"id\" type=\"xs:string\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"box\" type=\"t:Box\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:box i:type=\"t:Box\" id=\"A\">9</t:box></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    },
+    {
+      "id": "XT-045",
+      "label": "Different named complex siblings with equal shapes",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Require true derivation; do not compare shapes",
+      "proposedBoundedOutcome": "Invalid",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:complexType name=\"Other\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r i:type=\"t:Other\" xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid"
+    },
+    {
+      "id": "XT-046",
+      "label": "Simple declared decimal to complex decimal simple-content derivative",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Legitimate derivation exists, but new complex/attribute projection is deferred",
+      "proposedBoundedOutcome": "Unsupported/ValueType",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:complexType name=\"Box\"><xs:simpleContent><xs:extension base=\"xs:decimal\"/></xs:simpleContent></xs:complexType><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Box\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Unsupported/ValueType"
+    },
+    {
+      "id": "XT-047",
+      "label": "Named integer restriction selected under decimal declaration",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Transitive derivation via integer is valid; scalar-family change deferred",
+      "proposedBoundedOutcome": "Unsupported/ValueType",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Unsupported/ValueType"
+    },
+    {
+      "id": "XT-048",
+      "label": "Primitive decimal selected under integer declaration",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Base cannot substitute for its derived declaration type",
+      "proposedBoundedOutcome": "Invalid",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:integer\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"xs:decimal\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid"
+    },
+    {
+      "id": "XT-049",
+      "label": "Schema block/final declarations remain unsupported",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Do not silently ignore derivation constraints",
+      "proposedBoundedOutcome": "Unsupported at schema compilation",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element block=\"restriction\" name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Unsupported",
+      "proposedAssessment": "Valid"
+    },
+    {
+      "id": "XT-050",
+      "label": "Complex inheritance schema remains unsupported",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "No new schema grammar",
+      "proposedBoundedOutcome": "Unsupported at schema compilation",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:complexType name=\"Inherited\"><xs:complexContent><xs:extension base=\"t:Root\"/></xs:complexContent></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Unsupported",
+      "proposedAssessment": "Valid"
+    },
+    {
+      "id": "XT-051",
+      "label": "Known excluded unions/lists stay unsupported",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Do not manufacture scalar or primitive aliases",
+      "proposedBoundedOutcome": "Unsupported/ValueType",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:simpleType name=\"List\"><xs:list itemType=\"xs:decimal\"/></xs:simpleType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Unsupported",
+      "proposedAssessment": "Valid"
+    },
+    {
+      "id": "XT-052",
+      "label": "Processed xsi:type attribute is not exposed as a string scalar",
+      "status": "Scenario covered separately or deferred; no payload execution claim",
+      "fixtureRequirement": "No new QName typed-value public family or application attribute count",
+      "proposedBoundedOutcome": "ReadAttribute Unsupported"
+    },
+    {
+      "id": "XT-053",
+      "label": "Selected restriction with assertions uses same scalar projection",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Qualify both outcomes with decimal and string assertions",
+      "proposedBoundedOutcome": "Valid or Invalid by assertion",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence><xs:assert test=\"t:v eq 9\"/></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    },
+    {
+      "id": "XT-054",
+      "label": "Root and descendant application attributes preserve count/path/type",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Special type request does not enter declared application attribute projections",
+      "proposedBoundedOutcome": "Valid",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence><xs:attribute name=\"type\" type=\"xs:string\"/></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r type=\"ordinary\" xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    },
+    {
+      "id": "XT-055",
+      "label": "Hints with explicit selected type never acquire external schema",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Use unfetchable schemaLocation hints and prove no acquisition",
+      "proposedBoundedOutcome": "Valid for admitted request",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r i:schemaLocation=\"urn:types https://invalid.example/schema.xsd\" xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    },
+    {
+      "id": "XT-056",
+      "label": "Cancellation/quota/disposal preserve original episode",
+      "status": "Scenario covered separately or deferred; no payload execution claim",
+      "fixtureRequirement": "No partial facts or leaked admission",
+      "proposedBoundedOutcome": "Operation refusal/recovery"
+    },
+    {
+      "id": "XT-057",
+      "label": "Export and reassess resolves type anew",
+      "status": "Scenario covered separately or deferred; no payload execution claim",
+      "fixtureRequirement": "Preserve parsed QName/prefix bindings, new input/origin ownership",
+      "proposedBoundedOutcome": "Valid for valid input"
+    },
+    {
+      "id": "XT-058",
+      "label": "Foreign and copied original nodes do not gain authority",
+      "status": "Scenario covered separately or deferred; no payload execution claim",
+      "fixtureRequirement": "Actual native Core probes; no transport authority stand-in",
+      "proposedBoundedOutcome": "Refused"
+    },
+    {
+      "id": "XT-059",
+      "label": "No-request source compatibility",
+      "status": "Scenario covered separately or deferred; no payload execution claim",
+      "fixtureRequirement": "Keep original identities and record every new authored admission",
+      "proposedBoundedOutcome": "All prior scoped cases unchanged except explicit admissions"
+    },
+    {
+      "id": "XT-060",
+      "label": "Complex simple-content type cannot be weakened to its simple base",
+      "status": "Scenario covered separately or deferred; no payload execution claim",
+      "fixtureRequirement": "Use named Money complex type extending decimal, select xs:decimal on that declared Money element",
+      "proposedBoundedOutcome": "Invalid"
+    }
+  ],
+  "scope": "Authored bounded production catalog; original sealed proposal remains separate"
+}

@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 20-11-2026     | Adopt nested decimal simple content as original complex scalar-bearing terminals         |
 //                      | Charles Korthout | 0.4   | 20-11-2026     | Preserve unfetched location hints separately from descendant application attributes      |
 //                      | Charles Korthout | 0.5   | 20-11-2026     | Share original anonymous simple definitions and the eager combined local type budget      |
+//                      | Charles Korthout | 0.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -148,6 +149,7 @@ internal sealed partial class NativeDecimalSchema
         first.NamedTypes = simple.Values.Concat(named.Values.Select(p => p.Root.Type)).ToImmutableArray();
         first.DecimalType = decimalType; first.StringType = stringType; first.BooleanType = booleanType; first.IntegerType = integerType;
         first.maxStringCharacters = maxStringCharacters;
+        first.PrepareInstanceTypes();
         return first;
     }
 
@@ -174,12 +176,13 @@ internal sealed partial class NativeDecimalSchema
         ImmutableArray<int> ownerPath, CancellationToken cancellationToken, bool isRoot = false)
     {
         cancellationToken.ThrowIfCancellationRequested();
+        var effectiveType = ResolveInstanceType(element, declaration.Type);
         if (!isRoot)
         {
             if (plan.AttributeUses.IsEmpty) InstanceAttributes(element);
             else
             {
-                Require(element.Attributes().All(a => IsNamespaceOrLocationHint(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
+                Require(element.Attributes().All(a => IsAdmittedInstanceAttribute(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
                     "Special attribute requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
                 foreach (var use in plan.AttributeUses)
                 {
@@ -188,7 +191,7 @@ internal sealed partial class NativeDecimalSchema
                     Check(attribute is not null || use.MinOccurs == 0, "Required descendant attribute is missing.");
                     if (attribute is not null) attributes.Add(AssessScalar(attribute.Value, use) with { OwnerElementPath = ownerPath, OwnerElementIndex = states.Count });
                 }
-                Check(element.Attributes().All(a => IsNamespaceOrLocationHint(a) || plan.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared descendant attribute.");
+                Check(element.Attributes().All(a => IsAdmittedInstanceAttribute(a) || plan.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared descendant attribute.");
             }
         }
         if (plan.Root.Type.ContentType is { } contentType)
@@ -196,13 +199,13 @@ internal sealed partial class NativeDecimalSchema
             Check(!element.HasElements, "Simple-content terminal cannot contain child elements.");
             Require(element.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
             var atomicDeclaration = new NativeDeclaration(declaration.Name, contentType, 1, 1, declaration.NamespaceUri);
-            states.Add(AssessScalar(element.Value, atomicDeclaration) with { Declaration = declaration, NormalizedStringValue = Collapse(element.Value) });
+            states.Add(AssessScalar(element.Value, atomicDeclaration) with { Declaration = declaration, EffectiveType = effectiveType, NormalizedStringValue = Collapse(element.Value) });
             cancellationToken.ThrowIfCancellationRequested();
             return;
         }
         foreach (var text in element.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only container contains non-whitespace text.");
         Require(element.Nodes().All(n => n is XElement or XText), "Container comments or processing instructions are unsupported.");
-        states.Add(new NativeElementState(declaration, null));
+        states.Add(new NativeElementState(declaration, null) { EffectiveType = effectiveType });
         var nodes = element.Elements().ToArray(); var index = 0;
         foreach (var child in plan.Children)
         {
@@ -218,7 +221,7 @@ internal sealed partial class NativeDecimalSchema
                     InstanceAttributes(node);
                     Check(!node.HasElements, "Scalar leaf contains nested elements.");
                     Require(node.Nodes().All(n => n is XText), "Scalar comments or processing instructions are unsupported.");
-                    states.Add(AssessScalar(node.Value, child));
+                    states.Add(AssessElementScalar(node, child));
                 }
                 Check(++count <= child.MaxOccurs, "Maximum occurrence exceeded.");
             }

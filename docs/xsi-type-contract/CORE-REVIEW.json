@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-20",
+  "scope": "Static pinned public package/XML contract review, not native runtime override feasibility",
+  "lanes": [
+    {
+      "version": "1.81.2",
+      "sourceCommit": "7249d0e01628c47f92b89a3380bc69cf58d70045",
+      "archiveSha256": "d825efae7baa90d3d3dabac0fdce6497d73d13468f401c0a576edc66494dd216",
+      "assemblySha256": "cc8a0f3ba4a0c2bd682d7e81c244208d9f46e6fa9e38f5b05eac9fcf04581fbe",
+      "xmlSha256": "b4927e9a6cbc01365790114f60661ae2d8726f10c8a29e214f1bc1044581bdf5",
+      "members": {
+        "P:Bosak.XPath.Core.Schema.ISchemaAtomicProvenance.DeclaredType": "The current declared/governing type; user-defined types require authority evidence.",
+        "P:Bosak.XPath.Core.Schema.ISchemaAtomicProvenance.ActualType": "The actual selected atomic type, including union member selection.",
+        "P:Bosak.XPath.Core.Schema.ISchemaTypedValue.GoverningType": "The governing type, retaining list/union boundaries.",
+        "P:Bosak.XPath.Core.Schema.ISchemaNodeFacts.Type": "The original governing type.",
+        "P:Bosak.XPath.Core.Schema.ISchemaNodeFacts.Declaration": "The governing declaration where present."
+      },
+      "priorSignatureReceipt": "docs/string-assertions/evidence/IDENTITY-FINAL.json",
+      "freshSignatureVerification": false
+    },
+    {
+      "version": "1.81.17",
+      "sourceCommit": "6a7618e9dcf70eb8a67d5d1789ff7b787133b52d",
+      "archiveSha256": "04db280f00449b747096d6aac6c02d5a077276b26308c39fecc1a03d970f7489",
+      "assemblySha256": "ba3e59e82dc81bd7632eec33dcb6c993c47946400dacb0506110c64239be6785",
+      "xmlSha256": "b4927e9a6cbc01365790114f60661ae2d8726f10c8a29e214f1bc1044581bdf5",
+      "members": {
+        "P:Bosak.XPath.Core.Schema.ISchemaAtomicProvenance.DeclaredType": "The current declared/governing type; user-defined types require authority evidence.",
+        "P:Bosak.XPath.Core.Schema.ISchemaAtomicProvenance.ActualType": "The actual selected atomic type, including union member selection.",
+        "P:Bosak.XPath.Core.Schema.ISchemaTypedValue.GoverningType": "The governing type, retaining list/union boundaries.",
+        "P:Bosak.XPath.Core.Schema.ISchemaNodeFacts.Type": "The original governing type.",
+        "P:Bosak.XPath.Core.Schema.ISchemaNodeFacts.Declaration": "The governing declaration where present."
+      },
+      "priorSignatureReceipt": "docs/string-assertions/evidence/IDENTITY-FINAL.json",
+      "freshSignatureVerification": false
+    }
+  ],
+  "contractsAgree": true,
+  "mapping": {
+    "declaration": "Original governing element declaration D retained",
+    "nodeFactsType": "Effective governing type G selected by xsi:type or declared D.Type",
+    "typedValueGoverningType": "G",
+    "atomicDeclaredType": "G; Core member means current declared/governing, not the original declaration type",
+    "atomicActualType": "G for simple atomic selected type; content type C for unchanged complex simple content",
+    "nodeAnnotation": "G expanded name; anonymous identity must remain unnamed"
+  }
+}
