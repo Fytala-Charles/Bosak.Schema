@@ -621,13 +621,13 @@
     },
     {
       "id": "CR-042",
-      "label": "Integer content base remains excluded",
+      "label": "Integer restriction admits schema and rejects fractional lexical form",
       "status": "Authored production regression input",
       "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:integer'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
       "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
-      "expectedCompile": "Unsupported",
-      "expectedAssessment": null,
-      "unsupportedReason": "ValueType",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
       "path": [],
       "specificationSections": [
         "Structures3.4.2.2/3.4.6.3/3.16.6.4",

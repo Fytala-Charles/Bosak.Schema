@@ -32,6 +32,7 @@
 //                      | Charles Korthout | 1.9   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
 //                      | Charles Korthout | 1.10  | 21-11-2026     | Adopt mixed relative target namespaces and form defaults independently of attribute uses     |
 //                      | Charles Korthout | 1.11  | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+//                      | Charles Korthout | 1.12  | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -296,9 +297,18 @@ internal sealed partial class NativeDecimalSchema
         var extension = Single(content, "extension");
         Attributes(extension, "base");
         var baseName = ResolveTypeName(extension, "base");
-        NativeType? baseType = baseName == Xs + "decimal" ? decimalType : simple.GetValueOrDefault(baseName);
-        Require(baseType is not null && !baseType.IsString && !baseType.IsBoolean && !baseType.IsInteger,
+        NativeType? baseType = baseName == Xs + "decimal" ? decimalType : baseName == Xs + "integer" ? integerType : simple.GetValueOrDefault(baseName);
+        Require(baseType is not null && !baseType.IsString && !baseType.IsBoolean,
             "Only direct admitted decimal simple-content bases are supported.", NativeDecimalUnsupportedReason.ValueType);
+        if (baseType!.IsInteger)
+        {
+            foreach (var child in Elements(extension))
+            {
+                Require(child.Name != Xs + "attribute" && child.Name != Xs + "attributeGroup" && child.Name != Xs + "anyAttribute", "Integer extension attributes are outside the profile.", NativeDecimalUnsupportedReason.Attributes);
+                Require(child.Name != Xs + "assert", "Integer extension assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+                Require(false, "Integer extension child grammar is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+            }
+        }
         var uses = CompileAttributes(Elements(extension), targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
         var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri, contentType: baseType);
         return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { AttributeUses = uses };

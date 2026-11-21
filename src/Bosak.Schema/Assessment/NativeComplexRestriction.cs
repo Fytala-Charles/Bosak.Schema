@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 21-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -64,10 +65,13 @@ internal sealed partial class NativeDecimalSchema
         Require(basePlan.AttributeUses.IsEmpty, "Base attribute uses are outside the restriction profile.", NativeDecimalUnsupportedReason.Attributes);
         Require(basePlan.assertions.IsEmpty, "Base assertions are outside the restriction profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
         var content = baseType.ContentType;
-        Require(content is not null && !content.IsComplex && !content.IsString && !content.IsBoolean && !content.IsInteger,
+        Require(content is not null && !content.IsComplex && !content.IsString && !content.IsBoolean,
             "Complex base content is outside the decimal profile.", NativeDecimalUnsupportedReason.ValueType);
-        var facets = NativeDecimalFacets.CompileDerived(restriction, content!.Facets, limits);
-        var atomic = new NativeType(null, false, targetNamespace, facets: facets, derivationBase: content);
+        var atomic = content!.IsInteger
+            ? new NativeType(null, false, targetNamespace, isInteger: true,
+                integerFacets: NativeIntegerFacets.CompileDerived(restriction, content.IntegerFacets, limits), derivationBase: content)
+            : new NativeType(null, false, targetNamespace,
+                facets: NativeDecimalFacets.CompileDerived(restriction, content.Facets, limits), derivationBase: content);
         var governing = new NativeType(root.Type.Name, false, targetNamespace, contentType: atomic,
             derivationBase: baseType, isComplexRestriction: true);
         return new NativeDecimalSchema(new NativeDeclaration(root.Name, governing, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);

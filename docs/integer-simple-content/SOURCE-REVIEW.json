@@ -1,0 +1,54 @@
+{
+  "source": "ab7e20afacd83edf93e71be2123fb40235c4f646",
+  "status": "Static source review; no engine execution",
+  "files": [
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalSchema.cs",
+      "gitBlobSha256": "b10ee86f1030f7592a12b7661b885ebdf0f3196df06caac5da6c3a624ab1491d",
+      "worktreeSha256": "224947441d0022ccbc449cbda9e1cacdff4df4d093e948bc5b048f68c8901935"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeNestedSchema.cs",
+      "gitBlobSha256": "3f0a511511719ce662909dac9983af7ee505f03f1c44dc983f89136795d2b8b2",
+      "worktreeSha256": "f4e4e38207ddea93223b8f7f42053569195d32123fc24431aa3f172244535187"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeComplexRestriction.cs",
+      "gitBlobSha256": "3caa87b594336005ac00eccacb12925a907882e90f8b9620b2ffed3a0ff6ec7e",
+      "worktreeSha256": "51f2737154c7630a0888c5ed0f881c1056d7bbb13fbd397bc2e54ce4a825de4a"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeIntegerFacets.cs",
+      "gitBlobSha256": "f1d43c5ed84e2b30dc9bbaab8f01abf0a595a2490eeb75498b5a8a7d816c2800",
+      "worktreeSha256": "c5b834455d1d7cd04749f8b4511c0ad72d1fcf4b84262e8c09d80a7dd00556aa"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeInstanceType.cs",
+      "gitBlobSha256": "d27d0652911145c3646f5056e2c8e0152f61384a4e9fc8f3348ebb4f56defcdd",
+      "worktreeSha256": "c40b4a80adc115acdc35124f9ad785bf795151a83928c579df1e7b5326947ffc"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSchemaProvider.cs",
+      "gitBlobSha256": "16eb4fc44eb30c12d9aed88081d2bdc1b5bef8ff03a9fa78585c741ab4d07b2f",
+      "worktreeSha256": "0961dd203c76011248a8e87fa4a049e04e338f56b7647238092593bfda3e9e2e"
+    },
+    {
+      "path": "tests/TestData/SimpleContent/cases.json",
+      "gitBlobSha256": "6788dee77f8f372205e8f779859201c498b982a91b32348b88e2ebec3d909415",
+      "worktreeSha256": "57899338aff76b06bd0547e6d289e68f6113489ac502af044c05be78c9a0cd87"
+    },
+    {
+      "path": "docs/NUGET_README.md",
+      "gitBlobSha256": "522a281330f385ef5e475b39b3eb09ad8b786f54e31bf82d46155b8c2695e9ac",
+      "worktreeSha256": "238d9d7f697d527dfe9a68ec776e392d901376c249afad03898e29b31a5e6555"
+    }
+  ],
+  "findings": [
+    "CompileSimpleContent excludes integer primitives and named integer restrictions.",
+    "CompileComplexRestriction excludes integer content.",
+    "Root/nested scalar paths already delegate to AssessScalar; integer parse/facet enforcement exists there.",
+    "Integer facets have no inherited static restriction profile; adding only runtime intersection is insufficient.",
+    "Provider recursively registers real content and derivation components; preserve this ownership.",
+    "SC-053 supplies an integer complex base with an application attribute and remains excluded; potential refusal reason reconciliation must be explicit."
+  ]
+}
