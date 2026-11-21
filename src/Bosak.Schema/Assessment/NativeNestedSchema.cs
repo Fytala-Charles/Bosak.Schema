@@ -18,6 +18,7 @@
 //                      | Charles Korthout | 0.5   | 20-11-2026     | Share original anonymous simple definitions and the eager combined local type budget      |
 //                      | Charles Korthout | 0.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
 //                      | Charles Korthout | 0.7   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+//                      | Charles Korthout | 0.8   | 21-11-2026     | Adopt bounded contextual and inherited integer assertions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -46,7 +47,7 @@ internal sealed partial class NativeDecimalSchema
         NativeType decimalType, NativeType stringType, NativeType booleanType, NativeType integerType,
         Dictionary<XName, NativeType> simple, NativeNumericLimits limits, int maxStringCharacters, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple)
     {
-        Require(!schema.Descendants(Xs + "assert").Any(), "Nested schemas must be assertion-free.", NativeDecimalUnsupportedReason.AssertionGrammar);
+        Require(!schema.Descendants(Xs + "assert").Any(a => a.Parent?.Parent?.Name != Xs + "simpleContent"), "Structural nested assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
         var definitions = types.Where(t => t.Name == Xs + "complexType")
             .ToDictionary(t => XName.Get(Name(t), targetNamespace));
         var named = new Dictionary<XName, NativeDecimalSchema>();
@@ -71,7 +72,7 @@ internal sealed partial class NativeDecimalSchema
             var members = Elements(complex);
             if (members.Count == 1 && members[0].Name == Xs + "simpleContent")
                 return CompileComplex(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
-                    decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null);
+                    decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null, nestedContext: true);
             Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && members.Skip(1).All(e => e.Name == Xs + "attribute"),
                 "Expected an element-only sequence and root attributes.", NativeDecimalUnsupportedReason.DeclarationShape);
             var sequence = members[0];
@@ -136,7 +137,7 @@ internal sealed partial class NativeDecimalSchema
                 Require(Elements(element).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                 var shared = Resolve(ResolveTypeName(element));
                 plan = new NativeDecimalSchema(new NativeDeclaration(name, shared.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits)
-                    { AttributeUses = shared.AttributeUses, NestedProfile = shared.NestedProfile };
+                    { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, NestedProfile = shared.NestedProfile };
             }
             else
             {
@@ -200,7 +201,9 @@ internal sealed partial class NativeDecimalSchema
             Check(!element.HasElements, "Simple-content terminal cannot contain child elements.");
             Require(element.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
             var atomicDeclaration = new NativeDeclaration(declaration.Name, contentType, 1, 1, declaration.NamespaceUri);
-            states.Add(AssessScalar(element.Value, atomicDeclaration) with { Declaration = declaration, EffectiveType = effectiveType, NormalizedStringValue = Collapse(element.Value) });
+            var scalarState = AssessScalar(element.Value, atomicDeclaration) with { Declaration = declaration, EffectiveType = effectiveType, NormalizedStringValue = Collapse(element.Value) };
+            plan.AssessIntegerAssertions(element, scalarState, cancellationToken);
+            states.Add(scalarState);
             cancellationToken.ThrowIfCancellationRequested();
             return;
         }

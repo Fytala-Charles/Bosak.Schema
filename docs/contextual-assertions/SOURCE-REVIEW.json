@@ -1,0 +1,48 @@
+{
+  "source": "2e8d6102e10e9ccbddee87249eaefa2fdfaa4468",
+  "files": [
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalAssertion.cs",
+      "worktreeSha256": "cda6ce0c220e864a57a63e0b8756aecb6675c55a871ec918a006785f6fb1419f",
+      "gitBlobSha256": "e5b84eef967754021b93614e9aa50cae23966d827a355460dee0f439b70dbdb5"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalSchema.cs",
+      "worktreeSha256": "6914fb7de24a3477b676643ff071a15c6ba9906cebd520573e123dda9045904b",
+      "gitBlobSha256": "79728ceee8bde09289e9b372bcd0ad7a5d09e17ec466fafd5c02a3e30b86b12c"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeComplexRestriction.cs",
+      "worktreeSha256": "078a06c77e51ebf9891edc656603b7ef335268bb5d10d32e96912378b1c29a3c",
+      "gitBlobSha256": "97d5596130f07b79593ff1674ca555482bc1a2782481c77a1fc46eead6b0b8af"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeNestedSchema.cs",
+      "worktreeSha256": "f4e4e38207ddea93223b8f7f42053569195d32123fc24431aa3f172244535187",
+      "gitBlobSha256": "3f0a511511719ce662909dac9983af7ee505f03f1c44dc983f89136795d2b8b2"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSchemaProvider.cs",
+      "worktreeSha256": "0961dd203c76011248a8e87fa4a049e04e338f56b7647238092593bfda3e9e2e",
+      "gitBlobSha256": "16eb4fc44eb30c12d9aed88081d2bdc1b5bef8ff03a9fa78585c741ab4d07b2f"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeIntegerFacets.cs",
+      "worktreeSha256": "8b41e94922ecac111776378c5348fc98bb898226ee9522f1456150e46f213ffe",
+      "gitBlobSha256": "3eed5962143d5841ca59449eed688da380d830f36a8b5b300ef727c7be23ba56"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeInstanceType.cs",
+      "worktreeSha256": "c40b4a80adc115acdc35124f9ad785bf795151a83928c579df1e7b5326947ffc",
+      "gitBlobSha256": "d27d0652911145c3646f5056e2c8e0152f61384a4e9fc8f3348ebb4f56defcdd"
+    }
+  ],
+  "findings": [
+    "Integer simple content refuses xs:assert children; restriction also refuses asserted base plans.",
+    "Current assertion compiler receives child value dictionaries, not an assertion partial-PSVI context.",
+    "Integer operands/context item/variables/ranges/mod are outside the existing decimal/string predicate grammar.",
+    "Root and nested simple-content assessment return before the flat sequence assertion loop; both need explicit assertion validation before fact publication.",
+    "Original public NativeSessionNode intentionally atomizes using authenticated G/C1; this is different from the temporary assertion context anyType/untypedAtomic.",
+    "Inherited assertion plans must retain base static bindings and be appended, not replaced or rebound."
+  ]
+}

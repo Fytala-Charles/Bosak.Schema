@@ -33,6 +33,7 @@
 //                      | Charles Korthout | 1.10  | 21-11-2026     | Adopt mixed relative target namespaces and form defaults independently of attribute uses     |
 //                      | Charles Korthout | 1.11  | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
 //                      | Charles Korthout | 1.12  | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
+//                      | Charles Korthout | 1.13  | 21-11-2026     | Adopt bounded contextual and inherited integer assertions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -165,7 +166,7 @@ internal sealed partial class NativeDecimalSchema
                 {
                     Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                     Require(named.TryGetValue(ResolveTypeName(declaration), out var shared), "Unresolved root complex type.", NativeDecimalUnsupportedReason.ValueType);
-                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses };
+                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions };
                 }
                 else
                 {
@@ -195,11 +196,11 @@ internal sealed partial class NativeDecimalSchema
 
     private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
         string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
-        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null)
+        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null, bool nestedContext = false)
     {
         var members = Elements(complex);
         if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
-            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver);
+            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver, assertionNamespace, nestedContext);
         var attributeMembers = members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray();
         var assertionMembers = members.Skip(1 + attributeMembers.Length).ToArray();
         Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && assertionMembers.Length <= 8 &&
@@ -288,26 +289,28 @@ internal sealed partial class NativeDecimalSchema
 
     private static NativeDecimalSchema CompileSimpleContent(XElement content, NativeDeclaration root,
         string targetNamespace, string attributeForm, NativeType decimalType, NativeType stringType, NativeType? booleanType,
-        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Func<XName, NativeDecimalSchema?>? complexResolver)
+        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Func<XName, NativeDecimalSchema?>? complexResolver, string assertionNamespace, bool nestedContext)
     {
         Attributes(content);
         var contentMembers = Elements(content);
         if (contentMembers.Count == 1 && contentMembers[0].Name == Xs + "restriction")
-            return CompileComplexRestriction(contentMembers[0], root, targetNamespace, simple, limits, complexResolver, cancellationToken);
+            return CompileComplexRestriction(contentMembers[0], root, targetNamespace, simple, limits, complexResolver, cancellationToken, assertionNamespace);
         var extension = Single(content, "extension");
         Attributes(extension, "base");
         var baseName = ResolveTypeName(extension, "base");
         NativeType? baseType = baseName == Xs + "decimal" ? decimalType : baseName == Xs + "integer" ? integerType : simple.GetValueOrDefault(baseName);
+        if (nestedContext && baseType?.IsInteger != true && Elements(extension).Any(e => e.Name == Xs + "assert"))
+            Require(false, "Noninteger nested assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
         Require(baseType is not null && !baseType.IsString && !baseType.IsBoolean,
             "Only direct admitted decimal simple-content bases are supported.", NativeDecimalUnsupportedReason.ValueType);
         if (baseType!.IsInteger)
         {
-            foreach (var child in Elements(extension))
-            {
-                Require(child.Name != Xs + "attribute" && child.Name != Xs + "attributeGroup" && child.Name != Xs + "anyAttribute", "Integer extension attributes are outside the profile.", NativeDecimalUnsupportedReason.Attributes);
-                Require(child.Name != Xs + "assert", "Integer extension assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
-                Require(false, "Integer extension child grammar is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-            }
+            var children = Elements(extension);
+            Require(!children.Any(e => e.Name == Xs + "attribute" || e.Name == Xs + "attributeGroup" || e.Name == Xs + "anyAttribute"), "Integer extension attributes are outside the profile.", NativeDecimalUnsupportedReason.Attributes);
+            Require(children.All(e => e.Name == Xs + "assert"), "Integer extension children are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+            var integerTypePlan = new NativeType(root.Type.Name, false, root.Type.NamespaceUri, contentType: baseType);
+            return new NativeDecimalSchema(new NativeDeclaration(root.Name, integerTypePlan, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits)
+            { integerAssertions = CompileIntegerAssertions(children, targetNamespace, assertionNamespace, limits, cancellationToken) };
         }
         var uses = CompileAttributes(Elements(extension), targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
         var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri, contentType: baseType);
@@ -370,6 +373,7 @@ internal sealed partial class NativeDecimalSchema
                 Require(root.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
                 var scalarDeclaration = new NativeDeclaration(selected.Root.Name, contentType, 1, 1, selected.Root.NamespaceUri);
                 var state = AssessScalar(root.Value, scalarDeclaration) with { Declaration = selected.Root, EffectiveType = rootType, NormalizedStringValue = Collapse(root.Value) };
+                selected.AssessIntegerAssertions(root, state, cancellationToken);
                 cancellationToken.ThrowIfCancellationRequested();
                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [state], attributeStates.ToImmutable()));
             }

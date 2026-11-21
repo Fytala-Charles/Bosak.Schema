@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 21-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
+//                      | Charles Korthout | 0.3   | 21-11-2026     | Adopt bounded contextual and inherited integer assertions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -26,12 +27,14 @@ internal sealed partial class NativeDecimalSchema
 {
     private static NativeDecimalSchema CompileComplexRestriction(XElement restriction, NativeDeclaration root,
         string targetNamespace, Dictionary<XName, NativeType> simple, NativeNumericLimits limits,
-        Func<XName, NativeDecimalSchema?>? resolveComplex, CancellationToken token)
+        Func<XName, NativeDecimalSchema?>? resolveComplex, CancellationToken token, string assertionNamespace)
     {
         token.ThrowIfCancellationRequested();
         Attributes(restriction, "base");
         var children = Elements(restriction);
-        foreach (var child in children)
+        var localAssertions = children.Where(e => e.Name == Xs + "assert").ToArray();
+        Require(!children.SkipWhile(e => e.Name != Xs + "assert").Any(e => e.Name != Xs + "assert"), "Facets must precede assertions.", NativeDecimalUnsupportedReason.DeclarationShape);
+        foreach (var child in children.Where(e => e.Name != Xs + "assert"))
         {
             token.ThrowIfCancellationRequested();
             Require(child.Name != Xs + "attribute" && child.Name != Xs + "attributeGroup" && child.Name != Xs + "anyAttribute",
@@ -67,13 +70,19 @@ internal sealed partial class NativeDecimalSchema
         var content = baseType.ContentType;
         Require(content is not null && !content.IsComplex && !content.IsString && !content.IsBoolean,
             "Complex base content is outside the decimal profile.", NativeDecimalUnsupportedReason.ValueType);
+        Require(content!.IsInteger || localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty,
+            "Contextual assertions on noninteger content are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+        var facetsOnly = new XElement(restriction.Name, restriction.Attributes(), children.Where(e => e.Name != Xs + "assert"));
+        var inheritedAssertions = basePlan.integerAssertions;
+        var effectiveAssertions = inheritedAssertions.AddRange(CompileIntegerAssertions(localAssertions, targetNamespace, assertionNamespace, limits, token));
+        Require(effectiveAssertions.Length <= 8, "Effective integer assertion capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         var atomic = content!.IsInteger
             ? new NativeType(null, false, targetNamespace, isInteger: true,
-                integerFacets: NativeIntegerFacets.CompileDerived(restriction, content.IntegerFacets, limits), derivationBase: content)
+                integerFacets: NativeIntegerFacets.CompileDerived(facetsOnly, content.IntegerFacets, limits), derivationBase: content)
             : new NativeType(null, false, targetNamespace,
-                facets: NativeDecimalFacets.CompileDerived(restriction, content.Facets, limits), derivationBase: content);
+                facets: NativeDecimalFacets.CompileDerived(facetsOnly, content.Facets, limits), derivationBase: content);
         var governing = new NativeType(root.Type.Name, false, targetNamespace, contentType: atomic,
             derivationBase: baseType, isComplexRestriction: true);
-        return new NativeDecimalSchema(new NativeDeclaration(root.Name, governing, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
+        return new NativeDecimalSchema(new NativeDeclaration(root.Name, governing, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { integerAssertions = effectiveAssertions };
     }
 }

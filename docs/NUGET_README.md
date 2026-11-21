@@ -351,7 +351,7 @@ counts all supplied digits including leading zeroes, excluding sign; overflow is
 Unsupported/RepresentationCapacity. The separate Core query digit limit can refuse
 a read; export and subsequent in-bound reads remain available. Decimal scale and
 string capacities do not constrain integer values. NativeDecimalSession remains
-decimal-only. Integer assertions, derived integer families and named integer
+decimal-only. Contextual assertions on integer leaves, derived integer families and named integer
 restrictions/facets remain excluded; this profile is not published beta.1.
 
 ```csharp
@@ -628,7 +628,7 @@ element nodes (the node ceiling is defensive under the other limits). Sequences
 have 1-16 unique expanded child names, minOccurs 0/1 and finite maxOccurs 1-16;
 root/type counts and local anonymous types have separate 16-component ceilings.
 Optional branches and repetition count toward compile-time budgets. New nested
-schemas are assertion-free. Choice/all, recursion, unbounded repetition, nested
+element-only containers remain assertion-free; admitted integer simple-content terminals use the contextual profile below. Choice/all, recursion, unbounded repetition, nested
 attributes/simple content, mixed content, composition and defaults/nil remain
 excluded. NativeDecimalSession and published beta.1 retain their original scope.
 
@@ -685,7 +685,7 @@ Up to 16 uses per owner and 64 total potential attribute occurrences INCLUDING
 root uses, absent optionals and maximum repetition are admitted. Existing depth,
 terminal, string/numeric and independent query/cache limits still apply. Scalar
 leaf attributes, nested simple content, defaults/fixed/inheritable/prohibited,
-global refs/groups/wildcards and assertions in nested schemas remain excluded.
+global refs/groups/wildcards and assertions on element-only containers remain excluded. Integer simple-content terminals can use the contextual profile below.
 Published beta.1 and NativeDecimalSession keep their prior scope.
 
 
@@ -764,7 +764,7 @@ The 0.6 development profile supports direct named and local anonymous restrictio
 of `xs:integer`: exact inclusive/exclusive bounds, totalDigits, and inherited fixed
 fractionDigits zero. Values and bounds use BigInteger without decimal conversion.
 Named integer restrictions also enforce facets on admitted local application
-attributes. Existing representation limits still apply; integer assertions,
+attributes. Existing representation limits still apply; assertion facets on integer simple types,
 restriction chains, derived integer families and broader query profiles remain
 excluded. Legacy NativeDecimalSession and published 0.5.0-beta.1 are unchanged.
 
@@ -904,8 +904,8 @@ Core provider API expansion is implied.
 
 NativeSchemaSession and NativeSchemaNodeDataSession admit simple-content extension
 of xs:integer or an existing named direct integer simple restriction, followed by
-one direct complex restriction. Both integer complex types must be attribute-free
-and assertion-free. This example accepts integers below the stated exact bound:
+one direct complex restriction. Both integer complex types must be attribute-free.
+Bounded assertions are described below. This example accepts integers below the stated exact bound:
 
 ```xml
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -938,8 +938,64 @@ schema-Invalid; capacity and excluded grammar remain Unsupported. Legal empty
 integer ranges (for example, minExclusive=0/maxExclusive=1) compile but reject all
 instances. Raw digit capacities apply before leading-zero normalization.
 
-Application attributes/assertions on integer complex types, complex chains,
+Application attributes on integer complex types, complex chains,
 derived built-ins such as xs:int/xs:long, inline simpleType, general inheritance
-and broader complex xsi:type substitution remain excluded. This does not admit
-inherited/contextual assertions. Legacy NativeDecimalSession and published beta.1
+and broader complex xsi:type substitution remain excluded. Only the bounded
+contextual assertion profile below is admitted. Legacy NativeDecimalSession and published beta.1
 are unchanged; this development behavior does not claim full XSD/PSVI support.
+
+
+### Contextual and inherited integer assertions (0.6 development)
+
+Attribute-free integer simple-content extensions and their one direct complex
+restriction can carry bounded xs:assert components. Every inherited base assertion
+and local assertion must succeed. This example accepts20, rejects80 by the base
+membership test, and rejects5 by the derived parity test:
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:t="urn:assertions" targetNamespace="urn:assertions">
+  <xs:complexType name="Allowed">
+    <xs:simpleContent><xs:extension base="xs:integer">
+      <xs:assert test="$value = (1 to 10, 20, 30)"/>
+    </xs:extension></xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="EvenAllowed">
+    <xs:simpleContent><xs:restriction base="t:Allowed">
+      <xs:assert test="$value mod 2 eq 0"/>
+    </xs:restriction></xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="value" type="t:EvenAllowed"/>
+</xs:schema>
+```
+
+Assess `<t:value xmlns:t="urn:assertions">20</t:value>` through the existing API,
+then read the exact IntegerValue using ReadRootScalar() or original-node
+ReadElement([]). Root, anonymous and existing nested integer terminals retain
+original complex/atomic provenance and ownership after assertion success.
+
+Use `$value` for exact integer arithmetic and comparison. During XSD assertion
+checking, dot normally atomizes to untypedAtomic from a temporary partial context.
+Numeric general comparison/arithmetic on dot converts to double and can round;
+`. eq 5` instead uses a value comparison and fails a string/numeric type check.
+These rules do not change the exact stored or returned BigInteger. Temporary
+assertion values carry no transferable schema authority.
+
+The closed grammar supports dot/$value, signed integer literals, scalar value
+comparisons, general=/!= with integer sequences/ranges, mod, parentheses and/or.
+Quoted strings are admitted for scalar eq/ne only. String ordering, functions,
+paths, other variables/arithmetic and broader XPath remain Unsupported. General!=
+is existential inequality, not negated membership. Evaluated dynamic/type errors
+make the assertion unsatisfied and the instance Invalid; no partial facts publish.
+
+Effective inherited-plus-local assertions are capped at8per owner; expressions
+at512characters/128tokens/depth16. Internal expanded sequences are capped at32
+items before allocation, separate from the public single-result query limit.
+Existing integer/input/query/export budgets remain; capacity refusal and
+cancellation stay distinct from a failed assertion. Static bindings are retained
+from each original assertion, including when inherited by a derived type.
+
+Assertions on other scalar contexts or element-only/empty-content owners,
+application attributes, broader type chains, node functions and full XPath/PSVI
+remain outside this profile. Decimal/string child-assertion behavior, bounded
+complex xsi:type policy, NativeDecimalSession and published beta.1 are unchanged.
