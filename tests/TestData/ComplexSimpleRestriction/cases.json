@@ -1,0 +1,805 @@
+{
+  "date": "2026-11-21",
+  "status": "Authored production qualification input; original proposed catalog remains sealed",
+  "rows": [
+    {
+      "id": "CR-001",
+      "label": "Primitive decimal base, narrower value accepted",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-002",
+      "label": "Exclusive facet rejects boundary",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-003",
+      "label": "No facets still create anonymous C1",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-004",
+      "label": "Named decimal content base, inherited lower and new upper",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/><xs:maxInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-005",
+      "label": "Inherited omitted lower enforced",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/><xs:maxInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>-1</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-006",
+      "label": "Lower weakening invalid even when supplied value fits intersection",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/><xs:maxInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minInclusive value='-1'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-007",
+      "label": "Upper weakening invalid",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/><xs:maxInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxInclusive value='11'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-008",
+      "label": "Inclusive equal inherited exclusive lower widens",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minExclusive value='0'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minInclusive value='0'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-009",
+      "label": "Exclusive equal inherited inclusive lower narrows",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minExclusive value='0'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-010",
+      "label": "Inclusive equal inherited exclusive upper widens",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:maxExclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxInclusive value='10'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-011",
+      "label": "Exclusive equal inherited inclusive upper narrows",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:maxInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='10'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-012",
+      "label": "Inclusive singleton is valid",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minInclusive value='5'/><xs:maxInclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-013",
+      "label": "Equal exclusive endpoints create valid empty type",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minExclusive value='5'/><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-014",
+      "label": "Exclusive lower and inclusive upper equality invalid",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minExclusive value='5'/><xs:maxInclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-015",
+      "label": "Inclusive lower and exclusive upper equality invalid",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minInclusive value='5'/><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-016",
+      "label": "New lower cannot meet inherited exclusive upper",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-017",
+      "label": "New upper cannot meet inherited exclusive lower",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minExclusive value='5'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-018",
+      "label": "Inclusive upper may equal inherited inclusive lower",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='5'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxInclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-019",
+      "label": "Narrow digit facets retain exact decimal",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:totalDigits value='4'/><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:totalDigits value='3'/><xs:fractionDigits value='1'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>12.3</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-020",
+      "label": "totalDigits widening is invalid",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:totalDigits value='4'/><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:totalDigits value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-021",
+      "label": "fractionDigits widening is invalid",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:totalDigits value='4'/><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:fractionDigits value='3'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-022",
+      "label": "Local fractionDigits conflicts with inherited totalDigits",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:totalDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:fractionDigits value='3'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-023",
+      "label": "Local totalDigits conflicts with inherited fractionDigits",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:fractionDigits value='3'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:totalDigits value='2'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-024",
+      "label": "No new facets over empty base remains valid empty",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minExclusive value='5'/><xs:maxExclusive value='5'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-025",
+      "label": "Repeated bound on empty base violates opposite inherited bound condition",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minExclusive value='5'/><xs:maxExclusive value='5'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-026",
+      "label": "Forward complex base declaration",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-027",
+      "label": "Nested original scalar terminal",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='t:Derived'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'><t:amount>4.5</t:amount></t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-028",
+      "label": "Relative namespace identity preserved",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='amount/types' targetNamespace='amount/types' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='amount/types'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-029",
+      "label": "Large exact decimal without legacy decimal rounding",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>12345678901234567890123456789012345</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-030",
+      "label": "Raw facet lexical capacity preserved",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxInclusive value='11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "RepresentationCapacity",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-031",
+      "label": "Base attributes are not silently dropped",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'><xs:attribute name='code' type='xs:string'/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "Attributes",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-032",
+      "label": "Derived attributes remain excluded",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/><xs:attribute name='code' type='xs:string'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "Attributes",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-033",
+      "label": "Assertions remain excluded",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/><xs:assert test='. lt 5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-034",
+      "label": "Malformed known decimal facet value",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxInclusive value='5.0.1'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-035",
+      "label": "Zero totalDigits invalid",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:totalDigits value='0'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-036",
+      "label": "Negative fractionDigits invalid",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:fractionDigits value='-1'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-037",
+      "label": "Both lower facet kinds in one step invalid",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minInclusive value='0'/><xs:minExclusive value='1'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-038",
+      "label": "Duplicate same facet invalid",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxInclusive value='10'/><xs:maxInclusive value='9'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-039",
+      "label": "Unknown closed complex base",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Absent'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-040",
+      "label": "Unbound complex base prefix",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='missing:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-041",
+      "label": "Malformed base QName",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='2.0'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-042",
+      "label": "Integer content base remains excluded",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:integer'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "ValueType",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-043",
+      "label": "Simple restriction base kind remains outside complex slice",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='xs:decimal'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "ValueType",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-044",
+      "label": "Same governing complex request",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:type='t:Derived'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-045",
+      "label": "Derived complex request under declared base remains deferred",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Base'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:type='t:Derived'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "unsupportedReason": "ValueType",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-046",
+      "label": "Cannot weaken declared derived type via base request",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:type='t:Base'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-047",
+      "label": "Anonymous root governing complex type",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-048",
+      "label": "Anonymous nested governing complex type",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount'><xs:complexType><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'><t:amount>4.5</t:amount></t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-049",
+      "label": "Unsupported inline simple type is not ignored",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/><xs:simpleType><xs:restriction base='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "DeclarationShape",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-050",
+      "label": "Explicit fixed facet grammar remains excluded",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5' fixed='false'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "Attributes",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-051",
+      "label": "Explicit whitespace facet grammar remains excluded",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "ValueType",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-052",
+      "label": "Restriction chains stay outside one-level profile",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Middle'><xs:simpleContent><xs:restriction base='t:Base'/></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Middle'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "DeclarationShape",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-053",
+      "label": "Unused invalid weakening is still rejected eagerly",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/><xs:maxInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minInclusive value='-1'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Base'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    }
+  ]
+}

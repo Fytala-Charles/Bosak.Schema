@@ -31,6 +31,7 @@
 //                      | Charles Korthout | 1.8   | 20-11-2026     | Assess bounded string assertions from original immediate scalar child values             |
 //                      | Charles Korthout | 1.9   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
 //                      | Charles Korthout | 1.10  | 21-11-2026     | Adopt mixed relative target namespaces and form defaults independently of attribute uses     |
+//                      | Charles Korthout | 1.11  | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -128,16 +129,27 @@ internal sealed partial class NativeDecimalSchema
                     defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType!, integerType!, simple,
                     limits, maxStringCharacters!.Value, cancellationToken, anonymousSimple));
             // Compile all complex types eagerly, including unused declarations.
-            foreach (var type in types.Where(t => t.Name == Xs + "complexType"))
+            var complexDefinitions = types.Where(t => t.Name == Xs + "complexType")
+                .ToDictionary(t => XName.Get(Name(t), targetNamespace));
+            var resolvingComplex = new HashSet<XName>();
+            NativeDecimalSchema ResolveComplex(XName key)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+                if (named.TryGetValue(key, out var known)) return known;
+                Require(resolvingComplex.Add(key), "Complex dependency cycle is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+                var type = complexDefinitions[key];
                 Attributes(type, "name");
                 var name = Name(type);
-                var key = XName.Get(name, targetNamespace);
                 var identity = new NativeType(name, true, targetNamespace);
-                named.Add(key, CompileComplex(type, new NativeDeclaration(name, identity, 1, 1, targetNamespace),
-                    targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple));
+                var plan = CompileComplex(type, new NativeDeclaration(name, identity, 1, 1, targetNamespace),
+                    targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType,
+                    simple, limits, cancellationToken, anonymousSimple,
+                    requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null);
+                resolvingComplex.Remove(key);
+                named.Add(key, plan);
+                return plan;
             }
+            foreach (var key in complexDefinitions.Keys) ResolveComplex(key);
             var compiled = ImmutableDictionary.CreateBuilder<XName, NativeDecimalSchema>();
             NativeDecimalSchema? first = null;
             foreach (var declaration in declarations)
@@ -159,7 +171,7 @@ internal sealed partial class NativeDecimalSchema
                     var complex = Single(declaration, "complexType");
                     Attributes(complex);
                     plan = CompileComplex(complex, new NativeDeclaration(name, new NativeType(null, true), 1, 1, targetNamespace),
-                        targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple);
+                        targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null);
                 }
                 compiled.Add(key, plan);
                 first ??= plan;
@@ -182,11 +194,11 @@ internal sealed partial class NativeDecimalSchema
 
     private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
         string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
-        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple)
+        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null)
     {
         var members = Elements(complex);
         if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
-            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken);
+            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver);
         var attributeMembers = members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray();
         var assertionMembers = members.Skip(1 + attributeMembers.Length).ToArray();
         Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && assertionMembers.Length <= 8 &&
@@ -275,9 +287,12 @@ internal sealed partial class NativeDecimalSchema
 
     private static NativeDecimalSchema CompileSimpleContent(XElement content, NativeDeclaration root,
         string targetNamespace, string attributeForm, NativeType decimalType, NativeType stringType, NativeType? booleanType,
-        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken)
+        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Func<XName, NativeDecimalSchema?>? complexResolver)
     {
         Attributes(content);
+        var contentMembers = Elements(content);
+        if (contentMembers.Count == 1 && contentMembers[0].Name == Xs + "restriction")
+            return CompileComplexRestriction(contentMembers[0], root, targetNamespace, simple, limits, complexResolver, cancellationToken);
         var extension = Single(content, "extension");
         Attributes(extension, "base");
         var baseName = ResolveTypeName(extension, "base");
@@ -616,8 +631,10 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false)
 {
+    internal NativeType? DerivationBase { get; } = derivationBase;
+    internal bool IsComplexRestriction { get; } = isComplexRestriction;
     internal XName? BaseName { get; } = baseName;
     internal NativeIntegerFacets? IntegerFacets { get; } = integerFacets;
     internal NativeType? ContentType { get; } = contentType;

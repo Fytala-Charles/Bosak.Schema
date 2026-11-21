@@ -635,3 +635,77 @@ only; no commit/push, Core pin, tag/controller or publication change. Next after
 review/delivery: bounded decimal complex simple-content restriction. Original
 post-xsi-type proposal remains historical; corrected schema representation section
 is Structures3.17.2. [Contract, adoption and receipts](<namespace-form/README.md>).
+
+
+## PR35 merged; decimal complex restriction contract - 21 November 2026
+
+PR35 merged as7ce8ada7ca78a77a13e07151b199639fa757317a, exactly preserving the
+reviewed313fc1c tree. Main CI44884962349 passes2,143source tests(581/1,562),
+release/docs/workload checks. Existing frozen qualification remains16matches/
+5Unsupported/zero errors; no new package, controller/pin or publication change.
+
+The next bounded contract proposes one direct attribute-free/assertion-free decimal
+complex simple-content restriction, using the six existing facets. It preserves
+separate G->complex B and anonymous C1->content C0 identities, including a distinct
+C1 when no facets are supplied. Static inherited facet validity precedes runtime
+checks; equal exclusive endpoints may define a valid empty type, whereas mixed
+endpoint equality is invalid. Proposed new admitted facet/reference errors are
+schema-Invalid; excluded grammar/dependencies/capacity stay Unsupported. Legacy
+routes and deferred complex xsi:type substitution policy remain unchanged.
+
+53concrete payloads,25separate gates and16facet relations are proposed artifacts,
+not executed tests or conformance passes. Exact normative review pins and source/
+upstream hashes are recorded. No semantic adoption or production/source/test/tool
+change. Next: experimental scope + actual native copied-source feasibility on both
+signed Core pins, then production adoption only after the gate passes. General
+inheritance, integer assertions, full-XSD/PSVI/C45 remain separate.
+[Merge evidence and contract](<complex-simple-restriction/README.md>).
+
+
+## Complex restriction native feasibility - 21 November 2026
+
+An isolated copied-source candidate passes 176 controls per signed Core pin,
+including all 53 proposed payloads through both facades, 48 normative facet-bound
+conditions and exact native D/T/G/B/C0/C1 ownership/provenance gates. Static facet
+validity, valid empty types, anonymous/sibling contexts, no-target namespaces,
+limits, query rollback and fresh assessment origins are demonstrated. Data-profile
+ReadTypedValue refusal and independent typed-identity evidence stay separate.
+
+Original source comparison: 581 implementation + 1,561 public pass, with exactly
+one existing refusal-reason difference. SC-058 still refuses its restriction
+attribute, now as Attributes rather than DeclarationShape. With that one explicit
+scratch-only overlay, all 2,143 stable cases pass. Production fixtures/source are
+unchanged. API stays 54 types / 401 rows; all 18 signed Core source/runtime/archive
+identities verify. These scopes overlap and are not new product coverage totals.
+
+Production adoption and implementation remain pending. Original proposal and
+sealed prior dossiers remain historical. No new package/retained-binary/pilot
+execution, Core change, commit/push or publication. Current production pilot stays
+16 matches / 5 Unsupported / zero errors. Next: separate production adoption,
+implement the measured mapping with explicit admission review, then full product
+consumer/binary/pilot qualification. [Feasibility and receipts](<complex-simple-restriction/FEASIBILITY.md>).
+
+
+## Decimal complex restriction production candidate - 21 November 2026
+
+Production adoption followed176actual-native controls per signed Core pin. The
+mixed owned facades now admit one direct decimal complex simple-content restriction
+with attribute/assertion-free base/derived types and six existing numeric facets.
+Static inherited-facet validity, G->B versus anonymous C1->C0 identities and original
+D/T/G/actual-C1 provenance are enforced. No public API/Core profile expansion; legacy
+and deferred complex xsi:type policies remain intact. SC-058 has one explicit
+refusal-reason reconciliation, preserving schema/instance/ID and Unsupported.
+
+Qualification:2,319source passes(651implementation/1,668public),1,668public
+package-only passes per Core1.81.2/1.81.17,70overlapping current-package native
+controls, retained124/23/33, API54types/401rows zero delta,18verified signed Core
+archives/source/runtime payloads and signed beta.1 baseline. All2,143oldcase IDs
+remain;176new source cases are70internal+106public. The unchanged frozen corpus
+measures17matches/4Unsupported/zero mismatch/harness errors; onlyctD017.v becomes
+a new match. Remaining assertion-family cases retain independent unsupported requirements.
+
+Six production source files change. Local unsigned alpha.0.26 is qualification
+only; published beta.1, Core pins and release controllers are unchanged. No commit/
+push/tag/publication requested. Original proposal and feasibility seals remain
+historical. Next: review/deliver, then assess integer complex content separately
+from context-item/inherited assertions. [Implementation and exact receipts](<complex-simple-restriction/IMPLEMENTATION.md>).

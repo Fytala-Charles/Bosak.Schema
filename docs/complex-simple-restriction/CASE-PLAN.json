@@ -1,0 +1,982 @@
+{
+  "date": "2026-11-21",
+  "status": "Proposed authored payloads and qualification gates only; not tests or execution evidence",
+  "rows": [
+    {
+      "id": "CR-001",
+      "label": "Primitive decimal base, narrower value accepted",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-002",
+      "label": "Exclusive facet rejects boundary",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-003",
+      "label": "No facets still create anonymous C1",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-004",
+      "label": "Named decimal content base, inherited lower and new upper",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/><xs:maxInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-005",
+      "label": "Inherited omitted lower enforced",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/><xs:maxInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>-1</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-006",
+      "label": "Lower weakening invalid even when supplied value fits intersection",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/><xs:maxInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minInclusive value='-1'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-007",
+      "label": "Upper weakening invalid",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/><xs:maxInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxInclusive value='11'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-008",
+      "label": "Inclusive equal inherited exclusive lower widens",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minExclusive value='0'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minInclusive value='0'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-009",
+      "label": "Exclusive equal inherited inclusive lower narrows",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minExclusive value='0'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-010",
+      "label": "Inclusive equal inherited exclusive upper widens",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:maxExclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxInclusive value='10'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-011",
+      "label": "Exclusive equal inherited inclusive upper narrows",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:maxInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='10'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-012",
+      "label": "Inclusive singleton is valid",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minInclusive value='5'/><xs:maxInclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-013",
+      "label": "Equal exclusive endpoints create valid empty type",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minExclusive value='5'/><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-014",
+      "label": "Exclusive lower and inclusive upper equality invalid",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minExclusive value='5'/><xs:maxInclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-015",
+      "label": "Inclusive lower and exclusive upper equality invalid",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minInclusive value='5'/><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-016",
+      "label": "New lower cannot meet inherited exclusive upper",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-017",
+      "label": "New upper cannot meet inherited exclusive lower",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minExclusive value='5'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-018",
+      "label": "Inclusive upper may equal inherited inclusive lower",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='5'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxInclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-019",
+      "label": "Narrow digit facets retain exact decimal",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:totalDigits value='4'/><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:totalDigits value='3'/><xs:fractionDigits value='1'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>12.3</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-020",
+      "label": "totalDigits widening is invalid",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:totalDigits value='4'/><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:totalDigits value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-021",
+      "label": "fractionDigits widening is invalid",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:totalDigits value='4'/><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:fractionDigits value='3'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-022",
+      "label": "Local fractionDigits conflicts with inherited totalDigits",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:totalDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:fractionDigits value='3'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-023",
+      "label": "Local totalDigits conflicts with inherited fractionDigits",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:fractionDigits value='3'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:totalDigits value='2'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-024",
+      "label": "No new facets over empty base remains valid empty",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minExclusive value='5'/><xs:maxExclusive value='5'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-025",
+      "label": "Repeated bound on empty base violates opposite inherited bound condition",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minExclusive value='5'/><xs:maxExclusive value='5'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-026",
+      "label": "Forward complex base declaration",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-027",
+      "label": "Nested original scalar terminal",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='t:Derived'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'><t:amount>4.5</t:amount></t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-028",
+      "label": "Relative namespace identity preserved",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='amount/types' targetNamespace='amount/types' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='amount/types'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-029",
+      "label": "Large exact decimal without legacy decimal rounding",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>12345678901234567890123456789012345</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-030",
+      "label": "Raw facet lexical capacity preserved",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxInclusive value='11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "RepresentationCapacity",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-031",
+      "label": "Base attributes are not silently dropped",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'><xs:attribute name='code' type='xs:string'/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "Attributes",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-032",
+      "label": "Derived attributes remain excluded",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/><xs:attribute name='code' type='xs:string'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "Attributes",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-033",
+      "label": "Assertions remain excluded",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/><xs:assert test='. lt 5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-034",
+      "label": "Malformed known decimal facet value",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxInclusive value='5.0.1'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-035",
+      "label": "Zero totalDigits invalid",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:totalDigits value='0'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-036",
+      "label": "Negative fractionDigits invalid",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:fractionDigits value='-1'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-037",
+      "label": "Both lower facet kinds in one step invalid",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minInclusive value='0'/><xs:minExclusive value='1'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-038",
+      "label": "Duplicate same facet invalid",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxInclusive value='10'/><xs:maxInclusive value='9'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-039",
+      "label": "Unknown closed complex base",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Absent'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-040",
+      "label": "Unbound complex base prefix",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='missing:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-041",
+      "label": "Malformed base QName",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='2.0'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-042",
+      "label": "Integer content base remains excluded",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:integer'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "ValueType",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-043",
+      "label": "Simple restriction base kind remains outside complex slice",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='xs:decimal'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "ValueType",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-044",
+      "label": "Same governing complex request",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:type='t:Derived'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-045",
+      "label": "Derived complex request under declared base remains deferred",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Base'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:type='t:Derived'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "unsupportedReason": "ValueType",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-046",
+      "label": "Cannot weaken declared derived type via base request",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:type='t:Base'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-047",
+      "label": "Anonymous root governing complex type",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-048",
+      "label": "Anonymous nested governing complex type",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount'><xs:complexType><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'><t:amount>4.5</t:amount></t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-049",
+      "label": "Unsupported inline simple type is not ignored",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/><xs:simpleType><xs:restriction base='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "DeclarationShape",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-050",
+      "label": "Explicit fixed facet grammar remains excluded",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5' fixed='false'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "Attributes",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-051",
+      "label": "Explicit whitespace facet grammar remains excluded",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "ValueType",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-052",
+      "label": "Restriction chains stay outside one-level profile",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:decimal'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Middle'><xs:simpleContent><xs:restriction base='t:Base'/></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Middle'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "DeclarationShape",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    {
+      "id": "CR-053",
+      "label": "Unused invalid weakening is still rejected eagerly",
+      "status": "Proposed authored payload; not executed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:simpleType name='V'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/><xs:maxInclusive value='10'/></xs:restriction></xs:simpleType><xs:complexType name='Base'><xs:simpleContent><xs:extension base='t:V'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:minInclusive value='-1'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Base'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    }
+  ],
+  "gates": [
+    {
+      "id": "CR-G01",
+      "name": "RootDeclaredDerived",
+      "expectedCategory": "Positive",
+      "requirement": "Root declared as G reads decimal allowed by its narrower facets",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G02",
+      "name": "NestedDeclaredDerived",
+      "expectedCategory": "Positive",
+      "requirement": "Same original G/C1 facts at existing nested-terminal path",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G03",
+      "name": "BasePassDerivedFail",
+      "expectedCategory": "InvalidInstance",
+      "requirement": "Value valid under B fails newly selected C1 facet",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G04",
+      "name": "InheritedBound",
+      "expectedCategory": "InvalidInstance",
+      "requirement": "Inherited bound still enforced when omitted in restriction",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G05",
+      "name": "ZeroNewFacets",
+      "expectedCategory": "Positive",
+      "requirement": "C1 remains distinct anonymous component with inherited value space",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G06",
+      "name": "NamedDecimalContentBase",
+      "expectedCategory": "Positive",
+      "requirement": "B extends existing named simple decimal restriction C0",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G07",
+      "name": "ForwardBase",
+      "expectedCategory": "Positive",
+      "requirement": "Derived declaration before named B resolves same component",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G08",
+      "name": "MinInclusiveWeakening",
+      "expectedCategory": "InvalidSchema",
+      "requirement": "Derived lower bound weakens inherited lower bound",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G09",
+      "name": "MinExclusiveBoundary",
+      "expectedCategory": "InvalidSchema",
+      "requirement": "Inclusive equal bound cannot widen an exclusive base",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G10",
+      "name": "MaxInclusiveWeakening",
+      "expectedCategory": "InvalidSchema",
+      "requirement": "Derived upper bound cannot widen inherited upper bound",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G11",
+      "name": "MaxExclusiveBoundary",
+      "expectedCategory": "Positive",
+      "requirement": "Exclusive equal bound narrows an inclusive base",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G12",
+      "name": "DigitWeakening",
+      "expectedCategory": "InvalidSchema",
+      "requirement": "Derived total/fraction digits cannot widen inherited limits",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G13",
+      "name": "EffectiveFacetConflict",
+      "expectedCategory": "InvalidSchema",
+      "requirement": "Merged effective bounds/digits must be consistent",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G14",
+      "name": "CycleUnused",
+      "expectedCategory": "Refusal",
+      "requirement": "Eager cycle refusal even in unused definition",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G15",
+      "name": "UnknownBase",
+      "expectedCategory": "Refusal",
+      "requirement": "Closed named complex base lookup fails without acquisition",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G16",
+      "name": "BaseWithAttributes",
+      "expectedCategory": "Unsupported",
+      "requirement": "Do not drop or approximate inherited attribute constraints",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G17",
+      "name": "DerivedAttributes",
+      "expectedCategory": "Unsupported",
+      "requirement": "No new restriction attribute-use grammar",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G18",
+      "name": "RestrictionChain",
+      "expectedCategory": "Unsupported",
+      "requirement": "Complex restriction-of-restriction remains outside first slice",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G19",
+      "name": "IntegerBase",
+      "expectedCategory": "Unsupported",
+      "requirement": "No accidental integer simple-content support",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G20",
+      "name": "Assertions",
+      "expectedCategory": "Unsupported",
+      "requirement": "No inherited or contextual assertion grammar expansion",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G21",
+      "name": "DerivedXsiRequestUnderBase",
+      "expectedCategory": "Unsupported",
+      "requirement": "True G->B derivation recorded but complex substitution deferred",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G22",
+      "name": "WeakeningXsiToBase",
+      "expectedCategory": "InvalidInstance",
+      "requirement": "B does not derive from G",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G23",
+      "name": "ActualAnonymousContent",
+      "expectedCategory": "Authority",
+      "requirement": "Provenance actual C1, declared G and exact original episode; distinct equal-facet sibling contexts must retain different anonymous C1 components sharing only their actual C0 base",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G24",
+      "name": "QuotasCancellationRecovery",
+      "expectedCategory": "Lifetime",
+      "requirement": "No partial publication or lost admission after failure",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    },
+    {
+      "id": "CR-G25",
+      "name": "ExportReassessForeign",
+      "expectedCategory": "Lifetime",
+      "requirement": "Lexical export retained; reassess fresh authority; foreign/copy refused",
+      "status": "Proposed separate native/ownership/static gate; not executed"
+    }
+  ]
+}

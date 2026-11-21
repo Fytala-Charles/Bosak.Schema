@@ -1,0 +1,151 @@
+{
+  "status": "Proposed normative condition table; data validation is not engine execution",
+  "comparison": "candidate new facet value OP inherited base facet value; every applicable condition must hold",
+  "baseBoundConditions": [
+    {
+      "newFacet": "maxInclusive",
+      "baseFacet": "maxInclusive",
+      "requiredOperator": "<=",
+      "section": "4.3.7.4"
+    },
+    {
+      "newFacet": "maxInclusive",
+      "baseFacet": "maxExclusive",
+      "requiredOperator": "<",
+      "section": "4.3.7.4"
+    },
+    {
+      "newFacet": "maxInclusive",
+      "baseFacet": "minInclusive",
+      "requiredOperator": ">=",
+      "section": "4.3.7.4"
+    },
+    {
+      "newFacet": "maxInclusive",
+      "baseFacet": "minExclusive",
+      "requiredOperator": ">",
+      "section": "4.3.7.4"
+    },
+    {
+      "newFacet": "maxExclusive",
+      "baseFacet": "maxExclusive",
+      "requiredOperator": "<=",
+      "section": "4.3.8.4"
+    },
+    {
+      "newFacet": "maxExclusive",
+      "baseFacet": "maxInclusive",
+      "requiredOperator": "<=",
+      "section": "4.3.8.4"
+    },
+    {
+      "newFacet": "maxExclusive",
+      "baseFacet": "minInclusive",
+      "requiredOperator": ">",
+      "section": "4.3.8.4"
+    },
+    {
+      "newFacet": "maxExclusive",
+      "baseFacet": "minExclusive",
+      "requiredOperator": ">",
+      "section": "4.3.8.4"
+    },
+    {
+      "newFacet": "minExclusive",
+      "baseFacet": "minExclusive",
+      "requiredOperator": ">=",
+      "section": "4.3.9.4"
+    },
+    {
+      "newFacet": "minExclusive",
+      "baseFacet": "minInclusive",
+      "requiredOperator": ">=",
+      "section": "4.3.9.4"
+    },
+    {
+      "newFacet": "minExclusive",
+      "baseFacet": "maxInclusive",
+      "requiredOperator": "<",
+      "section": "4.3.9.4"
+    },
+    {
+      "newFacet": "minExclusive",
+      "baseFacet": "maxExclusive",
+      "requiredOperator": "<",
+      "section": "4.3.9.4"
+    },
+    {
+      "newFacet": "minInclusive",
+      "baseFacet": "minInclusive",
+      "requiredOperator": ">=",
+      "section": "4.3.10.4"
+    },
+    {
+      "newFacet": "minInclusive",
+      "baseFacet": "maxInclusive",
+      "requiredOperator": "<=",
+      "section": "4.3.10.4"
+    },
+    {
+      "newFacet": "minInclusive",
+      "baseFacet": "minExclusive",
+      "requiredOperator": ">",
+      "section": "4.3.10.4"
+    },
+    {
+      "newFacet": "minInclusive",
+      "baseFacet": "maxExclusive",
+      "requiredOperator": "<",
+      "section": "4.3.10.4"
+    }
+  ],
+  "sameDatatypePairs": [
+    {
+      "lower": "minInclusive",
+      "upper": "maxInclusive",
+      "requiredOperator": "<="
+    },
+    {
+      "lower": "minExclusive",
+      "upper": "maxExclusive",
+      "requiredOperator": "<="
+    },
+    {
+      "lower": "minExclusive",
+      "upper": "maxInclusive",
+      "requiredOperator": "<"
+    },
+    {
+      "lower": "minInclusive",
+      "upper": "maxExclusive",
+      "requiredOperator": "<"
+    }
+  ],
+  "sameStepExclusions": [
+    [
+      "minInclusive",
+      "minExclusive"
+    ],
+    [
+      "maxInclusive",
+      "maxExclusive"
+    ]
+  ],
+  "digitRules": [
+    {
+      "facet": "totalDigits",
+      "domain": "positiveInteger",
+      "versusInherited": "<="
+    },
+    {
+      "facet": "fractionDigits",
+      "domain": "nonNegativeInteger",
+      "versusInherited": "<="
+    },
+    {
+      "constraint": "effective fractionDigits <= effective totalDigits when both exist"
+    }
+  ],
+  "identityRule": "Restriction creates distinct anonymous C1 based on actual C0 even with no new facets",
+  "noGlobalLegacySemanticChange": true
+}

@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 21-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -42,6 +43,7 @@ internal sealed partial class NativeDecimalSchema
         {
             if (!all.Add(type)) return;
             if (type.ContentType is { } content) AddType(content);
+            if (type.DerivationBase is { } parent) AddType(parent);
         }
         void Visit(NativeDecimalSchema plan)
         {
@@ -59,7 +61,8 @@ internal sealed partial class NativeDecimalSchema
         if (IntegerType is { } integer) bases.Add(integer, DecimalType);
         foreach (var type in all)
         {
-            if (type.BaseName is { } parent) bases.Add(type, named[parent]);
+            if (type.DerivationBase is { } direct) bases.Add(type, direct);
+            else if (type.BaseName is { } parent) bases.Add(type, named[parent]);
             else if (type.ContentType is { } content) bases.Add(type, content);
         }
         instanceBases = bases.ToImmutable();
