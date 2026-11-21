@@ -1,0 +1,311 @@
+diff --git a/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs b/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
+index dd2efaf..87799da 100644
+--- a/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
++++ b/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
+@@ -29,6 +29,7 @@
+ //                      | Charles Korthout | 1.6   | 20-11-2026     | Reuse direct facets for original anonymous local decimal and string definitions          |
+ //                      | Charles Korthout | 1.7   | 20-11-2026     | Enforce exact integer facets on original element and attribute scalar facts                 |
+ //                      | Charles Korthout | 1.8   | 20-11-2026     | Assess bounded string assertions from original immediate scalar child values             |
++//                      | Charles Korthout | 1.9   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -170,6 +171,7 @@ internal sealed partial class NativeDecimalSchema
+             first.BooleanType = booleanType;
+             first.IntegerType = integerType;
+             first.maxStringCharacters = maxStringCharacters;
++            first.PrepareInstanceTypes();
+             return NativeResult<NativeDecimalSchema>.Valid(first);
+         }
+         catch (NativeProfileException ex)
+@@ -320,10 +322,11 @@ internal sealed partial class NativeDecimalSchema
+             var document = Parse(instance, 65536, cancellationToken);
+             var root = document.Root!;
+             var found = roots.TryGetValue(root.Name, out var selected);
++            var rootType = found ? ResolveInstanceType(root, selected!.Root.Type) : null;
+             var attributeStates = ImmutableArray.CreateBuilder<NativeElementState>();
+             if (found && selected!.AttributeUses.Length != 0)
+             {
+-                Require(root.Attributes().All(a => IsNamespaceOrLocationHint(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
++                Require(root.Attributes().All(a => IsAdmittedInstanceAttribute(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
+                     "Special attribute requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
+                 foreach (var use in selected.AttributeUses)
+                 {
+@@ -332,7 +335,7 @@ internal sealed partial class NativeDecimalSchema
+                     Check(attribute is not null || use.MinOccurs == 0, "Required root attribute is missing.");
+                     if (attribute is not null) attributeStates.Add(AssessScalar(attribute.Value, use));
+                 }
+-                Check(root.Attributes().All(a => IsNamespaceOrLocationHint(a) || selected.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared root attribute.");
++                Check(root.Attributes().All(a => IsAdmittedInstanceAttribute(a) || selected.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared root attribute.");
+             }
+             else InstanceAttributes(root);
+             Check(found, "Unexpected root element.");
+@@ -341,7 +344,7 @@ internal sealed partial class NativeDecimalSchema
+                 Check(!root.HasElements, "Simple-content root cannot contain child elements.");
+                 Require(root.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
+                 var scalarDeclaration = new NativeDeclaration(selected.Root.Name, contentType, 1, 1, selected.Root.NamespaceUri);
+-                var state = AssessScalar(root.Value, scalarDeclaration) with { Declaration = selected.Root, NormalizedStringValue = Collapse(root.Value) };
++                var state = AssessScalar(root.Value, scalarDeclaration) with { Declaration = selected.Root, EffectiveType = rootType, NormalizedStringValue = Collapse(root.Value) };
+                 cancellationToken.ThrowIfCancellationRequested();
+                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [state], attributeStates.ToImmutable()));
+             }
+@@ -356,7 +359,7 @@ internal sealed partial class NativeDecimalSchema
+             var values = new Dictionary<string, List<XdmExactDecimal>>(StringComparer.Ordinal);
+             var strings = new Dictionary<string, List<string>>(StringComparer.Ordinal);
+             var elements = ImmutableArray.CreateBuilder<NativeElementState>();
+-            elements.Add(new NativeElementState(selected!.Root, null));
++            elements.Add(new NativeElementState(selected!.Root, null) { EffectiveType = rootType });
+             var nodes = root.Elements().ToArray();
+             var index = 0;
+             foreach (var declaration in selected!.Children)
+@@ -372,7 +375,7 @@ internal sealed partial class NativeDecimalSchema
+                     InstanceAttributes(leaf);
+                     Check(!leaf.HasElements, "Decimal leaf contains nested elements.");
+                     Require(leaf.Nodes().All(n => n is XText), "Decimal leaf comments or processing instructions are unsupported.");
+-                    var state = AssessScalar(leaf.Value, declaration);
++                    var state = AssessElementScalar(leaf, declaration);
+                     if (state.TypedValue is { } numeric) present.Add(numeric);
+                     if (state.StringValue is { } textValue) textValues.Add(textValue);
+                     elements.Add(state);
+@@ -503,7 +506,7 @@ internal sealed partial class NativeDecimalSchema
+         attribute.Name.LocalName is "schemaLocation" or "noNamespaceSchemaLocation";
+ 
+     private void InstanceAttributes(XElement element) =>
+-        Require(element.Attributes().All(IsNamespaceOrLocationHint), "Instance application attributes and xsi requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
++        Require(element.Attributes().All(IsAdmittedInstanceAttribute), "Instance application attributes and xsi requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
+ 
+     private static string TargetNamespace(XElement schema)
+     {
+@@ -612,8 +615,9 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string?
+ }
+ 
+ // Identity is deliberate: independently compiled equal schemas do not share components.
+-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null)
++internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null)
+ {
++    internal XName? BaseName { get; } = baseName;
+     internal NativeIntegerFacets? IntegerFacets { get; } = integerFacets;
+     internal NativeType? ContentType { get; } = contentType;
+     internal bool IsComplex => HasNoTypedValue || ContentType is not null;
+@@ -639,6 +643,8 @@ internal sealed class NativeDeclaration(string name, NativeType type, int minOcc
+ }
+ internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null)
+ {
++    internal NativeType? EffectiveType { get; init; }
++    internal NativeType GoverningType => EffectiveType ?? Declaration.Type;
+     internal ImmutableArray<int> OwnerElementPath { get; init; } = [];
+     internal int OwnerElementIndex { get; init; }
+     internal bool IsNilled => false;
+diff --git a/src/Bosak.Schema/Assessment/NativeNestedSchema.cs b/src/Bosak.Schema/Assessment/NativeNestedSchema.cs
+index a28bfc8..2f992d9 100644
+--- a/src/Bosak.Schema/Assessment/NativeNestedSchema.cs
++++ b/src/Bosak.Schema/Assessment/NativeNestedSchema.cs
+@@ -16,6 +16,7 @@
+ //                      | Charles Korthout | 0.3   | 20-11-2026     | Adopt nested decimal simple content as original complex scalar-bearing terminals         |
+ //                      | Charles Korthout | 0.4   | 20-11-2026     | Preserve unfetched location hints separately from descendant application attributes      |
+ //                      | Charles Korthout | 0.5   | 20-11-2026     | Share original anonymous simple definitions and the eager combined local type budget      |
++//                      | Charles Korthout | 0.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ using System.Collections.Immutable;
+@@ -148,6 +149,7 @@ internal sealed partial class NativeDecimalSchema
+         first.NamedTypes = simple.Values.Concat(named.Values.Select(p => p.Root.Type)).ToImmutableArray();
+         first.DecimalType = decimalType; first.StringType = stringType; first.BooleanType = booleanType; first.IntegerType = integerType;
+         first.maxStringCharacters = maxStringCharacters;
++        first.PrepareInstanceTypes();
+         return first;
+     }
+ 
+@@ -174,12 +176,13 @@ internal sealed partial class NativeDecimalSchema
+         ImmutableArray<int> ownerPath, CancellationToken cancellationToken, bool isRoot = false)
+     {
+         cancellationToken.ThrowIfCancellationRequested();
++        var effectiveType = ResolveInstanceType(element, declaration.Type);
+         if (!isRoot)
+         {
+             if (plan.AttributeUses.IsEmpty) InstanceAttributes(element);
+             else
+             {
+-                Require(element.Attributes().All(a => IsNamespaceOrLocationHint(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
++                Require(element.Attributes().All(a => IsAdmittedInstanceAttribute(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
+                     "Special attribute requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
+                 foreach (var use in plan.AttributeUses)
+                 {
+@@ -188,7 +191,7 @@ internal sealed partial class NativeDecimalSchema
+                     Check(attribute is not null || use.MinOccurs == 0, "Required descendant attribute is missing.");
+                     if (attribute is not null) attributes.Add(AssessScalar(attribute.Value, use) with { OwnerElementPath = ownerPath, OwnerElementIndex = states.Count });
+                 }
+-                Check(element.Attributes().All(a => IsNamespaceOrLocationHint(a) || plan.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared descendant attribute.");
++                Check(element.Attributes().All(a => IsAdmittedInstanceAttribute(a) || plan.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared descendant attribute.");
+             }
+         }
+         if (plan.Root.Type.ContentType is { } contentType)
+@@ -196,13 +199,13 @@ internal sealed partial class NativeDecimalSchema
+             Check(!element.HasElements, "Simple-content terminal cannot contain child elements.");
+             Require(element.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
+             var atomicDeclaration = new NativeDeclaration(declaration.Name, contentType, 1, 1, declaration.NamespaceUri);
+-            states.Add(AssessScalar(element.Value, atomicDeclaration) with { Declaration = declaration, NormalizedStringValue = Collapse(element.Value) });
++            states.Add(AssessScalar(element.Value, atomicDeclaration) with { Declaration = declaration, EffectiveType = effectiveType, NormalizedStringValue = Collapse(element.Value) });
+             cancellationToken.ThrowIfCancellationRequested();
+             return;
+         }
+         foreach (var text in element.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only container contains non-whitespace text.");
+         Require(element.Nodes().All(n => n is XElement or XText), "Container comments or processing instructions are unsupported.");
+-        states.Add(new NativeElementState(declaration, null));
++        states.Add(new NativeElementState(declaration, null) { EffectiveType = effectiveType });
+         var nodes = element.Elements().ToArray(); var index = 0;
+         foreach (var child in plan.Children)
+         {
+@@ -218,7 +221,7 @@ internal sealed partial class NativeDecimalSchema
+                     InstanceAttributes(node);
+                     Check(!node.HasElements, "Scalar leaf contains nested elements.");
+                     Require(node.Nodes().All(n => n is XText), "Scalar comments or processing instructions are unsupported.");
+-                    states.Add(AssessScalar(node.Value, child));
++                    states.Add(AssessElementScalar(node, child));
+                 }
+                 Check(++count <= child.MaxOccurs, "Maximum occurrence exceeded.");
+             }
+diff --git a/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs b/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs
+index 039ca09..984f31c 100644
+--- a/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs
++++ b/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs
+@@ -26,6 +26,7 @@
+ //                      | Charles Korthout | 1.3   | 20-11-2026     | Publish exact original owner-aware attributes with separate root and descendant projections |
+ //                      | Charles Korthout | 1.4   | 20-11-2026     | Register actual decimal content types for nested original complex terminal facts         |
+ //                      | Charles Korthout | 1.5   | 20-11-2026     | Adopt opt-in original-node data binding; preserve scalar default          |
++//                      | Charles Korthout | 1.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -220,12 +221,12 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
+             var origin = new Origin(this, input, date, timezone);
+             var states = result.Value!.Elements;
+             var facts = states.Select((state, index) => new Facts(input, input.ElementNodes[index], origin,
+-                provider.components[state.Declaration.Type], provider.components[state.Declaration], state,
+-                provider.components[state.Declaration.Type.ContentType ?? state.Declaration.Type])).ToImmutableArray();
++                provider.components[state.GoverningType], provider.components[state.Declaration], state,
++                provider.components[state.GoverningType.ContentType ?? state.GoverningType])).ToImmutableArray();
+             cancellationToken.ThrowIfCancellationRequested();
+             var attributeFacts = result.Value.Attributes.Select(state => new Facts(input, input.ElementAttributeNode(state.OwnerElementIndex, state.OwnerElementPath, states[state.OwnerElementIndex].Declaration.ExpandedName, state.Declaration.ExpandedName), origin,
+-                provider.components[state.Declaration.Type], provider.components[state.Declaration], state,
+-                provider.components[state.Declaration.Type.ContentType ?? state.Declaration.Type])).ToImmutableArray();
++                provider.components[state.GoverningType], provider.components[state.Declaration], state,
++                provider.components[state.GoverningType.ContentType ?? state.GoverningType])).ToImmutableArray();
+             cancellationToken.ThrowIfCancellationRequested();
+             if (!input.Publish(origin, facts.AddRange(attributeFacts)))
+                 return Assessment.Failure(SchemaAssessmentStatus.Unsupported, "BSK-NATIVE-REASSESSMENT", "Original assessment cannot be replaced.", request.Limits);
+@@ -269,11 +270,11 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
+         internal string? NormalizedStringValue { get { Input.Check(); return state.NormalizedStringValue; } }
+         internal ImmutableArray<int> OwnerElementPath { get { Input.Check(); return state.OwnerElementPath; } }
+         internal NativeDeclaration NativeDeclaration { get { Input.Check(); return state.Declaration; } }
+-        internal NativeType NativeType { get { Input.Check(); return state.Declaration.Type; } }
++        internal NativeType NativeType { get { Input.Check(); return state.GoverningType; } }
+         public ISchemaComponentHandle Type { get { Input.Check(); return type; } }
+         public ISchemaComponentHandle Declaration { get { Input.Check(); return declaration; } }
+         public ISchemaAssessmentOrigin Origin => origin;
+-        public bool HasNoTypedValue { get { Input.Check(); return state.Declaration.Type.HasNoTypedValue; } }
++        public bool HasNoTypedValue { get { Input.Check(); return state.GoverningType.HasNoTypedValue; } }
+         public bool IsNilled { get { Input.Check(); return false; } }
+         public SchemaResult<ISchemaTypedValue> ReadTypedValue(CancellationToken cancellationToken)
+         {
+diff --git a/src/Bosak.Schema/Assessment/NativeSimpleRestriction.cs b/src/Bosak.Schema/Assessment/NativeSimpleRestriction.cs
+index 4e3a699..5ee624c 100644
+--- a/src/Bosak.Schema/Assessment/NativeSimpleRestriction.cs
++++ b/src/Bosak.Schema/Assessment/NativeSimpleRestriction.cs
+@@ -13,6 +13,7 @@
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+ //                      | Charles Korthout | 0.2   | 20-11-2026     | Admit direct opt-in integer restrictions with exact original type identity                 |
++//                      | Charles Korthout | 0.3   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -30,13 +31,13 @@ internal sealed partial class NativeDecimalSchema
+         Attributes(restriction, "base");
+         var baseName = ResolveTypeName(restriction, "base");
+         if (baseName == Xs + "decimal")
+-            return new NativeType(name, false, namespaceUri, NativeDecimalFacets.Compile(restriction, limits));
++            return new NativeType(name, false, namespaceUri, NativeDecimalFacets.Compile(restriction, limits), baseName: baseName);
+         if (maxStringCharacters is not null && baseName == Xs + "string")
+             return new NativeType(name, false, namespaceUri, isString: true,
+-                stringFacets: NativeStringFacets.Compile(restriction, maxStringCharacters.Value));
++                stringFacets: NativeStringFacets.Compile(restriction, maxStringCharacters.Value), baseName: baseName);
+         if (maxStringCharacters is not null && baseName == Xs + "integer")
+             return new NativeType(name, false, namespaceUri, isInteger: true,
+-                integerFacets: NativeIntegerFacets.Compile(restriction, limits));
++                integerFacets: NativeIntegerFacets.Compile(restriction, limits), baseName: baseName);
+         throw new NativeProfileException(NativeOutcome.Unsupported, "Only admitted direct scalar restrictions are supported.", NativeDecimalUnsupportedReason.ValueType);
+     }
+ 
+diff --git a/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj b/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
+index 30f37b2..3affd3f 100644
+--- a/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
++++ b/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
+@@ -33,4 +33,5 @@
+   <ItemGroup>
+     <None Include="../TestData/StringAssertions/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/StringAssertions/%(Filename)%(Extension)" />
+   </ItemGroup>
++  <ItemGroup><None Include="../TestData/InstanceTypes/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/InstanceTypes/%(Filename)%(Extension)" /></ItemGroup>
+ </Project>
+diff --git a/tests/Bosak.Schema.PublicConsumer.Tests/NativeLocationHintConsumerTests.cs b/tests/Bosak.Schema.PublicConsumer.Tests/NativeLocationHintConsumerTests.cs
+index 8330592..e2f879d 100644
+--- a/tests/Bosak.Schema.PublicConsumer.Tests/NativeLocationHintConsumerTests.cs
++++ b/tests/Bosak.Schema.PublicConsumer.Tests/NativeLocationHintConsumerTests.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 21-11-2026     | Distinguish absent instance type from other unsupported requests                          |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -102,8 +103,8 @@ public sealed class NativeLocationHintConsumerTests
+         var xml=XElement.Parse(NestedXml);var target=owner==0?xml:xml.Element("box")!;
+         target.SetAttributeValue(XName.Get("noNamespaceSchemaLocation",Xsi),"missing.xsd");target.SetAttributeValue(XName.Get(request,Xsi),"true");
+         using var session=NativeSchemaSession.Create(NestedSchema,Options).Value!;
+-        var result=session.Assess(xml.ToString(),Context);Assert.Equal(NativeSchemaOutcome.Unsupported,result.Outcome);Assert.Null(result.Value);
+-        Assert.Equal(NativeSchemaUnsupportedReason.Attributes,result.Diagnostics[0].UnsupportedReason);
++        var result=session.Assess(xml.ToString(),Context);Assert.Equal(request=="type"?NativeSchemaOutcome.Invalid:NativeSchemaOutcome.Unsupported,result.Outcome);Assert.Null(result.Value);
++        if(request!="type")Assert.Equal(NativeSchemaUnsupportedReason.Attributes,result.Diagnostics[0].UnsupportedReason);else Assert.Equal("BSK-NATIVE-INSTANCE-INVALID",Assert.Single(result.Diagnostics).Code);
+     }
+ 
+     /// <summary>Unqualified and wrong-namespace lookalikes do not acquire special hint treatment.</summary>
+diff --git a/tests/TestData/AnonymousSimpleRestrictions/cases.json b/tests/TestData/AnonymousSimpleRestrictions/cases.json
+index 34afb1c..16b0a82 100644
+--- a/tests/TestData/AnonymousSimpleRestrictions/cases.json
++++ b/tests/TestData/AnonymousSimpleRestrictions/cases.json
+@@ -450,11 +450,11 @@
+   },
+   {
+     "id": "AS-029",
+-    "label": "xsi type remains excluded",
++    "label": "Absent instance type is invalid",
+     "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:decimal\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+     "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\"><v h:type=\"true\">1</v></r>",
+     "expectedCompile": "Valid",
+-    "expectedAssessment": "Unsupported",
++    "expectedAssessment": "Invalid",
+     "values": [],
+     "reason": null,
+     "clauses": [
+diff --git a/tests/TestData/IntegerRestrictions/cases.json b/tests/TestData/IntegerRestrictions/cases.json
+index 8f34272..c732e5a 100644
+--- a/tests/TestData/IntegerRestrictions/cases.json
++++ b/tests/TestData/IntegerRestrictions/cases.json
+@@ -1628,13 +1628,13 @@
+   },
+   {
+     "id": "IR-088",
+-    "label": "xsi remains excluded type",
++    "label": "Absent instance type is invalid",
+     "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+     "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\"><v h:type=\"true\">1</v></r>",
+     "expectedCompile": "Valid",
+-    "expectedAssessment": "Unsupported",
++    "expectedAssessment": "Invalid",
+     "values": [],
+-    "reason": "Attributes",
++    "reason": null,
+     "digits": 256,
+     "attributes": [],
+     "descendantAttributes": [],

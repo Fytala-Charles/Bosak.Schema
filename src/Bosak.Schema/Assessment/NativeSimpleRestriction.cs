@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 20-11-2026     | Admit direct opt-in integer restrictions with exact original type identity                 |
+//                      | Charles Korthout | 0.3   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -30,13 +31,13 @@ internal sealed partial class NativeDecimalSchema
         Attributes(restriction, "base");
         var baseName = ResolveTypeName(restriction, "base");
         if (baseName == Xs + "decimal")
-            return new NativeType(name, false, namespaceUri, NativeDecimalFacets.Compile(restriction, limits));
+            return new NativeType(name, false, namespaceUri, NativeDecimalFacets.Compile(restriction, limits), baseName: baseName);
         if (maxStringCharacters is not null && baseName == Xs + "string")
             return new NativeType(name, false, namespaceUri, isString: true,
-                stringFacets: NativeStringFacets.Compile(restriction, maxStringCharacters.Value));
+                stringFacets: NativeStringFacets.Compile(restriction, maxStringCharacters.Value), baseName: baseName);
         if (maxStringCharacters is not null && baseName == Xs + "integer")
             return new NativeType(name, false, namespaceUri, isInteger: true,
-                integerFacets: NativeIntegerFacets.Compile(restriction, limits));
+                integerFacets: NativeIntegerFacets.Compile(restriction, limits), baseName: baseName);
         throw new NativeProfileException(NativeOutcome.Unsupported, "Only admitted direct scalar restrictions are supported.", NativeDecimalUnsupportedReason.ValueType);
     }
 

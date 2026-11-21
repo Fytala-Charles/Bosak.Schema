@@ -1,0 +1,99 @@
+{
+  "scope": "Production authored admission,21November2026; prior sealed comparisons preserved",
+  "entries": [
+    {
+      "file": "tests/TestData/AnonymousSimpleRestrictions/cases.json",
+      "id": "AS-029",
+      "before": {
+        "id": "AS-029",
+        "label": "xsi type remains excluded",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:decimal\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\"><v h:type=\"true\">1</v></r>",
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "reason": null,
+        "clauses": [
+          "Structures3.3.2-3.3.4",
+          "Structures3.16.2.1-2",
+          "Datatypes4.1-4.3"
+        ]
+      },
+      "after": {
+        "id": "AS-029",
+        "label": "Absent instance type is invalid",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:decimal\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\"><v h:type=\"true\">1</v></r>",
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Invalid",
+        "values": [],
+        "reason": null,
+        "clauses": [
+          "Structures3.3.2-3.3.4",
+          "Structures3.16.2.1-2",
+          "Datatypes4.1-4.3"
+        ]
+      },
+      "reason": "Type QName true names no type in the closed no-namespace schema"
+    },
+    {
+      "file": "tests/TestData/IntegerRestrictions/cases.json",
+      "id": "IR-088",
+      "before": {
+        "id": "IR-088",
+        "label": "xsi remains excluded type",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\"><v h:type=\"true\">1</v></r>",
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "reason": "Attributes",
+        "digits": 256,
+        "attributes": [],
+        "descendantAttributes": [],
+        "clauses": [
+          "Datatypes3.4.13.1-3",
+          "Datatypes4.3.6-4.3.12",
+          "Structures3.16.1-4"
+        ]
+      },
+      "after": {
+        "id": "IR-088",
+        "label": "Absent instance type is invalid",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\"><v h:type=\"true\">1</v></r>",
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Invalid",
+        "values": [],
+        "reason": null,
+        "digits": 256,
+        "attributes": [],
+        "descendantAttributes": [],
+        "clauses": [
+          "Datatypes3.4.13.1-3",
+          "Datatypes4.3.6-4.3.12",
+          "Structures3.16.1-4"
+        ]
+      },
+      "reason": "Type QName true names no type in the closed no-namespace schema"
+    },
+    {
+      "file": "tests/Bosak.Schema.PublicConsumer.Tests/NativeLocationHintConsumerTests.cs",
+      "method": "OtherXsiRequests_RemainUnsupported",
+      "request": "type",
+      "owner": 0,
+      "before": "Unsupported/Attributes",
+      "after": "Invalid",
+      "reason": "Type QName true names no type in the closed no-namespace schema"
+    },
+    {
+      "file": "tests/Bosak.Schema.PublicConsumer.Tests/NativeLocationHintConsumerTests.cs",
+      "method": "OtherXsiRequests_RemainUnsupported",
+      "request": "type",
+      "owner": 1,
+      "before": "Unsupported/Attributes",
+      "after": "Invalid",
+      "reason": "Type QName true names no type in the closed no-namespace schema"
+    }
+  ]
+}

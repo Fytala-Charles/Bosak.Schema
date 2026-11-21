@@ -747,8 +747,9 @@ attributes remain excluded. NativeDecimalSession and published beta.1 are unchan
 The opt-in NativeSchemaSession on the 0.6 development line accepts instance
 `xsi:schemaLocation` and `xsi:noNamespaceSchemaLocation` as unfetched hints.
 The explicitly supplied schema remains authoritative; hints stay in exported XML
-and do not add typed application attribute slots. `xsi:type` and `xsi:nil` remain
-unsupported, and the legacy NativeDecimalSession retains hint refusal. This does
+and do not add typed application attribute slots. `xsi:nil` remains unsupported;
+the bounded `xsi:type` rules below apply only to the mixed facades. The legacy
+NativeDecimalSession retains hint and instance-type refusal. This does
 not change published 0.5.0-beta.1 or claim general schema discovery/full XSD PSVI.
 
 The 0.6 development profile also admits anonymous local element types directly
@@ -815,3 +816,24 @@ its previous grammar. False assertions publish no document or native facts.
 The public XML documentation describes the owned session types; string assertions extend the existing schema profile without new API members.
 The frozen W3C fixtures/expectations are unchanged. No public API, Core source/pin,
 release-controller, tag or published-package change is included.
+
+
+### Bounded instance type selection (0.6 development)
+
+NativeSchemaSession and NativeSchemaNodeDataSession accept `xsi:type` for the same
+existing component or an existing direct restriction of a declared primitive in
+the same string/decimal/integer family. For example, a leaf declared `xs:decimal`
+can select a named decimal restriction; its narrower facets are then enforced.
+The QName uses the instance owner's in-scope namespaces, including its default
+namespace. Its parsed raw value is limited to256UTF-16units before whitespace
+collapse. Export retains the request; reassessment resolves it afresh.
+
+Malformed, unbound, absent or unrelated types are Invalid. Known excluded built-ins
+and valid derivations that change scalar family or simple/complex representation
+remain Unsupported. Siblings and weakening are not substitutions. Selected values
+retain original declaration and assessment ownership, with the selected governing
+type supplying annotations and atomic provenance. The request itself adds no
+application-attribute scalar. `xsi:nil`, imports, complex inheritance, block/final,
+abstract types, lists/unions and additional scalar families remain excluded.
+NativeDecimalSession and published0.5.0-beta.1 are unchanged. This is bounded
+development support; no full XSD1.1 or general PSVI claim is made.

@@ -1,4 +1,4 @@
-Last updated: 2026-11-20
+Last updated: 2026-11-21
 
 ## Beta.1 publication documentation — 18 November 2026
 
@@ -636,3 +636,65 @@ barrier protocol across eight lifecycle classes; assertions/timeouts are unchang
 All25focused lifecycle and1,886full source cases pass with unchanged named outcomes.
 Product source/API and prior package/pilot/signature evidence are unchanged.
 [Original failure and correction](<string-assertions-ci/README.md>).
+
+
+## Next bounded xsi:type contract ? 20 November 2026
+
+PR33 is merged at b1759d22761587b2abe507d12aacf3f5b6b33535; main CI44819529110
+passed 1,886 source cases and supporting controls. The next slice is a proposed
+instance-type contract, not an implementation or new admission. It covers exact
+type identity and current same-family direct restrictions, with explicit QName
+resolution, component derivation and separate original declaration/declared type /
+effective governing type. Cross-family and new complex projections are deferred.
+
+Static review records all 51 built-in names to distinguish absent names from known
+unsupported types, both pinned Core contracts, four original negative pilot cases,
+33 well-formed proposed payloads and 27 scenario gates. These are planned controls,
+not executed product tests or new pilot matches. Current frozen results stay
+10 matches / 11 Unsupported/zero mismatches or harness errors. Next gate is actual
+native feasibility on both Core pins, then separate adoption before source edits.
+[Contract and qualification plan](<xsi-type-contract/README.md>).
+
+
+## Actual native xsi:type feasibility ? 21 November 2026
+
+An isolated copied-source candidate passes 169 controls on each pinned Core version
+(96 type-selection controls plus 73 retained original-node controls). It preserves
+original declaration D/declared T and supplies effective governing G to guarded
+facts, annotations and atomic evidence; selected facets are enforced and failed
+requests publish no facts. Fixed node-data operations still refuse ReadTypedValue;
+separate native typed-identity sessions prove that route without rebinding origins.
+
+The unmodified source comparison has 1,882 passes and four expected xsi:type=true
+Unsupported-to-Invalid differences. With exactly four scratch-only expectation
+changes, all 1,886 stable source cases pass. Production tests/fixtures are unchanged.
+All 18 Core signatures/source/cache/runtime identities verify; public API remains
+54 types / 401 rows. These lanes overlap and are not a new product test count.
+
+Production src/tests/tools/configuration and the sealed original proposal remain
+unchanged. No new pilot/package/publication/commit/push. Original pilot remains
+10 matches / 11 Unsupported / zero mismatches or harness errors. Next: record
+production semantic adoption, implement the measured mapping, then full consumer,
+retained-binary and frozen-pilot qualification. ADR017 review remains separate.
+[Native feasibility and preserved iterations](<xsi-type-contract/FEASIBILITY.md>).
+
+
+## Bounded xsi:type production candidate - 21 November 2026
+
+The two mixed owned facades now admit same-component requests and existing direct
+same-family restrictions using instance-scoped QNames and an immutable compiled
+base graph. Original D/T remain distinct from effective G; selected facets,
+annotations and original atomic provenance agree. Failed requests publish no facts.
+Legacy decimal-only refusal and the54-type/401-row public API remain unchanged.
+
+Qualification:2,024source passes(550implementation/1,474public),1,474package-only
+passes per Core1.81.2/1.81.17,30overlapping current-package native controls and
+retained124/23/33passes. Four authored absent-type expectations are explicitly
+reconciled. The unchanged frozen pilot now measures14matches/7Unsupported/zero
+mismatches or harness errors; positive selected restrictions are tested separately.
+Signed dependencies and published beta.1 baseline verify. These lanes overlap.
+
+Production adoption is recorded; original proposal/feasibility dossiers remain
+historical. ADR017 owner review and Git delivery remain pending. Published beta.1,
+Core pins and release controller are unchanged. No commit/push/publication.
+[Implementation qualification](<xsi-type-contract/implementation/README.md>).

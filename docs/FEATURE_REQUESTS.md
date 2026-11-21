@@ -44,10 +44,11 @@ The published **0.5.0-beta.1** provides owned `NativeDecimalSession` and `Native
 |---|---|---|
 | Apache/public transition | Implemented and GitHub publication verified | Schema-only Apache-2.0; activation-free services; private infrastructure excluded |
 | Packaged0.6consumer guidance | Reconciled after M1; no publication | [Examples and evidence](package-readme06-reconciled/README.md); earlier planning receipts retain original scope |
-| Shared specification coverage | Owner-prioritized; bounded namespaces/types/scalars/attributes/nesting and integer restrictions merged through PR31; owned original-node data implemented locally for review | [REQ-009 programme](REQ-009-SPECIFICATION-COVERAGE.md); shared CoreREQ-142;24areas with explicit evidence limits |
+| Shared specification coverage | Owner-prioritized; bounded components/scalars/attributes/nesting, original-node data and string assertions merged through PR33; bounded xsi:type locally qualified; review pending | [REQ-009 programme](REQ-009-SPECIFICATION-COVERAGE.md); shared CoreREQ-142;24areas with explicit evidence limits |
 | Direct integer restrictions | Merged PR31; main verified | [Exact bounds/digits, named/anonymous and attribute uses](integer-restrictions/README.md); owned scalar route; no publication |
-| Bounded string assertions | Locally reviewed and qualified; owner authorized PR delivery | [String equality, cardinality, namespaces and limits](string-assertions/README.md) |
-| Native original-node atomization | Bounded ADR-016/API owner accepted; qualified locally | [Owned implementation](native-node-data/README.md); fixed operation, existing bounded grammar |
+| Bounded string assertions | Merged PR33; main verified | [String equality, cardinality, namespaces and limits](string-assertions/README.md) |
+| Bounded xsi:type | Bounded xsi:type implemented and locally qualified; review pending | [Implementation/adoption/evidence](xsi-type-contract/implementation/README.md); bounded owner review pending |
+| Native original-node atomization | Merged PR32; bounded ADR-016/API accepted | [Owned implementation](native-node-data/README.md); fixed operation, existing bounded grammar |
 | [REQ-009](ADR-005-xsd11-compiled-model-and-validation.md) staged XSD 1.1 support | In Progress | Compiled descriptors, assertion/facet evaluation, alternative applicability/filtering and selected metadata |
 | [Core 1.81.2 dependency adoption](CORE-1.81.2-ADOPTION.md) | Merged | Four product references and one test provider reference updated; no C# adaptation |
 | Core optional source integration | Refreshed in Core PR #503 | Merged Schema9fd4e6a pinned with58 source/test/fixture/legal inputs;260 implementation/legacy plus nine public current-Core cases. Original135-case receipt remains historical. |
@@ -83,7 +84,7 @@ The transition does not implement the proposed core session API, change frozen W
 
 The 3 November [O1/O2 versioned responses](core-disposition-responses/2026-11-03-v2/README.md) are scoped historical design acceptance, not proof of current native adapter/runtime delivery. Their original source/proposal hashes and the unsigned [confirmation drafts](core-disposition-inbox/2026-11-03/README.md) remain unchanged. The published Core 1.81.2 release and its budget deferral do not complete Schema's native provider/session or performance requirements. See [history](DEVELOPMENT_HISTORY.md).
 
-*Last updated: 2026-11-20*
+*Last updated: 2026-11-21*
 
 
 ## M2A scope proposal - 19 November 2026
@@ -482,3 +483,65 @@ barrier protocol across eight lifecycle classes; assertions/timeouts are unchang
 All25focused lifecycle and1,886full source cases pass with unchanged named outcomes.
 Product source/API and prior package/pilot/signature evidence are unchanged.
 [Original failure and correction](<string-assertions-ci/README.md>).
+
+
+## Next bounded xsi:type contract ? 20 November 2026
+
+PR33 is merged at b1759d22761587b2abe507d12aacf3f5b6b33535; main CI44819529110
+passed 1,886 source cases and supporting controls. The next slice is a proposed
+instance-type contract, not an implementation or new admission. It covers exact
+type identity and current same-family direct restrictions, with explicit QName
+resolution, component derivation and separate original declaration/declared type /
+effective governing type. Cross-family and new complex projections are deferred.
+
+Static review records all 51 built-in names to distinguish absent names from known
+unsupported types, both pinned Core contracts, four original negative pilot cases,
+33 well-formed proposed payloads and 27 scenario gates. These are planned controls,
+not executed product tests or new pilot matches. Current frozen results stay
+10 matches / 11 Unsupported/zero mismatches or harness errors. Next gate is actual
+native feasibility on both Core pins, then separate adoption before source edits.
+[Contract and qualification plan](<xsi-type-contract/README.md>).
+
+
+## Actual native xsi:type feasibility ? 21 November 2026
+
+An isolated copied-source candidate passes 169 controls on each pinned Core version
+(96 type-selection controls plus 73 retained original-node controls). It preserves
+original declaration D/declared T and supplies effective governing G to guarded
+facts, annotations and atomic evidence; selected facets are enforced and failed
+requests publish no facts. Fixed node-data operations still refuse ReadTypedValue;
+separate native typed-identity sessions prove that route without rebinding origins.
+
+The unmodified source comparison has 1,882 passes and four expected xsi:type=true
+Unsupported-to-Invalid differences. With exactly four scratch-only expectation
+changes, all 1,886 stable source cases pass. Production tests/fixtures are unchanged.
+All 18 Core signatures/source/cache/runtime identities verify; public API remains
+54 types / 401 rows. These lanes overlap and are not a new product test count.
+
+Production src/tests/tools/configuration and the sealed original proposal remain
+unchanged. No new pilot/package/publication/commit/push. Original pilot remains
+10 matches / 11 Unsupported / zero mismatches or harness errors. Next: record
+production semantic adoption, implement the measured mapping, then full consumer,
+retained-binary and frozen-pilot qualification. ADR017 review remains separate.
+[Native feasibility and preserved iterations](<xsi-type-contract/FEASIBILITY.md>).
+
+
+## Bounded xsi:type production candidate - 21 November 2026
+
+The two mixed owned facades now admit same-component requests and existing direct
+same-family restrictions using instance-scoped QNames and an immutable compiled
+base graph. Original D/T remain distinct from effective G; selected facets,
+annotations and original atomic provenance agree. Failed requests publish no facts.
+Legacy decimal-only refusal and the54-type/401-row public API remain unchanged.
+
+Qualification:2,024source passes(550implementation/1,474public),1,474package-only
+passes per Core1.81.2/1.81.17,30overlapping current-package native controls and
+retained124/23/33passes. Four authored absent-type expectations are explicitly
+reconciled. The unchanged frozen pilot now measures14matches/7Unsupported/zero
+mismatches or harness errors; positive selected restrictions are tested separately.
+Signed dependencies and published beta.1 baseline verify. These lanes overlap.
+
+Production adoption is recorded; original proposal/feasibility dossiers remain
+historical. ADR017 owner review and Git delivery remain pending. Published beta.1,
+Core pins and release controller are unchanged. No commit/push/publication.
+[Implementation qualification](<xsi-type-contract/implementation/README.md>).

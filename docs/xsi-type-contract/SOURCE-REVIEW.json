@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-20",
+  "productBase": "b1759d22761587b2abe507d12aacf3f5b6b33535",
+  "scope": "Static source review only; production/tests/tools unchanged",
+  "files": {
+    "src/Bosak.Schema/Assessment/NativeDecimalSchema.cs": {
+      "gitBlob": "dd2efafbaf188b21c30b075bcb649e16a7404840",
+      "workingTreeSha256": "87ead2f814084c75bebdb20ce5f098e522549d69b7a9162542dd8a24a97a80b1"
+    },
+    "src/Bosak.Schema/Assessment/NativeSimpleRestriction.cs": {
+      "gitBlob": "4e3a6997915cbfaaf217697caa0e333e205839b1",
+      "workingTreeSha256": "3df9750307015d1120bc8b67796d4f995efbcf316a2c95257bb4dfdf1c3476d0"
+    },
+    "src/Bosak.Schema/Assessment/NativeNestedSchema.cs": {
+      "gitBlob": "a28bfc82421bc3c0e204a13683d77c90dacb32a7",
+      "workingTreeSha256": "d4ca60707de10667a5a022e76ef60026d14296c2faf4e87a93d20820e7062387"
+    },
+    "src/Bosak.Schema/Assessment/NativeSchemaProvider.cs": {
+      "gitBlob": "039ca0980804f4bc041c9e47ae4b06c1040f0a97",
+      "workingTreeSha256": "f7b9ef4a5abf8c92e990c83c14f4d1ef04737acff66da6767fa380e150724807"
+    },
+    "src/Bosak.Schema/Assessment/NativeSessionNode.cs": {
+      "gitBlob": "f72fa1cffdd82981de082a39e96c78843df8f7a6",
+      "workingTreeSha256": "77fdf47f4da2fb6cd294f75d8a657093ad711da184a151cc5f7c054976439a76"
+    },
+    "Directory.Build.props": {
+      "gitBlob": "65670022ecb19fcd604774c6b16d7c68f790aa7f",
+      "workingTreeSha256": "95cff08600bae5f74fbcace694ea0c26f9007a2924ac397291c814e5f16c8235"
+    },
+    "global.json": {
+      "gitBlob": "512142d2bea1add9d1cf54884a7fde22666bad51",
+      "workingTreeSha256": "ec7d038183957f0f2dd09078668ab7866560a585b3566836e5ecd105796260f4"
+    }
+  },
+  "findings": [
+    "NativeType has no explicit derivation/base reference",
+    "NativeElementState stores original Declaration but no separate effective governing type",
+    "Provider facts and annotations currently derive governing type directly from Declaration.Type",
+    "Four invalid pilot cases do not establish positive override support",
+    "Complete built-in-name inventory must distinguish unsupported built-ins from absent names",
+    "Decimal-to-integer override changes typed-value family and assertion projection; defer as Unsupported in first slice"
+  ]
+}

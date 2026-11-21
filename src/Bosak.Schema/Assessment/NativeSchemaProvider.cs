@@ -26,6 +26,7 @@
 //                      | Charles Korthout | 1.3   | 20-11-2026     | Publish exact original owner-aware attributes with separate root and descendant projections |
 //                      | Charles Korthout | 1.4   | 20-11-2026     | Register actual decimal content types for nested original complex terminal facts         |
 //                      | Charles Korthout | 1.5   | 20-11-2026     | Adopt opt-in original-node data binding; preserve scalar default          |
+//                      | Charles Korthout | 1.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -220,12 +221,12 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             var origin = new Origin(this, input, date, timezone);
             var states = result.Value!.Elements;
             var facts = states.Select((state, index) => new Facts(input, input.ElementNodes[index], origin,
-                provider.components[state.Declaration.Type], provider.components[state.Declaration], state,
-                provider.components[state.Declaration.Type.ContentType ?? state.Declaration.Type])).ToImmutableArray();
+                provider.components[state.GoverningType], provider.components[state.Declaration], state,
+                provider.components[state.GoverningType.ContentType ?? state.GoverningType])).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
             var attributeFacts = result.Value.Attributes.Select(state => new Facts(input, input.ElementAttributeNode(state.OwnerElementIndex, state.OwnerElementPath, states[state.OwnerElementIndex].Declaration.ExpandedName, state.Declaration.ExpandedName), origin,
-                provider.components[state.Declaration.Type], provider.components[state.Declaration], state,
-                provider.components[state.Declaration.Type.ContentType ?? state.Declaration.Type])).ToImmutableArray();
+                provider.components[state.GoverningType], provider.components[state.Declaration], state,
+                provider.components[state.GoverningType.ContentType ?? state.GoverningType])).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
             if (!input.Publish(origin, facts.AddRange(attributeFacts)))
                 return Assessment.Failure(SchemaAssessmentStatus.Unsupported, "BSK-NATIVE-REASSESSMENT", "Original assessment cannot be replaced.", request.Limits);
@@ -269,11 +270,11 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         internal string? NormalizedStringValue { get { Input.Check(); return state.NormalizedStringValue; } }
         internal ImmutableArray<int> OwnerElementPath { get { Input.Check(); return state.OwnerElementPath; } }
         internal NativeDeclaration NativeDeclaration { get { Input.Check(); return state.Declaration; } }
-        internal NativeType NativeType { get { Input.Check(); return state.Declaration.Type; } }
+        internal NativeType NativeType { get { Input.Check(); return state.GoverningType; } }
         public ISchemaComponentHandle Type { get { Input.Check(); return type; } }
         public ISchemaComponentHandle Declaration { get { Input.Check(); return declaration; } }
         public ISchemaAssessmentOrigin Origin => origin;
-        public bool HasNoTypedValue { get { Input.Check(); return state.Declaration.Type.HasNoTypedValue; } }
+        public bool HasNoTypedValue { get { Input.Check(); return state.GoverningType.HasNoTypedValue; } }
         public bool IsNilled { get { Input.Check(); return false; } }
         public SchemaResult<ISchemaTypedValue> ReadTypedValue(CancellationToken cancellationToken)
         {
