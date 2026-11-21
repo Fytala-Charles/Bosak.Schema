@@ -1663,7 +1663,7 @@
   },
   {
     "id": "SC-067",
-    "description": "No-use attributeFormDefault keeps previous refusal",
+    "description": "No-use form default is legal; undeclared currency remains unsupported",
     "sections": [
       "Structures3.4.2.2/3.4.4",
       "Datatypes3.3.3/4.3.6",
@@ -1671,7 +1671,7 @@
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' attributeFormDefault='qualified'><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
     "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
-    "expectedCompile": "Unsupported",
+    "expectedCompile": "Valid",
     "expectedAssessment": "Unsupported",
     "expectedRoot": "12.5",
     "maxNativeCoefficientDigits": 256,
@@ -1685,6 +1685,6 @@
         "value": "EUR"
       }
     ],
-    "unsupportedReason": "Namespace"
+    "unsupportedReason": "Attributes"
   }
 ]

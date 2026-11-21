@@ -635,3 +635,44 @@ Production adoption is recorded; original proposal/feasibility dossiers remain
 historical. ADR017 owner review and Git delivery remain pending. Published beta.1,
 Core pins and release controller are unchanged. No commit/push/publication.
 [Implementation qualification](<docs/xsi-type-contract/implementation/README.md>).
+
+
+## PR34 merged and next specification gaps - 21 November 2026
+
+PR34 is merged as ee32ac81c7a704c95647b121d1cde23cfa32dcbd; its tree equals the
+reviewed9d48071 tree. Main CI44871576728 passes2,024source tests(550/1,474),
+release controls, docs and workload integrity. Existing bounded xsi:type scope,
+API and publication boundaries remain unchanged. No new package/pilot measurement.
+
+The seven frozen Unsupported cases span four schemas. The next proposed slice
+is schema namespace/form declarations: review relative namespace-name support
+and admit legal attributeFormDefault without requiring application attributes.
+One such gate currently masks the assert006 family's independent integer content,
+complex restriction and inherited assertion gaps. Decimal complex simple-content
+restriction follows; context-item/nested assertions remain separate. Analyse
+original inputs and record exact adoption before implementation; no forecast pass
+count or full-conformance percentage. This step changes documentation only.
+[Merge receipt, ranked gaps and next contract](<docs/post-xsi-type/README.md>).
+
+
+## Namespace/form development candidate - 21 November 2026
+
+The mixed owned facades now accept bounded relative target namespace references
+as exact strings, with no URI resolution/normalization/acquisition. Legal schema
+attributeFormDefault no longer requires application attribute uses. Explicit
+assertion-default URI literals and legacy decimal-only limits/diagnostics remain
+unchanged. Actual adoption follows31native controls per signed Core pin.
+
+Final qualification:2,143source passes(581implementation/1,562public),1,562public
+package-only passes per Core1.81.2/1.81.17,31overlapping current-package native
+controls and retained124/23/33. Two authored expectation admissions are recorded;
+the prior2,024stable source IDs remain. API54types/401rows has zero delta, and
+18Core signatures/source/runtime identities plus signed beta.1 verify. Frozen
+pilot16matches/5Unsupported/zero mismatch/harness errors; assert006 remains
+Unsupported at its next assertion gate. All lanes overlap; no full-XSD percentage.
+
+One production source file changes. Local unsigned alpha.0.25 is qualification
+only; no commit/push, Core pin, tag/controller or publication change. Next after
+review/delivery: bounded decimal complex simple-content restriction. Original
+post-xsi-type proposal remains historical; corrected schema representation section
+is Structures3.17.2. [Contract, adoption and receipts](<docs/namespace-form/README.md>).

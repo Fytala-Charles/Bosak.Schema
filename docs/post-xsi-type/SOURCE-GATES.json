@@ -1,0 +1,25 @@
+{
+  "source": "ee32ac81c7a704c95647b121d1cde23cfa32dcbd",
+  "files": {
+    "src/Bosak.Schema/Assessment/NativeDecimalSchema.cs": "18a750dc82d70148ca810f178541f2bc931183a763068bc0861932b00d275e93",
+    "src/Bosak.Schema/Assessment/NativeNestedSchema.cs": "d33e03d687c8285447cf74fe819d2db2f6c013f7421f9b146e986ae9894b4f70"
+  },
+  "gates": [
+    {
+      "method": "NamespaceUri",
+      "effect": "Requires absolute namespace URI"
+    },
+    {
+      "method": "Compile/root attributeProfile",
+      "effect": "attributeFormDefault permitted only with detected application attributes"
+    },
+    {
+      "method": "CompileSimpleContent",
+      "effect": "extension only; decimal or admitted named-decimal bases"
+    },
+    {
+      "method": "CompileNestedSchema",
+      "effect": "refuses assertions in nested schemas"
+    }
+  ]
+}

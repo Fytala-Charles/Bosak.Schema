@@ -30,6 +30,7 @@
 //                      | Charles Korthout | 1.7   | 20-11-2026     | Enforce exact integer facets on original element and attribute scalar facts                 |
 //                      | Charles Korthout | 1.8   | 20-11-2026     | Assess bounded string assertions from original immediate scalar child values             |
 //                      | Charles Korthout | 1.9   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+//                      | Charles Korthout | 1.10  | 21-11-2026     | Adopt mixed relative target namespaces and form defaults independently of attribute uses     |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -85,13 +86,12 @@ internal sealed partial class NativeDecimalSchema
             var document = Parse(schema, 32768, cancellationToken);
             var root = document.Root!;
             Require(root.Name == Xs + "schema", "Schema root or namespace is unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
-            var attributeProfile = maxStringCharacters is not null && root.Descendants(Xs + "complexType")
-                .Any(c => c.Elements(Xs + "attribute").Any() || c.Elements(Xs + "simpleContent").Elements(Xs + "extension").Elements(Xs + "attribute").Any());
-            if (attributeProfile) Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault", "attributeFormDefault");
+            var mixedProfile = maxStringCharacters is not null;
+            if (mixedProfile) Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault", "attributeFormDefault");
             else Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault");
-            var attributeForm = attributeProfile ? Form(root, "attributeFormDefault", "unqualified") : "unqualified";
+            var attributeForm = mixedProfile ? Form(root, "attributeFormDefault", "unqualified") : "unqualified";
             Require(root.Attribute("version") is null || (string?)root.Attribute("version") == "1.1", "Only schema version 1.1 is admitted.");
-            var targetNamespace = TargetNamespace(root);
+            var targetNamespace = TargetNamespace(root, mixedProfile);
             var defaultForm = Form(root, "elementFormDefault", "unqualified");
             var assertionNamespace = AssertionNamespace(root, targetNamespace, "");
             var globals = Elements(root);
@@ -508,7 +508,7 @@ internal sealed partial class NativeDecimalSchema
     private void InstanceAttributes(XElement element) =>
         Require(element.Attributes().All(IsAdmittedInstanceAttribute), "Instance application attributes and xsi requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
 
-    private static string TargetNamespace(XElement schema)
+    private static string TargetNamespace(XElement schema, bool allowRelative)
     {
         var attribute = schema.Attribute("targetNamespace");
         if (attribute is null) return "";
@@ -516,13 +516,14 @@ internal sealed partial class NativeDecimalSchema
         Require(value.Length != 0 && value is not "http://www.w3.org/2001/XMLSchema" and
             not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace" and
             not "http://www.w3.org/2000/xmlns/", "Target namespace is outside the admitted profile.", NativeDecimalUnsupportedReason.Namespace);
-        return NamespaceUri(value);
+        return NamespaceUri(value, allowRelative);
     }
 
-    private static string NamespaceUri(string value)
+    private static string NamespaceUri(string value, bool allowRelative = false)
     {
-        Require(!value.Any(char.IsWhiteSpace) && Uri.TryCreate(value, UriKind.Absolute, out _),
-            "Only absolute namespace URIs without whitespace are admitted.", NativeDecimalUnsupportedReason.Namespace);
+        Require(!value.Any(char.IsWhiteSpace) && Uri.TryCreate(value, allowRelative ? UriKind.RelativeOrAbsolute : UriKind.Absolute, out _),
+            allowRelative ? "Namespace reference is outside the admitted lexical profile." :
+                "Only absolute namespace URIs without whitespace are admitted.", NativeDecimalUnsupportedReason.Namespace);
         return value; // Compare supplied strings, not Uri normalization or resource identities.
     }
 

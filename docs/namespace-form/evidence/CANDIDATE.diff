@@ -1,0 +1,117 @@
+diff --git a/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs b/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
+index 87799da..a0b18c2 100644
+--- a/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
++++ b/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
+@@ -30,6 +30,7 @@
+ //                      | Charles Korthout | 1.7   | 20-11-2026     | Enforce exact integer facets on original element and attribute scalar facts                 |
+ //                      | Charles Korthout | 1.8   | 20-11-2026     | Assess bounded string assertions from original immediate scalar child values             |
+ //                      | Charles Korthout | 1.9   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
++//                      | Charles Korthout | 1.10  | 21-11-2026     | Adopt mixed relative target namespaces and form defaults independently of attribute uses     |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -85,13 +86,12 @@ internal sealed partial class NativeDecimalSchema
+             var document = Parse(schema, 32768, cancellationToken);
+             var root = document.Root!;
+             Require(root.Name == Xs + "schema", "Schema root or namespace is unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
+-            var attributeProfile = maxStringCharacters is not null && root.Descendants(Xs + "complexType")
+-                .Any(c => c.Elements(Xs + "attribute").Any() || c.Elements(Xs + "simpleContent").Elements(Xs + "extension").Elements(Xs + "attribute").Any());
+-            if (attributeProfile) Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault", "attributeFormDefault");
++            var mixedProfile = maxStringCharacters is not null;
++            if (mixedProfile) Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault", "attributeFormDefault");
+             else Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault");
+-            var attributeForm = attributeProfile ? Form(root, "attributeFormDefault", "unqualified") : "unqualified";
++            var attributeForm = mixedProfile ? Form(root, "attributeFormDefault", "unqualified") : "unqualified";
+             Require(root.Attribute("version") is null || (string?)root.Attribute("version") == "1.1", "Only schema version 1.1 is admitted.");
+-            var targetNamespace = TargetNamespace(root);
++            var targetNamespace = TargetNamespace(root, mixedProfile);
+             var defaultForm = Form(root, "elementFormDefault", "unqualified");
+             var assertionNamespace = AssertionNamespace(root, targetNamespace, "");
+             var globals = Elements(root);
+@@ -508,7 +508,7 @@ internal sealed partial class NativeDecimalSchema
+     private void InstanceAttributes(XElement element) =>
+         Require(element.Attributes().All(IsAdmittedInstanceAttribute), "Instance application attributes and xsi requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
+ 
+-    private static string TargetNamespace(XElement schema)
++    private static string TargetNamespace(XElement schema, bool allowRelative)
+     {
+         var attribute = schema.Attribute("targetNamespace");
+         if (attribute is null) return "";
+@@ -516,13 +516,14 @@ internal sealed partial class NativeDecimalSchema
+         Require(value.Length != 0 && value is not "http://www.w3.org/2001/XMLSchema" and
+             not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace" and
+             not "http://www.w3.org/2000/xmlns/", "Target namespace is outside the admitted profile.", NativeDecimalUnsupportedReason.Namespace);
+-        return NamespaceUri(value);
++        return NamespaceUri(value, allowRelative);
+     }
+ 
+-    private static string NamespaceUri(string value)
++    private static string NamespaceUri(string value, bool allowRelative = false)
+     {
+-        Require(!value.Any(char.IsWhiteSpace) && Uri.TryCreate(value, UriKind.Absolute, out _),
+-            "Only absolute namespace URIs without whitespace are admitted.", NativeDecimalUnsupportedReason.Namespace);
++        Require(!value.Any(char.IsWhiteSpace) && Uri.TryCreate(value, allowRelative ? UriKind.RelativeOrAbsolute : UriKind.Absolute, out _),
++            allowRelative ? "Namespace reference is outside the admitted lexical profile." :
++                "Only absolute namespace URIs without whitespace are admitted.", NativeDecimalUnsupportedReason.Namespace);
+         return value; // Compare supplied strings, not Uri normalization or resource identities.
+     }
+ 
+diff --git a/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj b/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
+index 3affd3f..4339416 100644
+--- a/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
++++ b/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
+@@ -34,4 +34,5 @@
+     <None Include="../TestData/StringAssertions/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/StringAssertions/%(Filename)%(Extension)" />
+   </ItemGroup>
+   <ItemGroup><None Include="../TestData/InstanceTypes/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/InstanceTypes/%(Filename)%(Extension)" /></ItemGroup>
++  <ItemGroup><None Include="../TestData/NamespaceForm/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NamespaceForm/%(Filename)%(Extension)" /></ItemGroup>
+ </Project>
+diff --git a/tests/TestData/NestedAttributes/cases.json b/tests/TestData/NestedAttributes/cases.json
+index a40837b..a4e611c 100644
+--- a/tests/TestData/NestedAttributes/cases.json
++++ b/tests/TestData/NestedAttributes/cases.json
+@@ -2389,11 +2389,11 @@
+   },
+   {
+     "id": "NA-050",
+-    "label": "attribute-free schema does not admit form default",
++    "label": "No-use form default is legal; required child still missing",
+     "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" attributeFormDefault=\"qualified\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\" ><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+     "instance": "<r/>",
+-    "expectedCompile": "Unsupported",
+-    "expectedAssessment": "Valid",
++    "expectedCompile": "Valid",
++    "expectedAssessment": "Invalid",
+     "scalars": [
+       "ABC-0001",
+       "2",
+diff --git a/tests/TestData/SimpleContent/cases.json b/tests/TestData/SimpleContent/cases.json
+index 8ea43ba..d92ccde 100644
+--- a/tests/TestData/SimpleContent/cases.json
++++ b/tests/TestData/SimpleContent/cases.json
+@@ -1663,7 +1663,7 @@
+   },
+   {
+     "id": "SC-067",
+-    "description": "No-use attributeFormDefault keeps previous refusal",
++    "description": "No-use form default is legal; undeclared currency remains unsupported",
+     "sections": [
+       "Structures3.4.2.2/3.4.4",
+       "Datatypes3.3.3/4.3.6",
+@@ -1671,7 +1671,7 @@
+     ],
+     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' attributeFormDefault='qualified'><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+     "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+-    "expectedCompile": "Unsupported",
++    "expectedCompile": "Valid",
+     "expectedAssessment": "Unsupported",
+     "expectedRoot": "12.5",
+     "maxNativeCoefficientDigits": 256,
+@@ -1685,6 +1685,6 @@
+         "value": "EUR"
+       }
+     ],
+-    "unsupportedReason": "Namespace"
++    "unsupportedReason": "Attributes"
+   }
+ ]

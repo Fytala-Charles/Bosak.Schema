@@ -1,0 +1,494 @@
+build-test-hygiene	Set up job	﻿2026-11-21T05:35:20.6527751Z Current runner version: '2.338.2'
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6588195Z ##[group]Runner Image Provisioner
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6589097Z Hosted Compute Agent
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6589666Z Version: 20261111.635
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6590260Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6591033Z Build Date: 2026-11-11T01:49:01Z
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6591699Z Worker ID: {1d54890f-0934-41ef-8254-75ebc2302322}
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6592510Z Region: northcentralus
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6593086Z Cloud: Azure
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6593613Z ##[endgroup]
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6594947Z ##[group]Operating System
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6595641Z Microsoft Windows Server 2025
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6596232Z 10.0.26100
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6596753Z Datacenter
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6597679Z ##[endgroup]
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6598475Z ##[group]Runner Image
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6599258Z Image: windows-2025-vs2026
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6600226Z Version: 20261116.315.1
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6601774Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261116.315/images/windows/Windows2025-VS2026-Readme.md
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6604953Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261116.315
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6606320Z ##[endgroup]
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6607847Z ##[group]GITHUB_TOKEN Permissions
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6610449Z Contents: read
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6611268Z Metadata: read
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6611953Z ##[endgroup]
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6614627Z Secret source: Actions
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6615902Z Cache mode: write
+build-test-hygiene	Set up job	2026-11-21T05:35:20.6616784Z Prepare workflow directory
+build-test-hygiene	Set up job	2026-11-21T05:35:20.7150852Z Prepare all required actions
+build-test-hygiene	Set up job	2026-11-21T05:35:20.7222173Z Getting action download info
+build-test-hygiene	Set up job	2026-11-21T05:35:20.9306333Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+build-test-hygiene	Set up job	2026-11-21T05:35:21.0519318Z Download action repository 'actions/setup-dotnet@v4' (SHA:67a3573c9a986a3f9c594539f4ab511d57bb3ce9)
+build-test-hygiene	Set up job	2026-11-21T05:35:21.3726741Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+build-test-hygiene	Set up job	2026-11-21T05:35:21.6345761Z Complete job name: build-test-hygiene
+build-test-hygiene	Run actions/checkout@v4	﻿2026-11-21T05:35:21.8314068Z ##[group]Run actions/checkout@v4
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8315888Z with:
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8316463Z   fetch-depth: 0
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8317051Z   repository: Fytala-Charles/Bosak.Schema
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8322234Z   token: ***
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8322823Z   ssh-strict: true
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8323451Z   ssh-user: git
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8323998Z   persist-credentials: true
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8324582Z   clean: true
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8325165Z   sparse-checkout-cone-mode: true
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8325803Z   fetch-tags: false
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8326355Z   show-progress: true
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8326928Z   lfs: false
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8327433Z   submodules: false
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8328047Z   set-safe-directory: true
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8328683Z   allow-unsafe-pr-checkout: false
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.8329708Z ##[endgroup]
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.9782530Z Syncing repository: Fytala-Charles/Bosak.Schema
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.9784800Z ##[group]Getting Git version info
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:21.9785626Z Working directory is 'D:\a\Bosak.Schema\Bosak.Schema'
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.0542377Z [command]"C:\Program Files\Git\bin\git.exe" version
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.4033216Z git version 2.56.1.windows.1
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.4091036Z ##[endgroup]
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.4112318Z Temporarily overriding HOME='D:\a\_temp\0a4e7c5e-5f60-4d32-9760-4b3153640521' before making global git config changes
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.4115383Z Adding repository directory to the temporary git global config as a safe directory
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.4123760Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\Bosak.Schema\Bosak.Schema
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.4844491Z Deleting the contents of 'D:\a\Bosak.Schema\Bosak.Schema'
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.4850679Z ##[group]Initializing the repository
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.4859846Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\Bosak.Schema\Bosak.Schema
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.5765990Z Initialized empty Git repository in D:/a/Bosak.Schema/Bosak.Schema/.git/
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.5822846Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/Fytala-Charles/Bosak.Schema
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.6512818Z ##[endgroup]
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.6515073Z ##[group]Disabling automatic garbage collection
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.6523371Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.6977628Z ##[endgroup]
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.6981490Z ##[group]Setting up auth
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.6989328Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:22.7404900Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:24.2569192Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:24.2966193Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:24.8591590Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:24.8981725Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:25.4693339Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:25.5095789Z ##[endgroup]
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:25.5096696Z ##[group]Fetching the repository
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:25.5108262Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5395787Z From https://github.com/Fytala-Charles/Bosak.Schema
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5398636Z  * [new branch]      ci/schema-preparation-diagnostics -> origin/ci/schema-preparation-diagnostics
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5400445Z  * [new branch]      ci/schema-trusted-publishing -> origin/ci/schema-trusted-publishing
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5401183Z  * [new branch]      docs/bounded-nested-content -> origin/docs/bounded-nested-content
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5401889Z  * [new branch]      docs/m2a-named-complex-type-scope -> origin/docs/m2a-named-complex-type-scope
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5402677Z  * [new branch]      docs/m2b-decimal-restriction-scope -> origin/docs/m2b-decimal-restriction-scope
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5403402Z  * [new branch]      docs/m2c-builtin-datatype-scope -> origin/docs/m2c-builtin-datatype-scope
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5404206Z  * [new branch]      docs/native-attribute-contract -> origin/docs/native-attribute-contract
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5404935Z  * [new branch]      docs/nested-container-attributes -> origin/docs/nested-container-attributes
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5405708Z  * [new branch]      docs/nested-decimal-simple-content -> origin/docs/nested-decimal-simple-content
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5406416Z  * [new branch]      docs/schema-beta-assessment -> origin/docs/schema-beta-assessment
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5408390Z  * [new branch]      docs/schema-beta1-publication -> origin/docs/schema-beta1-publication
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5409617Z  * [new branch]      docs/schema-specification-coverage -> origin/docs/schema-specification-coverage
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5410756Z  * [new branch]      docs/synchronize-core1812-status-20261109 -> origin/docs/synchronize-core1812-status-20261109
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5412008Z  * [new branch]      feature/anonymous-simple-restrictions -> origin/feature/anonymous-simple-restrictions
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5414233Z  * [new branch]      feature/bounded-document-assessment -> origin/feature/bounded-document-assessment
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5415244Z  * [new branch]      feature/core-1.81.2-adoption -> origin/feature/core-1.81.2-adoption
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5416264Z  * [new branch]      feature/native-boolean-scalars -> origin/feature/native-boolean-scalars
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5417319Z  * [new branch]      feature/native-decimal-simple-content -> origin/feature/native-decimal-simple-content
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5418367Z  * [new branch]      feature/native-integer-scalars -> origin/feature/native-integer-scalars
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5419387Z  * [new branch]      feature/native-string-assertions -> origin/feature/native-string-assertions
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5421092Z  * [new branch]      feature/native-string-restrictions -> origin/feature/native-string-restrictions
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5422343Z  * [new branch]      feature/public-native-decimal-session -> origin/feature/public-native-decimal-session
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5423396Z  * [new branch]      fix/schema-compile-diagnostics -> origin/fix/schema-compile-diagnostics
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5424320Z  * [new branch]      fix/schema-descriptor-snapshots -> origin/fix/schema-descriptor-snapshots
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5425300Z  * [new branch]      fix/schema-package-metadata -> origin/fix/schema-package-metadata
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5426065Z  * [new branch]      main          -> origin/main
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5426809Z  * [new branch]      planning/bounded-xsi-type -> origin/planning/bounded-xsi-type
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5428275Z  * [new branch]      planning/native-typed-node-contract -> origin/planning/native-typed-node-contract
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5429561Z  * [new branch]      planning/schema-specification-next -> origin/planning/schema-specification-next
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5430697Z  * [new branch]      qualification/native-xsd-conformance-pilot -> origin/qualification/native-xsd-conformance-pilot
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5431754Z  * [new branch]      qualification/schema-beta-workloads -> origin/qualification/schema-beta-workloads
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5432757Z  * [new branch]      release/schema-0.5-review -> origin/release/schema-0.5-review
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5434739Z  * [new branch]      release/schema-beta1-preparation -> origin/release/schema-beta1-preparation
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5435798Z  * [new branch]      review/schema-06-prerelease-plan -> origin/review/schema-06-prerelease-plan
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5436735Z  * [new branch]      review/schema-beta-contract -> origin/review/schema-beta-contract
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5437688Z  * [new branch]      review/schema-beta2-gap-assessment -> origin/review/schema-beta2-gap-assessment
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5438523Z  * [new tag]         v0.5.0-beta.1 -> v0.5.0-beta.1
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5464111Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/main
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5903728Z   origin/main
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.5955123Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/main
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.6356057Z ee32ac81c7a704c95647b121d1cde23cfa32dcbd
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.6394761Z ##[endgroup]
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.6395412Z ##[group]Determining the checkout info
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.6396527Z ##[endgroup]
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.6405388Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.6986664Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.7371646Z ##[group]Checking out the ref
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:30.7381554Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:31.5701885Z Switched to a new branch 'main'
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:31.5712611Z branch 'main' set up to track 'origin/main'.
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:31.5812165Z ##[endgroup]
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:31.6234113Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+build-test-hygiene	Run actions/checkout@v4	2026-11-21T05:35:31.6583212Z ee32ac81c7a704c95647b121d1cde23cfa32dcbd
+build-test-hygiene	Run actions/setup-dotnet@v4	﻿2026-11-21T05:35:31.7073284Z ##[group]Run actions/setup-dotnet@v4
+build-test-hygiene	Run actions/setup-dotnet@v4	2026-11-21T05:35:31.7073776Z with:
+build-test-hygiene	Run actions/setup-dotnet@v4	2026-11-21T05:35:31.7074082Z   global-json-file: global.json
+build-test-hygiene	Run actions/setup-dotnet@v4	2026-11-21T05:35:31.7074415Z   cache: false
+build-test-hygiene	Run actions/setup-dotnet@v4	2026-11-21T05:35:31.7074711Z ##[endgroup]
+build-test-hygiene	Run actions/setup-dotnet@v4	2026-11-21T05:35:31.8754414Z (node:920) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+build-test-hygiene	Run actions/setup-dotnet@v4	2026-11-21T05:35:31.8755449Z (Use `node --trace-deprecation ...` to show where the warning was created)
+build-test-hygiene	Run actions/setup-dotnet@v4	2026-11-21T05:35:31.9788408Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v4\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Runtime dotnet -Channel LTS
+build-test-hygiene	Run actions/setup-dotnet@v4	2026-11-21T05:35:33.5564916Z dotnet-install: .NET Core Runtime with version '10.0.15' is already installed.
+build-test-hygiene	Run actions/setup-dotnet@v4	2026-11-21T05:35:33.6835438Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v4\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Channel 10.0
+build-test-hygiene	Run actions/setup-dotnet@v4	2026-11-21T05:35:34.5765961Z dotnet-install: .NET Core SDK with version '10.0.404' is already installed.
+build-test-hygiene	Run actions/setup-python@v5	﻿2026-11-21T05:35:34.6820130Z ##[group]Run actions/setup-python@v5
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.6820596Z with:
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.6820894Z   python-version: 3.12
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.6821217Z   check-latest: false
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.6823975Z   token: ***
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.6824290Z   update-environment: true
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.6824636Z   allow-prereleases: false
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.6824942Z   freethreaded: false
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.6825248Z env:
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.6825527Z   DOTNET_ROOT: C:\Program Files\dotnet
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.6825872Z ##[endgroup]
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.8414116Z ##[group]Installed versions
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.8623668Z (node:5236) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.8624948Z (Use `node --trace-deprecation ...` to show where the warning was created)
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.8625892Z Successfully set up CPython (3.12.10)
+build-test-hygiene	Run actions/setup-python@v5	2026-11-21T05:35:34.8626681Z ##[endgroup]
+build-test-hygiene	Release refusal controls (no login or push)	﻿2026-11-21T05:35:34.8926895Z ##[group]Run python -m unittest discover -s .github/scripts -p test_schema_release.py
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.8927793Z ^[[36;1mpython -m unittest discover -s .github/scripts -p test_schema_release.py^[[0m
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.8928431Z ^[[36;1mif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }^[[0m
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.8928914Z ^[[36;1mnode --test .github/scripts/test-schema-source-run.cjs^[[0m
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.8929379Z ^[[36;1mif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }^[[0m
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.9446116Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.9446568Z env:
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.9446854Z   DOTNET_ROOT: C:\Program Files\dotnet
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.9447311Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.9447912Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.9448941Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.9449449Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.9450055Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:34.9450457Z ##[endgroup]
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:38.3317703Z ................................
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:38.3318435Z ----------------------------------------------------------------------
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:38.3319303Z Ran 32 tests in 0.835s
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:38.3319625Z 
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:38.3319791Z OK
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:40.9883582Z TAP version 13
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2131919Z # Subtest: qualified preparation is admitted without login or push
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2140624Z ok 1 - qualified preparation is admitted without login or push
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2142050Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2142596Z   duration_ms: 7.109
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2143784Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2144226Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2144775Z # Subtest: invalid run ID refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2145587Z ok 2 - invalid run ID refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2147587Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2148246Z   duration_ms: 10.5249
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2148672Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2149232Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2149730Z # Subtest: unsafe numeric run ID refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2152665Z ok 3 - unsafe numeric run ID refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2153552Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2154371Z   duration_ms: 0.2166
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2154861Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2155210Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2155742Z # Subtest: missing reviewed digest refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2172690Z ok 4 - missing reviewed digest refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2173414Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2173801Z   duration_ms: 0.1862
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2174562Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2175202Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2176015Z # Subtest: wrong repository refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2176904Z ok 5 - wrong repository refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2177474Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2178320Z   duration_ms: 0.3163
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2178753Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2179145Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2179655Z # Subtest: running preparation refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2180868Z ok 6 - running preparation refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2181564Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2181921Z   duration_ms: 0.1302
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2182318Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2182704Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2183212Z # Subtest: failed preparation refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2184392Z ok 7 - failed preparation refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2185068Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2185494Z   duration_ms: 0.2043
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2185968Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2186320Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2186756Z # Subtest: pull-request event refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2187360Z ok 8 - pull-request event refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2187957Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2191810Z   duration_ms: 0.1199
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2192358Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2192660Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2192968Z # Subtest: rerun attempt refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2193388Z ok 9 - rerun attempt refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2193709Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2193970Z   duration_ms: 0.4149
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2194337Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2194683Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2195067Z # Subtest: non-main branch refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2673198Z ok 10 - non-main branch refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2673990Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2674411Z   duration_ms: 0.484
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2674849Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2675155Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2681008Z # Subtest: wrong workflow refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2686496Z ok 11 - wrong workflow refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2687147Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2687916Z   duration_ms: 0.3481
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2688263Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2688742Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2689425Z # Subtest: fork source refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2690077Z ok 12 - fork source refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2690627Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2691000Z   duration_ms: 0.1553
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2691466Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2691872Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2696585Z # Subtest: invalid head refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2697267Z ok 13 - invalid head refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2697864Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2698141Z   duration_ms: 0.1365
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2698407Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2698643Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2699816Z # Subtest: no successful prepare job refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2702468Z ok 14 - no successful prepare job refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2702844Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2703443Z   duration_ms: 0.1101
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2703976Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2704247Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2704594Z # Subtest: publish run cannot be reused refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2705209Z ok 15 - publish run cannot be reused refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2705602Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2706411Z   duration_ms: 0.0857
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2706820Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2707563Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2708101Z # Subtest: truncated job inventory refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2708838Z ok 16 - truncated job inventory refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2709311Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2709842Z   duration_ms: 0.078
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2710213Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2710501Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2710928Z # Subtest: truncated artifact inventory refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2711441Z ok 17 - truncated artifact inventory refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2711828Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2712123Z   duration_ms: 0.0943
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2712389Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2712638Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2712911Z # Subtest: missing artifact refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2713344Z ok 18 - missing artifact refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2713666Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2713973Z   duration_ms: 1.4926
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2714350Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2714591Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2716533Z # Subtest: expired artifact refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2717115Z ok 19 - expired artifact refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2717449Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2717698Z   duration_ms: 0.1479
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2717961Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2718211Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2719285Z # Subtest: artifact source mismatch refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2720153Z ok 20 - artifact source mismatch refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2720702Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2720937Z   duration_ms: 0.1065
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2721198Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2724144Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2724482Z # Subtest: artifact run mismatch refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2725148Z ok 21 - artifact run mismatch refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2725920Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2726178Z   duration_ms: 0.0839
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2726453Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2726713Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2727052Z # Subtest: duplicate artifact refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2727482Z ok 22 - duplicate artifact refuses before outputs
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2727804Z   ---
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2728050Z   duration_ms: 0.2152
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2728338Z   type: 'test'
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.2728583Z   ...
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.7575107Z 1..22
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.7575546Z # tests 22
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.7576636Z # suites 0
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.7577182Z # pass 22
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.7577514Z # fail 0
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.7577864Z # cancelled 0
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.7578217Z # skipped 0
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.7578556Z # todo 0
+build-test-hygiene	Release refusal controls (no login or push)	2026-11-21T05:35:41.7578985Z # duration_ms 844.7147
+build-test-hygiene	Build	﻿2026-11-21T05:35:41.8805438Z ##[group]Run dotnet build Bosak.Schema.slnx -c Release
+build-test-hygiene	Build	2026-11-21T05:35:41.8806000Z ^[[36;1mdotnet build Bosak.Schema.slnx -c Release^[[0m
+build-test-hygiene	Build	2026-11-21T05:35:41.8870339Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+build-test-hygiene	Build	2026-11-21T05:35:41.8870851Z env:
+build-test-hygiene	Build	2026-11-21T05:35:41.8871155Z   DOTNET_ROOT: C:\Program Files\dotnet
+build-test-hygiene	Build	2026-11-21T05:35:41.8871593Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Build	2026-11-21T05:35:41.8872211Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+build-test-hygiene	Build	2026-11-21T05:35:41.8872760Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Build	2026-11-21T05:35:41.8873266Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Build	2026-11-21T05:35:41.8873927Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Build	2026-11-21T05:35:41.8874323Z ##[endgroup]
+build-test-hygiene	Build	2026-11-21T05:35:49.9269729Z   Determining projects to restore...
+build-test-hygiene	Build	2026-11-21T05:35:55.0659337Z   Restored D:\a\Bosak.Schema\Bosak.Schema\src\Bosak.Schema\Bosak.Schema.csproj (in 4.38 sec).
+build-test-hygiene	Build	2026-11-21T05:35:56.7092415Z   Restored D:\a\Bosak.Schema\Bosak.Schema\tests\Bosak.Schema.Tests\Bosak.Schema.Tests.csproj (in 6.07 sec).
+build-test-hygiene	Build	2026-11-21T05:35:56.7093815Z   Restored D:\a\Bosak.Schema\Bosak.Schema\tests\Bosak.Schema.PublicConsumer.Tests\Bosak.Schema.PublicConsumer.Tests.csproj (in 6.07 sec).
+build-test-hygiene	Build	2026-11-21T05:36:07.6625980Z   Bosak.Schema -> D:\a\Bosak.Schema\Bosak.Schema\src\Bosak.Schema\bin\Release\net10.0\Bosak.Schema.dll
+build-test-hygiene	Build	2026-11-21T05:36:11.3455051Z   Bosak.Schema.PublicConsumer.Tests -> D:\a\Bosak.Schema\Bosak.Schema\tests\Bosak.Schema.PublicConsumer.Tests\bin\Release\net10.0\Bosak.Schema.PublicConsumer.Tests.dll
+build-test-hygiene	Build	2026-11-21T05:36:11.4244521Z   Bosak.Schema.Tests -> D:\a\Bosak.Schema\Bosak.Schema\tests\Bosak.Schema.Tests\bin\Release\net10.0\Bosak.Schema.Tests.dll
+build-test-hygiene	Build	2026-11-21T05:36:11.4478603Z 
+build-test-hygiene	Build	2026-11-21T05:36:11.4489878Z Build succeeded.
+build-test-hygiene	Build	2026-11-21T05:36:11.4498510Z     0 Warning(s)
+build-test-hygiene	Build	2026-11-21T05:36:11.4498963Z     0 Error(s)
+build-test-hygiene	Build	2026-11-21T05:36:11.4500698Z 
+build-test-hygiene	Build	2026-11-21T05:36:11.4501022Z Time Elapsed 00:00:25.00
+build-test-hygiene	Test	﻿2026-11-21T05:36:11.6339910Z ##[group]Run dotnet test Bosak.Schema.slnx -c Release --no-build
+build-test-hygiene	Test	2026-11-21T05:36:11.6340909Z ^[[36;1mdotnet test Bosak.Schema.slnx -c Release --no-build^[[0m
+build-test-hygiene	Test	2026-11-21T05:36:11.6451716Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+build-test-hygiene	Test	2026-11-21T05:36:11.6452334Z env:
+build-test-hygiene	Test	2026-11-21T05:36:11.6452736Z   DOTNET_ROOT: C:\Program Files\dotnet
+build-test-hygiene	Test	2026-11-21T05:36:11.6453343Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Test	2026-11-21T05:36:11.6454043Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+build-test-hygiene	Test	2026-11-21T05:36:11.6460077Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Test	2026-11-21T05:36:11.6460868Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Test	2026-11-21T05:36:11.6461616Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Test	2026-11-21T05:36:11.6462231Z ##[endgroup]
+build-test-hygiene	Test	2026-11-21T05:36:13.8912315Z Test run for D:\a\Bosak.Schema\Bosak.Schema\tests\Bosak.Schema.Tests\bin\Release\net10.0\Bosak.Schema.Tests.dll (.NETCoreApp,Version=v10.0)
+build-test-hygiene	Test	2026-11-21T05:36:13.9171076Z Test run for D:\a\Bosak.Schema\Bosak.Schema\tests\Bosak.Schema.PublicConsumer.Tests\bin\Release\net10.0\Bosak.Schema.PublicConsumer.Tests.dll (.NETCoreApp,Version=v10.0)
+build-test-hygiene	Test	2026-11-21T05:36:14.5778607Z A total of 1 test files matched the specified pattern.
+build-test-hygiene	Test	2026-11-21T05:36:14.5785727Z A total of 1 test files matched the specified pattern.
+build-test-hygiene	Test	2026-11-21T05:36:46.0351879Z 
+build-test-hygiene	Test	2026-11-21T05:36:46.0401236Z Passed!  - Failed:     0, Passed:   550, Skipped:     0, Total:   550, Duration: 30 s - Bosak.Schema.Tests.dll (net10.0)
+build-test-hygiene	Test	2026-11-21T05:36:48.3045310Z 
+build-test-hygiene	Test	2026-11-21T05:36:48.3101933Z Passed!  - Failed:     0, Passed:  1474, Skipped:     0, Total:  1474, Duration: 31 s - Bosak.Schema.PublicConsumer.Tests.dll (net10.0)
+build-test-hygiene	Documentation hygiene	﻿2026-11-21T05:36:48.5071761Z ##[group]Run ./tools/check-docs.ps1 -ProjectPath .
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.5072435Z ^[[36;1m./tools/check-docs.ps1 -ProjectPath .^[[0m
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.5139359Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.5139878Z env:
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.5140187Z   DOTNET_ROOT: C:\Program Files\dotnet
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.5140700Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.5141312Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.5141838Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.5142394Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.5142888Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.5143453Z ##[endgroup]
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.8950066Z 
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.8950807Z ========================================
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.8958001Z Documentation Validation
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.8971507Z Project: D:\a\Bosak.Schema\Bosak.Schema
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.8980202Z ========================================
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.8987243Z 
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.8987500Z 1. Required Files
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9254983Z   [PASS]  Found README.md
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9270734Z   [PASS]  Found AGENTS.md
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9282297Z   [PASS]  Found ROADMAP.md
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9293942Z   [PASS]  Found LICENSE.md
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9303696Z   [PASS]  Found docs\ARCHITECTURE.md
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9314020Z   [PASS]  Found docs\FEATURE_REQUESTS.md
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9323114Z   [PASS]  Found docs\INTEGRATION.md
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9333374Z   [PASS]  Found docs\AGENT_HANDOVER.md
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9345329Z   [PASS]  Found docs\DOCUMENTATION_STYLE_GUIDE.md
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9357491Z   [PASS]  Found .kimi\HANDOVER.md
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9364016Z 
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9364619Z 2. Recommended Files
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9386113Z   [PASS]  Found Directory.Build.props
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9398915Z   [PASS]  Found .editorconfig
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9409842Z   [PASS]  Found global.json
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9420904Z   [PASS]  Found .env.example
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9433046Z   [PASS]  Found docs\ADR-000-TEMPLATE.md
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9445280Z   [PASS]  Found tools\rebuild.ps1
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9457432Z   [PASS]  Found tools\check-docs.ps1
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9470212Z   [PASS]  Found .github\workflows\build.yml
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9477430Z 
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9477975Z 3. AGENTS.md Required Sections
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9676999Z   [PASS]  AGENTS.md contains File Headers section
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9696016Z   [PASS]  AGENTS.md contains XML Documentation section
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9706490Z   [PASS]  AGENTS.md contains Testing Requirements section
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9716473Z   [PASS]  AGENTS.md contains Versioning section
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9727041Z   [PASS]  AGENTS.md contains Architecture Decision Records section
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9736257Z   [PASS]  AGENTS.md contains Documentation Sync Checklist section
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9744947Z   [PASS]  AGENTS.md contains a file header template
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9754075Z   [PASS]  AGENTS.md contains Pre-Handover Checklist
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9760531Z 
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:48.9760858Z 4. Stale Placeholders
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.0954466Z   [PASS]  No stale placeholders found in any .md file
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.0960249Z 
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.0960697Z 5. Old Prefixed Document Names
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.1871230Z   [PASS]  No stale prefixed document references found
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.1964930Z   [PASS]  No old prefixed physical files in docs/
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.1971489Z 
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.1972414Z 6. Section Numbering
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.2169361Z   [PASS]  docs\ARCHITECTURE.md section numbering is sequential (5 sections)
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.2187352Z   [PASS]  docs\INTEGRATION.md section numbering is sequential (6 sections)
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.2204846Z   [PASS]  docs\FEATURE_REQUESTS.md section numbering is sequential (3 sections)
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.2224692Z   [INFO]  docs\AGENT_HANDOVER.md — fewer than 2 numbered sections; numbering check skipped
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.2230477Z 
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.2231717Z 7. Referenced Documents Exist
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.3439909Z   [PASS]  All referenced documents exist
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.3444797Z 
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.3445280Z 8. Last-Updated Date Freshness
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.3630972Z   [PASS]  docs\FEATURE_REQUESTS.md last updated 0 day(s) ago (2026-11-21)
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.3662000Z   [PASS]  docs\AGENT_HANDOVER.md last updated 0 day(s) ago (2026-11-21)
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.3675454Z   [PASS]  .kimi\HANDOVER.md last updated 0 day(s) ago (2026-11-21)
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.3679675Z 
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.3681080Z ========================================
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.3689293Z RESULT: ALL CHECKS PASSED
+build-test-hygiene	Documentation hygiene	2026-11-21T05:36:49.3695207Z ========================================
+build-test-hygiene	Workload tool build and measurement-integrity controls	﻿2026-11-21T05:36:49.4574189Z ##[group]Run dotnet build tools/Bosak.Schema.Workloads/Bosak.Schema.Workloads.csproj -c Release
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4575196Z ^[[36;1mdotnet build tools/Bosak.Schema.Workloads/Bosak.Schema.Workloads.csproj -c Release^[[0m
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4575766Z ^[[36;1mif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }^[[0m
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4576257Z ^[[36;1mpython -m unittest discover -s tools -p test_schema_workloads.py^[[0m
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4576770Z ^[[36;1mif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }^[[0m
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4640027Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4640466Z env:
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4640772Z   DOTNET_ROOT: C:\Program Files\dotnet
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4641200Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4641718Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4642280Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4643084Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4643580Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:49.4643980Z ##[endgroup]
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:50.4701285Z   Determining projects to restore...
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:51.1211618Z   Restored D:\a\Bosak.Schema\Bosak.Schema\tools\Bosak.Schema.Workloads\Bosak.Schema.Workloads.csproj (in 313 ms).
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:51.1252675Z   1 of 2 projects are up-to-date for restore.
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:51.8220671Z   Bosak.Schema -> D:\a\Bosak.Schema\Bosak.Schema\src\Bosak.Schema\bin\Release\net10.0\Bosak.Schema.dll
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:52.6411100Z   Bosak.Schema.Workloads -> D:\a\Bosak.Schema\Bosak.Schema\tools\Bosak.Schema.Workloads\bin\Release\net10.0\Bosak.Schema.Workloads.dll
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:52.6580270Z 
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:52.6591516Z Build succeeded.
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:52.6592196Z     0 Warning(s)
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:52.6593062Z     0 Error(s)
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:52.6593709Z 
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:52.6594169Z Time Elapsed 00:00:02.60
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:52.8451184Z ......
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:52.8452509Z ----------------------------------------------------------------------
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:52.8453471Z Ran 6 tests in 0.013s
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:52.8453955Z 
+build-test-hygiene	Workload tool build and measurement-integrity controls	2026-11-21T05:36:52.8454410Z OK
+build-test-hygiene	Post Run actions/setup-python@v5	﻿2026-11-21T05:36:52.9928417Z Post job cleanup.
+build-test-hygiene	Post Run actions/setup-python@v5	2026-11-21T05:36:53.1498075Z (node:8448) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+build-test-hygiene	Post Run actions/setup-python@v5	2026-11-21T05:36:53.1499323Z (Use `node --trace-deprecation ...` to show where the warning was created)
+build-test-hygiene	Post Run actions/setup-dotnet@v4	﻿2026-11-21T05:36:53.1804883Z Post job cleanup.
+build-test-hygiene	Post Run actions/setup-dotnet@v4	2026-11-21T05:36:53.3537578Z (node:8360) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+build-test-hygiene	Post Run actions/setup-dotnet@v4	2026-11-21T05:36:53.3538418Z (Use `node --trace-deprecation ...` to show where the warning was created)
+build-test-hygiene	Post Run actions/checkout@v4	﻿2026-11-21T05:36:53.3978130Z Post job cleanup.
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:53.6063647Z [command]"C:\Program Files\Git\bin\git.exe" version
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:53.6586218Z git version 2.56.1.windows.1
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:53.6677243Z Temporarily overriding HOME='D:\a\_temp\28125017-eae7-4e6d-8fe0-e95448534ef3' before making global git config changes
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:53.6680124Z Adding repository directory to the temporary git global config as a safe directory
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:53.6691642Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\Bosak.Schema\Bosak.Schema
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:53.7173617Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:53.7610620Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:54.3458198Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:54.3818229Z http.https://github.com/.extraheader
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:54.3868873Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:54.4283535Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:55.0466008Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+build-test-hygiene	Post Run actions/checkout@v4	2026-11-21T05:36:55.0898474Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+build-test-hygiene	Complete job	﻿2026-11-21T05:36:55.7171951Z Cleaning up orphan processes
+build-test-hygiene	Complete job	2026-11-21T05:36:55.7735667Z Terminate orphan process: pid (4708) (dotnet)
+build-test-hygiene	Complete job	2026-11-21T05:36:55.7886410Z Terminate orphan process: pid (8320) (dotnet)
+build-test-hygiene	Complete job	2026-11-21T05:36:55.8204735Z Terminate orphan process: pid (7716) (VBCSCompiler)
+build-test-hygiene	Complete job	2026-11-21T05:36:55.8261741Z Terminate orphan process: pid (3700) (conhost)
+build-test-hygiene	Complete job	2026-11-21T05:36:55.8392139Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-dotnet@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
