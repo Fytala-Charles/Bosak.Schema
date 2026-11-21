@@ -1,0 +1,212 @@
+diff --git a/src/Bosak.Schema/Assessment/NativeComplexRestriction.cs b/src/Bosak.Schema/Assessment/NativeComplexRestriction.cs
+index eb68e67..04e0095 100644
+--- a/src/Bosak.Schema/Assessment/NativeComplexRestriction.cs
++++ b/src/Bosak.Schema/Assessment/NativeComplexRestriction.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 21-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -64,10 +65,13 @@ internal sealed partial class NativeDecimalSchema
+         Require(basePlan.AttributeUses.IsEmpty, "Base attribute uses are outside the restriction profile.", NativeDecimalUnsupportedReason.Attributes);
+         Require(basePlan.assertions.IsEmpty, "Base assertions are outside the restriction profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+         var content = baseType.ContentType;
+-        Require(content is not null && !content.IsComplex && !content.IsString && !content.IsBoolean && !content.IsInteger,
++        Require(content is not null && !content.IsComplex && !content.IsString && !content.IsBoolean,
+             "Complex base content is outside the decimal profile.", NativeDecimalUnsupportedReason.ValueType);
+-        var facets = NativeDecimalFacets.CompileDerived(restriction, content!.Facets, limits);
+-        var atomic = new NativeType(null, false, targetNamespace, facets: facets, derivationBase: content);
++        var atomic = content!.IsInteger
++            ? new NativeType(null, false, targetNamespace, isInteger: true,
++                integerFacets: NativeIntegerFacets.CompileDerived(restriction, content.IntegerFacets, limits), derivationBase: content)
++            : new NativeType(null, false, targetNamespace,
++                facets: NativeDecimalFacets.CompileDerived(restriction, content.Facets, limits), derivationBase: content);
+         var governing = new NativeType(root.Type.Name, false, targetNamespace, contentType: atomic,
+             derivationBase: baseType, isComplexRestriction: true);
+         return new NativeDecimalSchema(new NativeDeclaration(root.Name, governing, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
+diff --git a/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs b/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
+index 44850e4..e653d95 100644
+--- a/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
++++ b/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
+@@ -32,6 +32,7 @@
+ //                      | Charles Korthout | 1.9   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+ //                      | Charles Korthout | 1.10  | 21-11-2026     | Adopt mixed relative target namespaces and form defaults independently of attribute uses     |
+ //                      | Charles Korthout | 1.11  | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
++//                      | Charles Korthout | 1.12  | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -296,9 +297,18 @@ internal sealed partial class NativeDecimalSchema
+         var extension = Single(content, "extension");
+         Attributes(extension, "base");
+         var baseName = ResolveTypeName(extension, "base");
+-        NativeType? baseType = baseName == Xs + "decimal" ? decimalType : simple.GetValueOrDefault(baseName);
+-        Require(baseType is not null && !baseType.IsString && !baseType.IsBoolean && !baseType.IsInteger,
++        NativeType? baseType = baseName == Xs + "decimal" ? decimalType : baseName == Xs + "integer" ? integerType : simple.GetValueOrDefault(baseName);
++        Require(baseType is not null && !baseType.IsString && !baseType.IsBoolean,
+             "Only direct admitted decimal simple-content bases are supported.", NativeDecimalUnsupportedReason.ValueType);
++        if (baseType!.IsInteger)
++        {
++            foreach (var child in Elements(extension))
++            {
++                Require(child.Name != Xs + "attribute" && child.Name != Xs + "attributeGroup" && child.Name != Xs + "anyAttribute", "Integer extension attributes are outside the profile.", NativeDecimalUnsupportedReason.Attributes);
++                Require(child.Name != Xs + "assert", "Integer extension assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
++                Require(false, "Integer extension child grammar is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
++            }
++        }
+         var uses = CompileAttributes(Elements(extension), targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
+         var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri, contentType: baseType);
+         return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { AttributeUses = uses };
+diff --git a/src/Bosak.Schema/Assessment/NativeIntegerFacets.cs b/src/Bosak.Schema/Assessment/NativeIntegerFacets.cs
+index da857a0..348d78d 100644
+--- a/src/Bosak.Schema/Assessment/NativeIntegerFacets.cs
++++ b/src/Bosak.Schema/Assessment/NativeIntegerFacets.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -22,8 +23,64 @@ using System.Xml.Linq;
+ namespace Bosak.Schema;
+ 
+ /// <summary>Compiles and enforces bounded exact integer restriction facets.</summary>
+-internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive, BigInteger? upper, bool upperExclusive, int? totalDigits)
++internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive, BigInteger? upper, bool upperExclusive, int? totalDigits, NativeIntegerFacets? parent = null)
+ {
++    internal BigInteger? LowerBound => lower ?? parent?.LowerBound;
++    internal BigInteger? UpperBound => upper ?? parent?.UpperBound;
++    internal bool LowerExclusive => lower is not null ? lowerExclusive : parent?.LowerExclusive ?? false;
++    internal bool UpperExclusive => upper is not null ? upperExclusive : parent?.UpperExclusive ?? false;
++    internal int? TotalLimit => totalDigits ?? parent?.TotalLimit;
++    internal int? FractionLimit => 0;
++
++    internal static NativeIntegerFacets CompileDerived(XElement restriction, NativeIntegerFacets? inherited, NativeNumericLimits limits)
++    {
++        NativeIntegerFacets own;
++        try { own = Compile(restriction, limits); }
++        catch (NativeProfileException error) when (error.Outcome == NativeOutcome.Unsupported &&
++            error.UnsupportedReason is NativeDecimalUnsupportedReason.ValueType or NativeDecimalUnsupportedReason.DeclarationShape)
++        { throw new NativeProfileException(NativeOutcome.Invalid, "Invalid bounded integer restriction facets."); }
++        static void Valid(bool condition)
++        { if (!condition) throw new NativeProfileException(NativeOutcome.Invalid, "Illegal inherited integer facet restriction."); }
++        if (inherited is not null)
++        {
++            if (own.UpperBound is { } hi)
++            {
++                if (inherited.UpperBound is { } bhi)
++                {
++                    var c = Compare(hi, bhi);
++                    Valid(own.UpperExclusive || !inherited.UpperExclusive ? c <= 0 : c < 0);
++                }
++                if (inherited.LowerBound is { } blo)
++                {
++                    var c = Compare(hi, blo);
++                    Valid(own.UpperExclusive || inherited.LowerExclusive ? c > 0 : c >= 0);
++                }
++            }
++            if (own.LowerBound is { } lo)
++            {
++                if (inherited.LowerBound is { } blo)
++                {
++                    var c = Compare(lo, blo);
++                    Valid(!own.LowerExclusive && inherited.LowerExclusive ? c > 0 : c >= 0);
++                }
++                if (inherited.UpperBound is { } bhi)
++                {
++                    var c = Compare(lo, bhi);
++                    Valid(own.LowerExclusive || inherited.UpperExclusive ? c < 0 : c <= 0);
++                }
++            }
++            if (own.TotalLimit is { } total && inherited.TotalLimit is { } baseTotal) Valid(total <= baseTotal);
++            if (own.FractionLimit is { } fraction && inherited.FractionLimit is { } baseFraction) Valid(fraction <= baseFraction);
++        }
++        var effectiveTotal = own.TotalLimit ?? inherited?.TotalLimit;
++        var effectiveFraction = own.FractionLimit ?? inherited?.FractionLimit;
++        Valid(effectiveTotal is null || effectiveFraction is null || effectiveFraction <= effectiveTotal);
++        return new(own.LowerBound, own.LowerExclusive, own.UpperBound, own.UpperExclusive,
++            own.TotalLimit, inherited);
++    }
++
++    private static int Compare(BigInteger a, BigInteger b) => a.CompareTo(b);
++
+     internal static NativeIntegerFacets Compile(XElement restriction, NativeNumericLimits limits)
+     {
+         BigInteger? lower=null,upper=null;
+@@ -79,6 +136,7 @@ internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive
+ 
+     internal bool Accepts(BigInteger value)
+     {
++        if (parent is not null && !parent.Accepts(value)) return false;
+         if(lower is {} lo && (value<lo || lowerExclusive && value==lo))return false;
+         if(upper is {} hi && (value>hi || upperExclusive && value==hi))return false;
+         return totalDigits is not {} digits || BigInteger.Abs(value).ToString(CultureInfo.InvariantCulture).Length<=digits;
+diff --git a/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj b/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
+index e7dc843..75a533b 100644
+--- a/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
++++ b/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
+@@ -36,4 +36,5 @@
+   <ItemGroup><None Include="../TestData/InstanceTypes/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/InstanceTypes/%(Filename)%(Extension)" /></ItemGroup>
+   <ItemGroup><None Include="../TestData/NamespaceForm/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NamespaceForm/%(Filename)%(Extension)" /></ItemGroup>
+   <ItemGroup><None Include="../TestData/ComplexSimpleRestriction/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/ComplexSimpleRestriction/%(Filename)%(Extension)" /></ItemGroup>
++  <ItemGroup><None Include="../TestData/IntegerSimpleContent/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/IntegerSimpleContent/%(Filename)%(Extension)" /></ItemGroup>
+ </Project>
+diff --git a/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj b/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj
+index 566879c..4f52603 100644
+--- a/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj
++++ b/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj
+@@ -32,4 +32,5 @@
+     <None Include="../TestData/NodeData/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NodeData/%(Filename)%(Extension)" />
+   </ItemGroup>
+   <ItemGroup><None Include="../TestData/ComplexSimpleRestriction/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/ComplexSimpleRestriction/%(Filename)%(Extension)" /></ItemGroup>
++  <ItemGroup><None Include="../TestData/IntegerSimpleContent/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/IntegerSimpleContent/%(Filename)%(Extension)" /></ItemGroup>
+ </Project>
+diff --git a/tests/TestData/ComplexSimpleRestriction/cases.json b/tests/TestData/ComplexSimpleRestriction/cases.json
+index 2853d60..b390d8c 100644
+--- a/tests/TestData/ComplexSimpleRestriction/cases.json
++++ b/tests/TestData/ComplexSimpleRestriction/cases.json
+@@ -621,13 +621,13 @@
+     },
+     {
+       "id": "CR-042",
+-      "label": "Integer content base remains excluded",
++      "label": "Integer restriction admits schema and rejects fractional lexical form",
+       "status": "Authored production regression input",
+       "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:integer'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+       "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+-      "expectedCompile": "Unsupported",
+-      "expectedAssessment": null,
+-      "unsupportedReason": "ValueType",
++      "expectedCompile": "Valid",
++      "expectedAssessment": "Invalid",
++      "unsupportedReason": null,
+       "path": [],
+       "specificationSections": [
+         "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+diff --git a/tests/TestData/SimpleContent/cases.json b/tests/TestData/SimpleContent/cases.json
+index e1c5f4d..bf946d2 100644
+--- a/tests/TestData/SimpleContent/cases.json
++++ b/tests/TestData/SimpleContent/cases.json
+@@ -1299,7 +1299,7 @@
+   },
+   {
+     "id": "SC-053",
+-    "description": "Excluded or unresolved base xs:integer",
++    "description": "Integer extension attribute uses remain excluded",
+     "sections": [
+       "Structures3.4.2.2/3.4.4",
+       "Datatypes3.3.3/4.3.6",
+@@ -1321,7 +1321,7 @@
+         "value": "EUR"
+       }
+     ],
+-    "unsupportedReason": "ValueType"
++    "unsupportedReason": "Attributes"
+   },
+   {
+     "id": "SC-054",

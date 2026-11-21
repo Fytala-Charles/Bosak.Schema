@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -22,8 +23,64 @@ using System.Xml.Linq;
 namespace Bosak.Schema;
 
 /// <summary>Compiles and enforces bounded exact integer restriction facets.</summary>
-internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive, BigInteger? upper, bool upperExclusive, int? totalDigits)
+internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive, BigInteger? upper, bool upperExclusive, int? totalDigits, NativeIntegerFacets? parent = null)
 {
+    internal BigInteger? LowerBound => lower ?? parent?.LowerBound;
+    internal BigInteger? UpperBound => upper ?? parent?.UpperBound;
+    internal bool LowerExclusive => lower is not null ? lowerExclusive : parent?.LowerExclusive ?? false;
+    internal bool UpperExclusive => upper is not null ? upperExclusive : parent?.UpperExclusive ?? false;
+    internal int? TotalLimit => totalDigits ?? parent?.TotalLimit;
+    internal int? FractionLimit => 0;
+
+    internal static NativeIntegerFacets CompileDerived(XElement restriction, NativeIntegerFacets? inherited, NativeNumericLimits limits)
+    {
+        NativeIntegerFacets own;
+        try { own = Compile(restriction, limits); }
+        catch (NativeProfileException error) when (error.Outcome == NativeOutcome.Unsupported &&
+            error.UnsupportedReason is NativeDecimalUnsupportedReason.ValueType or NativeDecimalUnsupportedReason.DeclarationShape)
+        { throw new NativeProfileException(NativeOutcome.Invalid, "Invalid bounded integer restriction facets."); }
+        static void Valid(bool condition)
+        { if (!condition) throw new NativeProfileException(NativeOutcome.Invalid, "Illegal inherited integer facet restriction."); }
+        if (inherited is not null)
+        {
+            if (own.UpperBound is { } hi)
+            {
+                if (inherited.UpperBound is { } bhi)
+                {
+                    var c = Compare(hi, bhi);
+                    Valid(own.UpperExclusive || !inherited.UpperExclusive ? c <= 0 : c < 0);
+                }
+                if (inherited.LowerBound is { } blo)
+                {
+                    var c = Compare(hi, blo);
+                    Valid(own.UpperExclusive || inherited.LowerExclusive ? c > 0 : c >= 0);
+                }
+            }
+            if (own.LowerBound is { } lo)
+            {
+                if (inherited.LowerBound is { } blo)
+                {
+                    var c = Compare(lo, blo);
+                    Valid(!own.LowerExclusive && inherited.LowerExclusive ? c > 0 : c >= 0);
+                }
+                if (inherited.UpperBound is { } bhi)
+                {
+                    var c = Compare(lo, bhi);
+                    Valid(own.LowerExclusive || inherited.UpperExclusive ? c < 0 : c <= 0);
+                }
+            }
+            if (own.TotalLimit is { } total && inherited.TotalLimit is { } baseTotal) Valid(total <= baseTotal);
+            if (own.FractionLimit is { } fraction && inherited.FractionLimit is { } baseFraction) Valid(fraction <= baseFraction);
+        }
+        var effectiveTotal = own.TotalLimit ?? inherited?.TotalLimit;
+        var effectiveFraction = own.FractionLimit ?? inherited?.FractionLimit;
+        Valid(effectiveTotal is null || effectiveFraction is null || effectiveFraction <= effectiveTotal);
+        return new(own.LowerBound, own.LowerExclusive, own.UpperBound, own.UpperExclusive,
+            own.TotalLimit, inherited);
+    }
+
+    private static int Compare(BigInteger a, BigInteger b) => a.CompareTo(b);
+
     internal static NativeIntegerFacets Compile(XElement restriction, NativeNumericLimits limits)
     {
         BigInteger? lower=null,upper=null;
@@ -79,6 +136,7 @@ internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive
 
     internal bool Accepts(BigInteger value)
     {
+        if (parent is not null && !parent.Accepts(value)) return false;
         if(lower is {} lo && (value<lo || lowerExclusive && value==lo))return false;
         if(upper is {} hi && (value>hi || upperExclusive && value==hi))return false;
         return totalDigits is not {} digits || BigInteger.Abs(value).ToString(CultureInfo.InvariantCulture).Length<=digits;

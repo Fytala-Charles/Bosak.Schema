@@ -1,0 +1,46 @@
+  Determining projects to restore...
+  Restored D:\Development\Bosak\.guard-tmp\schema-integer-simple-content-feasibility-20261121\regression\public\Regression.csproj (in 219 ms).
+  1 of 2 projects are up-to-date for restore.
+  SchemaCandidate -> D:\Development\Bosak\.guard-tmp\schema-integer-simple-content-feasibility-20261121\minimum\schema\bin\Release\net10.0\Bosak.Schema.dll
+  Regression -> D:\Development\Bosak\.guard-tmp\schema-integer-simple-content-feasibility-20261121\regression\public\bin\Release\net10.0\Bosak.Schema.PublicConsumer.Tests.dll
+Test run for D:\Development\Bosak\.guard-tmp\schema-integer-simple-content-feasibility-20261121\regression\public\bin\Release\net10.0\Bosak.Schema.PublicConsumer.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:02.03]     Bosak.Schema.PublicConsumer.Tests.NativeSimpleContentConsumerTests.SimpleContent_SeparatesRootAndExistingIndexes(id: "SC-053", payload: "{\r\n    \"id\": \"SC-053\",\r\n    \"description\"···) [FAIL]
+  Failed Bosak.Schema.PublicConsumer.Tests.NativeSimpleContentConsumerTests.SimpleContent_SeparatesRootAndExistingIndexes(id: "SC-053", payload: "{\r\n    \"id\": \"SC-053\",\r\n    \"description\"···) [1 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "ValueType"
+Actual:   "Attributes"
+           ↑ (pos 0)
+  Stack Trace:
+     at Bosak.Schema.PublicConsumer.Tests.NativeSimpleContentConsumerTests.SimpleContent_SeparatesRootAndExistingIndexes(String id, String payload) in D:\Development\Bosak\.worktrees\Schema.IntegerSimpleContent\tests\Bosak.Schema.PublicConsumer.Tests\NativeSimpleContentConsumerTests.cs:line 48
+   at InvokeStub_NativeSimpleContentConsumerTests.SimpleContent_SeparatesRootAndExistingIndexes(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:03.85]     Bosak.Schema.PublicConsumer.Tests.NativeComplexRestrictionConsumerTests.ProposedPayloads_UseNativeAssessment(id: "CR-042", payload: "{\r\n      \"id\": \"CR-042\",\r\n      \"label\":"···, data: True) [FAIL]
+  Failed Bosak.Schema.PublicConsumer.Tests.NativeComplexRestrictionConsumerTests.ProposedPayloads_UseNativeAssessment(id: "CR-042", payload: "{\r\n      \"id\": \"CR-042\",\r\n      \"label\":"···, data: True) [1 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "Unsupported"
+Actual:   "Valid"
+           ↑ (pos 0)
+  Stack Trace:
+     at Bosak.Schema.PublicConsumer.Tests.NativeComplexRestrictionConsumerTests.ProposedPayloads_UseNativeAssessment(String id, String payload, Boolean data) in D:\Development\Bosak\.worktrees\Schema.IntegerSimpleContent\tests\Bosak.Schema.PublicConsumer.Tests\NativeComplexRestrictionConsumerTests.cs:line 45
+   at InvokeStub_NativeComplexRestrictionConsumerTests.ProposedPayloads_UseNativeAssessment(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:05.26]     Bosak.Schema.PublicConsumer.Tests.NativeComplexRestrictionConsumerTests.ProposedPayloads_UseNativeAssessment(id: "CR-042", payload: "{\r\n      \"id\": \"CR-042\",\r\n      \"label\":"···, data: False) [FAIL]
+  Failed Bosak.Schema.PublicConsumer.Tests.NativeComplexRestrictionConsumerTests.ProposedPayloads_UseNativeAssessment(id: "CR-042", payload: "{\r\n      \"id\": \"CR-042\",\r\n      \"label\":"···, data: False) [< 1 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "Unsupported"
+Actual:   "Valid"
+           ↑ (pos 0)
+  Stack Trace:
+     at Bosak.Schema.PublicConsumer.Tests.NativeComplexRestrictionConsumerTests.ProposedPayloads_UseNativeAssessment(String id, String payload, Boolean data) in D:\Development\Bosak\.worktrees\Schema.IntegerSimpleContent\tests\Bosak.Schema.PublicConsumer.Tests\NativeComplexRestrictionConsumerTests.cs:line 51
+   at InvokeStub_NativeComplexRestrictionConsumerTests.ProposedPayloads_UseNativeAssessment(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+Results File: D:\Development\Bosak\.guard-tmp\schema-integer-simple-content-feasibility-20261121\regression-public\charl_CHARLES_2026-11-21_12_47_28_net10.0.trx
+
+Failed!  - Failed:     3, Passed:  1665, Skipped:     0, Total:  1668, Duration: 14 s - Bosak.Schema.PublicConsumer.Tests.dll (net10.0)

@@ -892,9 +892,54 @@ grammar remain Unsupported. Equal exclusive endpoints can define a valid empty
 type whose instances all fail; that is different from an invalid schema.
 
 Forward named base references are supported. Complex restriction chains, base or
-derived attributes/assertions, other scalar families, inline simpleType and
+derived attributes/assertions, scalar families beyond decimal/integer, inline simpleType and
 broader inheritance remain excluded. An xsi:type request changing one complex
 governing type to another remains Unsupported even when its true derivation is
 known; same-component requests keep their existing behavior. Legacy
 NativeDecimalSession and published beta.1 are unchanged. No general XSD/PSVI or
 Core provider API expansion is implied.
+
+
+### Integer complex simple content (0.6 development)
+
+NativeSchemaSession and NativeSchemaNodeDataSession admit simple-content extension
+of xs:integer or an existing named direct integer simple restriction, followed by
+one direct complex restriction. Both integer complex types must be attribute-free
+and assertion-free. This example accepts integers below the stated exact bound:
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:t="urn:quantity" targetNamespace="urn:quantity">
+  <xs:complexType name="Quantity">
+    <xs:simpleContent><xs:extension base="xs:integer"/></xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SmallQuantity">
+    <xs:simpleContent><xs:restriction base="t:Quantity">
+      <xs:maxExclusive value="100000000000000000000"/>
+    </xs:restriction></xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="quantity" type="t:SmallQuantity"/>
+</xs:schema>
+```
+
+Assess `<t:quantity xmlns:t="urn:quantity">9223372036854775808</t:quantity>` with
+the existing options/context and read `ReadRootScalar().IntegerValue` or original-
+node `ReadElement([]).IntegerValue`. The detached value is a BigInteger, without
+Int64 or decimal conversion. Named/anonymous root and existing nested terminal
+routes retain original declaration/governing versus actual atomic provenance.
+Leading signs/zeros and collapsed surrounding whitespace are admitted; `4.5`,
+`4.0`, exponents and empty integer text are Invalid. Export preserves the parsed
+XML lexical value even when the detached integer uses canonical spelling.
+
+The existing six numeric facets apply, with fractionDigits fixed at zero. New
+complex restriction bounds/digits must legally restrict inherited facets; runtime
+intersection alone is insufficient. Invalid recognized new facets/references are
+schema-Invalid; capacity and excluded grammar remain Unsupported. Legal empty
+integer ranges (for example, minExclusive=0/maxExclusive=1) compile but reject all
+instances. Raw digit capacities apply before leading-zero normalization.
+
+Application attributes/assertions on integer complex types, complex chains,
+derived built-ins such as xs:int/xs:long, inline simpleType, general inheritance
+and broader complex xsi:type substitution remain excluded. This does not admit
+inherited/contextual assertions. Legacy NativeDecimalSession and published beta.1
+are unchanged; this development behavior does not claim full XSD/PSVI support.

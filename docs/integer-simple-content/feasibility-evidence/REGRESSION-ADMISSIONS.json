@@ -1,0 +1,92 @@
+[
+  {
+    "id": "SC-053",
+    "before": {
+      "id": "SC-053",
+      "description": "Excluded or unresolved base xs:integer",
+      "sections": [
+        "Structures3.4.2.2/3.4.4",
+        "Datatypes3.3.3/4.3.6",
+        "XDM3.3.1.2/6.2"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:integer' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+      "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Unsupported",
+      "expectedRoot": "12.5",
+      "maxNativeCoefficientDigits": 256,
+      "maxNativeScale": 256,
+      "maxStringCharacters": 256,
+      "attributes": [
+        {
+          "namespaceUri": "",
+          "localName": "currency",
+          "kind": "String",
+          "value": "EUR"
+        }
+      ],
+      "unsupportedReason": "ValueType"
+    },
+    "after": {
+      "id": "SC-053",
+      "description": "Excluded or unresolved base xs:integer",
+      "sections": [
+        "Structures3.4.2.2/3.4.4",
+        "Datatypes3.3.3/4.3.6",
+        "XDM3.3.1.2/6.2"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:integer' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+      "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Unsupported",
+      "expectedRoot": "12.5",
+      "maxNativeCoefficientDigits": 256,
+      "maxNativeScale": 256,
+      "maxStringCharacters": 256,
+      "attributes": [
+        {
+          "namespaceUri": "",
+          "localName": "currency",
+          "kind": "String",
+          "value": "EUR"
+        }
+      ],
+      "unsupportedReason": "Attributes"
+    },
+    "scope": "Scratch runtime fixture override only; original source/fixture unchanged"
+  },
+  {
+    "id": "CR-042",
+    "before": {
+      "id": "CR-042",
+      "label": "Integer content base remains excluded",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:integer'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "ValueType",
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    "after": {
+      "id": "CR-042",
+      "label": "Integer content base remains excluded",
+      "status": "Authored production regression input",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:complex:restriction' targetNamespace='urn:complex:restriction' elementFormDefault='qualified'><xs:complexType name='Base'><xs:simpleContent><xs:extension base='xs:integer'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Derived'><xs:simpleContent><xs:restriction base='t:Base'><xs:maxExclusive value='5'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='t:Derived'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:complex:restriction'>4.5</t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "specificationSections": [
+        "Structures3.4.2.2/3.4.6.3/3.16.6.4",
+        "Datatypes4.3.7.4-4.3.12.4"
+      ]
+    },
+    "scope": "Scratch runtime fixture override only; original source/fixture unchanged"
+  }
+]

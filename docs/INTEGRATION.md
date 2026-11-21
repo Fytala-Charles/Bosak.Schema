@@ -709,3 +709,57 @@ only; published beta.1, Core pins and release controllers are unchanged. No comm
 push/tag/publication requested. Original proposal and feasibility seals remain
 historical. Next: review/deliver, then assess integer complex content separately
 from context-item/inherited assertions. [Implementation and exact receipts](<complex-simple-restriction/IMPLEMENTATION.md>).
+
+
+## PR36 merged; proposed integer simple content - 21 November 2026
+
+PR36 merged as ab7e20afacd83edf93e71be2123fb40235c4f646, preserving reviewed
+7cfe414 tree. Main CI44896328993 passes 2,319 source cases (651/1,668), release,
+docs and workload controls. Frozen qualification remains 17 matches/4 Unsupported/
+zero errors. The next proposal covers exact integer complex extension plus one
+direct restriction, with attribute/assertion-free types and fixed fractionDigits=0.
+Actual G->B and anonymous C1->C0 identities, inherited static facet validity,
+valid-empty integer ranges and raw digit capacities remain distinct requirements.
+SC-053 remains excluded; any refusal reason change needs measured reconciliation.
+Assert006 still needs inherited/contextual assertions, so no new matches forecast.
+No implementation/adoption/new engine execution, Core/API/controller or publication
+change. Next: experiment-only adoption and actual signed-Core native feasibility.
+[Contract and review evidence](<integer-simple-content/README.md>).
+
+
+## Actual native integer simple-content feasibility - 21 November 2026
+
+An isolated three-file copied-source candidate passes 203 controls per signed Core
+pin:120public-facade payloads,48normative bound comparisons and35native identity/
+resource controls. Exact50digit integer atomics, G->B/C1->C0, anonymous/sibling/
+namespace contexts, no-facet C1, fixed fractionDigits0 and valid-empty ranges pass.
+Data-profile ReadTypedValue refusal and separate typed-identity evidence remain.
+All18Core signatures/source/cache/runtime identities verify; API54types/401rows
+has zero delta. Unmodified source comparison651implementation+1665public pass,
+with3expected failures across SC-053(reason) and CR-042(schema admitted, original
+fractional instance Invalid through both facades). With two scratch-only fixture
+expectation reconciliations, all2319stable source identities pass. Original source/
+fixtures unchanged; lanes overlap. No new package/retained-binary/pilot execution.
+Production adoption remains pending; frozen pilot stays17matches/4Unsupported/zero
+errors. Next: separate production adoption, measured implementation/reconciliations
+and full consumer/binary/pilot qualification. No commit/push/publication.
+[Native feasibility and preserved evidence](<integer-simple-content/FEASIBILITY.md>).
+
+
+## Integer simple-content production candidate - 21 November 2026
+
+Production adoption followed203actual-native controls per signed Core pin. Three
+source files now admit attribute/assertion-free integer complex extension and one
+direct restriction. BigInteger values, static inherited facets/fixedfractionDigits0,
+G->B versus anonymousC1->C0, original authority and existing quotas are retained.
+SC-053 staysUnsupported/Attributes;CR-042 schemaValid/original4.5instanceInvalid;
+explicit authored receipts preserve schema/instance/IDs and all2319stablecases.
+Qualification:2522source(734implementation/1788public),1788package-only perCore,
+83overlapping current-package native controls, retained124/23/33,API54types/401rows
+zero delta,18signedCore identities and signedbeta.1baseline. README example passes.
+Frozenpilot17matches/4Unsupported/zeroerrors with no classificationchanges;
+42originalcorpusfiles unchanged. Localunsignedalpha.0.27 only;noCore/API/controller
+or publishedbeta.1change. No commit/push/tag/publication requested. Originalproposal/
+feasibility seals remain historical. Next: review/deliver, then contextual/inherited
+assertion contract with separate exact adoption;no fullXSD/PSVI/C45/SLAacceptance.
+[Implementation and exact qualification receipts](<integer-simple-content/IMPLEMENTATION.md>).
