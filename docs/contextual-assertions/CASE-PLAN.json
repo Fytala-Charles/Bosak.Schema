@@ -1,0 +1,934 @@
+{
+  "status": "Plan only; no engine executed",
+  "rows": [
+    {
+      "id": "CA-001",
+      "description": "Inherited membership plus local parity",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\". = (1 to 10, 20, 30)\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". mod 2 = 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-002",
+      "description": "Inherited membership plus local parity",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\". = (1 to 10, 20, 30)\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". mod 2 = 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">20</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-003",
+      "description": "Inherited membership plus local parity",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\". = (1 to 10, 20, 30)\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". mod 2 = 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">80</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-004",
+      "description": "Inherited membership plus local parity",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\". = (1 to 10, 20, 30)\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". mod 2 = 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">5</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-005",
+      "description": "Inherited membership plus local parity",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\". = (1 to 10, 20, 30)\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". mod 2 = 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"outer\"><xs:complexType><xs:sequence><xs:element name=\"value\" type=\"t:D\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<outer xmlns=\"urn:assertion\"><value xmlns=\"urn:assertion\">4</value></outer>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-006",
+      "description": "Inherited membership plus local parity",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\". = (1 to 10, 20, 30)\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". mod 2 = 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"outer\"><xs:complexType><xs:sequence><xs:element name=\"value\" type=\"t:D\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<outer xmlns=\"urn:assertion\"><value xmlns=\"urn:assertion\">20</value></outer>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-007",
+      "description": "Inherited membership plus local parity",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\". = (1 to 10, 20, 30)\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". mod 2 = 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"outer\"><xs:complexType><xs:sequence><xs:element name=\"value\" type=\"t:D\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<outer xmlns=\"urn:assertion\"><value xmlns=\"urn:assertion\">80</value></outer>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-008",
+      "description": "Inherited membership plus local parity",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\". = (1 to 10, 20, 30)\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". mod 2 = 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"outer\"><xs:complexType><xs:sequence><xs:element name=\"value\" type=\"t:D\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<outer xmlns=\"urn:assertion\"><value xmlns=\"urn:assertion\">5</value></outer>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-009",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value eq 5\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">5</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-010",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". = 5\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">5</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-011",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". eq 5\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">5</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-012",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". eq '0005'\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">0005</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-013",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". eq '5'\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">0005</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-014",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value eq '5'\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">5</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-015",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value eq 9007199254740993\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">9007199254740993</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-016",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value = 9007199254740992\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">9007199254740993</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-017",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". = 9007199254740992\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">9007199254740993</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-018",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value mod 2 eq 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">9007199254740993</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-019",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". mod 2 = 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">9007199254740993</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-020",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value mod 2 eq -1\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">-5</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-021",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value mod -2 eq 1\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">5</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-022",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". mod 2 = -1\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">-5</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-023",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value mod 0 eq 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-024",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". mod 0 = 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-025",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value eq 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">-0</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-026",
+      "description": "Context/value coercion and exactness",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value eq 5\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">+0005</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-027",
+      "description": "Bounded sequence/range/logical semantics",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value = (1, 4, 9)\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-028",
+      "description": "Bounded sequence/range/logical semantics",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value != (4, 5)\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-029",
+      "description": "Bounded sequence/range/logical semantics",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value != (4, 4)\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-030",
+      "description": "Bounded sequence/range/logical semantics",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value = ()\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-031",
+      "description": "Bounded sequence/range/logical semantics",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value != ()\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-032",
+      "description": "Bounded sequence/range/logical semantics",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value = (1 to 4)\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-033",
+      "description": "Bounded sequence/range/logical semantics",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value = (4 to 4)\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-034",
+      "description": "Bounded sequence/range/logical semantics",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value = (5 to 4)\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-035",
+      "description": "Bounded sequence/range/logical semantics",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value = (-2 to 4, 20)\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-036",
+      "description": "Bounded sequence/range/logical semantics",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value ge 0 and $value lt 5\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-037",
+      "description": "Bounded sequence/range/logical semantics",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value lt 0 or $value eq 4\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-038",
+      "description": "Bounded sequence/range/logical semantics",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"($value eq 4) and ($value mod 2 eq 0)\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-039",
+      "description": "Namespace/local context survives inheritance",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\"$value ge 0\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"B\"><xs:assert test=\"$value mod 2 eq 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"D\"/></xs:schema>",
+      "instance": "<value>4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-040",
+      "description": "Namespace/local context survives inheritance",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\"$value ge 0\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"B\"><xs:assert test=\"$value mod 2 eq 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"outer\"><xs:complexType><xs:sequence><xs:element name=\"value\" type=\"D\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<outer><value>4</value></outer>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-041",
+      "description": "Namespace/local context survives inheritance",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"relative/assertion\" targetNamespace=\"relative/assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\"$value ge 0\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value mod 2 eq 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"relative/assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-042",
+      "description": "Namespace/local context survives inheritance",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"relative/assertion\" targetNamespace=\"relative/assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\"$value ge 0\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value mod 2 eq 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"outer\"><xs:complexType><xs:sequence><xs:element name=\"value\" type=\"t:D\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<outer xmlns=\"relative/assertion\"><value xmlns=\"relative/assertion\">4</value></outer>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-043",
+      "description": "Inherited-only assertions remain effective",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\"$value ge 0\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">-2</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-044",
+      "description": "Derived-only assertion",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value eq 4\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-045",
+      "description": "Facets precede context assessment",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:minInclusive value=\"2\"/><xs:assert test=\"$value eq 1\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">1</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-046",
+      "description": "Valid facets and both assertion sets",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\"$value ge 0\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:minInclusive value=\"2\"/><xs:assert test=\"$value mod 2 eq 0\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-047",
+      "description": "Lexical invalid before typed value",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value eq 4\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4.0</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-048",
+      "description": "Excluded grammar remains refusal",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"namespace-uri(.) = 'urn:assertion'\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-049",
+      "description": "Excluded grammar remains refusal",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"../value = 4\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-050",
+      "description": "Excluded grammar remains refusal",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"@x = 4\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-051",
+      "description": "Excluded grammar remains refusal",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"child eq 4\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-052",
+      "description": "Excluded grammar remains refusal",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test='doc(\"https://example.org\") = 4'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-053",
+      "description": "Excluded grammar remains refusal",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"position() eq 1\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-054",
+      "description": "Excluded grammar remains refusal",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"some $x in (1,2) satisfies $x eq 1\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-055",
+      "description": "Excluded grammar remains refusal",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$other eq 4\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-056",
+      "description": "Excluded grammar remains refusal",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value + 1 eq 5\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-057",
+      "description": "Excluded grammar remains refusal",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value div 2 eq 2\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-058",
+      "description": "Excluded grammar remains refusal",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"xs:integer(.) eq 4\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "AssertionGrammar",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-059",
+      "description": "Explicit application attributes remain excluded",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:attribute name=\"x\" type=\"xs:integer\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value eq 4\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "Attributes",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-060",
+      "description": "Aggregate inherited assertion cap",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value eq 4\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "RepresentationCapacity",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-061",
+      "description": "Bounded range cardinality",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value = (1 to 33)\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "RepresentationCapacity",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-062",
+      "description": "Huge range must not allocate",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value = (1 to 999999999999999999999999999999)\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "RepresentationCapacity",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-063",
+      "description": "Assertion length cap",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value eq 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 \"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "RepresentationCapacity",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-064",
+      "description": "Exact original assert006 input under frozen upstream expectations",
+      "schema": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n\n  <xs:complexType name=\"base\">\n    <xs:simpleContent>\n      <xs:extension base=\"xs:integer\">\n        <xs:assert test=\". = (1 to 10, 20, 30)\"/>\n      </xs:extension>\n    </xs:simpleContent>\n  </xs:complexType>\n  \n  <xs:complexType name=\"derived\">\n    <xs:simpleContent>\n      <xs:restriction base=\"base\">\n        <xs:assert test=\". mod 2 = 0\"/>\n      </xs:restriction>\n    </xs:simpleContent>\n  </xs:complexType>    \n\n  <xs:element name=\"outer\">\n    <xs:complexType>\n       <xs:sequence>\n         <xs:element name=\"inner\" minOccurs=\"0\" maxOccurs=\"4\" type=\"derived\"/>\n       </xs:sequence>       \n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n",
+      "instance": "<outer>\n  <inner>4</inner>\n  <inner>20</inner>\n  <inner>10</inner> \n</outer>   ",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "upstreamId": "Assert/assert006/assert006.v1.xml",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-065",
+      "description": "Exact original assert006 input under frozen upstream expectations",
+      "schema": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n\n  <xs:complexType name=\"base\">\n    <xs:simpleContent>\n      <xs:extension base=\"xs:integer\">\n        <xs:assert test=\". = (1 to 10, 20, 30)\"/>\n      </xs:extension>\n    </xs:simpleContent>\n  </xs:complexType>\n  \n  <xs:complexType name=\"derived\">\n    <xs:simpleContent>\n      <xs:restriction base=\"base\">\n        <xs:assert test=\". mod 2 = 0\"/>\n      </xs:restriction>\n    </xs:simpleContent>\n  </xs:complexType>    \n\n  <xs:element name=\"outer\">\n    <xs:complexType>\n       <xs:sequence>\n         <xs:element name=\"inner\" minOccurs=\"0\" maxOccurs=\"4\" type=\"derived\"/>\n       </xs:sequence>       \n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n",
+      "instance": "<outer>\n  <inner>4</inner>\n  <inner>20</inner>\n  <inner>80</inner> \n</outer>   ",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "upstreamId": "Assert/assert006/assert006.n1.xml",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-066",
+      "description": "Exact original assert006 input under frozen upstream expectations",
+      "schema": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n\n  <xs:complexType name=\"base\">\n    <xs:simpleContent>\n      <xs:extension base=\"xs:integer\">\n        <xs:assert test=\". = (1 to 10, 20, 30)\"/>\n      </xs:extension>\n    </xs:simpleContent>\n  </xs:complexType>\n  \n  <xs:complexType name=\"derived\">\n    <xs:simpleContent>\n      <xs:restriction base=\"base\">\n        <xs:assert test=\". mod 2 = 0\"/>\n      </xs:restriction>\n    </xs:simpleContent>\n  </xs:complexType>    \n\n  <xs:element name=\"outer\">\n    <xs:complexType>\n       <xs:sequence>\n         <xs:element name=\"inner\" minOccurs=\"0\" maxOccurs=\"4\" type=\"derived\"/>\n       </xs:sequence>       \n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n",
+      "instance": "<outer>\n  <inner>4</inner>\n  <inner>20</inner>\n  <inner>5</inner> \n</outer>   ",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "unsupportedReason": null,
+      "path": [
+        0
+      ],
+      "upstreamId": "Assert/assert006/assert006.n2.xml",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-067",
+      "description": "Nesting quota",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"((((((((((((((((($value eq 4)))))))))))))))))\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "RepresentationCapacity",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-068",
+      "description": "Token quota",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\". = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1 and . = 1\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "RepresentationCapacity",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-069",
+      "description": "Native integer literal quota",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value eq 99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "unsupportedReason": "RepresentationCapacity",
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-070",
+      "description": "Sequence quota inclusive boundary",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value = (1 to 32)\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "CA-071",
+      "description": "Aggregate eight-assertion boundary",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:assertion\" targetNamespace=\"urn:assertion\" elementFormDefault=\"qualified\"><xs:complexType name=\"B\"><xs:simpleContent><xs:extension base=\"xs:integer\"><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/><xs:assert test=\"$value eq 4\"/></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name=\"D\"><xs:simpleContent><xs:restriction base=\"t:B\"><xs:assert test=\"$value eq 4\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"value\" type=\"t:D\"/></xs:schema>",
+      "instance": "<value xmlns=\"urn:assertion\">4</value>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "unsupportedReason": null,
+      "path": [],
+      "status": "Proposed authored payload; not executed"
+    }
+  ],
+  "gates": [
+    {
+      "id": "CA-G01",
+      "scenario": "Partial assertion context anyType/untypedAtomic and exact typed$value remain different",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G02",
+      "scenario": "Value/general comparison coercion and2^53precision sentinels",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G03",
+      "scenario": "Positive/negative mod and integer zero-error versus doubleNaN",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G04",
+      "scenario": "Sequence != remains existential, not negated membership",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G05",
+      "scenario": "Parentless local context for root/nested owners; no ancestor escape",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G06",
+      "scenario": "Base/local conjunction; evaluate inherited tests for every derived instance",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G07",
+      "scenario": "Aggregate8assertion quota, preserve distinct identical components",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G08",
+      "scenario": "Original base namespace/default/baseURI bindings captured, never rebound",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G09",
+      "scenario": "Exact G/B/C0/C1 identity remains unchanged after assertion success",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G10",
+      "scenario": "Temporary partial assertion projection has no public/native issued authority",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G11",
+      "scenario": "Failed assertion/type error publishes no facts/snapshot or transferable atomics",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G12",
+      "scenario": "Cancellation/query rollback, rejection and recovery on same compiled session",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G13",
+      "scenario": "Foreign/copy/lifetime/reassessment guards and independent typed-identity evidence",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G14",
+      "scenario": "Preserve2522stable source identities; reconcile only measured authored deltas",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G15",
+      "scenario": "Both real public facades and native signedCore1.81.2/1.81.17 probes",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G16",
+      "scenario": "API54types/401rows zero delta, package consumers and retained124/23/33",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G17",
+      "scenario": "Frozen42files/21cases unchanged; prospective matches must be measured",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G18",
+      "scenario": "Inherited assert context uses derived content without weakening facets",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G19",
+      "scenario": "Empty local list and no-facet C1 still preserve inherited tests",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G20",
+      "scenario": "Compile unsupported operands even when a logical branch would skip runtime",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G21",
+      "scenario": "Evaluation errors yield instanceInvalid; quota/cancellation are distinct",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G22",
+      "scenario": "Decimal/string child assertion grammar and legacy refusal routes unchanged",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G23",
+      "scenario": "DeclaredG versus bounded complex xsi:type selection policy unchanged",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G24",
+      "scenario": "Eager unused asserted types, unsupportedbase dependencies/cycles/chains",
+      "status": "Proposed gate; not executed"
+    },
+    {
+      "id": "CA-G25",
+      "scenario": "Separate namespace-uri nested/empty-content case remains deferred",
+      "status": "Proposed gate; not executed"
+    }
+  ]
+}

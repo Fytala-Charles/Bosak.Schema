@@ -634,3 +634,58 @@ or publishedbeta.1change. No commit/push/tag/publication requested. Originalprop
 feasibility seals remain historical. Next: review/deliver, then contextual/inherited
 assertion contract with separate exact adoption;no fullXSD/PSVI/C45/SLAacceptance.
 [Implementation and exact qualification receipts](<integer-simple-content/IMPLEMENTATION.md>).
+
+
+## PR37 merged; contextual/inherited assertion proposal - 21 November 2026
+
+PR37 merged as2e8d6102e10e9ccbddee87249eaefa2fdfaa4468; reviewed16694d1tree
+preserved and mainCI44910612674 passes2522source(734/1788),release/docs/workload
+checks. Next proposed slice:attribute-free integer simple-content assertions with
+inherited base/local conjunction, dot versus typed$value, bounded sequence/range/
+mod and existing original type/authority semantics. XSD's partial context normally
+atomizes dot as untypedAtomic, not integer; numeric comparison/arithmetic conversions
+and value-comparison type errors need separate controls.71planned payloads/25gates
+are not executed tests/admissions. No new pilot/package/source/API/Core/controller
+change;current frozen17matches/4Unsupported/zeroerrors. Separate namespace-uri/
+nested-empty-content case remains deferred. Next:experiment-only adoption then
+actual signed-Core native feasibility. No commit/push/publication requested.
+[Proposed assertion contract and review evidence](<contextual-assertions/README.md>).
+
+
+## Actual native contextual assertion feasibility - 21 November 2026
+
+An isolated five-overlay candidate passes248native controls per signedCore pin:
+142proposal/facade+48facet+58context/ownership/grammar controls. Partial dot
+untypedAtomic versus exact typed$value, inherited/static contexts, original final
+G/C1provenance, invalid/no-publication, capacities and retained ownership guards
+are verified. API54types/401rows zero delta;18Core signatures/source/cache/runtime
+identities verify. True source comparison734implementation+1784public pass/4fail
+across exactlyIC-046/IC-050. Their unchanged `. gt 0` instances fail value-comparison
+type errors after schema admission. With2scratch-only expectation reconciliations,
+all2522stable source identities pass. Initial nested-gate failures, probe build
+errors and stale historical fixture wiring are preserved separately;SC-053 has
+no product delta. Production source/fixtures remain unchanged;no new package,
+retained-binary or frozen-pilot execution. Frozen17matches/4Unsupported/zeroerrors.
+Next:separate production adoption, measured implementation/reconciliations and full
+consumer/binary/pilot qualification. No commit/push/tag/publication requested.
+[Native feasibility and preserved evidence](<contextual-assertions/FEASIBILITY.md>).
+
+
+## Contextual/inherited integer assertion production candidate - 21 November 2026
+
+Production adoption followed248native controls per signedCore pin. Five source
+files now admit bounded integer simple-content assertions with inherited base/local
+conjunction, distinct dot untypedAtomic/typed$value, original static bindings and
+finalG/C1provenance. No public API/Core/profile change. IC-046/IC-050 schemasValid,
+original `. gt 0` instancesInvalid;explicit receipts preserve schema/instance/IDs.
+All2522priorstablecases retained. Qualification:2770source(840/1930),1930package-only
+perCore,106overlapping current-package native controls,retained124/23/33,API54types/
+401rows zero delta,18signedCore identities and signedbeta.1baseline. README example
+passes bothfacades and separate inherited/local negatives. Frozen21casepilot now
+20matches/1Unsupported/zeroerrors:three originalassert006cases newlymatch;42corpus
+files/expectations unchanged. namespace-uri structural/empty-content case remains
+Unsupported. Localunsignedalpha.0.28only;publishedbeta.1/pins/controllers unchanged.
+Originalproposal/feasibilityseals preserved. Next:review/deliver,then separate
+structural-context/namespace-uri contract. No commit/push/tag/publication or
+fullXSD/PSVI/C45/SLAacceptance requested.
+[Implementation and exact qualification receipts](<contextual-assertions/IMPLEMENTATION.md>).

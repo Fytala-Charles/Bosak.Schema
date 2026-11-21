@@ -1,0 +1,27 @@
+{
+  "status": "Proposed normative sentinels, not evaluated",
+  "dot": {
+    "partialType": "xs:anyType",
+    "atomized": "xs:untypedAtomic",
+    "numericGeneralComparison": "cast to xs:double when compared to numeric",
+    "numericArithmetic": "cast to xs:double before mod",
+    "valueComparison": "cast to xs:string; numeric mismatch is a type error"
+  },
+  "value": {
+    "type": "xs:integer for admitted valid integer simple content",
+    "representation": "BigInteger; no conversion for integer-only operations",
+    "atomics": "Internal prepublication value, not an issued public schema atomic"
+  },
+  "inherited": "Base assertion components followed by local components, all must be satisfied",
+  "caps": {
+    "effectiveAssertionsPerOwner": 8,
+    "expressionCharacters": 512,
+    "tokens": 128,
+    "nesting": 16,
+    "expandedSequenceItems": 32,
+    "integerDigits": "existing native configured limit; max256"
+  },
+  "errorPolicy": "Type errors in admitted comparisons treated dynamically; evaluated dynamic/type error makes assertion unsatisfied; Unsupported capacity/grammar stays separate",
+  "conversionPolicy": "IEEEbinary64 nearest/ties-even for new untyped numeric conversions; verify native implementation rather than silently substituting integer arithmetic",
+  "stringCollation": "http://www.w3.org/2005/xpath-functions/collation/codepoint"
+}

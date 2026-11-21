@@ -1,0 +1,448 @@
+--- original/Assessment/NativeComplexRestriction.cs
++++ candidate/Assessment/NativeComplexRestriction.cs
+@@ -13,6 +13,7 @@
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 21-11-2026     | Creation                                                                                 |
+ //                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
++//                      | Charles Korthout | 0.3   | 21-11-2026     | Isolated contextual integer assertion experiment |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -26,12 +27,14 @@
+ {
+     private static NativeDecimalSchema CompileComplexRestriction(XElement restriction, NativeDeclaration root,
+         string targetNamespace, Dictionary<XName, NativeType> simple, NativeNumericLimits limits,
+-        Func<XName, NativeDecimalSchema?>? resolveComplex, CancellationToken token)
++        Func<XName, NativeDecimalSchema?>? resolveComplex, CancellationToken token, string assertionNamespace)
+     {
+         token.ThrowIfCancellationRequested();
+         Attributes(restriction, "base");
+         var children = Elements(restriction);
+-        foreach (var child in children)
++        var localAssertions = children.Where(e => e.Name == Xs + "assert").ToArray();
++        Require(!children.SkipWhile(e => e.Name != Xs + "assert").Any(e => e.Name != Xs + "assert"), "Facets must precede assertions.", NativeDecimalUnsupportedReason.DeclarationShape);
++        foreach (var child in children.Where(e => e.Name != Xs + "assert"))
+         {
+             token.ThrowIfCancellationRequested();
+             Require(child.Name != Xs + "attribute" && child.Name != Xs + "attributeGroup" && child.Name != Xs + "anyAttribute",
+@@ -67,13 +70,19 @@
+         var content = baseType.ContentType;
+         Require(content is not null && !content.IsComplex && !content.IsString && !content.IsBoolean,
+             "Complex base content is outside the decimal profile.", NativeDecimalUnsupportedReason.ValueType);
++        Require(content!.IsInteger || localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty,
++            "Contextual assertions on noninteger content are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
++        var facetsOnly = new XElement(restriction.Name, restriction.Attributes(), children.Where(e => e.Name != Xs + "assert"));
++        var inheritedAssertions = basePlan.integerAssertions;
++        var effectiveAssertions = inheritedAssertions.AddRange(CompileIntegerAssertions(localAssertions, targetNamespace, assertionNamespace, limits, token));
++        Require(effectiveAssertions.Length <= 8, "Effective integer assertion capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+         var atomic = content!.IsInteger
+             ? new NativeType(null, false, targetNamespace, isInteger: true,
+-                integerFacets: NativeIntegerFacets.CompileDerived(restriction, content.IntegerFacets, limits), derivationBase: content)
++                integerFacets: NativeIntegerFacets.CompileDerived(facetsOnly, content.IntegerFacets, limits), derivationBase: content)
+             : new NativeType(null, false, targetNamespace,
+-                facets: NativeDecimalFacets.CompileDerived(restriction, content.Facets, limits), derivationBase: content);
++                facets: NativeDecimalFacets.CompileDerived(facetsOnly, content.Facets, limits), derivationBase: content);
+         var governing = new NativeType(root.Type.Name, false, targetNamespace, contentType: atomic,
+             derivationBase: baseType, isComplexRestriction: true);
+-        return new NativeDecimalSchema(new NativeDeclaration(root.Name, governing, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
++        return new NativeDecimalSchema(new NativeDeclaration(root.Name, governing, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { integerAssertions = effectiveAssertions };
+     }
+ }
+--- original/Assessment/NativeDecimalSchema.cs
++++ candidate/Assessment/NativeDecimalSchema.cs
+@@ -33,6 +33,7 @@
+ //                      | Charles Korthout | 1.10  | 21-11-2026     | Adopt mixed relative target namespaces and form defaults independently of attribute uses     |
+ //                      | Charles Korthout | 1.11  | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+ //                      | Charles Korthout | 1.12  | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
++//                      | Charles Korthout | 1.13  | 21-11-2026     | Isolated contextual integer assertion experiment |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -165,7 +166,7 @@
+                 {
+                     Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
+                     Require(named.TryGetValue(ResolveTypeName(declaration), out var shared), "Unresolved root complex type.", NativeDecimalUnsupportedReason.ValueType);
+-                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses };
++                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions };
+                 }
+                 else
+                 {
+@@ -195,11 +196,11 @@
+ 
+     private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
+         string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
+-        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null)
++        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null, bool nestedContext = false)
+     {
+         var members = Elements(complex);
+         if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
+-            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver);
++            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver, assertionNamespace, nestedContext);
+         var attributeMembers = members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray();
+         var assertionMembers = members.Skip(1 + attributeMembers.Length).ToArray();
+         Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && assertionMembers.Length <= 8 &&
+@@ -288,26 +289,28 @@
+ 
+     private static NativeDecimalSchema CompileSimpleContent(XElement content, NativeDeclaration root,
+         string targetNamespace, string attributeForm, NativeType decimalType, NativeType stringType, NativeType? booleanType,
+-        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Func<XName, NativeDecimalSchema?>? complexResolver)
++        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Func<XName, NativeDecimalSchema?>? complexResolver, string assertionNamespace, bool nestedContext)
+     {
+         Attributes(content);
+         var contentMembers = Elements(content);
+         if (contentMembers.Count == 1 && contentMembers[0].Name == Xs + "restriction")
+-            return CompileComplexRestriction(contentMembers[0], root, targetNamespace, simple, limits, complexResolver, cancellationToken);
++            return CompileComplexRestriction(contentMembers[0], root, targetNamespace, simple, limits, complexResolver, cancellationToken, assertionNamespace);
+         var extension = Single(content, "extension");
+         Attributes(extension, "base");
+         var baseName = ResolveTypeName(extension, "base");
+         NativeType? baseType = baseName == Xs + "decimal" ? decimalType : baseName == Xs + "integer" ? integerType : simple.GetValueOrDefault(baseName);
++        if (nestedContext && baseType?.IsInteger != true && Elements(extension).Any(e => e.Name == Xs + "assert"))
++            Require(false, "Noninteger nested assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+         Require(baseType is not null && !baseType.IsString && !baseType.IsBoolean,
+             "Only direct admitted decimal simple-content bases are supported.", NativeDecimalUnsupportedReason.ValueType);
+         if (baseType!.IsInteger)
+         {
+-            foreach (var child in Elements(extension))
+-            {
+-                Require(child.Name != Xs + "attribute" && child.Name != Xs + "attributeGroup" && child.Name != Xs + "anyAttribute", "Integer extension attributes are outside the profile.", NativeDecimalUnsupportedReason.Attributes);
+-                Require(child.Name != Xs + "assert", "Integer extension assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+-                Require(false, "Integer extension child grammar is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+-            }
++            var children = Elements(extension);
++            Require(!children.Any(e => e.Name == Xs + "attribute" || e.Name == Xs + "attributeGroup" || e.Name == Xs + "anyAttribute"), "Integer extension attributes are outside the profile.", NativeDecimalUnsupportedReason.Attributes);
++            Require(children.All(e => e.Name == Xs + "assert"), "Integer extension children are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
++            var integerTypePlan = new NativeType(root.Type.Name, false, root.Type.NamespaceUri, contentType: baseType);
++            return new NativeDecimalSchema(new NativeDeclaration(root.Name, integerTypePlan, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits)
++            { integerAssertions = CompileIntegerAssertions(children, targetNamespace, assertionNamespace, limits, cancellationToken) };
+         }
+         var uses = CompileAttributes(Elements(extension), targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
+         var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri, contentType: baseType);
+@@ -370,6 +373,7 @@
+                 Require(root.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
+                 var scalarDeclaration = new NativeDeclaration(selected.Root.Name, contentType, 1, 1, selected.Root.NamespaceUri);
+                 var state = AssessScalar(root.Value, scalarDeclaration) with { Declaration = selected.Root, EffectiveType = rootType, NormalizedStringValue = Collapse(root.Value) };
++                selected.AssessIntegerAssertions(root, state, cancellationToken);
+                 cancellationToken.ThrowIfCancellationRequested();
+                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [state], attributeStates.ToImmutable()));
+             }
+--- original/Assessment/NativeIntegerAssertion.cs
++++ candidate/Assessment/NativeIntegerAssertion.cs
+@@ -0,0 +1,203 @@
++// ===========================================================================================================================================================
++// AUTHOR               : Charles Korthout
++// CREATE DATE          : 21 November 2026
++// PURPOSE              : Compiles bounded contextual integer assertions for an isolated native experiment.
++// SPECIAL NOTES        : Isolated prototype; no production semantic adoption or public authority issuance.
++//
++// COPYRIGHT            : Fytala
++// LICENSE              : LICENSE.md (Apache-2.0)
++// SPDX-License-Identifier: Apache-2.0
++// ===========================================================================================================================================================
++// Change History:      |==================|=======|================|=========================================================================================
++//                      |     Author       |Version|  Date          | Notes                                                                                    |
++//                      |==================|=======|================|=========================================================================================
++//                      | Charles Korthout | 0.1   | 21-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 21-11-2026     | Refine isolated contextual assertion prototype; no production adoption |
++//                      |==================|=======|================|=========================================================================================
++// ===========================================================================================================================================================
++
++using System.Collections.Immutable;
++using System.Globalization;
++using System.Numerics;
++
++namespace Bosak.Schema;
++
++internal sealed class NativeIntegerAssertion
++{
++    internal sealed record Context(string Text, BigInteger Integer)
++    {
++        internal string TypeAnnotation => "{http://www.w3.org/2001/XMLSchema}anyType";
++        internal string AtomizedKind => "untypedAtomic";
++    }
++    private sealed class DynamicError : Exception { }
++    private sealed record Atom(string Kind, BigInteger Integer = default, double Number = 0, string Text = "");
++    private sealed record Token(string Kind, string Text);
++    private readonly Func<Context, bool> predicate;
++    internal ImmutableDictionary<string, string> Namespaces { get; }
++    internal string DefaultNamespace { get; }
++    internal string BaseUri { get; }
++    internal string Expression { get; }
++    private NativeIntegerAssertion(Func<Context, bool> predicate, string expression,
++        ImmutableDictionary<string, string> namespaces, string defaultNamespace, string baseUri)
++    { this.predicate = predicate; Expression = expression; Namespaces = namespaces; DefaultNamespace = defaultNamespace; BaseUri = baseUri; }
++
++    internal static NativeIntegerAssertion Compile(string expression, NativeNumericLimits limits,
++        ImmutableDictionary<string, string> namespaces, string defaultNamespace, string baseUri)
++    {
++        Need(expression.Length <= 512, true);
++        var tokens = new List<Token>();
++        for (var index = 0; index < expression.Length;)
++        {
++            var c = expression[index];
++            if (c is ' ' or '\t' or '\r' or '\n') { index++; continue; }
++            var start = index++;
++            if (c is '\'' or '"')
++            {
++                var text = new System.Text.StringBuilder(); var closed = false;
++                while (index < expression.Length)
++                {
++                    var next = expression[index++];
++                    if (next != c) { text.Append(next); continue; }
++                    if (index < expression.Length && expression[index] == c) { text.Append(c); index++; continue; }
++                    closed = true; break;
++                }
++                Need(closed); tokens.Add(new("string", text.ToString()));
++            }
++            else if (c is >= '0' and <= '9')
++            {
++                while (index < expression.Length && expression[index] is >= '0' and <= '9') index++;
++                tokens.Add(new("integer", expression[start..index]));
++            }
++            else if (char.IsAsciiLetter(c) || c is '$' or '_')
++            {
++                while (index < expression.Length && (char.IsAsciiLetterOrDigit(expression[index]) || expression[index] is '_' or ':' or '-')) index++;
++                tokens.Add(new("word", expression[start..index]));
++            }
++            else
++            {
++                Need(c is '.' or '(' or ')' or ',' or '=' or '!' or '+' or '-');
++                if (c == '!') { Need(index < expression.Length && expression[index] == '='); index++; }
++                tokens.Add(new("symbol", expression[start..index]));
++            }
++            Need(tokens.Count <= 128, true);
++        }
++        var parser = new Parser(tokens, limits); var predicate = parser.ParseOr(); Need(parser.End);
++        return new(predicate, expression, namespaces, defaultNamespace, baseUri);
++    }
++    internal bool Evaluate(Context context)
++    {
++        try { return predicate(context); }
++        catch (DynamicError) { return false; }
++    }
++    private static void Need(bool condition, bool capacity = false) => NativeDecimalSchema.Require(condition,
++        capacity ? "Integer assertion capacity exceeded." : "Integer assertion grammar is outside the profile.",
++        capacity ? NativeDecimalUnsupportedReason.RepresentationCapacity : NativeDecimalUnsupportedReason.AssertionGrammar);
++    private static double AsDouble(Atom atom)
++    {
++        if (atom.Kind == "double") return atom.Number;
++        var text = atom.Kind == "integer" ? atom.Integer.ToString(CultureInfo.InvariantCulture) : atom.Text;
++        if (!double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var number)) throw new DynamicError();
++        return number;
++    }
++    private static Atom Remainder(Atom left, BigInteger divisor)
++    {
++        if (left.Kind == "integer")
++        { if (divisor.IsZero) throw new DynamicError(); return new("integer", left.Integer % divisor); }
++        if (left.Kind is "untyped" or "double") return new("double", Number: AsDouble(left) % AsDouble(new("integer", divisor)));
++        throw new DynamicError();
++    }
++    private static bool Compare(Atom left, Atom right, string operation, bool general)
++    {
++        if (general)
++        {
++            if (left.Kind == "untyped") left = new("double", Number: AsDouble(left));
++            if (right.Kind == "untyped") right = new("double", Number: AsDouble(right));
++        }
++        else
++        {
++            if (left.Kind == "untyped") left = new("string", Text: left.Text);
++            if (right.Kind == "untyped") right = new("string", Text: right.Text);
++        }
++        if (left.Kind == "string" || right.Kind == "string")
++        {
++            if (left.Kind != "string" || right.Kind != "string" || operation is not ("eq" or "ne")) throw new DynamicError();
++            var same = string.Equals(left.Text, right.Text, StringComparison.Ordinal);
++            return operation == "eq" ? same : !same;
++        }
++        int comparison;
++        if (left.Kind == "double" || right.Kind == "double")
++        {
++            var a = AsDouble(left); var b = AsDouble(right);
++            if (double.IsNaN(a) || double.IsNaN(b)) return operation == "ne";
++            comparison = a.CompareTo(b);
++        }
++        else comparison = left.Integer.CompareTo(right.Integer);
++        return operation switch { "eq" => comparison == 0, "ne" => comparison != 0, "lt" => comparison < 0,
++            "le" => comparison <= 0, "gt" => comparison > 0, "ge" => comparison >= 0, _ => throw new DynamicError() };
++    }
++    private sealed class Parser(List<Token> tokens, NativeNumericLimits limits)
++    {
++        private int position, depth;
++        internal bool End => position == tokens.Count;
++        private string Peek => End ? "" : tokens[position].Text;
++        private bool Take(string token) { if (Peek != token || End || tokens[position].Kind == "string") return false; position++; return true; }
++        private void Expect(string token) => Need(Take(token));
++        private void Enter() { depth++; Need(depth <= 16, true); }
++        internal Func<Context, bool> ParseOr()
++        {
++            var plan = ParseAnd();
++            while (Take("or")) { var left = plan; var right = ParseAnd(); plan = c => left(c) || right(c); }
++            return plan;
++        }
++        private Func<Context, bool> ParseAnd()
++        {
++            var plan = Primary();
++            while (Take("and")) { var left = plan; var right = Primary(); plan = c => left(c) && right(c); }
++            return plan;
++        }
++        private Func<Context, bool> Primary()
++        {
++            if (Take("(")) { Enter(); var inner = ParseOr(); Expect(")"); depth--; return inner; }
++            var leftString = !End && tokens[position].Kind == "string";
++            var left = Operand(); Need(!End && tokens[position].Kind != "string"); var operation = Peek; position++;
++            if (operation is "=" or "!=")
++            {
++                Need(!leftString); var sequence = Sequence(); var op = operation == "=" ? "eq" : "ne";
++                return c => { var a = left(c); foreach (var b in sequence) if (Compare(a, new("integer", b), op, true)) return true; return false; };
++            }
++            Need(operation is "eq" or "ne" or "lt" or "le" or "gt" or "ge");
++            var rightString = !End && tokens[position].Kind == "string";
++            Need(operation is "eq" or "ne" || !leftString && !rightString);
++            var right = Operand(); return c => Compare(left(c), right(c), operation, false);
++        }
++        private Func<Context, Atom> Operand()
++        {
++            Need(!End); Func<Context, Atom> value; var stringLiteral = false;
++            if (Take(".")) value = c => new("untyped", Text: c.Text);
++            else if (Take("$value")) value = c => new("integer", c.Integer);
++            else if (tokens[position].Kind == "string") { stringLiteral = true; var text = tokens[position++].Text; value = _ => new("string", Text: text); }
++            else { var integer = Integer(); value = _ => new("integer", integer); }
++            if (Take("mod")) { Need(!stringLiteral); var dividend = value; var divisor = Integer(); value = c => Remainder(dividend(c), divisor); }
++            return value;
++        }
++        private BigInteger Integer()
++        {
++            var negative = Take("-"); if (!negative) Take("+"); Need(!End && tokens[position].Kind == "integer");
++            var text = tokens[position++].Text; Need(text.Length <= 256 && text.Length <= limits.MaxDigits, true);
++            var value = BigInteger.Parse(text, NumberStyles.None, CultureInfo.InvariantCulture); return negative ? -value : value;
++        }
++        private BigInteger[] Sequence()
++        {
++            var result = new List<BigInteger>(); var grouped = Take("(");
++            if (grouped) { Enter(); if (Take(")")) { depth--; return []; } }
++            do
++            {
++                var first = Integer(); var last = Take("to") ? Integer() : first;
++                var count = BigInteger.Max(BigInteger.Zero, last - first + 1); Need(count <= 32 - result.Count, true);
++                for (var n = first; n <= last; n++) result.Add(n);
++            } while (grouped && Take(","));
++            if (grouped) { Expect(")"); depth--; }
++            return result.ToArray();
++        }
++    }
++}
+--- original/Assessment/NativeIntegerAssertionBinding.cs
++++ candidate/Assessment/NativeIntegerAssertionBinding.cs
+@@ -0,0 +1,63 @@
++// ===========================================================================================================================================================
++// AUTHOR               : Charles Korthout
++// CREATE DATE          : 21 November 2026
++// PURPOSE              : Binds bounded integer assertions to native simple-content assessment.
++// SPECIAL NOTES        : Isolated prototype; no production semantic adoption or public authority issuance.
++//
++// COPYRIGHT            : Fytala
++// LICENSE              : LICENSE.md (Apache-2.0)
++// SPDX-License-Identifier: Apache-2.0
++// ===========================================================================================================================================================
++// Change History:      |==================|=======|================|=========================================================================================
++//                      |     Author       |Version|  Date          | Notes                                                                                    |
++//                      |==================|=======|================|=========================================================================================
++//                      | Charles Korthout | 0.1   | 21-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 21-11-2026     | Refine isolated contextual assertion prototype; no production adoption |
++//                      |==================|=======|================|=========================================================================================
++// ===========================================================================================================================================================
++
++
++using System.Collections.Immutable;
++using System.Xml.Linq;
++
++namespace Bosak.Schema;
++
++internal sealed partial class NativeDecimalSchema
++{
++    private ImmutableArray<NativeIntegerAssertion> integerAssertions = [];
++    internal ImmutableArray<NativeIntegerAssertion> IntegerAssertions => integerAssertions;
++    private static ImmutableArray<NativeIntegerAssertion> CompileIntegerAssertions(
++        IEnumerable<XElement> elements, string targetNamespace, string defaultNamespace,
++        NativeNumericLimits limits, CancellationToken token)
++    {
++        var result = ImmutableArray.CreateBuilder<NativeIntegerAssertion>();
++        foreach (var element in elements)
++        {
++            token.ThrowIfCancellationRequested();
++            Require(element.Name == Xs + "assert", "Expected bounded integer assertion.", NativeDecimalUnsupportedReason.AssertionGrammar);
++            Attributes(element, "test", "xpathDefaultNamespace");
++            Require(Elements(element).Count == 0, "Assertion children are excluded.", NativeDecimalUnsupportedReason.AssertionGrammar);
++            var expression = (string?)element.Attribute("test");
++            Require(expression is not null, "Assertion expression required.", NativeDecimalUnsupportedReason.AssertionGrammar);
++            var namespaces = ImmutableDictionary.CreateBuilder<string,string>(StringComparer.Ordinal);
++            namespaces["xml"] = XNamespace.Xml.NamespaceName;
++            foreach (var scope in element.AncestorsAndSelf().Reverse())
++                foreach (var attribute in scope.Attributes().Where(a => a.IsNamespaceDeclaration))
++                    namespaces[attribute.Name.LocalName == "xmlns" ? "" : attribute.Name.LocalName] = attribute.Value;
++            result.Add(NativeIntegerAssertion.Compile(expression!, limits, namespaces.ToImmutable(),
++                AssertionNamespace(element, targetNamespace, defaultNamespace), element.BaseUri));
++            Require(result.Count <= 8, "Effective integer assertion capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
++        }
++        return result.ToImmutable();
++    }
++    private void AssessIntegerAssertions(XElement element, NativeElementState state, CancellationToken token)
++    {
++        if (integerAssertions.IsEmpty) return;
++        var context = new NativeIntegerAssertion.Context(element.Value, state.IntegerValue!.Value);
++        foreach (var assertion in integerAssertions)
++        {
++            token.ThrowIfCancellationRequested();
++            Check(assertion.Evaluate(context), "Integer assertion evaluated false or raised a dynamic/type error.");
++        }
++    }
++}
+--- original/Assessment/NativeNestedSchema.cs
++++ candidate/Assessment/NativeNestedSchema.cs
+@@ -18,6 +18,7 @@
+ //                      | Charles Korthout | 0.5   | 20-11-2026     | Share original anonymous simple definitions and the eager combined local type budget      |
+ //                      | Charles Korthout | 0.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+ //                      | Charles Korthout | 0.7   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
++//                      | Charles Korthout | 0.8   | 21-11-2026     | Isolated contextual integer assertion experiment |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ using System.Collections.Immutable;
+@@ -46,7 +47,7 @@
+         NativeType decimalType, NativeType stringType, NativeType booleanType, NativeType integerType,
+         Dictionary<XName, NativeType> simple, NativeNumericLimits limits, int maxStringCharacters, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple)
+     {
+-        Require(!schema.Descendants(Xs + "assert").Any(), "Nested schemas must be assertion-free.", NativeDecimalUnsupportedReason.AssertionGrammar);
++        Require(!schema.Descendants(Xs + "assert").Any(a => a.Parent?.Parent?.Name != Xs + "simpleContent"), "Structural nested assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+         var definitions = types.Where(t => t.Name == Xs + "complexType")
+             .ToDictionary(t => XName.Get(Name(t), targetNamespace));
+         var named = new Dictionary<XName, NativeDecimalSchema>();
+@@ -71,7 +72,7 @@
+             var members = Elements(complex);
+             if (members.Count == 1 && members[0].Name == Xs + "simpleContent")
+                 return CompileComplex(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
+-                    decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null);
++                    decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null, nestedContext: true);
+             Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && members.Skip(1).All(e => e.Name == Xs + "attribute"),
+                 "Expected an element-only sequence and root attributes.", NativeDecimalUnsupportedReason.DeclarationShape);
+             var sequence = members[0];
+@@ -136,7 +137,7 @@
+                 Require(Elements(element).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
+                 var shared = Resolve(ResolveTypeName(element));
+                 plan = new NativeDecimalSchema(new NativeDeclaration(name, shared.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits)
+-                    { AttributeUses = shared.AttributeUses, NestedProfile = shared.NestedProfile };
++                    { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, NestedProfile = shared.NestedProfile };
+             }
+             else
+             {
+@@ -200,7 +201,9 @@
+             Check(!element.HasElements, "Simple-content terminal cannot contain child elements.");
+             Require(element.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
+             var atomicDeclaration = new NativeDeclaration(declaration.Name, contentType, 1, 1, declaration.NamespaceUri);
+-            states.Add(AssessScalar(element.Value, atomicDeclaration) with { Declaration = declaration, EffectiveType = effectiveType, NormalizedStringValue = Collapse(element.Value) });
++            var scalarState = AssessScalar(element.Value, atomicDeclaration) with { Declaration = declaration, EffectiveType = effectiveType, NormalizedStringValue = Collapse(element.Value) };
++            plan.AssessIntegerAssertions(element, scalarState, cancellationToken);
++            states.Add(scalarState);
+             cancellationToken.ThrowIfCancellationRequested();
+             return;
+         }
