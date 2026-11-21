@@ -1,0 +1,78 @@
+{
+  "status": "Proposed bounded classification, not observed results",
+  "priority": [
+    "Existing XML/input/cancellation and resource gates",
+    "Eager excluded grammar/dependencies, preserving existing refusal ordering",
+    "New bounded reference/facet component checks",
+    "Complete instance assessment and fact publication"
+  ],
+  "rules": [
+    {
+      "condition": "Recognized new base QName malformed, unbound or absent in complete closed schema",
+      "compile": "Invalid",
+      "stageCode": "BSK-NATIVE-SCHEMA-INVALID"
+    },
+    {
+      "condition": "Recognized numeric facet missing/invalid value, duplicate/conflicting facets or illegal inherited weakening",
+      "compile": "Invalid",
+      "stageCode": "BSK-NATIVE-SCHEMA-INVALID"
+    },
+    {
+      "condition": "Valid empty type from equal exclusive bounds in one step",
+      "compile": "Valid",
+      "assessment": "Invalid for every supplied decimal instance"
+    },
+    {
+      "condition": "Schema/input/raw facet/numeric/type/expanded graph capacity exceeded",
+      "compile": "Unsupported",
+      "reason": "RepresentationCapacity"
+    },
+    {
+      "condition": "Complex restriction chain or cyclic dependency outside one-level profile",
+      "compile": "Unsupported",
+      "reason": "DeclarationShape"
+    },
+    {
+      "condition": "Base/derived application attribute uses",
+      "compile": "Unsupported",
+      "reason": "Attributes"
+    },
+    {
+      "condition": "Assertions outside existing admitted context",
+      "compile": "Unsupported",
+      "reason": "AssertionGrammar"
+    },
+    {
+      "condition": "Known excluded built-in, scalar family or base kind",
+      "compile": "Unsupported",
+      "reason": "ValueType"
+    },
+    {
+      "condition": "Valid instance exceeds inherited or derived scalar facet",
+      "compile": "Valid",
+      "assessment": "Invalid",
+      "noFactsPublished": true
+    },
+    {
+      "condition": "True derived-complex xsi:type under declared base",
+      "compile": "Valid",
+      "assessment": "Unsupported",
+      "reason": "ValueType"
+    },
+    {
+      "condition": "Weakening xsi:type to base or unrelated sibling",
+      "compile": "Valid",
+      "assessment": "Invalid"
+    }
+  ],
+  "excludedGrammarIncludes": [
+    "inline simpleType",
+    "enumeration/pattern/whiteSpace/fixed facets",
+    "attribute groups/wildcards/default/fixed/prohibited uses",
+    "complexContent",
+    "block/final/abstract",
+    "list/union",
+    "new acquisition"
+  ],
+  "legacyOutcomesPreserved": true
+}

@@ -1,0 +1,1690 @@
+[
+  {
+    "id": "SC-001",
+    "description": "Decimal value '12.50'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-002",
+    "description": "Decimal value '+0012.500'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>+0012.500</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-003",
+    "description": "Decimal value '-12.50'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>-12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "-12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-004",
+    "description": "Decimal value '0'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>0</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "0",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-005",
+    "description": "Decimal value '-0.000'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>-0.000</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "0",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-006",
+    "description": "Decimal value '.5'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>.5</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "0.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-007",
+    "description": "Decimal value '12.'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-008",
+    "description": "Decimal value '9999999999999999999999999999'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>99999999999999999999999999999999999999999999999999</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "99999999999999999999999999999999999999999999999999",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-009",
+    "description": "Decimal value '9999999999999999999999999999'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-010",
+    "description": "Decimal value '-999999999999999999999999999'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>-999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "-999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-011",
+    "description": "Decimal value ' \\t12.50\\r\\n '",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'> \t12.50\r\n </price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-012",
+    "description": "Referenced whitespace collapses only root string-value",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>&#x9;+0012.50&#xD;&#xA;</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-013",
+    "description": "CDATA supplies root text",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'><![CDATA[12.50]]></price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-014",
+    "description": "Invalid decimal text ''",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'></price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-015",
+    "description": "Invalid decimal text ' '",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'> </price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-016",
+    "description": "Invalid decimal text 'abc'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>abc</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-017",
+    "description": "Invalid decimal text '1e2'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>1e2</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-018",
+    "description": "Invalid decimal text '1 2'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>1 2</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-019",
+    "description": "Invalid decimal text 'TRUE'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>TRUE</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-020",
+    "description": "Invalid decimal text '１２'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>１２</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-021",
+    "description": "Invalid decimal text '1,2'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>1,2</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-022",
+    "description": "Invalid decimal text '+'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>+</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-023",
+    "description": "Invalid decimal text 'NaN'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>NaN</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-024",
+    "description": "Invalid decimal text 'INF'",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>INF</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-025",
+    "description": "Raw decimal lexical ceiling",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "SC-026",
+    "description": "Raw whitespace counted before collapse",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>                                                                                                                                                                                                                                                                1</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "SC-027",
+    "description": "Supplied coefficient zeros counted",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>0001</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 3,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "SC-028",
+    "description": "Supplied scale bound",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>1.250</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 2,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "SC-029",
+    "description": "Integer lexical fits decimal scale0",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 0,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-030",
+    "description": "Zero scale overflow before normalization",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>0.00</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 1,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "SC-031",
+    "description": "Missing required attr",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-032",
+    "description": "Undeclared attr",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR' extra='x'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-033",
+    "description": "Optional attr absent",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": []
+  },
+  {
+    "id": "SC-034",
+    "description": "No attribute uses",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": []
+  },
+  {
+    "id": "SC-035",
+    "description": "No-use root retains old attribute refusal",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "SC-036",
+    "description": "Attribute normalized before root",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='E\tR'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "E R"
+      }
+    ]
+  },
+  {
+    "id": "SC-037",
+    "description": "Attribute string capacity independent of decimal",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 2,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "SC-038",
+    "description": "Qualified attribute form default",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' attributeFormDefault='qualified'><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<p:price xmlns:p='urn:price' p:currency='EUR'>12.50</p:price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "urn:price",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-039",
+    "description": "Default namespace does not qualify attribute",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' attributeFormDefault='qualified'><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-040",
+    "description": "Anonymous complex root",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:element name='price'><xs:complexType><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-041",
+    "description": "Second root shared named complex",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<quote xmlns='urn:price' currency='EUR'>12.50</quote>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-042",
+    "description": "Nested elements invalid",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'><n>12.50</n></price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-043",
+    "description": "Mixed child invalid",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12<n/>.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-044",
+    "description": "Simple root comments excluded",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12<!--x-->.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "Unspecified"
+  },
+  {
+    "id": "SC-045",
+    "description": "Simple root PI excluded",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12<?p x?>.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "Unspecified"
+  },
+  {
+    "id": "SC-046",
+    "description": "xsi nil request excluded",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' currency='EUR'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "SC-047",
+    "description": "Duplicate physical attribute invalid",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR' currency='USD'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-048",
+    "description": "Named decimal content inherited facets",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='1'/><xs:maxInclusive value='20'/><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='t:Money' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-049",
+    "description": "Inherited decimal facet rejects",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:simpleType name='Money'><xs:restriction base='xs:decimal'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='t:Money' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>0</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-050",
+    "description": "Base QName default namespace",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension xmlns='http://www.w3.org/2001/XMLSchema' base='decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ]
+  },
+  {
+    "id": "SC-051",
+    "description": "Excluded or unresolved base xs:string",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:string' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "ValueType"
+  },
+  {
+    "id": "SC-052",
+    "description": "Excluded or unresolved base xs:boolean",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:boolean' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "ValueType"
+  },
+  {
+    "id": "SC-053",
+    "description": "Excluded or unresolved base xs:integer",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:integer' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "ValueType"
+  },
+  {
+    "id": "SC-054",
+    "description": "Excluded or unresolved base xs:double",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:double' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "ValueType"
+  },
+  {
+    "id": "SC-055",
+    "description": "Excluded or unresolved base t:Missing",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='t:Missing' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "ValueType"
+  },
+  {
+    "id": "SC-056",
+    "description": "Excluded or unresolved base unknown:decimal",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='unknown:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "ValueType"
+  },
+  {
+    "id": "SC-057",
+    "description": "Complex base chain excluded",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='Other'><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='t:Other' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "ValueType"
+  },
+  {
+    "id": "SC-058",
+    "description": "Simple content restriction excluded",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:restriction base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "SC-059",
+    "description": "Simple content assertions excluded",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:assert test='. gt 0'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "SC-060",
+    "description": "Simple content mixed attribute excluded",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType' mixed='true'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "SC-061",
+    "description": "Default fixed still excluded",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' fixed='EUR'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "SC-062",
+    "description": "Wildcard still excluded",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:anyAttribute/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "SC-063",
+    "description": "Sequence cannot coexist with simple content",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent><xs:sequence/></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "DeclarationShape"
+  },
+  {
+    "id": "SC-064",
+    "description": "Extension attributes excluded",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' id='x'><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "SC-065",
+    "description": "Unused unsupported definition refuses whole schema",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='Unused' mixed='true'><xs:sequence/></xs:complexType><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  },
+  {
+    "id": "SC-066",
+    "description": "Seventeenth local attr capacity",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='a0' type='xs:string'/><xs:attribute name='a1' type='xs:string'/><xs:attribute name='a2' type='xs:string'/><xs:attribute name='a3' type='xs:string'/><xs:attribute name='a4' type='xs:string'/><xs:attribute name='a5' type='xs:string'/><xs:attribute name='a6' type='xs:string'/><xs:attribute name='a7' type='xs:string'/><xs:attribute name='a8' type='xs:string'/><xs:attribute name='a9' type='xs:string'/><xs:attribute name='a10' type='xs:string'/><xs:attribute name='a11' type='xs:string'/><xs:attribute name='a12' type='xs:string'/><xs:attribute name='a13' type='xs:string'/><xs:attribute name='a14' type='xs:string'/><xs:attribute name='a15' type='xs:string'/><xs:attribute name='a16' type='xs:string'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "RepresentationCapacity"
+  },
+  {
+    "id": "SC-067",
+    "description": "No-use form default is legal; undeclared currency remains unsupported",
+    "sections": [
+      "Structures3.4.2.2/3.4.4",
+      "Datatypes3.3.3/4.3.6",
+      "XDM3.3.1.2/6.2"
+    ],
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' attributeFormDefault='qualified'><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+    "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "expectedRoot": "12.5",
+    "maxNativeCoefficientDigits": 256,
+    "maxNativeScale": 256,
+    "maxStringCharacters": 256,
+    "attributes": [
+      {
+        "namespaceUri": "",
+        "localName": "currency",
+        "kind": "String",
+        "value": "EUR"
+      }
+    ],
+    "unsupportedReason": "Attributes"
+  }
+]

@@ -740,7 +740,7 @@ lexical XML. Original element-only ancestors have no typed value (FOTY0012).
 Only direct xs:decimal or admitted named-decimal bases are supported. Existing
 depth4/16terminal/64attribute-use budgets remain; scalar-bearing complex owners
 at depth4may have three-segment OwnerElementPath values. No new public member or
-path-based selector is added. Complex-base chains/restriction, other base families,
+path-based selector is added. Complex-base extension/restriction chains, other base families,
 assertions, mixed content, defaults/nil/composition and primitive simple-type leaf
 attributes remain excluded. NativeDecimalSession and published beta.1 are unchanged.
 
@@ -833,7 +833,7 @@ and valid derivations that change scalar family or simple/complex representation
 remain Unsupported. Siblings and weakening are not substitutions. Selected values
 retain original declaration and assessment ownership, with the selected governing
 type supplying annotations and atomic provenance. The request itself adds no
-application-attribute scalar. `xsi:nil`, imports, complex inheritance, block/final,
+application-attribute scalar. `xsi:nil`, imports, general complex inheritance, block/final,
 abstract types, lists/unions and additional scalar families remain excluded.
 NativeDecimalSession and published0.5.0-beta.1 are unchanged. This is bounded
 development support; no full XSD1.1 or general PSVI claim is made.
@@ -855,3 +855,46 @@ namespace-aware attributes keep their behavior. Explicit xpathDefaultNamespace
 URI literals remain absolute-only; symbolic `##targetNamespace` and
 `##defaultNamespace` capture the exact namespace name. NativeDecimalSession keeps
 its previous absolute-only namespace/form limits. Published beta.1 is unchanged.
+
+
+### Decimal complex simple-content restriction (0.6 development)
+
+The mixed owned facades admit one direct restriction of a named complex type
+whose simple content extends `xs:decimal` or an existing named decimal simple
+restriction. Both complex types must be free of application attributes and
+assertions. This example admits `4.5` and rejects `5`:
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:t="urn:amount" targetNamespace="urn:amount">
+  <xs:complexType name="Amount">
+    <xs:simpleContent><xs:extension base="xs:decimal"/></xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SmallAmount">
+    <xs:simpleContent><xs:restriction base="t:Amount">
+      <xs:maxExclusive value="5"/>
+    </xs:restriction></xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="amount" type="t:SmallAmount"/>
+</xs:schema>
+```
+
+Supply `<t:amount xmlns:t="urn:amount">4.5</t:amount>` to the existing session
+assessment API. Read the root through `ReadRootScalar()` or fixed original-node
+`ReadElement([])`. Existing nested scalar-terminal reads work in their bounded
+paths. The decimal stays exact; the original declaration and complex governing
+type remain distinct from the owned anonymous simple content type.
+
+Only the existing six decimal facets are admitted. Inherited bounds/digits still
+apply, and static weakening or invalid facet/reference syntax in this bounded
+route makes the schema Invalid. Numeric/type/raw-token capacities and excluded
+grammar remain Unsupported. Equal exclusive endpoints can define a valid empty
+type whose instances all fail; that is different from an invalid schema.
+
+Forward named base references are supported. Complex restriction chains, base or
+derived attributes/assertions, other scalar families, inline simpleType and
+broader inheritance remain excluded. An xsi:type request changing one complex
+governing type to another remains Unsupported even when its true derivation is
+known; same-component requests keep their existing behavior. Legacy
+NativeDecimalSession and published beta.1 are unchanged. No general XSD/PSVI or
+Core provider API expansion is implied.

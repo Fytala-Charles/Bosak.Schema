@@ -27,6 +27,7 @@
 //                      | Charles Korthout | 1.4   | 20-11-2026     | Register actual decimal content types for nested original complex terminal facts         |
 //                      | Charles Korthout | 1.5   | 20-11-2026     | Adopt opt-in original-node data binding; preserve scalar default          |
 //                      | Charles Korthout | 1.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+//                      | Charles Korthout | 1.8   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -77,11 +78,19 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         }
     }
 
+    // Typed lookup of an existing owned native component; never registers or fabricates authority.
+    internal Component TypeComponent(NativeType type) => components[type];
+
     private Component Add(object value)
     {
         if (components.TryGetValue(value, out var existing)) return existing;
         var component = new Component(this);
         components.Add(value, component);
+        if (value is NativeType type)
+        {
+            if (type.ContentType is { } content) Add(content);
+            if (type.DerivationBase is { } parent) Add(parent);
+        }
         return component;
     }
 
@@ -221,12 +230,12 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             var origin = new Origin(this, input, date, timezone);
             var states = result.Value!.Elements;
             var facts = states.Select((state, index) => new Facts(input, input.ElementNodes[index], origin,
-                provider.components[state.GoverningType], provider.components[state.Declaration], state,
-                provider.components[state.GoverningType.ContentType ?? state.GoverningType])).ToImmutableArray();
+                provider.TypeComponent(state.GoverningType), provider.components[state.Declaration], state,
+                provider.TypeComponent(state.GoverningType.ContentType ?? state.GoverningType))).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
             var attributeFacts = result.Value.Attributes.Select(state => new Facts(input, input.ElementAttributeNode(state.OwnerElementIndex, state.OwnerElementPath, states[state.OwnerElementIndex].Declaration.ExpandedName, state.Declaration.ExpandedName), origin,
-                provider.components[state.GoverningType], provider.components[state.Declaration], state,
-                provider.components[state.GoverningType.ContentType ?? state.GoverningType])).ToImmutableArray();
+                provider.TypeComponent(state.GoverningType), provider.components[state.Declaration], state,
+                provider.TypeComponent(state.GoverningType.ContentType ?? state.GoverningType))).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
             if (!input.Publish(origin, facts.AddRange(attributeFacts)))
                 return Assessment.Failure(SchemaAssessmentStatus.Unsupported, "BSK-NATIVE-REASSESSMENT", "Original assessment cannot be replaced.", request.Limits);

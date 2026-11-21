@@ -1,0 +1,319 @@
+diff --git a/src/Bosak.Schema/Assessment/NativeDecimalFacets.cs b/src/Bosak.Schema/Assessment/NativeDecimalFacets.cs
+index ca2ae03..cc282a1 100644
+--- a/src/Bosak.Schema/Assessment/NativeDecimalFacets.cs
++++ b/src/Bosak.Schema/Assessment/NativeDecimalFacets.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -25,8 +26,62 @@ namespace Bosak.Schema;
+ /// <summary>Compiles and enforces bounded decimal value-space facets.</summary>
+ internal sealed class NativeDecimalFacets(
+     XdmExactDecimal? lower, bool lowerExclusive, XdmExactDecimal? upper, bool upperExclusive,
+-    int? totalDigits, int? fractionDigits)
++    int? totalDigits, int? fractionDigits, NativeDecimalFacets? parent = null)
+ {
++    internal XdmExactDecimal? LowerBound => lower ?? parent?.LowerBound;
++    internal XdmExactDecimal? UpperBound => upper ?? parent?.UpperBound;
++    internal bool LowerExclusive => lower is not null ? lowerExclusive : parent?.LowerExclusive ?? false;
++    internal bool UpperExclusive => upper is not null ? upperExclusive : parent?.UpperExclusive ?? false;
++    internal int? TotalLimit => totalDigits ?? parent?.TotalLimit;
++    internal int? FractionLimit => fractionDigits ?? parent?.FractionLimit;
++
++    internal static NativeDecimalFacets CompileDerived(XElement restriction, NativeDecimalFacets? inherited, NativeNumericLimits limits)
++    {
++        NativeDecimalFacets own;
++        try { own = Compile(restriction, limits); }
++        catch (NativeProfileException error) when (error.Outcome == NativeOutcome.Unsupported &&
++            error.UnsupportedReason is NativeDecimalUnsupportedReason.ValueType or NativeDecimalUnsupportedReason.DeclarationShape)
++        { throw new NativeProfileException(NativeOutcome.Invalid, "Invalid bounded decimal restriction facets."); }
++        static void Valid(bool condition)
++        { if (!condition) throw new NativeProfileException(NativeOutcome.Invalid, "Illegal inherited decimal facet restriction."); }
++        if (inherited is not null)
++        {
++            if (own.UpperBound is { } hi)
++            {
++                if (inherited.UpperBound is { } bhi)
++                {
++                    var c = Compare(hi, bhi);
++                    Valid(own.UpperExclusive || !inherited.UpperExclusive ? c <= 0 : c < 0);
++                }
++                if (inherited.LowerBound is { } blo)
++                {
++                    var c = Compare(hi, blo);
++                    Valid(own.UpperExclusive || inherited.LowerExclusive ? c > 0 : c >= 0);
++                }
++            }
++            if (own.LowerBound is { } lo)
++            {
++                if (inherited.LowerBound is { } blo)
++                {
++                    var c = Compare(lo, blo);
++                    Valid(!own.LowerExclusive && inherited.LowerExclusive ? c > 0 : c >= 0);
++                }
++                if (inherited.UpperBound is { } bhi)
++                {
++                    var c = Compare(lo, bhi);
++                    Valid(own.LowerExclusive || inherited.UpperExclusive ? c < 0 : c <= 0);
++                }
++            }
++            if (own.TotalLimit is { } total && inherited.TotalLimit is { } baseTotal) Valid(total <= baseTotal);
++            if (own.FractionLimit is { } fraction && inherited.FractionLimit is { } baseFraction) Valid(fraction <= baseFraction);
++        }
++        var effectiveTotal = own.TotalLimit ?? inherited?.TotalLimit;
++        var effectiveFraction = own.FractionLimit ?? inherited?.FractionLimit;
++        Valid(effectiveTotal is null || effectiveFraction is null || effectiveFraction <= effectiveTotal);
++        return new(own.LowerBound, own.LowerExclusive, own.UpperBound, own.UpperExclusive,
++            own.TotalLimit, own.FractionLimit, inherited);
++    }
++
+     internal static NativeDecimalFacets Compile(XElement restriction, NativeNumericLimits limits)
+     {
+         XdmExactDecimal? lower=null, upper=null;
+@@ -85,6 +140,7 @@ internal sealed class NativeDecimalFacets(
+ 
+     internal bool Accepts(XdmExactDecimal value)
+     {
++        if (parent is not null && !parent.Accepts(value)) return false;
+         if(lower is { } lo) { var c=Compare(value,lo); if(c<0 || c==0 && lowerExclusive) return false; }
+         if(upper is { } hi) { var c=Compare(value,hi); if(c>0 || c==0 && upperExclusive) return false; }
+         if(fractionDigits is { } f && value.Scale>f) return false;
+diff --git a/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs b/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
+index a0b18c2..44850e4 100644
+--- a/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
++++ b/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
+@@ -31,6 +31,7 @@
+ //                      | Charles Korthout | 1.8   | 20-11-2026     | Assess bounded string assertions from original immediate scalar child values             |
+ //                      | Charles Korthout | 1.9   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+ //                      | Charles Korthout | 1.10  | 21-11-2026     | Adopt mixed relative target namespaces and form defaults independently of attribute uses     |
++//                      | Charles Korthout | 1.11  | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -128,16 +129,27 @@ internal sealed partial class NativeDecimalSchema
+                     defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType!, integerType!, simple,
+                     limits, maxStringCharacters!.Value, cancellationToken, anonymousSimple));
+             // Compile all complex types eagerly, including unused declarations.
+-            foreach (var type in types.Where(t => t.Name == Xs + "complexType"))
++            var complexDefinitions = types.Where(t => t.Name == Xs + "complexType")
++                .ToDictionary(t => XName.Get(Name(t), targetNamespace));
++            var resolvingComplex = new HashSet<XName>();
++            NativeDecimalSchema ResolveComplex(XName key)
+             {
+                 cancellationToken.ThrowIfCancellationRequested();
++                if (named.TryGetValue(key, out var known)) return known;
++                Require(resolvingComplex.Add(key), "Complex dependency cycle is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
++                var type = complexDefinitions[key];
+                 Attributes(type, "name");
+                 var name = Name(type);
+-                var key = XName.Get(name, targetNamespace);
+                 var identity = new NativeType(name, true, targetNamespace);
+-                named.Add(key, CompileComplex(type, new NativeDeclaration(name, identity, 1, 1, targetNamespace),
+-                    targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple));
++                var plan = CompileComplex(type, new NativeDeclaration(name, identity, 1, 1, targetNamespace),
++                    targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType,
++                    simple, limits, cancellationToken, anonymousSimple,
++                    requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null);
++                resolvingComplex.Remove(key);
++                named.Add(key, plan);
++                return plan;
+             }
++            foreach (var key in complexDefinitions.Keys) ResolveComplex(key);
+             var compiled = ImmutableDictionary.CreateBuilder<XName, NativeDecimalSchema>();
+             NativeDecimalSchema? first = null;
+             foreach (var declaration in declarations)
+@@ -159,7 +171,7 @@ internal sealed partial class NativeDecimalSchema
+                     var complex = Single(declaration, "complexType");
+                     Attributes(complex);
+                     plan = CompileComplex(complex, new NativeDeclaration(name, new NativeType(null, true), 1, 1, targetNamespace),
+-                        targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple);
++                        targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null);
+                 }
+                 compiled.Add(key, plan);
+                 first ??= plan;
+@@ -182,11 +194,11 @@ internal sealed partial class NativeDecimalSchema
+ 
+     private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
+         string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
+-        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple)
++        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null)
+     {
+         var members = Elements(complex);
+         if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
+-            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken);
++            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver);
+         var attributeMembers = members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray();
+         var assertionMembers = members.Skip(1 + attributeMembers.Length).ToArray();
+         Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && assertionMembers.Length <= 8 &&
+@@ -275,9 +287,12 @@ internal sealed partial class NativeDecimalSchema
+ 
+     private static NativeDecimalSchema CompileSimpleContent(XElement content, NativeDeclaration root,
+         string targetNamespace, string attributeForm, NativeType decimalType, NativeType stringType, NativeType? booleanType,
+-        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken)
++        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Func<XName, NativeDecimalSchema?>? complexResolver)
+     {
+         Attributes(content);
++        var contentMembers = Elements(content);
++        if (contentMembers.Count == 1 && contentMembers[0].Name == Xs + "restriction")
++            return CompileComplexRestriction(contentMembers[0], root, targetNamespace, simple, limits, complexResolver, cancellationToken);
+         var extension = Single(content, "extension");
+         Attributes(extension, "base");
+         var baseName = ResolveTypeName(extension, "base");
+@@ -616,8 +631,10 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string?
+ }
+ 
+ // Identity is deliberate: independently compiled equal schemas do not share components.
+-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null)
++internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false)
+ {
++    internal NativeType? DerivationBase { get; } = derivationBase;
++    internal bool IsComplexRestriction { get; } = isComplexRestriction;
+     internal XName? BaseName { get; } = baseName;
+     internal NativeIntegerFacets? IntegerFacets { get; } = integerFacets;
+     internal NativeType? ContentType { get; } = contentType;
+diff --git a/src/Bosak.Schema/Assessment/NativeInstanceType.cs b/src/Bosak.Schema/Assessment/NativeInstanceType.cs
+index 4400327..eaf7098 100644
+--- a/src/Bosak.Schema/Assessment/NativeInstanceType.cs
++++ b/src/Bosak.Schema/Assessment/NativeInstanceType.cs
+@@ -12,6 +12,7 @@
+ //                      |     Author       |Version|  Date          | Notes                                                                                    |
+ //                      |==================|=======|================|=========================================================================================
+ //                      | Charles Korthout | 0.1   | 21-11-2026     | Creation                                                                                 |
++//                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -42,6 +43,7 @@ internal sealed partial class NativeDecimalSchema
+         {
+             if (!all.Add(type)) return;
+             if (type.ContentType is { } content) AddType(content);
++            if (type.DerivationBase is { } parent) AddType(parent);
+         }
+         void Visit(NativeDecimalSchema plan)
+         {
+@@ -59,7 +61,8 @@ internal sealed partial class NativeDecimalSchema
+         if (IntegerType is { } integer) bases.Add(integer, DecimalType);
+         foreach (var type in all)
+         {
+-            if (type.BaseName is { } parent) bases.Add(type, named[parent]);
++            if (type.DerivationBase is { } direct) bases.Add(type, direct);
++            else if (type.BaseName is { } parent) bases.Add(type, named[parent]);
+             else if (type.ContentType is { } content) bases.Add(type, content);
+         }
+         instanceBases = bases.ToImmutable();
+diff --git a/src/Bosak.Schema/Assessment/NativeNestedSchema.cs b/src/Bosak.Schema/Assessment/NativeNestedSchema.cs
+index 2f992d9..9041b2d 100644
+--- a/src/Bosak.Schema/Assessment/NativeNestedSchema.cs
++++ b/src/Bosak.Schema/Assessment/NativeNestedSchema.cs
+@@ -17,6 +17,7 @@
+ //                      | Charles Korthout | 0.4   | 20-11-2026     | Preserve unfetched location hints separately from descendant application attributes      |
+ //                      | Charles Korthout | 0.5   | 20-11-2026     | Share original anonymous simple definitions and the eager combined local type budget      |
+ //                      | Charles Korthout | 0.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
++//                      | Charles Korthout | 0.7   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ using System.Collections.Immutable;
+@@ -70,7 +71,7 @@ internal sealed partial class NativeDecimalSchema
+             var members = Elements(complex);
+             if (members.Count == 1 && members[0].Name == Xs + "simpleContent")
+                 return CompileComplex(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
+-                    decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple);
++                    decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null);
+             Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && members.Skip(1).All(e => e.Name == Xs + "attribute"),
+                 "Expected an element-only sequence and root attributes.", NativeDecimalUnsupportedReason.DeclarationShape);
+             var sequence = members[0];
+diff --git a/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs b/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs
+index 984f31c..1c3f705 100644
+--- a/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs
++++ b/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs
+@@ -27,6 +27,7 @@
+ //                      | Charles Korthout | 1.4   | 20-11-2026     | Register actual decimal content types for nested original complex terminal facts         |
+ //                      | Charles Korthout | 1.5   | 20-11-2026     | Adopt opt-in original-node data binding; preserve scalar default          |
+ //                      | Charles Korthout | 1.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
++//                      | Charles Korthout | 1.8   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -77,11 +78,19 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
+         }
+     }
+ 
++    // Typed lookup of an existing owned native component; never registers or fabricates authority.
++    internal Component TypeComponent(NativeType type) => components[type];
++
+     private Component Add(object value)
+     {
+         if (components.TryGetValue(value, out var existing)) return existing;
+         var component = new Component(this);
+         components.Add(value, component);
++        if (value is NativeType type)
++        {
++            if (type.ContentType is { } content) Add(content);
++            if (type.DerivationBase is { } parent) Add(parent);
++        }
+         return component;
+     }
+ 
+@@ -221,12 +230,12 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
+             var origin = new Origin(this, input, date, timezone);
+             var states = result.Value!.Elements;
+             var facts = states.Select((state, index) => new Facts(input, input.ElementNodes[index], origin,
+-                provider.components[state.GoverningType], provider.components[state.Declaration], state,
+-                provider.components[state.GoverningType.ContentType ?? state.GoverningType])).ToImmutableArray();
++                provider.TypeComponent(state.GoverningType), provider.components[state.Declaration], state,
++                provider.TypeComponent(state.GoverningType.ContentType ?? state.GoverningType))).ToImmutableArray();
+             cancellationToken.ThrowIfCancellationRequested();
+             var attributeFacts = result.Value.Attributes.Select(state => new Facts(input, input.ElementAttributeNode(state.OwnerElementIndex, state.OwnerElementPath, states[state.OwnerElementIndex].Declaration.ExpandedName, state.Declaration.ExpandedName), origin,
+-                provider.components[state.GoverningType], provider.components[state.Declaration], state,
+-                provider.components[state.GoverningType.ContentType ?? state.GoverningType])).ToImmutableArray();
++                provider.TypeComponent(state.GoverningType), provider.components[state.Declaration], state,
++                provider.TypeComponent(state.GoverningType.ContentType ?? state.GoverningType))).ToImmutableArray();
+             cancellationToken.ThrowIfCancellationRequested();
+             if (!input.Publish(origin, facts.AddRange(attributeFacts)))
+                 return Assessment.Failure(SchemaAssessmentStatus.Unsupported, "BSK-NATIVE-REASSESSMENT", "Original assessment cannot be replaced.", request.Limits);
+diff --git a/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj b/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
+index 4339416..e7dc843 100644
+--- a/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
++++ b/tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj
+@@ -35,4 +35,5 @@
+   </ItemGroup>
+   <ItemGroup><None Include="../TestData/InstanceTypes/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/InstanceTypes/%(Filename)%(Extension)" /></ItemGroup>
+   <ItemGroup><None Include="../TestData/NamespaceForm/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NamespaceForm/%(Filename)%(Extension)" /></ItemGroup>
++  <ItemGroup><None Include="../TestData/ComplexSimpleRestriction/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/ComplexSimpleRestriction/%(Filename)%(Extension)" /></ItemGroup>
+ </Project>
+diff --git a/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj b/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj
+index f5df97e..566879c 100644
+--- a/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj
++++ b/tests/Bosak.Schema.Tests/Bosak.Schema.Tests.csproj
+@@ -31,4 +31,5 @@
+   <ItemGroup>
+     <None Include="../TestData/NodeData/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NodeData/%(Filename)%(Extension)" />
+   </ItemGroup>
++  <ItemGroup><None Include="../TestData/ComplexSimpleRestriction/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/ComplexSimpleRestriction/%(Filename)%(Extension)" /></ItemGroup>
+ </Project>
+diff --git a/tests/TestData/SimpleContent/cases.json b/tests/TestData/SimpleContent/cases.json
+index d92ccde..e1c5f4d 100644
+--- a/tests/TestData/SimpleContent/cases.json
++++ b/tests/TestData/SimpleContent/cases.json
+@@ -1429,7 +1429,7 @@
+   },
+   {
+     "id": "SC-058",
+-    "description": "Simple content restriction excluded",
++    "description": "Restriction attribute uses remain excluded",
+     "sections": [
+       "Structures3.4.2.2/3.4.4",
+       "Datatypes3.3.3/4.3.6",
+@@ -1451,7 +1451,7 @@
+         "value": "EUR"
+       }
+     ],
+-    "unsupportedReason": "DeclarationShape"
++    "unsupportedReason": "Attributes"
+   },
+   {
+     "id": "SC-059",

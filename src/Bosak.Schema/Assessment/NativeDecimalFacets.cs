@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -25,8 +26,62 @@ namespace Bosak.Schema;
 /// <summary>Compiles and enforces bounded decimal value-space facets.</summary>
 internal sealed class NativeDecimalFacets(
     XdmExactDecimal? lower, bool lowerExclusive, XdmExactDecimal? upper, bool upperExclusive,
-    int? totalDigits, int? fractionDigits)
+    int? totalDigits, int? fractionDigits, NativeDecimalFacets? parent = null)
 {
+    internal XdmExactDecimal? LowerBound => lower ?? parent?.LowerBound;
+    internal XdmExactDecimal? UpperBound => upper ?? parent?.UpperBound;
+    internal bool LowerExclusive => lower is not null ? lowerExclusive : parent?.LowerExclusive ?? false;
+    internal bool UpperExclusive => upper is not null ? upperExclusive : parent?.UpperExclusive ?? false;
+    internal int? TotalLimit => totalDigits ?? parent?.TotalLimit;
+    internal int? FractionLimit => fractionDigits ?? parent?.FractionLimit;
+
+    internal static NativeDecimalFacets CompileDerived(XElement restriction, NativeDecimalFacets? inherited, NativeNumericLimits limits)
+    {
+        NativeDecimalFacets own;
+        try { own = Compile(restriction, limits); }
+        catch (NativeProfileException error) when (error.Outcome == NativeOutcome.Unsupported &&
+            error.UnsupportedReason is NativeDecimalUnsupportedReason.ValueType or NativeDecimalUnsupportedReason.DeclarationShape)
+        { throw new NativeProfileException(NativeOutcome.Invalid, "Invalid bounded decimal restriction facets."); }
+        static void Valid(bool condition)
+        { if (!condition) throw new NativeProfileException(NativeOutcome.Invalid, "Illegal inherited decimal facet restriction."); }
+        if (inherited is not null)
+        {
+            if (own.UpperBound is { } hi)
+            {
+                if (inherited.UpperBound is { } bhi)
+                {
+                    var c = Compare(hi, bhi);
+                    Valid(own.UpperExclusive || !inherited.UpperExclusive ? c <= 0 : c < 0);
+                }
+                if (inherited.LowerBound is { } blo)
+                {
+                    var c = Compare(hi, blo);
+                    Valid(own.UpperExclusive || inherited.LowerExclusive ? c > 0 : c >= 0);
+                }
+            }
+            if (own.LowerBound is { } lo)
+            {
+                if (inherited.LowerBound is { } blo)
+                {
+                    var c = Compare(lo, blo);
+                    Valid(!own.LowerExclusive && inherited.LowerExclusive ? c > 0 : c >= 0);
+                }
+                if (inherited.UpperBound is { } bhi)
+                {
+                    var c = Compare(lo, bhi);
+                    Valid(own.LowerExclusive || inherited.UpperExclusive ? c < 0 : c <= 0);
+                }
+            }
+            if (own.TotalLimit is { } total && inherited.TotalLimit is { } baseTotal) Valid(total <= baseTotal);
+            if (own.FractionLimit is { } fraction && inherited.FractionLimit is { } baseFraction) Valid(fraction <= baseFraction);
+        }
+        var effectiveTotal = own.TotalLimit ?? inherited?.TotalLimit;
+        var effectiveFraction = own.FractionLimit ?? inherited?.FractionLimit;
+        Valid(effectiveTotal is null || effectiveFraction is null || effectiveFraction <= effectiveTotal);
+        return new(own.LowerBound, own.LowerExclusive, own.UpperBound, own.UpperExclusive,
+            own.TotalLimit, own.FractionLimit, inherited);
+    }
+
     internal static NativeDecimalFacets Compile(XElement restriction, NativeNumericLimits limits)
     {
         XdmExactDecimal? lower=null, upper=null;
@@ -85,6 +140,7 @@ internal sealed class NativeDecimalFacets(
 
     internal bool Accepts(XdmExactDecimal value)
     {
+        if (parent is not null && !parent.Accepts(value)) return false;
         if(lower is { } lo) { var c=Compare(value,lo); if(c<0 || c==0 && lowerExclusive) return false; }
         if(upper is { } hi) { var c=Compare(value,hi); if(c>0 || c==0 && upperExclusive) return false; }
         if(fractionDigits is { } f && value.Scale>f) return false;
