@@ -39,6 +39,8 @@
 //                      | Charles Korthout | 1.16   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
 //                      | Charles Korthout | 1.17   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
 //                      | Charles Korthout | 1.18   | 22-11-2026     | Adopt qualified bounded native string patterns |
+//                      | Charles Korthout | 1.19   | 22-11-2026     | Probe simple scalar roots in isolated source copies only |
+//                      | Charles Korthout | 1.20   | 22-11-2026     | Adopt qualified native simple scalar root assessment |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -168,7 +170,9 @@ internal sealed partial class NativeDecimalSchema
                 var key = XName.Get(name, targetNamespace);
                 Require(!compiled.ContainsKey(key), "Duplicate root declaration.", NativeDecimalUnsupportedReason.DeclarationShape);
                 NativeDecimalSchema plan;
-                if (declaration.Attribute("type") is not null)
+                var scalarRoot = TryCompileSimpleRoot(declaration, targetNamespace, decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits);
+                if (scalarRoot is not null) plan = scalarRoot;
+                else if (declaration.Attribute("type") is not null)
                 {
                     Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                     Require(named.TryGetValue(ResolveTypeName(declaration), out var shared), "Unresolved root complex type.", NativeDecimalUnsupportedReason.ValueType);
@@ -394,7 +398,16 @@ internal sealed partial class NativeDecimalSchema
             }
             else InstanceAttributes(root);
             Check(found, "Unexpected root element.");
-            if (selected!.Root.Type.ContentType is { } contentType)
+            if (!selected!.Root.Type.IsComplex)
+            {
+                Check(!root.HasElements, "Simple root cannot contain child elements.");
+                Require(root.Nodes().All(n => n is XText), "Simple-root comments or processing instructions are unsupported.");
+                var scalar = AssessElementScalar(root, selected.Root, patternBudget) with
+                { NormalizedStringValue = rootType!.IsString ? root.Value : Collapse(root.Value) };
+                cancellationToken.ThrowIfCancellationRequested();
+                return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [scalar], []));
+            }
+            if (selected.Root.Type.ContentType is { } contentType)
             {
                 Check(!root.HasElements, "Simple-content root cannot contain child elements.");
                 Require(root.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");

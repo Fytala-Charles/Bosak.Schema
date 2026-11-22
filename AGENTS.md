@@ -1003,3 +1003,57 @@ This is an unsigned local alpha.0.30 candidate. Published beta.1, Core pins and
 release controllers remain unchanged. Broader regex syntax, new roots and type
 chains remain outside this slice. Git delivery awaits an explicit request.
 See the [implementation and qualification](docs/string-patterns/IMPLEMENTATION.md).
+
+
+## PR40 merged; simple-root contract - 22 November 2026
+
+PR40 merges as `1f2cca34ce8dc93b25f11b402bbe60330b8ee1cf`, preserving the reviewed
+tree. Main CI45027251051 passes 3,050 source tests plus release, documentation and
+workload controls. Pattern qualification remains sealed: frozen pilot 21 matches,
+expanded sample 3 matches / 126 Unsupported, zero mismatches or harness errors.
+
+Next proposed slice: global simple-typed roots for existing bounded decimal,
+integer, boolean and string families. Exact specification and source reviews,
+38 XML payloads and 17 actual-native gates are prepared, unexecuted. Preserve root
+scalar/leaf separation, original declaration/governing/atomic identity, selected
+xsi:type facets, string whitespace, shared limits and both compiler routes.
+Original SKU remains excluded by its unsupported digit escape. No product source,
+API, Core pin, package/controller or semantic-adoption change in this proposal.
+[Contract and next feasibility gates](docs/simple-typed-roots/README.md).
+
+
+## Native simple-root feasibility - 22 November 2026
+
+The isolated three-overlay candidate passes 135 actual-native controls per signed
+Core pin (1.81.2/1.81.17), with four unchanged-production baseline controls per pin.
+Original simple root declaration/type/atomic evidence, root/leaf separation, string
+whitespace, selected governing facets, mixed catalogs, budgets and lifetime pass.
+Two proposal boolean restrictions remain Unsupported; built-in boolean roots pass.
+All 3,050 prior source identities remain: 948 implementation pass; public comparison
+2,101 pass / one authored admission (AS-050), then scratch reconciliation 2,102 pass.
+Original schema/instance/ID and product fixture remain unchanged. API54/401 has zero
+delta; all 18 signed Core identities verify. Product source/pins/packages/controllers
+and frozen/expanded results remain unchanged. Next: separate production adoption
+and complete package/retained/corpus qualification. No commit/push/publication.
+[Feasibility and preserved receipts](docs/simple-typed-roots/FEASIBILITY.md).
+
+
+## Bounded simple-root production candidate - 22 November 2026
+
+Production adoption precedes the qualified simple-root implementation. Existing
+bounded scalar families now work at declared global roots through both opt-in
+facades, preserving original type evidence, root/leaf separation, string whitespace,
+selected governing facets, compiler routes, limits and lifetime. Boolean restrictions
+and new datatype/type-chain breadth remain excluded; legacy grammar is unchanged.
+
+All 3,050 prior source identities remain, with explicit AS-050 compile/label
+reconciliation and 135 new cases. Source 3,185 (1,007 internal / 2,178 public), package
+consumers 2,178 per Core, 59 current-package native controls and retained 124/23/33 pass.
+API 54 types / 401 rows has zero delta; 18 signed Core identities and signed beta.1 verify.
+Frozen pilot stays 21 matches; expanded 129 cases stay 3 matches / 126 Unsupported, zero errors
+on both pins. Eight first-refusal reason changes are recorded explicitly; all 42 frozen
+and 274 expanded original files/expectations remain unchanged. Packaged example passes.
+Local unsigned alpha.0.31 only; published beta.1, pins and controllers unchanged.
+Next: review/deliver on explicit Git request, then merge/main verification and the
+next ranked derived-integer family contract. No commit/push/tag/publication.
+[Implementation and exact qualification](docs/simple-typed-roots/IMPLEMENTATION.md).
