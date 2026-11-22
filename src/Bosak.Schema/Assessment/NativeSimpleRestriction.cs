@@ -16,6 +16,8 @@
 //                      | Charles Korthout | 0.3   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
 //                      | Charles Korthout | 0.4   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
 //                      | Charles Korthout | 0.5   | 22-11-2026     | Adopt qualified bounded native string patterns |
+//                      | Charles Korthout | 0.6   | 22-11-2026     | Probe simple scalar roots in isolated source copies only |
+//                      | Charles Korthout | 0.7   | 22-11-2026     | Adopt qualified native simple scalar root assessment |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -50,7 +52,7 @@ internal sealed partial class NativeDecimalSchema
         if (maxStringCharacters is null) return result;
         // Count source sites, including unused named definitions; shared references do not consume the budget twice.
         var definitions = schema.Descendants().Where(e => (e.Name == Xs + "simpleType" || e.Name == Xs + "complexType") &&
-            e.Parent?.Name == Xs + "element" && e.Parent.Parent?.Name == Xs + "sequence").ToArray();
+            e.Parent?.Name == Xs + "element" && (e.Parent.Parent?.Name == Xs + "sequence" || e.Name == Xs + "simpleType" && e.Parent.Parent?.Name == Xs + "schema")).ToArray();
         Require(definitions.Length <= 16, "Local anonymous type ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         foreach (var definition in definitions.Where(e => e.Name == Xs + "simpleType"))
         {
@@ -60,4 +62,25 @@ internal sealed partial class NativeDecimalSchema
         }
         return result;
     }
+    private static NativeDecimalSchema? TryCompileSimpleRoot(XElement declaration, string targetNamespace,
+        NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
+        Dictionary<XName, NativeType> simple, Dictionary<XElement, NativeType> anonymousSimple, NativeNumericLimits limits)
+    {
+        if (stringType is null) return null; // Preserve the legacy facade grammar.
+        NativeType? type = null;
+        if (declaration.Attribute("type") is not null)
+        {
+            Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
+            var name = ResolveTypeName(declaration);
+            type = name == Xs + "decimal" ? decimalType : name == Xs + "string" ? stringType :
+                name == Xs + "boolean" ? booleanType : name == Xs + "integer" ? integerType : simple.GetValueOrDefault(name);
+        }
+        else
+        {
+            var members = Elements(declaration);
+            if (members.Count == 1 && members[0].Name == Xs + "simpleType") type = anonymousSimple[members[0]];
+        }
+        return type is null ? null : new NativeDecimalSchema(new NativeDeclaration(Name(declaration), type, 1, 1, targetNamespace), [], [], limits);
+    }
+
 }

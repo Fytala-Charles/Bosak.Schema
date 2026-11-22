@@ -24,6 +24,8 @@
 //                      | Charles Korthout | 0.11   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
 //                      | Charles Korthout | 0.12   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
 //                      | Charles Korthout | 0.13   | 22-11-2026     | Adopt qualified bounded native string patterns |
+//                      | Charles Korthout | 0.14   | 22-11-2026     | Probe simple scalar roots in isolated source copies only |
+//                      | Charles Korthout | 0.15   | 22-11-2026     | Adopt qualified native simple scalar root assessment |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -139,7 +141,9 @@ internal sealed partial class NativeDecimalSchema
             var key = XName.Get(name, targetNamespace);
             Require(!roots.ContainsKey(key), "Duplicate root declaration.", NativeDecimalUnsupportedReason.DeclarationShape);
             NativeDecimalSchema plan;
-            if (element.Attribute("type") is not null)
+            var scalarRoot = TryCompileSimpleRoot(element, targetNamespace, decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits);
+            if (scalarRoot is not null) plan = scalarRoot;
+            else if (element.Attribute("type") is not null)
             {
                 Require(Elements(element).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                 var shared = Resolve(ResolveTypeName(element));
@@ -165,7 +169,7 @@ internal sealed partial class NativeDecimalSchema
     private static (int Nodes, int Scalars, int Depth, int Attributes) NestedBudget(NativeDecimalSchema plan, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        if (plan.Root.Type.ContentType is not null) return (1, 1, 1, plan.AttributeUses.Length);
+        if (!plan.Root.Type.IsComplex || plan.Root.Type.ContentType is not null) return (1, 1, 1, plan.AttributeUses.Length);
         var nodes = 1; var scalars = 0; var depth = 1; var attributes = plan.AttributeUses.Length;
         foreach (var child in plan.Children)
         {

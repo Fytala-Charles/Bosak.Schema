@@ -19,6 +19,7 @@
 //                      | Charles Korthout | 0.6   | 20-11-2026     | Document terminal-only document-order scalar reads for nested sequences                  |
 //                      | Charles Korthout | 0.7   | 20-11-2026     | Expose separate descendant attribute reads without changing root or scalar indexes       |
 //                      | Charles Korthout | 0.8   | 20-11-2026     | Document scalar-bearing complex terminals in the unchanged descendant read projection    |
+//                      | Charles Korthout | 0.9   | 22-11-2026     | Document simple scalar root reads without widening the API |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -53,9 +54,9 @@ public sealed class NativeSchemaDocument : IDisposable
     /// <exception cref="NotSupportedException">Another session operation is admitted.</exception>
     public bool HasRootScalar => document.HasRootScalar;
 
-    /// <summary>Reads a decimal simple-content root through its original typed facts.</summary>
+    /// <summary>Reads an admitted simple or simple-content root through its original typed facts.</summary>
     /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
-    /// <returns>A detached decimal scalar usable after document and session disposal.</returns>
+    /// <returns>A detached root scalar usable after document and session disposal.</returns>
     /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
     /// <exception cref="NotSupportedException">The root has no typed scalar (FOTY0012), overlapping work is admitted, or query limits are exceeded.</exception>
     /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>

@@ -195,11 +195,11 @@
     "id": "AS-013",
     "label": "string length Valid",
     "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:string\"><xs:length value=\"2\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r><v>😀e</v></r>",
+    "instance": "<r><v>\ud83d\ude00e</v></r>",
     "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
     "values": [
-      "😀e"
+      "\ud83d\ude00e"
     ],
     "reason": null,
     "clauses": [
@@ -227,11 +227,11 @@
     "id": "AS-015",
     "label": "string minLength Valid",
     "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:string\"><xs:minLength value=\"2\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r><v>é</v></r>",
+    "instance": "<r><v>e\u0301</v></r>",
     "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
     "values": [
-      "é"
+      "e\u0301"
     ],
     "reason": null,
     "clauses": [
@@ -259,11 +259,11 @@
     "id": "AS-017",
     "label": "string maxLength Valid",
     "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:string\"><xs:maxLength value=\"1\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r><v>😀</v></r>",
+    "instance": "<r><v>\ud83d\ude00</v></r>",
     "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
     "values": [
-      "😀"
+      "\ud83d\ude00"
     ],
     "reason": null,
     "clauses": [
@@ -340,11 +340,11 @@
     "id": "AS-022",
     "label": "string empty restriction preserves whitespace",
     "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:string\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r><v> x&#x9;😀 </v></r>",
+    "instance": "<r><v> x&#x9;\ud83d\ude00 </v></r>",
     "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
     "values": [
-      " x\t😀 "
+      " x\t\ud83d\ude00 "
     ],
     "reason": null,
     "clauses": [
@@ -535,7 +535,9 @@
     "instance": "<r><v>1</v></r>",
     "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
-    "values": ["1"],
+    "values": [
+      "1"
+    ],
     "reason": null,
     "clauses": [
       "Structures3.3.2-3.3.4",
@@ -770,10 +772,10 @@
   },
   {
     "id": "AS-050",
-    "label": "root simple type excluded",
+    "label": "anonymous decimal simple root",
     "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:simpleType><xs:restriction base=\"xs:decimal\"/></xs:simpleType></xs:element></xs:schema>",
     "instance": "<r>1</r>",
-    "expectedCompile": "Unsupported",
+    "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
     "values": [],
     "reason": null,

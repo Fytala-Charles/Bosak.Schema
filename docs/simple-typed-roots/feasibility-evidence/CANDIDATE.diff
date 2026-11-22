@@ -1,0 +1,114 @@
+--- a/Assessment/NativeDecimalSchema.cs
++++ b/Assessment/NativeDecimalSchema.cs
+@@ -39,6 +39,7 @@
+ //                      | Charles Korthout | 1.16   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
+ //                      | Charles Korthout | 1.17   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
+ //                      | Charles Korthout | 1.18   | 22-11-2026     | Adopt qualified bounded native string patterns |
++//                      | Charles Korthout | 1.19   | 22-11-2026     | Probe simple scalar roots in isolated source copies only |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -168,7 +169,9 @@
+                 var key = XName.Get(name, targetNamespace);
+                 Require(!compiled.ContainsKey(key), "Duplicate root declaration.", NativeDecimalUnsupportedReason.DeclarationShape);
+                 NativeDecimalSchema plan;
+-                if (declaration.Attribute("type") is not null)
++                var scalarRoot = TryCompileSimpleRoot(declaration, targetNamespace, decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits);
++                if (scalarRoot is not null) plan = scalarRoot;
++                else if (declaration.Attribute("type") is not null)
+                 {
+                     Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
+                     Require(named.TryGetValue(ResolveTypeName(declaration), out var shared), "Unresolved root complex type.", NativeDecimalUnsupportedReason.ValueType);
+@@ -394,7 +397,16 @@
+             }
+             else InstanceAttributes(root);
+             Check(found, "Unexpected root element.");
+-            if (selected!.Root.Type.ContentType is { } contentType)
++            if (!selected!.Root.Type.IsComplex)
++            {
++                Check(!root.HasElements, "Simple root cannot contain child elements.");
++                Require(root.Nodes().All(n => n is XText), "Simple-root comments or processing instructions are unsupported.");
++                var scalar = AssessElementScalar(root, selected.Root, patternBudget) with
++                { NormalizedStringValue = rootType!.IsString ? root.Value : Collapse(root.Value) };
++                cancellationToken.ThrowIfCancellationRequested();
++                return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [scalar], []));
++            }
++            if (selected.Root.Type.ContentType is { } contentType)
+             {
+                 Check(!root.HasElements, "Simple-content root cannot contain child elements.");
+                 Require(root.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
+--- a/Assessment/NativeNestedSchema.cs
++++ b/Assessment/NativeNestedSchema.cs
+@@ -24,6 +24,7 @@
+ //                      | Charles Korthout | 0.11   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
+ //                      | Charles Korthout | 0.12   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
+ //                      | Charles Korthout | 0.13   | 22-11-2026     | Adopt qualified bounded native string patterns |
++//                      | Charles Korthout | 0.14   | 22-11-2026     | Probe simple scalar roots in isolated source copies only |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ using System.Collections.Immutable;
+@@ -139,7 +140,9 @@
+             var key = XName.Get(name, targetNamespace);
+             Require(!roots.ContainsKey(key), "Duplicate root declaration.", NativeDecimalUnsupportedReason.DeclarationShape);
+             NativeDecimalSchema plan;
+-            if (element.Attribute("type") is not null)
++            var scalarRoot = TryCompileSimpleRoot(element, targetNamespace, decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits);
++            if (scalarRoot is not null) plan = scalarRoot;
++            else if (element.Attribute("type") is not null)
+             {
+                 Require(Elements(element).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
+                 var shared = Resolve(ResolveTypeName(element));
+@@ -165,7 +168,7 @@
+     private static (int Nodes, int Scalars, int Depth, int Attributes) NestedBudget(NativeDecimalSchema plan, CancellationToken cancellationToken)
+     {
+         cancellationToken.ThrowIfCancellationRequested();
+-        if (plan.Root.Type.ContentType is not null) return (1, 1, 1, plan.AttributeUses.Length);
++        if (!plan.Root.Type.IsComplex || plan.Root.Type.ContentType is not null) return (1, 1, 1, plan.AttributeUses.Length);
+         var nodes = 1; var scalars = 0; var depth = 1; var attributes = plan.AttributeUses.Length;
+         foreach (var child in plan.Children)
+         {
+--- a/Assessment/NativeSimpleRestriction.cs
++++ b/Assessment/NativeSimpleRestriction.cs
+@@ -16,6 +16,7 @@
+ //                      | Charles Korthout | 0.3   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+ //                      | Charles Korthout | 0.4   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
+ //                      | Charles Korthout | 0.5   | 22-11-2026     | Adopt qualified bounded native string patterns |
++//                      | Charles Korthout | 0.6   | 22-11-2026     | Probe simple scalar roots in isolated source copies only |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -50,7 +51,7 @@
+         if (maxStringCharacters is null) return result;
+         // Count source sites, including unused named definitions; shared references do not consume the budget twice.
+         var definitions = schema.Descendants().Where(e => (e.Name == Xs + "simpleType" || e.Name == Xs + "complexType") &&
+-            e.Parent?.Name == Xs + "element" && e.Parent.Parent?.Name == Xs + "sequence").ToArray();
++            e.Parent?.Name == Xs + "element" && (e.Parent.Parent?.Name == Xs + "sequence" || e.Name == Xs + "simpleType" && e.Parent.Parent?.Name == Xs + "schema")).ToArray();
+         Require(definitions.Length <= 16, "Local anonymous type ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+         foreach (var definition in definitions.Where(e => e.Name == Xs + "simpleType"))
+         {
+@@ -60,4 +61,25 @@
+         }
+         return result;
+     }
++    private static NativeDecimalSchema? TryCompileSimpleRoot(XElement declaration, string targetNamespace,
++        NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
++        Dictionary<XName, NativeType> simple, Dictionary<XElement, NativeType> anonymousSimple, NativeNumericLimits limits)
++    {
++        if (stringType is null) return null; // Preserve the legacy facade grammar.
++        NativeType? type = null;
++        if (declaration.Attribute("type") is not null)
++        {
++            Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
++            var name = ResolveTypeName(declaration);
++            type = name == Xs + "decimal" ? decimalType : name == Xs + "string" ? stringType :
++                name == Xs + "boolean" ? booleanType : name == Xs + "integer" ? integerType : simple.GetValueOrDefault(name);
++        }
++        else
++        {
++            var members = Elements(declaration);
++            if (members.Count == 1 && members[0].Name == Xs + "simpleType") type = anonymousSimple[members[0]];
++        }
++        return type is null ? null : new NativeDecimalSchema(new NativeDeclaration(Name(declaration), type, 1, 1, targetNamespace), [], [], limits);
++    }
++
+ }

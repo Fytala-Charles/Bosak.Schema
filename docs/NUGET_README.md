@@ -1089,3 +1089,38 @@ than a false match; genuine pattern mismatch is Invalid. Cancellation, recovery,
 source export and no-partial-document behavior retain their existing rules.
 This matcher uses bounded state traversal with no regex backend or ambient setting
 changes. Legacy NativeDecimalSession and published beta.1 retain their profiles.
+
+
+### Simple scalar document roots
+
+The opt-in scalar and original-node facades also admit global roots typed as
+`xs:decimal`, `xs:integer`, `xs:boolean` or `xs:string`. Existing direct named and
+anonymous decimal/integer/string restrictions may appear at the root. Boolean
+restrictions, new derivation chains, defaults/fixed values and nil remain excluded.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Code">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{3}-[0-9]{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="code" type="Code"/>
+</xs:schema>
+```
+
+For `<code>ABC-1234</code>`, `NativeSchemaDocument.HasRootScalar` is true and
+`ReadRootScalar()` returns String `ABC-1234`. `ScalarCount` is zero: root values
+are separate from descendant leaf indexes. The original-node facade reads the
+same assessed root with `ReadElement([])`. Both facades reject a nonmatching value,
+retain original declaration/type evidence, and export within their existing XML
+serialization contract. String roots preserve parsed XML whitespace and empty
+String remains one atomic value. Numeric/boolean roots retain their existing
+whitespace normalization and bounded representation limits.
+
+A schema may declare multiple admitted simple and complex roots; selection uses the
+instance's expanded root name. Current type selection, combined anonymous/global
+component ceilings, shared pattern work, cancellation and lifetime rules still
+apply. The legacy `NativeDecimalSession` retains its earlier grammar. This example
+uses explicit ASCII digits; the original public SKU's `\d` escape remains outside
+the bounded pattern subset. No general XSD, component-closure or PSVI claim follows.
