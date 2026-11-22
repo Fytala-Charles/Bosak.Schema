@@ -1,0 +1,34 @@
+  Determining projects to restore...
+  Restored D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\schema\SchemaCandidate.csproj (in 590 ms).
+  Restored D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\Probe.csproj (in 653 ms).
+  SchemaCandidate -> D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\schema\bin\Release\net10.0\Bosak.Schema.dll
+  Probe -> D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll
+Test run for D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:01.13]     EmptyProbe.BaselineTests.UnchangedBaseline(data: True, empty: False) [FAIL]
+  Failed EmptyProbe.BaselineTests.UnchangedBaseline(data: True, empty: False) [428 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "4"
+Actual:   "Bosak.XPath.Core.Xdm.XdmExactDecimal"
+           ↑ (pos 0)
+  Stack Trace:
+     at EmptyProbe.BaselineTests.UnchangedBaseline(Boolean data, Boolean empty) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\BaselineTests.cs:line 36
+   at InvokeStub_BaselineTests.UnchangedBaseline(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:01.65]     EmptyProbe.BaselineTests.UnchangedBaseline(data: False, empty: False) [FAIL]
+  Failed EmptyProbe.BaselineTests.UnchangedBaseline(data: False, empty: False) [524 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+Expected: "4"
+Actual:   "Bosak.XPath.Core.Xdm.XdmExactDecimal"
+           ↑ (pos 0)
+  Stack Trace:
+     at EmptyProbe.BaselineTests.UnchangedBaseline(Boolean data, Boolean empty) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\BaselineTests.cs:line 37
+   at InvokeStub_BaselineTests.UnchangedBaseline(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+Results File: D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\results\baseline\baseline.trx
+
+Failed!  - Failed:     2, Passed:     2, Skipped:     0, Total:     4, Duration: 1 s - Bosak.Schema.Tests.dll (net10.0)

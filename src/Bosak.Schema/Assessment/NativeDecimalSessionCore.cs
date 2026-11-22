@@ -19,6 +19,8 @@
 //                      | Charles Korthout | 0.6   | 20-11-2026     | Read the original root scalar separately from unchanged leaf and attribute indexes       |
 //                      | Charles Korthout | 0.7   | 20-11-2026     | Read terminal scalar facts without exposing nested element-only containers as values     |
 //                      | Charles Korthout | 0.8   | 20-11-2026     | Read detached descendant attributes through original owner-bound facts and shared gate   |
+//                      | Charles Korthout | 0.9   | 21-11-2026     | Probe empty complex typing in isolated copies only |
+//                      | Charles Korthout | 0.10   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -129,7 +131,7 @@ internal sealed class NativeDecimalSessionCore : IDisposable
     private bool HasRootScalar(Document document) => Work(() =>
     {
         Check(document);
-        return !document.Assessment.ElementFacts[0].HasNoTypedValue;
+        return !document.Assessment.ElementFacts[0].HasNoTypedValue && !document.Assessment.ElementFacts[0].NativeType.EmptyContent;
     }, default);
 
     private NativeScalarValue ReadRootScalar(Document document, CancellationToken cancellationToken) => Work(() =>

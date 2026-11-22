@@ -1,0 +1,58 @@
+{
+  "status": "Frozen original inputs; not executed; no forecast admission",
+  "upstream": {
+    "repository": "https://github.com/w3c/xsdtests",
+    "defaultBranch": "master",
+    "revision": "7bc3365c652a322f3d762021b3879eb92dae7e30",
+    "fetchDate": "2026-11-20"
+  },
+  "manifestSha256": "7539ad96ec9f82583bf1c19c44178064d8b994a94085df73c0b2070a2023aeed",
+  "cases": [
+    {
+      "id": "Assert/assert_027/assert_027_2",
+      "metadata": "ibmMeta/assert.testSet",
+      "testSet": "Assert",
+      "group": "assert_027",
+      "schemaTest": "assert_027_1",
+      "instanceTest": "assert_027_2",
+      "schema": "ibmData/mixed/assertions/namespace/ns3.xsd",
+      "instance": "ibmData/mixed/assertions/namespace/ns3.xml",
+      "upstreamSchemaExpected": "valid",
+      "upstreamExpected": "valid",
+      "schemaStatus": "accepted",
+      "instanceStatus": "accepted",
+      "selectionReason": "nested namespace assertion boundary",
+      "clauses": [
+        "structures:3.3.4",
+        "structures:3.13"
+      ],
+      "upstreamDocumentationReferences": [
+        "http://www.w3.org/TR/xmlschema11-1/",
+        "../common/XSD1_1TestCategories.xml#xsd1_1-Assertions-ImpactOfXPathDefaultNS"
+      ],
+      "applicability": {
+        "set": "1.1",
+        "group": "1.1",
+        "schemaTest": null,
+        "instanceTest": null
+      }
+    }
+  ],
+  "files": {
+    "ibmMeta/assert.testSet": "8f459e9ce7c5deec6f1d20e0bbbd0205d32fb8321133f7b4d8ca3f511ffd8e44",
+    "ibmData/mixed/assertions/namespace/ns3.xsd": "404659c11fd00cb85e4f43076202008e9128286a9d7815db829fbc7a2ba6f067",
+    "ibmData/mixed/assertions/namespace/ns3.xml": "c86a36859c4b7d51bbdb1cf8b25bd22a31baac87ae9c039cf3c1a60295b8d1a5"
+  },
+  "currentFrozenResult": {
+    "matches": 20,
+    "unsupported": 1,
+    "mismatches": 0,
+    "harnessErrors": 0
+  },
+  "requirements": [
+    "Inner true empty complex type",
+    "Outer element-only structural assertion",
+    "Actual instance expanded name",
+    "Original-node typed-value fidelity"
+  ]
+}

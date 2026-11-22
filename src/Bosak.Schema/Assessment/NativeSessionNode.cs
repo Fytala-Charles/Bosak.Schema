@@ -18,6 +18,8 @@
 //                      | Charles Korthout | 0.5   | 20-11-2026     | Decouple complex annotation from typed-value absence and retain normalized root text     |
 //                      | Charles Korthout | 0.6   | 20-11-2026     | Keep local complex declarations distinct from global element metadata                     |
 //                      | Charles Korthout | 0.7   | 20-11-2026     | Expose guarded original-node data interface; exact published facts and lifetime guard  |
+//                      | Charles Korthout | 0.8   | 21-11-2026     | Probe empty complex typing in isolated copies only |
+//                      | Charles Korthout | 0.9   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -53,7 +55,11 @@ internal sealed class NativeSessionNode(NativeSchemaInput input, XDocumentNode r
             if (facts.HasNoTypedValue)
                 throw new XPathErrorException("http://www.w3.org/2005/xqt-errors", "FOTY0012", "err", "Element-only root has no typed value.");
             var value = facts.ReadTypedValue(default).Value;
-            value.TryGetSingleAtomic(out var item);
+            if (!value.TryGetSingleAtomic(out var item))
+            {
+                if (facts.NativeType.EmptyContent) return XdmValue.Undefined;
+                throw new NotSupportedException("Non-scalar typed value outside the finite profile.");
+            }
             return item.Value;
         }
     }

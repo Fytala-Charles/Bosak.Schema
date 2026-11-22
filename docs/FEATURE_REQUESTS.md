@@ -44,12 +44,13 @@ The published **0.5.0-beta.1** provides owned `NativeDecimalSession` and `Native
 |---|---|---|
 | Apache/public transition | Implemented and GitHub publication verified | Schema-only Apache-2.0; activation-free services; private infrastructure excluded |
 | Packaged0.6consumer guidance | Reconciled after M1; no publication | [Examples and evidence](package-readme06-reconciled/README.md); earlier planning receipts retain original scope |
-| Shared specification coverage | Owner-prioritized; bounded components/scalars/attributes/nesting, original-node data and string assertions merged through PR33; bounded xsi:type merged PR34; namespace/form merged PR35; decimal complex restriction locally qualified; review pending | [REQ-009 programme](REQ-009-SPECIFICATION-COVERAGE.md); shared CoreREQ-142;24areas with explicit evidence limits |
+| Shared specification coverage | Owner-prioritized; bounded components/scalars/attributes/nesting, original-node data and string assertions merged through PR33; bounded xsi:type merged PR34; namespace/form merged PR35; decimal restriction merged PR36; integer simple content merged PR37; contextual assertions merged PR38 | [REQ-009 programme](REQ-009-SPECIFICATION-COVERAGE.md); shared CoreREQ-142;24areas with explicit evidence limits |
 | Direct integer restrictions | Merged PR31; main verified | [Exact bounds/digits, named/anonymous and attribute uses](integer-restrictions/README.md); owned scalar route; no publication |
 | Bounded string assertions | Merged PR33; main verified | [String equality, cardinality, namespaces and limits](string-assertions/README.md) |
 | Decimal complex simple-content restriction | Merged PR36; main CI verified | [Bounded implementation and evidence](complex-simple-restriction/IMPLEMENTATION.md); no publication |
 | Integer complex simple content | Merged PR37; main CI verified | [Bounded implementation and qualification](integer-simple-content/IMPLEMENTATION.md); no publication |
-| Contextual/inherited integer assertions | Locally implemented and qualified; review pending | [Bounded implementation and qualification](contextual-assertions/IMPLEMENTATION.md); no publication |
+| Contextual/inherited integer assertions | Merged PR38; main CI verified | [Bounded implementation and qualification](contextual-assertions/IMPLEMENTATION.md); no publication |
+| Structural namespace assertions and empty content | Locally implemented and qualified; review pending | [Bounded implementation and qualification](structural-assertions/IMPLEMENTATION.md); no publication |
 | Namespace/form declarations | Merged PR35; main verified | [Scope and evidence](namespace-form/README.md); mixed profile only |
 | Bounded xsi:type | Merged PR34; main verified | [Implementation/adoption/evidence](xsi-type-contract/implementation/README.md); unchanged bounded scope |
 | Native original-node atomization | Merged PR32; bounded ADR-016/API accepted | [Owned implementation](native-node-data/README.md); fixed operation, existing bounded grammar |
@@ -88,7 +89,7 @@ The transition does not implement the proposed core session API, change frozen W
 
 The 3 November [O1/O2 versioned responses](core-disposition-responses/2026-11-03-v2/README.md) are scoped historical design acceptance, not proof of current native adapter/runtime delivery. Their original source/proposal hashes and the unsigned [confirmation drafts](core-disposition-inbox/2026-11-03/README.md) remain unchanged. The published Core 1.81.2 release and its budget deferral do not complete Schema's native provider/session or performance requirements. See [history](DEVELOPMENT_HISTORY.md).
 
-*Last updated: 2026-11-21*
+*Last updated: 2026-11-22*
 
 
 ## M2A scope proposal - 19 November 2026
@@ -773,3 +774,72 @@ Originalproposal/feasibilityseals preserved. Next:review/deliver,then separate
 structural-context/namespace-uri contract. No commit/push/tag/publication or
 fullXSD/PSVI/C45/SLAacceptance requested.
 [Implementation and exact qualification receipts](<contextual-assertions/IMPLEMENTATION.md>).
+
+
+## PR38 merged; structural assertion contract - 21 November 2026
+
+PR38 merged as `2effee5bf9daa317599c9285ba2de5e333bc786f`; reviewed tree preserved. Main CI44944736601
+passes2,770source(840/1,930) plus release/docs/workload checks. Frozen pilot remains
+20matches/1Unsupported/zeroerrors; all42original files remain unchanged.
+Next proposed slice: bounded namespace-uri structural assertions and genuine empty
+complex content. Empty typed sequence differs from absent element-only typed value;
+actual original-node fidelity on both signed Core pins is a mandatory feasibility
+gate. Current provider/session assumes single atomics; public Core XML documentation
+also needs reconciliation. 27proposed XML payloads/18native gates are unexecuted plans.
+No semantic adoption, source/API/Core/package/controller or published-beta change.
+Next: isolated native feasibility, retaining Unsupported if empty typing cannot be
+represented faithfully. No commit/push/publication requested for this proposal.
+[Contract and review evidence](<structural-assertions/README.md>).
+
+
+## Empty typed-value native gate - 21 November 2026
+
+The first structural-assertion feasibility gate passes 29 actual-native controls
+per signed Core pin (1.81.2/1.81.17); unchanged baseline passes four per pin.
+Five scratch-only overlays faithfully issue present non-list empty typed sequences.
+Original-node data atomizes them to empty; typed identity and scalar APIs refuse
+without fabricating atomics. Element-only FOTY0012, original ownership, invalid/no
+publication, export/reopen, cancellation and lifetime controls pass. All 18 Core
+signatures/archive/cache/runtime identities verify; initial harness failures remain
+preserved. No Core change is needed for this measured path; its public XML example
+still needs separate correction. Namespace assertions, quotas, full stable-case
+comparison and production adoption remain pending. Product source/API/pins/packages,
+frozen pilot (20 matches/1 Unsupported/zero errors) and published beta.1 unchanged.
+Next: full isolated structural namespace-assertion candidate and qualification.
+No commit/push/publication requested for this step.
+[Scoped native results and preserved receipts](<structural-assertions/EMPTY-VALUE-FEASIBILITY.md>).
+
+
+## Structural namespace assertion feasibility - 22 November 2026
+
+The isolated six-overlay candidate passes 114 native controls per signed Core pin
+(1.81.2/1.81.17), including all 27 proposal payloads through both facades, retained
+empty-value controls, static/context/authority guards and exact expression/node limits.
+All 2,770 unchanged source identities pass (840 implementation/1,930 public), without
+expectation changes. API remains 54 types/401 rows; all 18 signed Core identities verify.
+The original remaining assert_027_2 passes a direct native probe, distinct from a
+frozen-pilot run. Initial named-root empty-whitespace failure and its scratch-only
+plan-copy correction are retained separately; earlier evidence remains sealed.
+Production source/API/pins/packages/controllers unchanged; frozen pilot stays
+20 matches/1 Unsupported/zero errors. Next: separate production adoption and measured
+implementation/package/retained/pilot qualification. No commit/push/publication.
+[Native feasibility and exact preserved receipts](<structural-assertions/FEASIBILITY.md>).
+
+
+## Structural namespace assertion production candidate - 22 November 2026
+
+Exact production adoption follows the retained native feasibility. Six source files
+now implement opt-in bounded namespace-uri assertions and faithful empty complex typed
+values, preserving element-only FOTY0012, original authority, scalar refusal and limits.
+The established decimal-only facade retains its profile, with two new refusal controls.
+All2,770priorstablecases preserved without expectation changes; source2,886(900/1,986),
+package-only1,986per signedCore pin,60current-package native controls,retained124/23/33
+pass. API54types/401rows zero delta;18Core identities and signedbeta.1baseline verify.
+Frozen21casepilot now21matches/0Unsupported/zeroerrors; only originalassert_027_2
+newlymatches. All42corpus files/expectations unchanged. This is not fullXSDcoverage.
+Packaged README/example and source/package/runner payloads agree. Initial legacy
+profile refusal failure and qualification-project error remain separately retained.
+Localunsignedalpha.0.29only; publishedbeta.1,Corepins,controllers unchanged. Next:
+review/deliver on explicitGit request,then mainCIverification and broader gap ranking.
+No commit/push/tag/publication or fullXSD/PSVI/C45/SLAacceptance requested.
+[Implementation and qualification receipts](<structural-assertions/IMPLEMENTATION.md>).

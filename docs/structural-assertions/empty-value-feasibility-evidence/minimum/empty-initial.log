@@ -1,0 +1,127 @@
+  SchemaCandidate -> D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\schema\bin\Release\net10.0\Bosak.Schema.dll
+  Probe -> D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\bin\Release\net10.0\Bosak.Schema.Tests.dll
+Test run for D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\bin\Release\net10.0\Bosak.Schema.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.40]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: False, sequence: False) [FAIL]
+[xUnit.net 00:00:00.43]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: True, sequence: False) [FAIL]
+[xUnit.net 00:00:00.46]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: False, sequence: True) [FAIL]
+[xUnit.net 00:00:00.50]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: False, sequence: True) [FAIL]
+[xUnit.net 00:00:00.52]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: True, sequence: False) [FAIL]
+[xUnit.net 00:00:00.56]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: True, sequence: True) [FAIL]
+[xUnit.net 00:00:00.59]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: True, sequence: True) [FAIL]
+[xUnit.net 00:00:00.62]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: False, sequence: False) [FAIL]
+  Failed EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: False, sequence: False) [248 ms]
+  Error Message:
+   System.InvalidOperationException : Snapshot admission limit reached.
+  Stack Trace:
+     at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)
+   at Bosak.Schema.NativeNodeDataCore.<>c__DisplayClass9_0.<Assess>b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 82
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 158
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 68
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\EmptyTests.cs:line 67
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  Failed EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: True, sequence: False) [32 ms]
+  Error Message:
+   System.InvalidOperationException : Snapshot admission limit reached.
+  Stack Trace:
+     at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)
+   at Bosak.Schema.NativeNodeDataCore.<>c__DisplayClass9_0.<Assess>b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 82
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 158
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 68
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\EmptyTests.cs:line 67
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: False, sequence: True) [34 ms]
+  Error Message:
+   System.InvalidOperationException : Snapshot admission limit reached.
+  Stack Trace:
+     at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)
+   at Bosak.Schema.NativeNodeDataCore.<>c__DisplayClass9_0.<Assess>b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 82
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 158
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 68
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\EmptyTests.cs:line 67
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: False, sequence: True) [31 ms]
+  Error Message:
+   System.InvalidOperationException : Snapshot admission limit reached.
+  Stack Trace:
+     at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)
+   at Bosak.Schema.NativeNodeDataCore.<>c__DisplayClass9_0.<Assess>b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 82
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 158
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 68
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\EmptyTests.cs:line 67
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: True, sequence: False) [29 ms]
+  Error Message:
+   System.InvalidOperationException : Snapshot admission limit reached.
+  Stack Trace:
+     at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)
+   at Bosak.Schema.NativeNodeDataCore.<>c__DisplayClass9_0.<Assess>b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 82
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 158
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 68
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\EmptyTests.cs:line 67
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: True, sequence: True) [30 ms]
+  Error Message:
+   System.InvalidOperationException : Snapshot admission limit reached.
+  Stack Trace:
+     at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)
+   at Bosak.Schema.NativeNodeDataCore.<>c__DisplayClass9_0.<Assess>b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 82
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 158
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 68
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\EmptyTests.cs:line 67
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: True, sequence: True) [30 ms]
+  Error Message:
+   System.InvalidOperationException : Snapshot admission limit reached.
+  Stack Trace:
+     at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)
+   at Bosak.Schema.NativeNodeDataCore.<>c__DisplayClass9_0.<Assess>b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 82
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 158
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 68
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\EmptyTests.cs:line 67
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: False, sequence: False) [32 ms]
+  Error Message:
+   System.InvalidOperationException : Snapshot admission limit reached.
+  Stack Trace:
+     at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)
+   at Bosak.Schema.NativeNodeDataCore.<>c__DisplayClass9_0.<Assess>b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 82
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 158
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeNodeDataCore.cs:line 68
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\EmptyTests.cs:line 67
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+Results File: D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\minimum\results\empty-initial\empty-initial.trx
+
+Failed!  - Failed:     8, Passed:    20, Skipped:     0, Total:    28, Duration: 1 s - Bosak.Schema.Tests.dll (net10.0)
