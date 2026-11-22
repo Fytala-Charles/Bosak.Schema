@@ -28,6 +28,8 @@
 //                      | Charles Korthout | 1.5   | 20-11-2026     | Adopt opt-in original-node data binding; preserve scalar default          |
 //                      | Charles Korthout | 1.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
 //                      | Charles Korthout | 1.8   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+//                      | Charles Korthout | 1.9   | 21-11-2026     | Probe empty complex typing in isolated copies only |
+//                      | Charles Korthout | 1.10   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -269,7 +271,8 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         internal Facts(NativeSchemaInput input, NativeSessionNode node, Origin origin, Component type, Component declaration, NativeElementState state, Component? actualType = null)
         {
             Input = input; Node = node; this.origin = origin; this.type = type; this.declaration = declaration; this.state = state;
-            if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
+            if (state.GoverningType.EmptyContent) value = new IssuedValue(input, origin, type, XdmValue.Undefined, empty: true);
+            else if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
             else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, XdmValue.FromString(text), actualType);
             else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical), actualType);
             else if (state.IntegerValue is { } integer) value = new IssuedValue(input, origin, type, XdmValue.FromInteger(integer), actualType);
@@ -293,7 +296,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         }
     }
 
-    private sealed class IssuedValue(NativeSchemaInput input, Origin origin, Component type, XdmValue scalar, Component? actualType = null) : ISchemaTypedValue
+    private sealed class IssuedValue(NativeSchemaInput input, Origin origin, Component type, XdmValue scalar, Component? actualType = null, bool empty = false) : ISchemaTypedValue
     {
         internal NativeSchemaInput Input => input;
         internal Origin Origin => origin;
@@ -306,12 +309,13 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         private IEnumerable<SchemaAtomicItem> Enumerate()
         {
             input.Check();
-            yield return Item();
+            if (!empty) yield return Item();
         }
         private SchemaAtomicItem Item() => new(scalar, new Provenance(input, origin, type, actualType ?? type));
         public bool TryGetSingleAtomic(out SchemaAtomicItem item)
         {
             input.Check();
+            if (empty) { item = default; return false; }
             item = Item();
             return true;
         }
@@ -334,7 +338,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             var allAttributes = attributeFacts.IsDefault ? [] : attributeFacts;
             AttributeFacts = allAttributes.Where(f => f.OwnerElementPath.IsEmpty).ToImmutableArray();
             DescendantAttributeFacts = allAttributes.Where(f => !f.OwnerElementPath.IsEmpty).ToImmutableArray();
-            ScalarFacts = facts.Skip(1).Where(f => !f.HasNoTypedValue).ToImmutableArray();
+            ScalarFacts = facts.Skip(1).Where(f => !f.HasNoTypedValue && !f.NativeType.EmptyContent).ToImmutableArray();
             Facts = facts.AddRange(allAttributes); Status = SchemaAssessmentStatus.Valid;
         }
         private Assessment(SchemaAssessmentStatus status, ImmutableArray<SchemaAssessmentDiagnostic> diagnostics, bool truncated,

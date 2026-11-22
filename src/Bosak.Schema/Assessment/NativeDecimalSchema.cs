@@ -34,6 +34,9 @@
 //                      | Charles Korthout | 1.11  | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
 //                      | Charles Korthout | 1.12  | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
 //                      | Charles Korthout | 1.13  | 21-11-2026     | Adopt bounded contextual and inherited integer assertions |
+//                      | Charles Korthout | 1.14   | 21-11-2026     | Probe empty complex typing in isolated copies only |
+//                      | Charles Korthout | 1.15   | 22-11-2026     | Probe bounded structural assertions in isolated copies |
+//                      | Charles Korthout | 1.16   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -166,7 +169,7 @@ internal sealed partial class NativeDecimalSchema
                 {
                     Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                     Require(named.TryGetValue(ResolveTypeName(declaration), out var shared), "Unresolved root complex type.", NativeDecimalUnsupportedReason.ValueType);
-                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions };
+                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile };
                 }
                 else
                 {
@@ -194,15 +197,34 @@ internal sealed partial class NativeDecimalSchema
         }
     }
 
+    private static NativeDecimalSchema? TryCompileEmpty(XElement complex, NativeDeclaration root, NativeNumericLimits limits, string targetNamespace, string assertionNamespace, CancellationToken cancellationToken)
+    {
+        var members = Elements(complex);
+        var hasSequence = members.Count != 0 && members[0].Name == Xs + "sequence";
+        if (hasSequence && Elements(members[0]).Count != 0) return null;
+        var assertions = members.Skip(hasSequence ? 1 : 0).ToArray();
+        if (assertions.Any(a => a.Name != Xs + "assert")) return null;
+        if (hasSequence) Attributes(members[0]);
+        var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri) { EmptyContent = true };
+        return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { NestedProfile = true, structuralAssertions = CompileStructuralAssertions(assertions, targetNamespace, assertionNamespace, cancellationToken) };
+    }
+
     private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
         string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
         Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null, bool nestedContext = false)
     {
         var members = Elements(complex);
+        if (stringType is not null && TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken) is { } empty) return empty;
         if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
             return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver, assertionNamespace, nestedContext);
         var attributeMembers = members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray();
         var assertionMembers = members.Skip(1 + attributeMembers.Length).ToArray();
+        if (assertionMembers.Any(IsStructuralAssertion))
+        {
+            Require(stringType is not null, "Structural assertions require the opt-in profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+            Require(attributeMembers.Length == 0, "Structural assertions with application attributes are excluded.", NativeDecimalUnsupportedReason.Attributes);
+            Require(assertionMembers.Length <= 8, "Structural assertion capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+        }
         Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && assertionMembers.Length <= 8 &&
             assertionMembers.All(e => e.Name == Xs + "assert") && (stringType is not null || attributeMembers.Length == 0),
             "Expected sequence, admitted attributes then zero to eight assertions.", NativeDecimalUnsupportedReason.DeclarationShape);
@@ -244,8 +266,9 @@ internal sealed partial class NativeDecimalSchema
 
         var assertionNames = children.Where(c => !c.Type.IsBoolean && !c.Type.IsInteger).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var stringNames = stringType is null ? null : children.Where(c => c.Type.IsString).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
+        var structuralPlans = CompileStructuralAssertions(assertionMembers.Where(IsStructuralAssertion), targetNamespace, assertionNamespace, cancellationToken);
         var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
-        foreach (var assertion in assertionMembers)
+        foreach (var assertion in assertionMembers.Where(a => !IsStructuralAssertion(a)))
         {
             cancellationToken.ThrowIfCancellationRequested();
             Attributes(assertion, "test", "xpathDefaultNamespace");
@@ -257,7 +280,7 @@ internal sealed partial class NativeDecimalSchema
                 name => ResolveAssertionName(assertion, name, defaultNamespace, assertionNames), stringNames));
         }
 
-        return new NativeDecimalSchema(root, children.ToImmutable(), plans.ToImmutable(), limits) { AttributeUses = attributeUses };
+        return new NativeDecimalSchema(root, children.ToImmutable(), plans.ToImmutable(), limits) { AttributeUses = attributeUses, structuralAssertions = structuralPlans };
     }
 
     private static ImmutableArray<NativeDeclaration> CompileAttributes(IReadOnlyList<XElement> attributeMembers,
@@ -417,7 +440,8 @@ internal sealed partial class NativeDecimalSchema
             }
 
             Check(index == nodes.Length, "Unexpected child or sequence order.");
-            foreach (var assertion in selected!.assertions)
+            selected!.AssessStructuralAssertions(root, cancellationToken);
+            foreach (var assertion in selected.assertions)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 Check(assertion.Evaluate(values, strings), "Assertion evaluated false.");
@@ -652,7 +676,8 @@ internal sealed class NativeType(string? name, bool hasNoTypedValue, string name
     internal XName? BaseName { get; } = baseName;
     internal NativeIntegerFacets? IntegerFacets { get; } = integerFacets;
     internal NativeType? ContentType { get; } = contentType;
-    internal bool IsComplex => HasNoTypedValue || ContentType is not null;
+    internal bool EmptyContent { get; init; }
+    internal bool IsComplex => EmptyContent || HasNoTypedValue || ContentType is not null;
     internal NativeStringFacets? StringFacets { get; } = stringFacets;
     internal bool IsInteger { get; } = isInteger;
     internal bool IsBoolean { get; } = isBoolean;

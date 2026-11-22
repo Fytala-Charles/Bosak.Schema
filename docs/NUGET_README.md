@@ -995,7 +995,49 @@ Existing integer/input/query/export budgets remain; capacity refusal and
 cancellation stay distinct from a failed assertion. Static bindings are retained
 from each original assertion, including when inherited by a derived type.
 
-Assertions on other scalar contexts or element-only/empty-content owners,
-application attributes, broader type chains, node functions and full XPath/PSVI
-remain outside this profile. Decimal/string child-assertion behavior, bounded
+Assertions on other scalar contexts, application attributes, broader type chains
+and full XPath/PSVI remain outside this integer profile. Structural namespace
+assertions use the separate bounded profile below. Decimal/string child-assertion behavior, bounded
 complex xsi:type policy, NativeDecimalSession and published beta.1 are unchanged.
+
+
+### Structural namespace assertions and empty content (0.6 development)
+
+NativeSchemaSession and NativeSchemaNodeDataSession can assess attribute-free empty
+complex types and bounded element-only sequences with namespace assertions. The
+following schema accepts `<r xmlns="urn:document"/>`:
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="urn:document">
+  <xs:element name="r"><xs:complexType>
+    <xs:assert test="namespace-uri(.) = 'urn:document'"/>
+  </xs:complexType></xs:element>
+</xs:schema>
+```
+
+The accessor observes the actual instance element namespace, including unqualified
+local elements; it does not substitute the type namespace or schema target namespace.
+Prefix aliases preserve the same URI. URI comparison preserves case, relative spelling
+and percent escapes. Supported expressions use namespace-uri(.) or namespace-uri(),
+optionally qualified by an ASCII prefix bound to the XPath functions namespace,
+= / != / eq / ne against string literals, parentheses and/or. xpathDefaultNamespace
+does not change function bindings or instance expanded names. Other XML prefix forms,
+functions, paths and broader XPath remain Unsupported in this finite grammar.
+
+Empty complex content has a present empty typed sequence and forbids all character
+or element content, including whitespace. Element-only content retains an absent
+typed value even when its optional children are missing. An empty value is not a
+scalar: HasRootScalar is false, scalar reads refuse with NotSupportedException, and
+XML export remains available. The original-node data operation internally atomizes
+authentic empty values to the empty sequence; element-only atomization retains FOTY0012.
+Typed-identity operations keep their singleton-only profile.
+
+Named/anonymous root and nested types retain original identity and ownership.
+Failed assertions or invalid content publish no document. Existing limits include
+eight assertions, 512 expression characters, 128 tokens, expression depth16,
+64 assessed nodes and node depth4; zero-scalar empty nodes count toward those limits.
+Application-attribute combinations with new structural assertions, structural
+inheritance, mixed/list/union content, comments and processing instructions remain
+outside this slice. NativeDecimalSession and published beta.1 retain their profiles.
+This development extension does not establish full XSD1.1 or PSVI coverage.

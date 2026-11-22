@@ -1,0 +1,170 @@
+--- base/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
++++ experiment/src/Bosak.Schema/Assessment/NativeDecimalSchema.cs
+@@ -34,6 +34,7 @@
+ //                      | Charles Korthout | 1.11  | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+ //                      | Charles Korthout | 1.12  | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
+ //                      | Charles Korthout | 1.13  | 21-11-2026     | Adopt bounded contextual and inherited integer assertions |
++//                      | Charles Korthout | 1.14   | 21-11-2026     | Probe empty complex typing in isolated copies only |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -194,11 +195,21 @@
+         }
+     }
+ 
++    private static NativeDecimalSchema? TryCompileEmpty(XElement complex, NativeDeclaration root, NativeNumericLimits limits)
++    {
++        var members = Elements(complex);
++        if (members.Count != 0 && !(members.Count == 1 && members[0].Name == Xs + "sequence" && Elements(members[0]).Count == 0)) return null;
++        if (members.Count == 1) Attributes(members[0]);
++        var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri) { EmptyContent = true };
++        return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { NestedProfile = true };
++    }
++
+     private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
+         string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
+         Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null, bool nestedContext = false)
+     {
+         var members = Elements(complex);
++        if (TryCompileEmpty(complex, root, limits) is { } empty) return empty;
+         if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
+             return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver, assertionNamespace, nestedContext);
+         var attributeMembers = members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray();
+@@ -652,7 +663,8 @@
+     internal XName? BaseName { get; } = baseName;
+     internal NativeIntegerFacets? IntegerFacets { get; } = integerFacets;
+     internal NativeType? ContentType { get; } = contentType;
+-    internal bool IsComplex => HasNoTypedValue || ContentType is not null;
++    internal bool EmptyContent { get; init; }
++    internal bool IsComplex => EmptyContent || HasNoTypedValue || ContentType is not null;
+     internal NativeStringFacets? StringFacets { get; } = stringFacets;
+     internal bool IsInteger { get; } = isInteger;
+     internal bool IsBoolean { get; } = isBoolean;
+--- base/src/Bosak.Schema/Assessment/NativeNestedSchema.cs
++++ experiment/src/Bosak.Schema/Assessment/NativeNestedSchema.cs
+@@ -19,6 +19,7 @@
+ //                      | Charles Korthout | 0.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+ //                      | Charles Korthout | 0.7   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+ //                      | Charles Korthout | 0.8   | 21-11-2026     | Adopt bounded contextual and inherited integer assertions |
++//                      | Charles Korthout | 0.9   | 21-11-2026     | Probe empty complex typing in isolated copies only |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ using System.Collections.Immutable;
+@@ -69,6 +70,7 @@
+         NativeDecimalSchema Complex(XElement complex, NativeDeclaration root)
+         {
+             cancellationToken.ThrowIfCancellationRequested();
++            if (TryCompileEmpty(complex, root, limits) is { } empty) return empty;
+             var members = Elements(complex);
+             if (members.Count == 1 && members[0].Name == Xs + "simpleContent")
+                 return CompileComplex(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
+@@ -207,6 +209,14 @@
+             cancellationToken.ThrowIfCancellationRequested();
+             return;
+         }
++        if (effectiveType.EmptyContent)
++        {
++            Require(element.Nodes().All(n => n is XElement or XText), "Empty-content comments or processing instructions are unsupported.");
++            Check(!element.Nodes().Any(), "Empty content cannot contain character or element children.");
++            states.Add(new NativeElementState(declaration, null) { EffectiveType = effectiveType });
++            cancellationToken.ThrowIfCancellationRequested();
++            return;
++        }
+         foreach (var text in element.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only container contains non-whitespace text.");
+         Require(element.Nodes().All(n => n is XElement or XText), "Container comments or processing instructions are unsupported.");
+         states.Add(new NativeElementState(declaration, null) { EffectiveType = effectiveType });
+--- base/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs
++++ experiment/src/Bosak.Schema/Assessment/NativeSchemaProvider.cs
+@@ -28,6 +28,7 @@
+ //                      | Charles Korthout | 1.5   | 20-11-2026     | Adopt opt-in original-node data binding; preserve scalar default          |
+ //                      | Charles Korthout | 1.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+ //                      | Charles Korthout | 1.8   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
++//                      | Charles Korthout | 1.9   | 21-11-2026     | Probe empty complex typing in isolated copies only |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -269,7 +270,8 @@
+         internal Facts(NativeSchemaInput input, NativeSessionNode node, Origin origin, Component type, Component declaration, NativeElementState state, Component? actualType = null)
+         {
+             Input = input; Node = node; this.origin = origin; this.type = type; this.declaration = declaration; this.state = state;
+-            if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
++            if (state.GoverningType.EmptyContent) value = new IssuedValue(input, origin, type, XdmValue.Undefined, empty: true);
++            else if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
+             else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, XdmValue.FromString(text), actualType);
+             else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical), actualType);
+             else if (state.IntegerValue is { } integer) value = new IssuedValue(input, origin, type, XdmValue.FromInteger(integer), actualType);
+@@ -293,7 +295,7 @@
+         }
+     }
+ 
+-    private sealed class IssuedValue(NativeSchemaInput input, Origin origin, Component type, XdmValue scalar, Component? actualType = null) : ISchemaTypedValue
++    private sealed class IssuedValue(NativeSchemaInput input, Origin origin, Component type, XdmValue scalar, Component? actualType = null, bool empty = false) : ISchemaTypedValue
+     {
+         internal NativeSchemaInput Input => input;
+         internal Origin Origin => origin;
+@@ -306,12 +308,13 @@
+         private IEnumerable<SchemaAtomicItem> Enumerate()
+         {
+             input.Check();
+-            yield return Item();
++            if (!empty) yield return Item();
+         }
+         private SchemaAtomicItem Item() => new(scalar, new Provenance(input, origin, type, actualType ?? type));
+         public bool TryGetSingleAtomic(out SchemaAtomicItem item)
+         {
+             input.Check();
++            if (empty) { item = default; return false; }
+             item = Item();
+             return true;
+         }
+@@ -334,7 +337,7 @@
+             var allAttributes = attributeFacts.IsDefault ? [] : attributeFacts;
+             AttributeFacts = allAttributes.Where(f => f.OwnerElementPath.IsEmpty).ToImmutableArray();
+             DescendantAttributeFacts = allAttributes.Where(f => !f.OwnerElementPath.IsEmpty).ToImmutableArray();
+-            ScalarFacts = facts.Skip(1).Where(f => !f.HasNoTypedValue).ToImmutableArray();
++            ScalarFacts = facts.Skip(1).Where(f => !f.HasNoTypedValue && !f.NativeType.EmptyContent).ToImmutableArray();
+             Facts = facts.AddRange(allAttributes); Status = SchemaAssessmentStatus.Valid;
+         }
+         private Assessment(SchemaAssessmentStatus status, ImmutableArray<SchemaAssessmentDiagnostic> diagnostics, bool truncated,
+--- base/src/Bosak.Schema/Assessment/NativeSessionNode.cs
++++ experiment/src/Bosak.Schema/Assessment/NativeSessionNode.cs
+@@ -18,6 +18,7 @@
+ //                      | Charles Korthout | 0.5   | 20-11-2026     | Decouple complex annotation from typed-value absence and retain normalized root text     |
+ //                      | Charles Korthout | 0.6   | 20-11-2026     | Keep local complex declarations distinct from global element metadata                     |
+ //                      | Charles Korthout | 0.7   | 20-11-2026     | Expose guarded original-node data interface; exact published facts and lifetime guard  |
++//                      | Charles Korthout | 0.8   | 21-11-2026     | Probe empty complex typing in isolated copies only |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -53,7 +54,11 @@
+             if (facts.HasNoTypedValue)
+                 throw new XPathErrorException("http://www.w3.org/2005/xqt-errors", "FOTY0012", "err", "Element-only root has no typed value.");
+             var value = facts.ReadTypedValue(default).Value;
+-            value.TryGetSingleAtomic(out var item);
++            if (!value.TryGetSingleAtomic(out var item))
++            {
++                if (facts.NativeType.EmptyContent) return XdmValue.Undefined;
++                throw new NotSupportedException("Non-scalar typed value outside the finite profile.");
++            }
+             return item.Value;
+         }
+     }
+--- base/src/Bosak.Schema/Assessment/NativeDecimalSessionCore.cs
++++ experiment/src/Bosak.Schema/Assessment/NativeDecimalSessionCore.cs
+@@ -19,6 +19,7 @@
+ //                      | Charles Korthout | 0.6   | 20-11-2026     | Read the original root scalar separately from unchanged leaf and attribute indexes       |
+ //                      | Charles Korthout | 0.7   | 20-11-2026     | Read terminal scalar facts without exposing nested element-only containers as values     |
+ //                      | Charles Korthout | 0.8   | 20-11-2026     | Read detached descendant attributes through original owner-bound facts and shared gate   |
++//                      | Charles Korthout | 0.9   | 21-11-2026     | Probe empty complex typing in isolated copies only |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -129,7 +130,7 @@
+     private bool HasRootScalar(Document document) => Work(() =>
+     {
+         Check(document);
+-        return !document.Assessment.ElementFacts[0].HasNoTypedValue;
++        return !document.Assessment.ElementFacts[0].HasNoTypedValue && !document.Assessment.ElementFacts[0].NativeType.EmptyContent;
+     }, default);
+ 
+     private NativeScalarValue ReadRootScalar(Document document, CancellationToken cancellationToken) => Work(() =>

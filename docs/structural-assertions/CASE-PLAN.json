@@ -1,0 +1,340 @@
+{
+  "status": "Proposal XML lint only; no engine execution",
+  "rows": [
+    {
+      "id": "SA-001",
+      "purpose": "Qualified empty context: namespace-uri(.) = 'urn:instance'",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"namespace-uri(.) = 'urn:instance'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-002",
+      "purpose": "Qualified empty context: namespace-uri() eq 'urn:instance'",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"namespace-uri() eq 'urn:instance'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-003",
+      "purpose": "Qualified empty context: f:namespace-uri(.) = 'urn:instance'",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"f:namespace-uri(.) = 'urn:instance'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-004",
+      "purpose": "Qualified empty context: namespace-uri(.) != '' and (namespace-uri() ne 'urn:other')",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"namespace-uri(.) != '' and (namespace-uri() ne 'urn:other')\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-005",
+      "purpose": "False assertion publishes no facts",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"namespace-uri(.) = 'urn:other'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-006",
+      "purpose": "Bare empty type control",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-007",
+      "purpose": "Empty sequence maps to empty variety",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:sequence/><xs:assert test=\"namespace-uri(.) = 'urn:instance'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-008",
+      "purpose": "Empty type rejects character content ' '",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"> </r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-009",
+      "purpose": "Empty type rejects character content '\\n'",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\">\n</r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-010",
+      "purpose": "Empty type rejects character content 'x'",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\">x</r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-011",
+      "purpose": "Empty type rejects child",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"><x/></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-012",
+      "purpose": "No namespace returns zero-length URI",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"namespace-uri(.) = ''\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-013",
+      "purpose": "Prefix alias retains expanded name",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"namespace-uri(.) = 'urn:instance'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<z:r xmlns:z=\"urn:instance\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-014",
+      "purpose": "XPath default namespace independent",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" xpathDefaultNamespace=\"urn:other\"><xs:element name=\"r\"><xs:complexType><xs:assert test=\"namespace-uri(.) = 'urn:instance'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-015",
+      "purpose": "Exact case comparison",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"namespace-uri(.) = 'URN:INSTANCE'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-016",
+      "purpose": "Optional child absent is element-only",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence><xs:assert test=\"namespace-uri(.) = 'urn:instance'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-017",
+      "purpose": "Element-only permits whitespace",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"n\" type=\"xs:decimal\" minOccurs=\"0\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"> \n</r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-018",
+      "purpose": "Local unqualified child distinct from schema target",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"n\" form=\"unqualified\"><xs:complexType><xs:assert test=\"namespace-uri(.) = ''\"/></xs:complexType></xs:element></xs:sequence><xs:assert test=\"namespace-uri(.) = 'urn:instance'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"><n xmlns=\"\"/></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-019",
+      "purpose": "Static grammar refusal: namespace-uri(../r) = 'urn:instance'",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"namespace-uri(../r) = 'urn:instance'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-020",
+      "purpose": "Static grammar refusal: local-name(.) = 'r'",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"local-name(.) = 'r'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-021",
+      "purpose": "Static grammar refusal: $value = ''",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"$value = ''\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-022",
+      "purpose": "Static grammar refusal: namespace-uri(.) lt 'z'",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"namespace-uri(.) lt 'z'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-023",
+      "purpose": "Static grammar refusal: namespace-uri(.) = 'urn:instance' or unknown()",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType><xs:assert test=\"namespace-uri(.) = 'urn:instance' or unknown()\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-024",
+      "purpose": "Wrong namespace function prefix",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" xmlns:bad=\"urn:wrong\"><xs:element name=\"r\"><xs:complexType><xs:assert test=\"bad:namespace-uri(.) = 'urn:instance'\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"/>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-025",
+      "purpose": "Comments remain profile exclusion",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"><!--c--></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-026",
+      "purpose": "PI remains profile exclusion",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"><?p q?></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "status": "Proposed authored payload; not executed"
+    },
+    {
+      "id": "SA-027",
+      "purpose": "Named empty type identity and actual node URI",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\"><xs:complexType name=\"Empty\"><xs:assert test=\"namespace-uri(.) = 'urn:types'\"/></xs:complexType><xs:element name=\"r\" type=\"t:Empty\"/></xs:schema>",
+      "instance": "<r xmlns=\"urn:types\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed authored payload; not executed"
+    }
+  ],
+  "gates": [
+    {
+      "id": "SG-001",
+      "purpose": "Both signed pins: present empty typed sequence, IsList=false, AtomicItems empty, TryGetSingleAtomic=false; query data() empty where admitted",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-002",
+      "purpose": "Actual scalar-only refusal category for empty typed sequence; no fabricated atomic or FOTY0012 absence",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-003",
+      "purpose": "Optional absent particle retains HasNoTypedValue=true and FOTY0012",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-004",
+      "purpose": "Partial assertion node carries actual name; no dummy integer; final type facts unchanged",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-005",
+      "purpose": "Named/anonymous root/nested empty types retain governing/actual identities and authority",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-006",
+      "purpose": "Use xsi:type from another namespace within existing bounded support; accessor must use instance name",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-007",
+      "purpose": "Alternate function prefixes, local rebindings and fixed default function namespace; unknown prefixes refused",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-008",
+      "purpose": "Exact case, percent, relative URI behavior consistent with prior namespace profile; no normalization/fetch",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-009",
+      "purpose": "Eight assertions/512chars/128tokens/16depth exact and one-over controls",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-010",
+      "purpose": "64nodes/4depth and16occurrences exact/one-over including zero-scalar empty nodes",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-011",
+      "purpose": "Existing16scalar/64attribute budgets remain enforced",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-012",
+      "purpose": "False/error/invalid/cancelled/Unsupported assessment exports no partial facts",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-013",
+      "purpose": "Disposal, recovery, foreign/copied wrappers and actual original source export controls",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-014",
+      "purpose": "All2770stable source identities retained",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-015",
+      "purpose": "1930package-only consumers per signed Core pin; record overlaps",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-016",
+      "purpose": "Retained124/23/33 compatibility lanes",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-017",
+      "purpose": "54types/401rows zero public API delta; same Core pins and signatures",
+      "status": "Required native control; not executed"
+    },
+    {
+      "id": "SG-018",
+      "purpose": "Original21cases/42files and expectations unchanged; measure without forecasting admission",
+      "status": "Required native control; not executed"
+    }
+  ]
+}

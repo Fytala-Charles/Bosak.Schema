@@ -1,0 +1,106 @@
+// ===========================================================================================================================================================
+// AUTHOR               : Charles Korthout
+// CREATE DATE          : 22 November 2026
+// PURPOSE              : Verifies isolated empty typed-value representation through original native assessments.
+// SPECIAL NOTES        : Unit tests verifying correctness of the underlying implementation.
+//
+// COPYRIGHT            : Fytala
+// LICENSE              : LICENSE.md (Apache-2.0)
+// SPDX-License-Identifier: Apache-2.0
+// ===========================================================================================================================================================
+// Change History:      |==================|=======|================|=========================================================================================
+//                      |     Author       |Version|  Date          | Notes                                                                                    |
+//                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.1   | 22-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 22-11-2026     | Adapt native controls for bounded integer simple content |
+//                      | Charles Korthout | 0.3   | 22-11-2026     | Verify isolated contextual assertions and retained native baseline |
+//                      |==================|=======|================|=========================================================================================
+// ===========================================================================================================================================================
+
+using System.Collections.Immutable;
+using System.Xml.Linq;
+using Bosak.Schema;
+using Bosak.Schema.Tests.NodeData;
+using Bosak.XPath.Api.Schema;
+using Bosak.XPath.Core.Schema;
+using Bosak.XPath.Core.Xdm;
+using Xunit;
+namespace Bosak.Schema.Tests.Structural;
+/// <summary>Exercises actual native empty content on pinned public Core binaries.</summary>
+public sealed class NativeStructuralEmptyCoreTests
+{
+    private const string Ns="urn:empty";
+    private static NativeSchemaSessionOptions Options=>new(256,256,1024,65536,1,32,1,256,256);
+    private static NativeSchemaAssessmentContext Context=>new(DateTimeOffset.UnixEpoch,0);
+    private static string Schema(bool nested,bool named,bool sequence)
+    {
+        var content=sequence?"<xs:sequence/>":"";
+        var definition=$"<xs:complexType{(named?" name='E'":"")}>{content}</xs:complexType>";
+        var terminal=named?"<xs:element name='e' type='t:E'/>":$"<xs:element name='e'>{definition}</xs:element>";
+        var root=nested?$"<xs:element name='r'><xs:complexType><xs:sequence>{terminal}</xs:sequence></xs:complexType></xs:element>":named?"<xs:element name='r' type='t:E'/>":$"<xs:element name='r'>{definition}</xs:element>";
+        return $"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='{Ns}' targetNamespace='{Ns}' elementFormDefault='qualified'>{(named?definition:"")}{root}</xs:schema>";
+    }
+    private static string Xml(bool nested,string text="")=>$"<t:r xmlns:t='{Ns}'>{(nested?$"<t:e>{text}</t:e>":text)}</t:r>";
+    /// <summary>Gets all root/local, named/anonymous and bare/sequence shapes.</summary>
+    /// <returns>Concrete shape controls.</returns>
+    public static IEnumerable<object[]> Shapes(){foreach(var n in new[]{false,true})foreach(var t in new[]{false,true})foreach(var s in new[]{false,true})yield return [n,t,s];}
+    /// <summary>Original facts issue a non-list zero-atomic value and data() yields the empty sequence.</summary>
+    /// <param name="nested">Nested owner.</param><param name="named">Named type.</param><param name="sequence">Explicit empty sequence.</param>
+    [Theory][MemberData(nameof(Shapes))]
+    public void NativeEmpty_IsAuthenticatedAndAtomizesEmpty(bool nested,bool named,bool sequence)
+    {
+        using var f=new Fixture(Schema(nested,named,sequence),Xml(nested));Assert.Equal(SchemaAssessmentStatus.Valid,f.Assessment.Status);
+        var node=f.Element(nested?[0]:[]);var fact=f.Input.FactsFor((NativeSessionNode)node)!;Assert.False(fact.HasNoTypedValue);Assert.True(node.IsComplexType);Assert.True(fact.NativeType.EmptyContent);Assert.Same(f.Provider.TypeComponent(fact.NativeType),fact.Type);
+        Assert.Equal(named?(Ns,"E"):((string,string)?)null,node.SchemaTypeAnnotation);var raw=fact.ReadTypedValue(default);Assert.Equal(SchemaResultKind.Supported,raw.Kind);Assert.False(raw.Value.IsList);Assert.False(raw.Value.TryGetSingleAtomic(out _));Assert.Empty(raw.Value.AtomicItems);Assert.Same(fact.Type,raw.Value.GoverningType);Assert.True(f.Session.Advisor!.OwnsTypedValue(raw.Value,f.Input,f.Assessment.Origin));Assert.True(f.Session.Advisor.OwnsNode(node,fact,f.Input,f.Assessment.Origin));Assert.Equal(XdmValueKind.Undefined,node.TypedValue.Kind);
+        f.Run(op=>{for(var i=0;i<3;i++){var v=f.Evaluate(op,node);Assert.Equal(XdmValueKind.Undefined,v.Kind);Assert.False(SchemaAtomics.TryGetProvenance(v,out _));}var direct=op.ReadTypedValue(f.Snapshot!,raw.Value);Assert.Equal(SchemaResultKind.Unsupported,direct.Kind);return 0;});
+        Assert.True(XNode.DeepEquals(XElement.Parse(Xml(nested)),XElement.Parse(f.Input.Xml)));
+        if(nested){Assert.True(f.Input.FactsFor((NativeSessionNode)f.Element([]))!.HasNoTypedValue);var ex=Assert.ThrowsAny<Exception>(()=>f.Run(op=>f.Evaluate(op,f.Element([]))));Assert.Contains("FOTY0012",ex.Message);Assert.Equal(XdmValueKind.Undefined,f.Run(op=>f.Evaluate(op,node)).Kind);}
+        f.Input.Dispose();Assert.Throws<ObjectDisposedException>(()=>fact.ReadTypedValue(default));
+    }
+    /// <summary>Both owned facades preserve export and refuse scalar reads of an empty value.</summary>
+    /// <param name="nested">Nested owner.</param><param name="named">Named type.</param><param name="sequence">Explicit empty sequence.</param>
+    [Theory][MemberData(nameof(Shapes))]
+    public void OwnedFacades_ExportAndRefuseScalar(bool nested,bool named,bool sequence)
+    {
+        var schema=Schema(nested,named,sequence);var xml=Xml(nested);
+        using(var s=NativeSchemaNodeDataSession.Create(schema,Options).Value!)
+        {using var d=s.Assess(xml,Context).Value!;var error=Assert.Throws<NotSupportedException>(()=>d.ReadElement(nested?[0]:[]));Assert.Equal("The scalar family is outside the supported profile.",error.Message);Assert.True(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));var exported=d.ExportXml();d.Dispose();using var again=s.Assess(exported,Context).Value!;Assert.Throws<NotSupportedException>(()=>again.ReadElement(nested?[0]:[]));}
+        using(var s=NativeSchemaSession.Create(schema,Options).Value!)
+        {using var d=s.Assess(xml,Context).Value!;Assert.False(d.HasRootScalar);Assert.Equal(0,d.ScalarCount);Assert.Throws<NotSupportedException>(()=>d.ReadRootScalar());Assert.True(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}
+    }
+    /// <summary>Empty content rejects whitespace as well as non-whitespace and child elements without publication.</summary>
+    /// <param name="nested">Nested owner.</param><param name="text">Disallowed content.</param>
+    [Theory][InlineData(false," ")][InlineData(true," ")][InlineData(false,"\n")][InlineData(true,"\n")][InlineData(false,"x")][InlineData(true,"x")][InlineData(false,"<t:x/>")][InlineData(true,"<t:x/>")]
+    public void InvalidEmpty_PublishesNothing(bool nested,string text)
+    {using var f=new Fixture(Schema(nested,false,false),Xml(nested,text));Assert.Equal(SchemaAssessmentStatus.Invalid,f.Assessment.Status);Assert.False(f.Input.IsAssessed);Assert.Empty(f.Assessment.Facts);Assert.Null(f.Assessment.Evidence);Assert.Null(f.Snapshot);}
+    /// <summary>An instance without optional particles still has element-only absent typed value.</summary>
+    [Fact]
+    public void OptionalAbsent_IsNotEmptyVariety()
+    {var schema=Schema(false,false,false).Replace("<xs:complexType></xs:complexType>","<xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' minOccurs='0'/></xs:sequence></xs:complexType>");using var f=new Fixture(schema,Xml(false," "));var node=f.Element([]);Assert.True(node.HasNoTypedValue);Assert.False(f.Input.FactsFor((NativeSessionNode)node)!.NativeType.EmptyContent);var ex=Assert.ThrowsAny<Exception>(()=>f.Run(op=>f.Evaluate(op,node)));Assert.Contains("FOTY0012",ex.Message);}
+    /// <summary>Empty original values remain tied to their exact original session and cancellation boundary.</summary>
+    [Fact]
+    public void ForeignCancellationAndRecovery()
+    {using var a=new Fixture(Schema(false,true,false),Xml(false));using var b=new Fixture(Schema(false,true,false),Xml(false));var node=a.Element([]);Assert.Throws<ArgumentException>(()=>b.Run(op=>b.Evaluate(op,node)));using var copy=NativeSchemaInput.Capture(Xml(false)).Value!;Assert.Throws<ArgumentException>(()=>a.Run(op=>a.Evaluate(op,copy.Root)));using var c=new CancellationTokenSource();c.Cancel();Assert.ThrowsAny<OperationCanceledException>(()=>a.Run(op=>a.Evaluate(op,node),c.Token));Assert.Equal(XdmValueKind.Undefined,a.Run(op=>a.Evaluate(op,node)).Kind);}
+    /// <summary>Existing comment and PI exclusions retain their Unsupported status.</summary>
+    /// <param name="text">Excluded markup.</param>
+    [Theory][InlineData("<!--c-->")][InlineData("<?p q?>")]
+    public void ExcludedMarkup_Refuses(string text)
+    {using var f=new Fixture(Schema(false,false,false),Xml(false,text));Assert.Equal(SchemaAssessmentStatus.Unsupported,f.Assessment.Status);Assert.False(f.Input.IsAssessed);Assert.Empty(f.Assessment.Facts);}
+    /// <summary>Typed identity retains its singleton-only refusal without changing the authentic empty facts.</summary>
+    [Fact]
+    public void TypedIdentity_RefusesEmptyContainer()
+    {
+        var compiled=NativeDecimalSchema.Compile(Schema(false,true,false),new(256,256),maxStringCharacters:1024).Value!;
+        var provider=new NativeSchemaProvider(compiled);using var session=SchemaQuerySession.CompileXPath("$value",new(1,32,1,256,256),assessor:provider).Value;
+        using var input=NativeSchemaInput.Capture(Xml(false)).Value!;var a=(NativeSchemaProvider.Assessment)session.Advisor!.Assess(new(input,SchemaAssessmentMode.Strict,null,null,new Episode(),null),default);Assert.Equal(SchemaAssessmentStatus.Valid,a.Status);
+        using var snapshot=session.OpenSnapshot(input,input,a.Origin).Value;
+        new NativeSessionRunner(session).Run([snapshot],op=>{var fact=a.ElementFacts[0];Assert.False(fact.HasNoTypedValue);var raw=fact.ReadTypedValue(default);Assert.Empty(raw.Value.AtomicItems);var admitted=op.ReadTypedValue(snapshot,raw.Value);Assert.Equal(SchemaResultKind.Unsupported,admitted.Kind);return 0;});
+    }
+    private sealed record Episode:ISchemaAssessmentEpisode
+    {
+        /// <inheritdoc/>
+        public DateTimeOffset CurrentDateTime=>DateTimeOffset.UnixEpoch;
+        /// <inheritdoc/>
+        public int ImplicitTimezoneOffsetMinutes=>0;
+    }
+}

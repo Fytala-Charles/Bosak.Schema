@@ -19,6 +19,9 @@
 //                      | Charles Korthout | 0.6   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
 //                      | Charles Korthout | 0.7   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
 //                      | Charles Korthout | 0.8   | 21-11-2026     | Adopt bounded contextual and inherited integer assertions |
+//                      | Charles Korthout | 0.9   | 21-11-2026     | Probe empty complex typing in isolated copies only |
+//                      | Charles Korthout | 0.10   | 22-11-2026     | Probe bounded structural assertions in isolated copies |
+//                      | Charles Korthout | 0.11   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -47,7 +50,7 @@ internal sealed partial class NativeDecimalSchema
         NativeType decimalType, NativeType stringType, NativeType booleanType, NativeType integerType,
         Dictionary<XName, NativeType> simple, NativeNumericLimits limits, int maxStringCharacters, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple)
     {
-        Require(!schema.Descendants(Xs + "assert").Any(a => a.Parent?.Parent?.Name != Xs + "simpleContent"), "Structural nested assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+        // Structural assertions are parsed eagerly on each complex owner below.
         var definitions = types.Where(t => t.Name == Xs + "complexType")
             .ToDictionary(t => XName.Get(Name(t), targetNamespace));
         var named = new Dictionary<XName, NativeDecimalSchema>();
@@ -69,11 +72,12 @@ internal sealed partial class NativeDecimalSchema
         NativeDecimalSchema Complex(XElement complex, NativeDeclaration root)
         {
             cancellationToken.ThrowIfCancellationRequested();
+            if (TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken) is { } empty) return empty;
             var members = Elements(complex);
             if (members.Count == 1 && members[0].Name == Xs + "simpleContent")
                 return CompileComplex(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
                     decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null, nestedContext: true);
-            Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && members.Skip(1).All(e => e.Name == Xs + "attribute"),
+            Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").Count() + members.Skip(1).SkipWhile(e => e.Name == Xs + "attribute").Count(e => e.Name == Xs + "assert") == members.Count - 1,
                 "Expected an element-only sequence and root attributes.", NativeDecimalUnsupportedReason.DeclarationShape);
             var sequence = members[0];
             Attributes(sequence);
@@ -113,9 +117,10 @@ internal sealed partial class NativeDecimalSchema
                 }
                 children.Add(new NativeDeclaration(name, type, min, max, ns) { Container = container });
             }
-            var attributes = CompileAttributes(members.Skip(1).ToArray(), targetNamespace, attributeForm,
+            Require(!members.Any(a => a.Name == Xs + "assert") || !members.Any(a => a.Name == Xs + "attribute"), "Structural assertions with application attributes are excluded.", NativeDecimalUnsupportedReason.Attributes);
+            var attributes = CompileAttributes(members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray(), targetNamespace, attributeForm,
                 decimalType, stringType, booleanType, integerType, simple, cancellationToken);
-            var plan = new NativeDecimalSchema(root, children.ToImmutable(), [], limits) { AttributeUses = attributes, NestedProfile = true };
+            var plan = new NativeDecimalSchema(root, children.ToImmutable(), [], limits) { AttributeUses = attributes, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(members.Skip(1).SkipWhile(e => e.Name == Xs + "attribute"), targetNamespace, assertionNamespace, cancellationToken) };
             NestedBudget(plan, cancellationToken);
             return plan;
         }
@@ -137,7 +142,7 @@ internal sealed partial class NativeDecimalSchema
                 Require(Elements(element).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                 var shared = Resolve(ResolveTypeName(element));
                 plan = new NativeDecimalSchema(new NativeDeclaration(name, shared.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits)
-                    { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, NestedProfile = shared.NestedProfile };
+                    { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile };
             }
             else
             {
@@ -207,6 +212,15 @@ internal sealed partial class NativeDecimalSchema
             cancellationToken.ThrowIfCancellationRequested();
             return;
         }
+        if (effectiveType.EmptyContent)
+        {
+            Require(element.Nodes().All(n => n is XElement or XText), "Empty-content comments or processing instructions are unsupported.");
+            Check(!element.Nodes().Any(), "Empty content cannot contain character or element children.");
+            plan.AssessStructuralAssertions(element, cancellationToken);
+            states.Add(new NativeElementState(declaration, null) { EffectiveType = effectiveType });
+            cancellationToken.ThrowIfCancellationRequested();
+            return;
+        }
         foreach (var text in element.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only container contains non-whitespace text.");
         Require(element.Nodes().All(n => n is XElement or XText), "Container comments or processing instructions are unsupported.");
         states.Add(new NativeElementState(declaration, null) { EffectiveType = effectiveType });
@@ -232,5 +246,6 @@ internal sealed partial class NativeDecimalSchema
             Check(count >= child.MinOccurs, "Required child is missing or out of order.");
         }
         Check(index == nodes.Length, "Unexpected child or sequence order.");
+        plan.AssessStructuralAssertions(element, cancellationToken);
     }
 }

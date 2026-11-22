@@ -1,0 +1,59 @@
+{
+  "status": "Public package XML documentation review only; no runtime test or pin change",
+  "pins": [
+    {
+      "lane": "minimum",
+      "version": "1.81.2",
+      "sourceCommit": "7249d0e01628c47f92b89a3380bc69cf58d70045",
+      "xmlSha256": "b4927e9a6cbc01365790114f60661ae2d8726f10c8a29e214f1bc1044581bdf5",
+      "xmlPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-contextual-assertions-production-20261121\\minimum-consumer-cache\\bosak.xpath.core\\1.81.2\\lib\\net10.0\\Bosak.XPath.Core.xml",
+      "members": [
+        {
+          "name": "P:Bosak.XPath.Core.Schema.ISchemaTypedValue.IsList",
+          "text": "Whether the schema value is a list, even for zero or one member."
+        },
+        {
+          "name": "P:Bosak.XPath.Core.Schema.ISchemaTypedValue.AtomicItems",
+          "text": "Plain atomics and separate evidence in order; no ownership transfer."
+        },
+        {
+          "name": "M:Bosak.XPath.Core.Schema.ISchemaTypedValue.TryGetSingleAtomic(Bosak.XPath.Core.Schema.SchemaAtomicItem@)",
+          "text": "Optional scalar fast path; false requires ordered enumeration. The scalar cell when available. True when one scalar cell is supplied."
+        },
+        {
+          "name": "P:Bosak.XPath.Core.Xdm.IXdmNode.HasNoTypedValue",
+          "text": "Gets a value indicating whether this node has no typed value per XDM (e.g., an element whose schema type is a complex type with element-only or empty content). When true, fn:data() must raise FOTY0012."
+        }
+      ]
+    },
+    {
+      "lane": "current",
+      "version": "1.81.17",
+      "sourceCommit": "6a7618e9dcf70eb8a67d5d1789ff7b787133b52d",
+      "xmlSha256": "b4927e9a6cbc01365790114f60661ae2d8726f10c8a29e214f1bc1044581bdf5",
+      "xmlPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-contextual-assertions-production-20261121\\current-consumer-cache\\bosak.xpath.core\\1.81.17\\lib\\net10.0\\Bosak.XPath.Core.xml",
+      "members": [
+        {
+          "name": "P:Bosak.XPath.Core.Schema.ISchemaTypedValue.IsList",
+          "text": "Whether the schema value is a list, even for zero or one member."
+        },
+        {
+          "name": "P:Bosak.XPath.Core.Schema.ISchemaTypedValue.AtomicItems",
+          "text": "Plain atomics and separate evidence in order; no ownership transfer."
+        },
+        {
+          "name": "M:Bosak.XPath.Core.Schema.ISchemaTypedValue.TryGetSingleAtomic(Bosak.XPath.Core.Schema.SchemaAtomicItem@)",
+          "text": "Optional scalar fast path; false requires ordered enumeration. The scalar cell when available. True when one scalar cell is supplied."
+        },
+        {
+          "name": "P:Bosak.XPath.Core.Xdm.IXdmNode.HasNoTypedValue",
+          "text": "Gets a value indicating whether this node has no typed value per XDM (e.g., an element whose schema type is a complex type with element-only or empty content). When true, fn:data() must raise FOTY0012."
+        }
+      ]
+    }
+  ],
+  "discrepancy": "HasNoTypedValue documentation includes empty content; XDM6.2.4 requires present empty typed sequence for complex empty variety",
+  "feasibilityGate": "Actual native original empty typed value, non-list and zero atomics, on both signed pins; otherwise retain Unsupported",
+  "publicApiTypes": 54,
+  "publicApiRows": 401
+}

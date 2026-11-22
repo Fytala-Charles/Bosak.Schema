@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="c873cbe3-bda6-498d-86fb-663dee3c73da" name="charl@CHARLES 2026-11-21 23:13:00" runUser="CHARLES\charl" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-21T23:13:00.8565994+01:00" queuing="2026-11-21T23:13:00.8565999+01:00" start="2026-11-21T23:12:59.8045454+01:00" finish="2026-11-21T23:13:01.8654658+01:00" />
+  <TestSettings name="default" id="899e78f7-b28d-49a9-80ab-d3732100f323">
+    <Deployment runDeploymentRoot="charl_CHARLES_2026-11-21_23_13_00" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="4423a774-ac10-4f1e-b653-2d73eb05df18" testId="e6babe30-7b15-f49f-4ee0-166727a05b9c" testName="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: True, text: &quot;\n&quot;)" computerName="CHARLES" duration="00:00:00.0001591" startTime="2026-11-21T23:13:00.8341641+01:00" endTime="2026-11-21T23:13:00.8341864+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4423a774-ac10-4f1e-b653-2d73eb05df18" />
+    <UnitTestResult executionId="d9c59287-c40b-4fde-8c50-ddc7f0b964a5" testId="1efde2b0-3ff9-504b-8aaf-9b9bf655a1e0" testName="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: True, sequence: True)" computerName="CHARLES" duration="00:00:00.0355925" startTime="2026-11-21T23:13:00.7026917+01:00" endTime="2026-11-21T23:13:00.7377403+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d9c59287-c40b-4fde-8c50-ddc7f0b964a5">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : Snapshot admission limit reached.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+   at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 82&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 158&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 68&#xD;
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63&#xD;
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs:line 67&#xD;
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4c22d6b7-e8e4-46c3-84a7-60ebb9e807a6" testId="6d66badd-c738-2022-b702-0a8935a8764a" testName="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: False, named: False, sequence: False)" computerName="CHARLES" duration="00:00:00.0970207" startTime="2026-11-21T23:13:01.0428423+01:00" endTime="2026-11-21T23:13:01.1371125+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4c22d6b7-e8e4-46c3-84a7-60ebb9e807a6" />
+    <UnitTestResult executionId="f02d8c84-ad69-42b2-90f5-67c337359099" testId="2bfd55af-2b84-f6ea-da14-d07c8f54060d" testName="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: True, named: False, sequence: False)" computerName="CHARLES" duration="00:00:00.0821405" startTime="2026-11-21T23:13:01.6283732+01:00" endTime="2026-11-21T23:13:01.7104930+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f02d8c84-ad69-42b2-90f5-67c337359099" />
+    <UnitTestResult executionId="c49771fb-a9a2-4969-8317-ab310e747f28" testId="164dc14c-a07d-4ec2-37ca-4edc938b41b9" testName="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: False, sequence: True)" computerName="CHARLES" duration="00:00:00.0319659" startTime="2026-11-21T23:13:00.6396884+01:00" endTime="2026-11-21T23:13:00.6712830+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c49771fb-a9a2-4969-8317-ab310e747f28">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : Snapshot admission limit reached.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+   at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 82&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 158&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 68&#xD;
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63&#xD;
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs:line 67&#xD;
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="27c057f7-5ff3-4969-99ae-d71ead42df22" testId="1f6ffdc5-e0d4-900d-d6cb-be3a9cf81af1" testName="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: False, named: True, sequence: False)" computerName="CHARLES" duration="00:00:00.1380196" startTime="2026-11-21T23:13:01.2501268+01:00" endTime="2026-11-21T23:13:01.3881055+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="27c057f7-5ff3-4969-99ae-d71ead42df22" />
+    <UnitTestResult executionId="82f9c713-e825-47bf-8b07-e81e88f09336" testId="0b16a911-5fb7-ba7b-9a69-10b2922873e2" testName="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: False, sequence: False)" computerName="CHARLES" duration="00:00:00.0320835" startTime="2026-11-21T23:13:00.7717169+01:00" endTime="2026-11-21T23:13:00.8033967+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="82f9c713-e825-47bf-8b07-e81e88f09336">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : Snapshot admission limit reached.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+   at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 82&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 158&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 68&#xD;
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63&#xD;
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs:line 67&#xD;
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="02b17ff2-69d9-4ce2-a592-8b4fd65badc9" testId="b089b31f-ebae-6c59-0921-69b79322282b" testName="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: False, text: &quot; &quot;)" computerName="CHARLES" duration="00:00:00.0000875" startTime="2026-11-21T23:13:00.8340919+01:00" endTime="2026-11-21T23:13:00.8341174+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="02b17ff2-69d9-4ce2-a592-8b4fd65badc9" />
+    <UnitTestResult executionId="687ed23c-6d0f-4d43-bc3f-0b22353d5fc8" testId="7855f11c-7c3b-6820-7963-e60087c7e1ab" testName="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: False, text: &quot;\n&quot;)" computerName="CHARLES" duration="00:00:00.0000851" startTime="2026-11-21T23:13:00.8340293+01:00" endTime="2026-11-21T23:13:00.8340539+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="687ed23c-6d0f-4d43-bc3f-0b22353d5fc8" />
+    <UnitTestResult executionId="0b2aabcc-ae7f-4fc2-af76-93ed03fb24fb" testId="b5c0f35a-636d-4612-e72d-2c06683dcef1" testName="EmptyProbe.EmptyTests.ExcludedMarkup_Refuses(text: &quot;&lt;!--c--&gt;&quot;)" computerName="CHARLES" duration="00:00:00.0005647" startTime="2026-11-21T23:13:01.7905965+01:00" endTime="2026-11-21T23:13:01.7909159+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0b2aabcc-ae7f-4fc2-af76-93ed03fb24fb" />
+    <UnitTestResult executionId="f4ec86ed-bcb6-43dc-bb5d-3a1a799ec765" testId="62f4352a-d071-dfbb-6e25-81cbab95fd7c" testName="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: True, text: &quot; &quot;)" computerName="CHARLES" duration="00:00:00.0001120" startTime="2026-11-21T23:13:00.8339567+01:00" endTime="2026-11-21T23:13:00.8339818+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f4ec86ed-bcb6-43dc-bb5d-3a1a799ec765" />
+    <UnitTestResult executionId="adbf3464-09a9-46d5-a030-10d3c308b3f7" testId="44194f7c-4499-89ad-2c8f-93996387f71c" testName="EmptyProbe.EmptyTests.ForeignCancellationAndRecovery" computerName="CHARLES" duration="00:00:00.0212029" startTime="2026-11-21T23:13:01.7941527+01:00" endTime="2026-11-21T23:13:01.8146978+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="adbf3464-09a9-46d5-a030-10d3c308b3f7" />
+    <UnitTestResult executionId="e220cae5-a9c2-4b0c-a7e0-be588973de04" testId="73d29afa-99e1-f8dd-484f-528c03e4cd5a" testName="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: True, named: False, sequence: True)" computerName="CHARLES" duration="00:00:00.2400388" startTime="2026-11-21T23:13:01.3883264+01:00" endTime="2026-11-21T23:13:01.6282108+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e220cae5-a9c2-4b0c-a7e0-be588973de04" />
+    <UnitTestResult executionId="6b04edb5-0694-402a-a076-a49f400738d9" testId="378c61c5-2fac-6d41-2281-8a0bf124f620" testName="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: False, sequence: True)" computerName="CHARLES" duration="00:00:00.0307818" startTime="2026-11-21T23:13:00.6091822+01:00" endTime="2026-11-21T23:13:00.6391499+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6b04edb5-0694-402a-a076-a49f400738d9">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : Snapshot admission limit reached.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+   at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 82&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 158&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 68&#xD;
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63&#xD;
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs:line 67&#xD;
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ef2bfc61-1099-4ca2-b220-db43bd4abc5b" testId="3354ced7-f6bd-3a5f-580b-61151cc768ba" testName="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: True, sequence: False)" computerName="CHARLES" duration="00:00:00.0298205" startTime="2026-11-21T23:13:00.5879864+01:00" endTime="2026-11-21T23:13:00.6081952+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ef2bfc61-1099-4ca2-b220-db43bd4abc5b">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : Snapshot admission limit reached.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+   at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 82&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 158&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 68&#xD;
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63&#xD;
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs:line 67&#xD;
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6860645f-e74c-40ae-b3ae-2b26231cf770" testId="e486102a-cb79-2b7a-20e2-ef4efa4951e1" testName="EmptyProbe.EmptyTests.ExcludedMarkup_Refuses(text: &quot;&lt;?p q?&gt;&quot;)" computerName="CHARLES" duration="00:00:00.0003401" startTime="2026-11-21T23:13:01.7910015+01:00" endTime="2026-11-21T23:13:01.7914118+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6860645f-e74c-40ae-b3ae-2b26231cf770" />
+    <UnitTestResult executionId="2f97482c-316f-429b-b8e2-d7416505ba60" testId="0a221780-fd48-3b1d-12b2-e923908ca238" testName="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: False, text: &quot;x&quot;)" computerName="CHARLES" duration="00:00:00.0070686" startTime="2026-11-21T23:13:00.8046657+01:00" endTime="2026-11-21T23:13:00.8110317+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2f97482c-316f-429b-b8e2-d7416505ba60" />
+    <UnitTestResult executionId="5faeee04-56a5-4986-9aa9-ebcb7ee4a315" testId="5991e746-757f-1af4-402e-336a4e2a9786" testName="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: True, sequence: False)" computerName="CHARLES" duration="00:00:00.0305124" startTime="2026-11-21T23:13:00.6719744+01:00" endTime="2026-11-21T23:13:00.7020158+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5faeee04-56a5-4986-9aa9-ebcb7ee4a315">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : Snapshot admission limit reached.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+   at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 82&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 158&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 68&#xD;
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63&#xD;
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs:line 67&#xD;
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4fe6ad2f-8e69-4e4e-a471-ce5a9edb8fde" testId="7c7c378c-3757-4b54-f064-c5bc78f16028" testName="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: True, text: &quot;&lt;t:x/&gt;&quot;)" computerName="CHARLES" duration="00:00:00.0001175" startTime="2026-11-21T23:13:00.8342255+01:00" endTime="2026-11-21T23:13:00.8342488+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4fe6ad2f-8e69-4e4e-a471-ce5a9edb8fde" />
+    <UnitTestResult executionId="aa6bfbb8-b1a2-4465-a466-159c6b2632ee" testId="7cd9f3d4-9ad1-bdd3-d555-9fc572420909" testName="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: True, named: True, sequence: False)" computerName="CHARLES" duration="00:00:00.1228784" startTime="2026-11-21T23:13:00.9173318+01:00" endTime="2026-11-21T23:13:01.0400331+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aa6bfbb8-b1a2-4465-a466-159c6b2632ee" />
+    <UnitTestResult executionId="2b349d4b-021b-4513-8381-0c407f7b253b" testId="ac80116d-b6ff-35da-0404-532d30b75f81" testName="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: False, text: &quot;&lt;t:x/&gt;&quot;)" computerName="CHARLES" duration="00:00:00.0005482" startTime="2026-11-21T23:13:00.8335907+01:00" endTime="2026-11-21T23:13:00.8336572+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2b349d4b-021b-4513-8381-0c407f7b253b" />
+    <UnitTestResult executionId="453c15c3-ae4d-4065-97a5-ea6139380c20" testId="ba66de62-1099-5366-8c7a-5bb4abccaded" testName="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: False, named: False, sequence: True)" computerName="CHARLES" duration="00:00:00.1127264" startTime="2026-11-21T23:13:01.1372405+01:00" endTime="2026-11-21T23:13:01.2499620+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="453c15c3-ae4d-4065-97a5-ea6139380c20" />
+    <UnitTestResult executionId="09f562a9-378b-4641-b4bd-b1cc56b8097e" testId="feae895b-6d50-7b80-2b19-e334b713d7ee" testName="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: True, named: True, sequence: True)" computerName="CHARLES" duration="00:00:00.0797424" startTime="2026-11-21T23:13:01.7106560+01:00" endTime="2026-11-21T23:13:01.7903421+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="09f562a9-378b-4641-b4bd-b1cc56b8097e" />
+    <UnitTestResult executionId="253860a1-909c-45cb-93c5-8c145572adf8" testId="042ff451-f74f-fff3-95ed-d618aa7e6d72" testName="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: False, named: True, sequence: True)" computerName="CHARLES" duration="00:00:00.1047534" startTime="2026-11-21T23:13:00.8343244+01:00" endTime="2026-11-21T23:13:00.9170854+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="253860a1-909c-45cb-93c5-8c145572adf8" />
+    <UnitTestResult executionId="73ea4098-f935-40d0-9b92-95cfdb1c2013" testId="c91cb28a-e303-9af2-4ebb-71ce77e10ba2" testName="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: True, text: &quot;x&quot;)" computerName="CHARLES" duration="00:00:00.0001944" startTime="2026-11-21T23:13:00.8338547+01:00" endTime="2026-11-21T23:13:00.8338820+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="73ea4098-f935-40d0-9b92-95cfdb1c2013" />
+    <UnitTestResult executionId="517f9cce-47c8-450b-971b-8601e0b9d24a" testId="23e4bd90-8261-d6b8-59b0-c63ba21d2ad4" testName="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: False, sequence: False)" computerName="CHARLES" duration="00:00:00.2471055" startTime="2026-11-21T23:13:00.3171544+01:00" endTime="2026-11-21T23:13:00.5789779+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="517f9cce-47c8-450b-971b-8601e0b9d24a">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : Snapshot admission limit reached.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+   at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 82&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 158&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 68&#xD;
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63&#xD;
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs:line 67&#xD;
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4c40ca11-45f7-4053-9fc9-39d146855350" testId="c6c58432-54aa-e7cc-ed6a-ec78c13bd389" testName="EmptyProbe.EmptyTests.OptionalAbsent_IsNotEmptyVariety" computerName="CHARLES" duration="00:00:00.0020030" startTime="2026-11-21T23:13:01.7916004+01:00" endTime="2026-11-21T23:13:01.7933652+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4c40ca11-45f7-4053-9fc9-39d146855350" />
+    <UnitTestResult executionId="45daaeaf-d1cc-4a84-b0c2-061dec0826d7" testId="d998b60c-b969-8cc6-ae14-159849d408fe" testName="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: True, sequence: True)" computerName="CHARLES" duration="00:00:00.0331765" startTime="2026-11-21T23:13:00.7383417+01:00" endTime="2026-11-21T23:13:00.7711251+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="45daaeaf-d1cc-4a84-b0c2-061dec0826d7">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : Snapshot admission limit reached.</Message>
+          <StackTrace>   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+   at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+   at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+   at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0() in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 82&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 158&#xD;
+   at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs:line 68&#xD;
+   at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs:line 63&#xD;
+   at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence) in D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs:line 67&#xD;
+   at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: False, named: False, sequence: True)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="ba66de62-1099-5366-8c7a-5bb4abccaded">
+      <Execution id="453c15c3-ae4d-4065-97a5-ea6139380c20" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="NativeEmpty_IsAuthenticatedAndAtomizesEmpty" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: True, text: &quot; &quot;)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="62f4352a-d071-dfbb-6e25-81cbab95fd7c">
+      <Execution id="f4ec86ed-bcb6-43dc-bb5d-3a1a799ec765" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="InvalidEmpty_PublishesNothing" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: True, named: False, sequence: True)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="73d29afa-99e1-f8dd-484f-528c03e4cd5a">
+      <Execution id="e220cae5-a9c2-4b0c-a7e0-be588973de04" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="NativeEmpty_IsAuthenticatedAndAtomizesEmpty" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: False, named: False, sequence: False)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="6d66badd-c738-2022-b702-0a8935a8764a">
+      <Execution id="4c22d6b7-e8e4-46c3-84a7-60ebb9e807a6" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="NativeEmpty_IsAuthenticatedAndAtomizesEmpty" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: False, named: True, sequence: True)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="042ff451-f74f-fff3-95ed-d618aa7e6d72">
+      <Execution id="253860a1-909c-45cb-93c5-8c145572adf8" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="NativeEmpty_IsAuthenticatedAndAtomizesEmpty" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: False, text: &quot;x&quot;)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="0a221780-fd48-3b1d-12b2-e923908ca238">
+      <Execution id="2f97482c-316f-429b-b8e2-d7416505ba60" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="InvalidEmpty_PublishesNothing" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: False, text: &quot; &quot;)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="b089b31f-ebae-6c59-0921-69b79322282b">
+      <Execution id="02b17ff2-69d9-4ce2-a592-8b4fd65badc9" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="InvalidEmpty_PublishesNothing" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: True, sequence: True)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="d998b60c-b969-8cc6-ae14-159849d408fe">
+      <Execution id="45daaeaf-d1cc-4a84-b0c2-061dec0826d7" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="OwnedFacades_ExportAndRefuseScalar" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: True, text: &quot;\n&quot;)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="e6babe30-7b15-f49f-4ee0-166727a05b9c">
+      <Execution id="4423a774-ac10-4f1e-b653-2d73eb05df18" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="InvalidEmpty_PublishesNothing" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: True, sequence: False)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="5991e746-757f-1af4-402e-336a4e2a9786">
+      <Execution id="5faeee04-56a5-4986-9aa9-ebcb7ee4a315" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="OwnedFacades_ExportAndRefuseScalar" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: False, sequence: False)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="0b16a911-5fb7-ba7b-9a69-10b2922873e2">
+      <Execution id="82f9c713-e825-47bf-8b07-e81e88f09336" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="OwnedFacades_ExportAndRefuseScalar" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: False, sequence: True)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="164dc14c-a07d-4ec2-37ca-4edc938b41b9">
+      <Execution id="c49771fb-a9a2-4969-8317-ab310e747f28" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="OwnedFacades_ExportAndRefuseScalar" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: True, sequence: True)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="1efde2b0-3ff9-504b-8aaf-9b9bf655a1e0">
+      <Execution id="d9c59287-c40b-4fde-8c50-ddc7f0b964a5" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="OwnedFacades_ExportAndRefuseScalar" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: False, sequence: False)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="23e4bd90-8261-d6b8-59b0-c63ba21d2ad4">
+      <Execution id="517f9cce-47c8-450b-971b-8601e0b9d24a" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="OwnedFacades_ExportAndRefuseScalar" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: True, text: &quot;&lt;t:x/&gt;&quot;)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="7c7c378c-3757-4b54-f064-c5bc78f16028">
+      <Execution id="4fe6ad2f-8e69-4e4e-a471-ce5a9edb8fde" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="InvalidEmpty_PublishesNothing" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: True, sequence: False)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="3354ced7-f6bd-3a5f-580b-61151cc768ba">
+      <Execution id="ef2bfc61-1099-4ca2-b220-db43bd4abc5b" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="OwnedFacades_ExportAndRefuseScalar" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.ForeignCancellationAndRecovery" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="44194f7c-4499-89ad-2c8f-93996387f71c">
+      <Execution id="adbf3464-09a9-46d5-a030-10d3c308b3f7" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="ForeignCancellationAndRecovery" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: False, named: True, sequence: False)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="1f6ffdc5-e0d4-900d-d6cb-be3a9cf81af1">
+      <Execution id="27c057f7-5ff3-4969-99ae-d71ead42df22" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="NativeEmpty_IsAuthenticatedAndAtomizesEmpty" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: True, text: &quot;x&quot;)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="c91cb28a-e303-9af2-4ebb-71ce77e10ba2">
+      <Execution id="73ea4098-f935-40d0-9b92-95cfdb1c2013" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="InvalidEmpty_PublishesNothing" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.ExcludedMarkup_Refuses(text: &quot;&lt;!--c--&gt;&quot;)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="b5c0f35a-636d-4612-e72d-2c06683dcef1">
+      <Execution id="0b2aabcc-ae7f-4fc2-af76-93ed03fb24fb" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="ExcludedMarkup_Refuses" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: False, text: &quot;&lt;t:x/&gt;&quot;)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="ac80116d-b6ff-35da-0404-532d30b75f81">
+      <Execution id="2b349d4b-021b-4513-8381-0c407f7b253b" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="InvalidEmpty_PublishesNothing" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.ExcludedMarkup_Refuses(text: &quot;&lt;?p q?&gt;&quot;)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="e486102a-cb79-2b7a-20e2-ef4efa4951e1">
+      <Execution id="6860645f-e74c-40ae-b3ae-2b26231cf770" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="ExcludedMarkup_Refuses" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.InvalidEmpty_PublishesNothing(nested: False, text: &quot;\n&quot;)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="7855f11c-7c3b-6820-7963-e60087c7e1ab">
+      <Execution id="687ed23c-6d0f-4d43-bc3f-0b22353d5fc8" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="InvalidEmpty_PublishesNothing" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: False, sequence: True)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="378c61c5-2fac-6d41-2281-8a0bf124f620">
+      <Execution id="6b04edb5-0694-402a-a076-a49f400738d9" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="OwnedFacades_ExportAndRefuseScalar" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.OptionalAbsent_IsNotEmptyVariety" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="c6c58432-54aa-e7cc-ed6a-ec78c13bd389">
+      <Execution id="4c40ca11-45f7-4053-9fc9-39d146855350" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="OptionalAbsent_IsNotEmptyVariety" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: True, named: False, sequence: False)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="2bfd55af-2b84-f6ea-da14-d07c8f54060d">
+      <Execution id="f02d8c84-ad69-42b2-90f5-67c337359099" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="NativeEmpty_IsAuthenticatedAndAtomizesEmpty" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: True, named: True, sequence: True)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="feae895b-6d50-7b80-2b19-e334b713d7ee">
+      <Execution id="09f562a9-378b-4641-b4bd-b1cc56b8097e" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="NativeEmpty_IsAuthenticatedAndAtomizesEmpty" />
+    </UnitTest>
+    <UnitTest name="EmptyProbe.EmptyTests.NativeEmpty_IsAuthenticatedAndAtomizesEmpty(nested: True, named: True, sequence: False)" storage="d:\development\bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\release\net10.0\bosak.schema.tests.dll" id="7cd9f3d4-9ad1-bdd3-d555-9fc572420909">
+      <Execution id="aa6bfbb8-b1a2-4465-a466-159c6b2632ee" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="EmptyProbe.EmptyTests" name="NativeEmpty_IsAuthenticatedAndAtomizesEmpty" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="e6babe30-7b15-f49f-4ee0-166727a05b9c" executionId="4423a774-ac10-4f1e-b653-2d73eb05df18" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1efde2b0-3ff9-504b-8aaf-9b9bf655a1e0" executionId="d9c59287-c40b-4fde-8c50-ddc7f0b964a5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6d66badd-c738-2022-b702-0a8935a8764a" executionId="4c22d6b7-e8e4-46c3-84a7-60ebb9e807a6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2bfd55af-2b84-f6ea-da14-d07c8f54060d" executionId="f02d8c84-ad69-42b2-90f5-67c337359099" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="164dc14c-a07d-4ec2-37ca-4edc938b41b9" executionId="c49771fb-a9a2-4969-8317-ab310e747f28" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f6ffdc5-e0d4-900d-d6cb-be3a9cf81af1" executionId="27c057f7-5ff3-4969-99ae-d71ead42df22" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0b16a911-5fb7-ba7b-9a69-10b2922873e2" executionId="82f9c713-e825-47bf-8b07-e81e88f09336" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b089b31f-ebae-6c59-0921-69b79322282b" executionId="02b17ff2-69d9-4ce2-a592-8b4fd65badc9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7855f11c-7c3b-6820-7963-e60087c7e1ab" executionId="687ed23c-6d0f-4d43-bc3f-0b22353d5fc8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b5c0f35a-636d-4612-e72d-2c06683dcef1" executionId="0b2aabcc-ae7f-4fc2-af76-93ed03fb24fb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="62f4352a-d071-dfbb-6e25-81cbab95fd7c" executionId="f4ec86ed-bcb6-43dc-bb5d-3a1a799ec765" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="44194f7c-4499-89ad-2c8f-93996387f71c" executionId="adbf3464-09a9-46d5-a030-10d3c308b3f7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="73d29afa-99e1-f8dd-484f-528c03e4cd5a" executionId="e220cae5-a9c2-4b0c-a7e0-be588973de04" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="378c61c5-2fac-6d41-2281-8a0bf124f620" executionId="6b04edb5-0694-402a-a076-a49f400738d9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3354ced7-f6bd-3a5f-580b-61151cc768ba" executionId="ef2bfc61-1099-4ca2-b220-db43bd4abc5b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e486102a-cb79-2b7a-20e2-ef4efa4951e1" executionId="6860645f-e74c-40ae-b3ae-2b26231cf770" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0a221780-fd48-3b1d-12b2-e923908ca238" executionId="2f97482c-316f-429b-b8e2-d7416505ba60" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5991e746-757f-1af4-402e-336a4e2a9786" executionId="5faeee04-56a5-4986-9aa9-ebcb7ee4a315" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7c7c378c-3757-4b54-f064-c5bc78f16028" executionId="4fe6ad2f-8e69-4e4e-a471-ce5a9edb8fde" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7cd9f3d4-9ad1-bdd3-d555-9fc572420909" executionId="aa6bfbb8-b1a2-4465-a466-159c6b2632ee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ac80116d-b6ff-35da-0404-532d30b75f81" executionId="2b349d4b-021b-4513-8381-0c407f7b253b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ba66de62-1099-5366-8c7a-5bb4abccaded" executionId="453c15c3-ae4d-4065-97a5-ea6139380c20" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="feae895b-6d50-7b80-2b19-e334b713d7ee" executionId="09f562a9-378b-4641-b4bd-b1cc56b8097e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="042ff451-f74f-fff3-95ed-d618aa7e6d72" executionId="253860a1-909c-45cb-93c5-8c145572adf8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c91cb28a-e303-9af2-4ebb-71ce77e10ba2" executionId="73ea4098-f935-40d0-9b92-95cfdb1c2013" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="23e4bd90-8261-d6b8-59b0-c63ba21d2ad4" executionId="517f9cce-47c8-450b-971b-8601e0b9d24a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c6c58432-54aa-e7cc-ed6a-ec78c13bd389" executionId="4c40ca11-45f7-4053-9fc9-39d146855350" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d998b60c-b969-8cc6-ae14-159849d408fe" executionId="45daaeaf-d1cc-4a84-b0c2-061dec0826d7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="28" executed="28" passed="20" failed="8" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.0.2+dd36e86129 (64-bit .NET 10.0.11)&#xD;
+[xUnit.net 00:00:00.06]   Discovering: Bosak.Schema.Tests&#xD;
+[xUnit.net 00:00:00.10]   Discovered:  Bosak.Schema.Tests&#xD;
+[xUnit.net 00:00:00.13]   Starting:    Bosak.Schema.Tests&#xD;
+[xUnit.net 00:00:00.41]       System.InvalidOperationException : Snapshot admission limit reached.&#xD;
+[xUnit.net 00:00:00.41]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.41]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+[xUnit.net 00:00:00.41]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:00.41]            at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.41]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(82,0): at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0()&#xD;
+[xUnit.net 00:00:00.41]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(158,0): at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.41]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(68,0): at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.41]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs(63,0): at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.41]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs(67,0): at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence)&#xD;
+[xUnit.net 00:00:00.41]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+[xUnit.net 00:00:00.41]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)&#xD;
+[xUnit.net 00:00:00.44]       System.InvalidOperationException : Snapshot admission limit reached.&#xD;
+[xUnit.net 00:00:00.44]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.44]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+[xUnit.net 00:00:00.44]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:00.44]            at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.44]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(82,0): at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0()&#xD;
+[xUnit.net 00:00:00.44]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(158,0): at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.44]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(68,0): at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.44]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs(63,0): at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.44]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs(67,0): at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence)&#xD;
+[xUnit.net 00:00:00.44]            at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+[xUnit.net 00:00:00.44]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:00.47]       System.InvalidOperationException : Snapshot admission limit reached.&#xD;
+[xUnit.net 00:00:00.47]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.47]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+[xUnit.net 00:00:00.47]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:00.47]            at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.47]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(82,0): at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0()&#xD;
+[xUnit.net 00:00:00.47]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(158,0): at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.47]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(68,0): at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.47]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs(63,0): at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.47]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs(67,0): at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence)&#xD;
+[xUnit.net 00:00:00.47]            at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+[xUnit.net 00:00:00.47]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:00.50]       System.InvalidOperationException : Snapshot admission limit reached.&#xD;
+[xUnit.net 00:00:00.50]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.50]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+[xUnit.net 00:00:00.50]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:00.50]            at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.50]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(82,0): at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0()&#xD;
+[xUnit.net 00:00:00.50]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(158,0): at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.50]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(68,0): at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.50]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs(63,0): at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.50]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs(67,0): at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence)&#xD;
+[xUnit.net 00:00:00.50]            at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+[xUnit.net 00:00:00.50]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:00.53]       System.InvalidOperationException : Snapshot admission limit reached.&#xD;
+[xUnit.net 00:00:00.53]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.53]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+[xUnit.net 00:00:00.53]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:00.53]            at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.53]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(82,0): at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0()&#xD;
+[xUnit.net 00:00:00.53]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(158,0): at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.53]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(68,0): at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.53]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs(63,0): at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.53]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs(67,0): at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence)&#xD;
+[xUnit.net 00:00:00.53]            at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+[xUnit.net 00:00:00.53]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:00.57]       System.InvalidOperationException : Snapshot admission limit reached.&#xD;
+[xUnit.net 00:00:00.57]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.57]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+[xUnit.net 00:00:00.57]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:00.57]            at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.57]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(82,0): at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0()&#xD;
+[xUnit.net 00:00:00.57]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(158,0): at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.57]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(68,0): at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.57]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs(63,0): at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.57]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs(67,0): at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence)&#xD;
+[xUnit.net 00:00:00.57]            at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+[xUnit.net 00:00:00.57]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:00.60]       System.InvalidOperationException : Snapshot admission limit reached.&#xD;
+[xUnit.net 00:00:00.60]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.60]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+[xUnit.net 00:00:00.60]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:00.60]            at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.60]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(82,0): at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0()&#xD;
+[xUnit.net 00:00:00.60]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(158,0): at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.60]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(68,0): at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.60]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs(63,0): at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.60]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs(67,0): at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence)&#xD;
+[xUnit.net 00:00:00.60]            at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+[xUnit.net 00:00:00.60]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:00.63]       System.InvalidOperationException : Snapshot admission limit reached.&#xD;
+[xUnit.net 00:00:00.63]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.63]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshotCore(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation, Snapshot retainedSource)&#xD;
+[xUnit.net 00:00:00.63]            at Bosak.XPath.Runtime.Vm.QuerySourceSession.OpenSnapshot(SchemaQueryEnvironment environment, IQuerySourceInput input, Func`1 enterOwner, Object originalAssessment, CancellationToken cancellation)&#xD;
+[xUnit.net 00:00:00.63]            at Bosak.XPath.Api.Schema.SchemaQuerySession.OpenSnapshot(ISchemaAssessmentInput input, IQueryOperationLifetime lifetime, ISchemaAssessmentOrigin originalAssessment, ISchemaCompatibilityView compatibilityView, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.63]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(82,0): at Bosak.Schema.NativeNodeDataCore.&lt;&gt;c__DisplayClass9_0.&lt;Assess&gt;b__0()&#xD;
+[xUnit.net 00:00:00.63]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(158,0): at Bosak.Schema.NativeNodeDataCore.Work[T](Func`1 work, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.63]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeNodeDataCore.cs(68,0): at Bosak.Schema.NativeNodeDataCore.Assess(String instance, DateTimeOffset currentDateTime, Int32 implicitTimezoneOffsetMinutes, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.63]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\candidate\Assessment\NativeSchemaNodeDataSession.cs(63,0): at Bosak.Schema.NativeSchemaNodeDataSession.Assess(String instance, NativeSchemaAssessmentContext context, CancellationToken cancellationToken)&#xD;
+[xUnit.net 00:00:00.63]         D:\Development\Bosak\.guard-tmp\schema-structural-empty-feasibility-20261121\current\EmptyTests.cs(67,0): at EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(Boolean nested, Boolean named, Boolean sequence)&#xD;
+[xUnit.net 00:00:00.63]            at InvokeStub_EmptyTests.OwnedFacades_ExportAndRefuseScalar(Object, Span`1)&#xD;
+[xUnit.net 00:00:00.63]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)&#xD;
+[xUnit.net 00:00:01.65]   Finished:    Bosak.Schema.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-21T23:13:00.5809568+01:00">
+        <Text>[xUnit.net 00:00:00.41]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: False, sequence: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-21T23:13:00.6086265+01:00">
+        <Text>[xUnit.net 00:00:00.44]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: True, sequence: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-21T23:13:00.6395612+01:00">
+        <Text>[xUnit.net 00:00:00.47]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: False, sequence: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-21T23:13:00.6718220+01:00">
+        <Text>[xUnit.net 00:00:00.50]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: False, sequence: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-21T23:13:00.7025203+01:00">
+        <Text>[xUnit.net 00:00:00.53]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: True, sequence: False) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-21T23:13:00.7381817+01:00">
+        <Text>[xUnit.net 00:00:00.57]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: True, named: True, sequence: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-21T23:13:00.7715718+01:00">
+        <Text>[xUnit.net 00:00:00.60]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: True, sequence: True) [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-21T23:13:00.8039100+01:00">
+        <Text>[xUnit.net 00:00:00.63]     EmptyProbe.EmptyTests.OwnedFacades_ExportAndRefuseScalar(nested: False, named: False, sequence: False) [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>
