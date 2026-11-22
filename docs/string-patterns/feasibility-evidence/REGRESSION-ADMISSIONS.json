@@ -1,0 +1,95 @@
+{
+  "status": "Explicit scratch runtime expectations only; original production fixture unchanged",
+  "source": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+  "sourceSha256": "e817372daf207d34723dc4764b80a791e07e6c6324ecc4395b958eb2ec547994",
+  "runtimeBeforeSha256": "e817372daf207d34723dc4764b80a791e07e6c6324ecc4395b958eb2ec547994",
+  "runtimeAfterSha256": "0f8bfb62537f9a4b8c2b0309bf347ed6f648b2df2dccff12b641f88cf7f20b49",
+  "rows": [
+    {
+      "id": "M2D1-66",
+      "schemaSha256": "f130235d1a459d80b19a661ce40c31afa3dd41174b8cdc310f25122949b94362",
+      "instanceSha256": "eb73463069a3e2083fe21a83dcff6f907ea3493ebbeba693137d504c86680b68",
+      "before": {
+        "id": "M2D1-66",
+        "description": "Pattern excluded",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:pattern value='[a-z]+'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      },
+      "after": {
+        "id": "M2D1-66",
+        "description": "Pattern excluded",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:pattern value='[a-z]+'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Valid",
+        "values": [
+          {
+            "kind": "String",
+            "value": "abc"
+          }
+        ],
+        "unsupportedReason": null
+      },
+      "measuredOutcome": "Valid schema / Valid original instance / exact String abc, both native facades and both signed Core pins"
+    },
+    {
+      "id": "M2D1-80",
+      "schemaSha256": "55c0004815fbc45b882313c9da1c1917646cedafbe834a7daeaafd68d2d43f8d",
+      "instanceSha256": "eb73463069a3e2083fe21a83dcff6f907ea3493ebbeba693137d504c86680b68",
+      "before": {
+        "id": "M2D1-80",
+        "description": "Unused unsupported named string still refuses",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Unused'><xs:restriction base='xs:string'><xs:pattern value='x'/></xs:restriction></xs:simpleType><xs:simpleType name='Label'><xs:restriction base='xs:string'></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      },
+      "after": {
+        "id": "M2D1-80",
+        "description": "Unused unsupported named string still refuses",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Unused'><xs:restriction base='xs:string'><xs:pattern value='x'/></xs:restriction></xs:simpleType><xs:simpleType name='Label'><xs:restriction base='xs:string'></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Valid",
+        "values": [
+          {
+            "kind": "String",
+            "value": "abc"
+          }
+        ],
+        "unsupportedReason": null
+      },
+      "measuredOutcome": "Valid schema / Valid original instance / exact String abc, both native facades and both signed Core pins"
+    }
+  ]
+}

@@ -88,14 +88,14 @@
       "Structures3.3.4"
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r xmlns='urn:s'><s>😀</s></r>",
+    "instance": "<r xmlns='urn:s'><s>\ud83d\ude00</s></r>",
     "maxStringCharacters": 2,
     "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
     "values": [
       {
         "kind": "String",
-        "value": "😀"
+        "value": "\ud83d\ude00"
       }
     ]
   },
@@ -108,14 +108,14 @@
       "Structures3.3.4"
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='2'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r xmlns='urn:s'><s>😀𐐀</s></r>",
+    "instance": "<r xmlns='urn:s'><s>\ud83d\ude00\ud801\udc00</s></r>",
     "maxStringCharacters": 4,
     "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
     "values": [
       {
         "kind": "String",
-        "value": "😀𐐀"
+        "value": "\ud83d\ude00\ud801\udc00"
       }
     ]
   },
@@ -128,14 +128,14 @@
       "Structures3.3.4"
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='2'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r xmlns='urn:s'><s>é</s></r>",
+    "instance": "<r xmlns='urn:s'><s>e\u0301</s></r>",
     "maxStringCharacters": 256,
     "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
     "values": [
       {
         "kind": "String",
-        "value": "é"
+        "value": "e\u0301"
       }
     ]
   },
@@ -148,14 +148,14 @@
       "Structures3.3.4"
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r xmlns='urn:s'><s>é</s></r>",
+    "instance": "<r xmlns='urn:s'><s>\u00e9</s></r>",
     "maxStringCharacters": 256,
     "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
     "values": [
       {
         "kind": "String",
-        "value": "é"
+        "value": "\u00e9"
       }
     ]
   },
@@ -168,7 +168,7 @@
       "Structures3.3.4"
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r xmlns='urn:s'><s>é</s></r>",
+    "instance": "<r xmlns='urn:s'><s>e\u0301</s></r>",
     "maxStringCharacters": 256,
     "expectedCompile": "Valid",
     "expectedAssessment": "Invalid",
@@ -183,7 +183,7 @@
       "Structures3.3.4"
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r xmlns='urn:s'><s>😀</s></r>",
+    "instance": "<r xmlns='urn:s'><s>\ud83d\ude00</s></r>",
     "maxStringCharacters": 1,
     "expectedCompile": "Valid",
     "expectedAssessment": "Unsupported",
@@ -598,8 +598,8 @@
       "Datatypes4.3.1-3/4.3.5-6",
       "Structures3.3.4"
     ],
-    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:enumeration value='é'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r xmlns='urn:s'><s>é</s></r>",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:enumeration value='\u00e9'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:s'><s>e\u0301</s></r>",
     "maxStringCharacters": 256,
     "expectedCompile": "Valid",
     "expectedAssessment": "Invalid",
@@ -613,15 +613,15 @@
       "Datatypes4.3.1-3/4.3.5-6",
       "Structures3.3.4"
     ],
-    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:enumeration value='😀'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r xmlns='urn:s'><s>😀</s></r>",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:enumeration value='\ud83d\ude00'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:s'><s>\ud83d\ude00</s></r>",
     "maxStringCharacters": 2,
     "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
     "values": [
       {
         "kind": "String",
-        "value": "😀"
+        "value": "\ud83d\ude00"
       }
     ]
   },
@@ -819,7 +819,7 @@
       "Datatypes4.3.1-3/4.3.5-6",
       "Structures3.3.4"
     ],
-    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:enumeration value='😀'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:enumeration value='\ud83d\ude00'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r xmlns='urn:s'><s>abc</s></r>",
     "maxStringCharacters": 1,
     "expectedCompile": "Unsupported",
@@ -925,13 +925,13 @@
   },
   {
     "id": "M2D1-52",
-    "description": "Invalid length facet '１２'",
+    "description": "Invalid length facet '\uff11\uff12'",
     "sections": [
       "Datatypes3.3.1",
       "Datatypes4.3.1-3/4.3.5-6",
       "Structures3.3.4"
     ],
-    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='１２'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='\uff11\uff12'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r xmlns='urn:s'><s>abc</s></r>",
     "maxStringCharacters": 256,
     "expectedCompile": "Unsupported",
@@ -1153,19 +1153,25 @@
   },
   {
     "id": "M2D1-66",
-    "description": "Pattern excluded",
+    "description": "Supported bounded string pattern",
     "sections": [
       "Datatypes3.3.1",
       "Datatypes4.3.1-3/4.3.5-6",
-      "Structures3.3.4"
+      "Structures3.3.4",
+      "Datatypes4.3.4/G"
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:pattern value='[a-z]+'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r xmlns='urn:s'><s>abc</s></r>",
     "maxStringCharacters": 256,
-    "expectedCompile": "Unsupported",
-    "expectedAssessment": "Unsupported",
-    "values": [],
-    "unsupportedReason": "ValueType"
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      {
+        "kind": "String",
+        "value": "abc"
+      }
+    ],
+    "unsupportedReason": null
   },
   {
     "id": "M2D1-67",
@@ -1399,18 +1405,24 @@
   },
   {
     "id": "M2D1-80",
-    "description": "Unused unsupported named string still refuses",
+    "description": "Unused supported string pattern compiled eagerly",
     "sections": [
       "Datatypes3.3.1",
       "Datatypes4.3.1-3/4.3.5-6",
-      "Structures3.3.4"
+      "Structures3.3.4",
+      "Datatypes4.3.4/G"
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Unused'><xs:restriction base='xs:string'><xs:pattern value='x'/></xs:restriction></xs:simpleType><xs:simpleType name='Label'><xs:restriction base='xs:string'></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r xmlns='urn:s'><s>abc</s></r>",
     "maxStringCharacters": 256,
-    "expectedCompile": "Unsupported",
-    "expectedAssessment": "Unsupported",
-    "values": [],
-    "unsupportedReason": "ValueType"
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      {
+        "kind": "String",
+        "value": "abc"
+      }
+    ],
+    "unsupportedReason": null
   }
 ]

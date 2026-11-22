@@ -14,6 +14,8 @@
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 20-11-2026     | Admit direct opt-in integer restrictions with exact original type identity                 |
 //                      | Charles Korthout | 0.3   | 21-11-2026     | Adopt bounded instance selection with original declaration and governing type identity |
+//                      | Charles Korthout | 0.4   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
+//                      | Charles Korthout | 0.5   | 22-11-2026     | Adopt qualified bounded native string patterns |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -24,7 +26,7 @@ namespace Bosak.Schema;
 internal sealed partial class NativeDecimalSchema
 {
     private static NativeType CompileRestriction(XElement definition, string? name, string namespaceUri,
-        NativeNumericLimits limits, int? maxStringCharacters)
+        NativeNumericLimits limits, int? maxStringCharacters, NativePatternCompilation patternCompilation)
     {
         Attributes(definition, name is null ? [] : ["name"]);
         var restriction = Single(definition, "restriction");
@@ -34,7 +36,7 @@ internal sealed partial class NativeDecimalSchema
             return new NativeType(name, false, namespaceUri, NativeDecimalFacets.Compile(restriction, limits), baseName: baseName);
         if (maxStringCharacters is not null && baseName == Xs + "string")
             return new NativeType(name, false, namespaceUri, isString: true,
-                stringFacets: NativeStringFacets.Compile(restriction, maxStringCharacters.Value), baseName: baseName);
+                stringFacets: NativeStringFacets.Compile(restriction, maxStringCharacters.Value, patternCompilation), baseName: baseName);
         if (maxStringCharacters is not null && baseName == Xs + "integer")
             return new NativeType(name, false, namespaceUri, isInteger: true,
                 integerFacets: NativeIntegerFacets.Compile(restriction, limits), baseName: baseName);
@@ -42,7 +44,7 @@ internal sealed partial class NativeDecimalSchema
     }
 
     private static Dictionary<XElement, NativeType> CompileAnonymousRestrictions(XElement schema,
-        NativeNumericLimits limits, int? maxStringCharacters, CancellationToken cancellationToken)
+        NativeNumericLimits limits, int? maxStringCharacters, CancellationToken cancellationToken, NativePatternCompilation patternCompilation)
     {
         var result = new Dictionary<XElement, NativeType>();
         if (maxStringCharacters is null) return result;
@@ -54,7 +56,7 @@ internal sealed partial class NativeDecimalSchema
         {
             cancellationToken.ThrowIfCancellationRequested();
             Require(definition.Parent!.Attribute("type") is null, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
-            result.Add(definition, CompileRestriction(definition, null, "", limits, maxStringCharacters));
+            result.Add(definition, CompileRestriction(definition, null, "", limits, maxStringCharacters, patternCompilation));
         }
         return result;
     }

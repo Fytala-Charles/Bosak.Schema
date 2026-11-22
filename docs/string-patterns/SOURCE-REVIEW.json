@@ -1,0 +1,52 @@
+{
+  "base": "677b5628be9b22c993dddb6ff8dce1b268a282db",
+  "status": "Static review only; production unchanged",
+  "files": [
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeStringFacets.cs",
+      "worktreeSha256": "1192ee7a0edb04d27dd8529692fb6fb3ca97c8a797669d48e20be4398da3b3b6",
+      "gitBlobSha256": "836658daf101e25ea57506b583f4f68bd92e7358657670dbece6405e5a4615f8"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSimpleRestriction.cs",
+      "worktreeSha256": "be96e1c8d916159209bfe81116fa20c48054d75d4cd09c551de256a9128c0ec5",
+      "gitBlobSha256": "0c66f63eb7e9dd670ed445cd6c6d614eb065bdbfa56d4554a986d95785d8068c"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalSchema.cs",
+      "worktreeSha256": "bb73e94814bc36d9af7166754f5ce5efc2aefe0d2bd243585b68fc0a002f720d",
+      "gitBlobSha256": "83ecb99fb180625a950653aaace2ab6bfb82bda40b265f871a3776a7c950ab87"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeNestedSchema.cs",
+      "worktreeSha256": "8a19320817a5878fca8a6436412d23125b1ee85a33988f6846f220f9555e1eac",
+      "gitBlobSha256": "80177a7c51ce921cbd5aa3eaf26d6beb4a9f70a11d29c1461550f13c0bdfbf42"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSchemaProvider.cs",
+      "worktreeSha256": "f5e57aba6d3ec37a79fc8be2fba3ab9d52bb338da147ac6ebd3113bd72201489",
+      "gitBlobSha256": "1a1c4bcca5bc58d07891542aac58683d6643de467fce8651e17933c5a9aa8083"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSessionNode.cs",
+      "worktreeSha256": "7b8330d263b43cb6a62e1b98d7f5f43805cdd1bef1acdc8fab5f4f59d61d2b91",
+      "gitBlobSha256": "2fa04026283e37bc3179ed24ee1cdd8b06533d5acbc78173438154abf2bea83d"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalSessionCore.cs",
+      "worktreeSha256": "dcb2ea8abc59ba60badbef5ee8c44f562c6ddd8a469a16e0be6eacc127e1ffad",
+      "gitBlobSha256": "dbb0074fc1429216efef7b2a1dea94c0ed58cf2283bd9079b97a93a8a964468b"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeNodeDataCore.cs",
+      "worktreeSha256": "1f5e7d5efd1a11958bf23d0c45ac25e2b865cdaf53efba23aa92212597789239",
+      "gitBlobSha256": "1d450c4761c34e491e0771244ea7c71a90b588ddbe941f5f1e9a95aab288b299"
+    }
+  ],
+  "findings": [
+    "NativeStringFacets currently admits length/minLength/maxLength/enumeration only",
+    "Direct string restrictions bind named/anonymous types; no new root or derivation breadth proposed",
+    "Shared assessment work/cancellation accounting needs explicit threading through scalar and attribute checks",
+    "Existing provider already carries one original String atomic, including empty String; no new carrier/API needed in proposal"
+  ]
+}

@@ -406,8 +406,10 @@ normalization applies to facet values before comparison.
 Length/minLength/maxLength values are bounded to0..65536 with a256character lexical
 ceiling. A direct restriction cannot combine length with minLength/maxLength;
 minLength and maxLength may coexist when consistent. Enumeration entries form
-alternatives and intersect with the other supplied facets. Pattern, whitespace
-overrides, restriction chains and anonymous string types remain excluded.
+alternatives and intersect with the other supplied facets. Pattern facets use the
+bounded profile below. Whitespace overrides and new restriction chains remain
+excluded; direct anonymous local string restrictions use the existing finite leaf
+placements.
 NativeDecimalSession remains decimal-only; string assertion references remain
 outside the decimal-only native assertion grammar. Published beta.1 is unchanged.
 
@@ -1041,3 +1043,49 @@ Application-attribute combinations with new structural assertions, structural
 inheritance, mixed/list/union content, comments and processing instructions remain
 outside this slice. NativeDecimalSession and published beta.1 retain their profiles.
 This development extension does not establish full XSD1.1 or PSVI coverage.
+
+
+### Bounded string pattern facets (0.6 development)
+
+Direct xs:string restrictions can combine pattern with the existing length and
+enumeration facets. Supported named/anonymous element and attribute placements
+retain their original String values and type identity. For example:
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Code"><xs:restriction base="xs:string">
+    <xs:pattern value="[A-Z]{3}-[0-9]{4}"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="r"><xs:complexType><xs:sequence>
+    <xs:element name="code" type="Code"/>
+  </xs:sequence></xs:complexType></xs:element>
+</xs:schema>
+```
+
+Assess `<r><code>ABC-1234</code></r>` with NativeSchemaSession or
+NativeSchemaNodeDataSession, then read ReadScalar(0).StringValue or
+ReadElement([0]).StringValue. `ABC-12345` is Invalid: XSD patterns match the whole
+literal. Caret and dollar are literals outside classes, not XPath anchors.
+Multiple pattern elements in one restriction are alternatives; length/enumeration
+constraints still conjoin with that result. Parsed whitespace, case and Unicode
+sequence are preserved. Empty matched text remains one String atomic, distinct from
+an empty complex typed sequence.
+
+The subset includes scalar literals, dot (excluding LF/CR), grouping/alternation,
+explicit positive/negative scalar classes/ranges, XML whitespace escapes, XSD
+single-character escapes, ?, * and +, and brace quantifiers under explicit bounds.
+It matches Unicode scalars, including supplementary characters. Unicode digit,
+property/name classes and class subtraction are Unsupported in this first subset;
+\d must not be interpreted as ASCII-only. Simple-typed document roots and new
+restriction chains remain excluded, so the original public SKU example is not
+admitted by pattern support alone.
+
+Limits are8source patterns per restriction,256UTF-16 pattern characters,64atoms,
+group depth8,16class members and explicit repetition bounds0..16. Compiled states
+are capped at128per pattern and1024per schema, including unused types. A fresh
+4,194,304-unit budget covers the complete assessment across element/attribute
+values, length scans and matching. Capacity/work exhaustion is Unsupported rather
+than a false match; genuine pattern mismatch is Invalid. Cancellation, recovery,
+source export and no-partial-document behavior retain their existing rules.
+This matcher uses bounded state traversal with no regex backend or ambient setting
+changes. Legacy NativeDecimalSession and published beta.1 retain their profiles.

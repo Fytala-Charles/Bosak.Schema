@@ -22,6 +22,8 @@
 //                      | Charles Korthout | 0.9   | 21-11-2026     | Probe empty complex typing in isolated copies only |
 //                      | Charles Korthout | 0.10   | 22-11-2026     | Probe bounded structural assertions in isolated copies |
 //                      | Charles Korthout | 0.11   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
+//                      | Charles Korthout | 0.12   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
+//                      | Charles Korthout | 0.13   | 22-11-2026     | Adopt qualified bounded native string patterns |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -180,7 +182,7 @@ internal sealed partial class NativeDecimalSchema
 
     private void AssessContainer(XElement element, NativeDeclaration declaration, NativeDecimalSchema plan,
         ImmutableArray<NativeElementState>.Builder states, ImmutableArray<NativeElementState>.Builder attributes,
-        ImmutableArray<int> ownerPath, CancellationToken cancellationToken, bool isRoot = false)
+        ImmutableArray<int> ownerPath, CancellationToken cancellationToken, NativePatternBudget patternBudget, bool isRoot = false)
     {
         cancellationToken.ThrowIfCancellationRequested();
         var effectiveType = ResolveInstanceType(element, declaration.Type);
@@ -196,7 +198,7 @@ internal sealed partial class NativeDecimalSchema
                     cancellationToken.ThrowIfCancellationRequested();
                     var attribute = element.Attribute(use.ExpandedName);
                     Check(attribute is not null || use.MinOccurs == 0, "Required descendant attribute is missing.");
-                    if (attribute is not null) attributes.Add(AssessScalar(attribute.Value, use) with { OwnerElementPath = ownerPath, OwnerElementIndex = states.Count });
+                    if (attribute is not null) attributes.Add(AssessScalar(attribute.Value, use, patternBudget) with { OwnerElementPath = ownerPath, OwnerElementIndex = states.Count });
                 }
                 Check(element.Attributes().All(a => IsAdmittedInstanceAttribute(a) || plan.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared descendant attribute.");
             }
@@ -206,7 +208,7 @@ internal sealed partial class NativeDecimalSchema
             Check(!element.HasElements, "Simple-content terminal cannot contain child elements.");
             Require(element.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
             var atomicDeclaration = new NativeDeclaration(declaration.Name, contentType, 1, 1, declaration.NamespaceUri);
-            var scalarState = AssessScalar(element.Value, atomicDeclaration) with { Declaration = declaration, EffectiveType = effectiveType, NormalizedStringValue = Collapse(element.Value) };
+            var scalarState = AssessScalar(element.Value, atomicDeclaration, patternBudget) with { Declaration = declaration, EffectiveType = effectiveType, NormalizedStringValue = Collapse(element.Value) };
             plan.AssessIntegerAssertions(element, scalarState, cancellationToken);
             states.Add(scalarState);
             cancellationToken.ThrowIfCancellationRequested();
@@ -233,13 +235,13 @@ internal sealed partial class NativeDecimalSchema
                 cancellationToken.ThrowIfCancellationRequested();
                 var childPath = ownerPath.Add(index);
                 var node = nodes[index++];
-                if (child.Container is { } nested) AssessContainer(node, child, nested, states, attributes, childPath, cancellationToken);
+                if (child.Container is { } nested) AssessContainer(node, child, nested, states, attributes, childPath, cancellationToken, patternBudget);
                 else
                 {
                     InstanceAttributes(node);
                     Check(!node.HasElements, "Scalar leaf contains nested elements.");
                     Require(node.Nodes().All(n => n is XText), "Scalar comments or processing instructions are unsupported.");
-                    states.Add(AssessElementScalar(node, child));
+                    states.Add(AssessElementScalar(node, child, patternBudget));
                 }
                 Check(++count <= child.MaxOccurs, "Maximum occurrence exceeded.");
             }
