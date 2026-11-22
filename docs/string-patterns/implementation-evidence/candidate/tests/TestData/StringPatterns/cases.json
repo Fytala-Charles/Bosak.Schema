@@ -1,0 +1,948 @@
+{
+  "source": "docs/string-patterns/CASE-PLAN.json",
+  "rows": [
+    {
+      "id": "SP-001",
+      "purpose": "Whole-literal/Unicode/grammar '.x'/'bx'",
+      "patterns": [
+        ".x"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\".x\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>bx</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "bx",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-002",
+      "purpose": "Whole-literal/Unicode/grammar '.x'/'abx'",
+      "patterns": [
+        ".x"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\".x\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>abx</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-003",
+      "purpose": "Whole-literal/Unicode/grammar 'a*x'/'x'",
+      "patterns": [
+        "a*x"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a*x\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>x</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "x",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-004",
+      "purpose": "Whole-literal/Unicode/grammar 'a*x'/'aaax'",
+      "patterns": [
+        "a*x"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a*x\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>aaax</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "aaax",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-005",
+      "purpose": "Whole-literal/Unicode/grammar 'a?x'/'aax'",
+      "patterns": [
+        "a?x"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a?x\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>aax</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-006",
+      "purpose": "Whole-literal/Unicode/grammar 'a?x'/'ax'",
+      "patterns": [
+        "a?x"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a?x\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>ax</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "ax",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-007",
+      "purpose": "Whole-literal/Unicode/grammar ''/''",
+      "patterns": [
+        ""
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v></v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-008",
+      "purpose": "Whole-literal/Unicode/grammar ''/'a'",
+      "patterns": [
+        ""
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-009",
+      "purpose": "Whole-literal/Unicode/grammar 'a*'/''",
+      "patterns": [
+        "a*"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a*\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v></v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-010",
+      "purpose": "Whole-literal/Unicode/grammar '^a'/'^a'",
+      "patterns": [
+        "^a"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"^a\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>^a</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "^a",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-011",
+      "purpose": "Whole-literal/Unicode/grammar '^a'/'a'",
+      "patterns": [
+        "^a"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"^a\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-012",
+      "purpose": "Whole-literal/Unicode/grammar '$'/'$'",
+      "patterns": [
+        "$"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"$\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>$</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "$",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-013",
+      "purpose": "Whole-literal/Unicode/grammar '$'/'a'",
+      "patterns": [
+        "$"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"$\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-014",
+      "purpose": "Whole-literal/Unicode/grammar 'a'/'a\\n'",
+      "patterns": [
+        "a"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a\n</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-015",
+      "purpose": "Whole-literal/Unicode/grammar '.'/'\\n'",
+      "patterns": [
+        "."
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\".\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>\n</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-016",
+      "purpose": "Whole-literal/Unicode/grammar '.'/'\\r'",
+      "patterns": [
+        "."
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\".\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>&#13;</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-017",
+      "purpose": "Whole-literal/Unicode/grammar '.'/'\ud801\udc00'",
+      "patterns": [
+        "."
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\".\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>\ud801\udc00</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "\ud801\udc00",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-018",
+      "purpose": "Whole-literal/Unicode/grammar '.x'/'\ud801\udc00x'",
+      "patterns": [
+        ".x"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\".x\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>\ud801\udc00x</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "\ud801\udc00x",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-019",
+      "purpose": "Whole-literal/Unicode/grammar '.'/'e\u0301'",
+      "patterns": [
+        "."
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\".\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>e\u0301</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-020",
+      "purpose": "Whole-literal/Unicode/grammar ' a '/' a '",
+      "patterns": [
+        " a "
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\" a \"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v> a </v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": " a ",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-021",
+      "purpose": "Whole-literal/Unicode/grammar ' a '/'a'",
+      "patterns": [
+        " a "
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\" a \"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-022",
+      "purpose": "Whole-literal/Unicode/grammar '[A-Z]{3}-[0-9]{4}'/'ABC-1234'",
+      "patterns": [
+        "[A-Z]{3}-[0-9]{4}"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"[A-Z]{3}-[0-9]{4}\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>ABC-1234</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "ABC-1234",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-023",
+      "purpose": "Whole-literal/Unicode/grammar '[A-Z]{3}-[0-9]{4}'/'ABC-12345'",
+      "patterns": [
+        "[A-Z]{3}-[0-9]{4}"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"[A-Z]{3}-[0-9]{4}\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>ABC-12345</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-024",
+      "purpose": "Whole-literal/Unicode/grammar '[^a]'/'b'",
+      "patterns": [
+        "[^a]"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"[^a]\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>b</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "b",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-025",
+      "purpose": "Whole-literal/Unicode/grammar '[^a]'/'a'",
+      "patterns": [
+        "[^a]"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"[^a]\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-026",
+      "purpose": "Whole-literal/Unicode/grammar '(a|b)c'/'bc'",
+      "patterns": [
+        "(a|b)c"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"(a|b)c\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>bc</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "bc",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-027",
+      "purpose": "Whole-literal/Unicode/grammar '(a|b)c'/'abc'",
+      "patterns": [
+        "(a|b)c"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"(a|b)c\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>abc</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-028",
+      "purpose": "Whole-literal/Unicode/grammar 'a{0}'/''",
+      "patterns": [
+        "a{0}"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a{0}\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v></v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-029",
+      "purpose": "Whole-literal/Unicode/grammar 'a{2,3}'/'aa'",
+      "patterns": [
+        "a{2,3}"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a{2,3}\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>aa</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "aa",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-030",
+      "purpose": "Whole-literal/Unicode/grammar 'a{2,3}'/'aaaa'",
+      "patterns": [
+        "a{2,3}"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a{2,3}\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>aaaa</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-031",
+      "purpose": "Whole-literal/Unicode/grammar 'a{1,}'/'aaaa'",
+      "patterns": [
+        "a{1,}"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a{1,}\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>aaaa</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "aaaa",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-032",
+      "purpose": "Whole-literal/Unicode/grammar '\\\\s'/'\\t'",
+      "patterns": [
+        "\\s"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"\\s\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>\t</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "\t",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-033",
+      "purpose": "Whole-literal/Unicode/grammar '\\\\S'/'a'",
+      "patterns": [
+        "\\S"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"\\S\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "a",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-034",
+      "purpose": "Whole-literal/Unicode/grammar '\\\\n'/'\\n'",
+      "patterns": [
+        "\\n"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"\\n\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>\n</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "\n",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-035",
+      "purpose": "Whole-literal/Unicode/grammar '\\\\^'/'^'",
+      "patterns": [
+        "\\^"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"\\^\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>^</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "^",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-036",
+      "purpose": "Whole-literal/Unicode/grammar '()*'/''",
+      "patterns": [
+        "()*"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"()*\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v></v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-037",
+      "purpose": "Same-restriction alternatives are OR",
+      "patterns": [
+        "a",
+        "b"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a\"/><xs:pattern value=\"b\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "a",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-038",
+      "purpose": "Same-restriction alternatives are OR",
+      "patterns": [
+        "a",
+        "b"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a\"/><xs:pattern value=\"b\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>b</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "b",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-039",
+      "purpose": "Same-restriction alternatives are OR",
+      "patterns": [
+        "a",
+        "b"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a\"/><xs:pattern value=\"b\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>c</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-040",
+      "purpose": "Length conjoins with OR patterns",
+      "patterns": [
+        "a*",
+        "b"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a*\"/><xs:pattern value=\"b\"/><xs:length value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>aa</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-041",
+      "purpose": "Enumeration conjoins with pattern",
+      "patterns": [
+        ".*o"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\".*o\"/><xs:enumeration value=\"foo\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>foo</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "foo",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-042",
+      "purpose": "Enumeration still refuses nonmember",
+      "patterns": [
+        ".*o"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\".*o\"/><xs:enumeration value=\"foo\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>zoo</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-043",
+      "purpose": "Anonymous type carries original string authority",
+      "patterns": [
+        "a+"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"><xs:simpleType><xs:restriction base=\"xs:string\"><xs:pattern value=\"a+\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>aaa</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "aaa",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-044",
+      "purpose": "Empty matched text remains one String atomic",
+      "patterns": [
+        ""
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"><xs:simpleType><xs:restriction base=\"xs:string\"><xs:pattern value=\"\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v></v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-045",
+      "purpose": "Attribute pattern value",
+      "patterns": [
+        "[A-Z]+"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"[A-Z]+\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\"/></xs:sequence><xs:attribute name=\"a\" type=\"S\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=\"ABC\"><v>leaf</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "ABC",
+      "valuePath": [],
+      "attribute": "a"
+    },
+    {
+      "id": "SP-046",
+      "purpose": "Attribute false match",
+      "patterns": [
+        "[A-Z]+"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"[A-Z]+\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\"/></xs:sequence><xs:attribute name=\"a\" type=\"S\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=\"abc\"><v>leaf</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedLexical": null,
+      "valuePath": [],
+      "attribute": "a"
+    },
+    {
+      "id": "SP-047",
+      "purpose": "Eight source patterns",
+      "patterns": [
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedLexical": "a",
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-048",
+      "purpose": "Nine source patterns",
+      "patterns": [
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/><xs:pattern value=\"a\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-049",
+      "purpose": "Well-formed XSD syntax outside first subset",
+      "patterns": [
+        "[a-z-[aeiou]]"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"[a-z-[aeiou]]\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-050",
+      "purpose": "Well-formed XSD syntax outside first subset",
+      "patterns": [
+        "\\p{L}"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"\\p{L}\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-051",
+      "purpose": "Well-formed XSD syntax outside first subset",
+      "patterns": [
+        "\\d"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"\\d\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-052",
+      "purpose": "Well-formed XSD syntax outside first subset",
+      "patterns": [
+        "\\i"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"\\i\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-053",
+      "purpose": "Well-formed XSD syntax outside first subset",
+      "patterns": [
+        "\\w"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"\\w\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-054",
+      "purpose": "Proven malformed supported XSD regex",
+      "patterns": [
+        "\\"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"\\\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-055",
+      "purpose": "Proven malformed supported XSD regex",
+      "patterns": [
+        "a**"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a**\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-056",
+      "purpose": "Proven malformed supported XSD regex",
+      "patterns": [
+        "("
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"(\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-057",
+      "purpose": "Proven malformed supported XSD regex",
+      "patterns": [
+        "\\$"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"\\$\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>a</v></r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": null,
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    },
+    {
+      "id": "SP-058",
+      "purpose": "Explicit quantifier bound17 is capacity refusal",
+      "patterns": [
+        "a{17}"
+      ],
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"S\"><xs:restriction base=\"xs:string\"><xs:pattern value=\"a{17}\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"S\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>aaaaaaaaaaaaaaaaa</v></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": null,
+      "expectedLexical": null,
+      "valuePath": [
+        0
+      ],
+      "attribute": null
+    }
+  ]
+}

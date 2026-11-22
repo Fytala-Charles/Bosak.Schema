@@ -37,6 +37,8 @@
 //                      | Charles Korthout | 1.14   | 21-11-2026     | Probe empty complex typing in isolated copies only |
 //                      | Charles Korthout | 1.15   | 22-11-2026     | Probe bounded structural assertions in isolated copies |
 //                      | Charles Korthout | 1.16   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
+//                      | Charles Korthout | 1.17   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
+//                      | Charles Korthout | 1.18   | 22-11-2026     | Adopt qualified bounded native string patterns |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -89,6 +91,7 @@ internal sealed partial class NativeDecimalSchema
         cancellationToken.ThrowIfCancellationRequested();
         try
         {
+            var patternCompilation = new NativePatternCompilation(cancellationToken);
             var document = Parse(schema, 32768, cancellationToken);
             var root = document.Root!;
             Require(root.Name == Xs + "schema", "Schema root or namespace is unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
@@ -125,10 +128,10 @@ internal sealed partial class NativeDecimalSchema
                 cancellationToken.ThrowIfCancellationRequested();
                 Attributes(type, "name");
                 var name = Name(type);
-                var restricted = CompileRestriction(type, name, targetNamespace, limits, maxStringCharacters);
+                var restricted = CompileRestriction(type, name, targetNamespace, limits, maxStringCharacters, patternCompilation);
                 simple.Add(XName.Get(name, targetNamespace), restricted);
             }
-            var anonymousSimple = CompileAnonymousRestrictions(root, limits, maxStringCharacters, cancellationToken);
+            var anonymousSimple = CompileAnonymousRestrictions(root, limits, maxStringCharacters, cancellationToken, patternCompilation);
             if (stringType is not null && HasNestedDeclarations(root, types, targetNamespace))
                 return NativeResult<NativeDecimalSchema>.Valid(CompileNestedSchema(root, types, declarations, targetNamespace,
                     defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType!, integerType!, simple,
@@ -370,6 +373,7 @@ internal sealed partial class NativeDecimalSchema
         cancellationToken.ThrowIfCancellationRequested();
         try
         {
+            var patternBudget = new NativePatternBudget(cancellationToken);
             var document = Parse(instance, 65536, cancellationToken);
             var root = document.Root!;
             var found = roots.TryGetValue(root.Name, out var selected);
@@ -384,7 +388,7 @@ internal sealed partial class NativeDecimalSchema
                     cancellationToken.ThrowIfCancellationRequested();
                     var attribute = root.Attribute(use.ExpandedName);
                     Check(attribute is not null || use.MinOccurs == 0, "Required root attribute is missing.");
-                    if (attribute is not null) attributeStates.Add(AssessScalar(attribute.Value, use));
+                    if (attribute is not null) attributeStates.Add(AssessScalar(attribute.Value, use, patternBudget));
                 }
                 Check(root.Attributes().All(a => IsAdmittedInstanceAttribute(a) || selected.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared root attribute.");
             }
@@ -395,7 +399,7 @@ internal sealed partial class NativeDecimalSchema
                 Check(!root.HasElements, "Simple-content root cannot contain child elements.");
                 Require(root.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
                 var scalarDeclaration = new NativeDeclaration(selected.Root.Name, contentType, 1, 1, selected.Root.NamespaceUri);
-                var state = AssessScalar(root.Value, scalarDeclaration) with { Declaration = selected.Root, EffectiveType = rootType, NormalizedStringValue = Collapse(root.Value) };
+                var state = AssessScalar(root.Value, scalarDeclaration, patternBudget) with { Declaration = selected.Root, EffectiveType = rootType, NormalizedStringValue = Collapse(root.Value) };
                 selected.AssessIntegerAssertions(root, state, cancellationToken);
                 cancellationToken.ThrowIfCancellationRequested();
                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [state], attributeStates.ToImmutable()));
@@ -403,7 +407,7 @@ internal sealed partial class NativeDecimalSchema
             if (selected.NestedProfile)
             {
                 var nestedElements = ImmutableArray.CreateBuilder<NativeElementState>();
-                AssessContainer(root, selected.Root, selected, nestedElements, attributeStates, [], cancellationToken, isRoot: true);
+                AssessContainer(root, selected.Root, selected, nestedElements, attributeStates, [], cancellationToken, patternBudget, isRoot: true);
                 cancellationToken.ThrowIfCancellationRequested();
                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, nestedElements.ToImmutable(), attributeStates.ToImmutable()));
             }
@@ -427,7 +431,7 @@ internal sealed partial class NativeDecimalSchema
                     InstanceAttributes(leaf);
                     Check(!leaf.HasElements, "Decimal leaf contains nested elements.");
                     Require(leaf.Nodes().All(n => n is XText), "Decimal leaf comments or processing instructions are unsupported.");
-                    var state = AssessElementScalar(leaf, declaration);
+                    var state = AssessElementScalar(leaf, declaration, patternBudget);
                     if (state.TypedValue is { } numeric) present.Add(numeric);
                     if (state.StringValue is { } textValue) textValues.Add(textValue);
                     elements.Add(state);
@@ -456,12 +460,12 @@ internal sealed partial class NativeDecimalSchema
         }
     }
 
-    private NativeElementState AssessScalar(string text, NativeDeclaration declaration)
+    private NativeElementState AssessScalar(string text, NativeDeclaration declaration, NativePatternBudget patternBudget)
     {
         if (declaration.Type.IsString)
         {
             Require(text.Length <= maxStringCharacters!.Value, "String capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
-            Check(declaration.Type.StringFacets?.Accepts(text) ?? true, "String facet violation.");
+            Check(declaration.Type.StringFacets?.Accepts(text, patternBudget) ?? true, "String facet violation.");
             return new NativeElementState(declaration, null, text);
         }
         else if (declaration.Type.IsBoolean)

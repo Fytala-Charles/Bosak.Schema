@@ -887,3 +887,78 @@ Localunsignedalpha.0.29only; publishedbeta.1,Corepins,controllers unchanged. Nex
 review/deliver on explicitGit request,then mainCIverification and broader gap ranking.
 No commit/push/tag/publication or fullXSD/PSVI/C45/SLAacceptance requested.
 [Implementation and qualification receipts](<structural-assertions/IMPLEMENTATION.md>).
+
+
+## Expanded public coverage assessment - 22 November 2026
+
+PR39 merged/mainCI45002890073verified at677b5628be9b22c993dddb6ff8dce1b268a282db.
+A separate statically selected assessment measures129original instances/108groups,
+18feature buckets across12matrix areas, on both signedCore1.81.2/1.81.17. Each pin
+reports0matches/129Unsupported/zeroerrors, with identical classifications; refusal
+is not positive validation coverage. Frozenpilot remains21matches/zeroUnsupported/
+zeroerrors;all42files and the historical matrix remain unchanged. This is not a
+fullsuite run or coverage percentage. Original metadata, selection, product/runtime
+hashes, W3C notices, raw receipts and co-feature dependencies are retained separately.
+Recommendation: boundedXSDstring-pattern facet contract/publicCorefeasibility first,
+then simple-typed roots, derivedintegerfamilies and choice/all. SKU independently needs
+both pattern and simple root; particle examples also contain implicitanyType. No
+single-feature admission forecast or new semantic adoption. Product/API/Corepins/
+packages/controllers unchanged. No commit/push/publication requested for assessment.
+[Expanded sample, rankings and exact evidence](<expanded-conformance/README.md>).
+
+
+## String-pattern contract and public Core review - 22 November 2026
+
+A new bounded pattern-facet proposal follows the preserved expanded assessment.
+Exact XSD/F&O sources confirm whole-literal XSD matching, literal caret/dollar and
+same-restriction pattern OR.20safe public-Core sentinels per signed1.81.2/1.81.17
+agree after experimental wrapping;7rawdifferences are specified XPath semantics,
+not Core defects. The caller-bounded execution gate is not met: pinned sources use
+ambient regex timeout and probes observe infinity. No adversarial patterns, private
+calls, machine settings or product source changes. Proposed route: Schema-owned
+Unicode-scalar bounded automaton, existing String transport, deterministic work and
+cancellation budgets.58XML payloads/12nativegates are plans, not Schema test passes.
+Unicode property/name/digit classes, class subtraction, new chains and simple roots
+remain outside the first proposed subset. SKU remains excluded; no admission forecast.
+Next: isolated automaton/accounting prototype then actual-native feasibility, before
+separate production adoption. No commit/push/package/publication or fullXSDacceptance.
+[Contract, exact review pins and measured Core capability](<string-patterns/README.md>).
+
+
+## Native string-pattern feasibility - 22 November 2026
+
+An isolated six-overlay Unicode-scalar automaton candidate passes164controls per
+signedCore1.81.2/1.81.17, with37147finite-oracle comparisons within one control.
+Exact syntax/state/work bounds, shared element/attribute work exhaustion, cancellation/
+recovery, original emptyString/named/anonymous provenance and disposal/export pass.
+The three unchanged original pattern examples pass direct native probes, not full
+corpus runs. Source comparison:900implementation pass;1984public pass/2authored
+admissions (M2D1-66/M2D1-80 nowValid/abc). Copied runtime expectation reconciliation
+passes1986public;all2886stable identities retained,productionfixtures unchanged.
+API54types/401rows zero delta;18Core signatures/source/runtime identities verify.
+Initial class-escape/hyphen prototype defect and harness setup errors preserved;
+finalnativecontrols pass. No product/Core/API/pin/package/controller/corpus change.
+Next: separate production adoption and implementation,then full package/retained/
+frozen/expanded qualification. No commit/push/publication or fullXSD/PSVIacceptance.
+[Native feasibility and exact preserved receipts](<string-patterns/FEASIBILITY.md>).
+
+
+## Bounded string-pattern production candidate - 22 November 2026
+
+The qualified candidate implements bounded scalar pattern automata on existing
+`xs:string` placements. It preserves whole-literal matching, OR between patterns
+in one restriction, String provenance, shared work limits and cancellation.
+Source qualification passes 3,050 tests (948 internal and 2,102 public). All 2,886
+prior test identities remain; the two authored expectation admissions are recorded
+separately, with schema, instance and case IDs unchanged.
+
+Package consumers pass 2,102 tests on each Core pin; 48 package-native controls and
+retained callers (124/23/33) pass. The public API remains 54 types / 401 rows.
+The frozen pilot remains 21 matches with zero errors. The expanded 129-case sample
+now has 3 matches and 126 Unsupported on both pins, with zero mismatches or harness
+errors. Original corpus inputs and expectations remain unchanged.
+
+This is an unsigned local alpha.0.30 candidate. Published beta.1, Core pins and
+release controllers remain unchanged. Broader regex syntax, new roots and type
+chains remain outside this slice. Git delivery awaits an explicit request.
+See the [implementation and qualification](string-patterns/IMPLEMENTATION.md).

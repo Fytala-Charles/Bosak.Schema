@@ -13,6 +13,8 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 21-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+//                      | Charles Korthout | 0.3   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
+//                      | Charles Korthout | 0.4   | 22-11-2026     | Adopt qualified bounded native string patterns |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -105,10 +107,10 @@ internal sealed partial class NativeDecimalSchema
         return selected;
     }
 
-    private NativeElementState AssessElementScalar(XElement element, NativeDeclaration declaration)
+    private NativeElementState AssessElementScalar(XElement element, NativeDeclaration declaration, NativePatternBudget patternBudget)
     {
         var selected = ResolveInstanceType(element, declaration.Type);
         var governing = new NativeDeclaration(declaration.Name, selected, declaration.MinOccurs, declaration.MaxOccurs, declaration.NamespaceUri);
-        return AssessScalar(element.Value, governing) with { Declaration = declaration, EffectiveType = selected };
+        return AssessScalar(element.Value, governing, patternBudget) with { Declaration = declaration, EffectiveType = selected };
     }
 }

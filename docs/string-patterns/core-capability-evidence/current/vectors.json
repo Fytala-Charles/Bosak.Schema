@@ -1,0 +1,142 @@
+[
+  {
+    "id": "P01",
+    "input": "bx",
+    "pattern": ".x",
+    "xsdExpected": true,
+    "note": "Whole string success"
+  },
+  {
+    "id": "P02",
+    "input": "abx",
+    "pattern": ".x",
+    "xsdExpected": false,
+    "note": "Unanchored matches is insufficient"
+  },
+  {
+    "id": "P03",
+    "input": "aax",
+    "pattern": "a?x",
+    "xsdExpected": false,
+    "note": "Suffix match is not facet validity"
+  },
+  {
+    "id": "P04",
+    "input": "x",
+    "pattern": "a*x",
+    "xsdExpected": true,
+    "note": "Nullable repeated atom"
+  },
+  {
+    "id": "P05",
+    "input": "",
+    "pattern": "a*",
+    "xsdExpected": true,
+    "note": "Empty accepted string"
+  },
+  {
+    "id": "P06",
+    "input": "abc",
+    "pattern": "a|b",
+    "xsdExpected": false,
+    "note": "Alternation requires whole literal"
+  },
+  {
+    "id": "P07",
+    "input": "^a",
+    "pattern": "^a",
+    "xsdExpected": true,
+    "note": "XSD caret is literal outside classes"
+  },
+  {
+    "id": "P08",
+    "input": "a",
+    "pattern": "^a",
+    "xsdExpected": false,
+    "note": "XPath caret is an anchor"
+  },
+  {
+    "id": "P09",
+    "input": "a",
+    "pattern": "$",
+    "xsdExpected": false,
+    "note": "XSD dollar is literal"
+  },
+  {
+    "id": "P10",
+    "input": "$",
+    "pattern": "$",
+    "xsdExpected": true,
+    "note": "XSD dollar literal match"
+  },
+  {
+    "id": "P11",
+    "input": "\n",
+    "pattern": ".",
+    "xsdExpected": false,
+    "note": "Dot excludes LF"
+  },
+  {
+    "id": "P12",
+    "input": "\r",
+    "pattern": ".",
+    "xsdExpected": false,
+    "note": "Dot excludes CR"
+  },
+  {
+    "id": "P13",
+    "input": "\ud801\udc00",
+    "pattern": ".",
+    "xsdExpected": true,
+    "note": "Supplementary Unicode scalar is one XSD character"
+  },
+  {
+    "id": "P14",
+    "input": "a\n",
+    "pattern": "a",
+    "xsdExpected": false,
+    "note": "Whole literal rejects final LF"
+  },
+  {
+    "id": "P15",
+    "input": "\ud801\udc00x",
+    "pattern": ".x",
+    "xsdExpected": true,
+    "note": "Supplementary scalar followed by literal"
+  },
+  {
+    "id": "P16",
+    "input": "\u0661",
+    "pattern": "\\d",
+    "xsdExpected": true,
+    "note": "XSD decimal digit is not ASCII-only"
+  },
+  {
+    "id": "P17",
+    "input": "b",
+    "pattern": "[a-z-[aeiou]]",
+    "xsdExpected": true,
+    "note": "XSD class subtraction"
+  },
+  {
+    "id": "P18",
+    "input": "a",
+    "pattern": "[a-z-[aeiou]]",
+    "xsdExpected": false,
+    "note": "Subtracted vowel"
+  },
+  {
+    "id": "P19",
+    "input": "a",
+    "pattern": "\\i",
+    "xsdExpected": true,
+    "note": "XML-name initial class"
+  },
+  {
+    "id": "P20",
+    "input": "1",
+    "pattern": "\\i",
+    "xsdExpected": false,
+    "note": "XML-name initial negative"
+  }
+]

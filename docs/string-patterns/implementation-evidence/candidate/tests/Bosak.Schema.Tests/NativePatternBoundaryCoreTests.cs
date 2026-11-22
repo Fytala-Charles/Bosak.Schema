@@ -1,0 +1,93 @@
+// ===========================================================================================================================================================
+// AUTHOR               : Charles Korthout
+// CREATE DATE          : 22 November 2026
+// PURPOSE              : Verifies isolated bounded pattern matching and native original string assessment.
+// SPECIAL NOTES        : Unit tests verifying correctness of the underlying implementation.
+//
+// COPYRIGHT            : Fytala
+// LICENSE              : LICENSE.md (Apache-2.0)
+// SPDX-License-Identifier: Apache-2.0
+// ===========================================================================================================================================================
+// Change History:      |==================|=======|================|=========================================================================================
+//                      |     Author       |Version|  Date          | Notes                                                                                    |
+//                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.1   | 22-11-2026     | Creation                                                                                 |
+//                      |==================|=======|================|=========================================================================================
+// ===========================================================================================================================================================
+
+using System.Xml.Linq;
+using Bosak.Schema;
+using Bosak.Schema.Tests.NodeData;
+using Bosak.XPath.Api.Schema;
+using Bosak.XPath.Core.Schema;
+using Bosak.XPath.Core.Xdm;
+using Xunit;
+namespace Bosak.Schema.Tests.Patterns;
+/// <summary>Verifies exact compiler limits, shared work, cancellation and original provenance.</summary>
+public sealed class NativePatternBoundaryCoreTests
+{
+    private static string Facet(string pattern)=>new XElement(XName.Get("pattern","http://www.w3.org/2001/XMLSchema"),new XAttribute("value",pattern)).ToString(SaveOptions.DisableFormatting);
+    private static string Schema(string pattern,bool attribute=false)=>"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='S'><xs:restriction base='xs:string'>"+Facet(pattern)+"</xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='S' maxOccurs='2'/></xs:sequence>"+(attribute?"<xs:attribute name='a' type='S'/>":"")+"</xs:complexType></xs:element></xs:schema>";
+    private static string Wide=>"("+string.Join("|",Enumerable.Repeat("a",62))+")*";
+    /// <summary>Exact accepted and one-over pattern syntax representation bounds.</summary>
+    /// <param name="kind">Boundary selector.</param><param name="over">One over the supported limit.</param>
+    [Theory][InlineData("characters",false)][InlineData("characters",true)][InlineData("atoms",false)][InlineData("atoms",true)][InlineData("depth",false)][InlineData("depth",true)][InlineData("members",false)][InlineData("members",true)][InlineData("repeat",false)][InlineData("repeat",true)][InlineData("states",false)][InlineData("states",true)]
+    public void CompilerBounds(string kind,bool over)
+    {
+        string pattern=kind switch
+        {"characters"=>string.Concat(Enumerable.Repeat("[abc]",over?51:50))+new string('a',over?2:6),"atoms"=>new string('a',over?65:64),"depth"=>new string('(',over?9:8)+"a"+new string(')',over?9:8),"members"=>"["+new string('a',over?17:16)+"]","repeat"=>$"a{{{(over?17:16)}}}",_=>string.Join("|",Enumerable.Repeat("a",64))+(over?"?":"")};
+        if(kind=="characters"){Assert.Equal(over?257:256,pattern.Length);}
+        if(over){var e=Assert.Throws<NativeProfileException>(()=>NativePattern.Compile(pattern,new(default)));Assert.Equal(NativeOutcome.Unsupported,e.Outcome);Assert.Equal(NativeDecimalUnsupportedReason.RepresentationCapacity,e.UnsupportedReason);}
+        else{var p=NativePattern.Compile(pattern,new(default));if(kind=="states")Assert.Equal(128,p.StateCount);}
+    }
+    /// <summary>One compilation-wide budget covers every named definition, including unused ones.</summary>
+    /// <param name="over">One over1024compiled states.</param>
+    [Theory][InlineData(false)][InlineData(true)]
+    public void SchemaStateBudget(bool over)
+    {
+        var definitions=string.Concat(Enumerable.Range(0,16).Select(i=>"<xs:simpleType name='S"+i+"'><xs:restriction base='xs:string'>"+Facet(new string('a',i==0&&over?64:63))+"</xs:restriction></xs:simpleType>"));
+        var schema="<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>"+definitions+"<xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='S0'/></xs:sequence></xs:complexType></xs:element></xs:schema>";
+        var c=NativeDecimalSchema.Compile(schema,new(256,256),maxStringCharacters:1024);Assert.Equal(over?NativeOutcome.Unsupported:NativeOutcome.Valid,c.Outcome);if(over)Assert.Equal(NativeDecimalUnsupportedReason.RepresentationCapacity,c.UnsupportedReason);
+    }
+    /// <summary>A deterministic exact work allowance succeeds and one fewer refuses.</summary>
+    [Fact]
+    public void WorkBudgetExactAndOneOver()
+    {var p=NativePattern.Compile("(a|aa)*b",new(default));var b=new NativePatternBudget(default);Assert.True(p.Match("aaaaab",b));Assert.True(p.Match("aaaaab",new(default,b.Consumed)));var e=Assert.Throws<NativeProfileException>(()=>p.Match("aaaaab",new(default,b.Consumed-1)));Assert.Equal(NativeOutcome.Unsupported,e.Outcome);Assert.Equal(NativeDecimalUnsupportedReason.RepresentationCapacity,e.UnsupportedReason);}
+    /// <summary>Mid-match cancellation is observed in the same counted state traversal.</summary>
+    [Fact]
+    public void MidMatchCancellation()
+    {
+        var p=NativePattern.Compile(Wide,new(default));using var c=new CancellationTokenSource();var b=new NativePatternBudget(c.Token,int.MaxValue);using var start=new ManualResetEventSlim();
+        var task=Task.Factory.StartNew(()=>{start.Set();return p.Match(new string('a',65536),b);},CancellationToken.None,TaskCreationOptions.LongRunning,TaskScheduler.Default);
+        Assert.True(start.Wait(TimeSpan.FromSeconds(2)));bool observed=SpinWait.SpinUntil(()=>b.Consumed>=1000||task.IsCompleted,TimeSpan.FromSeconds(2));c.Cancel();Assert.True(observed);Assert.True(b.Consumed>=1000);Assert.ThrowsAny<OperationCanceledException>(()=>task.GetAwaiter().GetResult());
+    }
+    /// <summary>Aggregate work across elements/attributes refuses without evidence and a later assessment recovers.</summary>
+    /// <param name="attribute">Share work between attribute and leaf instead of two leaves.</param>
+    [Theory][InlineData(false)][InlineData(true)]
+    public void NativeSharedBudgetAndRecovery(bool attribute)
+    {
+        var options=new NativeSchemaSessionOptions(256,256,16384,65536,1,32,1,256,256);var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);string large=new('a',6000);var xml=attribute?"<r a='"+large+"'><v>"+large+"</v></r>":"<r><v>"+large+"</v><v>"+large+"</v></r>";
+        using(var session=NativeSchemaSession.Create(Schema(Wide,attribute),options).Value!){var a=session.Assess(xml,context);Assert.Equal(NativeSchemaOutcome.Unsupported,a.Outcome);Assert.Null(a.Value);Assert.Equal(NativeSchemaUnsupportedReason.RepresentationCapacity,Assert.Single(a.Diagnostics).UnsupportedReason);using var d=session.Assess(attribute?"<r a='a'><v>a</v></r>":"<r><v>a</v><v>a</v></r>",context).Value!;Assert.Equal("a",d.ReadScalar(0).StringValue);}
+        var compiled=NativeDecimalSchema.Compile(Schema(Wide,attribute),new(256,256),maxStringCharacters:16384).Value!;var provider=new NativeSchemaProvider(compiled);using var s=SchemaQuerySession.CompileXPath("$value",new(1,32,1,256,256),assessor:provider).Value;using var input=NativeSchemaInput.Capture(xml).Value!;
+        var result=(NativeSchemaProvider.Assessment)s.Advisor!.Assess(new(input,SchemaAssessmentMode.Strict,null,null,new Episode(),null),default);Assert.Equal(SchemaAssessmentStatus.Unsupported,result.Status);Assert.False(input.IsAssessed);Assert.Empty(result.Facts);Assert.Null(result.Evidence);
+    }
+    /// <summary>Actual original empty strings remain one authenticated scalar with type identity.</summary>
+    [Theory][InlineData(false)][InlineData(true)]
+    public void OriginalStringIdentity(bool attribute)
+    {
+        using var f=new Fixture(Schema("a*",attribute),attribute?"<r a=''><v></v></r>":"<r><v></v></r>");Assert.Equal(SchemaAssessmentStatus.Valid,f.Assessment.Status);var n=attribute?f.Attribute([],"","a"):f.Element([0]);var fact=f.Input.FactsFor((NativeSessionNode)n)!;Assert.False(fact.HasNoTypedValue);var raw=fact.ReadTypedValue(default).Value;Assert.False(raw.IsList);Assert.True(raw.TryGetSingleAtomic(out var atom));Assert.Equal(XdmValueKind.String,atom.Value.Kind);Assert.Equal("",atom.Value.StringValue);Assert.Same(fact.Type,raw.GoverningType);Assert.True(f.Session.Advisor!.OwnsNode(n,fact,f.Input,f.Assessment.Origin));
+        f.Run(op=>{var v=f.Evaluate(op,n);Assert.True(SchemaAtomics.TryGetProvenance(v,out var origin));Assert.Same(fact.Type,origin!.DeclaredType);Assert.Same(fact.Type,origin.ActualType);Assert.Same(f.Assessment.Origin,origin.OriginalAssessment);return 0;});Assert.Equal("",f.Read(n).StringValue);
+        using var copy=NativeSchemaInput.Capture(f.Input.Xml).Value!;Assert.Throws<ArgumentException>(()=>f.Run(op=>f.Evaluate(op,copy.Root)));f.Input.Dispose();Assert.Throws<ObjectDisposedException>(()=>fact.ReadTypedValue(default));
+    }
+    private sealed record Episode:ISchemaAssessmentEpisode
+    {
+        /// <inheritdoc/>
+        public DateTimeOffset CurrentDateTime=>DateTimeOffset.UnixEpoch;
+        /// <inheritdoc/>
+        public int ImplicitTimezoneOffsetMinutes=>0;
+    }
+    /// <summary>The fixed default work limit permits exactly4194304ticks and refuses the next.</summary>
+    [Fact]
+    public void DefaultWorkLimitExact()
+    {var budget=new NativePatternBudget(default);for(int i=0;i<4_194_304;i++)budget.Tick();Assert.Equal(4_194_304,budget.Consumed);var error=Assert.Throws<NativeProfileException>(()=>budget.Tick());Assert.Equal(NativeOutcome.Unsupported,error.Outcome);Assert.Equal(NativeDecimalUnsupportedReason.RepresentationCapacity,error.UnsupportedReason);}
+}

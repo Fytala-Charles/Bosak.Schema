@@ -12,6 +12,8 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
+//                      | Charles Korthout | 0.3   | 22-11-2026     | Adopt qualified bounded native string patterns |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -23,25 +25,33 @@ using System.Xml.Linq;
 namespace Bosak.Schema;
 
 /// <summary>Compiles and enforces bounded named string length and enumeration facets.</summary>
-internal sealed class NativeStringFacets(int? length, int? minimum, int? maximum, ImmutableHashSet<string>? enumeration)
+internal sealed class NativeStringFacets(int? length, int? minimum, int? maximum, ImmutableHashSet<string>? enumeration, ImmutableArray<NativePattern> patterns)
 {
-    internal static NativeStringFacets Compile(XElement restriction, int maxStringCharacters)
+    internal static NativeStringFacets Compile(XElement restriction, int maxStringCharacters, NativePatternCompilation compilation)
     {
         int? length = null, minimum = null, maximum = null;
         var seen = new HashSet<string>(StringComparer.Ordinal);
         var values = ImmutableHashSet.CreateBuilder<string>(StringComparer.Ordinal);
         var suppliedEnumerations = 0;
+        var patterns = ImmutableArray.CreateBuilder<NativePattern>();
         foreach (var facet in NativeDecimalSchema.Elements(restriction))
         {
+            compilation.Check();
             NativeDecimalSchema.Require(facet.Name.NamespaceName == "http://www.w3.org/2001/XMLSchema" &&
-                facet.Name.LocalName is "length" or "minLength" or "maxLength" or "enumeration",
+                facet.Name.LocalName is "length" or "minLength" or "maxLength" or "enumeration" or "pattern",
                 "Unsupported string facet.", NativeDecimalUnsupportedReason.ValueType);
             var kind = facet.Name.LocalName;
-            NativeDecimalSchema.Require(kind == "enumeration" || seen.Add(kind), "Duplicate string facet.", NativeDecimalUnsupportedReason.DeclarationShape);
+            NativeDecimalSchema.Require(kind is "enumeration" or "pattern" || seen.Add(kind), "Duplicate string facet.", NativeDecimalUnsupportedReason.DeclarationShape);
             NativeDecimalSchema.Attributes(facet, "value");
             NativeDecimalSchema.Require(NativeDecimalSchema.Elements(facet).Count == 0, "Facet children are unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
             var supplied = (string?)facet.Attribute("value");
             NativeDecimalSchema.Require(supplied is not null, "Facet value required.", NativeDecimalUnsupportedReason.ValueType);
+            if (kind == "pattern")
+            {
+                NativePattern.Capacity(patterns.Count < 8);
+                patterns.Add(NativePattern.Compile(supplied!, compilation));
+                continue;
+            }
             if (kind == "enumeration")
             {
                 NativeDecimalSchema.Require(++suppliedEnumerations <= 16 && supplied!.Length <= maxStringCharacters,
@@ -65,14 +75,15 @@ internal sealed class NativeStringFacets(int? length, int? minimum, int? maximum
             "Direct string restrictions cannot combine length and bounds.", NativeDecimalUnsupportedReason.ValueType);
         NativeDecimalSchema.Require(minimum is null || maximum is null || minimum <= maximum,
             "Inconsistent string length bounds.", NativeDecimalUnsupportedReason.ValueType);
-        return new(length, minimum, maximum, suppliedEnumerations == 0 ? null : values.ToImmutable());
+        return new(length, minimum, maximum, suppliedEnumerations == 0 ? null : values.ToImmutable(), patterns.ToImmutable());
     }
 
-    internal bool Accepts(string value)
+    internal bool Accepts(string value, NativePatternBudget budget)
     {
         var count = 0;
-        foreach (var _ in value.EnumerateRunes()) count++;
+        foreach (var _ in value.EnumerateRunes()) { budget.Tick(); count++; }
         return (length is null || count == length) && (minimum is null || count >= minimum) &&
-            (maximum is null || count <= maximum) && (enumeration is null || enumeration.Contains(value));
+            (maximum is null || count <= maximum) && (enumeration is null || enumeration.Contains(value)) &&
+            (patterns.IsEmpty || patterns.Any(pattern => pattern.Match(value, budget)));
     }
 }

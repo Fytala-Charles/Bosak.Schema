@@ -1,0 +1,208 @@
+{
+  "coreAssembly": "1.81.2\u002B7249d0e01628c47f92b89a3380bc69cf58d70045",
+  "defaultRegexTimeoutInfinite": true,
+  "rows": [
+    {
+      "id": "P01",
+      "input": "bx",
+      "pattern": ".x",
+      "xsdExpected": true,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(.x)$",
+      "wholeCandidateMatches": true,
+      "error": null
+    },
+    {
+      "id": "P02",
+      "input": "abx",
+      "pattern": ".x",
+      "xsdExpected": false,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(.x)$",
+      "wholeCandidateMatches": false,
+      "error": null
+    },
+    {
+      "id": "P03",
+      "input": "aax",
+      "pattern": "a?x",
+      "xsdExpected": false,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(a?x)$",
+      "wholeCandidateMatches": false,
+      "error": null
+    },
+    {
+      "id": "P04",
+      "input": "x",
+      "pattern": "a*x",
+      "xsdExpected": true,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(a*x)$",
+      "wholeCandidateMatches": true,
+      "error": null
+    },
+    {
+      "id": "P05",
+      "input": "",
+      "pattern": "a*",
+      "xsdExpected": true,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(a*)$",
+      "wholeCandidateMatches": true,
+      "error": null
+    },
+    {
+      "id": "P06",
+      "input": "abc",
+      "pattern": "a|b",
+      "xsdExpected": false,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(a|b)$",
+      "wholeCandidateMatches": false,
+      "error": null
+    },
+    {
+      "id": "P07",
+      "input": "^a",
+      "pattern": "^a",
+      "xsdExpected": true,
+      "rawMatches": false,
+      "wholeCandidatePattern": "^(\\^a)$",
+      "wholeCandidateMatches": true,
+      "error": null
+    },
+    {
+      "id": "P08",
+      "input": "a",
+      "pattern": "^a",
+      "xsdExpected": false,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(\\^a)$",
+      "wholeCandidateMatches": false,
+      "error": null
+    },
+    {
+      "id": "P09",
+      "input": "a",
+      "pattern": "$",
+      "xsdExpected": false,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(\\$)$",
+      "wholeCandidateMatches": false,
+      "error": null
+    },
+    {
+      "id": "P10",
+      "input": "$",
+      "pattern": "$",
+      "xsdExpected": true,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(\\$)$",
+      "wholeCandidateMatches": true,
+      "error": null
+    },
+    {
+      "id": "P11",
+      "input": "\n",
+      "pattern": ".",
+      "xsdExpected": false,
+      "rawMatches": false,
+      "wholeCandidatePattern": "^(.)$",
+      "wholeCandidateMatches": false,
+      "error": null
+    },
+    {
+      "id": "P12",
+      "input": "\r",
+      "pattern": ".",
+      "xsdExpected": false,
+      "rawMatches": false,
+      "wholeCandidatePattern": "^(.)$",
+      "wholeCandidateMatches": false,
+      "error": null
+    },
+    {
+      "id": "P13",
+      "input": "\uD801\uDC00",
+      "pattern": ".",
+      "xsdExpected": true,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(.)$",
+      "wholeCandidateMatches": true,
+      "error": null
+    },
+    {
+      "id": "P14",
+      "input": "a\n",
+      "pattern": "a",
+      "xsdExpected": false,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(a)$",
+      "wholeCandidateMatches": false,
+      "error": null
+    },
+    {
+      "id": "P15",
+      "input": "\uD801\uDC00x",
+      "pattern": ".x",
+      "xsdExpected": true,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(.x)$",
+      "wholeCandidateMatches": true,
+      "error": null
+    },
+    {
+      "id": "P16",
+      "input": "\u0661",
+      "pattern": "\\d",
+      "xsdExpected": true,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(\\d)$",
+      "wholeCandidateMatches": true,
+      "error": null
+    },
+    {
+      "id": "P17",
+      "input": "b",
+      "pattern": "[a-z-[aeiou]]",
+      "xsdExpected": true,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^([a-z-[aeiou]])$",
+      "wholeCandidateMatches": true,
+      "error": null
+    },
+    {
+      "id": "P18",
+      "input": "a",
+      "pattern": "[a-z-[aeiou]]",
+      "xsdExpected": false,
+      "rawMatches": false,
+      "wholeCandidatePattern": "^([a-z-[aeiou]])$",
+      "wholeCandidateMatches": false,
+      "error": null
+    },
+    {
+      "id": "P19",
+      "input": "a",
+      "pattern": "\\i",
+      "xsdExpected": true,
+      "rawMatches": true,
+      "wholeCandidatePattern": "^(\\i)$",
+      "wholeCandidateMatches": true,
+      "error": null
+    },
+    {
+      "id": "P20",
+      "input": "1",
+      "pattern": "\\i",
+      "xsdExpected": false,
+      "rawMatches": false,
+      "wholeCandidatePattern": "^(\\i)$",
+      "wholeCandidateMatches": false,
+      "error": null
+    }
+  ],
+  "scope": "Tiny public API capability sentinels; wrapping is experimental, not an admitted Schema implementation",
+  "noAdversarialPatterns": true
+}

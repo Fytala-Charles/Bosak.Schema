@@ -1,0 +1,128 @@
+{
+  "date": "2026-11-22",
+  "basis": "Qualitative engineering ranking from isolated public schemas, existing application examples and dependency cost; not measured customer demand or a statistical conformance score",
+  "outcomeForecast": null,
+  "rows": [
+    {
+      "rank": 1,
+      "area": "SC09",
+      "candidate": "Bounded XSD string pattern facets",
+      "evidence": [
+        "MS-Element2006-07-15/elemU019/elemU019.v",
+        "MS-Element2006-07-15/elemU008/elemU008.v",
+        "MS-Element2006-07-15/elemU009/elemU009.v"
+      ],
+      "why": "Three declared-root, bounded string-sequence schemas isolate .x, a*x and a?x pattern constraints; existing string values/facts already have qualified transport",
+      "dependencies": [
+        "Exact XSD regular-expression semantics, including substring matching, escaping, Unicode and repeated facet combination",
+        "Review public Core regex capability and bounded execution before reuse; no private/friend bypass",
+        "Define static unsupported syntax, time/capacity limits and named/anonymous type provenance"
+      ],
+      "doesNotUnlock": [
+        "Public SKU still needs a simple-typed global root",
+        "No whole-regex or whole-XSD conformance inferred"
+      ],
+      "nextStep": "Contract/review then actual-native feasibility; no implementation adopted"
+    },
+    {
+      "rank": 2,
+      "area": "SC02/SC05",
+      "candidate": "Global simple-typed roots for already supported scalar families",
+      "evidence": [
+        "tests/TestData/Schemas/sku.xsd",
+        "See CO-BLOCKERS.json for original selected root shapes"
+      ],
+      "why": "Affects practical standalone value documents and is an independent blocker in the existing public SKU example",
+      "dependencies": [
+        "Original element declaration and simple-type facts at the document root",
+        "Existing scalar/data facade counts, authority and lifetime invariants"
+      ],
+      "doesNotUnlock": [
+        "SKU pattern remains a separate missing feature",
+        "Broader datatypes remain excluded"
+      ]
+    },
+    {
+      "rank": 3,
+      "area": "SC07/SC09",
+      "candidate": "Derived integer built-ins under existing exact integer transport",
+      "evidence": [
+        "MS-DataTypes2006-07-15/int_enumeration001_1634/int_enumeration001_1634.i",
+        "MS-DataTypes2006-07-15/int_enumeration002_1635/int_enumeration002_1635.v",
+        "MS-DataTypes2006-07-15/int_totalDigits001_1654/int_totalDigits001_1654.i"
+      ],
+      "why": "Reuses exact integer values and existing bound/digit infrastructure for common int/unsigned families",
+      "dependencies": [
+        "Built-in derivation/fixed facets and actual-vs-primitive type provenance",
+        "Enumeration is independently excluded in two selected current-cohort schemas"
+      ],
+      "doesNotUnlock": [
+        "Do not forecast all integer sample admissions from family recognition alone"
+      ]
+    },
+    {
+      "rank": 4,
+      "area": "SC06",
+      "candidate": "Bounded nonempty choice, then all particles",
+      "evidence": [
+        "MS-ModelGroups2006-07-15/mgJ003/mgJ003.i",
+        "MS-ModelGroups2006-07-15/mgJ004/mgJ004.v",
+        "MS-ModelGroups2006-07-15/mgJ005/mgJ005.i",
+        "MS-ModelGroups2006-07-15/mgB006/mgB006.v",
+        "MS-Additional2006-07-15/addB084/addB084.v",
+        "MS-ModelGroups2006-07-15/mgA014/mgA014.v"
+      ],
+      "why": "Important next breadth beyond ordered sequences",
+      "dependencies": [
+        "UPA/declaration identity and occurrence semantics",
+        "Preserve source-node order and original fact paths while assessing branch/order rules",
+        "All six declared-root samples also contain implicit anyType children; particle support alone does not admit them"
+      ],
+      "doesNotUnlock": [
+        "No arbitrary anyType, mixed content or group recursion bundled into a particle slice"
+      ]
+    },
+    {
+      "rank": 5,
+      "area": "SC07",
+      "candidate": "Date/time and other additional atomic families",
+      "evidence": [
+        "MS-DataTypes2006-07-15/date_enumeration001_1170/date_enumeration001_1170.i",
+        "MS-DataTypes2006-07-15/date_enumeration002_1171/date_enumeration002_1171.v",
+        "MS-DataTypes2006-07-15/date_maxExclusive001_1177/date_maxExclusive001_1177.i",
+        "MS-DataTypes2006-07-15/float_maxExclusive002_1070/float_maxExclusive002_1070.i",
+        "MS-DataTypes2006-07-15/float_maxExclusive003_1071/float_maxExclusive003_1071.v",
+        "MS-DataTypes2006-07-15/float_maxInclusive001_1066/float_maxInclusive001_1066.v",
+        "MS-DataTypes2006-07-15/QName_maxLength003_1366/QName_maxLength003_1366.v",
+        "MS-DataTypes2006-07-15/QName_minLength001_1360/QName_minLength001_1360.v",
+        "MS-DataTypes2006-07-15/QName_minLength002_1361/QName_minLength002_1361.v"
+      ],
+      "why": "Useful application values, but wider datatype/facet and original transport obligations",
+      "dependencies": [
+        "Lexical/value rules, timezones and limits",
+        "Public scalar/API and neutral Core transport feasibility for each family",
+        "QName namespace context and binary lexical rules need separate contracts"
+      ],
+      "doesNotUnlock": [
+        "Existing Core XPath parsing is not Schema validation evidence"
+      ]
+    },
+    {
+      "rank": 6,
+      "area": "SC10-SC20",
+      "candidate": "Assembly, defaults/nil, lists/unions, alternatives, open content and identity constraints",
+      "evidence": [
+        "Both cohort manifests"
+      ],
+      "why": "Large remaining coverage areas requiring separate contracts rather than a nominal beta completion",
+      "dependencies": [
+        "Explicit closed resolver/capacity and graph identity for imports/includes",
+        "Augmentation versus supplied source and provenance for defaults/nil",
+        "Multi-atomic and conditional/identity semantics"
+      ],
+      "doesNotUnlock": [
+        "No combined general PSVI/C45 acceptance"
+      ]
+    }
+  ]
+}
