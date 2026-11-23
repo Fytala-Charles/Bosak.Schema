@@ -1056,3 +1056,18 @@ PR #42 merged as `aa07e801ad5f2d89ebccd7299a4f539800e20df1`; main CI `4513958722
 ### 23 November 2026 - bounded choice production candidate
 
 The [bounded root choice implementation](particles/IMPLEMENTATION.md) is qualified: 3,739 source tests (1,191 internal / 2,548 public), 2,548 package consumers per Core pin, 65 current-package native controls and retained callers 124/23/33 pass. All 3,620 prior source names/outcomes remain unchanged; 119 controls are added. API 54/401 has zero delta. Frozen pilot stays 21 matches; expanded stays 8 matches / 121 Unsupported / zero errors, with six explicit first-refusal reason changes per pin. Eighteen signed Core identities and signed beta.1 verify. Local unsigned alpha.0.34 only; published beta, pins and controllers unchanged. NuGet advisory endpoints were unavailable; no fresh vulnerability-data assessment is claimed. Choice is bounded and opt-in; xs:all remains excluded and is the next separate phase after review/delivery and merge verification. No commit/push/publication.
+
+
+### 23 November 2026 - choice merged; separate all-group contract
+
+PR43 merged as `724d834b7e2cf1353bdacf100802ff29866c8c71`; main CI45168029488 passes all 3,739 source tests and supporting checks. Next is the [bounded root all-group proposal](all-particles/README.md): 43 unexecuted XML plans, 20 actual-native gates and three unchanged original co-blocked examples. It explicitly records 18 proposed changes among 23 existing authored refusal controls, preserving payloads and IDs. This is contract review only: all semantics, production source/tests, API, Core pins, packages and release controllers are unchanged. Native feasibility precedes separate production adoption and qualification. No new commit, push or publication.
+
+
+### 23 November 2026 - isolated all-group feasibility
+
+The [bounded all-group scratch candidate](all-particles/FEASIBILITY.md) passes 146 controls per signed Core pin, with 86 unchanged-production baseline refusals per pin. All 3,739 original source names/stimuli remain: the initial run has exactly 18 predeclared all-refusal failures; scratch-only expected compile reconciliation passes 1,191 internal and 2,548 public tests. Production source/tests remain unchanged. Original physical order, declaration/governing type, optional-group/member rules, FOTY0012, sum budgets and lifetime pass; API54/401zero delta and18signed Core identities verify. Three original all schemas remain Unsupported; no new full corpus/package/retained run or publication. Next is separate production adoption and full qualification, explicitly recording the18authored admissions. No commit/push.
+
+
+### 23 November 2026 - bounded all-group production candidate
+
+The [bounded all-group implementation](all-particles/IMPLEMENTATION.md) is qualified: 3,885 source tests (1,251 internal / 2,634 public), 2,634 package consumers per Core pin, 60 current-package native controls and retained 124/23/33 pass. All 3,739 previous names/stimuli remain, with 18 explicit measured compile expectation changes and 146 new controls. API 54/401 zero delta; 18 signed Core identities and signed beta.1 verify. Frozen stays 21 matches; expanded stays 8 matches / 121 Unsupported / zero errors, with six explicit first-refusal changes per pin. Exact packaged all/unsignedLong examples pass; advisory checks enabled after network retry. Local unsigned alpha.0.35 only; beta/pins/controllers unchanged. Next: explicit Git delivery/review and merge/main verification, then re-rank remaining specification coverage. No commit/push/publication.

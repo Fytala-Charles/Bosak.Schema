@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-23",
+  "base": "724d834b7e2cf1353bdacf100802ff29866c8c71",
+  "status": "Experimental all-only adoption before isolated source overlays; not production adoption",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.3.2 element type defaulting to anyType",
+        "3.3.4-5 local validity/declaration/type evidence",
+        "3.4.2 and3.4.4 complex element-only content",
+        "3.8.2 model-group XML mapping",
+        "3.8.4.1 choice/sequence/all validation",
+        "3.8.6.2 All Group Limited",
+        "3.8.6.3 Element Declarations Consistent",
+        "3.8.6.4 Unique Particle Attribution",
+        "3.9 particle occurrences and sequence validity",
+        "3.8.4.3 Element Sequence Valid; all permutation/interleaving model",
+        "3.8.6.5 effective total range uses sum for all/sequence"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\structures.html"
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "3.3.1 string preserves empty scalar value",
+        "Existing bounded atomic families/facets only"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\datatypes.html"
+    },
+    {
+      "id": "namespaces",
+      "url": "https://www.w3.org/TR/2009/REC-xml-names-20091208/",
+      "sha256": "b4a649e5fdab9852d68eca21442481599164949bcdee5549f2ec7e38fb3cd3a8",
+      "bytes": 51390,
+      "reviewedSections": [
+        "4 qualified names",
+        "6 expanded names and namespace scope"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\namespaces.html"
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3 typed values and absent typed value",
+        "6.2 original element nodes"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\xdm31.html"
+    }
+  ],
+  "intentionalExclusions": [
+    "Direct explicitly scalar-typed alternatives/members only in first slice",
+    "No implicit anyType, nested groups, group refs, wildcard, mixed/open content or substitution groups",
+    "No general repeated group/nullable choice branch; child all max1 and choice max16 are profile bounds, not XSD1.1 limits",
+    "No new numeric child assertion grammar or complex xsi:type substitution"
+  ],
+  "originalReview": "docs/particles/SPECIFICATION-REVIEW.json",
+  "scope": "Direct root all groups under the separate bounded all contract",
+  "productionAdoption": false,
+  "contractSealSha256": "d5eeb6dd4ad276b19c57b8f38f19fcd3b758f8027e447c677cf8837b3f8b11f7"
+}

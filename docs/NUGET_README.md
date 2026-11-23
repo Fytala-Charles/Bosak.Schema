@@ -1175,4 +1175,33 @@ not claim full datatype value spaces, general typed queries, closure or full XSD
 
 The opt-in `NativeSchemaSession` and `NativeSchemaNodeDataSession` also accept a root complex type containing one `xs:choice`: outer `minOccurs` 0 or 1, `maxOccurs` 1, with 1-16 direct scalar element alternatives. Each alternative requires `minOccurs` 1 and permits `maxOccurs` 1-16 within existing scalar and document budgets. One alternative is selected by expanded name; mixed alternatives are Invalid. Empty optional choice has no root typed value and publishes no omitted-branch scalar values. Existing scalar restrictions, root attributes and structural namespace assertions retain their existing exclusions.
 
-This subset excludes `xs:all`, repeated outer groups, nullable alternatives, nested choice containers, complex alternatives, implicit `xs:anyType`, wildcards and group references. These bounds are profile exclusions, not general XSD 1.1 limits. The legacy decimal-only grammar remains unchanged.
+The choice subset excludes repeated outer groups, nullable alternatives, nested choice containers, complex alternatives, implicit `xs:anyType`, wildcards and group references. These bounds are profile exclusions, not general XSD 1.1 limits. The legacy decimal-only grammar remains unchanged.
+
+
+### Bounded root all group
+
+The same two opt-in native facades also accept a root complex type containing one `xs:all`: outer minOccurs 0 or 1 and maxOccurs 1, with 1-16 direct explicitly scalar-typed members, each minOccurs 0 or 1 and maxOccurs 1. Present members may appear in any physical order; duplicate or unknown names, absent required members and bad scalar values are Invalid. Original declarations, governing types, scalar indexes and original-node paths follow the actual input order.
+
+An absent optional whole group permits empty content. Once any member appears, all required members apply. A required group whose members are all optional can also match empty content. These valid empty roots remain element-only with no typed value (FOTY0012); they do not become empty-content types. An omitted member has no scalar slot; a present empty string remains one atomic. Root attribute reads retain their existing declaration-order policy.
+
+Existing scalar restrictions, instance type selection, root attributes, structural namespace assertions and resource limits retain their current bounds. All-group budgets sum member maxima; choice keeps its maximum-alternative accounting. Nested all containers, complex members, group references, wildcards, implicit anyType and wider group/occurrence grammar remain excluded. These are profile limits, not full XSD 1.1 coverage. The legacy decimal-only grammar is unchanged.
+
+
+Example all-group schema:
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="r"><xs:complexType><xs:all minOccurs="0">
+    <xs:element name="a" type="xs:string"/>
+    <xs:element name="b" type="xs:int"/>
+  </xs:all></xs:complexType></xs:element>
+</xs:schema>
+```
+
+A reordered instance with a present empty string:
+
+```xml
+<r><b>7</b><a/></r>
+```
+
+For this instance, `NativeSchemaSession` exposes two scalar slots: integer `7` at index 0 and an empty string at index 1. `NativeSchemaNodeDataSession` reads the same values at physical paths `[0]` and `[1]`. With this optional whole group, `<r/>` is valid and has no scalar slots or root typed value. `<r><b>7</b></r>` is Invalid because the present group still requires `a`. Check the returned outcome before reading its value.
