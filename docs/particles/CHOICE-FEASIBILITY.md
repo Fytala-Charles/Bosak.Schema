@@ -1,0 +1,17 @@
+# Bounded choice feasibility — 23 November 2026
+
+PR [#42](https://github.com/Fytala-Charles/Bosak.Schema/pull/42) merged as `aa07e801ad5f2d89ebccd7299a4f539800e20df1`. Main CI run `45139587221` passed all 3,620 source tests. The earlier [contract packet](README.md) preserves its pre-merge state.
+
+The isolated native `xs:choice` candidate passes **119 controls on each signed Core pin**, 1.81.2 and 1.81.17. Its unchanged source suite passes **1,126 internal + 2,494 public tests**, with exactly the prior test names and outcomes and no expectation changes. Public API comparison retains **54 types / 401 rows**, with zero delta. Production source, tests, build inputs, packages and published beta remain unchanged.
+
+The subset supports one root choice, outer minOccurs 0 or 1 and maxOccurs 1, with 1–16 direct scalar alternatives, each minOccurs 1 and maxOccurs 1–16. Selection uses expanded names and actual physical child order; alternatives cannot mix. Empty optional choice preserves an element-only root with no typed value. Anonymous scalar restrictions, named root types, existing root attributes and structural namespace assertions are covered within existing exclusions. Budget accounting uses the largest alternative, including the 16-by-16 boundary, rather than their sum.
+
+Controls cover original node/declaration identity, selected scalar provenance, eager refusal of excluded unused alternatives, malformed patterns, shared pattern budget and recovery, cancellation before assessment, snapshot opening, disposal and detached export. Six unchanged original schema/instance pairs remain Unsupported on both facades because of independent co-blockers; these controls do not constitute a new corpus run. Existing legacy choice profiles refuse the feature.
+
+**`xs:all` is deferred.** Its 23 planned schema payloads are refusal controls only; no order-independent validation, occurrence semantics or all-phase adoption is claimed. Repeated outer choices, nullable alternatives, nested choice containers, complex alternatives, groups and wildcards remain excluded. This experiment is not full XSD 1.1, full PSVI, a package qualification or a release.
+
+The final suite contains 54 planned public-facade controls, 11 identity controls, 42 boundary/refusal controls and 12 unchanged-original controls per pin. Earlier failing runs are preserved under evidence: fixture links originally overwrote the output JSON, then timestamp-based copying retained that stale output. Correct filename links plus unconditional copying resolved the harness error without candidate source changes.
+
+[Evidence and exact source manifest](choice-feasibility-evidence/CANDIDATE-SOURCE.json) record 59 Git source blobs plus four overlays (three replacements and one new file), yielding 60 source files. [Reconstruction](choice-feasibility-evidence/reconstruct.py) accepts a fresh output directory and verifies every hash. [Specification adoption](choice-feasibility-evidence/EXPERIMENT-ADOPTION.json) precedes the overlay. Signed archive/cache/runtime identities and all test receipts are included. Rendering checks are programmatic; visual acceptance is not claimed.
+
+Next: review and adopt this bounded choice subset into production, then run the full source, consumer-package, native and retained qualification sequence. Assess `xs:all` separately after choice delivery. No Git delivery is authorized for this new candidate.

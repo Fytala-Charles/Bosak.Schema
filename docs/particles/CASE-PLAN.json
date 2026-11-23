@@ -1,0 +1,506 @@
+{
+  "date": "2026-11-23",
+  "status": "Two proposed phases, both unexecuted",
+  "cases": [
+    {
+      "id": "PT-001",
+      "phase": "choice-first",
+      "purpose": "First string branch",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>hello</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-002",
+      "phase": "choice-first",
+      "purpose": "Second branch is first physical child",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><b>7</b></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-003",
+      "phase": "choice-first",
+      "purpose": "Required choice empty",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-004",
+      "phase": "choice-first",
+      "purpose": "Mixed alternatives",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a><b>7</b></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-005",
+      "phase": "choice-first",
+      "purpose": "Choice selected branch above max1",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a><a>y</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-006",
+      "phase": "choice-first",
+      "purpose": "Chosen type lexical failure does not select another branch",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><b>bad</b></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-007",
+      "phase": "choice-first",
+      "purpose": "Unknown expanded name",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><z/></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-008",
+      "phase": "choice-first",
+      "purpose": "Element-only text",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>text<a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-009",
+      "phase": "choice-first",
+      "purpose": "Selected empty String is one atomic",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a/></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-010",
+      "phase": "choice-first",
+      "purpose": "Finite selected branch repeat boundary",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\" maxOccurs=\"3\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-011",
+      "phase": "choice-first",
+      "purpose": "Finite selected branch repeat boundary",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\" maxOccurs=\"3\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a><a>x</a><a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-012",
+      "phase": "choice-first",
+      "purpose": "Finite selected branch repeat boundary",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\" maxOccurs=\"3\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a><a>x</a><a>x</a><a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-013",
+      "phase": "choice-first",
+      "purpose": "Optional group omits all branches without leaf facts",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice minOccurs=\"0\"><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-014",
+      "phase": "choice-first",
+      "purpose": "Optional group does not admit mixed text",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice minOccurs=\"0\"><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>text</r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-015",
+      "phase": "choice-first",
+      "purpose": "Nullable alternatives excluded from first slice",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\" minOccurs=\"0\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-016",
+      "phase": "choice-first",
+      "purpose": "Repeated outer groups excluded",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice maxOccurs=\"2\"><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-017",
+      "phase": "choice-first",
+      "purpose": "Competing direct element particles even with equal type",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"a\" type=\"xs:string\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-018",
+      "phase": "choice-first",
+      "purpose": "Implicit anyType is independent exclusion",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-019",
+      "phase": "choice-first",
+      "purpose": "Wildcard syntax excluded before semantic attribution",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:any/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-020",
+      "phase": "choice-first",
+      "purpose": "Nested model group excluded in direct scalar phase",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:sequence><xs:element name=\"a\" type=\"xs:string\"/></xs:sequence></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-021",
+      "phase": "choice-first",
+      "purpose": "Empty declared model group excluded; not an empty complex admission",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-022",
+      "phase": "choice-first",
+      "purpose": "Named complex type model",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"C\"><xs:choice><xs:element name=\"a\" type=\"xs:string\"/></xs:choice></xs:complexType><xs:element name=\"r\" type=\"C\"/></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-023",
+      "phase": "choice-first",
+      "purpose": "Mixed simple and compositor root catalog",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\"/></xs:choice></xs:complexType></xs:element><xs:element name=\"other\" type=\"xs:unsignedLong\"/></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-024",
+      "phase": "choice-first",
+      "purpose": "Unrelated nested root forces alternate compiler route",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\"/></xs:choice></xs:complexType></xs:element><xs:element name=\"nested\"><xs:complexType><xs:sequence><xs:element name=\"box\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:int\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-025",
+      "phase": "all-second",
+      "purpose": "Competing direct element particles even with equal type",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"a\" type=\"xs:string\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Invalid",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-026",
+      "phase": "all-second",
+      "purpose": "Implicit anyType is independent exclusion",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-027",
+      "phase": "all-second",
+      "purpose": "Wildcard syntax excluded before semantic attribution",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:any/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-028",
+      "phase": "all-second",
+      "purpose": "Nested model group excluded in direct scalar phase",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:sequence><xs:element name=\"a\" type=\"xs:string\"/></xs:sequence></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-029",
+      "phase": "all-second",
+      "purpose": "Empty declared model group excluded; not an empty complex admission",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-030",
+      "phase": "all-second",
+      "purpose": "Named complex type model",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"C\"><xs:all><xs:element name=\"a\" type=\"xs:string\"/></xs:all></xs:complexType><xs:element name=\"r\" type=\"C\"/></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-031",
+      "phase": "all-second",
+      "purpose": "Mixed simple and compositor root catalog",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\"/></xs:all></xs:complexType></xs:element><xs:element name=\"other\" type=\"xs:unsignedLong\"/></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-032",
+      "phase": "all-second",
+      "purpose": "Unrelated nested root forces alternate compiler route",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\"/></xs:all></xs:complexType></xs:element><xs:element name=\"nested\"><xs:complexType><xs:sequence><xs:element name=\"box\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:int\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-033",
+      "phase": "all-second",
+      "purpose": "All declaration order",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a><b>7</b></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-034",
+      "phase": "all-second",
+      "purpose": "All reverse physical order",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><b>7</b><a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-035",
+      "phase": "all-second",
+      "purpose": "Missing required b",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-036",
+      "phase": "all-second",
+      "purpose": "Missing required a",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><b>7</b></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-037",
+      "phase": "all-second",
+      "purpose": "Required all empty",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-038",
+      "phase": "all-second",
+      "purpose": "Duplicate all member",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a><a>y</a><b>7</b></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-039",
+      "phase": "all-second",
+      "purpose": "All unknown element",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><b>7</b><z/></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-040",
+      "phase": "all-second",
+      "purpose": "Optional all member omitted",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\" minOccurs=\"0\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-041",
+      "phase": "all-second",
+      "purpose": "Optional member cannot substitute required member",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\" minOccurs=\"0\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><b>7</b></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-042",
+      "phase": "all-second",
+      "purpose": "Optional whole all group absent",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all minOccurs=\"0\"><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-043",
+      "phase": "all-second",
+      "purpose": "Present optional all group still requires a",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all minOccurs=\"0\"><xs:element name=\"a\" type=\"xs:string\"/><xs:element name=\"b\" type=\"xs:int\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><b>7</b></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-044",
+      "phase": "all-second",
+      "purpose": "Emptiable element-only type has absent typed value, not empty sequence",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\" minOccurs=\"0\"/><xs:element name=\"b\" type=\"xs:int\" minOccurs=\"0\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-045",
+      "phase": "all-second",
+      "purpose": "First all phase restricts member max1; XSD1.1 is broader",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\" maxOccurs=\"2\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-046",
+      "phase": "choice-first",
+      "purpose": "Choice branch capacity one over16",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\" maxOccurs=\"17\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a>x</a></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-047",
+      "phase": "choice-first",
+      "purpose": "Same local name, distinct expanded names and original physical order",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:p\" targetNamespace=\"urn:p\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\" form=\"qualified\"/><xs:element name=\"a\" type=\"xs:int\" form=\"unqualified\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:p\"><t:a>x</t:a></t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-048",
+      "phase": "choice-first",
+      "purpose": "Same local name, distinct expanded names and original physical order",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:p\" targetNamespace=\"urn:p\"><xs:element name=\"r\"><xs:complexType><xs:choice><xs:element name=\"a\" type=\"xs:string\" form=\"qualified\"/><xs:element name=\"a\" type=\"xs:int\" form=\"unqualified\"/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:p\"><a>7</a></t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-049",
+      "phase": "all-second",
+      "purpose": "Same local name, distinct expanded names and original physical order",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:p\" targetNamespace=\"urn:p\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\" form=\"qualified\"/><xs:element name=\"a\" type=\"xs:int\" form=\"unqualified\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:p\"><a>7</a><t:a>x</t:a></t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    {
+      "id": "PT-050",
+      "phase": "all-second",
+      "purpose": "Reordered all member keeps its declared integer type and rejects bad lexical value",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:p\" targetNamespace=\"urn:p\"><xs:element name=\"r\"><xs:complexType><xs:all><xs:element name=\"a\" type=\"xs:string\" form=\"qualified\"/><xs:element name=\"a\" type=\"xs:int\" form=\"unqualified\"/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:p\"><a>bad</a><t:a>x</t:a></t:r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "status": "Proposed unexecuted; no native acceptance claim"
+    }
+  ]
+}
