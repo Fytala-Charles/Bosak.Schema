@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 22-11-2026     | Adopt derived-integer expectations without changing original stimuli |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -57,7 +58,7 @@ public sealed class NativeSimpleRootBoundaryCoreTests
     /// <param name="selected">The selected control input.</param>
     /// <param name="text">The text control input.</param>
     /// <param name="expected">The expected control input.</param>
-    [Theory][InlineData("Code","ABC","Valid")][InlineData("Code","abc","Invalid")][InlineData("xs:integer","1","Invalid")][InlineData("missing","abc","Invalid")][InlineData("bad:t","abc","Invalid")][InlineData("xs:int","1","Unsupported")]
+    [Theory][InlineData("Code","ABC","Valid")][InlineData("Code","abc","Invalid")][InlineData("xs:integer","1","Invalid")][InlineData("missing","abc","Invalid")][InlineData("bad:t","abc","Invalid")][InlineData("xs:int","1","Invalid")]
     public void InstanceSelection(string selected,string text,string expected)
     {
         var schema=S("<xs:simpleType name='Code'><xs:restriction base='xs:string'><xs:pattern value='[A-Z]+'/></xs:restriction></xs:simpleType><xs:element name='r' type='xs:string'/>");
@@ -82,7 +83,7 @@ public sealed class NativeSimpleRootBoundaryCoreTests
     /// <param name="type">The type control input.</param>
     [Theory][InlineData("int")][InlineData("date")][InlineData("anyType")]
     public void OtherBuiltinTypesStayExcluded(string type)
-    {Assert.Equal(NativeSchemaOutcome.Unsupported,NativeSchemaSession.Create(S($"<xs:element name='r' type='xs:{type}'/>"),Options).Outcome);}
+    {var result=NativeSchemaSession.Create(S($"<xs:element name='r' type='xs:{type}'/>"),Options);Assert.Equal(type=="int"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Unsupported,result.Outcome);result.Value?.Dispose();}
     /// <summary>Eager Unused Pattern.</summary>
     /// <param name="pattern">The pattern control input.</param>
     /// <param name="expected">The expected control input.</param>

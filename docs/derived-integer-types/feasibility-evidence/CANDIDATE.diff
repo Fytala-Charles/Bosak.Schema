@@ -1,0 +1,133 @@
+--- a/Assessment/NativeBuiltinIntegers.cs
++++ b/Assessment/NativeBuiltinIntegers.cs
+@@ -0,0 +1,44 @@
++// ===========================================================================================================================================================
++// AUTHOR               : Charles Korthout
++// CREATE DATE          : 22 November 2026
++// PURPOSE              : Issues finite built-in integer types with original parents and exact inherited bounds.
++// SPECIAL NOTES        : BigInteger value-space checks; inherited fractionDigits zero remains fixed.
++//
++// COPYRIGHT            : Fytala
++// LICENSE              : LICENSE.md (Apache-2.0)
++// SPDX-License-Identifier: Apache-2.0
++// ===========================================================================================================================================================
++// Change History:      |==================|=======|================|=========================================================================================
++//                      | Charles Korthout | 0.1   | 22-11-2026     | Isolated native builtin integer feasibility |
++//                      |==================|=======|================|=========================================================================================
++// ===========================================================================================================================================================
++using System.Numerics;
++using System.Xml.Linq;
++namespace Bosak.Schema;
++internal sealed partial class NativeDecimalSchema
++{
++    private static Dictionary<XName, NativeType> CreateBuiltinIntegerTypes(NativeType? integer)
++    {
++        var result = new Dictionary<XName, NativeType>();
++        if (integer is null) return result;
++        void Add(string name, string parentName, BigInteger? lower, BigInteger? upper)
++        {
++            var parent = parentName == "integer" ? integer : result[Xs + parentName];
++            result.Add(Xs + name, new NativeType(name, false, Xs.NamespaceName, isInteger: true,
++                integerFacets: new(lower, false, upper, false, null, parent.IntegerFacets), derivationBase: parent));
++        }
++        Add("nonPositiveInteger", "integer", null, BigInteger.Parse("0", System.Globalization.CultureInfo.InvariantCulture));
++        Add("negativeInteger", "nonPositiveInteger", null, BigInteger.Parse("-1", System.Globalization.CultureInfo.InvariantCulture));
++        Add("long", "integer", BigInteger.Parse("-9223372036854775808", System.Globalization.CultureInfo.InvariantCulture), BigInteger.Parse("9223372036854775807", System.Globalization.CultureInfo.InvariantCulture));
++        Add("int", "long", BigInteger.Parse("-2147483648", System.Globalization.CultureInfo.InvariantCulture), BigInteger.Parse("2147483647", System.Globalization.CultureInfo.InvariantCulture));
++        Add("short", "int", BigInteger.Parse("-32768", System.Globalization.CultureInfo.InvariantCulture), BigInteger.Parse("32767", System.Globalization.CultureInfo.InvariantCulture));
++        Add("byte", "short", BigInteger.Parse("-128", System.Globalization.CultureInfo.InvariantCulture), BigInteger.Parse("127", System.Globalization.CultureInfo.InvariantCulture));
++        Add("nonNegativeInteger", "integer", BigInteger.Parse("0", System.Globalization.CultureInfo.InvariantCulture), null);
++        Add("unsignedLong", "nonNegativeInteger", BigInteger.Parse("0", System.Globalization.CultureInfo.InvariantCulture), BigInteger.Parse("18446744073709551615", System.Globalization.CultureInfo.InvariantCulture));
++        Add("unsignedInt", "unsignedLong", BigInteger.Parse("0", System.Globalization.CultureInfo.InvariantCulture), BigInteger.Parse("4294967295", System.Globalization.CultureInfo.InvariantCulture));
++        Add("unsignedShort", "unsignedInt", BigInteger.Parse("0", System.Globalization.CultureInfo.InvariantCulture), BigInteger.Parse("65535", System.Globalization.CultureInfo.InvariantCulture));
++        Add("unsignedByte", "unsignedShort", BigInteger.Parse("0", System.Globalization.CultureInfo.InvariantCulture), BigInteger.Parse("255", System.Globalization.CultureInfo.InvariantCulture));
++        Add("positiveInteger", "nonNegativeInteger", BigInteger.Parse("1", System.Globalization.CultureInfo.InvariantCulture), null);
++        return result;
++    }
++}
+--- a/Assessment/NativeDecimalSchema.cs
++++ b/Assessment/NativeDecimalSchema.cs
+@@ -41,6 +41,7 @@
+ //                      | Charles Korthout | 1.18   | 22-11-2026     | Adopt qualified bounded native string patterns |
+ //                      | Charles Korthout | 1.19   | 22-11-2026     | Probe simple scalar roots in isolated source copies only |
+ //                      | Charles Korthout | 1.20   | 22-11-2026     | Adopt qualified native simple scalar root assessment |
++//                      | Charles Korthout | 1.21   | 22-11-2026     | Probe derived integer builtins in isolated source copies |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -117,7 +118,7 @@
+             var booleanType = maxStringCharacters is null ? null : new NativeType("boolean", false, Xs.NamespaceName, isBoolean: true);
+             var integerType = maxStringCharacters is null ? null : new NativeType("integer", false, Xs.NamespaceName, isInteger: true);
+             var named = new Dictionary<XName, NativeDecimalSchema>();
+-            var simple = new Dictionary<XName, NativeType>();
++            var simple = CreateBuiltinIntegerTypes(integerType);
+             var typeNames = new HashSet<XName>();
+             foreach (var type in types)
+             {
+@@ -130,10 +131,10 @@
+                 cancellationToken.ThrowIfCancellationRequested();
+                 Attributes(type, "name");
+                 var name = Name(type);
+-                var restricted = CompileRestriction(type, name, targetNamespace, limits, maxStringCharacters, patternCompilation);
++                var restricted = CompileRestriction(type, name, targetNamespace, limits, maxStringCharacters, patternCompilation, simple);
+                 simple.Add(XName.Get(name, targetNamespace), restricted);
+             }
+-            var anonymousSimple = CompileAnonymousRestrictions(root, limits, maxStringCharacters, cancellationToken, patternCompilation);
++            var anonymousSimple = CompileAnonymousRestrictions(root, limits, maxStringCharacters, cancellationToken, patternCompilation, simple);
+             if (stringType is not null && HasNestedDeclarations(root, types, targetNamespace))
+                 return NativeResult<NativeDecimalSchema>.Valid(CompileNestedSchema(root, types, declarations, targetNamespace,
+                     defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType!, integerType!, simple,
+--- a/Assessment/NativeSimpleRestriction.cs
++++ b/Assessment/NativeSimpleRestriction.cs
+@@ -18,6 +18,7 @@
+ //                      | Charles Korthout | 0.5   | 22-11-2026     | Adopt qualified bounded native string patterns |
+ //                      | Charles Korthout | 0.6   | 22-11-2026     | Probe simple scalar roots in isolated source copies only |
+ //                      | Charles Korthout | 0.7   | 22-11-2026     | Adopt qualified native simple scalar root assessment |
++//                      | Charles Korthout | 0.8   | 22-11-2026     | Probe derived integer builtins in isolated source copies |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -28,7 +29,7 @@
+ internal sealed partial class NativeDecimalSchema
+ {
+     private static NativeType CompileRestriction(XElement definition, string? name, string namespaceUri,
+-        NativeNumericLimits limits, int? maxStringCharacters, NativePatternCompilation patternCompilation)
++        NativeNumericLimits limits, int? maxStringCharacters, NativePatternCompilation patternCompilation, Dictionary<XName, NativeType> simple)
+     {
+         Attributes(definition, name is null ? [] : ["name"]);
+         var restriction = Single(definition, "restriction");
+@@ -42,11 +43,24 @@
+         if (maxStringCharacters is not null && baseName == Xs + "integer")
+             return new NativeType(name, false, namespaceUri, isInteger: true,
+                 integerFacets: NativeIntegerFacets.Compile(restriction, limits), baseName: baseName);
++        if (maxStringCharacters is not null && baseName.Namespace == Xs && simple.TryGetValue(baseName, out var inherited) && inherited.IsInteger)
++        {
++            foreach (var facet in Elements(restriction))
++            {
++                Require(facet.Name.Namespace == Xs && facet.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits",
++                    "Excluded integer facet syntax.", NativeDecimalUnsupportedReason.ValueType);
++                Attributes(facet, "value");
++                Require(Elements(facet).Count == 0, "Facet children are unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
++            }
++            return new NativeType(name, false, namespaceUri, isInteger: true,
++                integerFacets: NativeIntegerFacets.CompileDerived(restriction, inherited.IntegerFacets, limits),
++                baseName: baseName, derivationBase: inherited);
++        }
+         throw new NativeProfileException(NativeOutcome.Unsupported, "Only admitted direct scalar restrictions are supported.", NativeDecimalUnsupportedReason.ValueType);
+     }
+ 
+     private static Dictionary<XElement, NativeType> CompileAnonymousRestrictions(XElement schema,
+-        NativeNumericLimits limits, int? maxStringCharacters, CancellationToken cancellationToken, NativePatternCompilation patternCompilation)
++        NativeNumericLimits limits, int? maxStringCharacters, CancellationToken cancellationToken, NativePatternCompilation patternCompilation, Dictionary<XName, NativeType> simple)
+     {
+         var result = new Dictionary<XElement, NativeType>();
+         if (maxStringCharacters is null) return result;
+@@ -58,7 +72,7 @@
+         {
+             cancellationToken.ThrowIfCancellationRequested();
+             Require(definition.Parent!.Attribute("type") is null, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
+-            result.Add(definition, CompileRestriction(definition, null, "", limits, maxStringCharacters, patternCompilation));
++            result.Add(definition, CompileRestriction(definition, null, "", limits, maxStringCharacters, patternCompilation, simple));
+         }
+         return result;
+     }

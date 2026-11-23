@@ -41,6 +41,8 @@
 //                      | Charles Korthout | 1.18   | 22-11-2026     | Adopt qualified bounded native string patterns |
 //                      | Charles Korthout | 1.19   | 22-11-2026     | Probe simple scalar roots in isolated source copies only |
 //                      | Charles Korthout | 1.20   | 22-11-2026     | Adopt qualified native simple scalar root assessment |
+//                      | Charles Korthout | 1.21   | 22-11-2026     | Probe derived integer builtins in isolated source copies |
+//                      | Charles Korthout | 1.22   | 22-11-2026     | Adopt qualified bounded builtin integer family |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -117,7 +119,7 @@ internal sealed partial class NativeDecimalSchema
             var booleanType = maxStringCharacters is null ? null : new NativeType("boolean", false, Xs.NamespaceName, isBoolean: true);
             var integerType = maxStringCharacters is null ? null : new NativeType("integer", false, Xs.NamespaceName, isInteger: true);
             var named = new Dictionary<XName, NativeDecimalSchema>();
-            var simple = new Dictionary<XName, NativeType>();
+            var simple = CreateBuiltinIntegerTypes(integerType);
             var typeNames = new HashSet<XName>();
             foreach (var type in types)
             {
@@ -130,10 +132,10 @@ internal sealed partial class NativeDecimalSchema
                 cancellationToken.ThrowIfCancellationRequested();
                 Attributes(type, "name");
                 var name = Name(type);
-                var restricted = CompileRestriction(type, name, targetNamespace, limits, maxStringCharacters, patternCompilation);
+                var restricted = CompileRestriction(type, name, targetNamespace, limits, maxStringCharacters, patternCompilation, simple);
                 simple.Add(XName.Get(name, targetNamespace), restricted);
             }
-            var anonymousSimple = CompileAnonymousRestrictions(root, limits, maxStringCharacters, cancellationToken, patternCompilation);
+            var anonymousSimple = CompileAnonymousRestrictions(root, limits, maxStringCharacters, cancellationToken, patternCompilation, simple);
             if (stringType is not null && HasNestedDeclarations(root, types, targetNamespace))
                 return NativeResult<NativeDecimalSchema>.Valid(CompileNestedSchema(root, types, declarations, targetNamespace,
                     defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType!, integerType!, simple,

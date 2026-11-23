@@ -518,7 +518,7 @@
       "Structures3.3.4"
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n' type='xs:integer'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r><n> 1</n></r>",
+    "instance": "<r><n>\u00a01</n></r>",
     "maxNativeCoefficientDigits": 256,
     "expectedCompile": "Valid",
     "expectedAssessment": "Invalid",
@@ -533,7 +533,7 @@
       "Structures3.3.4"
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n' type='xs:integer'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r><n>1 </n></r>",
+    "instance": "<r><n>1\u00a0</n></r>",
     "maxNativeCoefficientDigits": 256,
     "expectedCompile": "Valid",
     "expectedAssessment": "Invalid",
@@ -1061,7 +1061,7 @@
   },
   {
     "id": "M2C3-62",
-    "description": "Other built-in type remains excluded xs:long",
+    "description": "Admitted built-in integer subtype xs:long",
     "sections": [
       "Datatypes3.4.13.1-3",
       "Datatypes4.3.6",
@@ -1070,14 +1070,19 @@
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n' type='xs:long'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r><n>1</n></r>",
     "maxNativeCoefficientDigits": 256,
-    "expectedCompile": "Unsupported",
-    "expectedAssessment": "Unsupported",
-    "values": [],
-    "unsupportedReason": "ValueType"
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      {
+        "kind": "Integer",
+        "value": "1"
+      }
+    ],
+    "unsupportedReason": null
   },
   {
     "id": "M2C3-63",
-    "description": "Other built-in type remains excluded xs:unsignedInt",
+    "description": "Admitted built-in integer subtype xs:unsignedInt",
     "sections": [
       "Datatypes3.4.13.1-3",
       "Datatypes4.3.6",
@@ -1086,14 +1091,19 @@
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n' type='xs:unsignedInt'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r><n>1</n></r>",
     "maxNativeCoefficientDigits": 256,
-    "expectedCompile": "Unsupported",
-    "expectedAssessment": "Unsupported",
-    "values": [],
-    "unsupportedReason": "ValueType"
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      {
+        "kind": "Integer",
+        "value": "1"
+      }
+    ],
+    "unsupportedReason": null
   },
   {
     "id": "M2C3-64",
-    "description": "Other built-in type remains excluded xs:nonNegativeInteger",
+    "description": "Admitted built-in integer subtype xs:nonNegativeInteger",
     "sections": [
       "Datatypes3.4.13.1-3",
       "Datatypes4.3.6",
@@ -1102,14 +1112,19 @@
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n' type='xs:nonNegativeInteger'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r><n>1</n></r>",
     "maxNativeCoefficientDigits": 256,
-    "expectedCompile": "Unsupported",
-    "expectedAssessment": "Unsupported",
-    "values": [],
-    "unsupportedReason": "ValueType"
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      {
+        "kind": "Integer",
+        "value": "1"
+      }
+    ],
+    "unsupportedReason": null
   },
   {
     "id": "M2C3-65",
-    "description": "Other built-in type remains excluded xs:positiveInteger",
+    "description": "Admitted built-in integer subtype xs:positiveInteger",
     "sections": [
       "Datatypes3.4.13.1-3",
       "Datatypes4.3.6",
@@ -1118,10 +1133,15 @@
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n' type='xs:positiveInteger'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r><n>1</n></r>",
     "maxNativeCoefficientDigits": 256,
-    "expectedCompile": "Unsupported",
-    "expectedAssessment": "Unsupported",
-    "values": [],
-    "unsupportedReason": "ValueType"
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      {
+        "kind": "Integer",
+        "value": "1"
+      }
+    ],
+    "unsupportedReason": null
   },
   {
     "id": "M2C3-66",
@@ -1152,7 +1172,12 @@
     "maxNativeCoefficientDigits": 256,
     "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
-    "values": [{"kind": "Integer", "value": "1"}],
+    "values": [
+      {
+        "kind": "Integer",
+        "value": "1"
+      }
+    ],
     "unsupportedReason": null
   },
   {

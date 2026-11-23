@@ -351,8 +351,9 @@ counts all supplied digits including leading zeroes, excluding sign; overflow is
 Unsupported/RepresentationCapacity. The separate Core query digit limit can refuse
 a read; export and subsequent in-bound reads remain available. Decimal scale and
 string capacities do not constrain integer values. NativeDecimalSession remains
-decimal-only. Contextual assertions on integer leaves, derived integer families and named integer
-restrictions/facets remain excluded; this profile is not published beta.1.
+decimal-only. Contextual assertions on integer leaves remain excluded. Later sections
+describe admitted direct restrictions and built-in integer descendants; this profile
+is not published beta.1.
 
 ```csharp
 using System.Globalization;
@@ -767,8 +768,8 @@ of `xs:integer`: exact inclusive/exclusive bounds, totalDigits, and inherited fi
 fractionDigits zero. Values and bounds use BigInteger without decimal conversion.
 Named integer restrictions also enforce facets on admitted local application
 attributes. Existing representation limits still apply; assertion facets on integer simple types,
-restriction chains, derived integer families and broader query profiles remain
-excluded. Legacy NativeDecimalSession and published 0.5.0-beta.1 are unchanged.
+arbitrary user restriction chains and broader query profiles remain excluded.
+The built-in descendant family is described below. Legacy NativeDecimalSession and published 0.5.0-beta.1 are unchanged.
 
 
 ## Original-node scalar data (0.6 development candidate)
@@ -941,7 +942,7 @@ integer ranges (for example, minExclusive=0/maxExclusive=1) compile but reject a
 instances. Raw digit capacities apply before leading-zero normalization.
 
 Application attributes on integer complex types, complex chains,
-derived built-ins such as xs:int/xs:long, inline simpleType, general inheritance
+inline simpleType, general inheritance
 and broader complex xsi:type substitution remain excluded. Only the bounded
 contextual assertion profile below is admitted. Legacy NativeDecimalSession and published beta.1
 are unchanged; this development behavior does not claim full XSD/PSVI support.
@@ -1124,3 +1125,47 @@ component ceilings, shared pattern work, cancellation and lifetime rules still
 apply. The legacy `NativeDecimalSession` retains its earlier grammar. This example
 uses explicit ASCII digits; the original public SKU's `\d` escape remains outside
 the bounded pattern subset. No general XSD, component-closure or PSVI claim follows.
+
+
+### Built-in integer descendants
+
+The opt-in native facades admit `nonPositiveInteger`, `negativeInteger`, `long`,
+`int`, `short`, `byte`, `nonNegativeInteger`, `unsignedLong`, `unsignedInt`,
+`unsignedShort`, `unsignedByte` and `positiveInteger` in the XML Schema namespace.
+These types work in existing simple roots, flat/nested leaves, local attributes,
+direct named/anonymous restrictions and admitted integer simple-content placements.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="counter" type="xs:unsignedLong"/>
+</xs:schema>
+```
+
+`<counter>18446744073709551615</counter>` assesses Valid. The scalar facade reads
+`ReadRootScalar().IntegerValue`; the original-node facade reads
+`ReadElement([]).IntegerValue`. Both return an exact `BigInteger`, including values
+above Int64. Root values remain separate from descendant scalar indexes.
+An unsignedLong value of `18446744073709551616` or `-1` is Invalid within admitted
+capacity; `-0` is a valid spelling of zero. Export preserves parsed lexical content
+within the existing serialization contract. Detached values carry no schema authority.
+
+Each descendant keeps its original built-in type and derivation parent, inherited
+inclusive bounds, fixed fractionDigits zero and fixed collapse whitespace behavior.
+Direct restrictions may narrow existing bound/digit facets; weakening recognized
+bounds or violating an admitted fixed facet is Invalid. Enumeration, integer pattern
+facets and explicit whiteSpace/fixed-attribute facet syntax remain Unsupported.
+No arbitrary new user-defined restriction chains are admitted.
+
+Same-family `xsi:type` follows the actual derivation graph: int to byte is valid
+when the selected byte value fits; int to integer and long to unsignedInt are invalid
+selections even if the value would fit. Existing representation-changing selection
+from decimal into an integer type remains Unsupported. Source/instance namespace
+resolution and original declaration identity stay separate from selected type identity.
+
+Explicit lexical digit capacity still applies before normalization and value-space
+checks, including leading zeros. Standard built-in bound metadata does not require
+a caller's small value digit limit to contain all standard bound constants, and
+does not consume user source-definition quotas. Existing source/node/anonymous,
+query, cancellation, ownership and lifetime limits remain. Legacy NativeDecimalSession,
+public API, Core pins and published beta.1 are unchanged. This bounded profile does
+not claim full datatype value spaces, general typed queries, closure or full XSD/PSVI.
