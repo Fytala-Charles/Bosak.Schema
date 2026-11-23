@@ -1016,3 +1016,63 @@ Local unsigned alpha.0.31 only; published beta.1, pins and controllers unchanged
 Next: review/deliver on explicit Git request, then merge/main verification and the
 next ranked derived-integer family contract. No commit/push/tag/publication.
 [Implementation and exact qualification](simple-typed-roots/IMPLEMENTATION.md).
+
+
+## PR41 merged; derived-integer contract - 22 November 2026
+
+PR41 merges as `f9e9ad7c0599ba7b36b6d8d71704875990b54b98`, preserving the reviewed
+tree. Main CI45039993274 passes 3,185 source tests plus release, documentation and
+workload controls. Earlier simple-root qualification and all original evidence stay
+sealed; frozen pilot 21 matches, expanded 3 matches / 126 Unsupported / zero errors unchanged.
+
+Next proposed slice: all twelve built-in integer descendants, existing placements,
+original type graph/provenance and inherited bounds/fixed semantics. Exact normative
+ranges/parents and four spec bodies, ten Schema/eight Core source files are reviewed.
+158 XML payloads and 18 native gates are unexecuted plans. Enumeration and other facet/
+datatype breadth remain separate; no corpus-admission forecast. Capacity, legacy
+profile, ownership and type-selection distinctions remain mandatory. No production
+source/API/Core pin/package/controller or semantic-adoption change in this proposal.
+[Contract and next feasibility gates](derived-integer-types/README.md).
+
+
+## Native derived-integer feasibility - 22 November 2026
+
+The isolated three-overlay/59-file candidate passes 435 actual-native controls per
+signed Core pin (1.81.2/1.81.17), with 24 unchanged-production baseline controls per
+pin. All 158 proposed payloads run through both facades; 84 original identity gates
+per pin retain builtin/named/anonymous and complex/atomic distinctions, node QNames,
+BigInteger values beyond Int64, inherited bounds and selection. Descriptive type
+names are recorded separately; no general typed-query or closure acceptance.
+
+All 3,185 original source stimuli remain. Scratch reconciliation passes 1,007 internal
+and 2,178 public tests after 11 logical expectations / 14 executed admissions, with one
+explicit outcome-argument display rename. Production fixtures unchanged. Initial
+identity-selector harness failures are preserved; candidate source needed no fix.
+18 signed Core identities verify; API 54/401 zero delta. Direct original totalDigits
+probe matches invalid expectation; two enumeration schemas remain Unsupported.
+No full corpus/package/retained run here; product source/pins/packages/controllers
+and earlier frozen/expanded measurements unchanged. Next: separate production
+adoption and full qualification. No commit/push/publication.
+[Native feasibility and preserved receipts](derived-integer-types/FEASIBILITY.md).
+
+
+## Bounded derived-integer production candidate - 22 November 2026
+
+Production adoption precedes the qualified twelve-type builtin integer registry and
+two compiler/restriction overlays. Existing placements preserve original type graph,
+inherited bounds, exact BigInteger values, selected governing identity, limits and
+lifetime. No public API/Core pin or legacy grammar change. Excluded facet/type-chain
+breadth remains separate.
+
+All 3,185 original stimuli remain; 11 logical expectations / 14 executed cases are
+explicitly reconciled, with one expected-outcome display rename and no schema/XML/ID
+change. Source 3,620 (1,126 internal / 2,494 public), package consumers 2,494 per Core,
+119 current-package native controls and retained 124/23/33 pass. API 54 types / 401 rows zero
+delta; 18 signed Core identities and signed beta.1 verify. Exact packaged unsignedLong
+example passes. Frozen stays 21 matches / zero errors; expanded 129 cases now 8 matches /
+121 Unsupported / zero errors on both pins, five new matches and no other detail changes.
+All 42 frozen and 274 expanded original files/expectations unchanged. Local unsigned
+alpha.0.32 only; published beta.1, pins and controllers unchanged. Next: explicit Git
+delivery/review, merge/main checks, then bounded choice/all contract with UPA and
+implicit-anyType co-blockers. No commit/push/tag/publication.
+[Implementation and exact qualification](derived-integer-types/IMPLEMENTATION.md).

@@ -1,0 +1,64 @@
+{
+  "base": "f9e9ad7c0599ba7b36b6d8d71704875990b54b98",
+  "rows": [
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalSchema.cs",
+      "commit": "f9e9ad7c0599ba7b36b6d8d71704875990b54b98",
+      "gitBlobSha256": "dd5fd9702d530765a39a7881115bbf0529283d5a91284837f83e13df561a57e3"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeNestedSchema.cs",
+      "commit": "f9e9ad7c0599ba7b36b6d8d71704875990b54b98",
+      "gitBlobSha256": "493a409668d3211b6aeb12b230f3d8e3d6d48a15d4effdc2c5795e84dc2194a3"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSimpleRestriction.cs",
+      "commit": "f9e9ad7c0599ba7b36b6d8d71704875990b54b98",
+      "gitBlobSha256": "430fb8d355cd6cd7cdd9083c0ebf9a1419c452ec901ec20b37db727df430c756"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeInstanceType.cs",
+      "commit": "f9e9ad7c0599ba7b36b6d8d71704875990b54b98",
+      "gitBlobSha256": "115d7788f8ff86215526bf9b2b1db68b30685a69c1ae917a3aed6bc20ac1944b"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeIntegerFacets.cs",
+      "commit": "f9e9ad7c0599ba7b36b6d8d71704875990b54b98",
+      "gitBlobSha256": "3eed5962143d5841ca59449eed688da380d830f36a8b5b300ef727c7be23ba56"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeComplexRestriction.cs",
+      "commit": "f9e9ad7c0599ba7b36b6d8d71704875990b54b98",
+      "gitBlobSha256": "0711330b28e75aaf9adcefd0b5e44d2e39ccc7dfe633f668f4d7ff501d259374"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSchemaProvider.cs",
+      "commit": "f9e9ad7c0599ba7b36b6d8d71704875990b54b98",
+      "gitBlobSha256": "1a1c4bcca5bc58d07891542aac58683d6643de467fce8651e17933c5a9aa8083"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSchemaInput.cs",
+      "commit": "f9e9ad7c0599ba7b36b6d8d71704875990b54b98",
+      "gitBlobSha256": "0e587fd26335c1256a33cd7aa34491f45bedfd9c6ac512eafb1592fc3f181142"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalSessionCore.cs",
+      "commit": "f9e9ad7c0599ba7b36b6d8d71704875990b54b98",
+      "gitBlobSha256": "dbb0074fc1429216efef7b2a1dea94c0ed58cf2283bd9079b97a93a8a964468b"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeNodeDataCore.cs",
+      "commit": "f9e9ad7c0599ba7b36b6d8d71704875990b54b98",
+      "gitBlobSha256": "1d450c4761c34e491e0771244ea7c71a90b588ddbe941f5f1e9a95aab288b299"
+    }
+  ],
+  "findings": [
+    "Global root, flat/nested scalar, attribute and simple-content resolution currently recognize primitive integer only",
+    "Direct restriction bases accept xs:integer only; existing integer complex restriction checks can carry inherited facets",
+    "Instance type registry currently issues four builtin scalar handles; known derived names refuse before representation compatibility",
+    "Provider registers original types/declared vs atomic components; derived handles must be authority-owned, not detached labels",
+    "Integer parse capacity precedes normalization and facet checks; no CLR narrowing allowed",
+    "Builtin metadata must not consume source declaration quotas or require every standard bound to fit caller value digit limits",
+    "New registry entries may change existing known-unsupported xsi:type cases to Invalid for unrelated families; measure explicit authored reconciliations"
+  ]
+}

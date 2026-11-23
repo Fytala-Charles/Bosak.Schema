@@ -22,7 +22,8 @@ The initial public source is derived from Fytala's private schema source at `fa0
 The [owned decimal session API](docs/NATIVE-DECIMAL-PUBLIC-API.md) supports native assessment of a finite decimal-only schema profile, exact scalar reads and detached XML export. Callers supply explicit limits and assessment context. It is published in this bounded beta; complete XSD 1.1 and broader provider acceptance remain pending. [Restricted resolution](docs/RESTRICTED_RESOLUTION.md), [descriptor ownership](docs/DESCRIPTOR_SNAPSHOTS.md) and [legacy validation](docs/LEGACY_VALIDATION.md) retain their explicit limits.
 
 The 0.6 development API also offers opt-in bounded namespace assertions and empty
-complex-content assessment bounded string pattern facets and simple scalar document roots, with original typing
+complex-content assessment, bounded string pattern facets, simple scalar document
+roots and twelve derived integer built-in types, with original typing
 and explicit limits. See the
 [consumer guide](docs/NUGET_README.md) for its supported grammar and exclusions;
 the published beta retains its documented profile.

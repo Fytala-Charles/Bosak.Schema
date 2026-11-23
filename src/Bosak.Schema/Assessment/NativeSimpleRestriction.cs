@@ -18,6 +18,8 @@
 //                      | Charles Korthout | 0.5   | 22-11-2026     | Adopt qualified bounded native string patterns |
 //                      | Charles Korthout | 0.6   | 22-11-2026     | Probe simple scalar roots in isolated source copies only |
 //                      | Charles Korthout | 0.7   | 22-11-2026     | Adopt qualified native simple scalar root assessment |
+//                      | Charles Korthout | 0.8   | 22-11-2026     | Probe derived integer builtins in isolated source copies |
+//                      | Charles Korthout | 0.9   | 22-11-2026     | Adopt qualified bounded builtin integer family |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -28,7 +30,7 @@ namespace Bosak.Schema;
 internal sealed partial class NativeDecimalSchema
 {
     private static NativeType CompileRestriction(XElement definition, string? name, string namespaceUri,
-        NativeNumericLimits limits, int? maxStringCharacters, NativePatternCompilation patternCompilation)
+        NativeNumericLimits limits, int? maxStringCharacters, NativePatternCompilation patternCompilation, Dictionary<XName, NativeType> simple)
     {
         Attributes(definition, name is null ? [] : ["name"]);
         var restriction = Single(definition, "restriction");
@@ -42,11 +44,24 @@ internal sealed partial class NativeDecimalSchema
         if (maxStringCharacters is not null && baseName == Xs + "integer")
             return new NativeType(name, false, namespaceUri, isInteger: true,
                 integerFacets: NativeIntegerFacets.Compile(restriction, limits), baseName: baseName);
+        if (maxStringCharacters is not null && baseName.Namespace == Xs && simple.TryGetValue(baseName, out var inherited) && inherited.IsInteger)
+        {
+            foreach (var facet in Elements(restriction))
+            {
+                Require(facet.Name.Namespace == Xs && facet.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits",
+                    "Excluded integer facet syntax.", NativeDecimalUnsupportedReason.ValueType);
+                Attributes(facet, "value");
+                Require(Elements(facet).Count == 0, "Facet children are unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
+            }
+            return new NativeType(name, false, namespaceUri, isInteger: true,
+                integerFacets: NativeIntegerFacets.CompileDerived(restriction, inherited.IntegerFacets, limits),
+                baseName: baseName, derivationBase: inherited);
+        }
         throw new NativeProfileException(NativeOutcome.Unsupported, "Only admitted direct scalar restrictions are supported.", NativeDecimalUnsupportedReason.ValueType);
     }
 
     private static Dictionary<XElement, NativeType> CompileAnonymousRestrictions(XElement schema,
-        NativeNumericLimits limits, int? maxStringCharacters, CancellationToken cancellationToken, NativePatternCompilation patternCompilation)
+        NativeNumericLimits limits, int? maxStringCharacters, CancellationToken cancellationToken, NativePatternCompilation patternCompilation, Dictionary<XName, NativeType> simple)
     {
         var result = new Dictionary<XElement, NativeType>();
         if (maxStringCharacters is null) return result;
@@ -58,7 +73,7 @@ internal sealed partial class NativeDecimalSchema
         {
             cancellationToken.ThrowIfCancellationRequested();
             Require(definition.Parent!.Attribute("type") is null, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
-            result.Add(definition, CompileRestriction(definition, null, "", limits, maxStringCharacters, patternCompilation));
+            result.Add(definition, CompileRestriction(definition, null, "", limits, maxStringCharacters, patternCompilation, simple));
         }
         return result;
     }
