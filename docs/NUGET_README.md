@@ -1169,3 +1169,10 @@ does not consume user source-definition quotas. Existing source/node/anonymous,
 query, cancellation, ownership and lifetime limits remain. Legacy NativeDecimalSession,
 public API, Core pins and published beta.1 are unchanged. This bounded profile does
 not claim full datatype value spaces, general typed queries, closure or full XSD/PSVI.
+
+
+### Bounded root choice
+
+The opt-in `NativeSchemaSession` and `NativeSchemaNodeDataSession` also accept a root complex type containing one `xs:choice`: outer `minOccurs` 0 or 1, `maxOccurs` 1, with 1-16 direct scalar element alternatives. Each alternative requires `minOccurs` 1 and permits `maxOccurs` 1-16 within existing scalar and document budgets. One alternative is selected by expanded name; mixed alternatives are Invalid. Empty optional choice has no root typed value and publishes no omitted-branch scalar values. Existing scalar restrictions, root attributes and structural namespace assertions retain their existing exclusions.
+
+This subset excludes `xs:all`, repeated outer groups, nullable alternatives, nested choice containers, complex alternatives, implicit `xs:anyType`, wildcards and group references. These bounds are profile exclusions, not general XSD 1.1 limits. The legacy decimal-only grammar remains unchanged.

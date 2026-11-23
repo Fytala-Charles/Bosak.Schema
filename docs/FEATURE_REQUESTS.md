@@ -52,7 +52,8 @@ The published **0.5.0-beta.1** provides owned `NativeDecimalSession` and `Native
 | Contextual/inherited integer assertions | Merged PR38; main CI verified | [Bounded implementation and qualification](contextual-assertions/IMPLEMENTATION.md); no publication |
 | Bounded string pattern facets | Merged PR40; main CI qualified | [Bounded implementation and qualification](string-patterns/IMPLEMENTATION.md); no publication |
 | Simple-typed global roots | Merged PR41; main CI qualified | [Bounded implementation and qualification](simple-typed-roots/IMPLEMENTATION.md); no publication |
-| Derived integer built-ins | Locally implemented and qualified; review pending | [Bounded implementation and qualification](derived-integer-types/IMPLEMENTATION.md); no publication |
+| Derived integer built-ins | PR42 merged; main CI qualified | [Bounded implementation and qualification](derived-integer-types/IMPLEMENTATION.md); no publication |
+| Bounded choice/all particles | Choice production candidate qualified; all deferred | [Original order, UPA and occurrence gates](particles/README.md); choice delivery pending |
 | Expanded public XSD assessment | Measured129original cases on both Core pins; pattern contract recommended | [Sample and dependency-aware ranking](expanded-conformance/README.md); Unsupported is not a pass |
 | Structural namespace assertions and empty content | Merged PR39; main CI verified | [Bounded implementation and qualification](structural-assertions/IMPLEMENTATION.md); no publication |
 | Namespace/form declarations | Merged PR35; main verified | [Scope and evidence](namespace-form/README.md); mixed profile only |
@@ -93,7 +94,7 @@ The transition does not implement the proposed core session API, change frozen W
 
 The 3 November [O1/O2 versioned responses](core-disposition-responses/2026-11-03-v2/README.md) are scoped historical design acceptance, not proof of current native adapter/runtime delivery. Their original source/proposal hashes and the unsigned [confirmation drafts](core-disposition-inbox/2026-11-03/README.md) remain unchanged. The published Core 1.81.2 release and its budget deferral do not complete Schema's native provider/session or performance requirements. See [history](DEVELOPMENT_HISTORY.md).
 
-*Last updated: 2026-11-22*
+*Last updated: 2026-11-23*
 
 
 ## M2A scope proposal - 19 November 2026
@@ -1036,3 +1037,29 @@ alpha.0.32 only; published beta.1, pins and controllers unchanged. Next: explici
 delivery/review, merge/main checks, then bounded choice/all contract with UPA and
 implicit-anyType co-blockers. No commit/push/tag/publication.
 [Implementation and exact qualification](derived-integer-types/IMPLEMENTATION.md).
+
+
+## Reviewed PR42; bounded particle contract - 23 November 2026
+
+PR42 remains open at reviewed `442f742cebf98b9c4818be51edffc760c6b85ee9`, with
+CI45130016318 passing 3,620 source tests plus release/docs/workload controls. Merge
+is pending explicit owner approval. This reversible contract uses that reviewed
+head rather than claiming a merged-main base. Existing qualification remains sealed.
+
+Next proposal: bounded nonempty choice first, direct all second, with 50 unexecuted
+XML payloads and 18 actual-native gates. Expanded-name UPA/occurrences, physical-order
+facts, root/leaf and nullable element-only typed-value distinctions are mandatory.
+All six ranked original examples also require implicit anyType, still excluded.
+No original admission forecast, source/API/Corepin/package/controller change or
+semantic adoption. Product source remains unchanged in this contract step.
+[Contract and next feasibility gates](particles/README.md).
+
+
+### 23 November 2026 — merged integer support; isolated choice feasibility
+
+PR #42 merged as `aa07e801ad5f2d89ebccd7299a4f539800e20df1`; main CI `45139587221` passed 3,620 source tests. The [bounded choice experiment](particles/CHOICE-FEASIBILITY.md) passes 119 controls per Core pin and all 3,620 unchanged source tests, with zero public API delta. Production inputs and published packages remain unchanged. Choice production adoption and full qualification are next; `xs:all` remains a separate deferred phase. Earlier pre-merge contract receipts remain historical evidence.
+
+
+### 23 November 2026 - bounded choice production candidate
+
+The [bounded root choice implementation](particles/IMPLEMENTATION.md) is qualified: 3,739 source tests (1,191 internal / 2,548 public), 2,548 package consumers per Core pin, 65 current-package native controls and retained callers 124/23/33 pass. All 3,620 prior source names/outcomes remain unchanged; 119 controls are added. API 54/401 has zero delta. Frozen pilot stays 21 matches; expanded stays 8 matches / 121 Unsupported / zero errors, with six explicit first-refusal reason changes per pin. Eighteen signed Core identities and signed beta.1 verify. Local unsigned alpha.0.34 only; published beta, pins and controllers unchanged. NuGet advisory endpoints were unavailable; no fresh vulnerability-data assessment is claimed. Choice is bounded and opt-in; xs:all remains excluded and is the next separate phase after review/delivery and merge verification. No commit/push/publication.

@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="094b4454-49ce-463a-ad53-750370a6710c" name="charl@CHARLES 2026-11-23 09:45:13" runUser="CHARLES\charl" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-23T09:45:13.9969422+01:00" queuing="2026-11-23T09:45:13.9969425+01:00" start="2026-11-23T09:45:13.0055512+01:00" finish="2026-11-23T09:45:14.4374529+01:00" />
+  <TestSettings name="default" id="d5a016cd-64e4-4595-a67f-92cfd4cb5a34">
+    <Deployment runDeploymentRoot="charl_CHARLES_2026-11-23_09_45_13" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="5ed39fb2-db8a-4c18-aa8d-5a4dd49d0c45" testId="199b9c3a-6af9-92c0-aaa9-fc78202ca1e9" testName="ChoiceProbe.BoundaryTests.LegacyChoiceRefusal(named: False)" computerName="CHARLES" duration="00:00:00.0002177" startTime="2026-11-23T09:45:14.1845917+01:00" endTime="2026-11-23T09:45:14.1847315+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5ed39fb2-db8a-4c18-aa8d-5a4dd49d0c45" />
+    <UnitTestResult executionId="3edee2a0-d49a-4192-9b36-80f5b83752b4" testId="93c151e7-8721-ba4b-79c2-c295bb1842ba" testName="ChoiceProbe.BoundaryTests.AllRemainsExcluded" computerName="CHARLES" duration="00:00:00.0010000" startTime="2026-11-23T09:45:14.1851731+01:00" endTime="2026-11-23T09:45:14.1852775+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3edee2a0-d49a-4192-9b36-80f5b83752b4">
+      <Output>
+        <ErrorInfo>
+          <Message>System.Text.Json.JsonReaderException : '&lt;' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.</Message>
+          <StackTrace>   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader&amp; json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)&#xD;
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)&#xD;
+   at System.Text.Json.Utf8JsonReader.ReadFirstToken(Byte first)&#xD;
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()&#xD;
+   at System.Text.Json.Utf8JsonReader.Read()&#xD;
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb&amp; database, StackRowStack&amp; stack)&#xD;
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter, Boolean allowDuplicateProperties)&#xD;
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)&#xD;
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)&#xD;
+   at ChoiceProbe.BoundaryTests.AllPlans()+MoveNext() in D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\BoundaryTests.cs:line 97</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="677deba4-a58c-4f5d-9d17-d88b8763ef1f" testId="e3d14b6e-856e-9aff-8c6b-9e42f1b92386" testName="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgB006/mgB006.v&quot;, file: &quot;original-3-schema.xsd&quot;, data: False)" computerName="CHARLES" duration="00:00:00.0000709" startTime="2026-11-23T09:45:13.9789917+01:00" endTime="2026-11-23T09:45:13.9790074+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="677deba4-a58c-4f5d-9d17-d88b8763ef1f" />
+    <UnitTestResult executionId="4e7fc68c-023d-46ed-8f84-faf1a64b8dcf" testId="fe01980d-fa30-ca52-22af-4ced29ffa6cc" testName="ChoiceProbe.BoundaryTests.SharedPatternBudgetRefusalAndRecovery" computerName="CHARLES" duration="00:00:00.0300211" startTime="2026-11-23T09:45:13.9259547+01:00" endTime="2026-11-23T09:45:13.9561085+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4e7fc68c-023d-46ed-8f84-faf1a64b8dcf" />
+    <UnitTestResult executionId="0e28ae7c-4a5d-41fe-bdb6-60f2913241bc" testId="5478672d-9f5f-cba6-8348-c623e10b04da" testName="ChoiceProbe.BoundaryTests.EagerExcludedUnselectedType(facet: &quot;enumeration&quot;, attr: &quot;value='x'&quot;)" computerName="CHARLES" duration="00:00:00.0002387" startTime="2026-11-23T09:45:13.9236911+01:00" endTime="2026-11-23T09:45:13.9239015+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0e28ae7c-4a5d-41fe-bdb6-60f2913241bc" />
+    <UnitTestResult executionId="c8646d5e-ca60-44c0-ac32-68d2f62c6b85" testId="6b18a049-d6de-e3e2-a4b7-8de2d9c836de" testName="ChoiceProbe.BoundaryTests.CancellationRecoveryAndLifetime(data: False)" computerName="CHARLES" duration="00:00:00.1429712" startTime="2026-11-23T09:45:13.7803904+01:00" endTime="2026-11-23T09:45:13.9225473+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c8646d5e-ca60-44c0-ac32-68d2f62c6b85" />
+    <UnitTestResult executionId="e24c8abf-20ec-46de-a4ba-a2c7ac6ee252" testId="4a943b65-7bfa-225e-b77d-01eabc3c6ca7" testName="ChoiceProbe.BoundaryTests.EagerExcludedUnselectedType(facet: &quot;pattern&quot;, attr: &quot;value='\\p{L}'&quot;)" computerName="CHARLES" duration="00:00:00.0010698" startTime="2026-11-23T09:45:13.9227124+01:00" endTime="2026-11-23T09:45:13.9236366+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e24c8abf-20ec-46de-a4ba-a2c7ac6ee252" />
+    <UnitTestResult executionId="29ec1071-9ca4-4911-bc9e-51a21976ff52" testId="f5e39652-9495-5679-ac46-c9b1f070d500" testName="ChoiceProbe.BoundaryTests.BranchCountBoundary(count: 16, expected: &quot;Valid&quot;)" computerName="CHARLES" duration="00:00:00.0016752" startTime="2026-11-23T09:45:13.9239562+01:00" endTime="2026-11-23T09:45:13.9256255+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="29ec1071-9ca4-4911-bc9e-51a21976ff52" />
+    <UnitTestResult executionId="08bfaf3c-280d-418e-af9a-63fbbe45d807" testId="b08514ef-81dc-a698-1229-c7c9b2cdfad7" testName="ChoiceProbe.BoundaryTests.BranchCountBoundary(count: 17, expected: &quot;Unsupported&quot;)" computerName="CHARLES" duration="00:00:00.0002442" startTime="2026-11-23T09:45:13.9256761+01:00" endTime="2026-11-23T09:45:13.9258941+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="08bfaf3c-280d-418e-af9a-63fbbe45d807" />
+    <UnitTestResult executionId="275c9986-62be-497a-a82a-78728055bca9" testId="282cee67-55ad-a3ed-5eee-4a002cfcc513" testName="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgA014/mgA014.v&quot;, file: &quot;original-5-schema.xsd&quot;, data: True)" computerName="CHARLES" duration="00:00:00.0005659" startTime="2026-11-23T09:45:13.9775018+01:00" endTime="2026-11-23T09:45:13.9775211+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="275c9986-62be-497a-a82a-78728055bca9" />
+    <UnitTestResult executionId="0b4cae3b-7193-4053-a4e5-a929cd9f16fe" testId="0a2ccc44-5165-0a4a-cf9d-b9eb08e026b8" testName="ChoiceProbe.BoundaryTests.EagerMalformedUnusedPattern" computerName="CHARLES" duration="00:00:00.0003170" startTime="2026-11-23T09:45:14.3870507+01:00" endTime="2026-11-23T09:45:14.3871175+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0b4cae3b-7193-4053-a4e5-a929cd9f16fe" />
+    <UnitTestResult executionId="a95250d7-7767-4ca7-9bf6-a32f6eb195cd" testId="d6b5ddb6-fb29-e160-69b3-f2045f44978b" testName="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgJ003/mgJ003.i&quot;, file: &quot;original-0-schema.xsd&quot;, data: False)" computerName="CHARLES" duration="00:00:00.0001087" startTime="2026-11-23T09:45:13.9788644+01:00" endTime="2026-11-23T09:45:13.9788957+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a95250d7-7767-4ca7-9bf6-a32f6eb195cd" />
+    <UnitTestResult executionId="02f4341e-b200-4883-86f9-d389a4f8789c" testId="6a65856e-dc09-f624-c367-f65b9a11a5d6" testName="ChoiceProbe.BoundaryTests.StructuralNamespaceAssertion(valid: True)" computerName="CHARLES" duration="00:00:00.0009649" startTime="2026-11-23T09:45:13.9793030+01:00" endTime="2026-11-23T09:45:13.9802920+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="02f4341e-b200-4883-86f9-d389a4f8789c" />
+    <UnitTestResult executionId="d2e6f7e8-4829-41da-a06e-98b63637fa24" testId="ee83982e-881f-0421-9f4a-ab2f9d89ee9d" testName="ChoiceProbe.BoundaryTests.RootAttributesAndPhysicalOwner(named: False)" computerName="CHARLES" duration="00:00:00.0956583" startTime="2026-11-23T09:45:14.0864168+01:00" endTime="2026-11-23T09:45:14.1820574+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d2e6f7e8-4829-41da-a06e-98b63637fa24" />
+    <UnitTestResult executionId="be91dd50-a0c0-460f-bd51-9d6863080977" testId="7c4f3fcf-4add-c3a7-99bc-f1488965fa64" testName="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgJ004/mgJ004.v&quot;, file: &quot;original-1-schema.xsd&quot;, data: False)" computerName="CHARLES" duration="00:00:00.0015364" startTime="2026-11-23T09:45:13.9774355+01:00" endTime="2026-11-23T09:45:13.9774581+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="be91dd50-a0c0-460f-bd51-9d6863080977" />
+    <UnitTestResult executionId="1d402fc7-9176-43fd-b9f5-51ba53b0b002" testId="8e207b39-2154-14cd-98be-a5cc5791167b" testName="ChoiceProbe.ChoiceTests.PhysicalOriginalIdentity" computerName="CHARLES" duration="00:00:00.0010000" startTime="2026-11-23T09:45:13.4932513+01:00" endTime="2026-11-23T09:45:13.4932869+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1d402fc7-9176-43fd-b9f5-51ba53b0b002">
+      <Output>
+        <ErrorInfo>
+          <Message>System.Text.Json.JsonReaderException : '&lt;' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.</Message>
+          <StackTrace>   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader&amp; json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)&#xD;
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)&#xD;
+   at System.Text.Json.Utf8JsonReader.ReadFirstToken(Byte first)&#xD;
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()&#xD;
+   at System.Text.Json.Utf8JsonReader.Read()&#xD;
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb&amp; database, StackRowStack&amp; stack)&#xD;
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter, Boolean allowDuplicateProperties)&#xD;
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)&#xD;
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)&#xD;
+   at ChoiceProbe.ChoiceTests.Cases()+MoveNext() in D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\ChoiceTests.cs:line 35&#xD;
+   at ChoiceProbe.ChoiceTests.Identities()+MoveNext() in D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\ChoiceTests.cs:line 47</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a7af5d35-a89b-4247-a52e-b3333084acea" testId="3b638623-abeb-7cab-a650-da06b9e5b75d" testName="ChoiceProbe.BoundaryTests.LegacyChoiceRefusal(named: True)" computerName="CHARLES" duration="00:00:00.0023914" startTime="2026-11-23T09:45:14.1827010+01:00" endTime="2026-11-23T09:45:14.1845111+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a7af5d35-a89b-4247-a52e-b3333084acea" />
+    <UnitTestResult executionId="3b4d4cb0-2164-4586-8f34-3c882149fcc7" testId="22da6a65-25ad-ae12-d046-569637d2273a" testName="ChoiceProbe.BoundaryTests.RootAttributesAndPhysicalOwner(named: True)" computerName="CHARLES" duration="00:00:00.1058933" startTime="2026-11-23T09:45:13.9803521+01:00" endTime="2026-11-23T09:45:14.0863009+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3b4d4cb0-2164-4586-8f34-3c882149fcc7" />
+    <UnitTestResult executionId="db480923-2a0b-445c-91a9-e65ca82832dd" testId="47416cbd-a231-a84e-a804-680e4b3ee4a1" testName="ChoiceProbe.BoundaryTests.CancellationRecoveryAndLifetime(data: True)" computerName="CHARLES" duration="00:00:00.2922627" startTime="2026-11-23T09:45:13.4798166+01:00" endTime="2026-11-23T09:45:13.7797653+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db480923-2a0b-445c-91a9-e65ca82832dd" />
+    <UnitTestResult executionId="b583792c-255e-4954-a3a1-a96b42934f64" testId="c1eb1ebc-2cdd-1c8d-be9c-cdd2458af3da" testName="ChoiceProbe.BoundaryTests.AnonymousSelectedFacet(pattern: &quot;a+&quot;)" computerName="CHARLES" duration="00:00:00.0992814" startTime="2026-11-23T09:45:14.1856646+01:00" endTime="2026-11-23T09:45:14.2846799+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b583792c-255e-4954-a3a1-a96b42934f64" />
+    <UnitTestResult executionId="251207bc-31e8-4b9b-a39a-672b0fdf75c9" testId="214d0306-05dc-a8bb-8f92-7232d5a8fd90" testName="ChoiceProbe.BoundaryTests.WorstAlternativeBudget(nested: True)" computerName="CHARLES" duration="00:00:00.0029751" startTime="2026-11-23T09:45:13.9790985+01:00" endTime="2026-11-23T09:45:13.9791181+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="251207bc-31e8-4b9b-a39a-672b0fdf75c9" />
+    <UnitTestResult executionId="ec4c8dc9-b90d-4d42-a03e-bc3c0ceca6ce" testId="5ef649bf-d86e-5b60-18b9-2c3dba286cd1" testName="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-Additional2006-07-15/addB084/addB084.v&quot;, file: &quot;original-4-schema.xsd&quot;, data: False)" computerName="CHARLES" duration="00:00:00.0012890" startTime="2026-11-23T09:45:13.9777515+01:00" endTime="2026-11-23T09:45:13.9777680+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ec4c8dc9-b90d-4d42-a03e-bc3c0ceca6ce" />
+    <UnitTestResult executionId="ec8297b1-d342-4851-a1d1-1c7f6c832b2b" testId="52b80552-1202-d902-cbdc-ccc4e9c9f8e4" testName="ChoiceProbe.BoundaryTests.StructuralNamespaceAssertion(valid: False)" computerName="CHARLES" duration="00:00:00.0101375" startTime="2026-11-23T09:45:13.9792332+01:00" endTime="2026-11-23T09:45:13.9792575+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ec8297b1-d342-4851-a1d1-1c7f6c832b2b" />
+    <UnitTestResult executionId="e618bafd-262e-4c7e-ab97-06332ef2814e" testId="ae35f24b-ede5-e2d1-a16b-aac15cbfa2fb" testName="ChoiceProbe.BoundaryTests.WorstAlternativeBudget(nested: False)" computerName="CHARLES" duration="00:00:00.0026126" startTime="2026-11-23T09:45:13.9790528+01:00" endTime="2026-11-23T09:45:13.9790696+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e618bafd-262e-4c7e-ab97-06332ef2814e" />
+    <UnitTestResult executionId="3e8f962d-2105-42cb-834e-df8c53de2a50" testId="b9f0f7b0-54e8-a6a0-85f7-2a33f6e79222" testName="ChoiceProbe.BoundaryTests.InvalidNoFactsAndForeignAuthority" computerName="CHARLES" duration="00:00:00.0018489" startTime="2026-11-23T09:45:14.3871643+01:00" endTime="2026-11-23T09:45:14.3890297+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3e8f962d-2105-42cb-834e-df8c53de2a50" />
+    <UnitTestResult executionId="95caadbb-d037-4ecd-9701-7d8bca2d2cbb" testId="5b4b6eee-4f64-b446-5a1e-ba2910bb2b2a" testName="ChoiceProbe.BoundaryTests.AnonymousSelectedFacet(pattern: &quot;[a-z]+&quot;)" computerName="CHARLES" duration="00:00:00.1020273" startTime="2026-11-23T09:45:14.2847964+01:00" endTime="2026-11-23T09:45:14.3869022+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="95caadbb-d037-4ecd-9701-7d8bca2d2cbb" />
+    <UnitTestResult executionId="5b136c76-c269-4756-a28f-3daf579d3d97" testId="fa1f4bf8-0617-13b7-15d0-65355b2c110e" testName="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgJ005/mgJ005.i&quot;, file: &quot;original-2-schema.xsd&quot;, data: False)" computerName="CHARLES" duration="00:00:00.0018848" startTime="2026-11-23T09:45:13.9772048+01:00" endTime="2026-11-23T09:45:13.9772488+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5b136c76-c269-4756-a28f-3daf579d3d97" />
+    <UnitTestResult executionId="0e52cf93-0b35-4a8c-a067-c1dd48766fb4" testId="2268fb70-509d-9ac6-7c56-7a19ecdba9b5" testName="ChoiceProbe.ChoiceTests.PlannedPayloads" computerName="CHARLES" duration="00:00:00.0010000" startTime="2026-11-23T09:45:13.4778898+01:00" endTime="2026-11-23T09:45:13.4813302+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0e52cf93-0b35-4a8c-a067-c1dd48766fb4">
+      <Output>
+        <ErrorInfo>
+          <Message>System.Text.Json.JsonReaderException : '&lt;' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.</Message>
+          <StackTrace>   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader&amp; json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)&#xD;
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)&#xD;
+   at System.Text.Json.Utf8JsonReader.ReadFirstToken(Byte first)&#xD;
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()&#xD;
+   at System.Text.Json.Utf8JsonReader.Read()&#xD;
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb&amp; database, StackRowStack&amp; stack)&#xD;
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter, Boolean allowDuplicateProperties)&#xD;
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)&#xD;
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)&#xD;
+   at ChoiceProbe.ChoiceTests.Cases()+MoveNext() in D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\ChoiceTests.cs:line 35</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7978ab35-feac-4b8d-a74b-255deafa9ddd" testId="3050b1f5-08b4-2428-e4b1-38b6600ca5a5" testName="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgB006/mgB006.v&quot;, file: &quot;original-3-schema.xsd&quot;, data: True)" computerName="CHARLES" duration="00:00:00.0004560" startTime="2026-11-23T09:45:13.9777053+01:00" endTime="2026-11-23T09:45:13.9777226+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7978ab35-feac-4b8d-a74b-255deafa9ddd" />
+    <UnitTestResult executionId="0973c4ae-6310-40bf-95a3-15c06bf82e2e" testId="0445ddd4-dff9-e298-fe79-6c1c1cf0c6f0" testName="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgJ004/mgJ004.v&quot;, file: &quot;original-1-schema.xsd&quot;, data: True)" computerName="CHARLES" duration="00:00:00.0001011" startTime="2026-11-23T09:45:13.9775534+01:00" endTime="2026-11-23T09:45:13.9775716+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0973c4ae-6310-40bf-95a3-15c06bf82e2e" />
+    <UnitTestResult executionId="ba9d6e62-af5b-411d-9ccf-8e35b64bc10b" testId="35cf6702-f9b7-725b-f79e-c481507c0144" testName="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-Additional2006-07-15/addB084/addB084.v&quot;, file: &quot;original-4-schema.xsd&quot;, data: True)" computerName="CHARLES" duration="00:00:00.0000755" startTime="2026-11-23T09:45:13.9789437+01:00" endTime="2026-11-23T09:45:13.9789608+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ba9d6e62-af5b-411d-9ccf-8e35b64bc10b" />
+    <UnitTestResult executionId="6de1f9b5-d0d5-4946-883c-927ceb6d2043" testId="4dfeae05-6415-583e-3803-a0666921d8db" testName="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgJ003/mgJ003.i&quot;, file: &quot;original-0-schema.xsd&quot;, data: True)" computerName="CHARLES" duration="00:00:00.0009459" startTime="2026-11-23T09:45:13.9780472+01:00" endTime="2026-11-23T09:45:13.9780729+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6de1f9b5-d0d5-4946-883c-927ceb6d2043" />
+    <UnitTestResult executionId="52b0c223-3eb6-4978-ada5-46921f1bf2cc" testId="1c52b276-01ad-5bba-9995-2a246e81581a" testName="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgJ005/mgJ005.i&quot;, file: &quot;original-2-schema.xsd&quot;, data: True)" computerName="CHARLES" duration="00:00:00.0000725" startTime="2026-11-23T09:45:13.9776027+01:00" endTime="2026-11-23T09:45:13.9776206+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="52b0c223-3eb6-4978-ada5-46921f1bf2cc" />
+    <UnitTestResult executionId="9999a0f7-f67a-4db2-bcba-6bf190eedd09" testId="30563903-1c4d-e1c4-6a60-ec253cd0c5d9" testName="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgA014/mgA014.v&quot;, file: &quot;original-5-schema.xsd&quot;, data: False)" computerName="CHARLES" duration="00:00:00.0000692" startTime="2026-11-23T09:45:13.9776574+01:00" endTime="2026-11-23T09:45:13.9776752+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9999a0f7-f67a-4db2-bcba-6bf190eedd09" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ChoiceProbe.BoundaryTests.WorstAlternativeBudget(nested: False)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="ae35f24b-ede5-e2d1-a16b-aac15cbfa2fb">
+      <Execution id="e618bafd-262e-4c7e-ab97-06332ef2814e" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="WorstAlternativeBudget" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgA014/mgA014.v&quot;, file: &quot;original-5-schema.xsd&quot;, data: True)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="282cee67-55ad-a3ed-5eee-4a002cfcc513">
+      <Execution id="275c9986-62be-497a-a82a-78728055bca9" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="OriginalCoBlocker" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.CancellationRecoveryAndLifetime(data: True)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="47416cbd-a231-a84e-a804-680e4b3ee4a1">
+      <Execution id="db480923-2a0b-445c-91a9-e65ca82832dd" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="CancellationRecoveryAndLifetime" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgA014/mgA014.v&quot;, file: &quot;original-5-schema.xsd&quot;, data: False)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="30563903-1c4d-e1c4-6a60-ec253cd0c5d9">
+      <Execution id="9999a0f7-f67a-4db2-bcba-6bf190eedd09" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="OriginalCoBlocker" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.StructuralNamespaceAssertion(valid: True)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="6a65856e-dc09-f624-c367-f65b9a11a5d6">
+      <Execution id="02f4341e-b200-4883-86f9-d389a4f8789c" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="StructuralNamespaceAssertion" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.EagerMalformedUnusedPattern" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="0a2ccc44-5165-0a4a-cf9d-b9eb08e026b8">
+      <Execution id="0b4cae3b-7193-4053-a4e5-a929cd9f16fe" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="EagerMalformedUnusedPattern" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.ChoiceTests.PhysicalOriginalIdentity" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="8e207b39-2154-14cd-98be-a5cc5791167b">
+      <Execution id="1d402fc7-9176-43fd-b9f5-51ba53b0b002" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.ChoiceTests" name="PhysicalOriginalIdentity" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.LegacyChoiceRefusal(named: True)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="3b638623-abeb-7cab-a650-da06b9e5b75d">
+      <Execution id="a7af5d35-a89b-4247-a52e-b3333084acea" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="LegacyChoiceRefusal" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.EagerExcludedUnselectedType(facet: &quot;pattern&quot;, attr: &quot;value='\\p{L}'&quot;)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="4a943b65-7bfa-225e-b77d-01eabc3c6ca7">
+      <Execution id="e24c8abf-20ec-46de-a4ba-a2c7ac6ee252" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="EagerExcludedUnselectedType" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgB006/mgB006.v&quot;, file: &quot;original-3-schema.xsd&quot;, data: False)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="e3d14b6e-856e-9aff-8c6b-9e42f1b92386">
+      <Execution id="677deba4-a58c-4f5d-9d17-d88b8763ef1f" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="OriginalCoBlocker" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.BranchCountBoundary(count: 16, expected: &quot;Valid&quot;)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="f5e39652-9495-5679-ac46-c9b1f070d500">
+      <Execution id="29ec1071-9ca4-4911-bc9e-51a21976ff52" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="BranchCountBoundary" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgB006/mgB006.v&quot;, file: &quot;original-3-schema.xsd&quot;, data: True)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="3050b1f5-08b4-2428-e4b1-38b6600ca5a5">
+      <Execution id="7978ab35-feac-4b8d-a74b-255deafa9ddd" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="OriginalCoBlocker" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgJ004/mgJ004.v&quot;, file: &quot;original-1-schema.xsd&quot;, data: True)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="0445ddd4-dff9-e298-fe79-6c1c1cf0c6f0">
+      <Execution id="0973c4ae-6310-40bf-95a3-15c06bf82e2e" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="OriginalCoBlocker" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.InvalidNoFactsAndForeignAuthority" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="b9f0f7b0-54e8-a6a0-85f7-2a33f6e79222">
+      <Execution id="3e8f962d-2105-42cb-834e-df8c53de2a50" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="InvalidNoFactsAndForeignAuthority" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.RootAttributesAndPhysicalOwner(named: True)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="22da6a65-25ad-ae12-d046-569637d2273a">
+      <Execution id="3b4d4cb0-2164-4586-8f34-3c882149fcc7" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="RootAttributesAndPhysicalOwner" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.AllRemainsExcluded" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="93c151e7-8721-ba4b-79c2-c295bb1842ba">
+      <Execution id="3edee2a0-d49a-4192-9b36-80f5b83752b4" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="AllRemainsExcluded" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.WorstAlternativeBudget(nested: True)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="214d0306-05dc-a8bb-8f92-7232d5a8fd90">
+      <Execution id="251207bc-31e8-4b9b-a39a-672b0fdf75c9" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="WorstAlternativeBudget" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgJ005/mgJ005.i&quot;, file: &quot;original-2-schema.xsd&quot;, data: False)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="fa1f4bf8-0617-13b7-15d0-65355b2c110e">
+      <Execution id="5b136c76-c269-4756-a28f-3daf579d3d97" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="OriginalCoBlocker" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.AnonymousSelectedFacet(pattern: &quot;a+&quot;)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="c1eb1ebc-2cdd-1c8d-be9c-cdd2458af3da">
+      <Execution id="b583792c-255e-4954-a3a1-a96b42934f64" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="AnonymousSelectedFacet" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.RootAttributesAndPhysicalOwner(named: False)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="ee83982e-881f-0421-9f4a-ab2f9d89ee9d">
+      <Execution id="d2e6f7e8-4829-41da-a06e-98b63637fa24" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="RootAttributesAndPhysicalOwner" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.AnonymousSelectedFacet(pattern: &quot;[a-z]+&quot;)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="5b4b6eee-4f64-b446-5a1e-ba2910bb2b2a">
+      <Execution id="95caadbb-d037-4ecd-9701-7d8bca2d2cbb" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="AnonymousSelectedFacet" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.BranchCountBoundary(count: 17, expected: &quot;Unsupported&quot;)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="b08514ef-81dc-a698-1229-c7c9b2cdfad7">
+      <Execution id="08bfaf3c-280d-418e-af9a-63fbbe45d807" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="BranchCountBoundary" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.ChoiceTests.PlannedPayloads" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="2268fb70-509d-9ac6-7c56-7a19ecdba9b5">
+      <Execution id="0e52cf93-0b35-4a8c-a067-c1dd48766fb4" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.ChoiceTests" name="PlannedPayloads" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgJ003/mgJ003.i&quot;, file: &quot;original-0-schema.xsd&quot;, data: False)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="d6b5ddb6-fb29-e160-69b3-f2045f44978b">
+      <Execution id="a95250d7-7767-4ca7-9bf6-a32f6eb195cd" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="OriginalCoBlocker" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgJ005/mgJ005.i&quot;, file: &quot;original-2-schema.xsd&quot;, data: True)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="1c52b276-01ad-5bba-9995-2a246e81581a">
+      <Execution id="52b0c223-3eb6-4978-ada5-46921f1bf2cc" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="OriginalCoBlocker" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-Additional2006-07-15/addB084/addB084.v&quot;, file: &quot;original-4-schema.xsd&quot;, data: False)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="5ef649bf-d86e-5b60-18b9-2c3dba286cd1">
+      <Execution id="ec4c8dc9-b90d-4d42-a03e-bc3c0ceca6ce" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="OriginalCoBlocker" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.EagerExcludedUnselectedType(facet: &quot;enumeration&quot;, attr: &quot;value='x'&quot;)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="5478672d-9f5f-cba6-8348-c623e10b04da">
+      <Execution id="0e28ae7c-4a5d-41fe-bdb6-60f2913241bc" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="EagerExcludedUnselectedType" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgJ003/mgJ003.i&quot;, file: &quot;original-0-schema.xsd&quot;, data: True)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="4dfeae05-6415-583e-3803-a0666921d8db">
+      <Execution id="6de1f9b5-d0d5-4946-883c-927ceb6d2043" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="OriginalCoBlocker" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.StructuralNamespaceAssertion(valid: False)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="52b80552-1202-d902-cbdc-ccc4e9c9f8e4">
+      <Execution id="ec8297b1-d342-4851-a1d1-1c7f6c832b2b" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="StructuralNamespaceAssertion" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-Additional2006-07-15/addB084/addB084.v&quot;, file: &quot;original-4-schema.xsd&quot;, data: True)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="35cf6702-f9b7-725b-f79e-c481507c0144">
+      <Execution id="ba9d6e62-af5b-411d-9ccf-8e35b64bc10b" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="OriginalCoBlocker" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.SharedPatternBudgetRefusalAndRecovery" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="fe01980d-fa30-ca52-22af-4ced29ffa6cc">
+      <Execution id="4e7fc68c-023d-46ed-8f84-faf1a64b8dcf" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="SharedPatternBudgetRefusalAndRecovery" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.LegacyChoiceRefusal(named: False)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="199b9c3a-6af9-92c0-aaa9-fc78202ca1e9">
+      <Execution id="5ed39fb2-db8a-4c18-aa8d-5a4dd49d0c45" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="LegacyChoiceRefusal" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.CancellationRecoveryAndLifetime(data: False)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="6b18a049-d6de-e3e2-a4b7-8de2d9c836de">
+      <Execution id="c8646d5e-ca60-44c0-ac32-68d2f62c6b85" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="CancellationRecoveryAndLifetime" />
+    </UnitTest>
+    <UnitTest name="ChoiceProbe.BoundaryTests.OriginalCoBlocker(id: &quot;MS-ModelGroups2006-07-15/mgJ004/mgJ004.v&quot;, file: &quot;original-1-schema.xsd&quot;, data: False)" storage="d:\development\bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\release\net10.0\bosak.schema.tests.dll" id="7c4f3fcf-4add-c3a7-99bc-f1488965fa64">
+      <Execution id="be91dd50-a0c0-460f-bd51-9d6863080977" />
+      <TestMethod codeBase="D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\current\bin\Release\net10.0\Bosak.Schema.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="ChoiceProbe.BoundaryTests" name="OriginalCoBlocker" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="199b9c3a-6af9-92c0-aaa9-fc78202ca1e9" executionId="5ed39fb2-db8a-4c18-aa8d-5a4dd49d0c45" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="93c151e7-8721-ba4b-79c2-c295bb1842ba" executionId="3edee2a0-d49a-4192-9b36-80f5b83752b4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e3d14b6e-856e-9aff-8c6b-9e42f1b92386" executionId="677deba4-a58c-4f5d-9d17-d88b8763ef1f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fe01980d-fa30-ca52-22af-4ced29ffa6cc" executionId="4e7fc68c-023d-46ed-8f84-faf1a64b8dcf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5478672d-9f5f-cba6-8348-c623e10b04da" executionId="0e28ae7c-4a5d-41fe-bdb6-60f2913241bc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6b18a049-d6de-e3e2-a4b7-8de2d9c836de" executionId="c8646d5e-ca60-44c0-ac32-68d2f62c6b85" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4a943b65-7bfa-225e-b77d-01eabc3c6ca7" executionId="e24c8abf-20ec-46de-a4ba-a2c7ac6ee252" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f5e39652-9495-5679-ac46-c9b1f070d500" executionId="29ec1071-9ca4-4911-bc9e-51a21976ff52" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b08514ef-81dc-a698-1229-c7c9b2cdfad7" executionId="08bfaf3c-280d-418e-af9a-63fbbe45d807" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="282cee67-55ad-a3ed-5eee-4a002cfcc513" executionId="275c9986-62be-497a-a82a-78728055bca9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0a2ccc44-5165-0a4a-cf9d-b9eb08e026b8" executionId="0b4cae3b-7193-4053-a4e5-a929cd9f16fe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d6b5ddb6-fb29-e160-69b3-f2045f44978b" executionId="a95250d7-7767-4ca7-9bf6-a32f6eb195cd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6a65856e-dc09-f624-c367-f65b9a11a5d6" executionId="02f4341e-b200-4883-86f9-d389a4f8789c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ee83982e-881f-0421-9f4a-ab2f9d89ee9d" executionId="d2e6f7e8-4829-41da-a06e-98b63637fa24" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7c4f3fcf-4add-c3a7-99bc-f1488965fa64" executionId="be91dd50-a0c0-460f-bd51-9d6863080977" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8e207b39-2154-14cd-98be-a5cc5791167b" executionId="1d402fc7-9176-43fd-b9f5-51ba53b0b002" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3b638623-abeb-7cab-a650-da06b9e5b75d" executionId="a7af5d35-a89b-4247-a52e-b3333084acea" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="22da6a65-25ad-ae12-d046-569637d2273a" executionId="3b4d4cb0-2164-4586-8f34-3c882149fcc7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="47416cbd-a231-a84e-a804-680e4b3ee4a1" executionId="db480923-2a0b-445c-91a9-e65ca82832dd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c1eb1ebc-2cdd-1c8d-be9c-cdd2458af3da" executionId="b583792c-255e-4954-a3a1-a96b42934f64" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="214d0306-05dc-a8bb-8f92-7232d5a8fd90" executionId="251207bc-31e8-4b9b-a39a-672b0fdf75c9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5ef649bf-d86e-5b60-18b9-2c3dba286cd1" executionId="ec4c8dc9-b90d-4d42-a03e-bc3c0ceca6ce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="52b80552-1202-d902-cbdc-ccc4e9c9f8e4" executionId="ec8297b1-d342-4851-a1d1-1c7f6c832b2b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ae35f24b-ede5-e2d1-a16b-aac15cbfa2fb" executionId="e618bafd-262e-4c7e-ab97-06332ef2814e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b9f0f7b0-54e8-a6a0-85f7-2a33f6e79222" executionId="3e8f962d-2105-42cb-834e-df8c53de2a50" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5b4b6eee-4f64-b446-5a1e-ba2910bb2b2a" executionId="95caadbb-d037-4ecd-9701-7d8bca2d2cbb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fa1f4bf8-0617-13b7-15d0-65355b2c110e" executionId="5b136c76-c269-4756-a28f-3daf579d3d97" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2268fb70-509d-9ac6-7c56-7a19ecdba9b5" executionId="0e52cf93-0b35-4a8c-a067-c1dd48766fb4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3050b1f5-08b4-2428-e4b1-38b6600ca5a5" executionId="7978ab35-feac-4b8d-a74b-255deafa9ddd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0445ddd4-dff9-e298-fe79-6c1c1cf0c6f0" executionId="0973c4ae-6310-40bf-95a3-15c06bf82e2e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="35cf6702-f9b7-725b-f79e-c481507c0144" executionId="ba9d6e62-af5b-411d-9ccf-8e35b64bc10b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4dfeae05-6415-583e-3803-a0666921d8db" executionId="6de1f9b5-d0d5-4946-883c-927ceb6d2043" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c52b276-01ad-5bba-9995-2a246e81581a" executionId="52b0c223-3eb6-4978-ada5-46921f1bf2cc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="30563903-1c4d-e1c4-6a60-ec253cd0c5d9" executionId="9999a0f7-f67a-4db2-bcba-6bf190eedd09" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="34" executed="34" passed="31" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.0.2+dd36e86129 (64-bit .NET 10.0.11)&#xD;
+[xUnit.net 00:00:00.06]   Discovering: Bosak.Schema.Tests&#xD;
+[xUnit.net 00:00:00.10]   Discovered:  Bosak.Schema.Tests&#xD;
+[xUnit.net 00:00:00.12]   Starting:    Bosak.Schema.Tests&#xD;
+[xUnit.net 00:00:00.15]       System.Text.Json.JsonReaderException : '&lt;' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.&#xD;
+[xUnit.net 00:00:00.15]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.15]            at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader&amp; json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)&#xD;
+[xUnit.net 00:00:00.15]            at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)&#xD;
+[xUnit.net 00:00:00.15]            at System.Text.Json.Utf8JsonReader.ReadFirstToken(Byte first)&#xD;
+[xUnit.net 00:00:00.15]            at System.Text.Json.Utf8JsonReader.ReadSingleSegment()&#xD;
+[xUnit.net 00:00:00.15]            at System.Text.Json.Utf8JsonReader.Read()&#xD;
+[xUnit.net 00:00:00.15]            at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb&amp; database, StackRowStack&amp; stack)&#xD;
+[xUnit.net 00:00:00.15]            at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter, Boolean allowDuplicateProperties)&#xD;
+[xUnit.net 00:00:00.15]            at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)&#xD;
+[xUnit.net 00:00:00.15]            at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)&#xD;
+[xUnit.net 00:00:00.15]         D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\ChoiceTests.cs(35,0): at ChoiceProbe.ChoiceTests.Cases()+MoveNext()&#xD;
+[xUnit.net 00:00:00.16]       System.Text.Json.JsonReaderException : '&lt;' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.&#xD;
+[xUnit.net 00:00:00.16]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.16]            at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader&amp; json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)&#xD;
+[xUnit.net 00:00:00.16]            at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)&#xD;
+[xUnit.net 00:00:00.16]            at System.Text.Json.Utf8JsonReader.ReadFirstToken(Byte first)&#xD;
+[xUnit.net 00:00:00.16]            at System.Text.Json.Utf8JsonReader.ReadSingleSegment()&#xD;
+[xUnit.net 00:00:00.16]            at System.Text.Json.Utf8JsonReader.Read()&#xD;
+[xUnit.net 00:00:00.16]            at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb&amp; database, StackRowStack&amp; stack)&#xD;
+[xUnit.net 00:00:00.16]            at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter, Boolean allowDuplicateProperties)&#xD;
+[xUnit.net 00:00:00.16]            at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)&#xD;
+[xUnit.net 00:00:00.16]            at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)&#xD;
+[xUnit.net 00:00:00.16]         D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\ChoiceTests.cs(35,0): at ChoiceProbe.ChoiceTests.Cases()+MoveNext()&#xD;
+[xUnit.net 00:00:00.16]         D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\ChoiceTests.cs(47,0): at ChoiceProbe.ChoiceTests.Identities()+MoveNext()&#xD;
+[xUnit.net 00:00:00.85]       System.Text.Json.JsonReaderException : '&lt;' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.&#xD;
+[xUnit.net 00:00:00.85]       Stack Trace:&#xD;
+[xUnit.net 00:00:00.85]            at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader&amp; json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)&#xD;
+[xUnit.net 00:00:00.85]            at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)&#xD;
+[xUnit.net 00:00:00.85]            at System.Text.Json.Utf8JsonReader.ReadFirstToken(Byte first)&#xD;
+[xUnit.net 00:00:00.85]            at System.Text.Json.Utf8JsonReader.ReadSingleSegment()&#xD;
+[xUnit.net 00:00:00.85]            at System.Text.Json.Utf8JsonReader.Read()&#xD;
+[xUnit.net 00:00:00.85]            at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb&amp; database, StackRowStack&amp; stack)&#xD;
+[xUnit.net 00:00:00.85]            at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter, Boolean allowDuplicateProperties)&#xD;
+[xUnit.net 00:00:00.85]            at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)&#xD;
+[xUnit.net 00:00:00.85]            at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)&#xD;
+[xUnit.net 00:00:00.85]         D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\BoundaryTests.cs(97,0): at ChoiceProbe.BoundaryTests.AllPlans()+MoveNext()&#xD;
+[xUnit.net 00:00:01.05]   Finished:    Bosak.Schema.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-23T09:45:13.4838654+01:00">
+        <Text>[xUnit.net 00:00:00.14]     ChoiceProbe.ChoiceTests.PlannedPayloads [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-23T09:45:13.4936706+01:00">
+        <Text>[xUnit.net 00:00:00.15]     ChoiceProbe.ChoiceTests.PhysicalOriginalIdentity [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="CHARLES" outcome="Error" timestamp="2026-11-23T09:45:14.1855593+01:00">
+        <Text>[xUnit.net 00:00:00.85]     ChoiceProbe.BoundaryTests.AllRemainsExcluded [FAIL]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

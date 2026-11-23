@@ -1,0 +1,54 @@
+{
+  "base": "442f742cebf98b9c4818be51edffc760c6b85ee9",
+  "status": "Reviewed PR head; not merged main",
+  "rows": [
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalSchema.cs",
+      "commit": "442f742cebf98b9c4818be51edffc760c6b85ee9",
+      "sha256": "b274ceb57b17057174b19499bbfad15c38c7673ae20fb939a297dbd0286ea41f"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeNestedSchema.cs",
+      "commit": "442f742cebf98b9c4818be51edffc760c6b85ee9",
+      "sha256": "493a409668d3211b6aeb12b230f3d8e3d6d48a15d4effdc2c5795e84dc2194a3"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSimpleRestriction.cs",
+      "commit": "442f742cebf98b9c4818be51edffc760c6b85ee9",
+      "sha256": "b7c484ca22b44cf749cf74e72c3324326a7c28cd00080b409ce9b7af26cdc97d"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeInstanceType.cs",
+      "commit": "442f742cebf98b9c4818be51edffc760c6b85ee9",
+      "sha256": "115d7788f8ff86215526bf9b2b1db68b30685a69c1ae917a3aed6bc20ac1944b"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSchemaProvider.cs",
+      "commit": "442f742cebf98b9c4818be51edffc760c6b85ee9",
+      "sha256": "1a1c4bcca5bc58d07891542aac58683d6643de467fce8651e17933c5a9aa8083"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSchemaInput.cs",
+      "commit": "442f742cebf98b9c4818be51edffc760c6b85ee9",
+      "sha256": "0e587fd26335c1256a33cd7aa34491f45bedfd9c6ac512eafb1592fc3f181142"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalSessionCore.cs",
+      "commit": "442f742cebf98b9c4818be51edffc760c6b85ee9",
+      "sha256": "dbb0074fc1429216efef7b2a1dea94c0ed58cf2283bd9079b97a93a8a964468b"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeNodeDataCore.cs",
+      "commit": "442f742cebf98b9c4818be51edffc760c6b85ee9",
+      "sha256": "1d450c4761c34e491e0771244ea7c71a90b588ddbe941f5f1e9a95aab288b299"
+    }
+  ],
+  "findings": [
+    "Flat and nested compilers require sequence after existing special cases",
+    "Current assessment iterates declarations in schema order and indexes input nodes in physical order",
+    "Provider attaches state index to captured input node index; all permutations require physical-order facts",
+    "Omitted choice branches must issue no nodes/facts or fabricated empty values",
+    "Optional model emptiability differs from empty-content type and absent element-only typed value",
+    "Existing scalar root/attribute/index/authority and quota rules must remain intact"
+  ]
+}

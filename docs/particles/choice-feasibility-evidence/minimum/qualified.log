@@ -1,0 +1,53 @@
+  SchemaCandidate -> D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\minimum\schema\bin\Release\net10.0\Bosak.Schema.dll
+  Probe -> D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\minimum\bin\Release\net10.0\Bosak.Schema.Tests.dll
+Test run for D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\minimum\bin\Release\net10.0\Bosak.Schema.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.14]     ChoiceProbe.ChoiceTests.PlannedPayloads [FAIL]
+[xUnit.net 00:00:00.15]     ChoiceProbe.ChoiceTests.PhysicalOriginalIdentity [FAIL]
+  Failed ChoiceProbe.ChoiceTests.PlannedPayloads [1 ms]
+  Error Message:
+   System.Text.Json.JsonReaderException : '<' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.
+  Stack Trace:
+     at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadFirstToken(Byte first)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter, Boolean allowDuplicateProperties)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at ChoiceProbe.ChoiceTests.Cases()+MoveNext() in D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\ChoiceTests.cs:line 35
+  Failed ChoiceProbe.ChoiceTests.PhysicalOriginalIdentity [1 ms]
+  Error Message:
+   System.Text.Json.JsonReaderException : '<' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.
+  Stack Trace:
+     at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadFirstToken(Byte first)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter, Boolean allowDuplicateProperties)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at ChoiceProbe.ChoiceTests.Cases()+MoveNext() in D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\ChoiceTests.cs:line 35
+   at ChoiceProbe.ChoiceTests.Identities()+MoveNext() in D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\ChoiceTests.cs:line 47
+[xUnit.net 00:00:00.92]     ChoiceProbe.BoundaryTests.AllRemainsExcluded [FAIL]
+  Failed ChoiceProbe.BoundaryTests.AllRemainsExcluded [1 ms]
+  Error Message:
+   System.Text.Json.JsonReaderException : '<' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.
+  Stack Trace:
+     at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadFirstToken(Byte first)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter, Boolean allowDuplicateProperties)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at ChoiceProbe.BoundaryTests.AllPlans()+MoveNext() in D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\BoundaryTests.cs:line 97
+Results File: D:\Development\Bosak\.guard-tmp\schema-choice-feasibility-20261123\minimum\results\qualified\charl_CHARLES_2026-11-23_09_45_11_net10.0.trx
+
+Failed!  - Failed:     3, Passed:    31, Skipped:     0, Total:    34, Duration: 985 ms - Bosak.Schema.Tests.dll (net10.0)
