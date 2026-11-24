@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Admit bounded opt-in decimal enumeration with exact normalized value keys |
+//                      | Charles Korthout | 0.4   | 24-11-2026     | Validate native named decimal base values and preserve local enumeration sets |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -30,6 +31,7 @@ internal sealed class NativeDecimalFacets(
     XdmExactDecimal? lower, bool lowerExclusive, XdmExactDecimal? upper, bool upperExclusive,
     int? totalDigits, int? fractionDigits, NativeDecimalFacets? parent = null, ImmutableHashSet<(BigInteger Coefficient, int Scale)>? enumeration = null)
 {
+    private ImmutableHashSet<(BigInteger Coefficient, int Scale)>? Enumeration => enumeration;
     internal bool HasEnumeration => enumeration is not null || parent?.HasEnumeration == true;
     internal XdmExactDecimal? LowerBound => lower ?? parent?.LowerBound;
     internal XdmExactDecimal? UpperBound => upper ?? parent?.UpperBound;
@@ -38,10 +40,10 @@ internal sealed class NativeDecimalFacets(
     internal int? TotalLimit => totalDigits ?? parent?.TotalLimit;
     internal int? FractionLimit => fractionDigits ?? parent?.FractionLimit;
 
-    internal static NativeDecimalFacets CompileDerived(XElement restriction, NativeDecimalFacets? inherited, NativeNumericLimits limits)
+    internal static NativeDecimalFacets CompileDerived(XElement restriction, NativeDecimalFacets? inherited, NativeNumericLimits limits, bool nativeDerivation = false)
     {
         NativeDecimalFacets own;
-        try { own = Compile(restriction, limits); }
+        try { own = Compile(restriction, limits, allowEnumeration: nativeDerivation); }
         catch (NativeProfileException error) when (error.Outcome == NativeOutcome.Unsupported &&
             error.UnsupportedReason is NativeDecimalUnsupportedReason.ValueType or NativeDecimalUnsupportedReason.DeclarationShape)
         { throw new NativeProfileException(NativeOutcome.Invalid, "Invalid bounded decimal restriction facets."); }
@@ -75,6 +77,18 @@ internal sealed class NativeDecimalFacets(
                     Valid(own.LowerExclusive || inherited.UpperExclusive ? c < 0 : c <= 0);
                 }
             }
+            if (nativeDerivation)
+            {
+                if (own.Enumeration is { } members)
+                    foreach (var member in members)
+                        Valid(inherited.Accepts(new XdmExactDecimal(member.Coefficient, member.Scale, limits.MaxDigits, limits.MaxScale)));
+                if (own.LowerBound is { } ownLower && !(own.LowerExclusive && inherited.LowerExclusive &&
+                    inherited.LowerBound is { } baseLower && Compare(ownLower, baseLower) == 0))
+                    Valid(inherited.Accepts(ownLower));
+                if (own.UpperBound is { } ownUpper && !(own.UpperExclusive && inherited.UpperExclusive &&
+                    inherited.UpperBound is { } baseUpper && Compare(ownUpper, baseUpper) == 0))
+                    Valid(inherited.Accepts(ownUpper));
+            }
             if (own.TotalLimit is { } total && inherited.TotalLimit is { } baseTotal) Valid(total <= baseTotal);
             if (own.FractionLimit is { } fraction && inherited.FractionLimit is { } baseFraction) Valid(fraction <= baseFraction);
         }
@@ -82,7 +96,7 @@ internal sealed class NativeDecimalFacets(
         var effectiveFraction = own.FractionLimit ?? inherited?.FractionLimit;
         Valid(effectiveTotal is null || effectiveFraction is null || effectiveFraction <= effectiveTotal);
         return new(own.LowerBound, own.LowerExclusive, own.UpperBound, own.UpperExclusive,
-            own.TotalLimit, own.FractionLimit, inherited);
+            own.TotalLimit, own.FractionLimit, inherited, own.Enumeration);
     }
 
     internal static NativeDecimalFacets Compile(XElement restriction, NativeNumericLimits limits, bool allowEnumeration = false)

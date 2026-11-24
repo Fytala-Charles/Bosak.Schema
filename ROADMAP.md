@@ -3,6 +3,11 @@
   <h1>Bosak.Schema Roadmap</h1>
   <p>An open schema foundation with staged validation and integration.</p>
 </div>
+## Named decimal restriction chains - 24 November 2026
+
+Batch slice 8 adds closed named decimal bases and forward references with actual DerivationBase identity, inherited exact enumeration/range/digit constraints and base-valid declaration checks. Bounds and digit facets narrow the base; same-side exclusive endpoint repetition follows the REC exception. Six measured old results are reconciled with unchanged payloads/IDs. The explicit native derivation path leaves the prior complex/legacy route separate until slice 9. REQ-009 remains In Progress; public API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](docs/decimal-chains/README.md).
+
+
 ## Direct decimal enumeration - 24 November 2026
 
 Batch slice 7 adds bounded enumeration on direct decimal restrictions in the opt-in facades. Normalized exact coefficient/scale membership preserves original instance XML and typed values, including signed zero and equivalent lexical forms beyond System.Decimal precision. Sixteen source entries and existing raw numeric/digit/scale limits apply before normalization. Legacy enumeration refusal remains; complex restrictions over enumerated decimal bases are explicitly deferred. Two measured IE-093 results are reconciled with actual Decimal reads and unchanged inputs. REQ-009 remains In Progress; API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](docs/decimal-enumeration/README.md).
