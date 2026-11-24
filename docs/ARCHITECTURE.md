@@ -3,6 +3,11 @@
   <h1>Bosak.Schema Architecture</h1>
   <p>Modular Apache schema services with explicit resource and engine boundaries.</p>
 </div>
+## Decimal complex enumeration restriction - 25 November 2026
+
+Batch slice 9 enables local/inherited exact enumeration on the existing attribute/assertion-free decimal complex restriction route, using qualified native base-value validity and narrowing rules. Actual governing complex and anonymous atomic components keep their bases and authority. Fourteen measured old results are reconciled without changing payloads/IDs: six base-invalid schemas are Invalid and eight valid cases compile/assess successfully. Integer/date routes and legacy decimal-only grammar remain unchanged. REQ-009 remains In Progress; API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](decimal-complex-restriction/README.md).
+
+
 ## Named decimal restriction chains - 24 November 2026
 
 Batch slice 8 adds closed named decimal bases and forward references with actual DerivationBase identity, inherited exact enumeration/range/digit constraints and base-valid declaration checks. Bounds and digit facets narrow the base; same-side exclusive endpoint repetition follows the REC exception. Six measured old results are reconciled with unchanged payloads/IDs. The explicit native derivation path leaves the prior complex/legacy route separate until slice 9. REQ-009 remains In Progress; public API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](decimal-chains/README.md).
@@ -126,7 +131,7 @@ The dependency adoption changes no Schema C# implementation, upstream baseline/f
 
 Earlier source/design inputs and unsigned drafts remain in their [historical inbox](core-disposition-inbox/2026-11-03/README.md); their original identities and decisions are unchanged. Current engineering state takes precedence over the archived local notices in [development history](DEVELOPMENT_HISTORY.md).
 
-*Last updated: 2026-11-24*
+*Last updated: 2026-11-25*
 
 
 ## M2A scope proposal - 19 November 2026

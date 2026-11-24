@@ -1448,7 +1448,7 @@ The opt-in scalar and original-node facades admit enumeration on direct decimal 
 
 Both facades return the exact decimal value 1.23 and export the original text. The value 1.24 is Invalid. Enumeration combines with local bounds/digit facets; a base-valid enumeration declaration is not rejected against sibling constraints, and an empty intersection has Invalid instances. Missing or invalid decimal members are Invalid schemas.
 
-Sixteen source entries are allowed, counting duplicates before deduplication. Existing 256-character numeric source and pre-normalization digit/scale capacities apply; excess is Unsupported/RepresentationCapacity. String text limits do not replace numeric capacities. The legacy decimal-only facade keeps its prior enumeration refusal. Complex restrictions over enumerated content remain separate work, along with fixed facet attributes, decimal patterns and assertion expansion. Public equality/hash APIs and Core payloads are unchanged.
+Sixteen source entries are allowed, counting duplicates before deduplication. Existing 256-character numeric source and pre-normalization digit/scale capacities apply; excess is Unsupported/RepresentationCapacity. String text limits do not replace numeric capacities. The legacy decimal-only facade keeps its prior enumeration refusal. Fixed facet attributes, decimal patterns and assertion expansion remain separate work. Public equality/hash APIs and Core payloads are unchanged.
 
 ### Named decimal restriction chains
 
@@ -1471,4 +1471,31 @@ Named decimal restrictions may derive from admitted named decimal simple types, 
 <price>+001.23</price>
 ```
 
-Both facades return exact decimal 1.23 and preserve the input XML. The value 1.24 is Invalid. A derived enumeration value outside Prices makes the schema Invalid; inherited facets are not silently dropped by an alias. Sixteen global definitions and sixteen source enum entries per step remain bounded, with existing numeric capacities checked before normalization. Closed xsi:type follows actual ancestry. Legacy decimal-only grammar, fixed/annotation metadata, decimal patterns/assertions and complex restriction over enumerated content remain outside this slice.
+Both facades return exact decimal 1.23 and preserve the input XML. The value 1.24 is Invalid. A derived enumeration value outside Prices makes the schema Invalid; inherited facets are not silently dropped by an alias. Sixteen global definitions and sixteen source enum entries per step remain bounded, with existing numeric capacities checked before normalization. Closed xsi:type follows actual ancestry. Legacy decimal-only grammar, fixed/annotation metadata and decimal patterns/assertions remain outside this slice.
+
+### Decimal complex enumeration restriction
+
+The existing attribute/assertion-free decimal simple-content extension route supports a named or anonymous complex restriction with local or inherited enumeration. Governing complex and anonymous atomic restriction components retain their distinct identities and actual bases. Declaration values must be valid for the atomic base; sibling constraints may still have an empty intersection.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Prices"><xs:restriction base="xs:decimal">
+    <xs:enumeration value="1.23"/><xs:enumeration value="2.34"/>
+  </xs:restriction></xs:simpleType>
+  <xs:complexType name="DatedPrice"><xs:simpleContent>
+    <xs:extension base="Prices"/>
+  </xs:simpleContent></xs:complexType>
+  <xs:complexType name="Price"><xs:simpleContent><xs:restriction base="DatedPrice">
+    <xs:enumeration value="1.2300"/>
+  </xs:restriction></xs:simpleContent></xs:complexType>
+  <xs:element name="price" type="Price"/>
+</xs:schema>
+```
+
+```xml
+<price>+001.23</price>
+```
+
+Both facades return exact decimal 1.23 and preserve the original XML text. The value 1.24 is Invalid. A minInclusive declaration of 0 over Prices would make the schema Invalid because 0 is outside that base's enumeration. Bounds/digits must narrow and be base-valid, with the REC exception for repeating an inherited same-side exclusive endpoint.
+
+Existing entry, raw numeric, digit/scale and document limits apply. Local/inherited attributes, assertions, inline simple types, general complex restriction chains and general complex xsi:type substitution stay Unsupported; exact same named complex selection is supported. Integer/date restriction routes and the legacy decimal-only grammar retain their existing profiles. No public API, Core payload or equality/hash change.

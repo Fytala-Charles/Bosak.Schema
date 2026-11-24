@@ -21,6 +21,7 @@
 //                      | Charles Korthout | 0.8   | 24-11-2026     | Admit bounded date complex restriction with distinct atomic content |
 //                      | Charles Korthout | 0.9   | 24-11-2026     | Compile local complex-date patterns with the shared bounded context |
 //                      | Charles Korthout | 0.10   | 24-11-2026     | Refuse complex restrictions over newly enumerated decimal bases pending qualification |
+//                      | Charles Korthout | 0.11   | 25-11-2026     | Adopt native decimal complex enumeration and base-valid declarations |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -91,13 +92,9 @@ internal sealed partial class NativeDecimalSchema
                 derivationBase: baseType, isComplexRestriction: true);
             return new NativeDecimalSchema(new NativeDeclaration(root.Name, dateGoverning, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
         }
-        Require(content.IsInteger || content.Facets?.HasEnumeration != true,
-            "Complex restriction over enumerated decimal content requires separate inherited-facet support.", NativeDecimalUnsupportedReason.ValueType);
         Require(!children.Any(e => e.Name == Xs + "pattern"), "Numeric complex patterns are outside this date slice.", NativeDecimalUnsupportedReason.ValueType);
         Require(content!.IsInteger || localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty,
             "Contextual assertions on noninteger content are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
-        Require(content.IsInteger || !children.Any(e=>e.Name==Xs+"enumeration"),
-            "Decimal enumeration is outside the integer slice.",NativeDecimalUnsupportedReason.ValueType);
         var facetsOnly = new XElement(restriction.Name, restriction.Attributes(), children.Where(e => e.Name != Xs + "assert"));
         var inheritedAssertions = basePlan.integerAssertions;
         var effectiveAssertions = inheritedAssertions.AddRange(CompileIntegerAssertions(localAssertions, targetNamespace, assertionNamespace, limits, token));
@@ -106,7 +103,7 @@ internal sealed partial class NativeDecimalSchema
             ? new NativeType(null, false, targetNamespace, isInteger: true,
                 integerFacets: NativeIntegerFacets.CompileDerived(facetsOnly, content.IntegerFacets, limits), derivationBase: content)
             : new NativeType(null, false, targetNamespace,
-                facets: NativeDecimalFacets.CompileDerived(facetsOnly, content.Facets, limits), derivationBase: content);
+                facets: NativeDecimalFacets.CompileDerived(facetsOnly, content.Facets, limits, nativeDerivation: true), derivationBase: content);
         var governing = new NativeType(root.Type.Name, false, targetNamespace, contentType: atomic,
             derivationBase: baseType, isComplexRestriction: true);
         return new NativeDecimalSchema(new NativeDeclaration(root.Name, governing, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { integerAssertions = effectiveAssertions };

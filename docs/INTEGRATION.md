@@ -3,6 +3,11 @@
   <h1>Bosak.Schema Integration</h1>
   <p>Use schema services without activation and with explicit supported coverage.</p>
 </div>
+## Decimal complex enumeration restriction - 25 November 2026
+
+Batch slice 9 enables local/inherited exact enumeration on the existing attribute/assertion-free decimal complex restriction route, using qualified native base-value validity and narrowing rules. Actual governing complex and anonymous atomic components keep their bases and authority. Fourteen measured old results are reconciled without changing payloads/IDs: six base-invalid schemas are Invalid and eight valid cases compile/assess successfully. Integer/date routes and legacy decimal-only grammar remain unchanged. REQ-009 remains In Progress; API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](decimal-complex-restriction/README.md).
+
+
 ## Named decimal restriction chains - 24 November 2026
 
 Batch slice 8 adds closed named decimal bases and forward references with actual DerivationBase identity, inherited exact enumeration/range/digit constraints and base-valid declaration checks. Bounds and digit facets narrow the base; same-side exclusive endpoint repetition follows the REC exception. Six measured old results are reconciled with unchanged payloads/IDs. The explicit native derivation path leaves the prior complex/legacy route separate until slice 9. REQ-009 remains In Progress; public API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](decimal-chains/README.md).
@@ -172,7 +177,7 @@ The public source contains no internal HMAC/product key, signing implementation,
 
 Public factory/type signatures are retained, with the intentional licensing behavior change documented above. The separate dependency-adoption dossier records the exercised unchanged-Schema/test-binary replacement lane. It does not certify arbitrary previously compiled consumers or full schema-session ABI/provider acceptance.
 
-*Last updated: 2026-11-24*
+*Last updated: 2026-11-25*
 
 
 ## M2A scope proposal - 19 November 2026

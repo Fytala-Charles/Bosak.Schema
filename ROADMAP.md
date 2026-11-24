@@ -3,6 +3,11 @@
   <h1>Bosak.Schema Roadmap</h1>
   <p>An open schema foundation with staged validation and integration.</p>
 </div>
+## Decimal complex enumeration restriction - 25 November 2026
+
+Batch slice 9 enables local/inherited exact enumeration on the existing attribute/assertion-free decimal complex restriction route, using qualified native base-value validity and narrowing rules. Actual governing complex and anonymous atomic components keep their bases and authority. Fourteen measured old results are reconciled without changing payloads/IDs: six base-invalid schemas are Invalid and eight valid cases compile/assess successfully. Integer/date routes and legacy decimal-only grammar remain unchanged. REQ-009 remains In Progress; API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](docs/decimal-complex-restriction/README.md).
+
+
 ## Named decimal restriction chains - 24 November 2026
 
 Batch slice 8 adds closed named decimal bases and forward references with actual DerivationBase identity, inherited exact enumeration/range/digit constraints and base-valid declaration checks. Bounds and digit facets narrow the base; same-side exclusive endpoint repetition follows the REC exception. Six measured old results are reconciled with unchanged payloads/IDs. The explicit native derivation path leaves the prior complex/legacy route separate until slice 9. REQ-009 remains In Progress; public API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](docs/decimal-chains/README.md).
@@ -74,7 +79,7 @@ Broader XSD 1.1/component-universe/PSVI and general Core C45/ADR006 work require
 
 The [native API](docs/NATIVE-DECIMAL-PUBLIC-API.md), [restricted resolution](docs/RESTRICTED_RESOLUTION.md), [descriptor ownership](docs/DESCRIPTOR_SNAPSHOTS.md) and [legacy validation](docs/LEGACY_VALIDATION.md) define the supported limits. [Workload measurements](docs/BETA_QUALIFICATION.md) are bounded local observations, not a production SLA. Full XSD 1.1, general provider interchange and a perpetual API freeze remain unaccepted. Historical source integration receipts retain their original revisions; publication does not requalify them.
 
-*Last updated: 2026-11-24*
+*Last updated: 2026-11-25*
 
 ## Diagnostic development candidate
 
