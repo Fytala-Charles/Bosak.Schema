@@ -341,7 +341,7 @@ Console.WriteLine(document.ExportXml());
 
 The value is false, not an absent scalar; XML export retains lexical0.
 StringValue/DecimalValue getters on Boolean values refuse, and BooleanValue on
-other kinds refuses. Boolean assertions and named Boolean derivation chains remain separate work. This local profile is not published beta.1.
+other kinds refuses. Boolean assertions and Boolean complex content remain separate work. This local profile is not published beta.1.
 
 ## Exact integer leaves in the opt-in facade (0.6 development only)
 
@@ -1098,8 +1098,7 @@ changes. Legacy NativeDecimalSession and published beta.1 retain their profiles.
 
 The opt-in scalar and original-node facades also admit global roots typed as
 `xs:decimal`, `xs:integer`, `xs:boolean` or `xs:string`. Existing direct named and
-anonymous decimal/integer/string/Boolean restrictions may appear at the root. New Boolean
-derivation chains, defaults/fixed values and nil remain excluded.
+anonymous decimal/integer/string/Boolean restrictions may appear at the root. Defaults/fixed values and nil remain excluded.
 
 ```xml
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -1406,4 +1405,26 @@ Direct Boolean restrictions support finite patterns and explicit whiteSpace coll
 
 Both facades read Boolean true and preserve the original text. The lexical form 1 is Invalid for this pattern, although it maps to the same Boolean value. True and 2 are always Invalid Boolean forms. Enumeration and ordering/digit/length/timezone facets are inapplicable to Boolean and make such a restriction Invalid. Whitespace is fixed to collapse: preserve/replace and duplicate whiteSpace declarations are Invalid.
 
-Patterns use the same finite grammar and shared schema-state/assessment-work budgets as strings and dates. The existing raw Boolean lexical limit is 256 characters. Named user-defined Boolean base chains, Boolean complex content, assertions and fixed facet attribute syntax remain separate work. Unsupported grammar/capacity is reported explicitly. No public API or published-package change.
+Patterns use the same finite grammar and shared schema-state/assessment-work budgets as strings and dates. The existing raw Boolean lexical limit is 256 characters. Boolean complex content, assertions and fixed facet attribute syntax remain separate work. Unsupported grammar/capacity is reported explicitly. No public API or published-package change.
+
+### Named Boolean restriction chains
+
+Named Boolean restrictions may derive from admitted named Boolean simple types. Forward references resolve in the closed schema. Facet-free aliases retain their actual base identity and every inherited pattern group. Same-step patterns are alternatives; inherited groups all apply. An empty lexical intersection is a valid schema with no matching instances.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="WordTrue"><xs:restriction base="Either">
+    <xs:pattern value="true"/>
+  </xs:restriction></xs:simpleType>
+  <xs:simpleType name="Either"><xs:restriction base="xs:boolean">
+    <xs:pattern value="(true|1)"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="enabled" type="WordTrue"/>
+</xs:schema>
+```
+
+```xml
+<enabled> true </enabled>
+```
+
+Both facades return Boolean true and preserve original XML text. The lexical form 1 fails the derived pattern. Patterns are compiled once per definition and inherited matching shares the assessment budget and cancellation. Sixteen global types, including unused definitions, remain the shared cap. Cycles, unresolved bases and built-in redeclarations remain Unsupported. Closed xsi:type substitution follows actual ancestry; sibling types are not interchangeable. Boolean complex content, assertions and fixed attribute syntax remain outside this slice.

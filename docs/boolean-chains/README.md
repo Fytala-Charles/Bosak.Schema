@@ -1,0 +1,13 @@
+# Batch slice 6: named Boolean restriction chains
+
+24 November 2026; base 83f3569306debb157f5815bd687f44234ea06b8b. [Contract](CONTRACT.md) and [immutable adoption](ADOPTION.json) preceded production edits. Closed named Boolean bases and forward references preserve actual derivation identity. Facet-free aliases inherit every pattern group. Same-step alternatives and inherited conjunctions apply to normalized literals, while Boolean values and original XML stay intact. Empty intersections are valid schemas whose instances fail membership.
+
+6,557 source tests pass (1,392 internal / 5,165 public), with 5,165 fresh-cache package consumers, 47 packaged native controls and twelve exact README examples. All 6,337 original names/payloads remain; six measured results of the original named-base-separate refusal now compile/assess Valid. Added 220 controls comprise 36 authored cases across two facades/three contexts and four native identity/invalid-fact/shared-budget/alias-state checks. [Admissions](ADMISSIONS.json), [review](REVIEW.json), [full qualification summary](SUMMARY.json).
+
+Named ancestry governs closed xsi:type selection; unrelated siblings remain Invalid. Cycles, unresolved bases and unsupported derivation routes remain Unsupported. Sixteen global components and all finite pattern source/state/group/repeat/class/atom capacities remain. Each definition reserves its own states once; all inherited matching shares the actual assessment budget and cancellation. Boolean enumeration remains inapplicable/Invalid; assertions, fixed attribute syntax and Boolean complex content stay separate.
+
+API stays 55 types/408 rows. Nine signed Core 1.81.17 archives/runtime payloads keep their exact identities, with fresh signature checks; source, unsigned local alpha.0.50 package/cache and runtime DLLs agree. Frozen 21/expanded 129 have zero mismatches/harness errors. Exact corpus results are in the summary. Release/workload controls, workload build and documentation checks pass. Programmatic HTML checks do not claim visual acceptance.
+
+Retained migration preserves caller binaries while upgrading Schema, nine Core DLLs and dependency graphs: 124 passes; full historical 23/33 each retain only the documented old-Core identity assertion failure, with separate filtered 22/32 behavior passes. No full 23/33 success or Schema-only replacement claim. Prior sealed packets remain byte-identical; historical validators are not run against changed inputs.
+
+No public API, Core, registry publication, tag or release-controller change. Full XSD 1.1/PSVI/C45 remain separate. Batch authorization covers Git delivery, review, green merge and exact main verification; mutable [status](../schema-batch-20261124/STATUS.json) records delivery.

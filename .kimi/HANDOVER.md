@@ -1,5 +1,10 @@
 Last updated: 2026-11-24
 
+## Named Boolean restriction chains ? 24 November 2026
+
+Batch slice 6 adds closed named Boolean bases, forward references and facet-free aliases with inherited pattern conjunctions and actual DerivationBase identity. Same-step alternatives, fixed-collapse whitespace, primitive lexical validity and original Boolean/XML facts remain. Automata are compiled once per definition; inherited matching shares the assessment budget/cancellation. Six measured old refusal outcomes are reconciled without changing payloads/IDs. REQ-009 remains In Progress; API and Core 1.81.17 are unchanged. [Contract and qualification](../docs/boolean-chains/README.md).
+
+
 ## Direct Boolean restrictions ? 24 November 2026
 
 Batch slice 5 adds direct Boolean patterns, facet-free aliases and explicit collapse whitespace on existing scalar placements. Primitive validity and patterns precede original Boolean fact issuance. Boolean enumeration is inapplicable under XSD 1.1 and is Invalid; assertions, named Boolean base chains, fixed attribute syntax and Boolean complex content stay separate. Nine measured original outcomes are reconciled with original payloads/IDs unchanged, including actual Boolean reads in two older catalogs. REQ-009 remains In Progress; Core 1.81.17 and API are unchanged. [Contract and qualification](../docs/boolean-patterns/README.md).
