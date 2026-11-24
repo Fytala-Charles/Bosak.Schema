@@ -1,0 +1,42 @@
+{
+  "base": "b08187d5f59f47a068737154ecdd6872506d3a88",
+  "status": "Read-only review for prioritization; no semantic adoption",
+  "rows": [
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeIntegerFacets.cs",
+      "commit": "b08187d5f59f47a068737154ecdd6872506d3a88",
+      "sha256": "3eed5962143d5841ca59449eed688da380d830f36a8b5b300ef727c7be23ba56"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalFacets.cs",
+      "commit": "b08187d5f59f47a068737154ecdd6872506d3a88",
+      "sha256": "15697307809b79c94d21039c980e6ace3d6b4eb93038fc4cd7a3902c97200b91"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSimpleRestriction.cs",
+      "commit": "b08187d5f59f47a068737154ecdd6872506d3a88",
+      "sha256": "5a03413ed1599a198780f2252fed6184cee926534f4205182d670dedfcea13ad"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeStringFacets.cs",
+      "commit": "b08187d5f59f47a068737154ecdd6872506d3a88",
+      "sha256": "5d1349bd4679eee761f2e21a626c26c4387b6888e9925f3c3be0622b305dec37"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativePattern.cs",
+      "commit": "b08187d5f59f47a068737154ecdd6872506d3a88",
+      "sha256": "93a9ff80fdd2fb1750982c4d1960d0265d90236af712e22bcfab65fcf5c54a45"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeScalarValue.cs",
+      "commit": "b08187d5f59f47a068737154ecdd6872506d3a88",
+      "sha256": "3ff06139c1a9522d716503992bfc86ff7b63b669a05564fd7dce828fb714ec8a"
+    }
+  ],
+  "findings": [
+    "Integer and decimal native facet allowlists omit enumeration; string enumeration exists",
+    "Native regex parser explicitly refuses digit/property/name escapes including d/D/p/P",
+    "Public detached NativeScalarKind currently contains only String/Decimal/Boolean/Integer; date/time needs a transport/API design review",
+    "Existing integer transport uses BigInteger and qualified original facts; no new Core API is assumed necessary until feasibility verifies it"
+  ]
+}

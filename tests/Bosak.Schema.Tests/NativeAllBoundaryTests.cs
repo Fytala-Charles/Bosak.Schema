@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 23-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 23-11-2026     | Align test responsibility header with its primary type |
+//                      | Charles Korthout | 0.3   | 24-11-2026     | Adopt measured enumeration expectations and upstream validity |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -56,7 +57,7 @@ public sealed class NativeAllBoundaryTests
     /// <param name="attr">The attr control input.</param>
     [Theory][InlineData("enumeration","value='x'")][InlineData("pattern","value='\\p{L}'")]
     public void EagerExcludedUnselectedType(string facet,string attr)
-    {var unused=$"<xs:simpleType name='N'><xs:restriction base='xs:integer'><xs:{facet} {attr}/></xs:restriction></xs:simpleType>";var c=NativeSchemaSession.Create(Schema(Basic,unused),Options);Assert.Equal(NativeSchemaOutcome.Unsupported,c.Outcome);Assert.Null(c.Value);}
+    {var unused=$"<xs:simpleType name='N'><xs:restriction base='xs:integer'><xs:{facet} {attr}/></xs:restriction></xs:simpleType>";var c=NativeSchemaSession.Create(Schema(Basic,unused),Options);Assert.Equal(facet=="enumeration"?NativeSchemaOutcome.Invalid:NativeSchemaOutcome.Unsupported,c.Outcome);Assert.Null(c.Value);}
     /// <summary>Eager Malformed Unused Pattern.</summary>
     [Fact]
     public void EagerMalformedUnusedPattern()

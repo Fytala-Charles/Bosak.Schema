@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 22-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 24-11-2026     | Adopt measured enumeration expectations and upstream validity |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -77,7 +78,7 @@ public sealed class NativeDerivedIntegerBoundaryCoreTests
     /// <param name="attributes">The attributes control input.</param>
     [Theory][InlineData("enumeration","value='1'")][InlineData("pattern","value='.*'")][InlineData("whiteSpace","value='preserve'")][InlineData("fractionDigits","value='0' fixed='true'")]
     public void ExcludedFacetGrammar(string facet,string attributes)
-    {var schema=S($"<xs:simpleType name='N'><xs:restriction base='xs:int'><xs:{facet} {attributes}/></xs:restriction></xs:simpleType>"+Root());var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(NativeSchemaOutcome.Unsupported,c.Outcome);Assert.Null(c.Value);}
+    {var schema=S($"<xs:simpleType name='N'><xs:restriction base='xs:int'><xs:{facet} {attributes}/></xs:restriction></xs:simpleType>"+Root());var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(facet=="enumeration"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Unsupported,c.Outcome);if(facet=="enumeration")Assert.NotNull(c.Value);else Assert.Null(c.Value);c.Value?.Dispose();}
     /// <summary>User Chains Stay Excluded.</summary>
     [Fact]
     public void UserChainsStayExcluded()
@@ -98,5 +99,5 @@ public sealed class NativeDerivedIntegerBoundaryCoreTests
     /// <param name="data">The data control input.</param>
     [Theory][MemberData(nameof(Originals))]
     public void OriginalPublicFixtures(string id,string json,bool data)
-    {Assert.StartsWith("MS-DataTypes",id);using var d=JsonDocument.Parse(json);var row=d.RootElement;var schema=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,row.GetProperty("schema").GetString()!));var xml=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,row.GetProperty("instance").GetString()!));var expected=row.GetProperty("expectedCompile").GetString();if(data){var c=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(expected,c.Outcome.ToString());if(c.Value is{}s){using(s)Assert.Equal(NativeSchemaOutcome.Invalid,s.Assess(xml,Context).Outcome);}}else{var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(expected,c.Outcome.ToString());if(c.Value is{}s){using(s)Assert.Equal(NativeSchemaOutcome.Invalid,s.Assess(xml,Context).Outcome);}}}
+    {Assert.StartsWith("MS-DataTypes",id);using var d=JsonDocument.Parse(json);var row=d.RootElement;var schema=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,row.GetProperty("schema").GetString()!));var xml=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,row.GetProperty("instance").GetString()!));var expected=row.GetProperty("expectedCompile").GetString();var expectedAssessment=row.GetProperty("upstreamExpected").GetString()=="valid"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Invalid;if(data){var c=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(expected,c.Outcome.ToString());if(c.Value is{}s){using(s)Assert.Equal(expectedAssessment,s.Assess(xml,Context).Outcome);}}else{var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(expected,c.Outcome.ToString());if(c.Value is{}s){using(s)Assert.Equal(expectedAssessment,s.Assess(xml,Context).Outcome);}}}
 }

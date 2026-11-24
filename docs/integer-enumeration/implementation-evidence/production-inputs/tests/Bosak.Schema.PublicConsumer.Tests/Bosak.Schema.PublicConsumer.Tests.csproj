@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);IDE0005</NoWarn>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.0.2"><PrivateAssets>all</PrivateAssets></PackageReference>
+    <ProjectReference Include="../../src/Bosak.Schema/Bosak.Schema.csproj" Condition="'$(SchemaConsumerPackageVersion)' == ''" />
+    <PackageReference Include="Bosak.Schema" Version="$(SchemaConsumerPackageVersion)" Condition="'$(SchemaConsumerPackageVersion)' != ''" />
+    <None Include="../TestData/Schemas/orders.xsd;../TestData/Schemas/sku.xsd" CopyToOutputDirectory="PreserveNewest" Link="TestData/Schemas/%(Filename)%(Extension)" />
+    <None Include="../TestData/Schemas/native-decimal.*" CopyToOutputDirectory="PreserveNewest" Link="TestData/Schemas/%(Filename)%(Extension)" />
+    <None Include="../TestData/Namespaces/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/Namespaces/%(Filename)%(Extension)" />
+    <None Include="../TestData/NamedTypes/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NamedTypes/%(Filename)%(Extension)" />
+    <None Include="../TestData/DecimalFacets/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/DecimalFacets/%(Filename)%(Extension)" />
+    <None Include="../TestData/Strings/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/Strings/%(Filename)%(Extension)" />
+    <None Include="../TestData/Booleans/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/Booleans/%(Filename)%(Extension)" />
+    <None Include="../TestData/Integers/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/Integers/%(Filename)%(Extension)" />
+    <None Include="../TestData/StringFacets/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/StringFacets/%(Filename)%(Extension)" />
+    <None Include="../TestData/Attributes/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/Attributes/%(Filename)%(Extension)" />
+    <None Include="../TestData/SimpleContent/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/SimpleContent/%(Filename)%(Extension)" />
+    <None Include="../TestData/NestedSequences/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/NestedSequences/%(Filename)%(Extension)" />
+    <None Include="../TestData/NestedAttributes/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/NestedAttributes/%(Filename)%(Extension)" />
+    <None Include="../TestData/NestedSimpleContent/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/NestedSimpleContent/%(Filename)%(Extension)" />
+    <None Include="../TestData/AnonymousSimpleRestrictions/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/AnonymousSimpleRestrictions/%(Filename)%(Extension)" />
+    <None Include="../TestData/IntegerRestrictions/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/IntegerRestrictions/%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../TestData/NodeData/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NodeData/%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../TestData/StringAssertions/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/StringAssertions/%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup><None Include="../TestData/InstanceTypes/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/InstanceTypes/%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="../TestData/NamespaceForm/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NamespaceForm/%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="../TestData/ComplexSimpleRestriction/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/ComplexSimpleRestriction/%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="../TestData/IntegerSimpleContent/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/IntegerSimpleContent/%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="../TestData/ContextualAssertions/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/ContextualAssertions/%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup>
+    <None Include="../TestData/StructuralAssertions/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/StructuralAssertions/%(Filename)%(Extension)" />
+    <None Include="../TestData/ConformancePilot/upstream/ibmData/mixed/assertions/namespace/ns3.xsd" CopyToOutputDirectory="PreserveNewest" Link="original-ns3.xsd" />
+    <None Include="../TestData/ConformancePilot/upstream/ibmData/mixed/assertions/namespace/ns3.xml" CopyToOutputDirectory="PreserveNewest" Link="original-ns3.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../TestData/StringPatterns/**/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/StringPatterns/%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup><None Include="../TestData/SimpleRoots/**/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/SimpleRoots/%(RecursiveDir)%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="../TestData/DerivedIntegers/**/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/DerivedIntegers/%(RecursiveDir)%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="../TestData/Particles/*" CopyToOutputDirectory="Always" Link="%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="../TestData/AllParticles/*" CopyToOutputDirectory="Always" Link="TestData/AllParticles/%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="../TestData/IntegerEnumeration/*" CopyToOutputDirectory="Always" Link="TestData/IntegerEnumeration/%(Filename)%(Extension)" /></ItemGroup>
+</Project>

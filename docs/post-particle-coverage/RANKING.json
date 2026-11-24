@@ -1,0 +1,133 @@
+{
+  "date": "2026-11-24",
+  "base": "b08187d5f59f47a068737154ecdd6872506d3a88",
+  "basis": "Engineering priority from latest qualified public sample, exact source review, application examples and dependency cost; not customer demand or coverage percentage",
+  "replacesAsCurrentRecommendation": "docs/expanded-conformance/RANKING.json",
+  "earlierEvidenceModified": false,
+  "rows": [
+    {
+      "rank": 1,
+      "areas": [
+        "SC07",
+        "SC09"
+      ],
+      "candidate": "Bounded integer enumeration restrictions",
+      "evidence": [
+        "MS-DataTypes2006-07-15/int_enumeration001_1634/int_enumeration001_1634.i",
+        "MS-DataTypes2006-07-15/int_enumeration002_1635/int_enumeration002_1635.v"
+      ],
+      "why": "Closes a common missing constraining facet using existing exact integer transport and component/lifetime contracts; two unchanged originals isolate it",
+      "dependencies": [
+        "Value-space equality, lexical aliases and signed zero",
+        "Base-type validity, inherited builtin/user restrictions and same-level facet interaction",
+        "Explicit source-entry/digit capacities and original declared/governing/atomic provenance"
+      ],
+      "nextStep": "Prepare separate exact contract and native feasibility; no implementation adoption",
+      "admissionForecast": null
+    },
+    {
+      "rank": 2,
+      "areas": [
+        "SC07",
+        "SC21"
+      ],
+      "candidate": "Date/time primitive and transport contract, then facets",
+      "evidenceBuckets": [
+        "date-time"
+      ],
+      "why": "Broad useful scalar foundation and nine selected cases; first define Schema validation and public transport rather than reusing constructors as proof",
+      "dependencies": [
+        "Timezone absence/offset, partial comparisons and extended-year representation",
+        "NativeScalarValue/API compatibility and public Core representation review",
+        "Enumeration/range facets remain independent follow-up obligations"
+      ],
+      "admissionForecast": null
+    },
+    {
+      "rank": 3,
+      "areas": [
+        "SC09"
+      ],
+      "candidate": "Additional bounded XSD regex escapes, starting with digit semantics",
+      "evidence": [
+        "tests/TestData/Schemas/sku.xsd"
+      ],
+      "why": "The original SKU already has supported root/type placement but its d escape is explicitly refused; preserve exact XSD Unicode meaning",
+      "dependencies": [
+        "Unicode Nd versus ASCII; supplementary characters and complement",
+        "Unicode data/version pin, NFA static/work budgets",
+        "No replacement of the original SKU expression with a rewritten ASCII example"
+      ],
+      "admissionForecast": null
+    },
+    {
+      "rank": 4,
+      "areas": [
+        "SC05",
+        "SC12"
+      ],
+      "candidate": "Closed include/import component assembly contract",
+      "evidenceBuckets": [
+        "assembly"
+      ],
+      "why": "Enables reusable application schemas; eight selected cases but each has other dependencies",
+      "dependencies": [
+        "Host-owned resolver closure, no implicit network/filesystem acquisition",
+        "Graph identity, namespaces, cycles, bounded acquisition and cleanup",
+        "Assembly alone does not admit unsupported datatype/structure combinations"
+      ],
+      "admissionForecast": null
+    },
+    {
+      "rank": 5,
+      "areas": [
+        "SC02",
+        "SC06",
+        "SC17",
+        "SC21"
+      ],
+      "candidate": "Implicit anyType, untyped/mixed content and broader particle models",
+      "evidence": [
+        "Six unchanged ranked choice/all schemas remain co-blocked"
+      ],
+      "why": "Particle syntax is now implemented within bounds; generic default typing is a separate content/typed-value design problem",
+      "dependencies": [
+        "AnyType mixed/wildcard semantics and accurate original facts",
+        "Public scalar/neutral transport and full versus bounded PSVI distinction",
+        "No fabricated simple string type or broadening of the legacy profile"
+      ],
+      "admissionForecast": null
+    },
+    {
+      "rank": 6,
+      "areas": [
+        "SC10",
+        "SC11",
+        "SC13",
+        "SC15",
+        "SC16",
+        "SC18",
+        "SC19",
+        "SC20",
+        "SC22"
+      ],
+      "candidate": "Lists/unions, augmentation, alternatives, identity/substitution and wider schema-aware use",
+      "evidenceBuckets": [
+        "list",
+        "union",
+        "default-fixed",
+        "nil-abstract",
+        "simple-assertion",
+        "type-alternatives",
+        "default-attributes",
+        "identity-substitution"
+      ],
+      "why": "Necessary specification breadth; split into separately adopted component/value/ownership contracts",
+      "dependencies": [
+        "Multi-atomic values, defaults versus supplied source, conditional typing and identity graphs",
+        "Separate Core neutral-capability requests if reproduced through public APIs"
+      ],
+      "admissionForecast": null
+    }
+  ]
+}
