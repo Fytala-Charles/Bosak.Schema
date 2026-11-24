@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 22-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
 //                      | Charles Korthout | 0.3   | 22-11-2026     | Adopt qualified bounded native string patterns |
+//                      | Charles Korthout | 0.4   | 24-11-2026     | Share schema base-literal pattern work and cancellation across date types |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -34,6 +35,8 @@ internal sealed class NativePatternBudget(CancellationToken token, int limit = 4
 }
 internal sealed class NativePatternCompilation(CancellationToken token)
 {
+    private readonly NativePatternBudget matchingBudget = new(token);
+    internal NativePatternBudget MatchingBudget => matchingBudget;
     internal int States { get; private set; }
     internal void Check() => token.ThrowIfCancellationRequested();
     internal void Reserve(int states)

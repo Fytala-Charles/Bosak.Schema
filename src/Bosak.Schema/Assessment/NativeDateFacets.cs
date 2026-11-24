@@ -16,8 +16,10 @@
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Guard restriction text through the shared schema parser |
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Add bounded date ordering facets and explicit timezone constraints |
 //                      | Charles Korthout | 0.5   | 24-11-2026     | Validate inherited date facets and exclusive endpoint exceptions |
+//                      | Charles Korthout | 0.6   | 24-11-2026     | Compile date pattern groups with inherited lexical and value constraints |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
+using System.Collections.Immutable;
 using System.Numerics;
 using System.Xml.Linq;
 using Bosak.XPath.Core.Xdm;
@@ -28,8 +30,9 @@ internal sealed class NativeDateFacets(
     HashSet<(bool Zoned, BigInteger Minutes)>? entries,
     XPathDateTime? lower = null, bool lowerExclusive = false,
     XPathDateTime? upper = null, bool upperExclusive = false,
-    string timezone = "optional", NativeDateFacets? parent = null)
+    string timezone = "optional", NativeDateFacets? parent = null, ImmutableArray<NativePattern> patterns = default)
 {
+    internal bool HasPatterns => !patterns.IsDefaultOrEmpty || parent?.HasPatterns == true;
     private NativeDateFacets? Parent => parent;
     private XPathDateTime? Lower => lower;
     private XPathDateTime? Upper => upper;
@@ -37,27 +40,31 @@ internal sealed class NativeDateFacets(
     private bool UpperExclusive => upperExclusive;
     private string Timezone => timezone;
 
-    internal static NativeDateFacets? Compile(XElement restriction, int maxCharacters) =>
-        CompileDerived(restriction, maxCharacters, null);
+    internal static NativeDateFacets? Compile(XElement restriction, int maxCharacters, NativePatternCompilation compilation) =>
+        CompileDerived(restriction, maxCharacters, null, compilation);
 
-    internal static NativeDateFacets? CompileDerived(XElement restriction, int maxCharacters, NativeDateFacets? parent)
+    internal static NativeDateFacets? CompileDerived(XElement restriction, int maxCharacters, NativeDateFacets? parent, NativePatternCompilation compilation)
     {
         var facets = NativeDecimalSchema.Elements(restriction);
         var seen = new HashSet<string>(StringComparer.Ordinal);
         foreach (var facet in facets)
         {
+            compilation.Check();
             NativeDecimalSchema.Require(facet.Name.NamespaceName == "http://www.w3.org/2001/XMLSchema" &&
-                facet.Name.LocalName is "enumeration" or "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "explicitTimezone",
+                facet.Name.LocalName is "enumeration" or "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "explicitTimezone" or "pattern",
                 "Unsupported date facet.", NativeDecimalUnsupportedReason.ValueType);
             NativeDecimalSchema.Attributes(facet, "value");
             NativeDecimalSchema.Require(NativeDecimalSchema.Elements(facet).Count == 0,
                 "Date facet children unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
-            if (facet.Name.LocalName != "enumeration" && !seen.Add(facet.Name.LocalName))
+            if (facet.Name.LocalName is not ("enumeration" or "pattern") && !seen.Add(facet.Name.LocalName))
                 Invalid("Duplicate date facet.");
         }
         NativeDecimalSchema.Require(facets.Count(f => f.Name.LocalName == "enumeration") <= 16,
             "Date enumeration source capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+        NativePattern.Capacity(facets.Count(f => f.Name.LocalName == "pattern") <= 8);
         if (facets.Count == 0) return parent is null ? null : new(null, parent: parent);
+        NativeDecimalSchema.Require(parent?.HasPatterns != true || !facets.Any(f => f.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive"),
+            "Bounds over patterned date bases require separate value-space support.", NativeDecimalUnsupportedReason.ValueType);
         if (seen.Contains("minInclusive") && seen.Contains("minExclusive") ||
             seen.Contains("maxInclusive") && seen.Contains("maxExclusive")) Invalid("Conflicting date bound kinds.");
         HashSet<(bool Zoned, BigInteger Minutes)>? entries = null;
@@ -65,13 +72,20 @@ internal sealed class NativeDateFacets(
         var lowerExclusive = seen.Contains("minExclusive");
         var upperExclusive = seen.Contains("maxExclusive");
         var timezone = "optional";
+        var compiledPatterns = ImmutableArray.CreateBuilder<NativePattern>();
         foreach (var facet in facets)
         {
+            compilation.Check();
             var text = (string?)facet.Attribute("value");
             if (text is null) Invalid("Date facet value required.");
+            var kind = facet.Name.LocalName;
+            if (kind == "pattern")
+            {
+                compiledPatterns.Add(NativePattern.Compile(text!, compilation));
+                continue;
+            }
             NativeDecimalSchema.Require(text!.Length <= maxCharacters, "Date facet character capacity exceeded.",
                 NativeDecimalUnsupportedReason.RepresentationCapacity);
-            var kind = facet.Name.LocalName;
             if (kind == "explicitTimezone")
             {
                 timezone = string.Join(" ", text.Split([' ', '\t', '\r', '\n'], StringSplitOptions.RemoveEmptyEntries));
@@ -82,7 +96,7 @@ internal sealed class NativeDateFacets(
                 continue;
             }
             var value = NativeDateParser.Parse(text);
-            if (parent is not null) ValidateDerivedValue(kind, value, parent);
+            if (parent is not null) ValidateDerivedValue(kind, value, parent, text, compilation.MatchingBudget);
             if (kind == "enumeration") (entries ??= []).Add(Key(value));
             else if (kind.StartsWith("min", StringComparison.Ordinal)) lower = value;
             else upper = value;
@@ -92,12 +106,19 @@ internal sealed class NativeDateFacets(
             var compare = Compare(lo, hi);
             if (compare > 0 || compare == 0 && lowerExclusive != upperExclusive) Invalid("Inconsistent date bounds.");
         }
-        return new(entries, lower, lowerExclusive, upper, upperExclusive, timezone, parent);
+        return new(entries, lower, lowerExclusive, upper, upperExclusive, timezone, parent, compiledPatterns.ToImmutable());
     }
 
-    internal bool Accepts(XPathDateTime value)
+    internal bool Accepts(XPathDateTime value, string text, NativePatternBudget budget) =>
+        ValuesAccept(value) && PatternsAccept(string.Join(" ", text.Split([' ', '\t', '\r', '\n'], StringSplitOptions.RemoveEmptyEntries)), budget);
+
+    private bool PatternsAccept(string lexical, NativePatternBudget budget) =>
+        (parent is null || parent.PatternsAccept(lexical, budget)) &&
+        (patterns.IsDefaultOrEmpty || patterns.Any(pattern => pattern.Match(lexical, budget)));
+
+    private bool ValuesAccept(XPathDateTime value)
     {
-        if (parent is not null && !parent.Accepts(value)) return false;
+        if (parent is not null && !parent.ValuesAccept(value)) return false;
         if (timezone == "required" && !value.HasTimezone || timezone == "prohibited" && value.HasTimezone) return false;
         if (entries is not null && !entries.Contains(Key(value))) return false;
         if (lower is { } lo)
@@ -130,11 +151,11 @@ internal sealed class NativeDateFacets(
         return null;
     }
 
-    private static void ValidateDerivedValue(string kind, XPathDateTime value, NativeDateFacets parent)
+    private static void ValidateDerivedValue(string kind, XPathDateTime value, NativeDateFacets parent, string lexical, NativePatternBudget budget)
     {
         if (kind == "enumeration")
         {
-            if (!parent.Accepts(value)) Invalid("Enumeration member is outside the base type.");
+            if (!parent.Accepts(value, lexical, budget)) Invalid("Enumeration member is outside the base type.");
             return;
         }
         var minimum = kind.StartsWith("min", StringComparison.Ordinal);
@@ -167,7 +188,7 @@ internal sealed class NativeDateFacets(
                     Invalid("Lower bound conflicts with the base upper bound.");
             }
         }
-        if (!repeatsExclusiveEndpoint && !parent.Accepts(value)) Invalid("Date bound is outside the base type.");
+        if (!repeatsExclusiveEndpoint && !parent.ValuesAccept(value)) Invalid("Date bound is outside the base type.");
     }
 
     private static void Invalid(string message) => throw new NativeProfileException(NativeOutcome.Invalid, message);

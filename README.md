@@ -6,6 +6,8 @@
 
 # Bosak.Schema
 
+Bounded date patterns filter normalized lexical forms while preserving original typed dates and XML. [Date patterns](docs/date-patterns/README.md).
+
 Bounded date complex restrictions preserve original typed values and governing/atomic type identity. [Date complex restriction](docs/date-complex-restriction/CONTRACT.md).
 
 Bounded date restrictions support named derivation chains with inherited constraints and forward references. [Date type chains](docs/date-chains/CONTRACT.md).

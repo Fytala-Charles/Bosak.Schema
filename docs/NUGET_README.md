@@ -1295,7 +1295,7 @@ Direct named or anonymous restrictions of xs:date may contain up to 16 enumerati
 
 These dates begin at the same instant, so membership succeeds. ReadRootScalar().DateValue or ReadElement([]).DateValue returns the instance's year 1999, month 12, day 31 and offset -660 minutes. Export retains its parsed lexical content. The matching enumeration entry does not replace the instance value.
 
-All entries must be valid dates for the base type. Missing/invalid bounded facet values are Invalid schemas. The 17th source entry is Unsupported/RepresentationCapacity even when duplicates would collapse to fewer values. Facet and enumerated-instance text also obey MaxStringCharacters; the existing normalized 256-character and year capacities apply. Whitespace inside an otherwise empty enumeration element is allowed. Non-date user-defined simple restriction chains, date patterns/assertions and date complex restriction chains remain outside the profile. This feature does not change public equality/hash methods, XPath date comparison semantics or the legacy decimal facade.
+All entries must be valid dates for the base type. Missing/invalid bounded facet values are Invalid schemas. The 17th source entry is Unsupported/RepresentationCapacity even when duplicates would collapse to fewer values. Facet and enumerated-instance text also obey MaxStringCharacters; the existing normalized 256-character and year capacities apply. Whitespace inside an otherwise empty enumeration element is allowed. Non-date user-defined simple restriction chains, date assertions and date complex restriction chains remain outside the profile. This feature does not change public equality/hash methods, XPath date comparison semantics or the legacy decimal facade.
 
 ### Date bounds and timezone presence
 
@@ -1339,7 +1339,7 @@ Named date restrictions may derive from other admitted named date types. Forward
 <issued>2000-01-02Z</issued>
 ```
 
-This forward reference compiles, and the instance retains its original date and zero offset. Both inherited lower/timezone constraints and the derived upper bound apply. Up to 16 global type definitions are admitted; cycles, unresolved bases and built-in redeclarations are Unsupported. Fixed facets, general non-date restriction chains, date patterns and date complex restriction chains remain outside this slice.
+This forward reference compiles, and the instance retains its original date and zero offset. Both inherited lower/timezone constraints and the derived upper bound apply. Up to 16 global type definitions are admitted; cycles, unresolved bases and built-in redeclarations are Unsupported. Fixed facets, general non-date restriction chains, date complex restriction chains remain outside this slice.
 
 ### Date complex simple-content restriction
 
@@ -1364,3 +1364,24 @@ An attribute-free, assertion-free date simple-content extension may be restricte
 ```
 
 Both facades return year 2000, month 1, day 2 and explicit zero offset. Bounds and timezone requirements apply without normalizing the instance into another date. Caller character capacities apply to facets at roots and nested terminals. Local/inherited attributes, assertions, complex restriction chains, inline simple types and general complex xsi:type substitution remain outside this bounded restriction profile. Exact same named complex xsi:type selection is supported.
+
+### Date lexical patterns
+
+Date restrictions support the existing finite pattern grammar. Same-step patterns are alternatives; inherited groups all apply to the whitespace-collapsed lexical form. Calendar validity still applies first. Patterns distinguish Z, +00:00 and absent timezones without replacing the instance value.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="D"><xs:restriction base="xs:date">
+    <xs:pattern value="2000-01-02Z"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="issued" type="D"/>
+</xs:schema>
+```
+
+```xml
+<issued>2000-01-02Z</issued>
+```
+
+Both facades preserve the original date and XML. The same date without a timezone, the +00:00 spelling and 2000-01-03Z are Invalid for this pattern. Enumeration declarations must satisfy inherited lexical patterns; sibling constraints can have an empty intersection. New bounds over an already patterned base remain Unsupported.
+
+Limits are eight pattern siblings, 256 UTF-16 source units, 128 states per pattern, and 1,024 states shared with string patterns across the schema. The existing grammar limits (16-repeat counts, 64 atoms, eight grouping levels, 16 class members) also apply. Date and string matching share the assessment work budget and cancellation. Full Unicode regex, fixed facets, date assertions and complex restriction chains remain outside this profile.
