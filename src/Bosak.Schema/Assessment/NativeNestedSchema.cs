@@ -30,6 +30,7 @@
 //                      | Charles Korthout | 0.17   | 23-11-2026     | Adopt qualified bounded root all groups |
 //                      | Charles Korthout | 0.18   | 24-11-2026     | Probe bounded date simple content in isolated source copy |
 //                      | Charles Korthout | 0.19   | 24-11-2026     | Adopt qualified bounded date simple-content extension |
+//                      | Charles Korthout | 0.20   | 24-11-2026     | Preserve caller character capacity for nested date restrictions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -88,7 +89,7 @@ internal sealed partial class NativeDecimalSchema
             var members = Elements(complex);
             if (members.Count == 1 && members[0].Name == Xs + "simpleContent")
                 return CompileComplex(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
-                    decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null, nestedContext: true);
+                    decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null, nestedContext: true, maxStringCharacters: maxStringCharacters);
             Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").Count() + members.Skip(1).SkipWhile(e => e.Name == Xs + "attribute").Count(e => e.Name == Xs + "assert") == members.Count - 1,
                 "Expected an element-only sequence and root attributes.", NativeDecimalUnsupportedReason.DeclarationShape);
             var sequence = members[0];

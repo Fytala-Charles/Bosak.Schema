@@ -52,6 +52,7 @@
 //                      | Charles Korthout | 1.29   | 24-11-2026     | Probe bounded date enumeration in isolated source only                                      |
 //                      | Charles Korthout | 1.30   | 24-11-2026     | Adopt qualified bounded date enumeration and internal value equality |
 //                      | Charles Korthout | 1.31   | 24-11-2026     | Resolve named simple date dependencies with bounded cycle guards |
+//                      | Charles Korthout | 1.32   | 24-11-2026     | Propagate date restriction character limits through complex compilation |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -178,7 +179,7 @@ internal sealed partial class NativeDecimalSchema
                 var plan = CompileComplex(type, new NativeDeclaration(name, identity, 1, 1, targetNamespace),
                     targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType,
                     simple, limits, cancellationToken, anonymousSimple,
-                    requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null);
+                    requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null, maxStringCharacters: maxStringCharacters);
                 resolvingComplex.Remove(key);
                 named.Add(key, plan);
                 return plan;
@@ -207,7 +208,7 @@ internal sealed partial class NativeDecimalSchema
                     var complex = Single(declaration, "complexType");
                     Attributes(complex);
                     plan = CompileComplex(complex, new NativeDeclaration(name, new NativeType(null, true), 1, 1, targetNamespace),
-                        targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null);
+                        targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null, maxStringCharacters: maxStringCharacters);
                 }
                 compiled.Add(key, plan);
                 first ??= plan;
@@ -242,7 +243,7 @@ internal sealed partial class NativeDecimalSchema
 
     private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
         string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
-        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null, bool nestedContext = false)
+        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null, bool nestedContext = false, int? maxStringCharacters = null)
     {
         var members = Elements(complex);
         if (stringType is not null && TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken) is { } empty) return empty;
@@ -251,7 +252,7 @@ internal sealed partial class NativeDecimalSchema
         if (stringType is not null && TryCompileChoice(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
             decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } choice) return choice;
         if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
-            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver, assertionNamespace, nestedContext);
+            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver, assertionNamespace, nestedContext, maxStringCharacters);
         var attributeMembers = members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray();
         var assertionMembers = members.Skip(1 + attributeMembers.Length).ToArray();
         if (assertionMembers.Any(IsStructuralAssertion))
@@ -347,12 +348,12 @@ internal sealed partial class NativeDecimalSchema
 
     private static NativeDecimalSchema CompileSimpleContent(XElement content, NativeDeclaration root,
         string targetNamespace, string attributeForm, NativeType decimalType, NativeType stringType, NativeType? booleanType,
-        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Func<XName, NativeDecimalSchema?>? complexResolver, string assertionNamespace, bool nestedContext)
+        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Func<XName, NativeDecimalSchema?>? complexResolver, string assertionNamespace, bool nestedContext, int? maxStringCharacters)
     {
         Attributes(content);
         var contentMembers = Elements(content);
         if (contentMembers.Count == 1 && contentMembers[0].Name == Xs + "restriction")
-            return CompileComplexRestriction(contentMembers[0], root, targetNamespace, simple, limits, complexResolver, cancellationToken, assertionNamespace);
+            return CompileComplexRestriction(contentMembers[0], root, targetNamespace, simple, limits, complexResolver, cancellationToken, assertionNamespace, maxStringCharacters);
         var extension = Single(content, "extension");
         Attributes(extension, "base");
         var baseName = ResolveTypeName(extension, "base");
