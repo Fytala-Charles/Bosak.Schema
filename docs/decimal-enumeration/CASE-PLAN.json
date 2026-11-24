@@ -1,0 +1,365 @@
+{
+  "contract": "docs/decimal-enumeration/CONTRACT.md",
+  "cases": [
+    {
+      "id": "exact",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "equivalent",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='+001.2300'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>0001.23000</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "fraction-dot",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='.50'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>+.5</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "0.5"
+    },
+    {
+      "id": "signed-zero",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='0'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>-00.000</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "0"
+    },
+    {
+      "id": "zero-duplicates",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='0'/><xs:enumeration value='-0.0'/><xs:enumeration value='+.0'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>+0.00</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "0"
+    },
+    {
+      "id": "nonmember",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23001</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "whitespace",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='  +01.2300  '/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r> \n+001.230\t </r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "beyond-system-decimal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='123456789012345678901234567890123456789.1234567890123456789'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>123456789012345678901234567890123456789.1234567890123456789</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "123456789012345678901234567890123456789.1234567890123456789"
+    },
+    {
+      "id": "exact-neighbor",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='123456789012345678901234567890123456789.1234567890123456789'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>123456789012345678901234567890123456789.1234567890123456788</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "sibling-empty-bound",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/><xs:minInclusive value='2'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "sibling-bound-pass",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/><xs:minInclusive value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "fraction-normalized",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.00'/><xs:fractionDigits value='0'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>001.000</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1"
+    },
+    {
+      "id": "total-normalized",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.00'/><xs:totalDigits value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>001.000</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1"
+    },
+    {
+      "id": "total-scale",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='0.001'/><xs:totalDigits value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>0.001</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedDecimal": "0.001"
+    },
+    {
+      "id": "sixteen",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='0'/><xs:enumeration value='1'/><xs:enumeration value='2'/><xs:enumeration value='3'/><xs:enumeration value='4'/><xs:enumeration value='5'/><xs:enumeration value='6'/><xs:enumeration value='7'/><xs:enumeration value='8'/><xs:enumeration value='9'/><xs:enumeration value='10'/><xs:enumeration value='11'/><xs:enumeration value='12'/><xs:enumeration value='13'/><xs:enumeration value='14'/><xs:enumeration value='15'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>15</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "15"
+    },
+    {
+      "id": "sixteen-miss",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='0'/><xs:enumeration value='1'/><xs:enumeration value='2'/><xs:enumeration value='3'/><xs:enumeration value='4'/><xs:enumeration value='5'/><xs:enumeration value='6'/><xs:enumeration value='7'/><xs:enumeration value='8'/><xs:enumeration value='9'/><xs:enumeration value='10'/><xs:enumeration value='11'/><xs:enumeration value='12'/><xs:enumeration value='13'/><xs:enumeration value='14'/><xs:enumeration value='15'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>16</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedDecimal": "16"
+    },
+    {
+      "id": "seventeen-duplicates",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/><xs:enumeration value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "raw-256",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='                                                                                                                                                                                                                                                            1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "raw-257",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='                                                                                                                                                                                                                                                             1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "bad-member-empty",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value=''/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "bad-member-exponent",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1e0'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "bad-member-nan",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='NaN'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "bad-member-infinity",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='INF'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "bad-member-sign-only",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='+'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "bad-member-interior-space",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1 2'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "missing-value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "fixed-outside",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23' fixed='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "pattern-outside",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:pattern value='.*'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "assertion-outside",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:assertion test='$value'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "facet-comment",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'><!-- comment --></xs:enumeration></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "facet-stray-text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'>text</xs:enumeration></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "placement-anonymous",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:simpleType><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "anonymous",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "placement-terminal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='D'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1.23</v></r>",
+      "site": "terminal",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "placement-nested",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n'><xs:complexType><xs:sequence><xs:element name='v' type='D'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><n><v>1.23</v></n></r>",
+      "site": "nested",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "placement-attribute",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:decimal'><xs:attribute name='d' type='D' use='required'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r d='1.23'>1</r>",
+      "site": "attribute",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "placement-extension",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:complexType name='G'><xs:simpleContent><xs:extension base='D'/></xs:simpleContent></xs:complexType><xs:element name='r' type='G'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "extension",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "placement-xsi",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='xs:decimal'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='D'>1.23</r>",
+      "site": "xsi",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "named-chain-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'/></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "complex-base-enum-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:complexType name='C'><xs:simpleContent><xs:extension base='A'/></xs:simpleContent></xs:complexType><xs:complexType name='D'><xs:simpleContent><xs:restriction base='C'><xs:minInclusive value='0'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "complex-local-enum-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType><xs:complexType name='D'><xs:simpleContent><xs:restriction base='C'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    }
+  ]
+}

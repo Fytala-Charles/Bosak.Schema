@@ -1,16 +1,21 @@
 Last updated: 2026-11-24
 
-## Named Boolean restriction chains ? 24 November 2026
+## Direct decimal enumeration - 24 November 2026
+
+Batch slice 7 adds bounded enumeration on direct decimal restrictions in the opt-in facades. Normalized exact coefficient/scale membership preserves original instance XML and typed values, including signed zero and equivalent lexical forms beyond System.Decimal precision. Sixteen source entries and existing raw numeric/digit/scale limits apply before normalization. Legacy enumeration refusal remains; complex restrictions over enumerated decimal bases are explicitly deferred. Two measured IE-093 results are reconciled with actual Decimal reads and unchanged inputs. REQ-009 remains In Progress; API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](../docs/decimal-enumeration/README.md).
+
+
+## Named Boolean restriction chains - 24 November 2026
 
 Batch slice 6 adds closed named Boolean bases, forward references and facet-free aliases with inherited pattern conjunctions and actual DerivationBase identity. Same-step alternatives, fixed-collapse whitespace, primitive lexical validity and original Boolean/XML facts remain. Automata are compiled once per definition; inherited matching shares the assessment budget/cancellation. Six measured old refusal outcomes are reconciled without changing payloads/IDs. REQ-009 remains In Progress; API and Core 1.81.17 are unchanged. [Contract and qualification](../docs/boolean-chains/README.md).
 
 
-## Direct Boolean restrictions ? 24 November 2026
+## Direct Boolean restrictions - 24 November 2026
 
 Batch slice 5 adds direct Boolean patterns, facet-free aliases and explicit collapse whitespace on existing scalar placements. Primitive validity and patterns precede original Boolean fact issuance. Boolean enumeration is inapplicable under XSD 1.1 and is Invalid; assertions, named Boolean base chains, fixed attribute syntax and Boolean complex content stay separate. Nine measured original outcomes are reconciled with original payloads/IDs unchanged, including actual Boolean reads in two older catalogs. REQ-009 remains In Progress; Core 1.81.17 and API are unchanged. [Contract and qualification](../docs/boolean-patterns/README.md).
 
 
-## Bounded date patterns ? 24 November 2026
+## Bounded date patterns - 24 November 2026
 
 Batch slice 4 admits the existing finite pattern grammar on direct, named and bounded complex date restrictions. Same-step alternatives and inherited conjunctions check normalized literals; original date components, timezone presence and XML stay intact. New bounds over a patterned ancestor remain Unsupported pending a separate value-space contract. String/date states and matching work share their respective schema/assessment budgets. Numeric complex patterns retain their existing refusal. REQ-009 remains In Progress; Core 1.81.17 and the public API are unchanged. [Contract and qualification](../docs/date-patterns/README.md).
 

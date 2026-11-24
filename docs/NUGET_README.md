@@ -1211,7 +1211,7 @@ For this instance, `NativeSchemaSession` exposes two scalar slots: integer `7` a
 
 The two opt-in native facades support enumeration on the existing integer primitive and twelve builtin descendants, at admitted named/anonymous roots, scalar members, attributes and integer simple-content placements. Entries are base-typed values: signs, leading zeros and permitted XML whitespace do not create distinct integers. Bad base-typed declarations are Invalid; values outside the set are Invalid instances. Other applicable facets still apply. Inherited enumeration is retained or validly narrowed.
 
-At most sixteen source entries are admitted per restriction, including duplicates before deduplication. Existing 256-character lexical and explicit native digit limits apply before normalization. Capacity refusal is Unsupported. Decimal enumeration, integer patterns, arbitrary new chains and broad facet metadata syntax remain excluded. Attribute-only empty complex roots remain outside the profile; use an admitted element-only root for enumeration attributes.
+At most sixteen source entries are admitted per restriction, including duplicates before deduplication. Existing 256-character lexical and explicit native digit limits apply before normalization. Capacity refusal is Unsupported. Integer patterns, arbitrary new chains and broad facet metadata syntax remain excluded. Attribute-only empty complex roots remain outside the profile; use an admitted element-only root for enumeration attributes.
 
 Example integer enumeration:
 
@@ -1428,3 +1428,24 @@ Named Boolean restrictions may derive from admitted named Boolean simple types. 
 ```
 
 Both facades return Boolean true and preserve original XML text. The lexical form 1 fails the derived pattern. Patterns are compiled once per definition and inherited matching shares the assessment budget and cancellation. Sixteen global types, including unused definitions, remain the shared cap. Cycles, unresolved bases and built-in redeclarations remain Unsupported. Closed xsi:type substitution follows actual ancestry; sibling types are not interchangeable. Boolean complex content, assertions and fixed attribute syntax remain outside this slice.
+
+### Direct decimal enumeration
+
+The opt-in scalar and original-node facades admit enumeration on direct decimal restrictions. Membership uses normalized exact coefficient/scale values, so signs, trailing zeroes and signed zero do not change membership. The original instance XML is preserved; an enumeration literal never replaces the instance value.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Price"><xs:restriction base="xs:decimal">
+    <xs:enumeration value="1.2300"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="price" type="Price"/>
+</xs:schema>
+```
+
+```xml
+<price>+001.23</price>
+```
+
+Both facades return the exact decimal value 1.23 and export the original text. The value 1.24 is Invalid. Enumeration combines with local bounds/digit facets; a base-valid enumeration declaration is not rejected against sibling constraints, and an empty intersection has Invalid instances. Missing or invalid decimal members are Invalid schemas.
+
+Sixteen source entries are allowed, counting duplicates before deduplication. Existing 256-character numeric source and pre-normalization digit/scale capacities apply; excess is Unsupported/RepresentationCapacity. String text limits do not replace numeric capacities. The legacy decimal-only facade keeps its prior enumeration refusal. Named decimal base chains and complex restrictions over enumerated content remain separate work, along with fixed facet attributes, decimal patterns and assertion expansion. Public equality/hash APIs and Core payloads are unchanged.

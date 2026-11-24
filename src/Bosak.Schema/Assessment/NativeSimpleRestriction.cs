@@ -32,6 +32,7 @@
 //                      | Charles Korthout | 0.19   | 24-11-2026     | Use shared pattern compilation for direct and named date restrictions |
 //                      | Charles Korthout | 0.20   | 24-11-2026     | Admit direct Boolean patterns and fixed-collapse whitespace |
 //                      | Charles Korthout | 0.21   | 24-11-2026     | Resolve named Boolean bases with actual derivation identity |
+//                      | Charles Korthout | 0.22   | 24-11-2026     | Keep decimal enumeration opt-in while preserving the legacy grammar |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -63,7 +64,7 @@ internal sealed partial class NativeDecimalSchema
             return new NativeType(name, false, namespaceUri, isBoolean: true, baseName: baseName, derivationBase: booleanBase,
                 booleanFacets: NativeBooleanFacets.CompileDerived(restriction, patternCompilation, booleanBase.BooleanFacets));
         if (baseName == Xs + "decimal")
-            return new NativeType(name, false, namespaceUri, NativeDecimalFacets.Compile(restriction, limits), baseName: baseName);
+            return new NativeType(name, false, namespaceUri, NativeDecimalFacets.Compile(restriction, limits, allowEnumeration: maxStringCharacters is not null), baseName: baseName);
         if (maxStringCharacters is not null && baseName == Xs + "string")
             return new NativeType(name, false, namespaceUri, isString: true,
                 stringFacets: NativeStringFacets.Compile(restriction, maxStringCharacters.Value, patternCompilation), baseName: baseName);

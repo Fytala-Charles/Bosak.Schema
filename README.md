@@ -6,19 +6,9 @@
 
 # Bosak.Schema
 
-Named Boolean restriction chains retain inherited lexical constraints and actual base-type identity. [Boolean derivation](docs/boolean-chains/README.md).
+The 0.6 development candidate requires **Bosak Core 1.81.17 or later**. [Dependency compatibility](docs/core-18117-baseline/README.md). Native scalar and original-node assessment preserve original XML, exact typed values and component identity within an explicit bounded profile.
 
-Direct Boolean restrictions support finite lexical patterns and fixed-collapse whitespace. [Boolean patterns](docs/boolean-patterns/README.md).
-
-Bounded date patterns filter normalized lexical forms while preserving original typed dates and XML. [Date patterns](docs/date-patterns/README.md).
-
-Bounded date complex restrictions preserve original typed values and governing/atomic type identity. [Date complex restriction](docs/date-complex-restriction/CONTRACT.md).
-
-Bounded date restrictions support named derivation chains with inherited constraints and forward references. [Date type chains](docs/date-chains/CONTRACT.md).
-
-The development candidate supports bounded date bounds and explicitTimezone constraints. [Date bounds](docs/date-bounds/CONTRACT.md).
-
-The 0.6 development candidate requires **Bosak Core 1.81.17 or later**. [Dependency compatibility](docs/core-18117-baseline/README.md). Native date restrictions support bounded enumeration while preserving the instance date and timezone. [Date enumeration](docs/date-enumeration-implementation/README.md).
+Date restrictions support [enumeration](docs/date-enumeration-implementation/README.md), [bounds and timezones](docs/date-bounds/CONTRACT.md), [named derivation](docs/date-chains/CONTRACT.md), [lexical patterns](docs/date-patterns/README.md) and [bounded complex restriction](docs/date-complex-restriction/CONTRACT.md). Boolean restrictions support [patterns](docs/boolean-patterns/README.md) and [named chains](docs/boolean-chains/README.md). [Direct decimal enumeration](docs/decimal-enumeration/README.md) compares exact decimal values without replacing the instance representation.
 
 > Apache-2.0 schema integration and staged XSD 1.1 services for .NET.
 

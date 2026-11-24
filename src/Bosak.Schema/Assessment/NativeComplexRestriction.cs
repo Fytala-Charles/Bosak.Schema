@@ -20,6 +20,7 @@
 //                      | Charles Korthout | 0.7   | 24-11-2026     | Adopt qualified bounded date simple-content extension |
 //                      | Charles Korthout | 0.8   | 24-11-2026     | Admit bounded date complex restriction with distinct atomic content |
 //                      | Charles Korthout | 0.9   | 24-11-2026     | Compile local complex-date patterns with the shared bounded context |
+//                      | Charles Korthout | 0.10   | 24-11-2026     | Refuse complex restrictions over newly enumerated decimal bases pending qualification |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -90,6 +91,8 @@ internal sealed partial class NativeDecimalSchema
                 derivationBase: baseType, isComplexRestriction: true);
             return new NativeDecimalSchema(new NativeDeclaration(root.Name, dateGoverning, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
         }
+        Require(content.IsInteger || content.Facets?.HasEnumeration != true,
+            "Complex restriction over enumerated decimal content requires separate inherited-facet support.", NativeDecimalUnsupportedReason.ValueType);
         Require(!children.Any(e => e.Name == Xs + "pattern"), "Numeric complex patterns are outside this date slice.", NativeDecimalUnsupportedReason.ValueType);
         Require(content!.IsInteger || localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty,
             "Contextual assertions on noninteger content are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
