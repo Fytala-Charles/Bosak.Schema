@@ -2,6 +2,8 @@ Last updated: 2026-11-24
 
 # Packaged guidance reconciled after M1 - 19 November 2026
 
+24 November 2026: authorized batch slice2 adds named date restriction chains, closed forward references and inherited facet/timezone validation. [Contract](../docs/date-chains/CONTRACT.md). Six measured original results change; original inputs/IDs remain. Core1.81.17, public API and publication boundaries remain unchanged.
+
 24 November 2026: authorized specification batch slice1 adds bounded date bounds/explicitTimezone on Core1.81.17. [Contract](../docs/date-bounds/CONTRACT.md); 25measured original results reconciled without changing stimuli/IDs. Full XSD1.1 and publication remain separate. Batch commit/push/PR/green-merge authorization persists for up to20slices.
 
 24 November 2026: [final date-enumeration/Core-baseline review](../docs/date-enumeration-review/README.md) has no blocking findings. All69packets/4797entries verify; prior4874source/3509package/20native qualification stands. Retained minimum migration124/22/32behavior passes and two full historical old-pin failures are explicit. Ready for commit/push/PR only on explicit owner request; no new source changes or publication.

@@ -11,6 +11,8 @@ Prioritize the [shared specification programme](docs/specification-coverage/PROG
 
 # Bosak.Schema Roadmap
 
+24 November 2026: authorized batch slice2 adds named date restriction chains, closed forward references and inherited facet/timezone validation. [Contract](docs/date-chains/CONTRACT.md). Six measured original results change; original inputs/IDs remain. Core1.81.17, public API and publication boundaries remain unchanged.
+
 24 November 2026: authorized specification batch slice1 adds bounded date bounds/explicitTimezone on Core1.81.17. [Contract](docs/date-bounds/CONTRACT.md); 25measured original results reconciled without changing stimuli/IDs. Full XSD1.1 and publication remain separate. Batch commit/push/PR/green-merge authorization persists for up to20slices.
 
 24 November 2026: [bounded date enumeration production candidate](docs/date-enumeration-implementation/README.md) adopts direct date membership with preserved timezone presence/original values on Core1.81.17. Source4,874cases, package3,509public/20native, six examples and unchanged55type/408rowAPI qualify. Expanded sample16matches/113Unsupported/zeroerrors. Retained migration passes124/22/32behavior cases; two full historical catalogs retain their explicit old-Core pin assertion failures. REQ-009 remains In Progress; no publication.
