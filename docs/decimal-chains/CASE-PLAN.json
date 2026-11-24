@@ -1,0 +1,392 @@
+{
+  "contract": "docs/decimal-chains/CONTRACT.md",
+  "cases": [
+    {
+      "id": "alias",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "alias-reject",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.24</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "subset",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/><xs:enumeration value='2.34'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='1.2300'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "base-invalid-enum",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='1.24'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "base-invalid-enum-bound",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='0.5'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "base-invalid-enum-fraction",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:fractionDigits value='1'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "enum-bound-pass",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/><xs:enumeration value='2.34'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:minInclusive value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "enum-bound-invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/><xs:enumeration value='2.34'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "sibling-empty",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1'/><xs:enumeration value='2'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='1'/><xs:minInclusive value='2'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedDecimal": "1"
+    },
+    {
+      "id": "range-narrow",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/><xs:maxInclusive value='3'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:minInclusive value='1'/><xs:maxExclusive value='2'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "range-widen",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:minInclusive value='0'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:minInclusive value='-1'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "exclusive-repeat",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:minExclusive value='1'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:minExclusive value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "exclusive-reopen",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:minExclusive value='1'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "upper-exclusive-repeat",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:maxExclusive value='2'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:maxExclusive value='2'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "upper-exclusive-reopen",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:maxExclusive value='2'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:maxInclusive value='2'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "exclusive-repeat-digit-exception",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:maxExclusive value='100'/><xs:totalDigits value='1'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:maxExclusive value='100'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1"
+    },
+    {
+      "id": "exclusive-repeat-enum-exception",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:minExclusive value='0'/><xs:enumeration value='1'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:minExclusive value='0'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1"
+    },
+    {
+      "id": "bound-base-fraction-invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:fractionDigits value='1'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:minInclusive value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "bound-base-total-invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:totalDigits value='1'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:maxInclusive value='100'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "digits-narrow",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:totalDigits value='5'/><xs:fractionDigits value='4'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:totalDigits value='3'/><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "digits-widen",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:totalDigits value='5'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:totalDigits value='6'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "fraction-widen",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:fractionDigits value='2'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:fractionDigits value='3'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "effective-digits-inconsistent",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:fractionDigits value='3'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:totalDigits value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "normalized-zero",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='-0.0'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='+0.00'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>-00.000</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "0"
+    },
+    {
+      "id": "placement-anonymous",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.2300'/><xs:enumeration value='2'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:simpleType><xs:restriction base='A'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "anonymous",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "placement-terminal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.2300'/><xs:enumeration value='2'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='D'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1.23</v></r>",
+      "site": "terminal",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "placement-nested",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.2300'/><xs:enumeration value='2'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n'><xs:complexType><xs:sequence><xs:element name='v' type='D'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><n><v>1.23</v></n></r>",
+      "site": "nested",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "placement-attribute",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.2300'/><xs:enumeration value='2'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:decimal'><xs:attribute name='d' type='D' use='required'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r d='1.23'>1</r>",
+      "site": "attribute",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "placement-extension",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.2300'/><xs:enumeration value='2'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:complexType name='G'><xs:simpleContent><xs:extension base='D'/></xs:simpleContent></xs:complexType><xs:element name='r' type='G'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "extension",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "placement-xsi",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.2300'/><xs:enumeration value='2'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='xs:decimal'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='D'>1.23</r>",
+      "site": "xsi",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "sixteen-local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "seventeen-local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "fixed-outside",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:maxInclusive value='2' fixed='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "pattern-outside",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:pattern value='.*'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "annotation-outside",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:maxInclusive value='2'><xs:annotation/></xs:maxInclusive></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "duplicate-bound",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:minInclusive value='0'/><xs:minInclusive value='0'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "forward",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='B'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='A'/></xs:simpleType><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.2300'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "self-cycle",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='D'/></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "mutual-cycle",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='D'/></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'/></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "missing",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='Missing'/></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "global-cap-16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='C0'><xs:restriction base='xs:decimal'/></xs:simpleType><xs:simpleType name='C1'><xs:restriction base='C0'/></xs:simpleType><xs:simpleType name='C2'><xs:restriction base='C1'/></xs:simpleType><xs:simpleType name='C3'><xs:restriction base='C2'/></xs:simpleType><xs:simpleType name='C4'><xs:restriction base='C3'/></xs:simpleType><xs:simpleType name='C5'><xs:restriction base='C4'/></xs:simpleType><xs:simpleType name='C6'><xs:restriction base='C5'/></xs:simpleType><xs:simpleType name='C7'><xs:restriction base='C6'/></xs:simpleType><xs:simpleType name='C8'><xs:restriction base='C7'/></xs:simpleType><xs:simpleType name='C9'><xs:restriction base='C8'/></xs:simpleType><xs:simpleType name='C10'><xs:restriction base='C9'/></xs:simpleType><xs:simpleType name='C11'><xs:restriction base='C10'/></xs:simpleType><xs:simpleType name='C12'><xs:restriction base='C11'/></xs:simpleType><xs:simpleType name='C13'><xs:restriction base='C12'/></xs:simpleType><xs:simpleType name='C14'><xs:restriction base='C13'/></xs:simpleType><xs:simpleType name='D'><xs:restriction base='C14'/></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "global-cap-17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='C0'><xs:restriction base='xs:decimal'/></xs:simpleType><xs:simpleType name='C1'><xs:restriction base='C0'/></xs:simpleType><xs:simpleType name='C2'><xs:restriction base='C1'/></xs:simpleType><xs:simpleType name='C3'><xs:restriction base='C2'/></xs:simpleType><xs:simpleType name='C4'><xs:restriction base='C3'/></xs:simpleType><xs:simpleType name='C5'><xs:restriction base='C4'/></xs:simpleType><xs:simpleType name='C6'><xs:restriction base='C5'/></xs:simpleType><xs:simpleType name='C7'><xs:restriction base='C6'/></xs:simpleType><xs:simpleType name='C8'><xs:restriction base='C7'/></xs:simpleType><xs:simpleType name='C9'><xs:restriction base='C8'/></xs:simpleType><xs:simpleType name='C10'><xs:restriction base='C9'/></xs:simpleType><xs:simpleType name='C11'><xs:restriction base='C10'/></xs:simpleType><xs:simpleType name='C12'><xs:restriction base='C11'/></xs:simpleType><xs:simpleType name='C13'><xs:restriction base='C12'/></xs:simpleType><xs:simpleType name='C14'><xs:restriction base='C13'/></xs:simpleType><xs:simpleType name='C15'><xs:restriction base='C14'/></xs:simpleType><xs:simpleType name='D'><xs:restriction base='C15'/></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    {
+      "id": "unrelated-xsi",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'></xs:restriction></xs:simpleType><xs:element name='r' type='A'/><xs:simpleType name='B'><xs:restriction base='xs:decimal'/></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='B'>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedDecimal": "1.23"
+    }
+  ]
+}

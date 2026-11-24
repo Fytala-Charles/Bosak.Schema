@@ -1294,7 +1294,7 @@ Direct named or anonymous restrictions of xs:date may contain up to 16 enumerati
 
 These dates begin at the same instant, so membership succeeds. ReadRootScalar().DateValue or ReadElement([]).DateValue returns the instance's year 1999, month 12, day 31 and offset -660 minutes. Export retains its parsed lexical content. The matching enumeration entry does not replace the instance value.
 
-All entries must be valid dates for the base type. Missing/invalid bounded facet values are Invalid schemas. The 17th source entry is Unsupported/RepresentationCapacity even when duplicates would collapse to fewer values. Facet and enumerated-instance text also obey MaxStringCharacters; the existing normalized 256-character and year capacities apply. Whitespace inside an otherwise empty enumeration element is allowed. Non-date user-defined simple restriction chains, date assertions and date complex restriction chains remain outside the profile. This feature does not change public equality/hash methods, XPath date comparison semantics or the legacy decimal facade.
+All entries must be valid dates for the base type. Missing/invalid bounded facet values are Invalid schemas. The 17th source entry is Unsupported/RepresentationCapacity even when duplicates would collapse to fewer values. Facet and enumerated-instance text also obey MaxStringCharacters; the existing normalized 256-character and year capacities apply. Whitespace inside an otherwise empty enumeration element is allowed. General string/integer user-defined simple restriction chains, date assertions and date complex restriction chains remain outside the profile. This feature does not change public equality/hash methods, XPath date comparison semantics or the legacy decimal facade.
 
 ### Date bounds and timezone presence
 
@@ -1338,7 +1338,7 @@ Named date restrictions may derive from other admitted named date types. Forward
 <issued>2000-01-02Z</issued>
 ```
 
-This forward reference compiles, and the instance retains its original date and zero offset. Both inherited lower/timezone constraints and the derived upper bound apply. Up to 16 global type definitions are admitted; cycles, unresolved bases and built-in redeclarations are Unsupported. Fixed facets, general non-date restriction chains, date complex restriction chains remain outside this slice.
+This forward reference compiles, and the instance retains its original date and zero offset. Both inherited lower/timezone constraints and the derived upper bound apply. Up to 16 global type definitions are admitted; cycles, unresolved bases and built-in redeclarations are Unsupported. Fixed facets, general string/integer restriction chains, date complex restriction chains remain outside this slice.
 
 ### Date complex simple-content restriction
 
@@ -1448,4 +1448,27 @@ The opt-in scalar and original-node facades admit enumeration on direct decimal 
 
 Both facades return the exact decimal value 1.23 and export the original text. The value 1.24 is Invalid. Enumeration combines with local bounds/digit facets; a base-valid enumeration declaration is not rejected against sibling constraints, and an empty intersection has Invalid instances. Missing or invalid decimal members are Invalid schemas.
 
-Sixteen source entries are allowed, counting duplicates before deduplication. Existing 256-character numeric source and pre-normalization digit/scale capacities apply; excess is Unsupported/RepresentationCapacity. String text limits do not replace numeric capacities. The legacy decimal-only facade keeps its prior enumeration refusal. Named decimal base chains and complex restrictions over enumerated content remain separate work, along with fixed facet attributes, decimal patterns and assertion expansion. Public equality/hash APIs and Core payloads are unchanged.
+Sixteen source entries are allowed, counting duplicates before deduplication. Existing 256-character numeric source and pre-normalization digit/scale capacities apply; excess is Unsupported/RepresentationCapacity. String text limits do not replace numeric capacities. The legacy decimal-only facade keeps its prior enumeration refusal. Complex restrictions over enumerated content remain separate work, along with fixed facet attributes, decimal patterns and assertion expansion. Public equality/hash APIs and Core payloads are unchanged.
+
+### Named decimal restriction chains
+
+Named decimal restrictions may derive from admitted named decimal simple types, retaining exact enumeration, range and digit constraints and actual base-type identities. Forward references resolve in the closed schema. Enumeration and bound declarations must be valid for their actual base, with the REC exception for repeating a same-side exclusive endpoint. Bounds and digit facets cannot widen the base. Base-valid sibling declarations can have an empty intersection.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Price"><xs:restriction base="Prices">
+    <xs:enumeration value="1.2300"/>
+  </xs:restriction></xs:simpleType>
+  <xs:simpleType name="Prices"><xs:restriction base="xs:decimal">
+    <xs:enumeration value="1.23"/>
+    <xs:enumeration value="2.34"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="price" type="Price"/>
+</xs:schema>
+```
+
+```xml
+<price>+001.23</price>
+```
+
+Both facades return exact decimal 1.23 and preserve the input XML. The value 1.24 is Invalid. A derived enumeration value outside Prices makes the schema Invalid; inherited facets are not silently dropped by an alias. Sixteen global definitions and sixteen source enum entries per step remain bounded, with existing numeric capacities checked before normalization. Closed xsi:type follows actual ancestry. Legacy decimal-only grammar, fixed/annotation metadata, decimal patterns/assertions and complex restriction over enumerated content remain outside this slice.

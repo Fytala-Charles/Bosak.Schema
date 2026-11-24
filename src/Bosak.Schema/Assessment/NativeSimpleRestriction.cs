@@ -33,6 +33,7 @@
 //                      | Charles Korthout | 0.20   | 24-11-2026     | Admit direct Boolean patterns and fixed-collapse whitespace |
 //                      | Charles Korthout | 0.21   | 24-11-2026     | Resolve named Boolean bases with actual derivation identity |
 //                      | Charles Korthout | 0.22   | 24-11-2026     | Keep decimal enumeration opt-in while preserving the legacy grammar |
+//                      | Charles Korthout | 0.23   | 24-11-2026     | Admit closed named decimal bases with explicit native inherited-facet validation |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -65,6 +66,19 @@ internal sealed partial class NativeDecimalSchema
                 booleanFacets: NativeBooleanFacets.CompileDerived(restriction, patternCompilation, booleanBase.BooleanFacets));
         if (baseName == Xs + "decimal")
             return new NativeType(name, false, namespaceUri, NativeDecimalFacets.Compile(restriction, limits, allowEnumeration: maxStringCharacters is not null), baseName: baseName);
+        if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var decimalBase) && decimalBase.Facets is not null)
+        {
+            foreach (var facet in Elements(restriction))
+            {
+                Require(facet.Name.Namespace == Xs && facet.Name.LocalName is "enumeration" or "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits",
+                    "Excluded named decimal facet syntax.", NativeDecimalUnsupportedReason.ValueType);
+                Attributes(facet, "value");
+                Require(Elements(facet).Count == 0, "Named decimal facet children are unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
+            }
+            return new NativeType(name, false, namespaceUri,
+                facets: NativeDecimalFacets.CompileDerived(restriction, decimalBase.Facets, limits, nativeDerivation: true),
+                baseName: baseName, derivationBase: decimalBase);
+        }
         if (maxStringCharacters is not null && baseName == Xs + "string")
             return new NativeType(name, false, namespaceUri, isString: true,
                 stringFacets: NativeStringFacets.Compile(restriction, maxStringCharacters.Value, patternCompilation), baseName: baseName);
