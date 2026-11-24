@@ -1,0 +1,111 @@
+{
+  "date": "2026-11-24",
+  "base": "383914562d89d3f7fad3a6a60cf4e29884cce912",
+  "basis": "Engineering dependency/correctness and reviewed public sample; not customer demand, normative denominator or case-count forecast",
+  "supersedesCurrentRecommendation": "docs/post-particle-coverage/RANKING.json",
+  "earlierEvidenceModified": false,
+  "rows": [
+    {
+      "rank": 1,
+      "candidate": "Bounded date simple-content extension",
+      "areas": [
+        "SC06",
+        "SC07",
+        "SC21"
+      ],
+      "why": "Reuses checked date components and current transport; supports date-valued elements carrying attribute metadata. Two unchanged originals isolate an extension base.",
+      "dependencies": [
+        "Original complex governing type versus atomic date base",
+        "Supported root/terminal and attribute placements; existing budgets and lifetime",
+        "Explicitly refuse date complex restriction before decimal fallback; no arbitrary complex chains"
+      ],
+      "admissionForecast": null
+    },
+    {
+      "rank": 2,
+      "candidate": "Date enumeration contract",
+      "areas": [
+        "SC07",
+        "SC09"
+      ],
+      "why": "Two unchanged selected originals use date enumeration on an anonymous scalar member.",
+      "dependencies": [
+        "XSD value equality versus identity and preserved timezone absence",
+        "Base-typed facet declarations, narrowing and capacities",
+        "Offset/calendar boundary arithmetic without DateTimeOffset or implicit timezone"
+      ],
+      "admissionForecast": null
+    },
+    {
+      "rank": 3,
+      "candidate": "Date bounds and explicitTimezone contracts",
+      "areas": [
+        "SC07",
+        "SC09"
+      ],
+      "why": "One selected maxExclusive original plus useful timezone constraints; keep independent from enumeration implementation.",
+      "dependencies": [
+        "Partial comparison and indeterminate mixed-timezone results",
+        "Inherited/sibling facet constraints and schema versus instance validity",
+        "explicitTimezone restriction rules; no dateTimeStamp inference"
+      ],
+      "admissionForecast": null
+    },
+    {
+      "rank": 4,
+      "candidate": "Exact-seconds shared Core dateTime/time transport design",
+      "areas": [
+        "SC07",
+        "SC21"
+      ],
+      "why": "Important broader calendar foundation; none of the nine reviewed calendar examples is a dateTime/time case.",
+      "dependencies": [
+        "Current carriers store milliseconds",
+        "Exact seconds, timezone absence, end-of-day/year-boundary handling",
+        "Separate Core adoption/conformance/API/package-pin work before Schema transport"
+      ],
+      "admissionForecast": null
+    },
+    {
+      "rank": 5,
+      "candidate": "Additional bounded Unicode regex escapes",
+      "areas": [
+        "SC09"
+      ],
+      "why": "Existing public SKU expression remains relevant outside calendar work.",
+      "dependencies": [
+        "Exact Unicode digit semantics/data revision",
+        "NFA work/static budgets and supplementary characters"
+      ],
+      "admissionForecast": null
+    },
+    {
+      "rank": 6,
+      "candidate": "Mixed content and implicit anyType design",
+      "areas": [
+        "SC06",
+        "SC21"
+      ],
+      "why": "Two remaining calendar cases require mixed=true; their Attributes refusal is not a missing date-attribute feature.",
+      "dependencies": [
+        "Mixed node/typed-value meaning and physical order",
+        "Wildcard/default typing and accurate facts; no invented string type"
+      ],
+      "admissionForecast": null
+    },
+    {
+      "rank": 7,
+      "candidate": "Closed schema assembly and other datatype families",
+      "areas": [
+        "SC05",
+        "SC07"
+      ],
+      "why": "Retain broader application-schema priorities beyond the selected calendar bucket.",
+      "dependencies": [
+        "Resolver closure/component identity and cycles",
+        "Lists/unions, floating-point, QName/binary remain distinct obligations"
+      ],
+      "admissionForecast": null
+    }
+  ]
+}

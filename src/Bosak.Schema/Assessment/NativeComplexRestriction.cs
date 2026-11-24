@@ -16,6 +16,8 @@
 //                      | Charles Korthout | 0.3   | 21-11-2026     | Adopt bounded contextual and inherited integer assertions |
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Probe integer enumeration in isolated source copies |
 //                      | Charles Korthout | 0.5   | 24-11-2026     | Adopt qualified bounded integer enumeration |
+//                      | Charles Korthout | 0.6   | 24-11-2026     | Probe bounded date simple content in isolated source copy |
+//                      | Charles Korthout | 0.7   | 24-11-2026     | Adopt qualified bounded date simple-content extension |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -72,6 +74,7 @@ internal sealed partial class NativeDecimalSchema
         var content = baseType.ContentType;
         Require(content is not null && !content.IsComplex && !content.IsString && !content.IsBoolean,
             "Complex base content is outside the decimal profile.", NativeDecimalUnsupportedReason.ValueType);
+        Require(!content!.IsDate, "Date complex restriction is outside the profile.", NativeDecimalUnsupportedReason.ValueType);
         Require(content!.IsInteger || localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty,
             "Contextual assertions on noninteger content are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
         Require(content.IsInteger || !children.Any(e=>e.Name==Xs+"enumeration"),

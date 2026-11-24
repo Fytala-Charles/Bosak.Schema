@@ -14,6 +14,8 @@
 //                      | Charles Korthout | 0.1   | 24-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 24-11-2026     | Expand identity controls and label colliding theory displays |
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Adopt qualified date controls with separated public and identity lanes |
+//                      | Charles Korthout | 0.4   | 24-11-2026     | Reconcile measured date extension in isolated test copy |
+//                      | Charles Korthout | 0.5   | 24-11-2026     | Adopt measured date extension factory expectation |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -85,7 +87,7 @@ public sealed class NativeDateConsumerTests
  [Fact]public void DeferredTypes()
  {
   foreach(var name in new[]{"time","dateTime","dateTimeStamp","gYear","duration"})foreach(bool data in new[]{false,true}){var schema=Simple.Replace("xs:date'","xs:"+name+"'",StringComparison.Ordinal);Assert.Equal(NativeSchemaOutcome.Unsupported,data?NativeSchemaNodeDataSession.Create(schema,Options).Outcome:NativeSchemaSession.Create(schema,Options).Outcome);}
-  var complex=Start+"<xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:date'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>";Assert.Equal(NativeSchemaOutcome.Unsupported,NativeSchemaSession.Create(complex,Options).Outcome);
+  var complex=Start+"<xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:date'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>";var admitted=NativeSchemaSession.Create(complex,Options);Assert.Equal(NativeSchemaOutcome.Valid,admitted.Outcome);admitted.Value?.Dispose();
  }
 
  /// <summary>Checks public selected alias and capacity diagnostics.</summary><param name="data">Facade.</param>

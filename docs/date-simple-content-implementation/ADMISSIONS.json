@@ -1,0 +1,23 @@
+{
+  "initialFailures": {
+    "minimum": [
+      "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.DeferredTypes"
+    ],
+    "current": [
+      "Bosak.Schema.PublicConsumer.Tests.NativeDecimalConsumerTests.PublicSurface_NoFriendGrantOrPublicFactoriesForAuthority",
+      "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.DeferredTypes"
+    ]
+  },
+  "semanticFailuresPerPin": 1,
+  "changes": [
+    {
+      "path": "tests/Bosak.Schema.PublicConsumer.Tests/NativeDateConsumerTests.cs",
+      "beforeSha256": "dc5177fcc86fb2ba1998d504d2ac5f8ce4cc3e2dddeb91135de8747a5c046009",
+      "afterSha256": "b58feb733326c8e8d2049b2c481221bcba05d166db380b5956704ff72af25459",
+      "member": "DeferredTypes",
+      "change": "Original date extension factory payload kept; Unsupported->Valid plus dispose; all other temporal refusals retained"
+    }
+  ],
+  "currentQualificationOnly": "Adjust minimum-Core explicit version assertion to selected1.81.17 in scratch current lane only",
+  "originalStimuliPreserved": true
+}

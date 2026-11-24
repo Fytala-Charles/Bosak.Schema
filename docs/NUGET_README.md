@@ -1249,4 +1249,27 @@ Example date schema and instance:
 
 ReadRootScalar().DateValue or ReadElement([]).DateValue yields year zero, month 2, day 29 and offset 840 minutes. Export retains parsed lexical content. No conversion through DateTimeOffset or implicit timezone is used. Extended years and negative astronomical years use the Gregorian calendar directly.
 
-The explicit year interval is -9223372036854775807 through 9223372036854775807, with at most 256 normalized lexical characters plus existing document/work capacities. Otherwise-valid values outside these bounds are Unsupported/RepresentationCapacity; invalid bounded lexical/calendar values are Invalid. The excluded long.MinValue year cannot be formatted by the pinned Core carrier and is never silently rounded. Temporal facets, date simple-content extension/restriction, arbitrary derived chains, date assertions and dateTime/time/dateTimeStamp remain outside this slice. The legacy decimal facade is unchanged; full calendar operations, PSVI and XSD1.1 conformance are not implied.
+The explicit year interval is -9223372036854775807 through 9223372036854775807, with at most 256 normalized lexical characters plus existing document/work capacities. Otherwise-valid values outside these bounds are Unsupported/RepresentationCapacity; invalid bounded lexical/calendar values are Invalid. The excluded long.MinValue year cannot be formatted by the pinned Core carrier and is never silently rounded. Temporal facets, date simple-content restriction, arbitrary derived chains, date assertions and dateTime/time/dateTimeStamp remain outside this slice. The legacy decimal facade is unchanged; full calendar operations, PSVI and XSD1.1 conformance are not implied.
+
+### Dates with simple-content metadata
+
+The opt-in native facades also support direct simpleContent/extension of xs:date or an admitted facet-free date alias, at existing named/anonymous roots and terminal placements. The complex governing type and the atomic date base remain distinct; reads use the existing NativeScalarKind.Date and NativeDateValue. No new scalar API is required.
+
+Example date with attribute metadata:
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Dated"><xs:simpleContent><xs:extension base="xs:date">
+    <xs:attribute name="label" type="xs:string" use="required"/>
+  </xs:extension></xs:simpleContent></xs:complexType>
+  <xs:element name="issued" type="Dated"/>
+</xs:schema>
+```
+
+```xml
+<issued label="invoice">0000-02-29</issued>
+```
+
+ReadRootScalar().DateValue or ReadElement([]).DateValue yields year zero, month 2, day 29 and no timezone. The root has zero descendant scalar slots. ReadAttribute(0).Value.StringValue or ReadAttribute([], "", "label").StringValue yields invoice. Values remain usable after disposal; XML export preserves parsed content and attributes.
+
+Missing required, invalid typed or undeclared ordinary attributes are Invalid in this date-extension closure, including when zero attributes were declared. Existing scalar/decimal empty-use behavior is unchanged. Date simple content retains all date limits above and existing per-owner/expanded attribute, node, scalar and depth budgets. Temporal facets/assertions, date complex restriction, arbitrary complex chains and general simple-to-complex xsi:type substitution remain excluded. Exact same complex xsi:type is supported. The legacy decimal facade remains unchanged.

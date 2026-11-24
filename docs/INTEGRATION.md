@@ -1160,3 +1160,26 @@ The [native date implementation](native-date-implementation/README.md) passes 4,
 
 
 The date development API exposes NativeScalarKind.Date and NativeScalarValue.DateValue. NativeDateValue has readonly Year (long), Month/Day (int) and TimezoneOffsetMinutes (int?). A null offset is absent, not UTC. Handle the new enum value explicitly. There is no public constructor or authority handle on the detached date; read it only after a Valid result from an owned session. [Usage, capacities and exact package example](native-date-implementation/README.md).
+
+
+### 24 November 2026 - PR46 merged; calendar gaps reassessed
+
+PR46 merged as 383914562d89d3f7fad3a6a60cf4e29884cce912; main CI45426915018 passes 4,246 source tests. The [post-date reassessment](post-date-coverage/README.md) reuses the qualified sample of 12 matches / 117 Unsupported / zero errors, with no new execution. Nine calendar cases split into two delivered date matches, two date simple-content extensions, two mixed-content cases, two enumerations and one bound. Recommended next contract is bounded date simple-content extension with accurate complex-governing/atomic-date identity and an explicit guard against decimal restriction fallback. Date equality/facets and exact-seconds Core transport remain distinct follow-ups. All 328 production inputs and 62 earlier packets remain unchanged. No semantic adoption, API/source/test/pin/package change, commit/push or publication.
+
+
+### 24 November 2026 - date simple-content contract prepared
+
+The [bounded date simple-content contract](date-simple-content/README.md) defines named/anonymous roots and terminals, existing attribute uses, distinct complex G versus atomic date A, retained capacities and explicit derivation exclusions. It contains 77 unexecuted XML proposals and 18 native gates plus two unchanged original trials, without an admission forecast. Ordinary extra attributes are Invalid within this proposed date-extension closure even with zero uses; older profile behavior stays unchanged. Date complex restriction must be refused before decimal fallback. Static expectation impacts are recorded; no source/native/corpus execution or semantic adoption occurs. All 328 production inputs and 63 prior packets remain unchanged. Next: separate experimental adoption and isolated native feasibility on both signed Core pins. No API/pin/package change, commit/push or publication.
+
+
+### 24 November 2026 - date simple-content isolated feasibility
+
+The [isolated date extension candidate](date-simple-content-feasibility/README.md) passes 196 native controls per signed Core pin, including all 77 authored payloads on both facades, actual G/atomic-A identities and both unchanged original upstream trials matching their validities. All 4,246 original source names pass after one measured date-extension expectation correction in scratch copies; the current lane also adjusts its known minimum-version assertion. API remains55types/408rows with zero delta;18signed Core payloads and two fresh Core signatures verify. Three isolated source overlays implement date extension, scoped ordinary attribute closure and the date-restriction fallback guard. An initial nested-operation diagnostic error was corrected without source bypass; all receipts remain. All 328 production inputs and64 earlier packets remain unchanged. No production semantic adoption, source/API/pin/package change or full corpus/package/retained run. Next: separate production adoption and full qualification. No commit/push/publication.
+
+
+### 24 November 2026 - date simple-content production candidate
+
+The [date extension implementation](date-simple-content-implementation/README.md) passes 4,442 source tests (1,345 internal / 3,097 public), 3,097 package consumers per Core pin, 37 packaged identity controls and retained124/23/33. All4,246 prior source names/stimuli remain;196 controls are added, and the single measured factory refusal is explicitly reconciled. Actual complex G versus atomic date A, scoped closed attributes including zero uses and date-restriction fallback refusal are qualified. API55types/408rows has zero delta;18signed Core identities and published beta.1 verify. Frozen stays21matches; expanded now14matches/115Unsupported/zeroerrors, with exactlytwo original date-extension admissions per pin and no other row changes. Five exact packaged examples pass after a stale README exclusion was corrected without changing the DLL. Local unsigned alpha.0.43 only;65earlier packets intact. No publication/Corepin/controller change. Next: explicit Git delivery/review and merge verification, then separate date-enumeration/equality work.
+
+
+Date simple-content extensions use the existing DateValue accessor at complex roots and terminal paths; attributes use existing owner-aware reads. No new scalar kind or constructor is added. The governing complex component and atomic date content component remain distinct. Ordinary undeclared attributes are Invalid in this date-extension closure even with zero uses; older scalar/decimal behavior is unchanged. [Exact packaged example and limits](date-simple-content-implementation/README.md).

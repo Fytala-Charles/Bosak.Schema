@@ -28,6 +28,8 @@
 //                      | Charles Korthout | 0.15   | 22-11-2026     | Adopt qualified native simple scalar root assessment |
 //                      | Charles Korthout | 0.16   | 23-11-2026     | Adopt qualified bounded native choice |
 //                      | Charles Korthout | 0.17   | 23-11-2026     | Adopt qualified bounded root all groups |
+//                      | Charles Korthout | 0.18   | 24-11-2026     | Probe bounded date simple content in isolated source copy |
+//                      | Charles Korthout | 0.19   | 24-11-2026     | Adopt qualified bounded date simple-content extension |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -210,7 +212,7 @@ internal sealed partial class NativeDecimalSchema
         var effectiveType = ResolveInstanceType(element, declaration.Type);
         if (!isRoot)
         {
-            if (plan.AttributeUses.IsEmpty) InstanceAttributes(element);
+            if (plan.AttributeUses.IsEmpty && plan.Root.Type.ContentType?.IsDate != true) InstanceAttributes(element);
             else
             {
                 Require(element.Attributes().All(a => IsAdmittedInstanceAttribute(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
