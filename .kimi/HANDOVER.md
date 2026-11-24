@@ -2,6 +2,8 @@ Last updated: 2026-11-24
 
 # Packaged guidance reconciled after M1 - 19 November 2026
 
+24 November 2026: authorized specification batch slice1 adds bounded date bounds/explicitTimezone on Core1.81.17. [Contract](../docs/date-bounds/CONTRACT.md); 25measured original results reconciled without changing stimuli/IDs. Full XSD1.1 and publication remain separate. Batch commit/push/PR/green-merge authorization persists for up to20slices.
+
 24 November 2026: [final date-enumeration/Core-baseline review](../docs/date-enumeration-review/README.md) has no blocking findings. All69packets/4797entries verify; prior4874source/3509package/20native qualification stands. Retained minimum migration124/22/32behavior passes and two full historical old-pin failures are explicit. Ready for commit/push/PR only on explicit owner request; no new source changes or publication.
 
 24 November 2026: [bounded date enumeration production candidate](../docs/date-enumeration-implementation/README.md) adopts direct date membership with preserved timezone presence/original values on Core1.81.17. Source4,874cases, package3,509public/20native, six examples and unchanged55type/408rowAPI qualify. Expanded sample16matches/113Unsupported/zeroerrors. Retained migration passes124/22/32behavior cases; two full historical catalogs retain their explicit old-Core pin assertion failures. REQ-009 remains In Progress; no publication.

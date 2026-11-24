@@ -1,0 +1,13 @@
+# Batch slice1: date bounds and timezone presence
+
+24 November 2026. [Contract](CONTRACT.md) and [immutable adoption](ADOPTION.json) preceded source changes at55854ce1f1a170c0334d4085b1f228baac73fb11. Direct date restrictions now combine enumeration with four bounds and explicitTimezone. Partial ordering preserves mixed-timezone indeterminacy; it does not use the assessment timezone or change public equality/ordering. Named date chains, fixed facets, patterns, complex restriction and dateTime/time are separate slices.
+
+All **5,316source tests** pass (1,375internal/3,941public), **3,941package consumers**, **30native controls**, seven exact packaged examples and supplemental gates pass. All4,874prior names/payloads remain;25measured old refusal results are reconciled. Added442controls comprise432public contract executions and10native ordering/provenance checks. [Measured admissions](ADMISSIONS.json), [summary, exact identities/API/corpus/retained results](SUMMARY.json).
+
+The frozen21pilot is unchanged. Expanded129is17matches/112Unsupported/zeroerrors, with the original date maxExclusive row newly matching. Unchanged upstream requests/validities and original raw outcomes are retained. API remains55types/408rows. All nine signed Core1.81.17archives/runtime payloads match earlier identities and signatures freshly verify. The local unsigned alpha.0.45package, cache, source DLL and runtime payloads agree.
+
+Retained caller migration preserves binary callers and changes Schema, nine Core DLLs and runtime graphs.124passes; full23/33catalogs each retain one old1.81.2pin assertion failure; explicitly filtered22/32migration runs pass. Current public surface/authority checks use1.81.17. This is not a Schema-only replacement or full23/33pass claim. Earlier seals are verified by hash, never rerunning historical validators against changed inputs.
+
+Review finds no blocking issues. Specification consistency permits equal exclusive/exclusive endpoints (empty type) and incomparable endpoints without inventing an order; mixed inclusive/exclusive equal endpoints and reversed comparable bounds are Invalid. Base-valid sibling facet values are not rejected merely because their intersection is empty. Existing scalar capacities, owner authority and original values are retained. Normal source/package/metadata/audit checks apply. No new API, tag, registry publication or release-controller change.
+
+Batch owner authorization covers commit/push/PR/review/green merge, with main CI verification. [Batch queue/status](../schema-batch-20261124/STATUS.json) is maintained separately from this sealed evidence. Programmatic documentation checks do not claim visual acceptance.
