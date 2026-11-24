@@ -1,0 +1,8 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Window"><xs:restriction base="xs:date">
+    <xs:minInclusive value="2000-01-01Z"/>
+    <xs:maxExclusive value="2000-01-03Z"/>
+    <xs:explicitTimezone value="required"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="issued" type="Window"/>
+</xs:schema>

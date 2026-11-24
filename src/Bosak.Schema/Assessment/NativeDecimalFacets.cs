@@ -13,9 +13,11 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
+//                      | Charles Korthout | 0.3   | 24-11-2026     | Admit bounded opt-in decimal enumeration with exact normalized value keys |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Numerics;
 using System.Xml.Linq;
@@ -26,8 +28,9 @@ namespace Bosak.Schema;
 /// <summary>Compiles and enforces bounded decimal value-space facets.</summary>
 internal sealed class NativeDecimalFacets(
     XdmExactDecimal? lower, bool lowerExclusive, XdmExactDecimal? upper, bool upperExclusive,
-    int? totalDigits, int? fractionDigits, NativeDecimalFacets? parent = null)
+    int? totalDigits, int? fractionDigits, NativeDecimalFacets? parent = null, ImmutableHashSet<(BigInteger Coefficient, int Scale)>? enumeration = null)
 {
+    internal bool HasEnumeration => enumeration is not null || parent?.HasEnumeration == true;
     internal XdmExactDecimal? LowerBound => lower ?? parent?.LowerBound;
     internal XdmExactDecimal? UpperBound => upper ?? parent?.UpperBound;
     internal bool LowerExclusive => lower is not null ? lowerExclusive : parent?.LowerExclusive ?? false;
@@ -82,22 +85,34 @@ internal sealed class NativeDecimalFacets(
             own.TotalLimit, own.FractionLimit, inherited);
     }
 
-    internal static NativeDecimalFacets Compile(XElement restriction, NativeNumericLimits limits)
+    internal static NativeDecimalFacets Compile(XElement restriction, NativeNumericLimits limits, bool allowEnumeration = false)
     {
         XdmExactDecimal? lower=null, upper=null;
         bool lowerExclusive=false, upperExclusive=false;
         int? total=null, fraction=null;
         var seen=new HashSet<string>(StringComparer.Ordinal);
+        var entries = ImmutableHashSet.CreateBuilder<(BigInteger Coefficient, int Scale)>();
+        int sourceEntries = 0;
         foreach(var facet in NativeDecimalSchema.Elements(restriction))
         {
             NativeDecimalSchema.Require(facet.Name.NamespaceName=="http://www.w3.org/2001/XMLSchema" &&
-                facet.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits",
+                (facet.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits" || allowEnumeration && facet.Name.LocalName == "enumeration"),
                 "Unsupported decimal facet.", NativeDecimalUnsupportedReason.ValueType);
             var kind=facet.Name.LocalName;
-            NativeDecimalSchema.Require(seen.Add(kind), "Duplicate facet.", NativeDecimalUnsupportedReason.DeclarationShape);
+            NativeDecimalSchema.Require(kind == "enumeration" || seen.Add(kind), "Duplicate facet.", NativeDecimalUnsupportedReason.DeclarationShape);
             NativeDecimalSchema.Attributes(facet,"value");
             NativeDecimalSchema.Require(NativeDecimalSchema.Elements(facet).Count==0, "Facet children are unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
             var supplied=(string?)facet.Attribute("value");
+            if (kind == "enumeration")
+            {
+                NativeDecimalSchema.Require(++sourceEntries <= 16, "Decimal enumeration source capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+                if (supplied is null) throw new NativeProfileException(NativeOutcome.Invalid, "Enumeration value required.");
+                NativeDecimalSchema.Require(supplied.Length <= 256, "Decimal enumeration lexical capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+                var normalized = string.Join(" ", supplied.Split([' ', '\t', '\r', '\n'], StringSplitOptions.RemoveEmptyEntries));
+                var member = NativeDecimalSchema.ParseDecimal(normalized, limits, NativeOutcome.Invalid);
+                entries.Add((member.Coefficient, member.Scale));
+                continue;
+            }
             NativeDecimalSchema.Require(supplied is not null, "Facet value required.", NativeDecimalUnsupportedReason.ValueType);
             NativeDecimalSchema.Require(supplied!.Length<=256,"Facet lexical capacity exceeded.",NativeDecimalUnsupportedReason.RepresentationCapacity);
             var lexical=string.Join(" ",supplied.Split([' ','\t','\r','\n'],StringSplitOptions.RemoveEmptyEntries));
@@ -135,12 +150,13 @@ internal sealed class NativeDecimalFacets(
             NativeDecimalSchema.Require(compare<0 || compare==0 && lowerExclusive==upperExclusive,
                 "Inconsistent range facets.",NativeDecimalUnsupportedReason.ValueType);
         }
-        return new(lower,lowerExclusive,upper,upperExclusive,total,fraction);
+        return new(lower,lowerExclusive,upper,upperExclusive,total,fraction, enumeration: sourceEntries == 0 ? null : entries.ToImmutable());
     }
 
     internal bool Accepts(XdmExactDecimal value)
     {
         if (parent is not null && !parent.Accepts(value)) return false;
+        if (enumeration is not null && !enumeration.Contains((value.Coefficient, value.Scale))) return false;
         if(lower is { } lo) { var c=Compare(value,lo); if(c<0 || c==0 && lowerExclusive) return false; }
         if(upper is { } hi) { var c=Compare(value,hi); if(c>0 || c==0 && upperExclusive) return false; }
         if(fractionDigits is { } f && value.Scale>f) return false;
