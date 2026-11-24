@@ -1,0 +1,368 @@
+{
+  "status": "Unexecuted proposal; no implementation or test pass claim",
+  "facades": [
+    "NativeSchemaSession",
+    "NativeSchemaNodeDataSession"
+  ],
+  "cases": [
+    {
+      "id": "DT-001",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2024-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-002",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2000-02-29Z</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-003",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-004",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>-0004-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-005",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>-0001-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-006",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>10000-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-007",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-11-24+14:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-008",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-11-24-14:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-009",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-11-24+00:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-010",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-11-24-00:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-011",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r> \t2026-11-24\r\n</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-012",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>9223372036854775807-12-31</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-013",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>-9223372036854775808-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DT-014",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>1900-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-015",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2023-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-016",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-04-31</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-017",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-00-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-018",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-13-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-019",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-01-00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-020",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-01-32</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-021",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>+2026-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-022",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>026-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-023",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>02026-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-024",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-1-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-025",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-01-1</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-026",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-01-01z</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-027",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-01-01+14:01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-028",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-01-01-14:01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-029",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-01-01+00:60</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-030",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-01-01T00:00:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-031",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026-01-01\u00a0</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-032",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>2026- 01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-033",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DT-034",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>9223372036854775808-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false
+    },
+    {
+      "id": "DT-035",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>-9223372036854775809-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false
+    },
+    {
+      "id": "DT-036",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111-01-01</r>",
+      "normalizedLexicalCharacters": 256,
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "purpose": "Year capacity at lexical-character boundary; 257 also exceeds lexical budget",
+      "executed": false
+    },
+    {
+      "id": "DT-037",
+      "type": "xs:date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111-01-01</r>",
+      "normalizedLexicalCharacters": 257,
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "purpose": "Year capacity at lexical-character boundary; 257 also exceeds lexical budget",
+      "executed": false
+    }
+  ],
+  "followupTransportVectors": [
+    {
+      "type": "xs:dateTime",
+      "lexical": "2026-11-24T12:34:56.12345678901234567890Z",
+      "requirement": "exact seconds; never truncate or round to milliseconds"
+    },
+    {
+      "type": "xs:time",
+      "lexical": "24:00:00.000Z",
+      "requirement": "map to midnight without injecting date into detached time"
+    },
+    {
+      "type": "xs:dateTime",
+      "lexical": "0000-12-31T24:00:00",
+      "requirement": "calendar rollover, timezone absence retained"
+    },
+    {
+      "type": "xs:dateTimeStamp",
+      "lexical": "2026-11-24T00:00:00",
+      "requirement": "required timezone; builtin type remains deferred"
+    }
+  ]
+}

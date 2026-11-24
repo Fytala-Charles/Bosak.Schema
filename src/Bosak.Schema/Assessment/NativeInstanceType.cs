@@ -15,6 +15,8 @@
 //                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
 //                      | Charles Korthout | 0.3   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
 //                      | Charles Korthout | 0.4   | 22-11-2026     | Adopt qualified bounded native string patterns |
+//                      | Charles Korthout | 0.5   | 24-11-2026     | Probe revised bounded date transport in isolated source copy |
+//                      | Charles Korthout | 0.6   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -102,7 +104,7 @@ internal sealed partial class NativeDecimalSchema
             if (ReferenceEquals(current, declared)) { derives = true; break; }
         Check(derives, "Instance type does not derive from the declared type.");
         Require(!selected.IsComplex && !declared.IsComplex && selected.IsString == declared.IsString &&
-            selected.IsBoolean == declared.IsBoolean && selected.IsInteger == declared.IsInteger,
+            selected.IsDate == declared.IsDate && selected.IsBoolean == declared.IsBoolean && selected.IsInteger == declared.IsInteger,
             "Valid type derivation changes the admitted scalar representation.", NativeDecimalUnsupportedReason.ValueType);
         return selected;
     }

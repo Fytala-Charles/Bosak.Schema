@@ -45,6 +45,8 @@
 //                      | Charles Korthout | 1.22   | 22-11-2026     | Adopt qualified bounded builtin integer family |
 //                      | Charles Korthout | 1.23   | 23-11-2026     | Adopt qualified bounded native choice |
 //                      | Charles Korthout | 1.24   | 23-11-2026     | Adopt qualified bounded root all groups |
+//                      | Charles Korthout | 1.25   | 24-11-2026     | Probe revised bounded date transport in isolated source copy |
+//                      | Charles Korthout | 1.26   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -122,6 +124,7 @@ internal sealed partial class NativeDecimalSchema
             var integerType = maxStringCharacters is null ? null : new NativeType("integer", false, Xs.NamespaceName, isInteger: true);
             var named = new Dictionary<XName, NativeDecimalSchema>();
             var simple = CreateBuiltinIntegerTypes(integerType);
+            if (maxStringCharacters is not null) simple.Add(Xs + "date", new NativeType("date", false, Xs.NamespaceName, isDate: true));
             var typeNames = new HashSet<XName>();
             foreach (var type in types)
             {
@@ -279,7 +282,7 @@ internal sealed partial class NativeDecimalSchema
 
         var attributeUses = CompileAttributes(attributeMembers, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
 
-        var assertionNames = children.Where(c => !c.Type.IsBoolean && !c.Type.IsInteger).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
+        var assertionNames = children.Where(c => !c.Type.IsBoolean && !c.Type.IsInteger && !c.Type.IsDate).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var stringNames = stringType is null ? null : children.Where(c => c.Type.IsString).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var structuralPlans = CompileStructuralAssertions(assertionMembers.Where(IsStructuralAssertion), targetNamespace, assertionNamespace, cancellationToken);
         var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
@@ -339,7 +342,7 @@ internal sealed partial class NativeDecimalSchema
         NativeType? baseType = baseName == Xs + "decimal" ? decimalType : baseName == Xs + "integer" ? integerType : simple.GetValueOrDefault(baseName);
         if (nestedContext && baseType?.IsInteger != true && Elements(extension).Any(e => e.Name == Xs + "assert"))
             Require(false, "Noninteger nested assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
-        Require(baseType is not null && !baseType.IsString && !baseType.IsBoolean,
+        Require(baseType is not null && !baseType.IsString && !baseType.IsBoolean && !baseType.IsDate,
             "Only direct admitted decimal simple-content bases are supported.", NativeDecimalUnsupportedReason.ValueType);
         if (baseType!.IsInteger)
         {
@@ -512,6 +515,10 @@ internal sealed partial class NativeDecimalSchema
             var lexical = Collapse(text);
             Check(lexical is "true" or "false" or "1" or "0", "Invalid Boolean lexical form.");
             return new NativeElementState(declaration, null, BooleanValue: lexical is "true" or "1");
+        }
+        else if (declaration.Type.IsDate)
+        {
+            return new NativeElementState(declaration, null, DateValue: NativeDateParser.Parse(text));
         }
         else if (declaration.Type.IsInteger)
         {
@@ -711,7 +718,7 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false)
 {
     internal NativeType? DerivationBase { get; } = derivationBase;
     internal bool IsComplexRestriction { get; } = isComplexRestriction;
@@ -721,6 +728,7 @@ internal sealed class NativeType(string? name, bool hasNoTypedValue, string name
     internal bool EmptyContent { get; init; }
     internal bool IsComplex => EmptyContent || HasNoTypedValue || ContentType is not null;
     internal NativeStringFacets? StringFacets { get; } = stringFacets;
+    internal bool IsDate { get; } = isDate;
     internal bool IsInteger { get; } = isInteger;
     internal bool IsBoolean { get; } = isBoolean;
     internal bool IsString { get; } = isString;
@@ -740,7 +748,7 @@ internal sealed class NativeDeclaration(string name, NativeType type, int minOcc
     internal int MinOccurs { get; } = minOccurs;
     internal int MaxOccurs { get; } = maxOccurs;
 }
-internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null)
+internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null, XPathDateTime? DateValue = null)
 {
     internal NativeType? EffectiveType { get; init; }
     internal NativeType GoverningType => EffectiveType ?? Declaration.Type;

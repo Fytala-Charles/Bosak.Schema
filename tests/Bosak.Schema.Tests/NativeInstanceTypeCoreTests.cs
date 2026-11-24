@@ -12,6 +12,8 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 21-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 24-11-2026     | Reconcile measured date outcomes in isolated test copy |
+//                      | Charles Korthout | 0.3   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -183,7 +185,7 @@ public sealed class NativeInstanceTypeCoreTests
     /// <summary>Unsupported and invalid requests publish neither partial node facts nor a snapshot.</summary>
     /// <param name="request">Requested QName.</param>
     /// <param name="expected">Expected status.</param>
-    [Theory][InlineData("missing:Type",SchemaAssessmentStatus.Invalid)][InlineData("xs:date",SchemaAssessmentStatus.Unsupported)][InlineData("xs:integer",SchemaAssessmentStatus.Unsupported)]
+    [Theory][InlineData("missing:Type",SchemaAssessmentStatus.Invalid)][InlineData("xs:date",SchemaAssessmentStatus.Invalid)][InlineData("xs:integer",SchemaAssessmentStatus.Unsupported)]
     public void RefusedRequests_PublishNothing(string request,SchemaAssessmentStatus expected)
     {
         var p=Payload(request:request);using var f=new Fixture(p.Schema,p.Xml);Assert.Equal(expected,f.Assessment.Status);Assert.False(f.Input.IsAssessed);Assert.Null(f.Snapshot);Assert.Null(f.Assessment.Evidence);Assert.Empty(f.Assessment.Facts);
