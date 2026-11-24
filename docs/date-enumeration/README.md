@@ -1,0 +1,9 @@
+# Proposed bounded date enumeration
+
+24 November 2026. Contract review only; no new engine behavior, semantic adoption, test pass or corpus admission is claimed. The uncommitted Core 1.81.17 baseline is the proposed qualification prerequisite, not a new committed source identity. Reviewed Git head is 357ae494f645d9d20d1790d0a15e20be290d13d7; PR47 merged as cb81d80e42528a9ebca98366818309995a70bb87 with an identical tree.
+
+[Contract](CONTRACT.md), [immutable specification review](SPECIFICATION-REVIEW.json), [unexecuted XML cases](CASE-PLAN.json), [unexecuted native gates](NATIVE-GATES.json), [original public examples](ORIGINAL-EXAMPLES.json) and [exact working inputs](ENGINE-INPUTS.json) define the proposal. Existing capacities remain profile limits, not limits of XSD 1.1. The separate [Core baseline candidate](../core-18117-baseline/README.md) passed its own qualification before this planning step.
+
+Next: record separate experimental adoption, qualify an isolated candidate on signed Core 1.81.17, measure every changed original expectation and refusal, then consider separate production adoption. Preserve original sources and IDs, prior sealed packets and beta.1 release controls. No commit/push without an explicit request; no publication authority is implied.
+
+Validation: 68 unique well-formed schema/instance proposals and 20 gates are structurally checked, without running semantic cases. All 66 earlier packets /4,432 sealed entries, 319 current engine/test inputs, normative body hashes and two original fixture identities verify. Twelve documentation pages render programmatically and 910 local links resolve; this is not visual acceptance. Documentation hygiene passes. Current source/runtime/package files are unchanged by this planning step. The prior 4,442/3,097 Core baseline qualification belongs to that separate dependency change.

@@ -1,0 +1,37 @@
+  Determining projects to restore...
+  Restored D:\Development\Bosak\.guard-tmp\schema-date-enumeration-feasibility-20261124\public\Regression.csproj (in 239 ms).
+  1 of 2 projects are up-to-date for restore.
+  Candidate -> D:\Development\Bosak\.guard-tmp\schema-date-enumeration-feasibility-20261124\candidate\bin\Release\net10.0\Bosak.Schema.dll
+  Regression -> D:\Development\Bosak\.guard-tmp\schema-date-enumeration-feasibility-20261124\public\bin\Release\net10.0\Bosak.Schema.PublicConsumer.Tests.dll
+Test run for D:\Development\Bosak\.guard-tmp\schema-date-enumeration-feasibility-20261124\public\bin\Release\net10.0\Bosak.Schema.PublicConsumer.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:07.26]     Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Exclusions [FAIL]
+  Failed Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Exclusions [3 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: Unsupported
+Actual:   Valid
+  Stack Trace:
+     at Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Exclusions() in D:\Development\Bosak\.worktrees\Schema.Coverage\tests\Bosak.Schema.PublicConsumer.Tests\NativeDateConsumerTests.cs:line 61
+   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:08.95]     Bosak.Schema.PublicConsumer.Tests.NativeDateSimpleContentConsumerTests.Contract(id: "DSC-075", json: "{\r\n      \"id\": \"DSC-075\",\r\n      \"purpose"···, data: False) [FAIL]
+  Failed Bosak.Schema.PublicConsumer.Tests.NativeDateSimpleContentConsumerTests.Contract(id: "DSC-075", json: "{\r\n      \"id\": \"DSC-075\",\r\n      \"purpose"···, data: False) [< 1 ms]
+  Error Message:
+   DSC-075:[]
+  Stack Trace:
+     at Bosak.Schema.PublicConsumer.Tests.NativeDateSimpleContentConsumerTests.Contract(String id, String json, Boolean data) in D:\Development\Bosak\.worktrees\Schema.Coverage\tests\Bosak.Schema.PublicConsumer.Tests\NativeDateSimpleContentConsumerTests.cs:line 46
+   at InvokeStub_NativeDateSimpleContentConsumerTests.Contract(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:09.66]     Bosak.Schema.PublicConsumer.Tests.NativeDateSimpleContentConsumerTests.Contract(id: "DSC-075", json: "{\r\n      \"id\": \"DSC-075\",\r\n      \"purpose"···, data: True) [FAIL]
+  Failed Bosak.Schema.PublicConsumer.Tests.NativeDateSimpleContentConsumerTests.Contract(id: "DSC-075", json: "{\r\n      \"id\": \"DSC-075\",\r\n      \"purpose"···, data: True) [< 1 ms]
+  Error Message:
+   DSC-075:[]
+  Stack Trace:
+     at Bosak.Schema.PublicConsumer.Tests.NativeDateSimpleContentConsumerTests.Contract(String id, String json, Boolean data) in D:\Development\Bosak\.worktrees\Schema.Coverage\tests\Bosak.Schema.PublicConsumer.Tests\NativeDateSimpleContentConsumerTests.cs:line 45
+   at InvokeStub_NativeDateSimpleContentConsumerTests.Contract(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+Results File: D:\Development\Bosak\.guard-tmp\schema-date-enumeration-feasibility-20261124\public-unchanged-results\charl_CHARLES_2026-11-24_19_11_56_net10.0.trx
+
+Failed!  - Failed:     3, Passed:  3094, Skipped:     0, Total:  3097, Duration: 14 s - Bosak.Schema.PublicConsumer.Tests.dll (net10.0)

@@ -1,0 +1,690 @@
+{
+  "status": "Authored proposals only; no native executions",
+  "implicitTimezoneMinutesForSensitiveCases": [
+    -840,
+    0,
+    840
+  ],
+  "cases": [
+    {
+      "id": "root-member",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>1999-05-31</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "root-nonmember",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>1999-06-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "anonymous-member",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:simpleType><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r>1999-05-31</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "anonymous",
+      "note": ""
+    },
+    {
+      "id": "anonymous-nonmember",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:simpleType><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r>1999-06-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "anonymous",
+      "note": ""
+    },
+    {
+      "id": "terminal-member",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"D\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1999-05-31</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "terminal",
+      "note": ""
+    },
+    {
+      "id": "terminal-nonmember",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"D\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1999-06-01</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "terminal",
+      "note": ""
+    },
+    {
+      "id": "nested-member",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"box\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"D\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><box><v>1999-05-31</v></box></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "nested",
+      "note": ""
+    },
+    {
+      "id": "nested-nonmember",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"box\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"D\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><box><v>1999-06-01</v></box></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "nested",
+      "note": ""
+    },
+    {
+      "id": "attribute-member",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:attribute name=\"d\" type=\"D\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r d=\"1999-05-31\"/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "attribute",
+      "note": ""
+    },
+    {
+      "id": "attribute-nonmember",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:attribute name=\"d\" type=\"D\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r d=\"1999-06-01\"/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "attribute",
+      "note": ""
+    },
+    {
+      "id": "extension-member",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:simpleContent><xs:extension base=\"D\"><xs:attribute name=\"label\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r label=\"ok\">1999-05-31</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "extension",
+      "note": ""
+    },
+    {
+      "id": "extension-nonmember",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:simpleContent><xs:extension base=\"D\"><xs:attribute name=\"label\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r label=\"ok\">1999-06-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "extension",
+      "note": ""
+    },
+    {
+      "id": "offset-equivalent",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01+13:00\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>1999-12-31-11:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "reverse-offset",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-12-31-11:00\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01+13:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "offset24",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-03-01+14:00\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-02-29-10:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "year-zero-crossing",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"0000-01-01+13:00\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>-0001-12-31-11:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "year-one-crossing",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"0001-01-01+13:00\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>0000-12-31-11:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "absent-vs-zero",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01Z</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "zero-vs-absent",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01Z\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "same-day-offset",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01+01:00\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01+02:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "overlap-not-equality",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01+14:00\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>1999-12-31-14:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "explicit-zero-Z",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01Z\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01Z</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "explicit-zero-+00:00",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01Z\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01+00:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "explicit-zero--00:00",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01Z\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01-00:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "boundary-0000-02-29",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"0000-02-29\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "boundary--0004-02-29",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"-0004-02-29\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>-0004-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "boundary-10000-01-01",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"10000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>10000-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "boundary-9223372036854775807-12-31+14:00",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"9223372036854775807-12-31+14:00\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>9223372036854775807-12-31+14:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "boundary--9223372036854775807-01-01-14:00",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"-9223372036854775807-01-01-14:00\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>-9223372036854775807-01-01-14:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "invalid-instance-29",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2001-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "invalid-instance-30",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>1900-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "invalid-instance-31",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-13-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "invalid-instance-32",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01+14:01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "invalid-instance-33",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01T00:00:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "invalid-instance-34",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "invalid-instance-35",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000- 01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "invalid-instance-36",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01\u00a0</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "invalid-facet-37",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "invalid-facet-38",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "invalid-facet-39",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2001-02-29\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "invalid-facet-40",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01+14:01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "facet-capacity-41",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"9223372036854775808-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "instance-capacity-42",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>9223372036854775808-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "facet-capacity-43",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"-9223372036854775808-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "instance-capacity-44",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>-9223372036854775808-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "facet-capacity-45",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "instance-capacity-46",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "collapse",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"  2000-01-01Z  \"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>\n 2000-01-01+00:00\t</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "alternatives",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "duplicates",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01Z\"/><xs:enumeration value=\"2000-01-01+00:00\"/><xs:enumeration value=\"2000-01-01-00:00\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01Z</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "equal-distinct-members",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01+13:00\"/><xs:enumeration value=\"1999-12-31-11:00\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>1999-12-31-11:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "source-capacity-16",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "source-capacity-17",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "facet-free-alias",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "excluded-minInclusive",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/><xs:minInclusive value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "excluded-maxExclusive",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/><xs:maxExclusive value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "excluded-explicitTimezone",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/><xs:explicitTimezone value=\"optional\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "excluded-pattern",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/><xs:pattern value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "excluded-assertion",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2000-01-01\"/><xs:assertion test=\"true()\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "excluded-base-xs:dateTime",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:dateTime\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "excluded-base-xs:time",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:time\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "excluded-base-xs:dateTimeStamp",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:dateTimeStamp\"><xs:enumeration value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "facet-extra-attribute",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\" fixed=\"true\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>1999-05-31</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "facet-child",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"><xs:annotation/></xs:enumeration></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>1999-05-31</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "named-enumeration-chain",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"E\"><xs:restriction base=\"D\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"E\"/></xs:schema>",
+      "instance": "<r>1999-05-31</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "unused-invalid-enumeration",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Unused\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"2001-02-29\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>1999-05-31</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "unused-unsupported-date-bound",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Unused\"><xs:restriction base=\"xs:date\"><xs:maxExclusive value=\"2000-01-01\"/></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>1999-05-31</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    {
+      "id": "date-complex-restriction-guard",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:complexType name=\"C\"><xs:simpleContent><xs:extension base=\"D\"/></xs:simpleContent></xs:complexType><xs:complexType name=\"R\"><xs:simpleContent><xs:restriction base=\"C\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name=\"r\" type=\"R\"/></xs:schema>",
+      "instance": "<r>1999-05-31</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "extension",
+      "note": "Date complex restriction remains excluded despite valid simple date membership."
+    }
+  ]
+}

@@ -49,6 +49,8 @@
 //                      | Charles Korthout | 1.26   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      | Charles Korthout | 1.27   | 24-11-2026     | Probe bounded date simple content in isolated source copy |
 //                      | Charles Korthout | 1.28   | 24-11-2026     | Adopt qualified bounded date simple-content extension |
+//                      | Charles Korthout | 1.29   | 24-11-2026     | Probe bounded date enumeration in isolated source only                                      |
+//                      | Charles Korthout | 1.30   | 24-11-2026     | Adopt qualified bounded date enumeration and internal value equality |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -520,7 +522,10 @@ internal sealed partial class NativeDecimalSchema
         }
         else if (declaration.Type.IsDate)
         {
-            return new NativeElementState(declaration, null, DateValue: NativeDateParser.Parse(text));
+            if (declaration.Type.DateFacets is not null) Require(text.Length <= maxStringCharacters!.Value, "Date enumeration value capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            var value = NativeDateParser.Parse(text);
+            Check(declaration.Type.DateFacets?.Accepts(value) ?? true, "Date enumeration violation.");
+            return new NativeElementState(declaration, null, DateValue: value);
         }
         else if (declaration.Type.IsInteger)
         {
@@ -720,7 +725,7 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null)
 {
     internal NativeType? DerivationBase { get; } = derivationBase;
     internal bool IsComplexRestriction { get; } = isComplexRestriction;
@@ -731,6 +736,7 @@ internal sealed class NativeType(string? name, bool hasNoTypedValue, string name
     internal bool IsComplex => EmptyContent || HasNoTypedValue || ContentType is not null;
     internal NativeStringFacets? StringFacets { get; } = stringFacets;
     internal bool IsDate { get; } = isDate;
+    internal NativeDateFacets? DateFacets { get; } = dateFacets;
     internal bool IsInteger { get; } = isInteger;
     internal bool IsBoolean { get; } = isBoolean;
     internal bool IsString { get; } = isString;

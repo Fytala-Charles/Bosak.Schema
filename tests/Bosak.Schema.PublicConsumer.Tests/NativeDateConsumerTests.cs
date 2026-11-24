@@ -16,6 +16,8 @@
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Adopt qualified date controls with separated public and identity lanes |
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Reconcile measured date extension in isolated test copy |
 //                      | Charles Korthout | 0.5   | 24-11-2026     | Adopt measured date extension factory expectation |
+//                      | Charles Korthout | 0.6   | 24-11-2026     | Reconcile measured date-enumeration outcomes in isolated tests only                         |
+//                      | Charles Korthout | 0.7   | 24-11-2026     | Adopt measured date enumeration expectation reconciliation |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -58,7 +60,7 @@ public sealed class NativeDateConsumerTests
   Assert.Equal(0,detached.DateValue.Year);Assert.Null(detached.DateValue.TimezoneOffsetMinutes);Assert.Throws<InvalidOperationException>(()=>detached.IntegerValue);Assert.Throws<InvalidOperationException>(()=>detached.StringValue);Assert.Throws<InvalidOperationException>(()=>detached.DecimalValue);Assert.Throws<InvalidOperationException>(()=>detached.BooleanValue);Assert.Empty(typeof(NativeDateValue).GetConstructors());Assert.Equal(5,(int)NativeScalarKind.Date);
  }
  /// <summary>Unsupported temporal facets and legacy grammar remain refused.</summary>
- [Fact]public void Exclusions(){foreach(var facet in new[]{"enumeration","minInclusive","maxExclusive","pattern","explicitTimezone"}){var schema=Start+"<xs:simpleType name='Unused'><xs:restriction base='xs:date'><xs:"+facet+" value='2000-01-01'/></xs:restriction></xs:simpleType><xs:element name='r' type='xs:string'/></xs:schema>";Assert.Equal(NativeSchemaOutcome.Unsupported,NativeSchemaSession.Create(schema,Options).Outcome);Assert.Equal(NativeSchemaOutcome.Unsupported,NativeSchemaNodeDataSession.Create(schema,Options).Outcome);}Assert.Equal(NativeDecimalOutcome.Unsupported,NativeDecimalSession.Create(Simple,new(256,256,1,32,1,256,256)).Outcome);}
+ [Fact]public void Exclusions(){foreach(var facet in new[]{"enumeration","minInclusive","maxExclusive","pattern","explicitTimezone"}){var schema=Start+"<xs:simpleType name='Unused'><xs:restriction base='xs:date'><xs:"+facet+" value='2000-01-01'/></xs:restriction></xs:simpleType><xs:element name='r' type='xs:string'/></xs:schema>";if(facet=="enumeration"){var a=NativeSchemaSession.Create(schema,Options);var b=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(NativeSchemaOutcome.Valid,a.Outcome);Assert.Equal(NativeSchemaOutcome.Valid,b.Outcome);a.Value!.Dispose();b.Value!.Dispose();}else{Assert.Equal(NativeSchemaOutcome.Unsupported,NativeSchemaSession.Create(schema,Options).Outcome);Assert.Equal(NativeSchemaOutcome.Unsupported,NativeSchemaNodeDataSession.Create(schema,Options).Outcome);}}Assert.Equal(NativeDecimalOutcome.Unsupported,NativeDecimalSession.Create(Simple,new(256,256,1,32,1,256,256)).Outcome);}
 
  /// <summary>Gets placements through both public facades.</summary><returns>Cases.</returns>
  public static IEnumerable<object[]> PublicPlacements(){foreach(var r in Placements())foreach(bool data in new[]{false,true})yield return[r[0],r[1],r[2],data,r[3]];}

@@ -31,6 +31,14 @@ A public-example beta.2 gap assessment finds no confirmed new beta.1 defect. Nam
 
 # Bosak.Schema Integration
 
+24 November 2026: [bounded date enumeration production candidate](date-enumeration-implementation/README.md) adopts direct date membership with preserved timezone presence/original values on Core1.81.17. Source4,874cases, package3,509public/20native, six examples and unchanged55type/408rowAPI qualify. Expanded sample16matches/113Unsupported/zeroerrors. Retained migration passes124/22/32behavior cases; two full historical catalogs retain their explicit old-Core pin assertion failures. REQ-009 remains In Progress; no publication.
+
+24 November 2026: [isolated date-enumeration feasibility](date-enumeration-feasibility/README.md) passes428native controls and4,442regression results after three measured expectation updates. API55types/408rows unchanged; expanded sample16matches/113Unsupported/zero errors. Original container comments are already admitted; scalar comments remain refused. Production enumeration behavior and earlier sealed evidence are unchanged.
+
+24 November 2026: [date-enumeration/value-equality contract](date-enumeration/README.md) prepared for review on the Core 1.81.17 baseline candidate. Proposed direct date restrictions preserve timezone presence and original typed representations; no implementation/adoption or new semantic execution is claimed. REQ-009 remains In Progress.
+
+24 November 2026: the development candidate now requires **Core 1.81.17**. New qualification uses this single baseline; earlier two-pin evidence and published beta.1 remain historical and unchanged. [Dependency adoption](core-18117-baseline/README.md).
+
 > Use schema services without activation and with explicit supported coverage.
 
 
@@ -38,7 +46,7 @@ A public-example beta.2 gap assessment finds no confirmed new beta.1 defect. Nam
 
 **Current release — 18 November 2026:** [Bosak.Schema 0.5.0-beta.1](https://www.nuget.org/packages/Bosak.Schema/0.5.0-beta.1) is published and independently verified. [GitHub prerelease](https://github.com/Fytala-Charles/Bosak.Schema/releases/tag/v0.5.0-beta.1), [scope and publication receipt](BETA1_RELEASE.md).
 
-Build this source with .NET 10. The project references Bosak XPath API/providers, XSLT and XQuery 1.81.2 after the merged dependency adoption. Install the published package with `dotnet add package Bosak.Schema --version 0.5.0-beta.1`. Source builds use MinVer; the product release tag and later documentation/controller commits have distinct identities.
+Build this source with .NET 10. The development project references Bosak XPath API/providers, XSLT and XQuery 1.81.17; earlier dependency-adoption and published beta receipts retain 1.81.2. Install the published package with `dotnet add package Bosak.Schema --version 0.5.0-beta.1`. Source builds use MinVer; the product release tag and later documentation/controller commits have distinct identities.
 
 ## 2. Compile and Validate
 
