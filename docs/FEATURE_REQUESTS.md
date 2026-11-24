@@ -31,6 +31,8 @@ A public-example beta.2 gap assessment finds no confirmed new beta.1 defect. Nam
 
 # Bosak.Schema Feature Requests
 
+24 November 2026: authorized specification batch slice1 adds bounded date bounds/explicitTimezone on Core1.81.17. [Contract](date-bounds/CONTRACT.md); 25measured original results reconciled without changing stimuli/IDs. Full XSD1.1 and publication remain separate. Batch commit/push/PR/green-merge authorization persists for up to20slices.
+
 24 November 2026: [bounded date enumeration production candidate](date-enumeration-implementation/README.md) adopts direct date membership with preserved timezone presence/original values on Core1.81.17. Source4,874cases, package3,509public/20native, six examples and unchanged55type/408rowAPI qualify. Expanded sample16matches/113Unsupported/zeroerrors. Retained migration passes124/22/32behavior cases; two full historical catalogs retain their explicit old-Core pin assertion failures. REQ-009 remains In Progress; no publication.
 
 24 November 2026: [isolated date-enumeration feasibility](date-enumeration-feasibility/README.md) passes428native controls and4,442regression results after three measured expectation updates. API55types/408rows unchanged; expanded sample16matches/113Unsupported/zero errors. Original container comments are already admitted; scalar comments remain refused. Production enumeration behavior and earlier sealed evidence are unchanged.
