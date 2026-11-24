@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 24-11-2026     | Adopt qualified bounded date enumeration and internal value equality |
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Guard restriction text through the shared schema parser |
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Add bounded date ordering facets and explicit timezone constraints |
+//                      | Charles Korthout | 0.5   | 24-11-2026     | Validate inherited date facets and exclusive endpoint exceptions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Numerics;
@@ -27,9 +28,19 @@ internal sealed class NativeDateFacets(
     HashSet<(bool Zoned, BigInteger Minutes)>? entries,
     XPathDateTime? lower = null, bool lowerExclusive = false,
     XPathDateTime? upper = null, bool upperExclusive = false,
-    string timezone = "optional")
+    string timezone = "optional", NativeDateFacets? parent = null)
 {
-    internal static NativeDateFacets? Compile(XElement restriction, int maxCharacters)
+    private NativeDateFacets? Parent => parent;
+    private XPathDateTime? Lower => lower;
+    private XPathDateTime? Upper => upper;
+    private bool LowerExclusive => lowerExclusive;
+    private bool UpperExclusive => upperExclusive;
+    private string Timezone => timezone;
+
+    internal static NativeDateFacets? Compile(XElement restriction, int maxCharacters) =>
+        CompileDerived(restriction, maxCharacters, null);
+
+    internal static NativeDateFacets? CompileDerived(XElement restriction, int maxCharacters, NativeDateFacets? parent)
     {
         var facets = NativeDecimalSchema.Elements(restriction);
         var seen = new HashSet<string>(StringComparer.Ordinal);
@@ -46,7 +57,7 @@ internal sealed class NativeDateFacets(
         }
         NativeDecimalSchema.Require(facets.Count(f => f.Name.LocalName == "enumeration") <= 16,
             "Date enumeration source capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
-        if (facets.Count == 0) return null;
+        if (facets.Count == 0) return parent is null ? null : new(null, parent: parent);
         if (seen.Contains("minInclusive") && seen.Contains("minExclusive") ||
             seen.Contains("maxInclusive") && seen.Contains("maxExclusive")) Invalid("Conflicting date bound kinds.");
         HashSet<(bool Zoned, BigInteger Minutes)>? entries = null;
@@ -65,9 +76,13 @@ internal sealed class NativeDateFacets(
             {
                 timezone = string.Join(" ", text.Split([' ', '\t', '\r', '\n'], StringSplitOptions.RemoveEmptyEntries));
                 if (timezone is not ("optional" or "required" or "prohibited")) Invalid("Invalid explicitTimezone value.");
+                for (var inherited = parent; inherited is not null; inherited = inherited.Parent)
+                    if (inherited.Timezone != "optional" && inherited.Timezone != timezone)
+                        Invalid("Timezone facet widens the base type.");
                 continue;
             }
             var value = NativeDateParser.Parse(text);
+            if (parent is not null) ValidateDerivedValue(kind, value, parent);
             if (kind == "enumeration") (entries ??= []).Add(Key(value));
             else if (kind.StartsWith("min", StringComparison.Ordinal)) lower = value;
             else upper = value;
@@ -77,11 +92,12 @@ internal sealed class NativeDateFacets(
             var compare = Compare(lo, hi);
             if (compare > 0 || compare == 0 && lowerExclusive != upperExclusive) Invalid("Inconsistent date bounds.");
         }
-        return new(entries, lower, lowerExclusive, upper, upperExclusive, timezone);
+        return new(entries, lower, lowerExclusive, upper, upperExclusive, timezone, parent);
     }
 
     internal bool Accepts(XPathDateTime value)
     {
+        if (parent is not null && !parent.Accepts(value)) return false;
         if (timezone == "required" && !value.HasTimezone || timezone == "prohibited" && value.HasTimezone) return false;
         if (entries is not null && !entries.Contains(Key(value))) return false;
         if (lower is { } lo)
@@ -112,6 +128,46 @@ internal sealed class NativeDateFacets(
             if (x.Minutes > y.Minutes + 840) return 1;
         }
         return null;
+    }
+
+    private static void ValidateDerivedValue(string kind, XPathDateTime value, NativeDateFacets parent)
+    {
+        if (kind == "enumeration")
+        {
+            if (!parent.Accepts(value)) Invalid("Enumeration member is outside the base type.");
+            return;
+        }
+        var minimum = kind.StartsWith("min", StringComparison.Ordinal);
+        var exclusive = kind.EndsWith("Exclusive", StringComparison.Ordinal);
+        var repeatsExclusiveEndpoint = false;
+        for (var inherited = parent; inherited is not null; inherited = inherited.Parent)
+        {
+            if (inherited.Lower is { } lo)
+            {
+                var compare = Compare(value, lo);
+                if (minimum)
+                {
+                    if (compare < 0 || !exclusive && inherited.LowerExclusive && compare == 0)
+                        Invalid("Lower bound widens the base type.");
+                    if (exclusive && inherited.LowerExclusive && Key(value) == Key(lo)) repeatsExclusiveEndpoint = true;
+                }
+                else if (compare < 0 || (exclusive || inherited.LowerExclusive) && compare == 0)
+                    Invalid("Upper bound conflicts with the base lower bound.");
+            }
+            if (inherited.Upper is { } hi)
+            {
+                var compare = Compare(value, hi);
+                if (!minimum)
+                {
+                    if (compare > 0 || !exclusive && inherited.UpperExclusive && compare == 0)
+                        Invalid("Upper bound widens the base type.");
+                    if (exclusive && inherited.UpperExclusive && Key(value) == Key(hi)) repeatsExclusiveEndpoint = true;
+                }
+                else if (compare > 0 || (exclusive || inherited.UpperExclusive) && compare == 0)
+                    Invalid("Lower bound conflicts with the base upper bound.");
+            }
+        }
+        if (!repeatsExclusiveEndpoint && !parent.Accepts(value)) Invalid("Date bound is outside the base type.");
     }
 
     private static void Invalid(string message) => throw new NativeProfileException(NativeOutcome.Invalid, message);

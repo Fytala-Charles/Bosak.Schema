@@ -51,6 +51,7 @@
 //                      | Charles Korthout | 1.28   | 24-11-2026     | Adopt qualified bounded date simple-content extension |
 //                      | Charles Korthout | 1.29   | 24-11-2026     | Probe bounded date enumeration in isolated source only                                      |
 //                      | Charles Korthout | 1.30   | 24-11-2026     | Adopt qualified bounded date enumeration and internal value equality |
+//                      | Charles Korthout | 1.31   | 24-11-2026     | Resolve named simple date dependencies with bounded cycle guards |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -135,15 +136,27 @@ internal sealed partial class NativeDecimalSchema
                 Require(typeNames.Add(XName.Get(Name(type, NativeDecimalUnsupportedReason.DeclarationShape), targetNamespace)),
                     "Duplicate named type.", NativeDecimalUnsupportedReason.DeclarationShape);
             }
-            // Direct primitive restrictions have no forward dependency on user-defined types.
-            foreach (var type in types.Where(t => t.Name == Xs + "simpleType"))
+            // Resolve closed simple-type dependencies eagerly, including forward date bases.
+            var simpleDefinitions = types.Where(t => t.Name == Xs + "simpleType")
+                .ToDictionary(t => XName.Get(Name(t), targetNamespace));
+            Require(!simpleDefinitions.Keys.Any(key => key.Namespace == Xs && KnownBuiltinNames.Contains(key.LocalName)), "Built-in type redeclaration is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+            var resolvingSimple = new HashSet<XName>();
+            NativeType ResolveSimple(XName key)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+                if (simple.TryGetValue(key, out var known)) return known;
+                Require(resolvingSimple.Add(key), "Simple dependency cycle is outside the profile.", NativeDecimalUnsupportedReason.ValueType);
+                var type = simpleDefinitions[key];
                 Attributes(type, "name");
-                var name = Name(type);
-                var restricted = CompileRestriction(type, name, targetNamespace, limits, maxStringCharacters, patternCompilation, simple);
-                simple.Add(XName.Get(name, targetNamespace), restricted);
+                var restriction = Single(type, "restriction");
+                var dependency = ResolveTypeName(restriction, "base");
+                if (!simple.ContainsKey(dependency) && simpleDefinitions.ContainsKey(dependency)) ResolveSimple(dependency);
+                var restricted = CompileRestriction(type, Name(type), targetNamespace, limits, maxStringCharacters, patternCompilation, simple);
+                simple.Add(key, restricted);
+                resolvingSimple.Remove(key);
+                return restricted;
             }
+            foreach (var key in simpleDefinitions.Keys) ResolveSimple(key);
             var anonymousSimple = CompileAnonymousRestrictions(root, limits, maxStringCharacters, cancellationToken, patternCompilation, simple);
             if (stringType is not null && HasNestedDeclarations(root, types, targetNamespace))
                 return NativeResult<NativeDecimalSchema>.Valid(CompileNestedSchema(root, types, declarations, targetNamespace,

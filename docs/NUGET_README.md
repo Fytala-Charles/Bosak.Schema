@@ -1295,7 +1295,7 @@ Direct named or anonymous restrictions of xs:date may contain up to 16 enumerati
 
 These dates begin at the same instant, so membership succeeds. ReadRootScalar().DateValue or ReadElement([]).DateValue returns the instance's year 1999, month 12, day 31 and offset -660 minutes. Export retains its parsed lexical content. The matching enumeration entry does not replace the instance value.
 
-All entries must be valid dates for the base type. Missing/invalid bounded facet values are Invalid schemas. The 17th source entry is Unsupported/RepresentationCapacity even when duplicates would collapse to fewer values. Facet and enumerated-instance text also obey MaxStringCharacters; the existing normalized 256-character and year capacities apply. Whitespace inside an otherwise empty enumeration element is allowed. User-defined simple restriction chains, date patterns/assertions and date complex restriction remain outside the profile. This feature does not change public equality/hash methods, XPath date comparison semantics or the legacy decimal facade.
+All entries must be valid dates for the base type. Missing/invalid bounded facet values are Invalid schemas. The 17th source entry is Unsupported/RepresentationCapacity even when duplicates would collapse to fewer values. Facet and enumerated-instance text also obey MaxStringCharacters; the existing normalized 256-character and year capacities apply. Whitespace inside an otherwise empty enumeration element is allowed. Non-date user-defined simple restriction chains, date patterns/assertions and date complex restriction remain outside the profile. This feature does not change public equality/hash methods, XPath date comparison semantics or the legacy decimal facade.
 
 ### Date bounds and timezone presence
 
@@ -1316,4 +1316,27 @@ Direct date restrictions may combine enumeration with minInclusive, minExclusive
 <issued>2000-01-02Z</issued>
 ```
 
-The instance is Valid and retains year 2000, month 1, day 2 and explicit zero offset. The same date without a timezone is Invalid. The upper-bound date is excluded. Base-valid enumeration and bound declarations are not validated against sibling facets; an empty intersection is not itself a schema error. Fixed facets, named date derivation chains and date complex restriction remain separate.
+The instance is Valid and retains year 2000, month 1, day 2 and explicit zero offset. The same date without a timezone is Invalid. The upper-bound date is excluded. Base-valid enumeration and bound declarations are not validated against sibling facets; an empty intersection is not itself a schema error. Fixed facets and date complex restriction remain separate.
+
+### Named date derivation chains
+
+Named date restrictions may derive from other admitted named date types. Forward references are resolved within the closed schema; every component retains its own identity. Facet-free aliases inherit all constraints. Enumeration members and bound values must be valid for the base type, with the XSD exception for repeating an inherited same-side exclusive endpoint. Explicit timezone constraints may narrow optional to required/prohibited, but cannot widen or swap an inherited required/prohibited constraint.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Window"><xs:restriction base="Start">
+    <xs:maxExclusive value="2000-01-03Z"/>
+  </xs:restriction></xs:simpleType>
+  <xs:simpleType name="Start"><xs:restriction base="xs:date">
+    <xs:minInclusive value="2000-01-01Z"/>
+    <xs:explicitTimezone value="required"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="issued" type="Window"/>
+</xs:schema>
+```
+
+```xml
+<issued>2000-01-02Z</issued>
+```
+
+This forward reference compiles, and the instance retains its original date and zero offset. Both inherited lower/timezone constraints and the derived upper bound apply. Up to 16 global type definitions are admitted; cycles, unresolved bases and built-in redeclarations are Unsupported. Fixed facets, general non-date restriction chains, date patterns and date complex restriction remain outside this slice.

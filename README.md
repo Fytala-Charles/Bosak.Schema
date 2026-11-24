@@ -6,6 +6,8 @@
 
 # Bosak.Schema
 
+Bounded date restrictions support named derivation chains with inherited constraints and forward references. [Date type chains](docs/date-chains/CONTRACT.md).
+
 The development candidate supports bounded date bounds and explicitTimezone constraints. [Date bounds](docs/date-bounds/CONTRACT.md).
 
 The 0.6 development candidate requires **Bosak Core 1.81.17 or later**. [Dependency compatibility](docs/core-18117-baseline/README.md). Native date restrictions support bounded enumeration while preserving the instance date and timezone. [Date enumeration](docs/date-enumeration-implementation/README.md).

@@ -1,0 +1,7 @@
+{
+  "finding": "Dependency cache must not silently satisfy a user definition with an existing built-in component",
+  "fix": "Reject definition keys that collide with the primitive/builtin simple registry before resolving",
+  "scope": "Closed component identity/profile guard; no new grammar or API",
+  "control": "User date definition in XMLSchema namespace is Unsupported rather than silently ignored",
+  "additionalReview": "Use the complete known-builtin set, not only the currently cached date/integer types, to guard string/boolean/decimal redeclarations too. Added three paired-facade/three-zone cases; no supported input grammar expands."
+}
