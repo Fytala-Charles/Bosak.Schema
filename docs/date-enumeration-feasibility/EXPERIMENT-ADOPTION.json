@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-24",
+  "base": "cb81d80e42528a9ebca98366818309995a70bb87",
+  "status": "Isolated experimental adoption recorded before source overlays; not production adoption",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.2 attribute declarations",
+        "3.3.4 element validation and governing type",
+        "3.4 complex types with simple content",
+        "3.16 simple type definitions"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\structures.html"
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "2.2.1 identity",
+        "2.2.2 equality",
+        "3.3.9 date",
+        "4.1.4 datatype validity",
+        "4.3.5.1-5 enumeration representation, validation and component constraints",
+        "4.3.6 whitespace",
+        "5.4 bounded implementation of infinite datatypes",
+        "D.2.1 seven-property model and timezone timeline",
+        "E.3.4 time on timeline (exact arithmetic review)"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\datatypes.html"
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3 typed values",
+        "6.2 element nodes",
+        "6.3 attribute nodes"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\xdm31.html"
+    }
+  ],
+  "next": "Separate isolated experimental adoption before source overlays",
+  "intentionalDeviations": [
+    "Direct xs:date restrictions only; no new named simple restriction chain",
+    "16 source members, existing lexical/year/source/document capacities",
+    "Temporal facets other than enumeration, dateTime/time, mixed content and full PSVI excluded",
+    "Internal date membership equality only; no Core/public equality or ordering change"
+  ],
+  "scope": "Bounded direct date enumeration and internal equality only; Core 1.81.17"
+}

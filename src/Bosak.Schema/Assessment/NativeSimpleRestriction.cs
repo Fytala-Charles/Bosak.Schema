@@ -26,6 +26,8 @@
 //                      | Charles Korthout | 0.13   | 24-11-2026     | Adopt qualified bounded integer enumeration |
 //                      | Charles Korthout | 0.14   | 24-11-2026     | Probe revised bounded date transport in isolated source copy |
 //                      | Charles Korthout | 0.15   | 24-11-2026     | Adopt qualified bounded native date transport |
+//                      | Charles Korthout | 0.16   | 24-11-2026     | Probe bounded date enumeration in isolated source only                                      |
+//                      | Charles Korthout | 0.17   | 24-11-2026     | Adopt qualified bounded date enumeration and internal value equality |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -44,8 +46,8 @@ internal sealed partial class NativeDecimalSchema
         var baseName = ResolveTypeName(restriction, "base");
         if (maxStringCharacters is not null && baseName == Xs + "date")
         {
-            Require(Elements(restriction).Count == 0, "Date facets are outside this slice.", NativeDecimalUnsupportedReason.ValueType);
-            return new NativeType(name, false, namespaceUri, baseName: baseName, isDate: true);
+            var dateFacets = NativeDateFacets.Compile(restriction, maxStringCharacters.Value);
+            return new NativeType(name, false, namespaceUri, baseName: baseName, isDate: true, dateFacets: dateFacets);
         }
         if (baseName == Xs + "decimal")
             return new NativeType(name, false, namespaceUri, NativeDecimalFacets.Compile(restriction, limits), baseName: baseName);

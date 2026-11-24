@@ -2,6 +2,8 @@
 
 # Bosak.Schema
 
+The 0.6 development candidate requires Bosak Core 1.81.17 or later.
+
 Apache-2.0 schema integration and staged XSD 1.1 services for .NET 10. Schema services require no activation, license key or subscription.
 
 The owned, synchronous native decimal-session API was introduced in 0.5.0-beta.1. The 0.6 development line adds detected Unsupported reasons and a bounded namespace-aware decimal profile with optional assertions and reusable global named complex types and direct named decimal restrictions with selected facets. It assesses a finite decimal-only schema profile, reads exact scalar values and exports detached XML. Existing schema compilation, validation and schema-aware XSLT helpers remain available. Complete XSD 1.1 validation is not implemented.
@@ -1249,11 +1251,11 @@ Example date schema and instance:
 
 ReadRootScalar().DateValue or ReadElement([]).DateValue yields year zero, month 2, day 29 and offset 840 minutes. Export retains parsed lexical content. No conversion through DateTimeOffset or implicit timezone is used. Extended years and negative astronomical years use the Gregorian calendar directly.
 
-The explicit year interval is -9223372036854775807 through 9223372036854775807, with at most 256 normalized lexical characters plus existing document/work capacities. Otherwise-valid values outside these bounds are Unsupported/RepresentationCapacity; invalid bounded lexical/calendar values are Invalid. The excluded long.MinValue year cannot be formatted by the pinned Core carrier and is never silently rounded. Temporal facets, date simple-content restriction, arbitrary derived chains, date assertions and dateTime/time/dateTimeStamp remain outside this slice. The legacy decimal facade is unchanged; full calendar operations, PSVI and XSD1.1 conformance are not implied.
+The explicit year interval is -9223372036854775807 through 9223372036854775807, with at most 256 normalized lexical characters plus existing document/work capacities. Otherwise-valid values outside these bounds are Unsupported/RepresentationCapacity; invalid bounded lexical/calendar values are Invalid. The excluded long.MinValue year cannot be formatted by the pinned Core carrier and is never silently rounded. Other temporal facets, date simple-content restriction, arbitrary derived chains, date assertions and dateTime/time/dateTimeStamp remain outside this slice. The legacy decimal facade is unchanged; full calendar operations, PSVI and XSD1.1 conformance are not implied.
 
 ### Dates with simple-content metadata
 
-The opt-in native facades also support direct simpleContent/extension of xs:date or an admitted facet-free date alias, at existing named/anonymous roots and terminal placements. The complex governing type and the atomic date base remain distinct; reads use the existing NativeScalarKind.Date and NativeDateValue. No new scalar API is required.
+The opt-in native facades also support direct simpleContent/extension of xs:date or an admitted direct date restriction, at existing named/anonymous roots and terminal placements. The complex governing type and the atomic date base remain distinct; reads use the existing NativeScalarKind.Date and NativeDateValue. No new scalar API is required.
 
 Example date with attribute metadata:
 
@@ -1272,4 +1274,25 @@ Example date with attribute metadata:
 
 ReadRootScalar().DateValue or ReadElement([]).DateValue yields year zero, month 2, day 29 and no timezone. The root has zero descendant scalar slots. ReadAttribute(0).Value.StringValue or ReadAttribute([], "", "label").StringValue yields invoice. Values remain usable after disposal; XML export preserves parsed content and attributes.
 
-Missing required, invalid typed or undeclared ordinary attributes are Invalid in this date-extension closure, including when zero attributes were declared. Existing scalar/decimal empty-use behavior is unchanged. Date simple content retains all date limits above and existing per-owner/expanded attribute, node, scalar and depth budgets. Temporal facets/assertions, date complex restriction, arbitrary complex chains and general simple-to-complex xsi:type substitution remain excluded. Exact same complex xsi:type is supported. The legacy decimal facade remains unchanged.
+Missing required, invalid typed or undeclared ordinary attributes are Invalid in this date-extension closure, including when zero attributes were declared. Existing scalar/decimal empty-use behavior is unchanged. Date simple content retains all date limits above and existing per-owner/expanded attribute, node, scalar and depth budgets. Temporal facets other than the date enumeration below, assertions, date complex restriction, arbitrary complex chains and general simple-to-complex xsi:type substitution remain excluded. Exact same complex xsi:type is supported. The legacy decimal facade remains unchanged.
+
+### Bounded date enumeration
+
+Direct named or anonymous restrictions of xs:date may contain up to 16 enumeration entries, including duplicate or equal entries. Existing root, scalar and attribute placements and date simple-content extension may use these types. A valid nonmember is Invalid. Members retain the original instance date and timezone offset; an absent timezone is distinct from explicit UTC. Matching never uses the assessment context's implicit timezone.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Allowed"><xs:restriction base="xs:date">
+    <xs:enumeration value="2000-01-01+13:00"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="issued" type="Allowed"/>
+</xs:schema>
+```
+
+```xml
+<issued>1999-12-31-11:00</issued>
+```
+
+These dates begin at the same instant, so membership succeeds. ReadRootScalar().DateValue or ReadElement([]).DateValue returns the instance's year 1999, month 12, day 31 and offset -660 minutes. Export retains its parsed lexical content. The matching enumeration entry does not replace the instance value.
+
+All entries must be valid dates for the base type. Missing/invalid bounded facet values are Invalid schemas. The 17th source entry is Unsupported/RepresentationCapacity even when duplicates would collapse to fewer values. Facet and enumerated-instance text also obey MaxStringCharacters; the existing normalized 256-character and year capacities apply. Whitespace inside an otherwise empty enumeration element is allowed. User-defined simple restriction chains, other date facets and date complex restriction remain outside the profile. This feature does not change public equality/hash methods, XPath date comparison semantics or the legacy decimal facade.

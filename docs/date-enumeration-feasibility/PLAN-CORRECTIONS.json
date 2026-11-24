@@ -1,0 +1,18 @@
+[
+  {
+    "id": "attribute-member",
+    "originalSchema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:attribute name=\"d\" type=\"D\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "originalInstance": "<r d=\"1999-05-31\"/>",
+    "correctedSchema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"d\" type=\"D\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+    "correctedInstance": "<r d=\"1999-05-31\">0</r>",
+    "reason": "Feasibility plan correction: use the already-supported decimal simple-content owner; attribute-only empty-content owners are outside the existing profile."
+  },
+  {
+    "id": "attribute-nonmember",
+    "originalSchema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:attribute name=\"d\" type=\"D\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "originalInstance": "<r d=\"1999-06-01\"/>",
+    "correctedSchema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"d\" type=\"D\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+    "correctedInstance": "<r d=\"1999-06-01\">0</r>",
+    "reason": "Feasibility plan correction: use the already-supported decimal simple-content owner; attribute-only empty-content owners are outside the existing profile."
+  }
+]

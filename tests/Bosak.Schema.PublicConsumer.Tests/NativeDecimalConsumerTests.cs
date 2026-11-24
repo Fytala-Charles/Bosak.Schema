@@ -2,7 +2,7 @@
 // AUTHOR               : Charles Korthout
 // CREATE DATE          : 17 November 2026
 // PURPOSE              : Qualifies the public native decimal contract without friend-assembly access.
-// SPECIAL NOTES        : Bounded native decimal profile; published Core 1.81.2; no general XSD conformance claim.
+// SPECIAL NOTES        : Bounded native decimal profile; published Core 1.81.17; no general XSD conformance claim.
 //
 // COPYRIGHT            : Fytala
 // LICENSE              : LICENSE.md (Apache-2.0)
@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 17-11-2026     | Qualify restricted schema resolution from the external public consumer                   |
 //                      | Charles Korthout | 0.3   | 17-11-2026     | Qualify compiler-owned snapshots without changing caller-created record compatibility      |
 //                      | Charles Korthout | 0.4   | 17-11-2026     | Qualify compile-diagnostic preconditions and assertion-only legacy success                  |
+//                      | Charles Korthout | 0.5   | 24-11-2026     | Qualify the adopted Core 1.81.17 development baseline                                      |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -222,7 +223,7 @@ public sealed class NativeDecimalConsumerTests
         Assert.All(typeof(NativeDecimalSessionOptions).GetProperties(), property => Assert.Null(property.SetMethod));
         Assert.All(typeof(NativeDecimalAssessmentContext).GetProperties(), property => Assert.Null(property.SetMethod));
         Assert.DoesNotContain(schemaAssembly.GetExportedTypes(), type => type.Name.Contains("NativeSchemaProvider", StringComparison.Ordinal));
-        Assert.Equal(new Version(1, 81, 2, 0), typeof(XdmExactDecimal).Assembly.GetName().Version);
+        Assert.Equal(new Version(1, 81, 17, 0), typeof(XdmExactDecimal).Assembly.GetName().Version);
     }
 
     /// <summary>Checks the opt-in resolver returns detached read-only schema bytes outside friend access.</summary>

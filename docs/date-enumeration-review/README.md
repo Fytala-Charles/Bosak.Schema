@@ -1,0 +1,11 @@
+# Date enumeration and Core baseline: final review
+
+24 November 2026. Review of the uncommitted Core1.81.17 baseline, date-enumeration contract/feasibility and production candidate on planning/post-date-coverage at357ae494f645d9d20d1790d0a15e20be290d13d7. This review introduces no source change or new semantic adoption.
+
+No blocking code findings. Reviewed direct restriction grammar, facet source-count and lexical capacities, exact Gregorian equality across negative/extreme years, absent/explicit timezone separation, instance value preservation, selected governing/atomic types, attribute routes, lifetime/authority guards and public API identity. The production restriction-text finding is already corrected and its final artifact fully requalified. [Production report and receipts](../date-enumeration-implementation/README.md).
+
+All69packets/4,797sealed entries verify, including the198-entry production packet. Production validator confirms329exact inputs,64qualified sources,4,874source/3,509package/20native passes, six exact examples and supplemental gates, unchanged55type/408rowAPI and exact frozen21/expanded129outcomes. Expanded sample remains16matches/113Unsupported/zeroerrors. No additional source changes justified repeating already-passed semantic tests during this review.
+
+The Core minimum upgrade is intentional. Retained caller binaries remain unchanged, while Schema plus nine Core DLLs and dependency graphs migrate to1.81.17. The full124catalog passes. The full23/33catalogs each retain one failure in their old1.81.2identity assertion; filtered migration catalogs pass22/32. Current source/package consumers execute the full surface/authority fact against1.81.17. This is not a Schema-only replacement or a complete23/33pass claim. [Exact retained results](../date-enumeration-implementation/RETAINED-RESULTS.json).
+
+Documentation hygiene, release controls and workload checks pass. Historical receipts, published beta and its release controller are preserved. Qualification uses a local unsigned package only; no registry publication is authorized or performed. Next delivery step is a focused commit/push/PR for this complete reviewed change, requiring an explicit request under AGENTS.md section8.
