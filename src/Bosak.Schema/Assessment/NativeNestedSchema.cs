@@ -31,6 +31,7 @@
 //                      | Charles Korthout | 0.18   | 24-11-2026     | Probe bounded date simple content in isolated source copy |
 //                      | Charles Korthout | 0.19   | 24-11-2026     | Adopt qualified bounded date simple-content extension |
 //                      | Charles Korthout | 0.20   | 24-11-2026     | Preserve caller character capacity for nested date restrictions |
+//                      | Charles Korthout | 0.21   | 24-11-2026     | Share date/string pattern compilation across nested date restrictions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -57,7 +58,7 @@ internal sealed partial class NativeDecimalSchema
     private static NativeDecimalSchema CompileNestedSchema(XElement schema, XElement[] types, XElement[] declarations,
         string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace,
         NativeType decimalType, NativeType stringType, NativeType booleanType, NativeType integerType,
-        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, int maxStringCharacters, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple)
+        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, int maxStringCharacters, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, NativePatternCompilation patternCompilation)
     {
         // Structural assertions are parsed eagerly on each complex owner below.
         var definitions = types.Where(t => t.Name == Xs + "complexType")
@@ -89,7 +90,7 @@ internal sealed partial class NativeDecimalSchema
             var members = Elements(complex);
             if (members.Count == 1 && members[0].Name == Xs + "simpleContent")
                 return CompileComplex(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
-                    decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null, nestedContext: true, maxStringCharacters: maxStringCharacters);
+                    decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null, nestedContext: true, maxStringCharacters: maxStringCharacters, patternCompilation: patternCompilation);
             Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").Count() + members.Skip(1).SkipWhile(e => e.Name == Xs + "attribute").Count(e => e.Name == Xs + "assert") == members.Count - 1,
                 "Expected an element-only sequence and root attributes.", NativeDecimalUnsupportedReason.DeclarationShape);
             var sequence = members[0];

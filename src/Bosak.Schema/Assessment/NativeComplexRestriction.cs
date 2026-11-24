@@ -19,6 +19,7 @@
 //                      | Charles Korthout | 0.6   | 24-11-2026     | Probe bounded date simple content in isolated source copy |
 //                      | Charles Korthout | 0.7   | 24-11-2026     | Adopt qualified bounded date simple-content extension |
 //                      | Charles Korthout | 0.8   | 24-11-2026     | Admit bounded date complex restriction with distinct atomic content |
+//                      | Charles Korthout | 0.9   | 24-11-2026     | Compile local complex-date patterns with the shared bounded context |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -32,7 +33,7 @@ internal sealed partial class NativeDecimalSchema
 {
     private static NativeDecimalSchema CompileComplexRestriction(XElement restriction, NativeDeclaration root,
         string targetNamespace, Dictionary<XName, NativeType> simple, NativeNumericLimits limits,
-        Func<XName, NativeDecimalSchema?>? resolveComplex, CancellationToken token, string assertionNamespace, int? maxStringCharacters)
+        Func<XName, NativeDecimalSchema?>? resolveComplex, CancellationToken token, string assertionNamespace, int? maxStringCharacters, NativePatternCompilation? patternCompilation)
     {
         token.ThrowIfCancellationRequested();
         Attributes(restriction, "base");
@@ -46,7 +47,7 @@ internal sealed partial class NativeDecimalSchema
                 "Restriction attribute uses are outside the profile.", NativeDecimalUnsupportedReason.Attributes);
             Require(child.Name != Xs + "assert", "Restriction assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
             Require(child.Name != Xs + "simpleType", "Inline restriction types are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-            Require(child.Name.Namespace == Xs && child.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits" or "enumeration" or "explicitTimezone",
+            Require(child.Name.Namespace == Xs && child.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits" or "enumeration" or "explicitTimezone" or "pattern",
                 "Restriction facet is outside the profile.", NativeDecimalUnsupportedReason.ValueType);
             Attributes(child, "value");
             Require(Elements(child).Count == 0, "Facet child grammar is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
@@ -81,13 +82,15 @@ internal sealed partial class NativeDecimalSchema
                 "Date restriction assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
             var dateCharacters = maxStringCharacters ?? throw new NativeProfileException(NativeOutcome.Unsupported,
                 "Date restriction requires the native scalar profile.", NativeDecimalUnsupportedReason.ValueType);
+            var dateCompilation = patternCompilation ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Date pattern context unavailable.", NativeDecimalUnsupportedReason.ValueType);
             var dateFacets = new XElement(restriction.Name, restriction.Attributes(), children);
             var dateAtomic = new NativeType(null, false, targetNamespace, isDate: true,
-                dateFacets: NativeDateFacets.CompileDerived(dateFacets, dateCharacters, content.DateFacets), derivationBase: content);
+                dateFacets: NativeDateFacets.CompileDerived(dateFacets, dateCharacters, content.DateFacets, dateCompilation), derivationBase: content);
             var dateGoverning = new NativeType(root.Type.Name, false, targetNamespace, contentType: dateAtomic,
                 derivationBase: baseType, isComplexRestriction: true);
             return new NativeDecimalSchema(new NativeDeclaration(root.Name, dateGoverning, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
         }
+        Require(!children.Any(e => e.Name == Xs + "pattern"), "Numeric complex patterns are outside this date slice.", NativeDecimalUnsupportedReason.ValueType);
         Require(content!.IsInteger || localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty,
             "Contextual assertions on noninteger content are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
         Require(content.IsInteger || !children.Any(e=>e.Name==Xs+"enumeration"),

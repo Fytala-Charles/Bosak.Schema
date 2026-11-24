@@ -29,6 +29,7 @@
 //                      | Charles Korthout | 0.16   | 24-11-2026     | Probe bounded date enumeration in isolated source only                                      |
 //                      | Charles Korthout | 0.17   | 24-11-2026     | Adopt qualified bounded date enumeration and internal value equality |
 //                      | Charles Korthout | 0.18   | 24-11-2026     | Admit restrictions of named date types with original base identity |
+//                      | Charles Korthout | 0.19   | 24-11-2026     | Use shared pattern compilation for direct and named date restrictions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -47,12 +48,12 @@ internal sealed partial class NativeDecimalSchema
         var baseName = ResolveTypeName(restriction, "base");
         if (maxStringCharacters is not null && baseName == Xs + "date")
         {
-            var dateFacets = NativeDateFacets.Compile(restriction, maxStringCharacters.Value);
+            var dateFacets = NativeDateFacets.Compile(restriction, maxStringCharacters.Value, patternCompilation);
             return new NativeType(name, false, namespaceUri, baseName: baseName, isDate: true, dateFacets: dateFacets);
         }
         if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var dateBase) && dateBase.IsDate)
             return new NativeType(name, false, namespaceUri, baseName: baseName, derivationBase: dateBase,
-                isDate: true, dateFacets: NativeDateFacets.CompileDerived(restriction, maxStringCharacters.Value, dateBase.DateFacets));
+                isDate: true, dateFacets: NativeDateFacets.CompileDerived(restriction, maxStringCharacters.Value, dateBase.DateFacets, patternCompilation));
         if (baseName == Xs + "decimal")
             return new NativeType(name, false, namespaceUri, NativeDecimalFacets.Compile(restriction, limits), baseName: baseName);
         if (maxStringCharacters is not null && baseName == Xs + "string")

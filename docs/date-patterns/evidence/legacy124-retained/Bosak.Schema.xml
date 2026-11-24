@@ -1,0 +1,1222 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Bosak.Schema</name>
+    </assembly>
+    <members>
+        <member name="T:Bosak.Schema.ActivatedLicense">
+            <summary>Retains the legacy credential data shape for compatibility; it does not authorize schema access.</summary>
+            <param name="Licensee">Descriptive legacy label or Apache compatibility marker.</param>
+            <param name="Tier">Legacy tier label, not an entitlement for other products.</param>
+            <param name="IssuedUtc">Informational issue time.</param>
+            <param name="ExpiresUtc">Informational expiry time.</param>
+        </member>
+        <member name="M:Bosak.Schema.ActivatedLicense.#ctor(System.String,Bosak.Schema.LicenseTier,System.DateTimeOffset,System.DateTimeOffset)">
+            <summary>Retains the legacy credential data shape for compatibility; it does not authorize schema access.</summary>
+            <param name="Licensee">Descriptive legacy label or Apache compatibility marker.</param>
+            <param name="Tier">Legacy tier label, not an entitlement for other products.</param>
+            <param name="IssuedUtc">Informational issue time.</param>
+            <param name="ExpiresUtc">Informational expiry time.</param>
+        </member>
+        <member name="P:Bosak.Schema.ActivatedLicense.Licensee">
+            <summary>Descriptive legacy label or Apache compatibility marker.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ActivatedLicense.Tier">
+            <summary>Legacy tier label, not an entitlement for other products.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ActivatedLicense.IssuedUtc">
+            <summary>Informational issue time.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ActivatedLicense.ExpiresUtc">
+            <summary>Informational expiry time.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ActivatedLicense.IsExpired">
+            <summary>Gets whether the informational expiry time has been reached.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ActivatedLicense.IsInGrace">
+            <summary>Gets the historical grace-state calculation; it does not control schema access.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ActivatedLicense.IsUsable">
+            <summary>Gets the historical date-state calculation; it grants no commercial entitlement.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ActivatedLicense.DaysUntilExpiry">
+            <summary>Gets informational whole days until expiry, or zero after expiry.</summary>
+        </member>
+        <member name="T:Bosak.Schema.SchemaCompileOptions">
+            <summary>
+            Options for compiling a schema document.
+            </summary>
+            <param name="Version">The explicit XSD language version to compile against. Never inferred from
+            document content alone: 1.0 compiles reject 1.1-only constructs with explicit diagnostics.</param>
+            <param name="Resolver">Resolver for <c>xs:import</c>/<c>xs:include</c> schemaLocation hints, or null
+            to compile the single supplied document without resolving references (referenced imports then
+            produce <see cref="F:Bosak.Schema.SchemaDiagnosticCodes.ResolutionUnavailable"/> diagnostics).</param>
+            <param name="MaxImportDepth">Maximum import/include chain depth (bounded, default 32).</param>
+        </member>
+        <member name="M:Bosak.Schema.SchemaCompileOptions.#ctor(Bosak.Schema.XsdLanguageVersion,Bosak.Schema.ISchemaResourceResolver,System.Int32)">
+            <summary>
+            Options for compiling a schema document.
+            </summary>
+            <param name="Version">The explicit XSD language version to compile against. Never inferred from
+            document content alone: 1.0 compiles reject 1.1-only constructs with explicit diagnostics.</param>
+            <param name="Resolver">Resolver for <c>xs:import</c>/<c>xs:include</c> schemaLocation hints, or null
+            to compile the single supplied document without resolving references (referenced imports then
+            produce <see cref="F:Bosak.Schema.SchemaDiagnosticCodes.ResolutionUnavailable"/> diagnostics).</param>
+            <param name="MaxImportDepth">Maximum import/include chain depth (bounded, default 32).</param>
+        </member>
+        <member name="P:Bosak.Schema.SchemaCompileOptions.Version">
+            <summary>The explicit XSD language version to compile against. Never inferred from
+            document content alone: 1.0 compiles reject 1.1-only constructs with explicit diagnostics.</summary>
+        </member>
+        <member name="P:Bosak.Schema.SchemaCompileOptions.Resolver">
+            <summary>Resolver for <c>xs:import</c>/<c>xs:include</c> schemaLocation hints, or null
+            to compile the single supplied document without resolving references (referenced imports then
+            produce <see cref="F:Bosak.Schema.SchemaDiagnosticCodes.ResolutionUnavailable"/> diagnostics).</summary>
+        </member>
+        <member name="P:Bosak.Schema.SchemaCompileOptions.MaxImportDepth">
+            <summary>Maximum import/include chain depth (bounded, default 32).</summary>
+        </member>
+        <member name="M:Bosak.Schema.SchemaCompileOptions.Default(Bosak.Schema.XsdLanguageVersion)">
+            <summary>Default options for the given version: no resolver, default import depth.</summary>
+        </member>
+        <member name="T:Bosak.Schema.IXsdSchemaCompiler">
+            <summary>
+            Compiles XSD schema documents into immutable <see cref="T:Bosak.Schema.ICompiledSchema"/> models (REQ-009 S1).
+            </summary>
+        </member>
+        <member name="M:Bosak.Schema.IXsdSchemaCompiler.Compile(System.Xml.XmlReader,System.Uri,Bosak.Schema.SchemaCompileOptions)">
+            <summary>
+            Compiles the schema document read from <paramref name="reader"/>.
+            </summary>
+            <param name="reader">Reader positioned on the schema document. The caller controls its settings;
+            use the <see cref="M:Bosak.Schema.IXsdSchemaCompiler.Compile(System.IO.Stream,System.Uri,Bosak.Schema.SchemaCompileOptions)"/> overload for a hardened reader
+            (DTD prohibited, no embedded resolution).</param>
+            <param name="baseUri">Absolute base URI used to resolve relative import/include hints.</param>
+            <param name="options">Compile options (version, resolver, import depth bound).</param>
+            <returns>The immutable compiled schema; observations are reported via <see cref="P:Bosak.Schema.ICompiledSchema.Diagnostics"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="reader"/>, <paramref name="baseUri"/>, or <paramref name="options"/> is null.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="baseUri"/> is not absolute.</exception>
+        </member>
+        <member name="M:Bosak.Schema.IXsdSchemaCompiler.Compile(System.IO.Stream,System.Uri,Bosak.Schema.SchemaCompileOptions)">
+            <summary>
+            Compiles the schema document read from <paramref name="stream"/> with hardened reader settings
+            (DTD processing prohibited, no embedded XML resolution) — the recommended entry point.
+            </summary>
+            <param name="stream">Stream positioned at the start of the schema document.</param>
+            <param name="baseUri">Absolute base URI used to resolve relative import/include hints.</param>
+            <param name="options">Compile options (version, resolver, import depth bound).</param>
+            <returns>The immutable compiled schema; observations are reported via <see cref="P:Bosak.Schema.ICompiledSchema.Diagnostics"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="stream"/>, <paramref name="baseUri"/>, or <paramref name="options"/> is null.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="baseUri"/> is not absolute.</exception>
+            <exception cref="T:System.Xml.XmlException">The document is not well-formed XML or declares a DTD (DTD is prohibited).</exception>
+        </member>
+        <member name="T:Bosak.Schema.SchemaCompiler">
+            <summary>
+            Default <see cref="T:Bosak.Schema.IXsdSchemaCompiler"/> (REQ-009 S1). Produces immutable <see cref="T:Bosak.Schema.CompiledSchema"/>
+            models with a stable digest and explicit diagnostics; assertion/alternative components are recorded,
+            their evaluation lands in phases S2/S3.
+            </summary>
+        </member>
+        <member name="M:Bosak.Schema.SchemaCompiler.Compile(System.Xml.XmlReader,System.Uri,Bosak.Schema.SchemaCompileOptions)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Bosak.Schema.SchemaCompiler.Compile(System.IO.Stream,System.Uri,Bosak.Schema.SchemaCompileOptions)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Bosak.Schema.ISchemaResourceResolver">
+            <summary>
+            Opens schema documents referenced by <c>xs:import</c> / <c>xs:include</c> schemaLocation hints.
+            </summary>
+            <remarks>
+            Implementations enforce their own security posture. The default implementation returned by
+            <see cref="T:Bosak.Schema.SchemaServices"/> is <see cref="T:Bosak.Schema.SecureSchemaResolver"/> with
+            <see cref="P:Bosak.Schema.SchemaResolutionPolicy.LocalFiles"/>: local files only, no network, no DTD.
+            </remarks>
+        </member>
+        <member name="M:Bosak.Schema.ISchemaResourceResolver.Open(System.Uri)">
+            <summary>
+            Opens the resolved schema document.
+            </summary>
+            <param name="resolvedUri">Absolute URI of the schema document to open.</param>
+            <returns>A readable stream positioned at the start of the document.</returns>
+            <exception cref="T:Bosak.Schema.SchemaResolutionException">The URI is denied by policy or exceeds a bounded limit.</exception>
+        </member>
+        <member name="T:Bosak.Schema.SchemaResolutionPolicy">
+            <summary>
+            Security policy for <see cref="T:Bosak.Schema.ISchemaResourceResolver"/> implementations: which URI schemes are
+            allowed, whether DTDs are tolerated, an optional allowlist of URI prefixes, and a per-document
+            byte cap.
+            </summary>
+            <param name="AllowLocalFiles">Allow <c>file</c> URIs. Default-deny posture keeps this off unless set.</param>
+            <param name="AllowNetwork">Allow <c>http</c>/<c>https</c> URIs. Off in every shipped default.</param>
+            <param name="AllowDtd">Allow documents declaring a DTD. Off in every shipped default.</param>
+            <param name="MaxDocumentBytes">Per-document byte cap enforced while reading.</param>
+            <param name="AllowedUriPrefixes">Optional allowlist; when non-null, URIs must start with one of these prefixes.</param>
+        </member>
+        <member name="M:Bosak.Schema.SchemaResolutionPolicy.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Int64,System.Collections.Generic.IReadOnlyList{System.String})">
+            <summary>
+            Security policy for <see cref="T:Bosak.Schema.ISchemaResourceResolver"/> implementations: which URI schemes are
+            allowed, whether DTDs are tolerated, an optional allowlist of URI prefixes, and a per-document
+            byte cap.
+            </summary>
+            <param name="AllowLocalFiles">Allow <c>file</c> URIs. Default-deny posture keeps this off unless set.</param>
+            <param name="AllowNetwork">Allow <c>http</c>/<c>https</c> URIs. Off in every shipped default.</param>
+            <param name="AllowDtd">Allow documents declaring a DTD. Off in every shipped default.</param>
+            <param name="MaxDocumentBytes">Per-document byte cap enforced while reading.</param>
+            <param name="AllowedUriPrefixes">Optional allowlist; when non-null, URIs must start with one of these prefixes.</param>
+        </member>
+        <member name="P:Bosak.Schema.SchemaResolutionPolicy.AllowLocalFiles">
+            <summary>Allow <c>file</c> URIs. Default-deny posture keeps this off unless set.</summary>
+        </member>
+        <member name="P:Bosak.Schema.SchemaResolutionPolicy.AllowNetwork">
+            <summary>Allow <c>http</c>/<c>https</c> URIs. Off in every shipped default.</summary>
+        </member>
+        <member name="P:Bosak.Schema.SchemaResolutionPolicy.AllowDtd">
+            <summary>Allow documents declaring a DTD. Off in every shipped default.</summary>
+        </member>
+        <member name="P:Bosak.Schema.SchemaResolutionPolicy.MaxDocumentBytes">
+            <summary>Per-document byte cap enforced while reading.</summary>
+        </member>
+        <member name="P:Bosak.Schema.SchemaResolutionPolicy.AllowedUriPrefixes">
+            <summary>Optional allowlist; when non-null, URIs must start with one of these prefixes.</summary>
+        </member>
+        <member name="P:Bosak.Schema.SchemaResolutionPolicy.LocalFiles">
+            <summary>Local files allowed; network and DTD denied; 10 MiB per-document cap; no allowlist.</summary>
+        </member>
+        <member name="P:Bosak.Schema.SchemaResolutionPolicy.DenyAll">
+            <summary>Deny every resolution (default-deny posture for untrusted input).</summary>
+        </member>
+        <member name="T:Bosak.Schema.SchemaResolutionException">
+            <summary>
+            Thrown when schema resolution is denied by policy or exceeds a bounded limit.
+            </summary>
+        </member>
+        <member name="M:Bosak.Schema.SchemaResolutionException.#ctor(System.String,System.String)">
+            <summary>
+            Creates the exception with a stable machine-readable code and a human-readable reason.
+            </summary>
+            <param name="code">Stable code (see <see cref="T:Bosak.Schema.SchemaDiagnosticCodes"/>).</param>
+            <param name="message">Human-readable description of the denial.</param>
+        </member>
+        <member name="P:Bosak.Schema.SchemaResolutionException.Code">
+            <summary>Stable machine-readable denial code.</summary>
+        </member>
+        <member name="T:Bosak.Schema.SecureSchemaResolver">
+            <summary>
+            Policy-enforcing <see cref="T:Bosak.Schema.ISchemaResourceResolver"/>: default deny network and DTD, optional
+            URI-prefix allowlist, per-document byte cap. Every control is explicit and testable.
+            </summary>
+        </member>
+        <member name="M:Bosak.Schema.SecureSchemaResolver.#ctor(Bosak.Schema.SchemaResolutionPolicy)">
+            <summary>
+            Creates a resolver enforcing <paramref name="policy"/>.
+            </summary>
+            <param name="policy">The policy to enforce; use <see cref="P:Bosak.Schema.SchemaResolutionPolicy.DenyAll"/> for untrusted input.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="policy"/> is null.</exception>
+        </member>
+        <member name="M:Bosak.Schema.SecureSchemaResolver.Open(System.Uri)">
+            <inheritdoc/>
+            <exception cref="T:Bosak.Schema.SchemaResolutionException">The URI is denied by scheme, allowlist, or DTD policy, or exceeds the byte cap.</exception>
+        </member>
+        <member name="T:Bosak.Schema.License">
+            <summary>Provides activation-free compatibility with legacy Bosak.Schema callers.</summary>
+            <remarks>No credential is parsed, stored, issued or used to authorize any product.</remarks>
+        </member>
+        <member name="P:Bosak.Schema.License.GracePeriod">
+            <summary>Gets the historical grace duration for compatibility; it does not restrict schema access.</summary>
+        </member>
+        <member name="P:Bosak.Schema.License.IsActivated">
+            <summary>Gets a value that is always true; Apache schema services need no activation.</summary>
+        </member>
+        <member name="P:Bosak.Schema.License.Current">
+            <summary>Gets a perpetual Apache compatibility marker, not a commercial entitlement.</summary>
+        </member>
+        <member name="M:Bosak.Schema.License.Activate(System.String)">
+            <summary>Accepts legacy calls without validating or retaining the supplied value.</summary>
+            <param name="licenseKey">Ignored compatibility parameter; no credential is required.</param>
+        </member>
+        <member name="T:Bosak.Schema.LicenseTier">
+            <summary>Retains legacy tier values for API compatibility; these labels authorize no schema features.</summary>
+        </member>
+        <member name="F:Bosak.Schema.LicenseTier.Dev">
+            <summary>Legacy developer label; also used by the Apache compatibility marker.</summary>
+        </member>
+        <member name="F:Bosak.Schema.LicenseTier.Runtime">
+            <summary>Legacy runtime label.</summary>
+        </member>
+        <member name="F:Bosak.Schema.LicenseTier.Trial">
+            <summary>Legacy trial label; Apache schema services have no trial restriction.</summary>
+        </member>
+        <member name="F:Bosak.Schema.LicenseTier.Community">
+            <summary>Legacy community label.</summary>
+        </member>
+        <member name="F:Bosak.Schema.LicenseTier.Team">
+            <summary>Legacy team label.</summary>
+        </member>
+        <member name="T:Bosak.Schema.LicenseValidationException">
+            <summary>Retains the historical exception type for binary compatibility; Apache factories do not throw it.</summary>
+        </member>
+        <member name="M:Bosak.Schema.LicenseValidationException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Bosak.Schema.LicenseValidationException"/> class.
+            </summary>
+        </member>
+        <member name="M:Bosak.Schema.LicenseValidationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Bosak.Schema.LicenseValidationException"/> class
+            with a descriptive message.
+            </summary>
+            <param name="message">The reason the license key was rejected.</param>
+        </member>
+        <member name="M:Bosak.Schema.LicenseValidationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Bosak.Schema.LicenseValidationException"/> class
+            with a descriptive message and an inner exception.
+            </summary>
+            <param name="message">The reason the license key was rejected.</param>
+            <param name="innerException">The underlying parsing or cryptographic failure.</param>
+        </member>
+        <member name="T:Bosak.Schema.AssertionContext">
+            <summary>
+            Distinguishes the two XSD 1.1 assertion contexts, which have distinct W3C-defined XPath
+            environments and must not be evaluated interchangeably.
+            </summary>
+        </member>
+        <member name="F:Bosak.Schema.AssertionContext.ComplexTypeAssert">
+            <summary><c>xs:assert</c> on a complex type: the XPath context item is the element being validated.</summary>
+        </member>
+        <member name="F:Bosak.Schema.AssertionContext.SimpleTypeAssertion">
+            <summary><c>xs:assertion</c> facet on a simple type: the XPath context item is the typed value being validated.</summary>
+        </member>
+        <member name="T:Bosak.Schema.AssertionDefinition">
+            <summary>
+            A compiled XSD 1.1 assertion component (<c>xs:assert</c> or <c>xs:assertion</c>).
+            </summary>
+            <param name="TestExpression">The raw <c>test</c> attribute expression. Compilation into a constrained
+            XPath form and evaluation land in REQ-009 phases S2/S3.</param>
+            <param name="Context">The assertion context — <see cref="F:Bosak.Schema.AssertionContext.ComplexTypeAssert"/> for
+            <c>xs:assert</c>, <see cref="F:Bosak.Schema.AssertionContext.SimpleTypeAssertion"/> for <c>xs:assertion</c>.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+            <param name="NamespaceBindings">In-scope namespace prefix → URI bindings captured at the assertion's
+            location in the schema document; used as the static namespace context when the test expression is
+            compiled (REQ-009 S2).</param>
+            <param name="XPathDefaultNamespace">Resolved <c>xpathDefaultNamespace</c> (element or nearest ancestor
+            <c>xs:schema</c>): the default element namespace for the test expression, or null when unspecified.</param>
+            <param name="OwningTypeName">The resolved expanded name of the owning named <c>xs:complexType</c>, or null
+            when the assertion sits on an anonymous inline complex type (REQ-009 S4b applicability filtering).</param>
+            <param name="OwningElementName">The resolved expanded name of the owning <c>xs:element</c> declaration,
+            or null when unavailable (REQ-009 S4b: anonymous-owner assertions match candidates by this name).</param>
+        </member>
+        <member name="M:Bosak.Schema.AssertionDefinition.#ctor(System.String,Bosak.Schema.AssertionContext,System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.String,System.Xml.Linq.XName,System.Xml.Linq.XName)">
+            <summary>
+            A compiled XSD 1.1 assertion component (<c>xs:assert</c> or <c>xs:assertion</c>).
+            </summary>
+            <param name="TestExpression">The raw <c>test</c> attribute expression. Compilation into a constrained
+            XPath form and evaluation land in REQ-009 phases S2/S3.</param>
+            <param name="Context">The assertion context — <see cref="F:Bosak.Schema.AssertionContext.ComplexTypeAssert"/> for
+            <c>xs:assert</c>, <see cref="F:Bosak.Schema.AssertionContext.SimpleTypeAssertion"/> for <c>xs:assertion</c>.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+            <param name="NamespaceBindings">In-scope namespace prefix → URI bindings captured at the assertion's
+            location in the schema document; used as the static namespace context when the test expression is
+            compiled (REQ-009 S2).</param>
+            <param name="XPathDefaultNamespace">Resolved <c>xpathDefaultNamespace</c> (element or nearest ancestor
+            <c>xs:schema</c>): the default element namespace for the test expression, or null when unspecified.</param>
+            <param name="OwningTypeName">The resolved expanded name of the owning named <c>xs:complexType</c>, or null
+            when the assertion sits on an anonymous inline complex type (REQ-009 S4b applicability filtering).</param>
+            <param name="OwningElementName">The resolved expanded name of the owning <c>xs:element</c> declaration,
+            or null when unavailable (REQ-009 S4b: anonymous-owner assertions match candidates by this name).</param>
+        </member>
+        <member name="P:Bosak.Schema.AssertionDefinition.TestExpression">
+            <summary>The raw <c>test</c> attribute expression. Compilation into a constrained
+            XPath form and evaluation land in REQ-009 phases S2/S3.</summary>
+        </member>
+        <member name="P:Bosak.Schema.AssertionDefinition.Context">
+            <summary>The assertion context — <see cref="F:Bosak.Schema.AssertionContext.ComplexTypeAssert"/> for
+            <c>xs:assert</c>, <see cref="F:Bosak.Schema.AssertionContext.SimpleTypeAssertion"/> for <c>xs:assertion</c>.</summary>
+        </member>
+        <member name="P:Bosak.Schema.AssertionDefinition.NodePath">
+            <summary>Path of the originating node inside the schema document.</summary>
+        </member>
+        <member name="P:Bosak.Schema.AssertionDefinition.NamespaceBindings">
+            <summary>In-scope namespace prefix → URI bindings captured at the assertion's
+            location in the schema document; used as the static namespace context when the test expression is
+            compiled (REQ-009 S2).</summary>
+        </member>
+        <member name="P:Bosak.Schema.AssertionDefinition.XPathDefaultNamespace">
+            <summary>Resolved <c>xpathDefaultNamespace</c> (element or nearest ancestor
+            <c>xs:schema</c>): the default element namespace for the test expression, or null when unspecified.</summary>
+        </member>
+        <member name="P:Bosak.Schema.AssertionDefinition.OwningTypeName">
+            <summary>The resolved expanded name of the owning named <c>xs:complexType</c>, or null
+            when the assertion sits on an anonymous inline complex type (REQ-009 S4b applicability filtering).</summary>
+        </member>
+        <member name="P:Bosak.Schema.AssertionDefinition.OwningElementName">
+            <summary>The resolved expanded name of the owning <c>xs:element</c> declaration,
+            or null when unavailable (REQ-009 S4b: anonymous-owner assertions match candidates by this name).</summary>
+        </member>
+        <member name="T:Bosak.Schema.TypeAlternativeDefinition">
+            <summary>
+            A compiled XSD 1.1 conditional type assignment component (<c>xs:alternative</c>).
+            </summary>
+            <param name="TestExpression">The raw <c>test</c> attribute expression, or null for the default alternative.</param>
+            <param name="TypeName">The <c>type</c> attribute value (a QName in its lexical form), or null when absent.</param>
+            <param name="ResolvedTypeName">The <c>type</c> attribute resolved to an expanded name (unprefixed type names
+            take the schema's target namespace, per the XSD rule), or null when absent or unresolvable.</param>
+            <param name="OwnerElementName">The raw lexical <c>name</c> of the owning <c>xs:element</c> declaration.</param>
+            <param name="OwnerElementResolvedName">The owning element declaration resolved to an expanded name (global
+            declarations and, per <c>elementFormDefault</c>, qualified locals take the target namespace), or null when
+            the owner name could not be resolved.</param>
+            <param name="NamespaceBindings">In-scope namespace prefix → URI bindings captured at the alternative's
+            location in the schema document; the static namespace context for the test expression (REQ-009 S4a).</param>
+            <param name="XPathDefaultNamespace">Resolved <c>xpathDefaultNamespace</c> (element or nearest ancestor
+            <c>xs:schema</c>): the default element namespace for the test expression, or null when unspecified.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="M:Bosak.Schema.TypeAlternativeDefinition.#ctor(System.String,System.String,System.Xml.Linq.XName,System.String,System.Xml.Linq.XName,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            A compiled XSD 1.1 conditional type assignment component (<c>xs:alternative</c>).
+            </summary>
+            <param name="TestExpression">The raw <c>test</c> attribute expression, or null for the default alternative.</param>
+            <param name="TypeName">The <c>type</c> attribute value (a QName in its lexical form), or null when absent.</param>
+            <param name="ResolvedTypeName">The <c>type</c> attribute resolved to an expanded name (unprefixed type names
+            take the schema's target namespace, per the XSD rule), or null when absent or unresolvable.</param>
+            <param name="OwnerElementName">The raw lexical <c>name</c> of the owning <c>xs:element</c> declaration.</param>
+            <param name="OwnerElementResolvedName">The owning element declaration resolved to an expanded name (global
+            declarations and, per <c>elementFormDefault</c>, qualified locals take the target namespace), or null when
+            the owner name could not be resolved.</param>
+            <param name="NamespaceBindings">In-scope namespace prefix → URI bindings captured at the alternative's
+            location in the schema document; the static namespace context for the test expression (REQ-009 S4a).</param>
+            <param name="XPathDefaultNamespace">Resolved <c>xpathDefaultNamespace</c> (element or nearest ancestor
+            <c>xs:schema</c>): the default element namespace for the test expression, or null when unspecified.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="P:Bosak.Schema.TypeAlternativeDefinition.TestExpression">
+            <summary>The raw <c>test</c> attribute expression, or null for the default alternative.</summary>
+        </member>
+        <member name="P:Bosak.Schema.TypeAlternativeDefinition.TypeName">
+            <summary>The <c>type</c> attribute value (a QName in its lexical form), or null when absent.</summary>
+        </member>
+        <member name="P:Bosak.Schema.TypeAlternativeDefinition.ResolvedTypeName">
+            <summary>The <c>type</c> attribute resolved to an expanded name (unprefixed type names
+            take the schema's target namespace, per the XSD rule), or null when absent or unresolvable.</summary>
+        </member>
+        <member name="P:Bosak.Schema.TypeAlternativeDefinition.OwnerElementName">
+            <summary>The raw lexical <c>name</c> of the owning <c>xs:element</c> declaration.</summary>
+        </member>
+        <member name="P:Bosak.Schema.TypeAlternativeDefinition.OwnerElementResolvedName">
+            <summary>The owning element declaration resolved to an expanded name (global
+            declarations and, per <c>elementFormDefault</c>, qualified locals take the target namespace), or null when
+            the owner name could not be resolved.</summary>
+        </member>
+        <member name="P:Bosak.Schema.TypeAlternativeDefinition.NamespaceBindings">
+            <summary>In-scope namespace prefix → URI bindings captured at the alternative's
+            location in the schema document; the static namespace context for the test expression (REQ-009 S4a).</summary>
+        </member>
+        <member name="P:Bosak.Schema.TypeAlternativeDefinition.XPathDefaultNamespace">
+            <summary>Resolved <c>xpathDefaultNamespace</c> (element or nearest ancestor
+            <c>xs:schema</c>): the default element namespace for the test expression, or null when unspecified.</summary>
+        </member>
+        <member name="P:Bosak.Schema.TypeAlternativeDefinition.NodePath">
+            <summary>Path of the originating node inside the schema document.</summary>
+        </member>
+        <member name="T:Bosak.Schema.ICompiledSchema">
+            <summary>
+            The result of compiling one schema document (plus its resolved import/include closure)
+            against an explicit <see cref="T:Bosak.Schema.XsdLanguageVersion"/>.
+            </summary>
+        </member>
+        <member name="P:Bosak.Schema.ICompiledSchema.SchemaId">
+            <summary>Deterministic schema identifier, derived from <see cref="P:Bosak.Schema.ICompiledSchema.Sha256Digest"/>.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ICompiledSchema.Sha256Digest">
+            <summary>SHA-256 digest of the canonical (formatting-insensitive) schema document content.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ICompiledSchema.LanguageVersion">
+            <summary>The language version the schema was compiled against.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ICompiledSchema.Assertions">
+            <summary>Compiled XSD 1.1 assertion components (empty for <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/> compiles).</summary>
+        </member>
+        <member name="P:Bosak.Schema.ICompiledSchema.Alternatives">
+            <summary>Compiled XSD 1.1 conditional type assignment components (empty for <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/> compiles).</summary>
+        </member>
+        <member name="P:Bosak.Schema.ICompiledSchema.ElementDeclarations">
+            <summary>Element declarations carrying an explicit <c>type</c> attribute (typed-view building for assertion evaluation).</summary>
+        </member>
+        <member name="P:Bosak.Schema.ICompiledSchema.SimpleTypes">
+            <summary>Named simple-type restrictions carrying <c>xs:assertion</c> facets (facet evaluation).</summary>
+        </member>
+        <member name="P:Bosak.Schema.ICompiledSchema.OpenContents">
+            <summary>Explicit XSD 1.1 open content components (<c>xs:openContent</c> on complex types or on
+            complex content derivation; empty for <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/> compiles). Structural
+            enforcement is a later REQ-009 phase.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ICompiledSchema.DefaultOpenContents">
+            <summary>XSD 1.1 <c>xs:defaultOpenContent</c> components of the resolved schema documents, at most
+            one per document (empty for <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/> compiles).</summary>
+        </member>
+        <member name="P:Bosak.Schema.ICompiledSchema.DefaultAttributeReferences">
+            <summary>XSD 1.1 default attribute group references (<c>xs:schema defaultAttributes="QName"</c>;
+            at most one per schema document; empty for <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/> compiles).
+            Referential integrity and per-type attribute-use computation are later phases.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ICompiledSchema.DefaultAttributeOptOuts">
+            <summary>Complex types opting out of the schema's default attributes via
+            <c>defaultAttributesApply="false"</c> (empty for <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/> compiles).</summary>
+        </member>
+        <member name="P:Bosak.Schema.ICompiledSchema.Diagnostics">
+            <summary>Explicit diagnostics: rejections, unsupported constructs, resolution failures. Never silent.</summary>
+        </member>
+        <member name="T:Bosak.Schema.CompiledSchema">
+            <summary>
+            Immutable default implementation of <see cref="T:Bosak.Schema.ICompiledSchema"/> (REQ-009 S1).
+            </summary>
+            <param name="SchemaId">Deterministic schema identifier, derived from <paramref name="Sha256Digest"/>.</param>
+            <param name="Sha256Digest">SHA-256 digest of the canonical schema document content.</param>
+            <param name="LanguageVersion">The language version the schema was compiled against.</param>
+            <param name="TargetNamespace">The <c>targetNamespace</c> of the root schema document, or null.</param>
+            <param name="Assertions">Compiled XSD 1.1 assertion components (empty for <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/> compiles).</param>
+            <param name="Alternatives">Compiled XSD 1.1 conditional type assignment components (empty for <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/> compiles).</param>
+            <param name="ElementDeclarations">Element declarations carrying an explicit <c>type</c> attribute; used to type candidate content before assertion evaluation.</param>
+            <param name="SimpleTypes">Named simple-type restrictions carrying <c>xs:assertion</c> facets.</param>
+            <param name="OpenContents">Explicit XSD 1.1 open content components (<c>xs:openContent</c>).</param>
+            <param name="DefaultOpenContents"><c>xs:defaultOpenContent</c> components of the resolved schema documents.</param>
+            <param name="DefaultAttributeReferences">XSD 1.1 default attribute group references (<c>xs:schema defaultAttributes</c>).</param>
+            <param name="DefaultAttributeOptOuts">Complex types with <c>defaultAttributesApply="false"</c>.</param>
+            <param name="Diagnostics">Explicit compile diagnostics; unsupported constructs are reported here, never silently accepted.</param>
+        </member>
+        <member name="M:Bosak.Schema.CompiledSchema.#ctor(System.String,System.String,Bosak.Schema.XsdLanguageVersion,System.String,System.Collections.Generic.IReadOnlyList{Bosak.Schema.AssertionDefinition},System.Collections.Generic.IReadOnlyList{Bosak.Schema.TypeAlternativeDefinition},System.Collections.Generic.IReadOnlyList{Bosak.Schema.ElementDeclaration},System.Collections.Generic.IReadOnlyList{Bosak.Schema.SimpleTypeDeclaration},System.Collections.Generic.IReadOnlyList{Bosak.Schema.OpenContentDefinition},System.Collections.Generic.IReadOnlyList{Bosak.Schema.OpenContentDefinition},System.Collections.Generic.IReadOnlyList{Bosak.Schema.DefaultAttributesReference},System.Collections.Generic.IReadOnlyList{Bosak.Schema.DefaultAttributesOptOut},System.Collections.Generic.IReadOnlyList{Bosak.Schema.SchemaDiagnostic})">
+            <summary>
+            Immutable default implementation of <see cref="T:Bosak.Schema.ICompiledSchema"/> (REQ-009 S1).
+            </summary>
+            <param name="SchemaId">Deterministic schema identifier, derived from <paramref name="Sha256Digest"/>.</param>
+            <param name="Sha256Digest">SHA-256 digest of the canonical schema document content.</param>
+            <param name="LanguageVersion">The language version the schema was compiled against.</param>
+            <param name="TargetNamespace">The <c>targetNamespace</c> of the root schema document, or null.</param>
+            <param name="Assertions">Compiled XSD 1.1 assertion components (empty for <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/> compiles).</param>
+            <param name="Alternatives">Compiled XSD 1.1 conditional type assignment components (empty for <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/> compiles).</param>
+            <param name="ElementDeclarations">Element declarations carrying an explicit <c>type</c> attribute; used to type candidate content before assertion evaluation.</param>
+            <param name="SimpleTypes">Named simple-type restrictions carrying <c>xs:assertion</c> facets.</param>
+            <param name="OpenContents">Explicit XSD 1.1 open content components (<c>xs:openContent</c>).</param>
+            <param name="DefaultOpenContents"><c>xs:defaultOpenContent</c> components of the resolved schema documents.</param>
+            <param name="DefaultAttributeReferences">XSD 1.1 default attribute group references (<c>xs:schema defaultAttributes</c>).</param>
+            <param name="DefaultAttributeOptOuts">Complex types with <c>defaultAttributesApply="false"</c>.</param>
+            <param name="Diagnostics">Explicit compile diagnostics; unsupported constructs are reported here, never silently accepted.</param>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.SchemaId">
+            <summary>Deterministic schema identifier, derived from <paramref name="Sha256Digest"/>.</summary>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.Sha256Digest">
+            <summary>SHA-256 digest of the canonical schema document content.</summary>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.LanguageVersion">
+            <summary>The language version the schema was compiled against.</summary>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.TargetNamespace">
+            <summary>The <c>targetNamespace</c> of the root schema document, or null.</summary>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.Assertions">
+            <summary>Compiled XSD 1.1 assertion components (empty for <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/> compiles).</summary>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.Alternatives">
+            <summary>Compiled XSD 1.1 conditional type assignment components (empty for <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/> compiles).</summary>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.ElementDeclarations">
+            <summary>Element declarations carrying an explicit <c>type</c> attribute; used to type candidate content before assertion evaluation.</summary>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.SimpleTypes">
+            <summary>Named simple-type restrictions carrying <c>xs:assertion</c> facets.</summary>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.OpenContents">
+            <summary>Explicit XSD 1.1 open content components (<c>xs:openContent</c>).</summary>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.DefaultOpenContents">
+            <summary><c>xs:defaultOpenContent</c> components of the resolved schema documents.</summary>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.DefaultAttributeReferences">
+            <summary>XSD 1.1 default attribute group references (<c>xs:schema defaultAttributes</c>).</summary>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.DefaultAttributeOptOuts">
+            <summary>Complex types with <c>defaultAttributesApply="false"</c>.</summary>
+        </member>
+        <member name="P:Bosak.Schema.CompiledSchema.Diagnostics">
+            <summary>Explicit compile diagnostics; unsupported constructs are reported here, never silently accepted.</summary>
+        </member>
+        <member name="T:Bosak.Schema.DefaultAttributesReference">
+            <summary>
+            An XSD 1.1 <c>xs:schema defaultAttributes="QName"</c> attribute: a reference to a global attribute
+            group whose attribute uses are applied by default to every complex type in that schema document
+            (W3C XML Schema 1.1 Part 1 §3.4.2.4). Recorded per schema document of the compiled set.
+            </summary>
+            <param name="AttributeGroupNamespace">Resolved namespace URI of the referenced attribute group name
+            (an unprefixed QName has no namespace, per QName attribute semantics).</param>
+            <param name="AttributeGroupLocalName">Local name of the referenced attribute group.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="M:Bosak.Schema.DefaultAttributesReference.#ctor(System.String,System.String,System.String)">
+            <summary>
+            An XSD 1.1 <c>xs:schema defaultAttributes="QName"</c> attribute: a reference to a global attribute
+            group whose attribute uses are applied by default to every complex type in that schema document
+            (W3C XML Schema 1.1 Part 1 §3.4.2.4). Recorded per schema document of the compiled set.
+            </summary>
+            <param name="AttributeGroupNamespace">Resolved namespace URI of the referenced attribute group name
+            (an unprefixed QName has no namespace, per QName attribute semantics).</param>
+            <param name="AttributeGroupLocalName">Local name of the referenced attribute group.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="P:Bosak.Schema.DefaultAttributesReference.AttributeGroupNamespace">
+            <summary>Resolved namespace URI of the referenced attribute group name
+            (an unprefixed QName has no namespace, per QName attribute semantics).</summary>
+        </member>
+        <member name="P:Bosak.Schema.DefaultAttributesReference.AttributeGroupLocalName">
+            <summary>Local name of the referenced attribute group.</summary>
+        </member>
+        <member name="P:Bosak.Schema.DefaultAttributesReference.NodePath">
+            <summary>Path of the originating node inside the schema document.</summary>
+        </member>
+        <member name="T:Bosak.Schema.DefaultAttributesOptOut">
+            <summary>
+            A complex type opting out of the schema's default attributes via
+            <c>defaultAttributesApply="false"</c> (W3C XML Schema 1.1 Part 1 §3.4.2.4). Anonymous local
+            complex types have a null <paramref name="ComplexTypeName"/>; their <paramref name="NodePath"/>
+            identifies them.
+            </summary>
+            <param name="ComplexTypeName">The owning <c>xs:complexType</c>'s <c>name</c> attribute, or null
+            for an anonymous local complex type.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="M:Bosak.Schema.DefaultAttributesOptOut.#ctor(System.String,System.String)">
+            <summary>
+            A complex type opting out of the schema's default attributes via
+            <c>defaultAttributesApply="false"</c> (W3C XML Schema 1.1 Part 1 §3.4.2.4). Anonymous local
+            complex types have a null <paramref name="ComplexTypeName"/>; their <paramref name="NodePath"/>
+            identifies them.
+            </summary>
+            <param name="ComplexTypeName">The owning <c>xs:complexType</c>'s <c>name</c> attribute, or null
+            for an anonymous local complex type.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="P:Bosak.Schema.DefaultAttributesOptOut.ComplexTypeName">
+            <summary>The owning <c>xs:complexType</c>'s <c>name</c> attribute, or null
+            for an anonymous local complex type.</summary>
+        </member>
+        <member name="P:Bosak.Schema.DefaultAttributesOptOut.NodePath">
+            <summary>Path of the originating node inside the schema document.</summary>
+        </member>
+        <member name="T:Bosak.Schema.ElementDeclaration">
+            <summary>
+            An <c>xs:element</c> declaration carrying an explicit <c>type</c> attribute, recorded by the
+            REQ-009 compile pipeline. The validation service uses these declarations to type candidate
+            content: an element whose expanded name matches a declaration is annotated with the declared
+            built-in simple type (when resolvable) before assertions are evaluated (REQ-009 S2).
+            </summary>
+            <param name="ElementNamespace">Resolved namespace URI of the declared element name.</param>
+            <param name="ElementLocalName">Local name of the declared element.</param>
+            <param name="TypeNamespace">Resolved namespace URI of the declared <c>type</c> attribute value.</param>
+            <param name="TypeLocalName">Local name of the declared <c>type</c> attribute value.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="M:Bosak.Schema.ElementDeclaration.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            An <c>xs:element</c> declaration carrying an explicit <c>type</c> attribute, recorded by the
+            REQ-009 compile pipeline. The validation service uses these declarations to type candidate
+            content: an element whose expanded name matches a declaration is annotated with the declared
+            built-in simple type (when resolvable) before assertions are evaluated (REQ-009 S2).
+            </summary>
+            <param name="ElementNamespace">Resolved namespace URI of the declared element name.</param>
+            <param name="ElementLocalName">Local name of the declared element.</param>
+            <param name="TypeNamespace">Resolved namespace URI of the declared <c>type</c> attribute value.</param>
+            <param name="TypeLocalName">Local name of the declared <c>type</c> attribute value.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="P:Bosak.Schema.ElementDeclaration.ElementNamespace">
+            <summary>Resolved namespace URI of the declared element name.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ElementDeclaration.ElementLocalName">
+            <summary>Local name of the declared element.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ElementDeclaration.TypeNamespace">
+            <summary>Resolved namespace URI of the declared <c>type</c> attribute value.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ElementDeclaration.TypeLocalName">
+            <summary>Local name of the declared <c>type</c> attribute value.</summary>
+        </member>
+        <member name="P:Bosak.Schema.ElementDeclaration.NodePath">
+            <summary>Path of the originating node inside the schema document.</summary>
+        </member>
+        <member name="T:Bosak.Schema.OpenContentMode">
+            <summary>
+            The <c>mode</c> of an XSD 1.1 open content component (W3C XML Schema 1.1 Part 1 §3.4.2).
+            </summary>
+        </member>
+        <member name="F:Bosak.Schema.OpenContentMode.None">
+            <summary><c>mode="none"</c>: the type's content is closed — used on derivation to remove inherited open content.</summary>
+        </member>
+        <member name="F:Bosak.Schema.OpenContentMode.Interleave">
+            <summary><c>mode="interleave"</c> (the default): open-content elements may appear anywhere among the content model's elements.</summary>
+        </member>
+        <member name="F:Bosak.Schema.OpenContentMode.Suffix">
+            <summary><c>mode="suffix"</c>: open-content elements may appear only after the content model's elements.</summary>
+        </member>
+        <member name="T:Bosak.Schema.WildcardProcessContents">
+            <summary>
+            The <c>processContents</c> policy of an open content wildcard (W3C XML Schema 1.1 Part 1 §3.10).
+            </summary>
+        </member>
+        <member name="F:Bosak.Schema.WildcardProcessContents.Strict">
+            <summary><c>processContents="strict"</c> (the default): the item must be valid against a found declaration.</summary>
+        </member>
+        <member name="F:Bosak.Schema.WildcardProcessContents.Lax">
+            <summary><c>processContents="lax"</c>: the item is validated when a declaration is found, otherwise accepted.</summary>
+        </member>
+        <member name="F:Bosak.Schema.WildcardProcessContents.Skip">
+            <summary><c>processContents="skip"</c>: the item is not validated against any declaration.</summary>
+        </member>
+        <member name="T:Bosak.Schema.OpenContentWildcard">
+            <summary>
+            The wildcard of an XSD 1.1 open content component — the <c>xs:any</c> child of
+            <c>xs:openContent</c> / <c>xs:defaultOpenContent</c>, recorded in raw lexical form.
+            </summary>
+            <param name="NamespaceConstraint">The space-separated <c>namespace</c> attribute tokens
+            (<c>##any</c>, <c>##other</c>, <c>##targetNamespace</c>, <c>##local</c>, or namespace URIs);
+            <c>##any</c> when the attribute is absent and no <c>notNamespace</c> attribute is present;
+            empty when only <c>notNamespace</c> is present (the constraint has negative variety, per the
+            mapping rule in W3C XML Schema 1.1 Part 1 §3.10.2.2).</param>
+            <param name="ProcessContents">The <c>processContents</c> attribute value; <see cref="F:Bosak.Schema.WildcardProcessContents.Strict"/> when absent.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="M:Bosak.Schema.OpenContentWildcard.#ctor(System.Collections.Generic.IReadOnlyList{System.String},Bosak.Schema.WildcardProcessContents,System.String)">
+            <summary>
+            The wildcard of an XSD 1.1 open content component — the <c>xs:any</c> child of
+            <c>xs:openContent</c> / <c>xs:defaultOpenContent</c>, recorded in raw lexical form.
+            </summary>
+            <param name="NamespaceConstraint">The space-separated <c>namespace</c> attribute tokens
+            (<c>##any</c>, <c>##other</c>, <c>##targetNamespace</c>, <c>##local</c>, or namespace URIs);
+            <c>##any</c> when the attribute is absent and no <c>notNamespace</c> attribute is present;
+            empty when only <c>notNamespace</c> is present (the constraint has negative variety, per the
+            mapping rule in W3C XML Schema 1.1 Part 1 §3.10.2.2).</param>
+            <param name="ProcessContents">The <c>processContents</c> attribute value; <see cref="F:Bosak.Schema.WildcardProcessContents.Strict"/> when absent.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="P:Bosak.Schema.OpenContentWildcard.NamespaceConstraint">
+            <summary>The space-separated <c>namespace</c> attribute tokens
+            (<c>##any</c>, <c>##other</c>, <c>##targetNamespace</c>, <c>##local</c>, or namespace URIs);
+            <c>##any</c> when the attribute is absent and no <c>notNamespace</c> attribute is present;
+            empty when only <c>notNamespace</c> is present (the constraint has negative variety, per the
+            mapping rule in W3C XML Schema 1.1 Part 1 §3.10.2.2).</summary>
+        </member>
+        <member name="P:Bosak.Schema.OpenContentWildcard.ProcessContents">
+            <summary>The <c>processContents</c> attribute value; <see cref="F:Bosak.Schema.WildcardProcessContents.Strict"/> when absent.</summary>
+        </member>
+        <member name="P:Bosak.Schema.OpenContentWildcard.NodePath">
+            <summary>Path of the originating node inside the schema document.</summary>
+        </member>
+        <member name="P:Bosak.Schema.OpenContentWildcard.NotNamespace">
+            <summary>The space-separated <c>notNamespace</c> attribute tokens (<c>##targetNamespace</c>,
+            <c>##local</c>, or namespace URIs); empty when the attribute is absent. Mutually exclusive
+            with the <c>namespace</c> constraint per W3C XML Schema 1.1 Part 1 §3.10.3.</summary>
+        </member>
+        <member name="P:Bosak.Schema.OpenContentWildcard.NotQName">
+            <summary>The space-separated <c>notQName</c> attribute tokens (<c>##defined</c>,
+            <c>##definedSibling</c>, or QNames); empty when the attribute is absent (W3C XML Schema
+            1.1 Part 1 §3.10.2). Semantic enforcement of the disallowed-names set is a later REQ-009 phase.</summary>
+        </member>
+        <member name="T:Bosak.Schema.OpenContentDefinition">
+            <summary>
+            A compiled XSD 1.1 open content component: an explicit <c>xs:openContent</c> on a complex type
+            (or on a complex content restriction/extension), or an <c>xs:defaultOpenContent</c> on a schema
+            document (REQ-009 S5a). Structural enforcement against instance content is a later phase.
+            </summary>
+            <param name="Mode">The open content mode; <see cref="F:Bosak.Schema.OpenContentMode.None"/> carries no wildcard.</param>
+            <param name="Wildcard">The open content wildcard, or null when <paramref name="Mode"/> is
+            <see cref="F:Bosak.Schema.OpenContentMode.None"/>.</param>
+            <param name="AppliesToEmpty">For <c>xs:defaultOpenContent</c>: whether the default also applies to
+            complex types with empty content; always false for explicit <c>xs:openContent</c>.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="M:Bosak.Schema.OpenContentDefinition.#ctor(Bosak.Schema.OpenContentMode,Bosak.Schema.OpenContentWildcard,System.Boolean,System.String)">
+            <summary>
+            A compiled XSD 1.1 open content component: an explicit <c>xs:openContent</c> on a complex type
+            (or on a complex content restriction/extension), or an <c>xs:defaultOpenContent</c> on a schema
+            document (REQ-009 S5a). Structural enforcement against instance content is a later phase.
+            </summary>
+            <param name="Mode">The open content mode; <see cref="F:Bosak.Schema.OpenContentMode.None"/> carries no wildcard.</param>
+            <param name="Wildcard">The open content wildcard, or null when <paramref name="Mode"/> is
+            <see cref="F:Bosak.Schema.OpenContentMode.None"/>.</param>
+            <param name="AppliesToEmpty">For <c>xs:defaultOpenContent</c>: whether the default also applies to
+            complex types with empty content; always false for explicit <c>xs:openContent</c>.</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="P:Bosak.Schema.OpenContentDefinition.Mode">
+            <summary>The open content mode; <see cref="F:Bosak.Schema.OpenContentMode.None"/> carries no wildcard.</summary>
+        </member>
+        <member name="P:Bosak.Schema.OpenContentDefinition.Wildcard">
+            <summary>The open content wildcard, or null when <paramref name="Mode"/> is
+            <see cref="F:Bosak.Schema.OpenContentMode.None"/>.</summary>
+        </member>
+        <member name="P:Bosak.Schema.OpenContentDefinition.AppliesToEmpty">
+            <summary>For <c>xs:defaultOpenContent</c>: whether the default also applies to
+            complex types with empty content; always false for explicit <c>xs:openContent</c>.</summary>
+        </member>
+        <member name="P:Bosak.Schema.OpenContentDefinition.NodePath">
+            <summary>Path of the originating node inside the schema document.</summary>
+        </member>
+        <member name="T:Bosak.Schema.SchemaDiagnostic">
+            <summary>
+            A single compile or validation observation: a stable machine-readable code, a human-readable
+            message, and the node path inside the schema document where the observation originated.
+            </summary>
+            <param name="Code">Stable diagnostic code (see <see cref="T:Bosak.Schema.SchemaDiagnosticCodes"/>).</param>
+            <param name="Message">Human-readable description of the observation.</param>
+            <param name="NodePath">Path of the originating node inside the schema document, or null when not applicable.</param>
+        </member>
+        <member name="M:Bosak.Schema.SchemaDiagnostic.#ctor(System.String,System.String,System.String)">
+            <summary>
+            A single compile or validation observation: a stable machine-readable code, a human-readable
+            message, and the node path inside the schema document where the observation originated.
+            </summary>
+            <param name="Code">Stable diagnostic code (see <see cref="T:Bosak.Schema.SchemaDiagnosticCodes"/>).</param>
+            <param name="Message">Human-readable description of the observation.</param>
+            <param name="NodePath">Path of the originating node inside the schema document, or null when not applicable.</param>
+        </member>
+        <member name="P:Bosak.Schema.SchemaDiagnostic.Code">
+            <summary>Stable diagnostic code (see <see cref="T:Bosak.Schema.SchemaDiagnosticCodes"/>).</summary>
+        </member>
+        <member name="P:Bosak.Schema.SchemaDiagnostic.Message">
+            <summary>Human-readable description of the observation.</summary>
+        </member>
+        <member name="P:Bosak.Schema.SchemaDiagnostic.NodePath">
+            <summary>Path of the originating node inside the schema document, or null when not applicable.</summary>
+        </member>
+        <member name="M:Bosak.Schema.SchemaDiagnostic.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Bosak.Schema.SchemaDiagnosticCodes">
+            <summary>
+            Stable diagnostic codes emitted by the REQ-009 compile pipeline. Codes are part of the
+            add-on's public contract: consumers may match on them, and the conformance posture
+            (explicit diagnostics, never silent acceptance) depends on their stability.
+            </summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.RootNotSchema">
+            <summary>The document root is not an <c>xs:schema</c> element in the XML Schema namespace.</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.ConstructRequiresXsd11">
+            <summary>An XSD 1.1-only construct was encountered while compiling against <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd10"/>.</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.UnsupportedConstruct">
+            <summary>A recognized XSD 1.1 construct is not yet supported by the current REQ-009 phase.</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.ResolutionDenied">
+            <summary>Schema resolution (import/include) was denied by the resolution policy.</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.ResolutionLimit">
+            <summary>Schema resolution exceeded a bounded limit (import depth or resolution count).</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.ResolutionUnavailable">
+            <summary>A referenced schema document could not be resolved (no resolver supplied or resolution failure).</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.AssertionRefused">
+            <summary>An assertion expression was refused: it uses a forbidden function or fails to compile under the W3C-constrained XPath 2.0 assertion environment.</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.AssertionEvaluationError">
+            <summary>An assertion expression raised an error while being evaluated against the candidate element.</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.AssertionViolated">
+            <summary>An assertion evaluated successfully with an effective boolean value of false — the candidate element violates the assertion.</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.SimpleTypeNotFound">
+            <summary>The named simple type was not found in the compiled schema — facet evaluation has nothing to evaluate against.</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.InvalidOpenContent">
+            <summary>An <c>xs:openContent</c> or <c>xs:defaultOpenContent</c> element violates the XSD 1.1 composition rules (wrong parent, ordering, duplicates, disallowed mode, or a missing/misplaced <c>xs:any</c> child).</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.InvalidDefaultAttributes">
+            <summary>A default-attributes construct is malformed: the <c>xs:complexType</c> <c>defaultAttributesApply</c> attribute is not a valid boolean.</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.AlternativeTypeUnresolved">
+            <summary>An <c>xs:alternative</c> names a <c>type</c> whose QName prefix could not be resolved in the schema document.</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.InvalidAlternativeSet">
+            <summary>An element declaration's <c>xs:alternative</c> set violates the CTA rules: more than one default alternative (no <c>test</c>), or a default alternative that is not the final alternative of its declaration.</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.AlternativeNotApplicable">
+            <summary>Conditional type assignment found no matching alternative and the declaration has no default alternative — the element has no governing type.</summary>
+        </member>
+        <member name="F:Bosak.Schema.SchemaDiagnosticCodes.InvalidWildcard">
+            <summary>A wildcard's <c>namespace</c> and <c>notNamespace</c> attributes are both present, or a
+            <c>notNamespace</c> / <c>notQName</c> token is not in the lexical space of W3C XML Schema 1.1 Part 1 §3.10.2.</summary>
+        </member>
+        <member name="T:Bosak.Schema.SimpleTypeDeclaration">
+            <summary>
+            A named <c>xs:simpleType</c> restriction carrying <c>xs:assertion</c> facets, recorded by the
+            REQ-009 compile pipeline. The validation service resolves a lexical value against the
+            restriction's built-in base chain and evaluates these facets with <c>$value</c> bound to the
+            typed value (REQ-009 S3).
+            </summary>
+            <param name="TypeNamespace">Resolved namespace URI of the declared type name (named simple types
+            live in the schema's target namespace; unprefixed type names resolve there per the XSD rule).</param>
+            <param name="TypeLocalName">Local name of the declared type.</param>
+            <param name="BaseTypeNamespace">Resolved namespace URI of the <c>xs:restriction base</c>, or null
+            when the simple type has no restriction parent recorded.</param>
+            <param name="BaseTypeLocalName">Local name of the <c>xs:restriction base</c>, or null.</param>
+            <param name="Assertions">The <c>xs:assertion</c> facet definitions owned by this type (same
+            instances as <see cref="P:Bosak.Schema.CompiledSchema.Assertions"/>).</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="M:Bosak.Schema.SimpleTypeDeclaration.#ctor(System.String,System.String,System.String,System.String,System.Collections.Generic.IReadOnlyList{Bosak.Schema.AssertionDefinition},System.String)">
+            <summary>
+            A named <c>xs:simpleType</c> restriction carrying <c>xs:assertion</c> facets, recorded by the
+            REQ-009 compile pipeline. The validation service resolves a lexical value against the
+            restriction's built-in base chain and evaluates these facets with <c>$value</c> bound to the
+            typed value (REQ-009 S3).
+            </summary>
+            <param name="TypeNamespace">Resolved namespace URI of the declared type name (named simple types
+            live in the schema's target namespace; unprefixed type names resolve there per the XSD rule).</param>
+            <param name="TypeLocalName">Local name of the declared type.</param>
+            <param name="BaseTypeNamespace">Resolved namespace URI of the <c>xs:restriction base</c>, or null
+            when the simple type has no restriction parent recorded.</param>
+            <param name="BaseTypeLocalName">Local name of the <c>xs:restriction base</c>, or null.</param>
+            <param name="Assertions">The <c>xs:assertion</c> facet definitions owned by this type (same
+            instances as <see cref="P:Bosak.Schema.CompiledSchema.Assertions"/>).</param>
+            <param name="NodePath">Path of the originating node inside the schema document.</param>
+        </member>
+        <member name="P:Bosak.Schema.SimpleTypeDeclaration.TypeNamespace">
+            <summary>Resolved namespace URI of the declared type name (named simple types
+            live in the schema's target namespace; unprefixed type names resolve there per the XSD rule).</summary>
+        </member>
+        <member name="P:Bosak.Schema.SimpleTypeDeclaration.TypeLocalName">
+            <summary>Local name of the declared type.</summary>
+        </member>
+        <member name="P:Bosak.Schema.SimpleTypeDeclaration.BaseTypeNamespace">
+            <summary>Resolved namespace URI of the <c>xs:restriction base</c>, or null
+            when the simple type has no restriction parent recorded.</summary>
+        </member>
+        <member name="P:Bosak.Schema.SimpleTypeDeclaration.BaseTypeLocalName">
+            <summary>Local name of the <c>xs:restriction base</c>, or null.</summary>
+        </member>
+        <member name="P:Bosak.Schema.SimpleTypeDeclaration.Assertions">
+            <summary>The <c>xs:assertion</c> facet definitions owned by this type (same
+            instances as <see cref="P:Bosak.Schema.CompiledSchema.Assertions"/>).</summary>
+        </member>
+        <member name="P:Bosak.Schema.SimpleTypeDeclaration.NodePath">
+            <summary>Path of the originating node inside the schema document.</summary>
+        </member>
+        <member name="T:Bosak.Schema.XsdLanguageVersion">
+            <summary>
+            Selects the W3C XML Schema language version a schema document is compiled against.
+            </summary>
+            <remarks>
+            The version is explicit (never guessed from document content alone): an XSD 1.0
+            compile rejects XSD 1.1-only constructs with explicit diagnostics, and an XSD 1.1
+            compile accepts them. This keeps existing XSD 1.0 behavior bit-identical.
+            </remarks>
+        </member>
+        <member name="F:Bosak.Schema.XsdLanguageVersion.Xsd10">
+            <summary>W3C XML Schema 1.0 semantics; 1.1-only constructs are rejected with diagnostics.</summary>
+        </member>
+        <member name="F:Bosak.Schema.XsdLanguageVersion.Xsd11">
+            <summary>W3C XML Schema 1.1 semantics; 1.1 constructs are compiled into the model (evaluation lands in later phases).</summary>
+        </member>
+        <member name="T:Bosak.Schema.SchemaAwareXslt">
+            <summary>
+            Creates schema-aware <see cref="T:Bosak.Xslt.Api.XsltCompiler"/> instances without license activation.
+            </summary>
+            <remarks>Schema-aware compilation is explicitly selected; ordinary compiler defaults are unchanged.</remarks>
+        </member>
+        <member name="M:Bosak.Schema.SchemaAwareXslt.CreateCompiler">
+            <summary>
+            Creates an <see cref="T:Bosak.Xslt.Api.XsltCompiler"/> with schema-aware compilation enabled
+            (<see cref="P:Bosak.Xslt.Api.XsltCompiler.SchemaAware"/>), so stylesheets containing
+            <c>xsl:import-schema</c>, <c>validation</c>, and <c>@type</c> compile instead of
+            raising XTSE1650/XTSE1660. Schemas are located by the declaration's
+            <c>schema-location</c> hints relative to each module's base URI.
+            </summary>
+            <returns>A schema-aware compiler.</returns>
+        </member>
+        <member name="M:Bosak.Schema.SchemaAwareXslt.CreateCompiler(System.String)">
+            <summary>
+            Creates an <see cref="T:Bosak.Xslt.Api.XsltCompiler"/> with schema-aware compilation enabled and a
+            schema resolver that serves <c>xsl:import-schema</c> <c>schema-location</c> hints from
+            files in <paramref name="schemaDirectory"/>. Hints that do not resolve to a file fall
+            back to the core's default URI resolution.
+            </summary>
+            <param name="schemaDirectory">Directory containing the XSD files referenced by schema-location hints.</param>
+            <returns>A schema-aware compiler with a file-system schema resolver.</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="schemaDirectory"/> is null, empty, or whitespace.</exception>
+        </member>
+        <member name="T:Bosak.Schema.SchemaServices">
+            <summary>
+            Creates the REQ-009 compiled XSD pipeline entry points: an <see cref="T:Bosak.Schema.IXsdSchemaCompiler"/>
+            (S1) that compiles XSD 1.0/1.1 documents into the immutable <see cref="T:Bosak.Schema.ICompiledSchema"/> model
+            without flowing through the core engine's XSD 1.0-only <c>XmlSchemaSet</c> seam, and an
+            <see cref="T:Bosak.Schema.IXsdValidationService"/> (S2) that evaluates the recorded assertions against
+            candidate elements (ADR-005).
+            </summary>
+            <remarks>Available under Apache-2.0; no license activation is required.</remarks>
+        </member>
+        <member name="M:Bosak.Schema.SchemaServices.CreateSchemaCompiler">
+            <summary>
+            Creates an <see cref="T:Bosak.Schema.IXsdSchemaCompiler"/> that parses XSD documents with hardened
+            <see cref="T:System.Xml.XmlReader"/> settings, records XSD 1.1 assertion/alternative
+            components, computes the stable interpretation digest, and resolves imports/includes
+            only through the caller-supplied <see cref="T:Bosak.Schema.ISchemaResourceResolver"/> policy.
+            </summary>
+            <returns>A schema compiler honoring <see cref="T:Bosak.Schema.SchemaCompileOptions"/>.</returns>
+        </member>
+        <member name="M:Bosak.Schema.SchemaServices.CreateValidationService">
+            <summary>
+            Creates an <see cref="T:Bosak.Schema.IXsdValidationService"/> that evaluates the recorded <c>xs:assert</c>
+            components of a compiled schema against candidate elements, enforcing the W3C-constrained
+            XPath 2.0 assertion environment (captured namespace bindings, forbidden-function pre-screen)
+            and reporting explicit findings — violated assertions, refused expressions, evaluation errors.
+            </summary>
+            <returns>An assertion validation service with per-service compiled-assertion caching.</returns>
+        </member>
+        <member name="T:Bosak.Schema.SchemaValidationResult">
+            <summary>
+            The outcome of validating a candidate element against the recorded assertions of a
+            compiled schema (REQ-009 S2).
+            </summary>
+            <param name="IsValid"><see langword="true"/> only when every evaluated assertion held (effective boolean
+            value true) and no assertion was refused or raised an evaluation error.</param>
+            <param name="Diagnostics">Validation findings: violated assertions (<see cref="F:Bosak.Schema.SchemaDiagnosticCodes.AssertionViolated"/>),
+            refused expressions (<see cref="F:Bosak.Schema.SchemaDiagnosticCodes.AssertionRefused"/>), and evaluation errors
+            (<see cref="F:Bosak.Schema.SchemaDiagnosticCodes.AssertionEvaluationError"/>). Empty when <paramref name="IsValid"/> is true.</param>
+        </member>
+        <member name="M:Bosak.Schema.SchemaValidationResult.#ctor(System.Boolean,System.Collections.Generic.IReadOnlyList{Bosak.Schema.SchemaDiagnostic})">
+            <summary>
+            The outcome of validating a candidate element against the recorded assertions of a
+            compiled schema (REQ-009 S2).
+            </summary>
+            <param name="IsValid"><see langword="true"/> only when every evaluated assertion held (effective boolean
+            value true) and no assertion was refused or raised an evaluation error.</param>
+            <param name="Diagnostics">Validation findings: violated assertions (<see cref="F:Bosak.Schema.SchemaDiagnosticCodes.AssertionViolated"/>),
+            refused expressions (<see cref="F:Bosak.Schema.SchemaDiagnosticCodes.AssertionRefused"/>), and evaluation errors
+            (<see cref="F:Bosak.Schema.SchemaDiagnosticCodes.AssertionEvaluationError"/>). Empty when <paramref name="IsValid"/> is true.</param>
+        </member>
+        <member name="P:Bosak.Schema.SchemaValidationResult.IsValid">
+            <summary><see langword="true"/> only when every evaluated assertion held (effective boolean
+            value true) and no assertion was refused or raised an evaluation error.</summary>
+        </member>
+        <member name="P:Bosak.Schema.SchemaValidationResult.Diagnostics">
+            <summary>Validation findings: violated assertions (<see cref="F:Bosak.Schema.SchemaDiagnosticCodes.AssertionViolated"/>),
+            refused expressions (<see cref="F:Bosak.Schema.SchemaDiagnosticCodes.AssertionRefused"/>), and evaluation errors
+            (<see cref="F:Bosak.Schema.SchemaDiagnosticCodes.AssertionEvaluationError"/>). Empty when <paramref name="IsValid"/> is true.</summary>
+        </member>
+        <member name="T:Bosak.Schema.IXsdValidationService">
+            <summary>
+            Add-on validation service contract (REQ-009 S2): evaluates the recorded XSD 1.1 assertion
+            components of a compiled schema against a candidate element and reports explicit findings.
+            </summary>
+            <remarks>
+            S2 evaluates every recorded <c>xs:assert</c> (<see cref="F:Bosak.Schema.AssertionContext.ComplexTypeAssert"/>) against
+            the supplied candidate element; S3 evaluates the <c>xs:assertion</c> facets
+            (<see cref="F:Bosak.Schema.AssertionContext.SimpleTypeAssertion"/>) of a named simple type against a lexical value
+            via <see cref="M:Bosak.Schema.IXsdValidationService.ValidateValue(Bosak.Schema.ICompiledSchema,System.Xml.Linq.XName,System.String)"/>. The W3C-constrained assertion environment is enforced add-side
+            (XPath 2.0 compatibility, captured namespace bindings, forbidden-function pre-screen) per ADR-005
+            decision 3; facets additionally receive the typed value as context item and through <c>$value</c>.
+            REQ-009 S4a adds <see cref="M:Bosak.Schema.IXsdValidationService.ValidateAlternativeTests(Bosak.Schema.ICompiledSchema)"/> — static compilation checking of the recorded
+            <c>xs:alternative</c> test expressions under the same constrained environment (CTA applicability
+            evaluation itself is S4b).
+            </remarks>
+        </member>
+        <member name="M:Bosak.Schema.IXsdValidationService.Validate(Bosak.Schema.ICompiledSchema,System.Xml.Linq.XElement)">
+            <summary>
+            Evaluates the <c>xs:assert</c> assertions applicable to <paramref name="candidate"/> and returns
+            the aggregated outcome. REQ-009 S4b governing-type semantics: an explicit <c>xsi:type</c> pre-empts;
+            otherwise the owning declaration's <c>xs:alternative</c> tests run in document order (first match
+            selects its type, the test-less default alternative catches the remainder, and no match without a
+            default is an explicit <c>BSK-XSD-015</c>); otherwise the declared type governs. Only assertions
+            owned by the governing named type — or, for anonymous inline complex types, owned by the candidate's
+            element declaration — are evaluated.
+            </summary>
+            <param name="schema">A schema produced by <see cref="T:Bosak.Schema.IXsdSchemaCompiler"/> against <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd11"/>.</param>
+            <param name="candidate">The element to validate. Its child content is what the assertion expressions see.</param>
+            <returns>A <see cref="T:Bosak.Schema.SchemaValidationResult"/>; invalid when any applicable assertion is violated, refused, or errors, or when CTA fails.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="schema"/> or <paramref name="candidate"/> is null.</exception>
+        </member>
+        <member name="M:Bosak.Schema.IXsdValidationService.ValidateAlternativeTests(Bosak.Schema.ICompiledSchema)">
+            <summary>
+            Statically checks the recorded <c>xs:alternative</c> test expressions of <paramref name="schema"/>:
+            every non-default alternative's <c>test</c> is compiled under the same W3C-constrained XPath 2.0
+            environment as assertions (forbidden-function pre-screen, XPath 2.0 compatibility, captured
+            namespace bindings, resolved <c>xpathDefaultNamespace</c>), and the compiled plans are cached on
+            this service instance for the S4b applicability evaluation. This method does not evaluate CTA
+            applicability against any candidate element.
+            </summary>
+            <param name="schema">A schema produced by <see cref="T:Bosak.Schema.IXsdSchemaCompiler"/> against <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd11"/>.</param>
+            <returns>A <see cref="T:Bosak.Schema.SchemaValidationResult"/>; invalid when any alternative test is refused by the constrained environment.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="schema"/> is null.</exception>
+        </member>
+        <member name="M:Bosak.Schema.IXsdValidationService.ValidateValue(Bosak.Schema.ICompiledSchema,System.Xml.Linq.XName,System.String)">
+            <summary>
+            Evaluates the <c>xs:assertion</c> facets of a named simple type against a lexical value and
+            returns the aggregated outcome. The value is parsed per the type's built-in restriction
+            base chain; each facet sees it as the context item and through the <c>$value</c> variable.
+            </summary>
+            <param name="schema">A schema produced by <see cref="T:Bosak.Schema.IXsdSchemaCompiler"/> against <see cref="F:Bosak.Schema.XsdLanguageVersion.Xsd11"/>.</param>
+            <param name="simpleType">The expanded name of a named simple type declared by <paramref name="schema"/>.</param>
+            <param name="lexicalValue">The lexical representation of the value to validate.</param>
+            <returns>A <see cref="T:Bosak.Schema.SchemaValidationResult"/>; invalid when any facet is violated, refused, or errors.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="schema"/>, <paramref name="simpleType"/>, or <paramref name="lexicalValue"/> is null.</exception>
+        </member>
+        <member name="T:Bosak.Schema.XsdValidationService">
+            <summary>
+            Default <see cref="T:Bosak.Schema.IXsdValidationService"/> (REQ-009 S2). Compiles assertion test expressions through
+            the engine's public XPath compiler under the W3C-constrained environment, caches compiled assertions
+            keyed by (schema id, expression, static namespace context), and evaluates them over XDM views of the
+            candidate element.
+            </summary>
+        </member>
+        <member name="M:Bosak.Schema.XsdValidationService.Validate(Bosak.Schema.ICompiledSchema,System.Xml.Linq.XElement)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Bosak.Schema.XsdValidationService.ValidateValue(Bosak.Schema.ICompiledSchema,System.Xml.Linq.XName,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Bosak.Schema.XsdValidationService.ValidateAlternativeTests(Bosak.Schema.ICompiledSchema)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Bosak.Schema.XsdValidationService.ForbiddenFunctionCall">
+            <remarks>
+            Pattern:<br/>
+            <code>\\b(?:fn:)?(doc|collection|document|json-doc|environment-variable)\\s*\\(</code><br/>
+            Options:<br/>
+            <code>RegexOptions.IgnoreCase | RegexOptions.CultureInvariant</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Match if at a word boundary.<br/>
+            ○ Optional (greedy).<br/>
+                ○ Match a character in the set [Ff].<br/>
+                ○ Match a character in the set [Nn].<br/>
+                ○ Match ':'.<br/>
+            ○ 1st capture group.<br/>
+                ○ Match with 5 alternative expressions.<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Dd].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Cc].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Cc].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Ll] exactly 2 times.<br/>
+                        ○ Match a character in the set [Ee].<br/>
+                        ○ Match a character in the set [Cc].<br/>
+                        ○ Match a character in the set [Tt].<br/>
+                        ○ Match a character in the set [Ii].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Dd].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Cc].<br/>
+                        ○ Match a character in the set [Uu].<br/>
+                        ○ Match a character in the set [Mm].<br/>
+                        ○ Match a character in the set [Ee].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match a character in the set [Tt].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Jj].<br/>
+                        ○ Match a character in the set [Ss].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match '-'.<br/>
+                        ○ Match a character in the set [Dd].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Cc].<br/>
+                    ○ Match a sequence of expressions.<br/>
+                        ○ Match a character in the set [Ee].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match a character in the set [Vv].<br/>
+                        ○ Match a character in the set [Ii].<br/>
+                        ○ Match a character in the set [Rr].<br/>
+                        ○ Match a character in the set [Oo].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match a character in the set [Mm].<br/>
+                        ○ Match a character in the set [Ee].<br/>
+                        ○ Match a character in the set [Nn].<br/>
+                        ○ Match a character in the set [Tt].<br/>
+                        ○ Match '-'.<br/>
+                        ○ Match a character in the set [Vv].<br/>
+                        ○ Match a character in the set [Aa].<br/>
+                        ○ Match a character in the set [Rr].<br/>
+                        ○ Match a character in the set [Ii].<br/>
+                        ○ Match a character in the set [Aa].<br/>
+                        ○ Match a character in the set [Bb].<br/>
+                        ○ Match a character in the set [Ll].<br/>
+                        ○ Match a character in the set [Ee].<br/>
+            ○ Match a whitespace character atomically any number of times.<br/>
+            ○ Match '('.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="T:Bosak.Schema.XsdValidationService.SimpleTypeSchemaInfo">
+            <summary>
+            Minimal <see cref="T:System.Xml.Schema.IXmlSchemaInfo"/> implementation declaring an element's type as a built-in
+            simple type. Read by the engine's typed-value surfaces via <c>XObject.GetSchemaInfo()</c>;
+            carries no declaration identity (there is no System.Xml.Schema component model behind it).
+            </summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.ForbiddenFunctionCall_0">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the ForbiddenFunctionCall method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.ForbiddenFunctionCall_0.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ForbiddenFunctionCall_0.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.ForbiddenFunctionCall_0.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ForbiddenFunctionCall_0.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.ForbiddenFunctionCall_0.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ForbiddenFunctionCall_0.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ForbiddenFunctionCall_0.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ForbiddenFunctionCall_0.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Utilities">
+            <summary>Helper methods used by generated <see cref="T:System.Text.RegularExpressions.Regex"/>-derived implementations.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout">
+            <summary>Default timeout value set in <see cref="T:System.AppContext"/>, or <see cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout"/> if none was set.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
+            <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.IsBoundary(System.ReadOnlySpan{System.Char},System.Int32)">
+            <summary>Determines whether the specified index is a boundary.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.IsBoundaryWordChar(System.Char)">
+            <summary>Determines whether the specified index is a boundary word character.</summary>
+            <remarks>This is the same as \w plus U+200C ZERO WIDTH NON-JOINER and U+200D ZERO WIDTH JOINER.</remarks>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.StackPush(System.Int32[]@,System.Int32@,System.Int32,System.Int32)">
+            <summary>Pushes 2 values onto the backtracking stack.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.WordCategoriesMask">
+            <summary>Provides a mask of Unicode categories that combine to form [\w].</summary>
+        </member>
+        <member name="P:System.Text.RegularExpressions.Generated.Utilities.WordCharBitmap">
+            <summary>Gets a bitmap for whether each character 0 through 127 is in [\w]</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_ascii_7804000078040000">
+            <summary>Supports searching for characters in or not in "CDEFJcdefj".</summary>
+        </member>
+    </members>
+</doc>

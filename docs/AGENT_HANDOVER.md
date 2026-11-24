@@ -1,5 +1,10 @@
 Last updated: 2026-11-24
 
+## Bounded date patterns ? 24 November 2026
+
+Batch slice 4 admits the existing finite pattern grammar on direct, named and bounded complex date restrictions. Same-step alternatives and inherited conjunctions check normalized literals; original date components, timezone presence and XML stay intact. New bounds over a patterned ancestor remain Unsupported pending a separate value-space contract. String/date states and matching work share their respective schema/assessment budgets. Numeric complex patterns retain their existing refusal. REQ-009 remains In Progress; Core 1.81.17 and the public API are unchanged. [Contract and qualification](date-patterns/README.md).
+
+
 ## Beta.1 publication documentation — 18 November 2026
 
 ## Packaged guidance reconciled after M1 - 19 November 2026

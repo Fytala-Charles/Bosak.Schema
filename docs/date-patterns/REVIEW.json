@@ -1,0 +1,12 @@
+{
+ "blockingFindings": [],
+ "resolvedFindings": [
+  {"finding":"Initial shared whitelist admitted integer complex patterns because the numeric facet compiler did not reject them.","resolution":"Explicit non-date pattern guard restored IC-044 refusals; original fixtures unchanged."},
+  {"finding":"Authored state-capacity fixture used a repeat count above the pre-existing 16 maximum.","resolution":"Replaced with eight admitted a{15} atoms; 8 definitions compile and 9 exceed shared state cap."},
+  {"finding":"Internal compile-work fixture used text capacity 10 for an 11-character date.","resolution":"Corrected its caller capacity to 11; independent source-limit test retains capacity 10."}
+ ],
+ "boundExclusion":"No new bound over an inherited patterned base is guessed valid/invalid.",
+ "unchangedStimuli":true,
+ "publicApiChange":false,
+ "publication":false
+}

@@ -53,6 +53,7 @@
 //                      | Charles Korthout | 1.30   | 24-11-2026     | Adopt qualified bounded date enumeration and internal value equality |
 //                      | Charles Korthout | 1.31   | 24-11-2026     | Resolve named simple date dependencies with bounded cycle guards |
 //                      | Charles Korthout | 1.32   | 24-11-2026     | Propagate date restriction character limits through complex compilation |
+//                      | Charles Korthout | 1.33   | 24-11-2026     | Propagate shared date pattern contexts through every compilation and assessment route |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -162,7 +163,7 @@ internal sealed partial class NativeDecimalSchema
             if (stringType is not null && HasNestedDeclarations(root, types, targetNamespace))
                 return NativeResult<NativeDecimalSchema>.Valid(CompileNestedSchema(root, types, declarations, targetNamespace,
                     defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType!, integerType!, simple,
-                    limits, maxStringCharacters!.Value, cancellationToken, anonymousSimple));
+                    limits, maxStringCharacters!.Value, cancellationToken, anonymousSimple, patternCompilation));
             // Compile all complex types eagerly, including unused declarations.
             var complexDefinitions = types.Where(t => t.Name == Xs + "complexType")
                 .ToDictionary(t => XName.Get(Name(t), targetNamespace));
@@ -179,7 +180,7 @@ internal sealed partial class NativeDecimalSchema
                 var plan = CompileComplex(type, new NativeDeclaration(name, identity, 1, 1, targetNamespace),
                     targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType,
                     simple, limits, cancellationToken, anonymousSimple,
-                    requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null, maxStringCharacters: maxStringCharacters);
+                    requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null, maxStringCharacters: maxStringCharacters, patternCompilation: patternCompilation);
                 resolvingComplex.Remove(key);
                 named.Add(key, plan);
                 return plan;
@@ -208,7 +209,7 @@ internal sealed partial class NativeDecimalSchema
                     var complex = Single(declaration, "complexType");
                     Attributes(complex);
                     plan = CompileComplex(complex, new NativeDeclaration(name, new NativeType(null, true), 1, 1, targetNamespace),
-                        targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null, maxStringCharacters: maxStringCharacters);
+                        targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null, maxStringCharacters: maxStringCharacters, patternCompilation: patternCompilation);
                 }
                 compiled.Add(key, plan);
                 first ??= plan;
@@ -243,7 +244,7 @@ internal sealed partial class NativeDecimalSchema
 
     private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
         string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
-        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null, bool nestedContext = false, int? maxStringCharacters = null)
+        Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null, bool nestedContext = false, int? maxStringCharacters = null, NativePatternCompilation? patternCompilation = null)
     {
         var members = Elements(complex);
         if (stringType is not null && TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken) is { } empty) return empty;
@@ -252,7 +253,7 @@ internal sealed partial class NativeDecimalSchema
         if (stringType is not null && TryCompileChoice(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
             decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } choice) return choice;
         if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
-            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver, assertionNamespace, nestedContext, maxStringCharacters);
+            return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver, assertionNamespace, nestedContext, maxStringCharacters, patternCompilation);
         var attributeMembers = members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray();
         var assertionMembers = members.Skip(1 + attributeMembers.Length).ToArray();
         if (assertionMembers.Any(IsStructuralAssertion))
@@ -348,12 +349,12 @@ internal sealed partial class NativeDecimalSchema
 
     private static NativeDecimalSchema CompileSimpleContent(XElement content, NativeDeclaration root,
         string targetNamespace, string attributeForm, NativeType decimalType, NativeType stringType, NativeType? booleanType,
-        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Func<XName, NativeDecimalSchema?>? complexResolver, string assertionNamespace, bool nestedContext, int? maxStringCharacters)
+        NativeType? integerType, Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Func<XName, NativeDecimalSchema?>? complexResolver, string assertionNamespace, bool nestedContext, int? maxStringCharacters, NativePatternCompilation? patternCompilation)
     {
         Attributes(content);
         var contentMembers = Elements(content);
         if (contentMembers.Count == 1 && contentMembers[0].Name == Xs + "restriction")
-            return CompileComplexRestriction(contentMembers[0], root, targetNamespace, simple, limits, complexResolver, cancellationToken, assertionNamespace, maxStringCharacters);
+            return CompileComplexRestriction(contentMembers[0], root, targetNamespace, simple, limits, complexResolver, cancellationToken, assertionNamespace, maxStringCharacters, patternCompilation);
         var extension = Single(content, "extension");
         Attributes(extension, "base");
         var baseName = ResolveTypeName(extension, "base");
@@ -538,7 +539,7 @@ internal sealed partial class NativeDecimalSchema
         {
             if (declaration.Type.DateFacets is not null) Require(text.Length <= maxStringCharacters!.Value, "Date enumeration value capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
             var value = NativeDateParser.Parse(text);
-            Check(declaration.Type.DateFacets?.Accepts(value) ?? true, "Date enumeration violation.");
+            Check(declaration.Type.DateFacets?.Accepts(value, text, patternBudget) ?? true, "Date enumeration violation.");
             return new NativeElementState(declaration, null, DateValue: value);
         }
         else if (declaration.Type.IsInteger)
