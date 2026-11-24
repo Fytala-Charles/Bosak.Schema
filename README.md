@@ -8,7 +8,7 @@
 
 The 0.6 development candidate requires **Bosak Core 1.81.17 or later**. [Dependency compatibility](docs/core-18117-baseline/README.md). Native scalar and original-node assessment preserve original XML, exact typed values and component identity within an explicit bounded profile.
 
-Date restrictions support [enumeration](docs/date-enumeration-implementation/README.md), [bounds and timezones](docs/date-bounds/CONTRACT.md), [named derivation](docs/date-chains/CONTRACT.md), [lexical patterns](docs/date-patterns/README.md) and [bounded complex restriction](docs/date-complex-restriction/CONTRACT.md). Boolean restrictions support [patterns](docs/boolean-patterns/README.md) and [named chains](docs/boolean-chains/README.md). Decimal restrictions support [exact enumeration](docs/decimal-enumeration/README.md) and [named derivation](docs/decimal-chains/README.md) without replacing the instance representation.
+Date restrictions support [enumeration](docs/date-enumeration-implementation/README.md), [bounds and timezones](docs/date-bounds/CONTRACT.md), [named derivation](docs/date-chains/CONTRACT.md), [lexical patterns](docs/date-patterns/README.md) and [bounded complex restriction](docs/date-complex-restriction/CONTRACT.md). Boolean restrictions support [patterns](docs/boolean-patterns/README.md) and [named chains](docs/boolean-chains/README.md). Decimal restrictions support [exact enumeration](docs/decimal-enumeration/README.md), [named derivation](docs/decimal-chains/README.md) and [bounded complex restriction](docs/decimal-complex-restriction/README.md) without replacing the instance representation.
 
 > Apache-2.0 schema integration and staged XSD 1.1 services for .NET.
 
@@ -81,7 +81,7 @@ Existing schema factory signatures remain intact. The old `License` entry points
 
 Fytala retains copyright and trademark ownership; Apache-2.0 grants the rights stated in the license. Branding does not grant trademark rights. The new license applies to this public source release; old proprietary releases and private licensing-product agreements are separate historical artifacts.
 
-*Last updated: 2026-11-24*
+*Last updated: 2026-11-25*
 
 See the [next-beta assessment](docs/beta2-gap-assessment/README.md) for proposed diagnostic improvements and the evidence required before expanding the native grammar.
 

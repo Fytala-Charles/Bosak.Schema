@@ -1,4 +1,9 @@
-Last updated: 2026-11-24
+Last updated: 2026-11-25
+
+## Decimal complex enumeration restriction - 25 November 2026
+
+Batch slice 9 enables local/inherited exact enumeration on the existing attribute/assertion-free decimal complex restriction route, using qualified native base-value validity and narrowing rules. Actual governing complex and anonymous atomic components keep their bases and authority. Fourteen measured old results are reconciled without changing payloads/IDs: six base-invalid schemas are Invalid and eight valid cases compile/assess successfully. Integer/date routes and legacy decimal-only grammar remain unchanged. REQ-009 remains In Progress; API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](decimal-complex-restriction/README.md).
+
 
 ## Named decimal restriction chains - 24 November 2026
 
