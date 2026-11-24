@@ -1,0 +1,545 @@
+{
+  "date": "2026-11-24",
+  "base": "2eb999052188a872a54548c71c378d6a05a8cc3c",
+  "tests": {
+    "source": 4246,
+    "minimum-consumer-qualified": 2938,
+    "current-consumer-qualified": 2938,
+    "current-native": 7,
+    "legacy124": 124,
+    "alpha23": 23,
+    "beta33": 33
+  },
+  "previousLogicalCases": 4146,
+  "newAuthoredControls": 99,
+  "newlyEligibleOriginalCase": "AL-008 existing all identity case",
+  "displayNamesRemoved": [
+    "Bosak.Schema.Tests.NativeInstanceTypeCoreTests.RefusedRequests_PublishNothing(request: \"xs:date\", expected: Unsupported)"
+  ],
+  "displayNamesAdded": [
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.DeferredTypes",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Exclusions",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.ExtremeAndZones(data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.ExtremeAndZones(data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-001\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2024-02-29</r>\", expected: \"Valid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-001\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2024-02-29</r>\", expected: \"Valid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-002\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2000-02-29Z</r>\", expected: \"Valid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-002\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2000-02-29Z</r>\", expected: \"Valid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-003\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>0000-02-29</r>\", expected: \"Valid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-003\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>0000-02-29</r>\", expected: \"Valid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-004\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>-0004-02-29</r>\", expected: \"Valid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-004\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>-0004-02-29</r>\", expected: \"Valid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-005\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>-0001-01-01</r>\", expected: \"Valid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-005\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>-0001-01-01</r>\", expected: \"Valid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-006\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>10000-01-01</r>\", expected: \"Valid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-006\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>10000-01-01</r>\", expected: \"Valid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-007\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-11-24+14:00</r>\", expected: \"Valid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-007\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-11-24+14:00</r>\", expected: \"Valid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-008\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-11-24-14:00</r>\", expected: \"Valid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-008\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-11-24-14:00</r>\", expected: \"Valid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-009\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-11-24+00:00</r>\", expected: \"Valid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-009\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-11-24+00:00</r>\", expected: \"Valid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-010\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-11-24-00:00</r>\", expected: \"Valid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-010\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-11-24-00:00</r>\", expected: \"Valid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-011\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r> \\t2026-11-24\\r\\n</r>\", expected: \"Valid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-011\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r> \\t2026-11-24\\r\\n</r>\", expected: \"Valid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-012\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>9223372036854775807-12-31</r>\", expected: \"Valid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-012\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>9223372036854775807-12-31</r>\", expected: \"Valid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-013\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>-9223372036854775808-01-01</r>\", expected: \"Unsupported\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-013\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>-9223372036854775808-01-01</r>\", expected: \"Unsupported\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-014\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>1900-02-29</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-014\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>1900-02-29</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-015\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2023-02-29</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-015\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2023-02-29</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-016\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-04-31</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-016\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-04-31</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-017\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-00-01</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-017\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-00-01</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-018\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-13-01</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-018\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-13-01</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-019\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-00</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-019\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-00</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-020\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-32</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-020\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-32</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-021\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>+2026-01-01</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-021\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>+2026-01-01</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-022\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>026-01-01</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-022\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>026-01-01</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-023\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>02026-01-01</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-023\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>02026-01-01</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-024\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-1-01</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-024\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-1-01</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-025\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-1</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-025\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-1</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-026\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-01z</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-026\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-01z</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-027\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-01+14:01</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-027\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-01+14:01</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-028\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-01-14:01</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-028\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-01-14:01</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-029\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-01+00:60</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-029\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-01+00:60</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-030\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-01T00:00:00</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-030\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-01T00:00:00</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-031\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-01\u00a0</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-031\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026-01-01\u00a0</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-032\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026- 01-01</r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-032\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>2026- 01-01</r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-033\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r></r>\", expected: \"Invalid\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-033\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r></r>\", expected: \"Invalid\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-034\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>9223372036854775808-01-01</r>\", expected: \"Unsupported\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-034\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>9223372036854775808-01-01</r>\", expected: \"Unsupported\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-035\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>-9223372036854775809-01-01</r>\", expected: \"Unsupported\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-035\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>-9223372036854775809-01-01</r>\", expected: \"Unsupported\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-036\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>11111111111111111111111111111111111111111111111\"\u00b7\u00b7\u00b7, expected: \"Unsupported\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-036\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>11111111111111111111111111111111111111111111111\"\u00b7\u00b7\u00b7, expected: \"Unsupported\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-037\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>11111111111111111111111111111111111111111111111\"\u00b7\u00b7\u00b7, expected: \"Unsupported\", data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.Planned(id: \"DT-037\", schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>11111111111111111111111111111111111111111111111\"\u00b7\u00b7\u00b7, expected: \"Unsupported\", data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.PublicLifetime(data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.PublicLifetime(data: True)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.PublicPlacement(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r a='-0004-02-29Z'><d>0000-02-29</d></r>\", depth: 1, data: False, placementId: \"DP-04\")",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.PublicPlacement(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r a='-0004-02-29Z'><d>0000-02-29</d></r>\", depth: 1, data: True, placementId: \"DP-04\")",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.PublicPlacement(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>0000-02-29</r>\", depth: 0, data: False, placementId: \"DP-01\")",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.PublicPlacement(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>0000-02-29</r>\", depth: 0, data: False, placementId: \"DP-02\")",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.PublicPlacement(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>0000-02-29</r>\", depth: 0, data: False, placementId: \"DP-03\")",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.PublicPlacement(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>0000-02-29</r>\", depth: 0, data: True, placementId: \"DP-01\")",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.PublicPlacement(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>0000-02-29</r>\", depth: 0, data: True, placementId: \"DP-02\")",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.PublicPlacement(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>0000-02-29</r>\", depth: 0, data: True, placementId: \"DP-03\")",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.PublicPlacement(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r><g><d>0000-02-29</d></g></r>\", depth: 2, data: False, placementId: \"DP-05\")",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.PublicPlacement(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r><g><d>0000-02-29</d></g></r>\", depth: 2, data: True, placementId: \"DP-05\")",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.SelectedAndCapacity(data: False)",
+    "Bosak.Schema.PublicConsumer.Tests.NativeDateConsumerTests.SelectedAndCapacity(data: True)",
+    "Bosak.Schema.Tests.DateExperiment.NativeDateIdentityTests.ActualFacts(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r a='-0004-02-29Z'><d>0000-02-29</d></r>\", depth: 1, placementId: \"DP-04\")",
+    "Bosak.Schema.Tests.DateExperiment.NativeDateIdentityTests.ActualFacts(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>0000-02-29</r>\", depth: 0, placementId: \"DP-01\")",
+    "Bosak.Schema.Tests.DateExperiment.NativeDateIdentityTests.ActualFacts(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>0000-02-29</r>\", depth: 0, placementId: \"DP-02\")",
+    "Bosak.Schema.Tests.DateExperiment.NativeDateIdentityTests.ActualFacts(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r>0000-02-29</r>\", depth: 0, placementId: \"DP-03\")",
+    "Bosak.Schema.Tests.DateExperiment.NativeDateIdentityTests.ActualFacts(schema: \"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSch\"\u00b7\u00b7\u00b7, xml: \"<r><g><d>0000-02-29</d></g></r>\", depth: 2, placementId: \"DP-05\")",
+    "Bosak.Schema.Tests.DateExperiment.NativeDateIdentityTests.InvalidFacts",
+    "Bosak.Schema.Tests.DateExperiment.NativeDateIdentityTests.SelectedIdentity",
+    "Bosak.Schema.Tests.NativeInstanceTypeCoreTests.RefusedRequests_PublishNothing(request: \"xs:date\", expected: Invalid)",
+    "Bosak.Schema.Tests.NodeData.NativeAllIdentityTests.PhysicalOriginalIdentity(id: \"AL-008\", json: \"{\\r\\n      \\\"id\\\": \\\"AL-008\\\",\\r\\n      \\\"phase\\\":\"\u00b7\u00b7\u00b7, data: False)"
+  ],
+  "sourceInternal": 1308,
+  "sourcePublic": 2938,
+  "apiPreservedRows": 401,
+  "apiAdditions": 7,
+  "apiTypes": 55,
+  "apiRows": 408,
+  "inputs": 328,
+  "corpus": {
+    "expanded-minimum-1": {
+      "counts": {
+        "match": 6,
+        "unsupported": 62,
+        "mismatch": 0,
+        "harnessError": 0
+      },
+      "changes": [
+        {
+          "before": {
+            "id": "CType/contenttype00301m/contentType00301m1_p",
+            "metadata": "sunMeta/CType.testSet",
+            "testSet": "CType",
+            "group": "contenttype00301m",
+            "schemaTest": "contentType00301m",
+            "instanceTest": "contentType00301m1_p",
+            "schema": "sunData/CType/contentType/contentType00301m/contentType00301m.xsd",
+            "instance": "sunData/CType/contentType/contentType00301m/contentType00301m1_p.xml",
+            "upstreamSchemaExpected": "valid",
+            "upstreamExpected": "valid",
+            "schemaStatus": "accepted",
+            "instanceStatus": "accepted",
+            "bucket": "date-time",
+            "area": "SC07",
+            "staticFeatures": [
+              "builtin:date"
+            ],
+            "schemaBytes": 476,
+            "classification": "unsupported",
+            "native": {
+              "id": "CType/contenttype00301m/contentType00301m1_p",
+              "compile": "Unsupported",
+              "assessment": null,
+              "reason": "ValueType",
+              "error": null
+            }
+          },
+          "after": {
+            "id": "CType/contenttype00301m/contentType00301m1_p",
+            "metadata": "sunMeta/CType.testSet",
+            "testSet": "CType",
+            "group": "contenttype00301m",
+            "schemaTest": "contentType00301m",
+            "instanceTest": "contentType00301m1_p",
+            "schema": "sunData/CType/contentType/contentType00301m/contentType00301m.xsd",
+            "instance": "sunData/CType/contentType/contentType00301m/contentType00301m1_p.xml",
+            "upstreamSchemaExpected": "valid",
+            "upstreamExpected": "valid",
+            "schemaStatus": "accepted",
+            "instanceStatus": "accepted",
+            "bucket": "date-time",
+            "area": "SC07",
+            "staticFeatures": [
+              "builtin:date"
+            ],
+            "schemaBytes": 476,
+            "classification": "match",
+            "native": {
+              "id": "CType/contenttype00301m/contentType00301m1_p",
+              "compile": "Valid",
+              "assessment": "Valid",
+              "reason": null,
+              "error": null
+            }
+          }
+        },
+        {
+          "before": {
+            "id": "CType/contenttype00301m/contentType00301m1_n",
+            "metadata": "sunMeta/CType.testSet",
+            "testSet": "CType",
+            "group": "contenttype00301m",
+            "schemaTest": "contentType00301m",
+            "instanceTest": "contentType00301m1_n",
+            "schema": "sunData/CType/contentType/contentType00301m/contentType00301m.xsd",
+            "instance": "sunData/CType/contentType/contentType00301m/contentType00301m1_n.xml",
+            "upstreamSchemaExpected": "valid",
+            "upstreamExpected": "invalid",
+            "schemaStatus": "accepted",
+            "instanceStatus": "accepted",
+            "bucket": "date-time",
+            "area": "SC07",
+            "staticFeatures": [
+              "builtin:date"
+            ],
+            "schemaBytes": 476,
+            "classification": "unsupported",
+            "native": {
+              "id": "CType/contenttype00301m/contentType00301m1_n",
+              "compile": "Unsupported",
+              "assessment": null,
+              "reason": "ValueType",
+              "error": null
+            }
+          },
+          "after": {
+            "id": "CType/contenttype00301m/contentType00301m1_n",
+            "metadata": "sunMeta/CType.testSet",
+            "testSet": "CType",
+            "group": "contenttype00301m",
+            "schemaTest": "contentType00301m",
+            "instanceTest": "contentType00301m1_n",
+            "schema": "sunData/CType/contentType/contentType00301m/contentType00301m.xsd",
+            "instance": "sunData/CType/contentType/contentType00301m/contentType00301m1_n.xml",
+            "upstreamSchemaExpected": "valid",
+            "upstreamExpected": "invalid",
+            "schemaStatus": "accepted",
+            "instanceStatus": "accepted",
+            "bucket": "date-time",
+            "area": "SC07",
+            "staticFeatures": [
+              "builtin:date"
+            ],
+            "schemaBytes": 476,
+            "classification": "match",
+            "native": {
+              "id": "CType/contenttype00301m/contentType00301m1_n",
+              "compile": "Valid",
+              "assessment": "Invalid",
+              "reason": "Unspecified",
+              "error": null
+            }
+          }
+        },
+        {
+          "before": {
+            "id": "Wild/wild080/wild080.v1.xml",
+            "metadata": "saxonMeta/Wild.testSet",
+            "testSet": "Wild",
+            "group": "wild080",
+            "schemaTest": "wild080.xsd",
+            "instanceTest": "wild080.v1.xml",
+            "schema": "saxonData/Wild/wild080.xsd",
+            "instance": "saxonData/Wild/wild080.v1.xml",
+            "upstreamSchemaExpected": "valid",
+            "upstreamExpected": "valid",
+            "schemaStatus": "accepted",
+            "instanceStatus": "accepted",
+            "bucket": "type-alternatives",
+            "area": "SC16",
+            "staticFeatures": [
+              "alternative",
+              "any",
+              "builtin:date"
+            ],
+            "schemaBytes": 593,
+            "classification": "unsupported",
+            "native": {
+              "id": "Wild/wild080/wild080.v1.xml",
+              "compile": "Unsupported",
+              "assessment": null,
+              "reason": "ValueType",
+              "error": null
+            }
+          },
+          "after": {
+            "id": "Wild/wild080/wild080.v1.xml",
+            "metadata": "saxonMeta/Wild.testSet",
+            "testSet": "Wild",
+            "group": "wild080",
+            "schemaTest": "wild080.xsd",
+            "instanceTest": "wild080.v1.xml",
+            "schema": "saxonData/Wild/wild080.xsd",
+            "instance": "saxonData/Wild/wild080.v1.xml",
+            "upstreamSchemaExpected": "valid",
+            "upstreamExpected": "valid",
+            "schemaStatus": "accepted",
+            "instanceStatus": "accepted",
+            "bucket": "type-alternatives",
+            "area": "SC16",
+            "staticFeatures": [
+              "alternative",
+              "any",
+              "builtin:date"
+            ],
+            "schemaBytes": 593,
+            "classification": "unsupported",
+            "native": {
+              "id": "Wild/wild080/wild080.v1.xml",
+              "compile": "Unsupported",
+              "assessment": null,
+              "reason": "DeclarationShape",
+              "error": null
+            }
+          }
+        }
+      ]
+    },
+    "expanded-minimum-2": {
+      "counts": {
+        "match": 6,
+        "unsupported": 55,
+        "mismatch": 0,
+        "harnessError": 0
+      },
+      "changes": []
+    },
+    "pilot-minimum": {
+      "counts": {
+        "match": 21,
+        "mismatch": 0,
+        "unsupported": 0,
+        "harnessError": 0
+      }
+    },
+    "expanded-current-1": {
+      "counts": {
+        "match": 6,
+        "unsupported": 62,
+        "mismatch": 0,
+        "harnessError": 0
+      },
+      "changes": [
+        {
+          "before": {
+            "id": "CType/contenttype00301m/contentType00301m1_p",
+            "metadata": "sunMeta/CType.testSet",
+            "testSet": "CType",
+            "group": "contenttype00301m",
+            "schemaTest": "contentType00301m",
+            "instanceTest": "contentType00301m1_p",
+            "schema": "sunData/CType/contentType/contentType00301m/contentType00301m.xsd",
+            "instance": "sunData/CType/contentType/contentType00301m/contentType00301m1_p.xml",
+            "upstreamSchemaExpected": "valid",
+            "upstreamExpected": "valid",
+            "schemaStatus": "accepted",
+            "instanceStatus": "accepted",
+            "bucket": "date-time",
+            "area": "SC07",
+            "staticFeatures": [
+              "builtin:date"
+            ],
+            "schemaBytes": 476,
+            "classification": "unsupported",
+            "native": {
+              "id": "CType/contenttype00301m/contentType00301m1_p",
+              "compile": "Unsupported",
+              "assessment": null,
+              "reason": "ValueType",
+              "error": null
+            }
+          },
+          "after": {
+            "id": "CType/contenttype00301m/contentType00301m1_p",
+            "metadata": "sunMeta/CType.testSet",
+            "testSet": "CType",
+            "group": "contenttype00301m",
+            "schemaTest": "contentType00301m",
+            "instanceTest": "contentType00301m1_p",
+            "schema": "sunData/CType/contentType/contentType00301m/contentType00301m.xsd",
+            "instance": "sunData/CType/contentType/contentType00301m/contentType00301m1_p.xml",
+            "upstreamSchemaExpected": "valid",
+            "upstreamExpected": "valid",
+            "schemaStatus": "accepted",
+            "instanceStatus": "accepted",
+            "bucket": "date-time",
+            "area": "SC07",
+            "staticFeatures": [
+              "builtin:date"
+            ],
+            "schemaBytes": 476,
+            "classification": "match",
+            "native": {
+              "id": "CType/contenttype00301m/contentType00301m1_p",
+              "compile": "Valid",
+              "assessment": "Valid",
+              "reason": null,
+              "error": null
+            }
+          }
+        },
+        {
+          "before": {
+            "id": "CType/contenttype00301m/contentType00301m1_n",
+            "metadata": "sunMeta/CType.testSet",
+            "testSet": "CType",
+            "group": "contenttype00301m",
+            "schemaTest": "contentType00301m",
+            "instanceTest": "contentType00301m1_n",
+            "schema": "sunData/CType/contentType/contentType00301m/contentType00301m.xsd",
+            "instance": "sunData/CType/contentType/contentType00301m/contentType00301m1_n.xml",
+            "upstreamSchemaExpected": "valid",
+            "upstreamExpected": "invalid",
+            "schemaStatus": "accepted",
+            "instanceStatus": "accepted",
+            "bucket": "date-time",
+            "area": "SC07",
+            "staticFeatures": [
+              "builtin:date"
+            ],
+            "schemaBytes": 476,
+            "classification": "unsupported",
+            "native": {
+              "id": "CType/contenttype00301m/contentType00301m1_n",
+              "compile": "Unsupported",
+              "assessment": null,
+              "reason": "ValueType",
+              "error": null
+            }
+          },
+          "after": {
+            "id": "CType/contenttype00301m/contentType00301m1_n",
+            "metadata": "sunMeta/CType.testSet",
+            "testSet": "CType",
+            "group": "contenttype00301m",
+            "schemaTest": "contentType00301m",
+            "instanceTest": "contentType00301m1_n",
+            "schema": "sunData/CType/contentType/contentType00301m/contentType00301m.xsd",
+            "instance": "sunData/CType/contentType/contentType00301m/contentType00301m1_n.xml",
+            "upstreamSchemaExpected": "valid",
+            "upstreamExpected": "invalid",
+            "schemaStatus": "accepted",
+            "instanceStatus": "accepted",
+            "bucket": "date-time",
+            "area": "SC07",
+            "staticFeatures": [
+              "builtin:date"
+            ],
+            "schemaBytes": 476,
+            "classification": "match",
+            "native": {
+              "id": "CType/contenttype00301m/contentType00301m1_n",
+              "compile": "Valid",
+              "assessment": "Invalid",
+              "reason": "Unspecified",
+              "error": null
+            }
+          }
+        },
+        {
+          "before": {
+            "id": "Wild/wild080/wild080.v1.xml",
+            "metadata": "saxonMeta/Wild.testSet",
+            "testSet": "Wild",
+            "group": "wild080",
+            "schemaTest": "wild080.xsd",
+            "instanceTest": "wild080.v1.xml",
+            "schema": "saxonData/Wild/wild080.xsd",
+            "instance": "saxonData/Wild/wild080.v1.xml",
+            "upstreamSchemaExpected": "valid",
+            "upstreamExpected": "valid",
+            "schemaStatus": "accepted",
+            "instanceStatus": "accepted",
+            "bucket": "type-alternatives",
+            "area": "SC16",
+            "staticFeatures": [
+              "alternative",
+              "any",
+              "builtin:date"
+            ],
+            "schemaBytes": 593,
+            "classification": "unsupported",
+            "native": {
+              "id": "Wild/wild080/wild080.v1.xml",
+              "compile": "Unsupported",
+              "assessment": null,
+              "reason": "ValueType",
+              "error": null
+            }
+          },
+          "after": {
+            "id": "Wild/wild080/wild080.v1.xml",
+            "metadata": "saxonMeta/Wild.testSet",
+            "testSet": "Wild",
+            "group": "wild080",
+            "schemaTest": "wild080.xsd",
+            "instanceTest": "wild080.v1.xml",
+            "schema": "saxonData/Wild/wild080.xsd",
+            "instance": "saxonData/Wild/wild080.v1.xml",
+            "upstreamSchemaExpected": "valid",
+            "upstreamExpected": "valid",
+            "schemaStatus": "accepted",
+            "instanceStatus": "accepted",
+            "bucket": "type-alternatives",
+            "area": "SC16",
+            "staticFeatures": [
+              "alternative",
+              "any",
+              "builtin:date"
+            ],
+            "schemaBytes": 593,
+            "classification": "unsupported",
+            "native": {
+              "id": "Wild/wild080/wild080.v1.xml",
+              "compile": "Unsupported",
+              "assessment": null,
+              "reason": "DeclarationShape",
+              "error": null
+            }
+          }
+        }
+      ]
+    },
+    "expanded-current-2": {
+      "counts": {
+        "match": 6,
+        "unsupported": 55,
+        "mismatch": 0,
+        "harnessError": 0
+      },
+      "changes": []
+    },
+    "pilot-current": {
+      "counts": {
+        "match": 21,
+        "mismatch": 0,
+        "unsupported": 0,
+        "harnessError": 0
+      }
+    }
+  },
+  "package": "Bosak.Schema.0.6.0-alpha.0.40.nupkg",
+  "packageSha256": "c56ec62d172373e9db553833eb2723b5b1d6b70ddbfb84e1f846dd9fda0d53bc",
+  "schemaDllSha256": "31f964170c0674b495601f146763b28efba3fed06e1f0e5871f512d5a5c09d7a",
+  "legacyExpandedDate": "Unchanged expanded measurement scripts retain22November field; actual executions24November2026"
+}

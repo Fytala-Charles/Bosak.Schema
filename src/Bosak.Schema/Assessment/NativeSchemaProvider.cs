@@ -30,6 +30,8 @@
 //                      | Charles Korthout | 1.8   | 21-11-2026     | Adopt bounded complex restriction with original and atomic component identities |
 //                      | Charles Korthout | 1.9   | 21-11-2026     | Probe empty complex typing in isolated copies only |
 //                      | Charles Korthout | 1.10   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
+//                      | Charles Korthout | 1.11   | 24-11-2026     | Probe revised bounded date transport in isolated source copy |
+//                      | Charles Korthout | 1.12   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -275,6 +277,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             else if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
             else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, XdmValue.FromString(text), actualType);
             else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical), actualType);
+            else if (state.DateValue is { } date) value = new IssuedValue(input, origin, type, XdmValue.FromDate(date, date.HasTimezone), actualType);
             else if (state.IntegerValue is { } integer) value = new IssuedValue(input, origin, type, XdmValue.FromInteger(integer), actualType);
         }
         internal NativeSchemaInput Input { get; }

@@ -1,0 +1,113 @@
+{
+  "initialFailures": {
+    "minimum": [
+      "Bosak.Schema.PublicConsumer.Tests.NativeAllContractTests.PlannedPayloads(id: \"AL-008\", json: \"{\\r\\n      \\\"id\\\": \\\"AL-008\\\",\\r\\n      \\\"phase\\\":\"\u00b7\u00b7\u00b7, data: True)",
+      "Bosak.Schema.PublicConsumer.Tests.NativeSchemaContractTests.SurfaceAndDiagnostics_AreProducerOnlyAndRedacted",
+      "Bosak.Schema.PublicConsumer.Tests.NativeAllContractTests.PlannedPayloads(id: \"AL-008\", json: \"{\\r\\n      \\\"id\\\": \\\"AL-008\\\",\\r\\n      \\\"phase\\\":\"\u00b7\u00b7\u00b7, data: False)",
+      "Bosak.Schema.PublicConsumer.Tests.NativeAttributeConsumerTests.RootAttributes_ValidateCompletelyWithoutChangingLeafIndexes(id: \"M2E1-067\", payload: \"{\\r\\n    \\\"id\\\": \\\"M2E1-067\\\",\\r\\n    \\\"descriptio\"\u00b7\u00b7\u00b7)",
+      "Bosak.Schema.PublicConsumer.Tests.NativeIntegerConsumerTests.IntegerAssessment_SeparatesValidityCapacityAndProfile(id: \"M2C3-66\", payload: \"{\\r\\n    \\\"id\\\": \\\"M2C3-66\\\",\\r\\n    \\\"description\"\u00b7\u00b7\u00b7)",
+      "Bosak.Schema.PublicConsumer.Tests.NativeInstanceTypeConsumerTests.ProposalPayloads_ExecuteActualNativeSelection(id: \"XT-026\", payload: \"{\\r\\n      \\\"id\\\": \\\"XT-026\\\",\\r\\n      \\\"label\\\":\"\u00b7\u00b7\u00b7, nodeData: False)",
+      "Bosak.Schema.PublicConsumer.Tests.NativeInstanceTypeConsumerTests.ProposalPayloads_ExecuteActualNativeSelection(id: \"XT-026\", payload: \"{\\r\\n      \\\"id\\\": \\\"XT-026\\\",\\r\\n      \\\"label\\\":\"\u00b7\u00b7\u00b7, nodeData: True)",
+      "Bosak.Schema.Tests.NativeInstanceTypeCoreTests.RefusedRequests_PublishNothing(request: \"xs:date\", expected: Unsupported)",
+      "Bosak.Schema.Tests.SimpleRoots.NativeSimpleRootBoundaryCoreTests.OtherBuiltinTypesStayExcluded(type: \"date\")"
+    ],
+    "current": [
+      "Bosak.Schema.PublicConsumer.Tests.NativeInstanceTypeConsumerTests.ProposalPayloads_ExecuteActualNativeSelection(id: \"XT-026\", payload: \"{\\r\\n      \\\"id\\\": \\\"XT-026\\\",\\r\\n      \\\"label\\\":\"\u00b7\u00b7\u00b7, nodeData: True)",
+      "Bosak.Schema.PublicConsumer.Tests.NativeAllContractTests.PlannedPayloads(id: \"AL-008\", json: \"{\\r\\n      \\\"id\\\": \\\"AL-008\\\",\\r\\n      \\\"phase\\\":\"\u00b7\u00b7\u00b7, data: True)",
+      "Bosak.Schema.PublicConsumer.Tests.NativeDecimalConsumerTests.PublicSurface_NoFriendGrantOrPublicFactoriesForAuthority",
+      "Bosak.Schema.PublicConsumer.Tests.NativeAllContractTests.PlannedPayloads(id: \"AL-008\", json: \"{\\r\\n      \\\"id\\\": \\\"AL-008\\\",\\r\\n      \\\"phase\\\":\"\u00b7\u00b7\u00b7, data: False)",
+      "Bosak.Schema.PublicConsumer.Tests.NativeSchemaContractTests.SurfaceAndDiagnostics_AreProducerOnlyAndRedacted",
+      "Bosak.Schema.PublicConsumer.Tests.NativeInstanceTypeConsumerTests.ProposalPayloads_ExecuteActualNativeSelection(id: \"XT-026\", payload: \"{\\r\\n      \\\"id\\\": \\\"XT-026\\\",\\r\\n      \\\"label\\\":\"\u00b7\u00b7\u00b7, nodeData: False)",
+      "Bosak.Schema.PublicConsumer.Tests.NativeIntegerConsumerTests.IntegerAssessment_SeparatesValidityCapacityAndProfile(id: \"M2C3-66\", payload: \"{\\r\\n    \\\"id\\\": \\\"M2C3-66\\\",\\r\\n    \\\"description\"\u00b7\u00b7\u00b7)",
+      "Bosak.Schema.PublicConsumer.Tests.NativeAttributeConsumerTests.RootAttributes_ValidateCompletelyWithoutChangingLeafIndexes(id: \"M2E1-067\", payload: \"{\\r\\n    \\\"id\\\": \\\"M2E1-067\\\",\\r\\n    \\\"descriptio\"\u00b7\u00b7\u00b7)",
+      "Bosak.Schema.Tests.SimpleRoots.NativeSimpleRootBoundaryCoreTests.OtherBuiltinTypesStayExcluded(type: \"date\")",
+      "Bosak.Schema.Tests.NativeInstanceTypeCoreTests.RefusedRequests_PublishNothing(request: \"xs:date\", expected: Unsupported)"
+    ]
+  },
+  "executedFailures": {
+    "minimum": 9,
+    "current": 10
+  },
+  "currentPinOnlyHarnessCorrection": "Original consumer explicitly asserts minimum Core version1.81.2; qualification copy now asserts selected1.81.17 for current lane only; original retained",
+  "logicalChanges": 7,
+  "changes": [
+    {
+      "path": "tests/TestData/Attributes/m2e1-cases.json",
+      "id": "M2E1-067",
+      "before": {
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "unsupportedReason": "ValueType"
+      },
+      "after": {
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Invalid",
+        "unsupportedReason": null
+      },
+      "originalSha256": "ff2504ddfe3709869883896a3701c87dd97faebe9da5eb9afb5a99a49e9088f3",
+      "reconciledSha256": "6f74286d9a519009da8d714bddaef5003e44087912637344eab9de8d3128f0da"
+    },
+    {
+      "path": "tests/TestData/Integers/m2c3-cases.json",
+      "id": "M2C3-66",
+      "before": {
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "unsupportedReason": "ValueType"
+      },
+      "after": {
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Invalid",
+        "unsupportedReason": null
+      },
+      "originalSha256": "d3dee5f6c29c500ada5d7d8c34fc819e7acf03299dc552d42ef29159ee5129d7",
+      "reconciledSha256": "50978da805730d3b4fb76c4366e2df5e5fd8804ebc3a8877081c30a6cb946cb4"
+    },
+    {
+      "path": "tests/TestData/AllParticles/case-plan.json",
+      "id": "AL-008",
+      "before": {
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "NotRun"
+      },
+      "after": {
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Valid"
+      },
+      "originalSha256": "423b0cea71a62725a4e44144222306e6a7edcc000f9c67ca09ac6be53c48600f",
+      "reconciledSha256": "70a568049dd1dea5316dc81a9665ce25047268f80380073ccff02a0c7924b0be"
+    },
+    {
+      "path": "tests/TestData/InstanceTypes/cases.json",
+      "id": "XT-026",
+      "before": {
+        "proposedAssessment": "Unsupported/ValueType"
+      },
+      "after": {
+        "proposedAssessment": "Invalid"
+      },
+      "originalSha256": "ab5cc2f7dad227d576349af26c8b6773b056fd305fd6c08421c76024cd085863",
+      "reconciledSha256": "ea4a273591b86f548fadea862955ebd82568b38dac881948ca46c86523ff928a"
+    },
+    {
+      "path": "tests/Bosak.Schema.Tests/NativeSimpleRootBoundaryCoreTests.cs",
+      "originalSha256": "e6a5b527722caf604db5ed4320c9092f7d671e38a5f7463215f6cdd5e6dc5e79",
+      "reconciledSha256": "7f18a94c775276622d3206a83647b23e996eb26d79d93a8174da8a001e6b6cb0",
+      "note": "Outcome correction only; surface test preserves original admitted date stimulus and adds separate time refusal diagnostic control"
+    },
+    {
+      "path": "tests/Bosak.Schema.Tests/NativeInstanceTypeCoreTests.cs",
+      "originalSha256": "2030626b7a922b0bbead0e02570d47bd9bf26dcf4623251f8ea0432221e915ce",
+      "reconciledSha256": "564b907430480a35ad78b62e5ea700842c4852e2095a00e83afc793ccb5a54b3",
+      "note": "Outcome correction only; surface test preserves original admitted date stimulus and adds separate time refusal diagnostic control"
+    },
+    {
+      "path": "tests/Bosak.Schema.PublicConsumer.Tests/NativeSchemaContractTests.cs",
+      "originalSha256": "2295348ed02e0b56eba41aa0a21d35f7f3a7ebfba17dc7238c79294c97e7cd10",
+      "reconciledSha256": "0a64c93df26897eacc832650cb71afc0f1003fd08f1a7b49fa4f6fa02ebd60be",
+      "note": "Outcome correction only; surface test preserves original admitted date stimulus and adds separate time refusal diagnostic control"
+    }
+  ],
+  "stimuli": "Original schema/XML/IDs retained; no upstream expectation modified",
+  "displayNameChange": "RefusedRequests_PublishNothing xs:date expected argument Unsupported -> Invalid; explicit same-case rename"
+}

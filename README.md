@@ -23,7 +23,8 @@ The [owned decimal session API](docs/NATIVE-DECIMAL-PUBLIC-API.md) supports nati
 
 The 0.6 development API also offers opt-in bounded namespace assertions and empty
 complex-content assessment, bounded string pattern facets, simple scalar document
-roots and twelve derived integer built-in types, with original typing
+roots, twelve derived integer built-in types, integer enumeration and checked dates,
+with original typing
 and explicit limits. See the
 [consumer guide](docs/NUGET_README.md) for its supported grammar and exclusions;
 the published beta retains its documented profile.
@@ -76,7 +77,7 @@ Existing schema factory signatures remain intact. The old `License` entry points
 
 Fytala retains copyright and trademark ownership; Apache-2.0 grants the rights stated in the license. Branding does not grant trademark rights. The new license applies to this public source release; old proprietary releases and private licensing-product agreements are separate historical artifacts.
 
-*Last updated: 2026-11-19*
+*Last updated: 2026-11-24*
 
 See the [next-beta assessment](docs/beta2-gap-assessment/README.md) for proposed diagnostic improvements and the evidence required before expanding the native grammar.
 

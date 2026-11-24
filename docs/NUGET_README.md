@@ -1230,3 +1230,23 @@ Example integer enumeration:
 ```
 
 The instance reads exact integer one through ReadRootScalar() or ReadElement([]), with zero descendant scalar slots. Export preserves parsed lexical content. Two fails the sibling bound; zero fails membership. The declaration for two is base-int-valid even though the new sibling bound excludes it. Check outcomes before reading values. The legacy decimal facade is unchanged.
+
+### Bounded native dates
+
+The two opt-in native facades support xs:date at admitted simple roots, scalar members and attributes, including direct facet-free named/anonymous date restrictions. NativeScalarKind.Date (5) exposes an immutable NativeDateValue through DateValue: Year, Month, Day and nullable TimezoneOffsetMinutes. Null means no timezone; zero means explicit UTC. Detached values carry no schema authority and survive disposal.
+
+Example date schema and instance:
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="date" type="xs:date"/>
+</xs:schema>
+```
+
+```xml
+<date>0000-02-29+14:00</date>
+```
+
+ReadRootScalar().DateValue or ReadElement([]).DateValue yields year zero, month 2, day 29 and offset 840 minutes. Export retains parsed lexical content. No conversion through DateTimeOffset or implicit timezone is used. Extended years and negative astronomical years use the Gregorian calendar directly.
+
+The explicit year interval is -9223372036854775807 through 9223372036854775807, with at most 256 normalized lexical characters plus existing document/work capacities. Otherwise-valid values outside these bounds are Unsupported/RepresentationCapacity; invalid bounded lexical/calendar values are Invalid. The excluded long.MinValue year cannot be formatted by the pinned Core carrier and is never silently rounded. Temporal facets, date simple-content extension/restriction, arbitrary derived chains, date assertions and dateTime/time/dateTimeStamp remain outside this slice. The legacy decimal facade is unchanged; full calendar operations, PSVI and XSD1.1 conformance are not implied.

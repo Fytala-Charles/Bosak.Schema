@@ -1,0 +1,71 @@
+{
+  "status": "Static review of exact Git sources, not executed transport qualification",
+  "sources": [
+    {
+      "lane": "minimum",
+      "sourceCommit": "7249d0e01628c47f92b89a3380bc69cf58d70045",
+      "path": "src/Bosak.XPath.Core/Xdm/XPathDateTime.cs",
+      "sha256": "026ea5c05b102411e5ac809920669b955950ad79e2c020edc1010f4dd9f74acb"
+    },
+    {
+      "lane": "minimum",
+      "sourceCommit": "7249d0e01628c47f92b89a3380bc69cf58d70045",
+      "path": "src/Bosak.XPath.Core/Xdm/XdmValue.cs",
+      "sha256": "4869627a5454d76f60da2378e77cb2f71a4ed655815c9f636aba9f653652b23e"
+    },
+    {
+      "lane": "minimum",
+      "sourceCommit": "7249d0e01628c47f92b89a3380bc69cf58d70045",
+      "path": "src/Bosak.XPath.Core/Xdm/XdmValueKind.cs",
+      "sha256": "4c17e645fa3002d4c7a0d0e6863ae3c4e87a5247e0f261eee7a618468ff6164e"
+    },
+    {
+      "lane": "current",
+      "sourceCommit": "6a7618e9dcf70eb8a67d5d1789ff7b787133b52d",
+      "path": "src/Bosak.XPath.Core/Xdm/XPathDateTime.cs",
+      "sha256": "026ea5c05b102411e5ac809920669b955950ad79e2c020edc1010f4dd9f74acb"
+    },
+    {
+      "lane": "current",
+      "sourceCommit": "6a7618e9dcf70eb8a67d5d1789ff7b787133b52d",
+      "path": "src/Bosak.XPath.Core/Xdm/XdmValue.cs",
+      "sha256": "4869627a5454d76f60da2378e77cb2f71a4ed655815c9f636aba9f653652b23e"
+    },
+    {
+      "lane": "current",
+      "sourceCommit": "6a7618e9dcf70eb8a67d5d1789ff7b787133b52d",
+      "path": "src/Bosak.XPath.Core/Xdm/XdmValueKind.cs",
+      "sha256": "4c17e645fa3002d4c7a0d0e6863ae3c4e87a5247e0f261eee7a618468ff6164e"
+    },
+    {
+      "lane": "schema",
+      "sourceCommit": "2eb999052188a872a54548c71c378d6a05a8cc3c",
+      "path": "src/Bosak.Schema/Assessment/NativeScalarValue.cs",
+      "sha256": "3ff06139c1a9522d716503992bfc86ff7b63b669a05564fd7dce828fb714ec8a"
+    },
+    {
+      "lane": "schema",
+      "sourceCommit": "2eb999052188a872a54548c71c378d6a05a8cc3c",
+      "path": "src/Bosak.Schema/Assessment/NativeSchemaProvider.cs",
+      "sha256": "1a1c4bcca5bc58d07891542aac58683d6643de467fce8651e17933c5a9aa8083"
+    },
+    {
+      "lane": "schema",
+      "sourceCommit": "2eb999052188a872a54548c71c378d6a05a8cc3c",
+      "path": "src/Bosak.Schema/Assessment/NativeNodeDataCore.cs",
+      "sha256": "1d450c4761c34e491e0771244ea7c71a90b588ddbe941f5f1e9a95aab288b299"
+    },
+    {
+      "lane": "schema",
+      "sourceCommit": "2eb999052188a872a54548c71c378d6a05a8cc3c",
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalSchema.cs",
+      "sha256": "ab298061ad519d5769024f8b002abd1114bcde6231c7be00b99d7efc24ef68a0"
+    }
+  ],
+  "findings": [
+    "Both pinned XPathDateTime definitions expose long Year and int Millisecond; constructors assign supplied components without Schema lexical validation",
+    "XdmValue carries Date/Time/DateTime kinds and annotated factories; factory availability is not validation or end-to-end provider acceptance",
+    "NativeScalarValue has four kinds and no temporal accessor",
+    "Do not infer public C45 acceptance, date comparison correctness or extended-year arithmetic from construction"
+  ]
+}

@@ -1422,7 +1422,7 @@
       "Existing datatype adoptions"
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r xmlns='urn:a' code='😀'><amount>12.50</amount></r>",
+    "instance": "<r xmlns='urn:a' code='\ud83d\ude00'><amount>12.50</amount></r>",
     "maxStringCharacters": 2,
     "maxNativeCoefficientDigits": 256,
     "maxNativeScale": 256,
@@ -1433,7 +1433,7 @@
         "namespaceUri": "",
         "localName": "code",
         "kind": "String",
-        "value": "😀"
+        "value": "\ud83d\ude00"
       }
     ],
     "leaves": [
@@ -1452,7 +1452,7 @@
       "Existing datatype adoptions"
     ],
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r xmlns='urn:a' code='😀'><amount>12.50</amount></r>",
+    "instance": "<r xmlns='urn:a' code='\ud83d\ude00'><amount>12.50</amount></r>",
     "maxStringCharacters": 1,
     "maxNativeCoefficientDigits": 256,
     "maxNativeScale": 256,
@@ -1475,8 +1475,8 @@
       "XML1.0 3.3.3",
       "Existing datatype adoptions"
     ],
-    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1'/><xs:enumeration value='😀'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='t:Label' use='required'/></xs:complexType></xs:element></xs:schema>",
-    "instance": "<r xmlns='urn:a' code='😀'><amount>12.50</amount></r>",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1'/><xs:enumeration value='\ud83d\ude00'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='t:Label' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns='urn:a' code='\ud83d\ude00'><amount>12.50</amount></r>",
     "maxStringCharacters": 2,
     "maxNativeCoefficientDigits": 256,
     "maxNativeScale": 256,
@@ -1487,7 +1487,7 @@
         "namespaceUri": "",
         "localName": "code",
         "kind": "String",
-        "value": "😀"
+        "value": "\ud83d\ude00"
       }
     ],
     "leaves": [
@@ -1505,7 +1505,7 @@
       "XML1.0 3.3.3",
       "Existing datatype adoptions"
     ],
-    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1'/><xs:enumeration value='😀'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='t:Label' use='required'/></xs:complexType></xs:element></xs:schema>",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1'/><xs:enumeration value='\ud83d\ude00'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='t:Label' use='required'/></xs:complexType></xs:element></xs:schema>",
     "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
     "maxStringCharacters": 256,
     "maxNativeCoefficientDigits": 256,
@@ -1884,8 +1884,8 @@
     "maxStringCharacters": 256,
     "maxNativeCoefficientDigits": 256,
     "maxNativeScale": 256,
-    "expectedCompile": "Unsupported",
-    "expectedAssessment": "Unsupported",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
     "attributes": [],
     "leaves": [
       {
@@ -1893,7 +1893,7 @@
         "value": "12.5"
       }
     ],
-    "unsupportedReason": "ValueType"
+    "unsupportedReason": null
   },
   {
     "id": "M2E1-068",

@@ -13,6 +13,8 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 22-11-2026     | Adopt derived-integer expectations without changing original stimuli |
+//                      | Charles Korthout | 0.3   | 24-11-2026     | Reconcile measured date outcomes in isolated test copy |
+//                      | Charles Korthout | 0.4   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -83,7 +85,7 @@ public sealed class NativeSimpleRootBoundaryCoreTests
     /// <param name="type">The type control input.</param>
     [Theory][InlineData("int")][InlineData("date")][InlineData("anyType")]
     public void OtherBuiltinTypesStayExcluded(string type)
-    {var result=NativeSchemaSession.Create(S($"<xs:element name='r' type='xs:{type}'/>"),Options);Assert.Equal(type=="int"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Unsupported,result.Outcome);result.Value?.Dispose();}
+    {var result=NativeSchemaSession.Create(S($"<xs:element name='r' type='xs:{type}'/>"),Options);Assert.Equal(type is "int" or "date"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Unsupported,result.Outcome);result.Value?.Dispose();}
     /// <summary>Eager Unused Pattern.</summary>
     /// <param name="pattern">The pattern control input.</param>
     /// <param name="expected">The expected control input.</param>
