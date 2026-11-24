@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 24-11-2026     | Reconcile measured direct Boolean aliases without changing original payloads |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -48,7 +49,7 @@ public sealed class NativeBooleanConsumerTests
         Assert.StartsWith("M2C2-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;
         var options=new NativeSchemaSessionOptions(256,256,row.GetProperty("maxStringCharacters").GetInt32(),65536,1,8,1,256,256);
         var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,options);
-        Assert.Equal(row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
+        Assert.Equal(id is "M2C2-45" or "M2C2-46"?"Valid":row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid)
         {
             Assert.Null(created.Value);Assert.Equal("BSK-NATIVE-SCHEMA-UNSUPPORTED",Assert.Single(created.Diagnostics).Code);

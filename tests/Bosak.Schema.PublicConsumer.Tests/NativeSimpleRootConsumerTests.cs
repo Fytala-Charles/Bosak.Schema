@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 22-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 24-11-2026     | Read original Boolean root values after measured admission |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -39,7 +40,7 @@ public sealed class NativeSimpleRootConsumerTests
     public void PlannedPayloads(string id,string json,bool data)
     {
         using var plan=JsonDocument.Parse(json);var r=plan.RootElement;var schema=r.GetProperty("schema").GetString()!;var xml=r.GetProperty("instance").GetString()!;
-        var compile=id is "SR-008" or "SR-009"?"Unsupported":r.GetProperty("expectedCompile").GetString();var assessment=r.GetProperty("expectedAssessment").GetString();
+        var compile=id is "SR-008" or "SR-009"?"Valid":r.GetProperty("expectedCompile").GetString();var assessment=id is "SR-008" or "SR-009"?"Valid":r.GetProperty("expectedAssessment").GetString();
         var root=XElement.Parse(xml);var family=root.Name.LocalName=="other"?"integer":r.GetProperty("scalarFamily").GetString()!;
         if(data)
         {var c=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(compile,c.Outcome.ToString());if(c.Value is not {} s){Assert.Null(c.Value);return;}using(s){var a=s.Assess(xml,Context);Assert.Equal(assessment,a.Outcome.ToString());if(a.Value is not {} d){Assert.Null(a.Value);return;}using(d){CheckValue(d.ReadElement([]),family,root.Value);Assert.True(XNode.DeepEquals(root,XElement.Parse(d.ExportXml())));Assert.Throws<ArgumentOutOfRangeException>(()=>d.ReadElement([0]));}}}

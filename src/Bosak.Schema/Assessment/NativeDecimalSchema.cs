@@ -54,6 +54,7 @@
 //                      | Charles Korthout | 1.31   | 24-11-2026     | Resolve named simple date dependencies with bounded cycle guards |
 //                      | Charles Korthout | 1.32   | 24-11-2026     | Propagate date restriction character limits through complex compilation |
 //                      | Charles Korthout | 1.33   | 24-11-2026     | Propagate shared date pattern contexts through every compilation and assessment route |
+//                      | Charles Korthout | 1.34   | 24-11-2026     | Assess Boolean lexical patterns before issuing typed facts |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -533,6 +534,7 @@ internal sealed partial class NativeDecimalSchema
             Require(text.Length <= 256, "Boolean lexical capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
             var lexical = Collapse(text);
             Check(lexical is "true" or "false" or "1" or "0", "Invalid Boolean lexical form.");
+            Check(declaration.Type.BooleanFacets?.Accepts(lexical, patternBudget) ?? true, "Boolean pattern violation.");
             return new NativeElementState(declaration, null, BooleanValue: lexical is "true" or "1");
         }
         else if (declaration.Type.IsDate)
@@ -740,7 +742,7 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null)
 {
     internal NativeType? DerivationBase { get; } = derivationBase;
     internal bool IsComplexRestriction { get; } = isComplexRestriction;
@@ -754,6 +756,7 @@ internal sealed class NativeType(string? name, bool hasNoTypedValue, string name
     internal NativeDateFacets? DateFacets { get; } = dateFacets;
     internal bool IsInteger { get; } = isInteger;
     internal bool IsBoolean { get; } = isBoolean;
+    internal NativeBooleanFacets? BooleanFacets { get; } = booleanFacets;
     internal bool IsString { get; } = isString;
     internal NativeDecimalFacets? Facets { get; } = facets;
     internal string? Name { get; } = name;
