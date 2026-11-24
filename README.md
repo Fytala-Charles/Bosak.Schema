@@ -6,6 +6,8 @@
 
 # Bosak.Schema
 
+Named Boolean restriction chains retain inherited lexical constraints and actual base-type identity. [Boolean derivation](docs/boolean-chains/README.md).
+
 Direct Boolean restrictions support finite lexical patterns and fixed-collapse whitespace. [Boolean patterns](docs/boolean-patterns/README.md).
 
 Bounded date patterns filter normalized lexical forms while preserving original typed dates and XML. [Date patterns](docs/date-patterns/README.md).

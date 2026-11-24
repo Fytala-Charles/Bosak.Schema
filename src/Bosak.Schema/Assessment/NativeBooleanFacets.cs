@@ -12,15 +12,17 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 24-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 24-11-2026     | Apply inherited Boolean groups without recompiling parent automata |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml.Linq;
 namespace Bosak.Schema;
 
-internal sealed class NativeBooleanFacets(ImmutableArray<NativePattern> patterns)
+internal sealed class NativeBooleanFacets(ImmutableArray<NativePattern> patterns, NativeBooleanFacets? parent = null)
 {
- internal static NativeBooleanFacets Compile(XElement restriction, NativePatternCompilation compilation)
+ internal static NativeBooleanFacets Compile(XElement restriction, NativePatternCompilation compilation) => CompileDerived(restriction, compilation, null);
+ internal static NativeBooleanFacets CompileDerived(XElement restriction, NativePatternCompilation compilation, NativeBooleanFacets? parent)
  {
   var facets=NativeDecimalSchema.Elements(restriction);var patterns=ImmutableArray.CreateBuilder<NativePattern>();bool whitespace=false;
   NativePattern.Capacity(facets.Count(e=>e.Name.LocalName=="pattern")<=8);
@@ -34,8 +36,8 @@ internal sealed class NativeBooleanFacets(ImmutableArray<NativePattern> patterns
    if(facet.Name.LocalName=="pattern")patterns.Add(NativePattern.Compile(text!,compilation));
    else{if(whitespace)Invalid("Duplicate Boolean whitespace facet.");whitespace=true;var collapsed=string.Join(" ",text!.Split([' ','\t','\r','\n'],StringSplitOptions.RemoveEmptyEntries));if(collapsed!="collapse")Invalid("Boolean whitespace is fixed to collapse.");}
   }
-  return new(patterns.ToImmutable());
+  return new(patterns.ToImmutable(), parent);
  }
- internal bool Accepts(string lexical,NativePatternBudget budget)=>patterns.IsDefaultOrEmpty || patterns.Any(p=>p.Match(lexical,budget));
+ internal bool Accepts(string lexical,NativePatternBudget budget)=>(parent is null || parent.Accepts(lexical,budget)) && (patterns.IsDefaultOrEmpty || patterns.Any(p=>p.Match(lexical,budget)));
  private static void Invalid(string message)=>throw new NativeProfileException(NativeOutcome.Invalid,message);
 }
