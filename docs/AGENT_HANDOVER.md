@@ -75,6 +75,8 @@ Restricts canonical contained local files, root spelling, reparse points, byte c
 
 # Schema beta assessment — 17 November 2026
 
+24 November 2026: authorized batch slice3 adds attribute/assertion-free date complex simple-content restriction with distinct governing/atomic components and exact caller capacities. [Contract](date-complex-restriction/CONTRACT.md). Ten measured old results change without changing fixtures/IDs, including two unused-definition schemas whose string roots remain string-valued. No public API/Core/publication change.
+
 24 November 2026: authorized batch slice2 adds named date restriction chains, closed forward references and inherited facet/timezone validation. [Contract](date-chains/CONTRACT.md). Six measured original results change; original inputs/IDs remain. Core1.81.17, public API and publication boundaries remain unchanged.
 
 24 November 2026: authorized specification batch slice1 adds bounded date bounds/explicitTimezone on Core1.81.17. [Contract](date-bounds/CONTRACT.md); 25measured original results reconciled without changing stimuli/IDs. Full XSD1.1 and publication remain separate. Batch commit/push/PR/green-merge authorization persists for up to20slices.
