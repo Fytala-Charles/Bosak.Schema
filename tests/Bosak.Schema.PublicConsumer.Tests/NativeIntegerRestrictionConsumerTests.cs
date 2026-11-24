@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 24-11-2026     | Reconcile original Boolean alias and read Boolean rather than integer facts |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -44,10 +45,11 @@ public sealed class NativeIntegerRestrictionConsumerTests
     public void IntegerRestrictions_ValidateExactOriginalValues(string id,string payload)
     {
         Assert.StartsWith("IR-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;
-        var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,Options(row.GetProperty("digits").GetInt32()));Assert.Equal(row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
+        var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,Options(row.GetProperty("digits").GetInt32()));Assert.Equal(id=="IR-098"?"Valid":row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(created.Value);if(row.GetProperty("reason").ValueKind==JsonValueKind.String)Assert.Equal(row.GetProperty("reason").GetString(),created.Diagnostics[0].UnsupportedReason.ToString());return;}
         using var session=created.Value!;var xml=row.GetProperty("instance").GetString()!;var result=session.Assess(xml,Context);Assert.Equal(row.GetProperty("expectedAssessment").GetString(),result.Outcome.ToString());
         if(result.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(result.Value);if(result.Outcome==NativeSchemaOutcome.Unsupported && row.GetProperty("reason").ValueKind==JsonValueKind.String)Assert.Equal(row.GetProperty("reason").GetString(),result.Diagnostics[0].UnsupportedReason.ToString());return;}
+        if(id=="IR-098"){using var booleanDocument=result.Value!;var value=booleanDocument.ReadScalar(0);Assert.Equal(NativeScalarKind.Boolean,value.Kind);Assert.True(value.BooleanValue);var exportedBoolean=booleanDocument.ExportXml();Assert.True(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(exportedBoolean)));booleanDocument.Dispose();using var reopenedBoolean=session.Assess(exportedBoolean,Context).Value!;Assert.True(reopenedBoolean.ReadScalar(0).BooleanValue);return;}
         using var document=result.Value!;var expected=row.GetProperty("values").EnumerateArray().Select(x=>x.GetString()).ToArray();Assert.Equal(expected.Length,document.ScalarCount);var detached=new List<BigInteger>();
         for(var i=0;i<expected.Length;i++){var value=document.ReadScalar(i);Assert.Equal(expected[i],Text(value));detached.Add(value.IntegerValue);}
         var attrs=row.GetProperty("attributes").EnumerateArray().Select(x=>x.GetString()).ToArray();Assert.Equal(attrs.Length,document.AttributeCount);for(var i=0;i<attrs.Length;i++)Assert.Equal(attrs[i],Text(document.ReadAttribute(i).Value));

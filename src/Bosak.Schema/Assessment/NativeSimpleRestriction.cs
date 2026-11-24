@@ -30,6 +30,7 @@
 //                      | Charles Korthout | 0.17   | 24-11-2026     | Adopt qualified bounded date enumeration and internal value equality |
 //                      | Charles Korthout | 0.18   | 24-11-2026     | Admit restrictions of named date types with original base identity |
 //                      | Charles Korthout | 0.19   | 24-11-2026     | Use shared pattern compilation for direct and named date restrictions |
+//                      | Charles Korthout | 0.20   | 24-11-2026     | Admit direct Boolean patterns and fixed-collapse whitespace |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -54,6 +55,9 @@ internal sealed partial class NativeDecimalSchema
         if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var dateBase) && dateBase.IsDate)
             return new NativeType(name, false, namespaceUri, baseName: baseName, derivationBase: dateBase,
                 isDate: true, dateFacets: NativeDateFacets.CompileDerived(restriction, maxStringCharacters.Value, dateBase.DateFacets, patternCompilation));
+        if (maxStringCharacters is not null && baseName == Xs + "boolean")
+            return new NativeType(name, false, namespaceUri, isBoolean: true, baseName: baseName,
+                booleanFacets: NativeBooleanFacets.Compile(restriction, patternCompilation));
         if (baseName == Xs + "decimal")
             return new NativeType(name, false, namespaceUri, NativeDecimalFacets.Compile(restriction, limits), baseName: baseName);
         if (maxStringCharacters is not null && baseName == Xs + "string")

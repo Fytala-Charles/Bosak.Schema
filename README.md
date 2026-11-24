@@ -6,6 +6,8 @@
 
 # Bosak.Schema
 
+Direct Boolean restrictions support finite lexical patterns and fixed-collapse whitespace. [Boolean patterns](docs/boolean-patterns/README.md).
+
 Bounded date patterns filter normalized lexical forms while preserving original typed dates and XML. [Date patterns](docs/date-patterns/README.md).
 
 Bounded date complex restrictions preserve original typed values and governing/atomic type identity. [Date complex restriction](docs/date-complex-restriction/CONTRACT.md).

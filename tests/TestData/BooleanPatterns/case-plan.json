@@ -1,0 +1,419 @@
+{
+  "contract": "docs/boolean-patterns/CONTRACT.md",
+  "cases": [
+    {
+      "id": "alias-true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "alias-false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>false</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": false
+    },
+    {
+      "id": "alias-1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "alias-0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>0</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": false
+    },
+    {
+      "id": "true-only-true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "true-only-1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "true-only-false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>false</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedBoolean": false
+    },
+    {
+      "id": "true-only-0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>0</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedBoolean": false
+    },
+    {
+      "id": "or-true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='false'/><xs:pattern value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "or-false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='false'/><xs:pattern value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>false</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": false
+    },
+    {
+      "id": "group-alternative",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='(true|1)'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "collapsed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='true'/><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r> \ttrue\n </r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "expression-not-collapsed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value=' true '/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "bad-lexical-13",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='.*'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>True</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedBoolean": false
+    },
+    {
+      "id": "bad-lexical-14",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='.*'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>TRUE</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedBoolean": false
+    },
+    {
+      "id": "bad-lexical-15",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='.*'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>2</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedBoolean": false
+    },
+    {
+      "id": "bad-lexical-16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='.*'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r></r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedBoolean": false
+    },
+    {
+      "id": "bad-lexical-17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='.*'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>tr ue</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "expectedBoolean": false
+    },
+    {
+      "id": "placement-anonymous",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:simpleType><xs:restriction base='xs:boolean'><xs:pattern value='true'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "anonymous",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "placement-terminal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='true'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='D'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>true</v></r>",
+      "site": "terminal",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "placement-nested",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='true'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n'><xs:complexType><xs:sequence><xs:element name='v' type='D'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><n><v>true</v></n></r>",
+      "site": "nested",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "placement-attribute",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='true'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:decimal'><xs:attribute name='d' type='D' use='required'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r d='true'>1</r>",
+      "site": "attribute",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "placement-xsi",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='xs:boolean'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='D'>true</r>",
+      "site": "xsi",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "inapplicable-enumeration",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:enumeration value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "inapplicable-minInclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:minInclusive value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "inapplicable-maxExclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:maxExclusive value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "inapplicable-totalDigits",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:totalDigits value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "inapplicable-length",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:length value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "inapplicable-explicitTimezone",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:explicitTimezone value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "whitespace-preserve",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:whiteSpace value='preserve'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "whitespace-replace",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:whiteSpace value='replace'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "whitespace-unknown",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:whiteSpace value='unknown'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "duplicate-whitespace",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:whiteSpace value='collapse'/><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "fixed-outside",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:whiteSpace value='collapse' fixed='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "assertion-outside",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:assertion test='$value'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "missing-value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "malformed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='['/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "unicode-outside",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='\\p{L}+'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "eight",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "nine",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/><xs:pattern value='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "source-limit",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "state-limit",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='a{16}a{16}a{16}a{16}a{16}a{16}a{16}a{16}'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "raw-capacity",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:boolean'><xs:pattern value='.*'/></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>                                                                                                                                                                                                                                                                true</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "expectedBoolean": true
+    },
+    {
+      "id": "named-base-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:boolean'/></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'/></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    },
+    {
+      "id": "schema-states-8",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='P0'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P1'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P2'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P3'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P4'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P5'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P6'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P7'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='xs:boolean'/></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "expectedBoolean": true
+    },
+    {
+      "id": "schema-states-9",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='P0'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P1'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P2'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P3'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P4'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P5'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P6'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P7'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='P8'><xs:restriction base='xs:boolean'><xs:pattern value='a{15}a{15}a{15}a{15}a{15}a{15}a{15}a{15}'/></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='xs:boolean'/></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>true</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedBoolean": true
+    }
+  ]
+}
