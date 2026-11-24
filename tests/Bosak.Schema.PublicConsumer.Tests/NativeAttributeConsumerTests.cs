@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 25-11-2026     | Reconcile invalid ref plus name/type in original M2E1-079 |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -49,7 +50,7 @@ public sealed class NativeAttributeConsumerTests
     {
         Assert.StartsWith("M2E1-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;
         var options=new NativeSchemaSessionOptions(row.GetProperty("maxNativeCoefficientDigits").GetInt32(),row.GetProperty("maxNativeScale").GetInt32(),row.GetProperty("maxStringCharacters").GetInt32(),65536,1,64,1,256,256);
-        var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,options);Assert.Equal(row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
+        var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,options);if(id=="M2E1-079"){Assert.Equal(NativeSchemaOutcome.Invalid,created.Outcome);Assert.Null(created.Value);Assert.Equal("BSK-NATIVE-SCHEMA-INVALID",Assert.Single(created.Diagnostics).Code);return;}Assert.Equal(row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid)
         {
             Assert.Null(created.Value);Assert.Equal("BSK-NATIVE-SCHEMA-UNSUPPORTED",Assert.Single(created.Diagnostics).Code);Assert.Equal(row.GetProperty("unsupportedReason").GetString(),created.Diagnostics[0].UnsupportedReason.ToString());return;

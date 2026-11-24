@@ -32,6 +32,7 @@
 //                      | Charles Korthout | 1.10   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
 //                      | Charles Korthout | 1.11   | 24-11-2026     | Probe revised bounded date transport in isolated source copy |
 //                      | Charles Korthout | 1.12   | 24-11-2026     | Adopt qualified bounded native date transport |
+//                      | Charles Korthout | 1.13   | 25-11-2026     | Preserve canonical global attribute handles across uses, lookup and original facts |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -58,6 +59,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         this.originalNodeData = originalNodeData;
         this.expectedNodeFingerprint = expectedNodeFingerprint;
         RootDeclaration = Add(schema.Root);
+        foreach (var declaration in schema.GlobalAttributeDeclarations) { Add(declaration); Add(declaration.Type); }
         foreach (var plan in schema.Roots)
         {
             Add(plan.Root); Add(plan.Root.Type);
@@ -75,8 +77,9 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     {
         foreach (var declaration in plan.Children.Concat(plan.AttributeUses))
         {
-            var known = components.ContainsKey(declaration);
-            Add(declaration); Add(declaration.Type);
+            var canonical = declaration.CanonicalDeclaration;
+            var known = components.ContainsKey(canonical);
+            components[declaration] = Add(canonical); Add(declaration.Type);
             if (declaration.Type.ContentType is { } contentType) Add(contentType);
             if (!known && declaration.Container is { } child) RegisterChildren(child);
         }
@@ -148,7 +151,10 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     {
         cancellationToken.ThrowIfCancellationRequested();
         ValidateName(name);
-        return NativeCoreResult<ISchemaComponentHandle>.Unsupported("BSK-NATIVE-ATTRIBUTES");
+        if (schema.GlobalAttributeDeclarations.IsEmpty) return NativeCoreResult<ISchemaComponentHandle>.Unsupported("BSK-NATIVE-ATTRIBUTES");
+        var declaration = schema.GlobalAttributeDeclarations.FirstOrDefault(d => d.NamespaceUri == name.NamespaceUri && d.Name == name.LocalName);
+        return declaration is not null ? NativeCoreResult<ISchemaComponentHandle>.Supported(components[declaration])
+            : NativeCoreResult<ISchemaComponentHandle>.NotFound();
     }
     public SchemaResult<bool> IsSameComponent(ISchemaComponentHandle left, ISchemaComponentHandle right, CancellationToken cancellationToken)
     {
@@ -284,7 +290,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         internal NativeSessionNode Node { get; }
         internal string? NormalizedStringValue { get { Input.Check(); return state.NormalizedStringValue; } }
         internal ImmutableArray<int> OwnerElementPath { get { Input.Check(); return state.OwnerElementPath; } }
-        internal NativeDeclaration NativeDeclaration { get { Input.Check(); return state.Declaration; } }
+        internal NativeDeclaration NativeDeclaration { get { Input.Check(); return state.Declaration.CanonicalDeclaration; } }
         internal NativeType NativeType { get { Input.Check(); return state.GoverningType; } }
         public ISchemaComponentHandle Type { get { Input.Check(); return type; } }
         public ISchemaComponentHandle Declaration { get { Input.Check(); return declaration; } }
