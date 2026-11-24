@@ -27,6 +27,7 @@
 //                      | Charles Korthout | 0.14   | 22-11-2026     | Probe simple scalar roots in isolated source copies only |
 //                      | Charles Korthout | 0.15   | 22-11-2026     | Adopt qualified native simple scalar root assessment |
 //                      | Charles Korthout | 0.16   | 23-11-2026     | Adopt qualified bounded native choice |
+//                      | Charles Korthout | 0.17   | 23-11-2026     | Adopt qualified bounded root all groups |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -78,6 +79,8 @@ internal sealed partial class NativeDecimalSchema
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken) is { } empty) return empty;
+            if (TryCompileAll(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
+                decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } all) return all;
             if (TryCompileChoice(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
                 decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } choice) return choice;
             var members = Elements(complex);
@@ -122,6 +125,7 @@ internal sealed partial class NativeDecimalSchema
                     container = Complex(inline[0], new NativeDeclaration(name, new NativeType(null, true), 1, 1, ns));
                     type = container.Root.Type;
                 }
+                Require(container?.AllMinimum is null, "Nested all containers are outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
                 Require(container?.ChoiceMinimum is null, "Nested choice containers are outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
                 children.Add(new NativeDeclaration(name, type, min, max, ns) { Container = container });
             }
@@ -152,7 +156,7 @@ internal sealed partial class NativeDecimalSchema
                 Require(Elements(element).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                 var shared = Resolve(ResolveTypeName(element));
                 plan = new NativeDecimalSchema(new NativeDeclaration(name, shared.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits)
-                    { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum };
+                    { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
             }
             else
             {
@@ -174,6 +178,11 @@ internal sealed partial class NativeDecimalSchema
     {
         cancellationToken.ThrowIfCancellationRequested();
         if (!plan.Root.Type.IsComplex || plan.Root.Type.ContentType is not null) return (1, 1, 1, plan.AttributeUses.Length);
+        if (plan.AllMinimum is not null)
+        {
+            var maximum = plan.Children.Sum(c => c.MaxOccurs);
+            return (1 + maximum, maximum, 2, plan.AttributeUses.Length);
+        }
         if (plan.ChoiceMinimum is not null)
         {
             var maximum = plan.Children.Max(c => c.MaxOccurs);

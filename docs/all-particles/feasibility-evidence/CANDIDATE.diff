@@ -1,0 +1,207 @@
+--- base/Assessment/NativeAll.cs
++++ candidate/Assessment/NativeAll.cs
+@@ -0,0 +1,93 @@
++// ===========================================================================================================================================================
++// AUTHOR               : Charles Korthout
++// CREATE DATE          : 23 November 2026
++// PURPOSE              : Compiles and assesses bounded direct all groups with physical-order facts.
++// SPECIAL NOTES        : Bounded direct scalar members; preserve original physical node and declaration identity.
++//
++// COPYRIGHT            : Fytala
++// LICENSE              : LICENSE.md (Apache-2.0)
++// SPDX-License-Identifier: Apache-2.0
++// ===========================================================================================================================================================
++// Change History:      |==================|=======|================|=========================================================================================
++//                      |     Author       |Version|  Date          | Notes                                                                                    |
++//                      |==================|=======|================|=========================================================================================
++//                      | Charles Korthout | 0.1   | 23-11-2026     | Isolated native all feasibility |
++//                      |==================|=======|================|=========================================================================================
++// ===========================================================================================================================================================
++using System.Collections.Immutable;
++using System.Xml.Linq;
++namespace Bosak.Schema;
++internal sealed partial class NativeDecimalSchema
++{
++    private int? AllMinimum { get; init; }
++    private static NativeDecimalSchema? TryCompileAll(XElement complex, NativeDeclaration root,
++        string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace,
++        NativeType decimalType, NativeType stringType, NativeType? booleanType, NativeType? integerType,
++        Dictionary<XName, NativeType> simple, Dictionary<XElement, NativeType> anonymousSimple,
++        NativeNumericLimits limits, CancellationToken token)
++    {
++        var members = Elements(complex);
++        if (members.Count == 0 || members[0].Name != Xs + "all") return null;
++        token.ThrowIfCancellationRequested();var group = members[0];Attributes(group, "minOccurs", "maxOccurs");
++        var minimum = Occurs(group, "minOccurs", 1);var maximum = Occurs(group, "maxOccurs", 1);
++        Require(minimum is 0 or 1 && maximum == 1, "Outer all occurrence is outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
++        var declarations = Elements(group);
++        Require(declarations.Count is >= 1 and <= 16, "All source member capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
++        var children = ImmutableArray.CreateBuilder<NativeDeclaration>();var names = new HashSet<XName>();
++        foreach(var declaration in declarations)
++        {
++            token.ThrowIfCancellationRequested();
++            Require(declaration.Name == Xs + "element", "All requires direct scalar element members.", NativeDecimalUnsupportedReason.DeclarationShape);
++            Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form");
++            var name = Name(declaration);var ns = Form(declaration, "form", defaultForm) == "qualified" ? targetNamespace : "";
++            Check(names.Add(XName.Get(name, ns)), "Competing direct all element particles.");
++            var min = Occurs(declaration, "minOccurs", 1);var max = Occurs(declaration, "maxOccurs", 1);
++            Require(min is 0 or 1 && max == 1, "All member occurrence is outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
++            var inline = Elements(declaration);NativeType type;
++            if (inline.Count == 0) type = ResolveScalarType(declaration, decimalType, stringType, booleanType, integerType, simple);
++            else
++            {
++                Require(inline.Count == 1 && declaration.Attribute("type") is null && anonymousSimple.ContainsKey(inline[0]),
++                    "Only admitted anonymous scalar all members are supported.", NativeDecimalUnsupportedReason.DeclarationShape);
++                type = anonymousSimple[inline[0]];
++            }
++            children.Add(new NativeDeclaration(name, type, min, max, ns));
++        }
++        var attributes = members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray();
++        var assertions = members.Skip(1 + attributes.Length).ToArray();
++        Require(assertions.All(e => e.Name == Xs + "assert" && IsStructuralAssertion(e)), "All child-value assertion grammar is excluded.", NativeDecimalUnsupportedReason.AssertionGrammar);
++        Require(assertions.Length <= 8, "All assertion capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
++        Require(assertions.Length == 0 || attributes.Length == 0, "Structural assertions with application attributes are excluded.", NativeDecimalUnsupportedReason.Attributes);
++        return new NativeDecimalSchema(root, children.ToImmutable(), [], limits)
++        {
++            AllMinimum = minimum,
++            AttributeUses = CompileAttributes(attributes, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, token),
++            structuralAssertions = CompileStructuralAssertions(assertions, targetNamespace, assertionNamespace, token)
++        };
++    }
++    private void AssessAll(XElement owner, NativeDecimalSchema plan, ImmutableArray<NativeElementState>.Builder states,
++        NativePatternBudget budget, CancellationToken token)
++    {
++        foreach(var text in owner.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only all contains non-whitespace text.");
++        Require(owner.Nodes().All(n => n is XElement or XText), "All container comments or processing instructions are excluded.");
++        var nodes = owner.Elements().ToArray();
++        if (nodes.Length == 0 && plan.AllMinimum == 0) return;
++        var seen = new HashSet<XName>();
++        foreach (var node in nodes)
++        {
++            token.ThrowIfCancellationRequested();
++            var selected = plan.Children.FirstOrDefault(c => c.ExpandedName == node.Name);
++            Check(selected is not null, "No all member matches the original expanded name.");
++            Check(seen.Add(node.Name), "All member occurs more than once.");
++            InstanceAttributes(node);
++            Check(!node.HasElements, "Scalar all member contains elements.");
++            Require(node.Nodes().All(n => n is XText), "Scalar all comments or processing instructions are excluded.");
++            states.Add(AssessElementScalar(node, selected!, budget));
++        }
++        foreach (var member in plan.Children)
++        {
++            token.ThrowIfCancellationRequested();
++            Check(member.MinOccurs == 0 || seen.Contains(member.ExpandedName), "Required all member is absent.");
++        }
++    }
++}
+--- base/Assessment/NativeDecimalSchema.cs
++++ candidate/Assessment/NativeDecimalSchema.cs
+@@ -44,6 +44,7 @@
+ //                      | Charles Korthout | 1.21   | 22-11-2026     | Probe derived integer builtins in isolated source copies |
+ //                      | Charles Korthout | 1.22   | 22-11-2026     | Adopt qualified bounded builtin integer family |
+ //                      | Charles Korthout | 1.23   | 23-11-2026     | Adopt qualified bounded native choice |
++//                      | Charles Korthout | 1.24   | 23-11-2026     | Probe bounded all groups in isolated source copies |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -179,7 +180,7 @@
+                 {
+                     Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
+                     Require(named.TryGetValue(ResolveTypeName(declaration), out var shared), "Unresolved root complex type.", NativeDecimalUnsupportedReason.ValueType);
+-                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum };
++                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
+                 }
+                 else
+                 {
+@@ -225,6 +226,8 @@
+     {
+         var members = Elements(complex);
+         if (stringType is not null && TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken) is { } empty) return empty;
++        if (stringType is not null && TryCompileAll(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
++            decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } all) return all;
+         if (stringType is not null && TryCompileChoice(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
+             decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } choice) return choice;
+         if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
+@@ -428,6 +431,15 @@
+                 states.Add(new NativeElementState(selected.Root, null) { EffectiveType = rootType });
+                 AssessChoice(root, selected, states, patternBudget, cancellationToken);
+                 selected.AssessStructuralAssertions(root, cancellationToken);
++                return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, states.ToImmutable(), attributeStates.ToImmutable()));
++            }
++            if (selected.AllMinimum is not null)
++            {
++                var states = ImmutableArray.CreateBuilder<NativeElementState>();
++                states.Add(new NativeElementState(selected.Root, null) { EffectiveType = rootType });
++                AssessAll(root, selected, states, patternBudget, cancellationToken);
++                selected.AssessStructuralAssertions(root, cancellationToken);
++                cancellationToken.ThrowIfCancellationRequested();
+                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, states.ToImmutable(), attributeStates.ToImmutable()));
+             }
+             if (selected.NestedProfile)
+--- base/Assessment/NativeNestedSchema.cs
++++ candidate/Assessment/NativeNestedSchema.cs
+@@ -27,6 +27,7 @@
+ //                      | Charles Korthout | 0.14   | 22-11-2026     | Probe simple scalar roots in isolated source copies only |
+ //                      | Charles Korthout | 0.15   | 22-11-2026     | Adopt qualified native simple scalar root assessment |
+ //                      | Charles Korthout | 0.16   | 23-11-2026     | Adopt qualified bounded native choice |
++//                      | Charles Korthout | 0.17   | 23-11-2026     | Probe bounded all groups in isolated source copies |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ using System.Collections.Immutable;
+@@ -78,6 +79,8 @@
+         {
+             cancellationToken.ThrowIfCancellationRequested();
+             if (TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken) is { } empty) return empty;
++            if (TryCompileAll(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
++                decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } all) return all;
+             if (TryCompileChoice(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
+                 decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } choice) return choice;
+             var members = Elements(complex);
+@@ -122,6 +125,7 @@
+                     container = Complex(inline[0], new NativeDeclaration(name, new NativeType(null, true), 1, 1, ns));
+                     type = container.Root.Type;
+                 }
++                Require(container?.AllMinimum is null, "Nested all containers are outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
+                 Require(container?.ChoiceMinimum is null, "Nested choice containers are outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
+                 children.Add(new NativeDeclaration(name, type, min, max, ns) { Container = container });
+             }
+@@ -152,7 +156,7 @@
+                 Require(Elements(element).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
+                 var shared = Resolve(ResolveTypeName(element));
+                 plan = new NativeDecimalSchema(new NativeDeclaration(name, shared.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits)
+-                    { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum };
++                    { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
+             }
+             else
+             {
+@@ -174,6 +178,11 @@
+     {
+         cancellationToken.ThrowIfCancellationRequested();
+         if (!plan.Root.Type.IsComplex || plan.Root.Type.ContentType is not null) return (1, 1, 1, plan.AttributeUses.Length);
++        if (plan.AllMinimum is not null)
++        {
++            var maximum = plan.Children.Sum(c => c.MaxOccurs);
++            return (1 + maximum, maximum, 2, plan.AttributeUses.Length);
++        }
+         if (plan.ChoiceMinimum is not null)
+         {
+             var maximum = plan.Children.Max(c => c.MaxOccurs);
+--- base/Assessment/NativeSimpleRestriction.cs
++++ candidate/Assessment/NativeSimpleRestriction.cs
+@@ -21,6 +21,7 @@
+ //                      | Charles Korthout | 0.8   | 22-11-2026     | Probe derived integer builtins in isolated source copies |
+ //                      | Charles Korthout | 0.9   | 22-11-2026     | Adopt qualified bounded builtin integer family |
+ //                      | Charles Korthout | 0.10   | 23-11-2026     | Adopt qualified bounded native choice |
++//                      | Charles Korthout | 0.11   | 23-11-2026     | Probe bounded all groups in isolated source copies |
+ //                      |==================|=======|================|=========================================================================================
+ // ===========================================================================================================================================================
+ 
+@@ -68,7 +69,7 @@
+         if (maxStringCharacters is null) return result;
+         // Count source sites, including unused named definitions; shared references do not consume the budget twice.
+         var definitions = schema.Descendants().Where(e => (e.Name == Xs + "simpleType" || e.Name == Xs + "complexType") &&
+-            e.Parent?.Name == Xs + "element" && (e.Parent.Parent?.Name == Xs + "sequence" || e.Parent.Parent?.Name == Xs + "choice" || e.Name == Xs + "simpleType" && e.Parent.Parent?.Name == Xs + "schema")).ToArray();
++            e.Parent?.Name == Xs + "element" && (e.Parent.Parent?.Name == Xs + "sequence" || e.Parent.Parent?.Name == Xs + "choice" || e.Parent.Parent?.Name == Xs + "all" || e.Name == Xs + "simpleType" && e.Parent.Parent?.Name == Xs + "schema")).ToArray();
+         Require(definitions.Length <= 16, "Local anonymous type ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+         foreach (var definition in definitions.Where(e => e.Name == Xs + "simpleType"))
+         {

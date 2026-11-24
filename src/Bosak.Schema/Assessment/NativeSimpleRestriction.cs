@@ -21,6 +21,7 @@
 //                      | Charles Korthout | 0.8   | 22-11-2026     | Probe derived integer builtins in isolated source copies |
 //                      | Charles Korthout | 0.9   | 22-11-2026     | Adopt qualified bounded builtin integer family |
 //                      | Charles Korthout | 0.10   | 23-11-2026     | Adopt qualified bounded native choice |
+//                      | Charles Korthout | 0.11   | 23-11-2026     | Adopt qualified bounded root all groups |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -68,7 +69,7 @@ internal sealed partial class NativeDecimalSchema
         if (maxStringCharacters is null) return result;
         // Count source sites, including unused named definitions; shared references do not consume the budget twice.
         var definitions = schema.Descendants().Where(e => (e.Name == Xs + "simpleType" || e.Name == Xs + "complexType") &&
-            e.Parent?.Name == Xs + "element" && (e.Parent.Parent?.Name == Xs + "sequence" || e.Parent.Parent?.Name == Xs + "choice" || e.Name == Xs + "simpleType" && e.Parent.Parent?.Name == Xs + "schema")).ToArray();
+            e.Parent?.Name == Xs + "element" && (e.Parent.Parent?.Name == Xs + "sequence" || e.Parent.Parent?.Name == Xs + "choice" || e.Parent.Parent?.Name == Xs + "all" || e.Name == Xs + "simpleType" && e.Parent.Parent?.Name == Xs + "schema")).ToArray();
         Require(definitions.Length <= 16, "Local anonymous type ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         foreach (var definition in definitions.Where(e => e.Name == Xs + "simpleType"))
         {

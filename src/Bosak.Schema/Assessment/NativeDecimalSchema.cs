@@ -44,6 +44,7 @@
 //                      | Charles Korthout | 1.21   | 22-11-2026     | Probe derived integer builtins in isolated source copies |
 //                      | Charles Korthout | 1.22   | 22-11-2026     | Adopt qualified bounded builtin integer family |
 //                      | Charles Korthout | 1.23   | 23-11-2026     | Adopt qualified bounded native choice |
+//                      | Charles Korthout | 1.24   | 23-11-2026     | Adopt qualified bounded root all groups |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -179,7 +180,7 @@ internal sealed partial class NativeDecimalSchema
                 {
                     Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                     Require(named.TryGetValue(ResolveTypeName(declaration), out var shared), "Unresolved root complex type.", NativeDecimalUnsupportedReason.ValueType);
-                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum };
+                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
                 }
                 else
                 {
@@ -225,6 +226,8 @@ internal sealed partial class NativeDecimalSchema
     {
         var members = Elements(complex);
         if (stringType is not null && TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken) is { } empty) return empty;
+        if (stringType is not null && TryCompileAll(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
+            decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } all) return all;
         if (stringType is not null && TryCompileChoice(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
             decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } choice) return choice;
         if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
@@ -428,6 +431,15 @@ internal sealed partial class NativeDecimalSchema
                 states.Add(new NativeElementState(selected.Root, null) { EffectiveType = rootType });
                 AssessChoice(root, selected, states, patternBudget, cancellationToken);
                 selected.AssessStructuralAssertions(root, cancellationToken);
+                return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, states.ToImmutable(), attributeStates.ToImmutable()));
+            }
+            if (selected.AllMinimum is not null)
+            {
+                var states = ImmutableArray.CreateBuilder<NativeElementState>();
+                states.Add(new NativeElementState(selected.Root, null) { EffectiveType = rootType });
+                AssessAll(root, selected, states, patternBudget, cancellationToken);
+                selected.AssessStructuralAssertions(root, cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, states.ToImmutable(), attributeStates.ToImmutable()));
             }
             if (selected.NestedProfile)

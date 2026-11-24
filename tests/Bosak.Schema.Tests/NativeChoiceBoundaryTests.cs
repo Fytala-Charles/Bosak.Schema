@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 23-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 23-11-2026     | Adopt18 measured all compile expectation changes |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -95,13 +96,13 @@ public sealed class NativeChoiceBoundaryTests
     /// <summary>All Plans.</summary>
     /// <returns>The explicit controls.</returns>
     public static IEnumerable<object[]> AllPlans(){using var d=JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"case-plan.json")));foreach(var r in d.RootElement.GetProperty("cases").EnumerateArray().Where(x=>x.GetProperty("phase").GetString()=="all-second"))yield return[r.GetProperty("id").GetString()!,r.GetProperty("schema").GetString()!];}
-    /// <summary>All Remains Excluded.</summary>
+    /// <summary>Checks original all-phase stimuli against explicitly adopted compile outcomes.</summary>
+    /// <remarks>The historical method name and inputs are retained to preserve case identity.</remarks>
     /// <param name="id">The id control input.</param>
     /// <param name="schema">The schema control input.</param>
     [Theory][MemberData(nameof(AllPlans))]
     public void AllRemainsExcluded(string id,string schema)
-    {Assert.StartsWith("PT-",id);var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(NativeSchemaOutcome.Unsupported,c.Outcome);Assert.Null(c.Value);}
-
+    {Assert.StartsWith("PT-",id);using var plan=JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"case-plan.json")));var expected=plan.RootElement.GetProperty("cases").EnumerateArray().Single(r=>r.GetProperty("phase").GetString()=="all-second"&&r.GetProperty("id").GetString()==id).GetProperty("expectedCompile").GetString();var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(expected,c.Outcome.ToString());if(expected=="Valid")Assert.NotNull(c.Value);else Assert.Null(c.Value);c.Value?.Dispose();}
     /// <summary>Gets exact original co-blocked upstream schemas for both facades.</summary>
     /// <returns>Original identifiers, schemas and facade selector.</returns>
     public static IEnumerable<object[]> Originals(){using var d=JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"originals.json")));foreach(var r in d.RootElement.EnumerateArray())foreach(bool data in new[]{false,true})yield return[r.GetProperty("id").GetString()!,r.GetProperty("schema").GetString()!,data];}
