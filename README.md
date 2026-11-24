@@ -23,7 +23,7 @@ The [owned decimal session API](docs/NATIVE-DECIMAL-PUBLIC-API.md) supports nati
 
 The 0.6 development API also offers opt-in bounded namespace assertions and empty
 complex-content assessment, bounded string pattern facets, simple scalar document
-roots, twelve derived integer built-in types, integer enumeration and checked dates,
+roots, twelve derived integer built-in types, integer enumeration and checked dates with simple-content metadata,
 with original typing
 and explicit limits. See the
 [consumer guide](docs/NUGET_README.md) for its supported grammar and exclusions;

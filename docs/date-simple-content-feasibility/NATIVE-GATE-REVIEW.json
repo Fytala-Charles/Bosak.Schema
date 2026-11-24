@@ -1,0 +1,131 @@
+{
+  "originalContractUnchanged": true,
+  "gates": [
+    {
+      "id": "DSCG-01",
+      "title": "Actual element identities",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "For named/anonymous roots and terminals, preserve D, T, G and atomic date/alias A; assert G differs from A for complex content and no fabricated QName."
+    },
+    {
+      "id": "DSCG-02",
+      "title": "Both original-node compiler paths",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Exercise flat-root and nested-terminal plans with real NativeSchemaProvider/Input and data($node), never a synthetic date validator."
+    },
+    {
+      "id": "DSCG-03",
+      "title": "Both public facades",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "ReadRootScalar/ReadScalar and ReadElement/ReadAttribute preserve checked Date and existing root/leaf/scalar/attribute contracts."
+    },
+    {
+      "id": "DSCG-04",
+      "title": "Shared components and owners",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Shared C across roots/terminals has shared type identity but distinct original declarations, owner paths and facts; independent sessions remain foreign."
+    },
+    {
+      "id": "DSCG-05",
+      "title": "Attribute closure including zero uses",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Date extension ordinary undeclared attributes are Invalid even with zero uses; special xsi/xml exclusions remain Unsupported; other profile behavior unchanged."
+    },
+    {
+      "id": "DSCG-06",
+      "title": "Typed attribute values and namespace forms",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Check string/Boolean/integer/date attributes, required/optional, qualified/unqualified names, declaration indexing and original owner nodes."
+    },
+    {
+      "id": "DSCG-07",
+      "title": "Calendar and lexical fidelity",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Reuse checked year zero/negative/extended/bounded dates, timezone absence/zero/offset, XML whitespace and invalid calendar behavior without DateTimeOffset."
+    },
+    {
+      "id": "DSCG-08",
+      "title": "Complex selection boundary",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Exact same complex xsi:type works; absent/unrelated/base selections are Invalid; valid simple-to-complex substitution stays Unsupported."
+    },
+    {
+      "id": "DSCG-09",
+      "title": "Decimal fallback refusal",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Unused or used date complex restrictions are Unsupported before noninteger decimal facet handling; no accidental facet or chain admission."
+    },
+    {
+      "id": "DSCG-10",
+      "title": "Eager declarations and source graph",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Unused unsupported definitions, forward primitive aliases, unknown/cyclic complex bases and source counts are checked before publication."
+    },
+    {
+      "id": "DSCG-11",
+      "title": "Expanded budgets",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Per-owner attributes16, expanded attributes64, scalars16, nodes64 and depth4; check17/65/17/65/5 separately with no discarded uses."
+    },
+    {
+      "id": "DSCG-12",
+      "title": "Cancellation and recovery",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Pre-cancel compile/assess/read/export and operation cancellation remain distinct from input outcomes; failed admissions do not leak quotas."
+    },
+    {
+      "id": "DSCG-13",
+      "title": "Atomic failed publication",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Invalid date/attributes and Unsupported capacities publish neither partial successful facts nor snapshots."
+    },
+    {
+      "id": "DSCG-14",
+      "title": "Export/reopen",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Export preserves parsed date lexical text, attributes, names and original physical structure; reopening produces equivalent checked values."
+    },
+    {
+      "id": "DSCG-15",
+      "title": "Disposal and detached lifetime",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Document/session/input/facts after disposal refuse; detached date and attribute values survive with no origin/authority transfer."
+    },
+    {
+      "id": "DSCG-16",
+      "title": "Signed package-only Core identities",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Run actual native candidate on signed Core1.81.2 and1.81.17, verifying exact archive/runtime/source pins and preserving Core dependency direction."
+    },
+    {
+      "id": "DSCG-17",
+      "title": "Unchanged regression and API boundary",
+      "status": "Measured within the scoped196-control experiment",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Run all original cases before reconciliation; record measured expectation changes without stimulus removal; verify zero public API delta rather than assume it."
+    },
+    {
+      "id": "DSCG-18",
+      "title": "Legacy and delivery boundaries",
+      "status": "Partial: legacy measured; full production delivery gates remain",
+      "evidence": "ExtensionTests.cs and qualified-results on both pins",
+      "requirement": "Legacy decimal date grammar remains refused. Full source/package/native/retained/example/corpus gates precede delivery; full PSVI/C45/public closure/performance stay separate."
+    }
+  ]
+}

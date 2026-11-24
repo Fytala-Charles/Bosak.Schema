@@ -47,6 +47,8 @@
 //                      | Charles Korthout | 1.24   | 23-11-2026     | Adopt qualified bounded root all groups |
 //                      | Charles Korthout | 1.25   | 24-11-2026     | Probe revised bounded date transport in isolated source copy |
 //                      | Charles Korthout | 1.26   | 24-11-2026     | Adopt qualified bounded native date transport |
+//                      | Charles Korthout | 1.27   | 24-11-2026     | Probe bounded date simple content in isolated source copy |
+//                      | Charles Korthout | 1.28   | 24-11-2026     | Adopt qualified bounded date simple-content extension |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -342,7 +344,7 @@ internal sealed partial class NativeDecimalSchema
         NativeType? baseType = baseName == Xs + "decimal" ? decimalType : baseName == Xs + "integer" ? integerType : simple.GetValueOrDefault(baseName);
         if (nestedContext && baseType?.IsInteger != true && Elements(extension).Any(e => e.Name == Xs + "assert"))
             Require(false, "Noninteger nested assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
-        Require(baseType is not null && !baseType.IsString && !baseType.IsBoolean && !baseType.IsDate,
+        Require(baseType is not null && !baseType.IsString && !baseType.IsBoolean,
             "Only direct admitted decimal simple-content bases are supported.", NativeDecimalUnsupportedReason.ValueType);
         if (baseType!.IsInteger)
         {
@@ -394,7 +396,7 @@ internal sealed partial class NativeDecimalSchema
             var found = roots.TryGetValue(root.Name, out var selected);
             var rootType = found ? ResolveInstanceType(root, selected!.Root.Type) : null;
             var attributeStates = ImmutableArray.CreateBuilder<NativeElementState>();
-            if (found && selected!.AttributeUses.Length != 0)
+            if (found && (selected!.AttributeUses.Length != 0 || selected.Root.Type.ContentType?.IsDate == true))
             {
                 Require(root.Attributes().All(a => IsAdmittedInstanceAttribute(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
                     "Special attribute requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);

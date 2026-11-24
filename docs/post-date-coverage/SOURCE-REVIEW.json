@@ -1,0 +1,37 @@
+{
+  "status": "Static exact source review, not semantic adoption",
+  "sources": [
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalSchema.cs",
+      "commit": "383914562d89d3f7fad3a6a60cf4e29884cce912",
+      "sha256": "fdd231f924a5348163c891143f8825470b4d7e45d02bf5068a8444db92cbb6ab"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeComplexRestriction.cs",
+      "commit": "383914562d89d3f7fad3a6a60cf4e29884cce912",
+      "sha256": "e3769ea336000e70854ab87c61964760770c6156093acbdb168461bf5c4f83dc"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSchemaProvider.cs",
+      "commit": "383914562d89d3f7fad3a6a60cf4e29884cce912",
+      "sha256": "580a1239d7c8800fa99fbbb12113309a9ca5afcb491f783c3eb9622f8391b92e"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDateParser.cs",
+      "commit": "383914562d89d3f7fad3a6a60cf4e29884cce912",
+      "sha256": "d856e85d860134b314183a253e03f4f72642a5655987f08b02c7571885d702b1"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeScalarValue.cs",
+      "commit": "383914562d89d3f7fad3a6a60cf4e29884cce912",
+      "sha256": "11a3800e26a8c1e6dcbdefd6bab5d85ffedfda0df47e3cb57420a782316522f0"
+    }
+  ],
+  "findings": [
+    "CompileSimpleContent explicitly refuses IsDate bases today",
+    "Existing ContentType provider facts distinguish complex governing type from atomic base",
+    "CompileComplexRestriction has a noninteger decimal fallback; admitting date extension requires an explicit date-restriction refusal or separate correct implementation",
+    "No new detached scalar kind/API is proposed for the extension slice",
+    "Do not widen simple-to-complex xsi:type substitution or arbitrary complex derivation chains implicitly"
+  ]
+}

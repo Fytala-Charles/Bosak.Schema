@@ -1,0 +1,37 @@
+{
+  "status": "Static exact source review; no runtime execution",
+  "sources": [
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeDecimalSchema.cs",
+      "commit": "383914562d89d3f7fad3a6a60cf4e29884cce912",
+      "sha256": "fdd231f924a5348163c891143f8825470b4d7e45d02bf5068a8444db92cbb6ab"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeComplexRestriction.cs",
+      "commit": "383914562d89d3f7fad3a6a60cf4e29884cce912",
+      "sha256": "e3769ea336000e70854ab87c61964760770c6156093acbdb168461bf5c4f83dc"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeNestedSchema.cs",
+      "commit": "383914562d89d3f7fad3a6a60cf4e29884cce912",
+      "sha256": "e96c18fb8e4b70174029c5dd320a4a1ccc8f5283c4f90feafcb46317a778e3cf"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeSchemaProvider.cs",
+      "commit": "383914562d89d3f7fad3a6a60cf4e29884cce912",
+      "sha256": "580a1239d7c8800fa99fbbb12113309a9ca5afcb491f783c3eb9622f8391b92e"
+    },
+    {
+      "path": "src/Bosak.Schema/Assessment/NativeInstanceType.cs",
+      "commit": "383914562d89d3f7fad3a6a60cf4e29884cce912",
+      "sha256": "31a43a73e1261a75c53421a9f911d59e55ef53fd4ec0d924bfba9142cf9960a0"
+    }
+  ],
+  "findings": [
+    "Direct CompileSimpleContent IsDate guard is intentional current exclusion",
+    "NestedBudget caps nodes64/scalars16/depth4/attributes64 and per-owner attributes16",
+    "Existing zero-use generic attribute path refuses ordinary extras as Unsupported; proposed date-extension-only closed model reports Invalid, preserving older scalar/decimal behavior",
+    "Date restriction must be refused before noninteger decimal fallback",
+    "Same-type complex selection is distinct from deferred simple-to-complex substitution"
+  ]
+}

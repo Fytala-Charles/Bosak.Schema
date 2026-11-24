@@ -1,0 +1,820 @@
+{
+  "date": "2026-11-24",
+  "base": "383914562d89d3f7fad3a6a60cf4e29884cce912",
+  "status": "Authored unexecuted contract proposals; not measured acceptance or semantic adoption",
+  "facades": [
+    "NativeSchemaSession",
+    "NativeSchemaNodeDataSession"
+  ],
+  "assessmentContext": {
+    "currentDateTime": "1970-01-01T00:00:00Z",
+    "implicitTimezoneMinutes": 120
+  },
+  "cases": [
+    {
+      "id": "DSC-001",
+      "purpose": "named root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ],
+      "hasRootScalar": true,
+      "descendantScalars": 0
+    },
+    {
+      "id": "DSC-002",
+      "purpose": "anonymous root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ],
+      "hasRootScalar": true,
+      "descendantScalars": 0
+    },
+    {
+      "id": "DSC-003",
+      "purpose": "direct alias base",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:date'/></xs:simpleType><xs:complexType name='C'><xs:simpleContent><xs:extension base='N'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ],
+      "hasRootScalar": true,
+      "descendantScalars": 0
+    },
+    {
+      "id": "DSC-004",
+      "purpose": "forward simple alias base",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='N'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/><xs:simpleType name='N'><xs:restriction base='xs:date'/></xs:simpleType></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ],
+      "hasRootScalar": true,
+      "descendantScalars": 0
+    },
+    {
+      "id": "DSC-005",
+      "purpose": "date lexical/calendar transport -0004-02-29Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>-0004-02-29Z</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ]
+    },
+    {
+      "id": "DSC-006",
+      "purpose": "date lexical/calendar transport 10000-01-01+14:00",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>10000-01-01+14:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ]
+    },
+    {
+      "id": "DSC-007",
+      "purpose": "date lexical/calendar transport 2000-02-29-14:00",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>2000-02-29-14:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ]
+    },
+    {
+      "id": "DSC-008",
+      "purpose": "date lexical/calendar transport 2026-11-24+00:00",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>2026-11-24+00:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ]
+    },
+    {
+      "id": "DSC-009",
+      "purpose": "date lexical/calendar transport 2026-11-24-00:00",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>2026-11-24-00:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ]
+    },
+    {
+      "id": "DSC-010",
+      "purpose": "date lexical/calendar transport  \t0000-02-29\r\n",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r> \t0000-02-29\r\n</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ]
+    },
+    {
+      "id": "DSC-011",
+      "purpose": "date lexical/calendar transport 9223372036854775807-12-31",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>9223372036854775807-12-31</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ]
+    },
+    {
+      "id": "DSC-012",
+      "purpose": "date lexical/calendar transport -9223372036854775807-01-01",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>-9223372036854775807-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ]
+    },
+    {
+      "id": "DSC-013",
+      "purpose": "invalid date '1900-02-29'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>1900-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-014",
+      "purpose": "invalid date '2023-02-29'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>2023-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-015",
+      "purpose": "invalid date '2024-04-31'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>2024-04-31</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-016",
+      "purpose": "invalid date '-0001-02-29'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>-0001-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-017",
+      "purpose": "invalid date '+2026-01-01'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>+2026-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-018",
+      "purpose": "invalid date '2026-01-01T00:00:00'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>2026-01-01T00:00:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-019",
+      "purpose": "invalid date '2026-01-01+14:01'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>2026-01-01+14:01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-020",
+      "purpose": "invalid date '2026-01-01\\xa0'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>2026-01-01\u00a0</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-021",
+      "purpose": "invalid date ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-022",
+      "purpose": "invalid date '  '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>  </r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-023",
+      "purpose": "date representation capacity",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>-9223372036854775808-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false,
+      "proposedUnsupportedReason": "RepresentationCapacity"
+    },
+    {
+      "id": "DSC-024",
+      "purpose": "date representation capacity",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>9223372036854775808-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false,
+      "proposedUnsupportedReason": "RepresentationCapacity"
+    },
+    {
+      "id": "DSC-025",
+      "purpose": "date representation capacity",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111-01-01</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false,
+      "proposedUnsupportedReason": "RepresentationCapacity"
+    },
+    {
+      "id": "DSC-026",
+      "purpose": "required string metadata",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='label' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r label=' issue date '>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ]
+    },
+    {
+      "id": "DSC-027",
+      "purpose": "integer/Boolean metadata reversed physical order",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='n' type='xs:integer'/><xs:attribute name='b' type='xs:boolean'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r b='1' n='+001'>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ]
+    },
+    {
+      "id": "DSC-028",
+      "purpose": "date metadata",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='stamp' type='xs:date'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r stamp='10000-01-01Z'>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ]
+    },
+    {
+      "id": "DSC-029",
+      "purpose": "optional metadata absent",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='label' type='xs:string'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        []
+      ]
+    },
+    {
+      "id": "DSC-030",
+      "purpose": "required metadata missing",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='label' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-031",
+      "purpose": "invalid date metadata",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='stamp' type='xs:date'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r stamp='2023-02-29'>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-032",
+      "purpose": "undeclared ordinary attribute with zero declared uses",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r extra='x'>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false,
+      "requiresScopedAttributeClosure": true
+    },
+    {
+      "id": "DSC-033",
+      "purpose": "undeclared ordinary attribute with known uses",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='label' type='xs:string'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r extra='x'>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-034",
+      "purpose": "child element invalid for date content",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29<x/></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-035",
+      "purpose": "comment is outside profile",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02<!--x-->-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false
+    },
+    {
+      "id": "DSC-036",
+      "purpose": "processing instruction is outside profile",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02<?p x?>-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false
+    },
+    {
+      "id": "DSC-037",
+      "purpose": "nil remains deferred",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false
+    },
+    {
+      "id": "DSC-038",
+      "purpose": "special XML attribute deferred",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r xml:lang='en'>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false
+    },
+    {
+      "id": "DSC-039",
+      "purpose": "opaque location hint without acquisition",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='https://invalid.example/no-fetch.xsd'>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DSC-040",
+      "purpose": "qualified root and attribute, alternative instance prefix",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:dsc' targetNamespace='urn:dsc' elementFormDefault='qualified' attributeFormDefault='qualified'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='label' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='t:C'/></xs:schema>",
+      "instance": "<q:r xmlns:q='urn:dsc' q:label='ISO'>0000-02-29</q:r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DSC-041",
+      "purpose": "qualified attribute missing under unqualified spelling",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:dsc' targetNamespace='urn:dsc' elementFormDefault='qualified' attributeFormDefault='qualified'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='label' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='t:C'/></xs:schema>",
+      "instance": "<q:r xmlns:q='urn:dsc' label='ISO'>0000-02-29</q:r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-042",
+      "purpose": "named terminal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='C' maxOccurs='1'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>0000-02-29</d></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        [
+          0
+        ]
+      ],
+      "hasRootScalar": false,
+      "descendantScalars": 1
+    },
+    {
+      "id": "DSC-043",
+      "purpose": "anonymous terminal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' maxOccurs='1'><xs:complexType><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>0000-02-29</d></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        [
+          0
+        ]
+      ],
+      "hasRootScalar": false,
+      "descendantScalars": 1
+    },
+    {
+      "id": "DSC-044",
+      "purpose": "nested named terminal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='g0'><xs:complexType><xs:sequence><xs:element name='d' type='C' maxOccurs='1'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><g0><d>0000-02-29</d></g0></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        [
+          0,
+          0
+        ]
+      ],
+      "hasRootScalar": false,
+      "descendantScalars": 1
+    },
+    {
+      "id": "DSC-045",
+      "purpose": "maximum depth terminal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='g1'><xs:complexType><xs:sequence><xs:element name='g0'><xs:complexType><xs:sequence><xs:element name='d' maxOccurs='1'><xs:complexType><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><g1><g0><d>0000-02-29</d></g0></g1></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "hasRootScalar": false,
+      "descendantScalars": 1
+    },
+    {
+      "id": "DSC-046",
+      "purpose": "depth five capacity",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='g2'><xs:complexType><xs:sequence><xs:element name='g1'><xs:complexType><xs:sequence><xs:element name='g0'><xs:complexType><xs:sequence><xs:element name='d' type='C' maxOccurs='1'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><g2><g1><g0><d>0000-02-29</d></g0></g1></g2></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "proposedUnsupportedReason": "RepresentationCapacity"
+    },
+    {
+      "id": "DSC-047",
+      "purpose": "date terminal maximum 16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='C' maxOccurs='16'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "declaredScalarMaximum": 16
+    },
+    {
+      "id": "DSC-048",
+      "purpose": "date terminal maximum 17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='C' maxOccurs='17'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "declaredScalarMaximum": 17
+    },
+    {
+      "id": "DSC-049",
+      "purpose": "expanded node capacity 64",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='E'><xs:sequence/></xs:complexType><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='C'/><xs:element name='e0' type='E' maxOccurs='16'/><xs:element name='e1' type='E' maxOccurs='16'/><xs:element name='e2' type='E' maxOccurs='16'/><xs:element name='e3' type='E' maxOccurs='14'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>0000-02-29</d><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "expandedNodes": 64
+    },
+    {
+      "id": "DSC-050",
+      "purpose": "expanded node capacity 65",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='E'><xs:sequence/></xs:complexType><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='C'/><xs:element name='e0' type='E' maxOccurs='16'/><xs:element name='e1' type='E' maxOccurs='16'/><xs:element name='e2' type='E' maxOccurs='16'/><xs:element name='e3' type='E' maxOccurs='15'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>0000-02-29</d><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e0/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e1/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e2/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/><e3/></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "expandedNodes": 65
+    },
+    {
+      "id": "DSC-051",
+      "purpose": "attribute-use capacity 16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='a0' type='xs:string'/><xs:attribute name='a1' type='xs:string'/><xs:attribute name='a2' type='xs:string'/><xs:attribute name='a3' type='xs:string'/><xs:attribute name='a4' type='xs:string'/><xs:attribute name='a5' type='xs:string'/><xs:attribute name='a6' type='xs:string'/><xs:attribute name='a7' type='xs:string'/><xs:attribute name='a8' type='xs:string'/><xs:attribute name='a9' type='xs:string'/><xs:attribute name='a10' type='xs:string'/><xs:attribute name='a11' type='xs:string'/><xs:attribute name='a12' type='xs:string'/><xs:attribute name='a13' type='xs:string'/><xs:attribute name='a14' type='xs:string'/><xs:attribute name='a15' type='xs:string'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "declaredAttributeUses": 16
+    },
+    {
+      "id": "DSC-052",
+      "purpose": "attribute-use capacity 17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='a0' type='xs:string'/><xs:attribute name='a1' type='xs:string'/><xs:attribute name='a2' type='xs:string'/><xs:attribute name='a3' type='xs:string'/><xs:attribute name='a4' type='xs:string'/><xs:attribute name='a5' type='xs:string'/><xs:attribute name='a6' type='xs:string'/><xs:attribute name='a7' type='xs:string'/><xs:attribute name='a8' type='xs:string'/><xs:attribute name='a9' type='xs:string'/><xs:attribute name='a10' type='xs:string'/><xs:attribute name='a11' type='xs:string'/><xs:attribute name='a12' type='xs:string'/><xs:attribute name='a13' type='xs:string'/><xs:attribute name='a14' type='xs:string'/><xs:attribute name='a15' type='xs:string'/><xs:attribute name='a16' type='xs:string'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "declaredAttributeUses": 17
+    },
+    {
+      "id": "DSC-053",
+      "purpose": "expanded attribute budget 64",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='a0' type='xs:string'/><xs:attribute name='a1' type='xs:string'/><xs:attribute name='a2' type='xs:string'/><xs:attribute name='a3' type='xs:string'/><xs:attribute name='a4' type='xs:string'/><xs:attribute name='a5' type='xs:string'/><xs:attribute name='a6' type='xs:string'/><xs:attribute name='a7' type='xs:string'/><xs:attribute name='a8' type='xs:string'/><xs:attribute name='a9' type='xs:string'/><xs:attribute name='a10' type='xs:string'/><xs:attribute name='a11' type='xs:string'/><xs:attribute name='a12' type='xs:string'/><xs:attribute name='a13' type='xs:string'/><xs:attribute name='a14' type='xs:string'/><xs:attribute name='a15' type='xs:string'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='C' maxOccurs='4'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "expandedAttributeUses": 64
+    },
+    {
+      "id": "DSC-054",
+      "purpose": "expanded attribute budget 65",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='a0' type='xs:string'/><xs:attribute name='a1' type='xs:string'/><xs:attribute name='a2' type='xs:string'/><xs:attribute name='a3' type='xs:string'/><xs:attribute name='a4' type='xs:string'/><xs:attribute name='a5' type='xs:string'/><xs:attribute name='a6' type='xs:string'/><xs:attribute name='a7' type='xs:string'/><xs:attribute name='a8' type='xs:string'/><xs:attribute name='a9' type='xs:string'/><xs:attribute name='a10' type='xs:string'/><xs:attribute name='a11' type='xs:string'/><xs:attribute name='a12' type='xs:string'/><xs:attribute name='a13' type='xs:string'/><xs:attribute name='a14' type='xs:string'/><xs:attribute name='a15' type='xs:string'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='C' maxOccurs='4'/></xs:sequence><xs:attribute name=\"extra\" type=\"xs:string\"/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d><d>0000-02-29</d></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "expandedAttributeUses": 65
+    },
+    {
+      "id": "DSC-055",
+      "purpose": "shared type selected second root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/><xs:element name='other' type='C'/></xs:schema>",
+      "instance": "<other>0000-02-29</other>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DSC-056",
+      "purpose": "exact complex xsi:type",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='C'>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DSC-057",
+      "purpose": "base date is not derived from complex C",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xsi:type='xs:date'>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-058",
+      "purpose": "unknown selected type",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='Missing'>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-059",
+      "purpose": "valid simple-to-complex substitution remains deferred",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='xs:date'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='C'>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false
+    },
+    {
+      "id": "DSC-060",
+      "purpose": "complex restriction guard with no facets",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Unused'><xs:simpleContent><xs:restriction base='C'/></xs:simpleContent></xs:complexType><xs:element name='r' type='xs:string'/></xs:schema>",
+      "instance": "<r>x</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    },
+    {
+      "id": "DSC-061",
+      "purpose": "date restriction must not reach decimal facet parsing",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Unused'><xs:simpleContent><xs:restriction base='C'><xs:minInclusive value='2000-01-01'/></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='xs:string'/></xs:schema>",
+      "instance": "<r>x</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    },
+    {
+      "id": "DSC-062",
+      "purpose": "complex extension chain deferred",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Unused'><xs:simpleContent><xs:extension base='C'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='xs:string'/></xs:schema>",
+      "instance": "<r>x</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    },
+    {
+      "id": "DSC-063",
+      "purpose": "date assertion deferred",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:assert test='true()'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    },
+    {
+      "id": "DSC-064",
+      "purpose": "attribute wildcard deferred",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:anyAttribute/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    },
+    {
+      "id": "DSC-065",
+      "purpose": "attribute group deferred",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attributeGroup ref='g'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    },
+    {
+      "id": "DSC-066",
+      "purpose": "default attribute deferred",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='a' type='xs:string' default='x'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    },
+    {
+      "id": "DSC-067",
+      "purpose": "fixed attribute deferred",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='a' type='xs:string' fixed='x'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    },
+    {
+      "id": "DSC-068",
+      "purpose": "mixed content remains deferred",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C' mixed='true'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    },
+    {
+      "id": "DSC-069",
+      "purpose": "global type budget 16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C0'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C1'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C2'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C3'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C4'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C5'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C6'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C7'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C8'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C9'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C10'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C11'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C12'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C13'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C14'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C15'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C0'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "globalTypes": 16
+    },
+    {
+      "id": "DSC-070",
+      "purpose": "global type budget 17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C0'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C1'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C2'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C3'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C4'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C5'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C6'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C7'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C8'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C9'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C10'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C11'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C12'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C13'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C14'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C15'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='C16'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C0'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "globalTypes": 17
+    },
+    {
+      "id": "DSC-071",
+      "purpose": "cyclic complex extension graph is outside profile",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='Other'></xs:extension></xs:simpleContent></xs:complexType><xs:complexType name='Other'><xs:simpleContent><xs:extension base='C'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    },
+    {
+      "id": "DSC-072",
+      "purpose": "sibling complex date type is not a derivation",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'/></xs:simpleContent></xs:complexType><xs:complexType name='Sibling'><xs:simpleContent><xs:extension base='xs:date'/></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='Sibling'>0000-02-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    },
+    {
+      "id": "DSC-073",
+      "purpose": "qualified exact complex selected type",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:dsc' targetNamespace='urn:dsc' elementFormDefault='qualified' attributeFormDefault='qualified'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='label' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='t:C'/></xs:schema>",
+      "instance": "<q:r xmlns:q='urn:dsc' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='q:C' q:label='ISO'>0000-02-29</q:r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false
+    },
+    {
+      "id": "DSC-074",
+      "purpose": "shared terminal type, distinct declarations/owners and physical order",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'><xs:attribute name='label' type='xs:string'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='left' type='C'/><xs:element name='middle' type='xs:string'/><xs:element name='right' type='C'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><left label='L'>0000-02-29</left><middle>keep</middle><right label='R'>10000-01-01Z</right></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "executed": false,
+      "datePaths": [
+        [
+          0
+        ],
+        [
+          2
+        ]
+      ],
+      "descendantScalars": 3,
+      "hasRootScalar": false
+    },
+    {
+      "id": "DSC-075",
+      "purpose": "date alias with temporal facet remains refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:date'><xs:enumeration value='2000-01-01'/></xs:restriction></xs:simpleType><xs:complexType name='C'><xs:simpleContent><xs:extension base='N'/></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    },
+    {
+      "id": "DSC-076",
+      "purpose": "other temporal extension base time",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:time'/></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    },
+    {
+      "id": "DSC-077",
+      "purpose": "other temporal extension base dateTime",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:dateTime'/></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02-29</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false
+    }
+  ]
+}
