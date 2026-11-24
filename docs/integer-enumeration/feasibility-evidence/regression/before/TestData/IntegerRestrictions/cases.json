@@ -1,0 +1,1855 @@
+[
+  {
+    "id": "IR-001",
+    "label": "False minInclusive Valid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:minInclusive value=\"-1\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>-1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "-1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-002",
+    "label": "False minInclusive Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:minInclusive value=\"-1\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>-2</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-003",
+    "label": "False minExclusive Valid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:minExclusive value=\"-1\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>0</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "0"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-004",
+    "label": "False minExclusive Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:minExclusive value=\"-1\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>-1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-005",
+    "label": "False maxInclusive Valid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"2\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>2</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "2"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-006",
+    "label": "False maxInclusive Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"2\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>3</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-007",
+    "label": "False maxExclusive Valid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxExclusive value=\"2\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-008",
+    "label": "False maxExclusive Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxExclusive value=\"2\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>2</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-009",
+    "label": "False totalDigits Valid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:totalDigits value=\"2\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>-99</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "-99"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-010",
+    "label": "False totalDigits Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:totalDigits value=\"2\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>100</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-011",
+    "label": "fixed fractionDigits zero 0",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"0\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>+001</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-012",
+    "label": "fixed fractionDigits zero +0",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"+0\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>+001</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-013",
+    "label": "fixed fractionDigits zero -0",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"-0\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>+001</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-014",
+    "label": "fixed fractionDigits zero 0000",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"0000\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>+001</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-015",
+    "label": "fixed fractionDigits refusal 1",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"1\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-016",
+    "label": "fixed fractionDigits refusal -1",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"-1\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-017",
+    "label": "fixed fractionDigits refusal 257",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"257\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-018",
+    "label": "exact huge singleton",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:minInclusive value=\"123456789012345678901234567890123456789012345678901234567890\"/><xs:maxInclusive value=\"123456789012345678901234567890123456789012345678901234567890\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>123456789012345678901234567890123456789012345678901234567890</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "123456789012345678901234567890123456789012345678901234567890"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-019",
+    "label": "exact huge comparison no rounding",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"123456789012345678901234567890123456789012345678901234567890\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>123456789012345678901234567890123456789012345678901234567891</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-020",
+    "label": "invalid range lexical '1.0'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"1.0\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-021",
+    "label": "invalid range lexical '1e2'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"1e2\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-022",
+    "label": "invalid range lexical '+'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"+\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-023",
+    "label": "invalid range lexical '\u0661'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"\u0661\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-024",
+    "label": "invalid range lexical '1 2'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"1 2\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-025",
+    "label": "invalid range lexical ''",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-026",
+    "label": "totalDigits leading zero representation",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:totalDigits value=\"1\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v> -0000 </v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "0"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-027",
+    "label": "adjacent exclusive empty space",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:minExclusive value=\"1\"/><xs:maxExclusive value=\"2\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-028",
+    "label": "equal exclusive empty space",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:minExclusive value=\"1\"/><xs:maxExclusive value=\"1\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-029",
+    "label": "empty facet intersection valid schema",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:minInclusive value=\"100\"/><xs:totalDigits value=\"1\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>100</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-030",
+    "label": "True minInclusive Valid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:minInclusive value=\"-1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>-1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "-1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-031",
+    "label": "True minInclusive Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:minInclusive value=\"-1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>-2</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-032",
+    "label": "True minExclusive Valid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:minExclusive value=\"-1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>0</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "0"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-033",
+    "label": "True minExclusive Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:minExclusive value=\"-1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>-1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-034",
+    "label": "True maxInclusive Valid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>2</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "2"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-035",
+    "label": "True maxInclusive Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>3</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-036",
+    "label": "True maxExclusive Valid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxExclusive value=\"2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-037",
+    "label": "True maxExclusive Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxExclusive value=\"2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>2</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-038",
+    "label": "True totalDigits Valid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:totalDigits value=\"2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>-99</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "-99"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-039",
+    "label": "True totalDigits Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:totalDigits value=\"2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>100</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-040",
+    "label": "fixed fractionDigits zero 0",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"0\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>+001</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-041",
+    "label": "fixed fractionDigits zero +0",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"+0\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>+001</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-042",
+    "label": "fixed fractionDigits zero -0",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"-0\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>+001</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-043",
+    "label": "fixed fractionDigits zero 0000",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"0000\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>+001</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-044",
+    "label": "fixed fractionDigits refusal 1",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-045",
+    "label": "fixed fractionDigits refusal -1",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"-1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-046",
+    "label": "fixed fractionDigits refusal 257",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"257\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-047",
+    "label": "exact huge singleton",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:minInclusive value=\"123456789012345678901234567890123456789012345678901234567890\"/><xs:maxInclusive value=\"123456789012345678901234567890123456789012345678901234567890\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>123456789012345678901234567890123456789012345678901234567890</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "123456789012345678901234567890123456789012345678901234567890"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-048",
+    "label": "exact huge comparison no rounding",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"123456789012345678901234567890123456789012345678901234567890\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>123456789012345678901234567890123456789012345678901234567891</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-049",
+    "label": "invalid range lexical '1.0'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"1.0\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-050",
+    "label": "invalid range lexical '1e2'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"1e2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-051",
+    "label": "invalid range lexical '+'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"+\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-052",
+    "label": "invalid range lexical '\u0661'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"\u0661\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-053",
+    "label": "invalid range lexical '1 2'",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"1 2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-054",
+    "label": "invalid range lexical ''",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-055",
+    "label": "totalDigits leading zero representation",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:totalDigits value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v> -0000 </v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "0"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-056",
+    "label": "adjacent exclusive empty space",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:minExclusive value=\"1\"/><xs:maxExclusive value=\"2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-057",
+    "label": "equal exclusive empty space",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:minExclusive value=\"1\"/><xs:maxExclusive value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-058",
+    "label": "empty facet intersection valid schema",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:minInclusive value=\"100\"/><xs:totalDigits value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>100</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-059",
+    "label": "schema refusal 58",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:minInclusive value=\"1\"/><xs:maxExclusive value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-060",
+    "label": "schema refusal 59",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:minExclusive value=\"1\"/><xs:maxInclusive value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-061",
+    "label": "schema refusal 60",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:minInclusive value=\"2\"/><xs:maxInclusive value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-062",
+    "label": "schema refusal 61",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:minInclusive value=\"1\"/><xs:minExclusive value=\"2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-063",
+    "label": "schema refusal 62",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"1\"/><xs:maxExclusive value=\"2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-064",
+    "label": "schema refusal 63",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:totalDigits value=\"1\"/><xs:totalDigits value=\"2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "DeclarationShape",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-065",
+    "label": "schema refusal 64",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:totalDigits value=\"0\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-066",
+    "label": "schema refusal 65",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:totalDigits value=\"-1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-067",
+    "label": "schema refusal 66",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:totalDigits value=\"257\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "RepresentationCapacity",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-068",
+    "label": "schema refusal 67",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:totalDigits value=\"1.0\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-069",
+    "label": "schema refusal 68",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-070",
+    "label": "schema refusal 69",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:enumeration value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-071",
+    "label": "schema refusal 70",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:pattern value=\".*\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-072",
+    "label": "schema refusal 71",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:whiteSpace value=\"collapse\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-073",
+    "label": "schema refusal 72",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"0\" fixed=\"true\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "Attributes",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-074",
+    "label": "schema refusal 73",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"1\"><xs:annotation/></xs:maxInclusive></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "DeclarationShape",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-075",
+    "label": "range supplied digit overflow",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"123\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "RepresentationCapacity",
+    "digits": 2,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-076",
+    "label": "facet raw lexical overflow",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "RepresentationCapacity",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-077",
+    "label": "instance capacity precedes facet invalidity",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"1\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>000</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "values": [],
+    "reason": "RepresentationCapacity",
+    "digits": 2,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-078",
+    "label": "invalid fractional instance",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1.0</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-079",
+    "label": "optional absence",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" minOccurs=\"0\"><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r/>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-080",
+    "label": "repeated values",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" maxOccurs=\"2\" type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>-0</v><v>+0002</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "0",
+      "2"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-081",
+    "label": "root attribute facets Valid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence><xs:attribute name=\"id\" type=\"Count\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r id=\"2\"><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [
+      "2"
+    ],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-082",
+    "label": "root attribute facets Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"2\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence><xs:attribute name=\"id\" type=\"Count\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r id=\"3\"><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-083",
+    "label": "missing required restricted attribute",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence><xs:attribute name=\"id\" type=\"Count\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-084",
+    "label": "descendant attribute facets Valid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"2\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Box\"><xs:sequence><xs:element name=\"v\" type=\"Count\"/></xs:sequence><xs:attribute name=\"code\" type=\"Count\" use=\"required\"/></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"box\" type=\"Box\" maxOccurs=\"2\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><box code=\"2\"><v>1</v></box></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [
+      "2"
+    ],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-085",
+    "label": "descendant attribute facets Invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"2\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Box\"><xs:sequence><xs:element name=\"v\" type=\"Count\"/></xs:sequence><xs:attribute name=\"code\" type=\"Count\" use=\"required\"/></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"box\" type=\"Box\" maxOccurs=\"2\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><box code=\"3\"><v>1</v></box></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-086",
+    "label": "shared type repetitions and attributes",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"2\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Box\"><xs:sequence><xs:element name=\"v\" type=\"Count\"/></xs:sequence><xs:attribute name=\"code\" type=\"Count\" use=\"required\"/></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"box\" type=\"Box\" maxOccurs=\"2\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><box code=\"1\"><v>1</v></box><box code=\"2\"><v>2</v></box></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1",
+      "2"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [
+      "1",
+      "2"
+    ],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-087",
+    "label": "xsi remains excluded nil",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\"><v h:nil=\"true\">1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Unsupported",
+    "values": [],
+    "reason": "Attributes",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-088",
+    "label": "Absent instance type is invalid",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\"><v h:type=\"true\">1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-089",
+    "label": "unfetched location hints",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\" h:noNamespaceSchemaLocation=\"missing\"><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-090",
+    "label": "integer assertions excluded",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence><xs:assert test=\"exists(v)\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "AssertionGrammar",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-091",
+    "label": "actual restriction namespace binding",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction xmlns:i=\"http://www.w3.org/2001/XMLSchema\" base=\"i:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-092",
+    "label": "unresolved restriction namespace",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction xmlns:i=\"urn:other\" base=\"i:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-093",
+    "label": "unused invalid component checked eagerly",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Bad\"><xs:restriction base=\"xs:integer\"><xs:fractionDigits value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-094",
+    "label": "global definition budget 16",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"T0\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T1\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T2\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T3\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T4\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T5\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T6\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T7\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T8\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T9\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T10\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T11\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T12\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T13\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T14\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T15\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-095",
+    "label": "global definition budget 17",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"T0\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T1\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T2\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T3\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T4\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T5\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T6\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T7\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T8\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T9\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T10\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T11\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T12\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T13\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T14\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T15\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:simpleType name=\"T16\"><xs:restriction base=\"xs:integer\"/></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "RepresentationCapacity",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-096",
+    "label": "admitted derived family xs:long",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:long\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-097",
+    "label": "admitted derived family xs:nonNegativeInteger",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:nonNegativeInteger\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "1"
+    ],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-098",
+    "label": "excluded derived family xs:boolean",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:boolean\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><v>1</v></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [],
+    "reason": "ValueType",
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  },
+  {
+    "id": "IR-099",
+    "label": "opt-in route for unchanged legacy M2B-54 payload",
+    "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:simpleType name='Money'><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:complexType name='Order'><xs:sequence><xs:element name='amount' type='t:Money' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType><xs:element name='order' type='t:Order'/></xs:schema>",
+    "instance": "<o:order xmlns:o='urn:orders'><o:amount>12.5000</o:amount></o:order>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Invalid",
+    "values": [],
+    "reason": null,
+    "digits": 256,
+    "attributes": [],
+    "descendantAttributes": [],
+    "clauses": [
+      "Datatypes3.4.13.1-3",
+      "Datatypes4.3.6-4.3.12",
+      "Structures3.16.1-4"
+    ]
+  }
+]

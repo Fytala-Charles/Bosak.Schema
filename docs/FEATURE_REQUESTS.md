@@ -53,7 +53,7 @@ The published **0.5.0-beta.1** provides owned `NativeDecimalSession` and `Native
 | Bounded string pattern facets | Merged PR40; main CI qualified | [Bounded implementation and qualification](string-patterns/IMPLEMENTATION.md); no publication |
 | Simple-typed global roots | Merged PR41; main CI qualified | [Bounded implementation and qualification](simple-typed-roots/IMPLEMENTATION.md); no publication |
 | Derived integer built-ins | PR42 merged; main CI qualified | [Bounded implementation and qualification](derived-integer-types/IMPLEMENTATION.md); no publication |
-| Bounded choice/all particles | Choice merged; all production candidate qualified | [Original order, UPA and occurrence gates](particles/README.md); all delivery/review pending |
+| Bounded choice/all particles | Choice/all merged; integer-enumeration feasibility qualified | [Original order, UPA and occurrence gates](particles/README.md); post-particle specification reassessment |
 | Expanded public XSD assessment | Measured129original cases on both Core pins; pattern contract recommended | [Sample and dependency-aware ranking](expanded-conformance/README.md); Unsupported is not a pass |
 | Structural namespace assertions and empty content | Merged PR39; main CI verified | [Bounded implementation and qualification](structural-assertions/IMPLEMENTATION.md); no publication |
 | Namespace/form declarations | Merged PR35; main verified | [Scope and evidence](namespace-form/README.md); mixed profile only |
@@ -94,7 +94,7 @@ The transition does not implement the proposed core session API, change frozen W
 
 The 3 November [O1/O2 versioned responses](core-disposition-responses/2026-11-03-v2/README.md) are scoped historical design acceptance, not proof of current native adapter/runtime delivery. Their original source/proposal hashes and the unsigned [confirmation drafts](core-disposition-inbox/2026-11-03/README.md) remain unchanged. The published Core 1.81.2 release and its budget deferral do not complete Schema's native provider/session or performance requirements. See [history](DEVELOPMENT_HISTORY.md).
 
-*Last updated: 2026-11-23*
+*Last updated: 2026-11-24*
 
 
 ## M2A scope proposal - 19 November 2026
@@ -1078,3 +1078,23 @@ The [bounded all-group scratch candidate](all-particles/FEASIBILITY.md) passes 1
 ### 23 November 2026 - bounded all-group production candidate
 
 The [bounded all-group implementation](all-particles/IMPLEMENTATION.md) is qualified: 3,885 source tests (1,251 internal / 2,634 public), 2,634 package consumers per Core pin, 60 current-package native controls and retained 124/23/33 pass. All 3,739 previous names/stimuli remain, with 18 explicit measured compile expectation changes and 146 new controls. API 54/401 zero delta; 18 signed Core identities and signed beta.1 verify. Frozen stays 21 matches; expanded stays 8 matches / 121 Unsupported / zero errors, with six explicit first-refusal changes per pin. Exact packaged all/unsignedLong examples pass; advisory checks enabled after network retry. Local unsigned alpha.0.35 only; beta/pins/controllers unchanged. Next: explicit Git delivery/review and merge/main verification, then re-rank remaining specification coverage. No commit/push/publication.
+
+
+### 24 November 2026 - all groups merged; specification priorities reassessed
+
+PR44 merged as `b08187d5f59f47a068737154ecdd6872506d3a88`; main CI45382084851 passes 3,885 source tests and supporting checks. The [post-particle coverage reassessment](post-particle-coverage/README.md) reuses the qualified 23 November sample: 8 matches / 121 Unsupported / zero errors, with no new corpus run or coverage percentage. Next recommended contract is bounded integer enumeration, followed by date/time transport design and wider Unicode regex support; schema assembly and implicit anyType remain separate dependencies. Source/test/build inputs, API, Core pins and packages are unchanged. Earlier matrices, rankings and seals remain historical; no new semantic adoption, commit/push or publication.
+
+
+### 24 November 2026 - integer-enumeration contract prepared
+
+The [bounded integer-enumeration contract](integer-enumeration/README.md) proposes value-space membership for existing integer families and placements, with 105 unexecuted XML cases and 18 native gates. Exact specification/source pins distinguish base-type entry validity from sibling intersections, preserve inheritance and define capacities. Static expectation impacts and a retained original-fixture Invalid-only harness assumption are recorded for measured reconciliation; upstream validities and payloads stay unchanged. No semantic adoption or product/API/Core/package change. Next: isolated native feasibility, then separate production adoption and qualification. No commit/push/publication.
+
+
+### 24 November 2026 - isolated integer-enumeration feasibility
+
+The [isolated candidate](integer-enumeration/FEASIBILITY.md) passes 261 controls per signed Core pin and 210 unchanged-baseline refusals per pin. One authored attribute-only root is retained as Unsupported; IE-073Q explicitly qualifies the supported attribute placement without widening grammar. Initial source regression has 10 measured expectation failures; scratch-only expectation/upstream-validity reconciliation passes all 3,885 prior test names with no removal or rename. Two original schemas compile Valid and their instances match preserved upstream valid/invalid outcomes. API 54/401 has zero delta and 18 signed Core identities verify. Production source/tests and earlier seals remain unchanged. Next: separate production adoption and full qualification; no commit/push/publication.
+
+
+### 24 November 2026 - integer-enumeration production qualification
+
+The [bounded integer-enumeration implementation](integer-enumeration/IMPLEMENTATION.md) passes 4,146 source tests (1,300 internal / 2,846 public), 2,846 package consumers per Core pin, 49 packaged native controls and retained callers 124/23/33. All 3,885 prior source names remain; 261 controls are added and ten measured expectations plus the original-fixture harness assumption are explicitly reconciled. API54/401 zero delta; 18 signed Core identities and published beta.1 verify. Frozen stays 21 matches; expanded is now 10 matches /119 Unsupported /zero errors, with exactly two original integer-enumeration admissions per pin. Integer membership is bounded to existing types/placements; original IE-073 remains Unsupported and its qualified variant is separate. Local unsigned alpha.0.37 only; no publication, pin/controller change or full XSD/PSVI claim. Next: explicit Git delivery/review and merge verification, then separate date/time transport design.

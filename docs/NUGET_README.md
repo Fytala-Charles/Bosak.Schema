@@ -1205,3 +1205,28 @@ A reordered instance with a present empty string:
 ```
 
 For this instance, `NativeSchemaSession` exposes two scalar slots: integer `7` at index 0 and an empty string at index 1. `NativeSchemaNodeDataSession` reads the same values at physical paths `[0]` and `[1]`. With this optional whole group, `<r/>` is valid and has no scalar slots or root typed value. `<r><b>7</b></r>` is Invalid because the present group still requires `a`. Check the returned outcome before reading its value.
+
+### Bounded integer enumeration
+
+The two opt-in native facades support enumeration on the existing integer primitive and twelve builtin descendants, at admitted named/anonymous roots, scalar members, attributes and integer simple-content placements. Entries are base-typed values: signs, leading zeros and permitted XML whitespace do not create distinct integers. Bad base-typed declarations are Invalid; values outside the set are Invalid instances. Other applicable facets still apply. Inherited enumeration is retained or validly narrowed.
+
+At most sixteen source entries are admitted per restriction, including duplicates before deduplication. Existing 256-character lexical and explicit native digit limits apply before normalization. Capacity refusal is Unsupported. Decimal enumeration, integer patterns, arbitrary new chains and broad facet metadata syntax remain excluded. Attribute-only empty complex roots remain outside the profile; use an admitted element-only root for enumeration attributes.
+
+Example integer enumeration:
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="N"><xs:restriction base="xs:int">
+    <xs:enumeration value="1"/>
+    <xs:enumeration value="+0002"/>
+    <xs:maxInclusive value="1"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="r" type="N"/>
+</xs:schema>
+```
+
+```xml
+<r>+001</r>
+```
+
+The instance reads exact integer one through ReadRootScalar() or ReadElement([]), with zero descendant scalar slots. Export preserves parsed lexical content. Two fails the sibling bound; zero fails membership. The declaration for two is base-int-valid even though the new sibling bound excludes it. Check outcomes before reading values. The legacy decimal facade is unchanged.

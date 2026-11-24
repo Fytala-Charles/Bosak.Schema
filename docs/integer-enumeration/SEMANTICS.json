@@ -1,0 +1,45 @@
+{
+  "status": "Reviewed proposed interpretation; not adoption",
+  "rules": [
+    {
+      "rule": "Enumeration entries are base-typed values, not lexical strings",
+      "clauses": [
+        "Datatypes4.3.5.1-3",
+        "Datatypes3.4.13"
+      ]
+    },
+    {
+      "rule": "Equal signed/zero-padded representations denote same integer; duplicate source entries still consume capacity",
+      "clauses": [
+        "Datatypes4.3.5.2-4"
+      ],
+      "profileLimit": "16source entries,256UTF16lexical characters and explicit native digits before normalization"
+    },
+    {
+      "rule": "Entry declaration must satisfy base bounds/facets, not new sibling facets",
+      "clauses": [
+        "Datatypes4.3.5.3",
+        "Datatypes4.3.5.5"
+      ]
+    },
+    {
+      "rule": "All value-based facets constrain instances jointly; sibling enumeration and max/totalDigits may have empty intersection without an extra schema-invalid rule",
+      "clauses": [
+        "Datatypes4.1.4",
+        "Structures3.16.6.4"
+      ],
+      "interpretation": true
+    },
+    {
+      "rule": "Inherited enumeration retained unless supplied replacement; replacement entries must belong to base value space",
+      "clauses": [
+        "Structures3.16.6.4",
+        "Datatypes4.3.5.5"
+      ]
+    },
+    {
+      "rule": "Do not extend existing user simple chains or complex restriction depth",
+      "profileExclusion": true
+    }
+  ]
+}

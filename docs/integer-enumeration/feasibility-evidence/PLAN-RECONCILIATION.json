@@ -1,0 +1,29 @@
+{
+  "originalId": "IE-073",
+  "qualifiedId": "IE-073Q",
+  "reason": "Attribute-only empty complex root was outside current admitted grammar; use existing element-only root with optional child and retain original refusal separately",
+  "original": {
+    "id": "IE-073",
+    "purpose": "Existing placement attribute",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"N\"><xs:restriction base=\"xs:integer\"><xs:enumeration value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:attribute name=\"a\" type=\"N\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r a=\"1\"/>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedValue": "1",
+    "status": "Proposed unexecuted; no native acceptance claim",
+    "placement": "attribute"
+  },
+  "qualified": {
+    "id": "IE-073Q",
+    "purpose": "Qualified existing attribute placement on optional scalar sequence root",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"N\"><xs:restriction base=\"xs:integer\"><xs:enumeration value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:string\" minOccurs=\"0\"/></xs:sequence><xs:attribute name=\"a\" type=\"N\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r a=\"1\"/>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "expectedValue": "1",
+    "status": "Proposed unexecuted; no native acceptance claim",
+    "placement": "attribute",
+    "originalContractId": "IE-073"
+  },
+  "engineGrammarWidened": false
+}

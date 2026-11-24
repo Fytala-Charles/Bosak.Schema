@@ -22,6 +22,8 @@
 //                      | Charles Korthout | 0.9   | 22-11-2026     | Adopt qualified bounded builtin integer family |
 //                      | Charles Korthout | 0.10   | 23-11-2026     | Adopt qualified bounded native choice |
 //                      | Charles Korthout | 0.11   | 23-11-2026     | Adopt qualified bounded root all groups |
+//                      | Charles Korthout | 0.12   | 24-11-2026     | Probe integer enumeration in isolated source copies |
+//                      | Charles Korthout | 0.13   | 24-11-2026     | Adopt qualified bounded integer enumeration |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -50,7 +52,7 @@ internal sealed partial class NativeDecimalSchema
         {
             foreach (var facet in Elements(restriction))
             {
-                Require(facet.Name.Namespace == Xs && facet.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits",
+                Require(facet.Name.Namespace == Xs && facet.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits" or "enumeration",
                     "Excluded integer facet syntax.", NativeDecimalUnsupportedReason.ValueType);
                 Attributes(facet, "value");
                 Require(Elements(facet).Count == 0, "Facet children are unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);

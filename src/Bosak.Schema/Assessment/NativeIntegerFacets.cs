@@ -13,9 +13,13 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
+//                      | Charles Korthout | 0.3   | 24-11-2026     | Probe integer enumeration in isolated source copies |
+//                      | Charles Korthout | 0.4   | 24-11-2026     | Keep invalid-value reporting inside the facet compiler |
+//                      | Charles Korthout | 0.5   | 24-11-2026     | Adopt qualified bounded integer enumeration |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Numerics;
 using System.Xml.Linq;
@@ -23,8 +27,9 @@ using System.Xml.Linq;
 namespace Bosak.Schema;
 
 /// <summary>Compiles and enforces bounded exact integer restriction facets.</summary>
-internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive, BigInteger? upper, bool upperExclusive, int? totalDigits, NativeIntegerFacets? parent = null)
+internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive, BigInteger? upper, bool upperExclusive, int? totalDigits, NativeIntegerFacets? parent = null, ImmutableHashSet<BigInteger>? enumeration = null)
 {
+    internal ImmutableHashSet<BigInteger>? Enumeration => enumeration;
     internal BigInteger? LowerBound => lower ?? parent?.LowerBound;
     internal BigInteger? UpperBound => upper ?? parent?.UpperBound;
     internal bool LowerExclusive => lower is not null ? lowerExclusive : parent?.LowerExclusive ?? false;
@@ -72,11 +77,13 @@ internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive
             if (own.TotalLimit is { } total && inherited.TotalLimit is { } baseTotal) Valid(total <= baseTotal);
             if (own.FractionLimit is { } fraction && inherited.FractionLimit is { } baseFraction) Valid(fraction <= baseFraction);
         }
+        if (own.Enumeration is { } entries && inherited is not null)
+            foreach (var value in entries) Valid(inherited.Accepts(value));
         var effectiveTotal = own.TotalLimit ?? inherited?.TotalLimit;
         var effectiveFraction = own.FractionLimit ?? inherited?.FractionLimit;
         Valid(effectiveTotal is null || effectiveFraction is null || effectiveFraction <= effectiveTotal);
         return new(own.LowerBound, own.LowerExclusive, own.UpperBound, own.UpperExclusive,
-            own.TotalLimit, inherited);
+            own.TotalLimit, inherited, own.Enumeration);
     }
 
     private static int Compare(BigInteger a, BigInteger b) => a.CompareTo(b);
@@ -86,18 +93,27 @@ internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive
         BigInteger? lower=null,upper=null;
         bool lowerExclusive=false,upperExclusive=false;
         int? total=null;
+        var entries=ImmutableHashSet.CreateBuilder<BigInteger>();
+        var sourceEntries=0;
         var seen=new HashSet<string>(StringComparer.Ordinal);
         foreach(var facet in NativeDecimalSchema.Elements(restriction))
         {
             NativeDecimalSchema.Require(facet.Name.NamespaceName=="http://www.w3.org/2001/XMLSchema" &&
-                facet.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits",
+                facet.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits" or "enumeration",
                 "Unsupported integer facet.",NativeDecimalUnsupportedReason.ValueType);
             var kind=facet.Name.LocalName;
-            NativeDecimalSchema.Require(seen.Add(kind),"Duplicate facet.",NativeDecimalUnsupportedReason.DeclarationShape);
+            NativeDecimalSchema.Require(kind=="enumeration" || seen.Add(kind),"Duplicate facet.",NativeDecimalUnsupportedReason.DeclarationShape);
             NativeDecimalSchema.Attributes(facet,"value");
             NativeDecimalSchema.Require(NativeDecimalSchema.Elements(facet).Count==0,"Facet children are unsupported.",NativeDecimalUnsupportedReason.DeclarationShape);
             var supplied=(string?)facet.Attribute("value");
-            NativeDecimalSchema.Require(supplied is not null,"Facet value required.",NativeDecimalUnsupportedReason.ValueType);
+            if(kind!="enumeration") NativeDecimalSchema.Require(supplied is not null,"Facet value required.",NativeDecimalUnsupportedReason.ValueType);
+            if (kind=="enumeration")
+            {
+                NativeDecimalSchema.Require(++sourceEntries<=16,"Integer enumeration source capacity exceeded.",NativeDecimalUnsupportedReason.RepresentationCapacity);
+                if (supplied is null) throw new NativeProfileException(NativeOutcome.Invalid,"Enumeration value is required.");
+                entries.Add(ParseValue(supplied!,limits,NativeOutcome.Invalid));
+                continue;
+            }
             if(kind is "totalDigits" or "fractionDigits")
             {
                 var value=ParseValue(supplied!,new(256,0),NativeOutcome.Unsupported);
@@ -131,12 +147,13 @@ internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive
             NativeDecimalSchema.Require(compare<0 || compare==0 && lowerExclusive==upperExclusive,
                 "Inconsistent integer range facets.",NativeDecimalUnsupportedReason.ValueType);
         }
-        return new(lower,lowerExclusive,upper,upperExclusive,total);
+        return new(lower,lowerExclusive,upper,upperExclusive,total,enumeration:sourceEntries==0?null:entries.ToImmutable());
     }
 
     internal bool Accepts(BigInteger value)
     {
         if (parent is not null && !parent.Accepts(value)) return false;
+        if (enumeration is not null && !enumeration.Contains(value)) return false;
         if(lower is {} lo && (value<lo || lowerExclusive && value==lo))return false;
         if(upper is {} hi && (value>hi || upperExclusive && value==hi))return false;
         return totalDigits is not {} digits || BigInteger.Abs(value).ToString(CultureInfo.InvariantCulture).Length<=digits;

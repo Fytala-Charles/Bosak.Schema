@@ -14,6 +14,8 @@
 //                      | Charles Korthout | 0.1   | 21-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 21-11-2026     | Adopt bounded integer simple content with actual component identity |
 //                      | Charles Korthout | 0.3   | 21-11-2026     | Adopt bounded contextual and inherited integer assertions |
+//                      | Charles Korthout | 0.4   | 24-11-2026     | Probe integer enumeration in isolated source copies |
+//                      | Charles Korthout | 0.5   | 24-11-2026     | Adopt qualified bounded integer enumeration |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -41,7 +43,7 @@ internal sealed partial class NativeDecimalSchema
                 "Restriction attribute uses are outside the profile.", NativeDecimalUnsupportedReason.Attributes);
             Require(child.Name != Xs + "assert", "Restriction assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
             Require(child.Name != Xs + "simpleType", "Inline restriction types are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-            Require(child.Name.Namespace == Xs && child.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits",
+            Require(child.Name.Namespace == Xs && child.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits" or "enumeration",
                 "Restriction facet is outside the profile.", NativeDecimalUnsupportedReason.ValueType);
             Attributes(child, "value");
             Require(Elements(child).Count == 0, "Facet child grammar is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
@@ -72,6 +74,8 @@ internal sealed partial class NativeDecimalSchema
             "Complex base content is outside the decimal profile.", NativeDecimalUnsupportedReason.ValueType);
         Require(content!.IsInteger || localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty,
             "Contextual assertions on noninteger content are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+        Require(content.IsInteger || !children.Any(e=>e.Name==Xs+"enumeration"),
+            "Decimal enumeration is outside the integer slice.",NativeDecimalUnsupportedReason.ValueType);
         var facetsOnly = new XElement(restriction.Name, restriction.Attributes(), children.Where(e => e.Name != Xs + "assert"));
         var inheritedAssertions = basePlan.integerAssertions;
         var effectiveAssertions = inheritedAssertions.AddRange(CompileIntegerAssertions(localAssertions, targetNamespace, assertionNamespace, limits, token));

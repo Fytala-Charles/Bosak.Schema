@@ -35,7 +35,7 @@ Broader XSD 1.1/component-universe/PSVI and general Core C45/ADR006 work require
 
 The [native API](docs/NATIVE-DECIMAL-PUBLIC-API.md), [restricted resolution](docs/RESTRICTED_RESOLUTION.md), [descriptor ownership](docs/DESCRIPTOR_SNAPSHOTS.md) and [legacy validation](docs/LEGACY_VALIDATION.md) define the supported limits. [Workload measurements](docs/BETA_QUALIFICATION.md) are bounded local observations, not a production SLA. Full XSD 1.1, general provider interchange and a perpetual API freeze remain unaccepted. Historical source integration receipts retain their original revisions; publication does not requalify them.
 
-*Last updated: 2026-11-23*
+*Last updated: 2026-11-24*
 
 ## Diagnostic development candidate
 
@@ -1003,3 +1003,23 @@ The [bounded all-group scratch candidate](docs/all-particles/FEASIBILITY.md) pas
 ### 23 November 2026 - bounded all-group production candidate
 
 The [bounded all-group candidate](docs/all-particles/IMPLEMENTATION.md) completes the proposed direct-root particle slice alongside choice, within explicit occurrence/type limits. Next: review and delivery, merge/main verification, then re-rank remaining specification gaps against the public corpus and coverage inventory. Wider grammar, datatypes, schema assembly and implicit anyType remain separate work; no full XSD/PSVI/C45 or publication claim.
+
+
+### 24 November 2026 - all groups merged; specification priorities reassessed
+
+PR44 merged as `b08187d5f59f47a068737154ecdd6872506d3a88`; main CI45382084851 passes 3,885 source tests and supporting checks. The [post-particle coverage reassessment](docs/post-particle-coverage/README.md) reuses the qualified 23 November sample: 8 matches / 121 Unsupported / zero errors, with no new corpus run or coverage percentage. Next recommended contract is bounded integer enumeration, followed by date/time transport design and wider Unicode regex support; schema assembly and implicit anyType remain separate dependencies. Source/test/build inputs, API, Core pins and packages are unchanged. Earlier matrices, rankings and seals remain historical; no new semantic adoption, commit/push or publication.
+
+
+### 24 November 2026 - integer-enumeration contract prepared
+
+The [bounded integer-enumeration contract](docs/integer-enumeration/README.md) proposes value-space membership for existing integer families and placements, with 105 unexecuted XML cases and 18 native gates. Exact specification/source pins distinguish base-type entry validity from sibling intersections, preserve inheritance and define capacities. Static expectation impacts and a retained original-fixture Invalid-only harness assumption are recorded for measured reconciliation; upstream validities and payloads stay unchanged. No semantic adoption or product/API/Core/package change. Next: isolated native feasibility, then separate production adoption and qualification. No commit/push/publication.
+
+
+### 24 November 2026 - isolated integer-enumeration feasibility
+
+The [isolated candidate](docs/integer-enumeration/FEASIBILITY.md) passes 261 controls per signed Core pin and 210 unchanged-baseline refusals per pin. One authored attribute-only root is retained as Unsupported; IE-073Q explicitly qualifies the supported attribute placement without widening grammar. Initial source regression has 10 measured expectation failures; scratch-only expectation/upstream-validity reconciliation passes all 3,885 prior test names with no removal or rename. Two original schemas compile Valid and their instances match preserved upstream valid/invalid outcomes. API 54/401 has zero delta and 18 signed Core identities verify. Production source/tests and earlier seals remain unchanged. Next: separate production adoption and full qualification; no commit/push/publication.
+
+
+### 24 November 2026 - integer-enumeration production qualification
+
+The [bounded integer-enumeration implementation](docs/integer-enumeration/IMPLEMENTATION.md) passes 4,146 source tests (1,300 internal / 2,846 public), 2,846 package consumers per Core pin, 49 packaged native controls and retained callers 124/23/33. All 3,885 prior source names remain; 261 controls are added and ten measured expectations plus the original-fixture harness assumption are explicitly reconciled. API54/401 zero delta; 18 signed Core identities and published beta.1 verify. Frozen stays 21 matches; expanded is now 10 matches /119 Unsupported /zero errors, with exactly two original integer-enumeration admissions per pin. Integer membership is bounded to existing types/placements; original IE-073 remains Unsupported and its qualified variant is separate. Local unsigned alpha.0.37 only; no publication, pin/controller change or full XSD/PSVI claim. Next: explicit Git delivery/review and merge verification, then separate date/time transport design.
