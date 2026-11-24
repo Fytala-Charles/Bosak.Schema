@@ -55,6 +55,7 @@
 //                      | Charles Korthout | 1.32   | 24-11-2026     | Propagate date restriction character limits through complex compilation |
 //                      | Charles Korthout | 1.33   | 24-11-2026     | Propagate shared date pattern contexts through every compilation and assessment route |
 //                      | Charles Korthout | 1.34   | 24-11-2026     | Assess Boolean lexical patterns before issuing typed facts |
+//                      | Charles Korthout | 1.35   | 25-11-2026     | Compile global attribute catalogs and owner-specific canonical reference uses |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -98,6 +99,7 @@ internal sealed partial class NativeDecimalSchema
     internal NativeDeclaration Root { get; }
     internal ImmutableArray<NativeDeclaration> Children { get; }
     internal ImmutableArray<NativeDeclaration> AttributeUses { get; private set; } = [];
+    internal ImmutableArray<NativeDeclaration> GlobalAttributeDeclarations { get; private set; } = [];
 
     internal static NativeResult<NativeDecimalSchema> Compile(string schema, NativeNumericLimits limits, CancellationToken cancellationToken = default, int? maxStringCharacters = null)
     {
@@ -120,7 +122,7 @@ internal sealed partial class NativeDecimalSchema
             var defaultForm = Form(root, "elementFormDefault", "unqualified");
             var assertionNamespace = AssertionNamespace(root, targetNamespace, "");
             var globals = Elements(root);
-            Require(globals.All(e => e.Name == Xs + "element" || e.Name == Xs + "complexType" || e.Name == Xs + "simpleType"),
+            Require(globals.All(e => e.Name == Xs + "element" || e.Name == Xs + "complexType" || e.Name == Xs + "simpleType" || mixedProfile && e.Name == Xs + "attribute"),
                 "Only global roots and named complex types are supported.", NativeDecimalUnsupportedReason.DeclarationShape);
             var types = globals.Where(e => e.Name == Xs + "complexType" || e.Name == Xs + "simpleType").ToArray();
             var declarations = globals.Where(e => e.Name == Xs + "element").ToArray();
@@ -161,10 +163,15 @@ internal sealed partial class NativeDecimalSchema
             }
             foreach (var key in simpleDefinitions.Keys) ResolveSimple(key);
             var anonymousSimple = CompileAnonymousRestrictions(root, limits, maxStringCharacters, cancellationToken, patternCompilation, simple);
+            var globalAttributes = CompileGlobalAttributeDeclarations(root, targetNamespace, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
             if (stringType is not null && HasNestedDeclarations(root, types, targetNamespace))
-                return NativeResult<NativeDecimalSchema>.Valid(CompileNestedSchema(root, types, declarations, targetNamespace,
+            {
+                var nested = CompileNestedSchema(root, types, declarations, targetNamespace,
                     defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType!, integerType!, simple,
-                    limits, maxStringCharacters!.Value, cancellationToken, anonymousSimple, patternCompilation));
+                    limits, maxStringCharacters!.Value, cancellationToken, anonymousSimple, patternCompilation);
+                nested.GlobalAttributeDeclarations = globalAttributes.Values;
+                return NativeResult<NativeDecimalSchema>.Valid(nested);
+            }
             // Compile all complex types eagerly, including unused declarations.
             var complexDefinitions = types.Where(t => t.Name == Xs + "complexType")
                 .ToDictionary(t => XName.Get(Name(t), targetNamespace));
@@ -216,6 +223,7 @@ internal sealed partial class NativeDecimalSchema
                 first ??= plan;
             }
             first!.roots = compiled.ToImmutable();
+            first.GlobalAttributeDeclarations = globalAttributes.Values;
             first.NamedTypes = simple.Values.Concat(named.Values.Select(p => p.Root.Type)).ToImmutableArray();
             first.DecimalType = decimalType;
             first.StringType = stringType;
@@ -332,6 +340,23 @@ internal sealed partial class NativeDecimalSchema
         foreach (var attribute in attributeMembers)
         {
             cancellationToken.ThrowIfCancellationRequested();
+            if (attribute.Attribute("ref") is not null)
+            {
+                Check(attribute.Attribute("name") is null && attribute.Attribute("type") is null && attribute.Attribute("form") is null,
+                    "An attribute reference cannot redefine name, type or form.");
+                Attributes(attribute, "ref", "use");
+                Require(Elements(attribute).Count == 0, "Reference children are unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
+                var key = AttributeReferenceName(attribute);
+                var context = NativeAttributeDeclarations.For(attribute);
+                Require(context is not null && context.Declarations.ContainsKey(key), "Unresolved closed attribute reference.", NativeDecimalUnsupportedReason.Attributes);
+                var global = context!.Declarations[key];
+                Check(attributeNames.Add(key), "Duplicate expanded attribute reference use.");
+                var referenceUse = Collapse((string?)attribute.Attribute("use") ?? "optional");
+                Require(referenceUse is "optional" or "required", "Unsupported attribute reference use.", NativeDecimalUnsupportedReason.DeclarationShape);
+                attributeUses.Add(new NativeDeclaration(global.Name, global.Type, referenceUse == "required" ? 1 : 0, 1,
+                    global.NamespaceUri, isAttribute: true, referencedDeclaration: global));
+                continue;
+            }
             Attributes(attribute, "name", "type", "use", "form");
             Require(Elements(attribute).Count == 0, "Attribute children are unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
             var name = Name(attribute, NativeDecimalUnsupportedReason.DeclarationShape);
@@ -763,10 +788,11 @@ internal sealed class NativeType(string? name, bool hasNoTypedValue, string name
     internal bool HasNoTypedValue { get; } = hasNoTypedValue;
     internal string NamespaceUri { get; } = namespaceUri;
 }
-internal sealed class NativeDeclaration(string name, NativeType type, int minOccurs, int maxOccurs, string namespaceUri = "", bool isAttribute = false)
+internal sealed class NativeDeclaration(string name, NativeType type, int minOccurs, int maxOccurs, string namespaceUri = "", bool isAttribute = false, NativeDeclaration? referencedDeclaration = null)
 {
     internal NativeDecimalSchema? Container { get; init; }
     internal bool IsAttribute { get; } = isAttribute;
+    internal NativeDeclaration CanonicalDeclaration => referencedDeclaration ?? this;
     internal string Name { get; } = name;
     internal string NamespaceUri { get; } = namespaceUri;
     internal XName ExpandedName { get; } = XName.Get(name, namespaceUri);

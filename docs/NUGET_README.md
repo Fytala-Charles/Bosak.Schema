@@ -1499,3 +1499,30 @@ The existing attribute/assertion-free decimal simple-content extension route sup
 Both facades return exact decimal 1.23 and preserve the original XML text. The value 1.24 is Invalid. A minInclusive declaration of 0 over Prices would make the schema Invalid because 0 is outside that base's enumeration. Bounds/digits must narrow and be base-valid, with the REC exception for repeating an inherited same-side exclusive endpoint.
 
 Existing entry, raw numeric, digit/scale and document limits apply. Local/inherited attributes, assertions, inline simple types, general complex restriction chains and general complex xsi:type substitution stay Unsupported; exact same named complex selection is supported. Integer/date restriction routes and the legacy decimal-only grammar retain their existing profiles. No public API, Core payload or equality/hash change.
+
+### Global attribute declarations and references
+
+The opt-in facades support typed global attributes and local references in existing admitted attribute owners. Each reference has its own optional/required presence constraint and retains the canonical global declaration and scalar type. A global attribute uses targetNamespace regardless of attributeFormDefault; reference QNames follow the source namespace bindings.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:attribute name="price" type="Price"/>
+  <xs:simpleType name="Price"><xs:restriction base="xs:decimal">
+    <xs:enumeration value="1.23"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="order"><xs:complexType>
+    <xs:sequence><xs:element name="amount" type="xs:decimal"/></xs:sequence>
+    <xs:attribute ref="price" use="required"/>
+  </xs:complexType></xs:element>
+</xs:schema>
+```
+
+```xml
+<order price="+001.2300"><amount>1</amount></order>
+```
+
+ReadAttribute(0).Value or ReadAttribute([], "", "price") returns exact Decimal 1.23. The amount remains the first scalar/element child with value 1, and export preserves original XML. A missing required price or value 1.24 is Invalid. Optional uses do not inherit another owner's required flag.
+
+Sixteen global declarations and sixteen attribute uses per owner are bounded; name/ref source limits are256UTF16units. Unused globals are validated. Malformed/empty/unbound ref QNames and illegal ref with name/type/form are Invalid; missing closed references are Unsupported. Global lookup keeps canonical declaration identity, with NotFound for a missing name in a present global catalog; empty-catalog profiles retain their prior Unsupported lookup. No external resolution occurs.
+
+Existing primitive/named scalar attribute types and sequence/all/choice, decimal/date extension and nested owners retain their limits. Attribute-only empty complex owners, integer extension attributes, complex restriction attributes, prohibited uses, anonymous attribute types, groups, defaults/fixed and imports remain separate work. Legacy decimal-only grammar and public/Core APIs are unchanged.

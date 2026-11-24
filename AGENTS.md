@@ -1,5 +1,10 @@
 # Bosak.Schema — Agent Guide
 
+## Global attribute declarations and references - 25 November 2026
+
+Batch slice 10 adds closed typed globals and optional/required reference uses on existing attribute owners. Canonical global declaration handles remain shared across uses; each owner keeps its presence constraint and original node origin. Private per-schema context and lookup avoid ambient state or per-use authoritative copies. One measured old malformed ref+name/type case now returns Invalid with unchanged input. Global namespaces, scalar facets, eager unused declarations and capacities are qualified. REQ-009 remains In Progress; public API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](docs/global-attribute-references/README.md).
+
+
 ## Decimal complex enumeration restriction - 25 November 2026
 
 Batch slice 9 enables local/inherited exact enumeration on the existing attribute/assertion-free decimal complex restriction route, using qualified native base-value validity and narrowing rules. Actual governing complex and anonymous atomic components keep their bases and authority. Fourteen measured old results are reconciled without changing payloads/IDs: six base-invalid schemas are Invalid and eight valid cases compile/assess successfully. Integer/date routes and legacy decimal-only grammar remain unchanged. REQ-009 remains In Progress; API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](docs/decimal-complex-restriction/README.md).
