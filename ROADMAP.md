@@ -3,6 +3,11 @@
   <h1>Bosak.Schema Roadmap</h1>
   <p>An open schema foundation with staged validation and integration.</p>
 </div>
+## Attribute groups with component-preserving union - 25 November 2026
+
+Batch slice 11 adds closed acyclic named groups and actual attribute-use set union on existing owners. Repeated/shared diamond components deduplicate by identity; distinct same-name uses are Invalid. Required flags, global/group-local declarations, original facts and private compilation contexts remain intact. Cycles are Unsupported rather than Invalid because XSD1.1 permits circular groups. Nine measured old results are reconciled without input/ID changes: six valid group cases, two Invalid duplicate-use schemas and one refined missing-group refusal reason. REQ-009 remains In Progress; API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](docs/attribute-groups/README.md).
+
+
 ## Global attribute declarations and references - 25 November 2026
 
 Batch slice 10 adds closed typed globals and optional/required reference uses on existing attribute owners. Canonical global declaration handles remain shared across uses; each owner keeps its presence constraint and original node origin. Private per-schema context and lookup avoid ambient state or per-use authoritative copies. One measured old malformed ref+name/type case now returns Invalid with unchanged input. Global namespaces, scalar facets, eager unused declarations and capacities are qualified. REQ-009 remains In Progress; public API and signed Core 1.81.17 payloads are unchanged. [Contract and qualification](docs/global-attribute-references/README.md).

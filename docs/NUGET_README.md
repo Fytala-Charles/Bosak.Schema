@@ -1525,4 +1525,31 @@ ReadAttribute(0).Value or ReadAttribute([], "", "price") returns exact Decimal 1
 
 Sixteen global declarations and sixteen attribute uses per owner are bounded; name/ref source limits are256UTF16units. Unused globals are validated. Malformed/empty/unbound ref QNames and illegal ref with name/type/form are Invalid; missing closed references are Unsupported. Global lookup keeps canonical declaration identity, with NotFound for a missing name in a present global catalog; empty-catalog profiles retain their prior Unsupported lookup. No external resolution occurs.
 
-Existing primitive/named scalar attribute types and sequence/all/choice, decimal/date extension and nested owners retain their limits. Attribute-only empty complex owners, integer extension attributes, complex restriction attributes, prohibited uses, anonymous attribute types, groups, defaults/fixed and imports remain separate work. Legacy decimal-only grammar and public/Core APIs are unchanged.
+Existing primitive/named scalar attribute types and sequence/all/choice, decimal/date extension and nested owners retain their limits. Attribute-only empty complex owners, integer extension attributes, complex restriction attributes, prohibited uses, anonymous attribute types, defaults/fixed and imports remain separate work. Legacy decimal-only grammar and public/Core APIs are unchanged.
+
+### Attribute groups
+
+Named attribute groups collect existing local attributes and global references. Closed forward and nested acyclic references are resolved once; each owner receives the set union of the actual attribute-use components. Repeated references to the same group or shared diamond use do not clone components or duplicate facts. Different use components with the same expanded attribute name are Invalid.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Price"><xs:restriction base="xs:decimal">
+    <xs:enumeration value="1.23"/>
+  </xs:restriction></xs:simpleType>
+  <xs:attributeGroup name="OrderAttributes">
+    <xs:attribute name="price" type="Price" use="required"/>
+  </xs:attributeGroup>
+  <xs:element name="order"><xs:complexType>
+    <xs:sequence><xs:element name="amount" type="xs:decimal"/></xs:sequence>
+    <xs:attributeGroup ref="OrderAttributes"/>
+  </xs:complexType></xs:element>
+</xs:schema>
+```
+
+```xml
+<order price="+001.2300"><amount>1</amount></order>
+```
+
+Both facades read exact price 1.23 and preserve original XML and amount indexing. The required flag belongs to the group use. Group-local declarations remain local to their actual definition; global references retain their canonical global declaration.
+
+Limits are sixteen group definitions, sixteen raw attribute/group members and sixteen effective uses after union, with256UTF16name/ref source caps. Unused definitions are validated. Empty groups contribute no uses. Circular groups are permitted by XSD1.1, but fixed-point expansion is outside this bounded profile: cycles return Unsupported, never Invalid solely for circularity. Missing closed groups also return Unsupported. Wildcards, defaultAttributes, imports/redefine/override, annotations/default/fixed/prohibited metadata and previously excluded owner shapes remain separate. No external resolution, Core or public API change.
