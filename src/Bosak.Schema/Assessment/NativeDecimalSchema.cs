@@ -58,6 +58,7 @@
 //                      | Charles Korthout | 1.35   | 25-11-2026     | Compile global attribute catalogs and owner-specific canonical reference uses |
 //                      | Charles Korthout | 1.36   | 25-11-2026     | Apply component-preserving attribute-group set union across admitted owners |
 //                      | Charles Korthout | 1.37   | 25-11-2026     | Admit bounded closed named sequence model groups |
+//                      | Charles Korthout | 1.38   | 25-11-2026     | Preserve imported named simple-type namespaces through private compile metadata |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -103,7 +104,7 @@ internal sealed partial class NativeDecimalSchema
     internal ImmutableArray<NativeDeclaration> AttributeUses { get; private set; } = [];
     internal ImmutableArray<NativeDeclaration> GlobalAttributeDeclarations { get; private set; } = [];
 
-    internal static NativeResult<NativeDecimalSchema> Compile(string schema, NativeNumericLimits limits, CancellationToken cancellationToken = default, int? maxStringCharacters = null)
+    internal static NativeResult<NativeDecimalSchema> Compile(string schema, NativeNumericLimits limits, CancellationToken cancellationToken = default, int? maxStringCharacters = null, IReadOnlyDictionary<int,string>? importedTypeNamespaces = null)
     {
         ArgumentNullException.ThrowIfNull(schema);
         if (limits.MaxDigits <= 0 || limits.MaxScale < 0) throw new ArgumentOutOfRangeException(nameof(limits));
@@ -126,6 +127,15 @@ internal sealed partial class NativeDecimalSchema
             var globals = Elements(root);
             Require(globals.All(e => e.Name == Xs + "element" || e.Name == Xs + "complexType" || e.Name == Xs + "simpleType" || mixedProfile && (e.Name == Xs + "attribute" || e.Name == Xs + "attributeGroup" || e.Name == Xs + "group")),
                 "Only global roots and named complex types are supported.", NativeDecimalUnsupportedReason.DeclarationShape);
+            if (importedTypeNamespaces is not null)
+            {
+                Require(mixedProfile, "Imported type metadata requires the native scalar profile.");
+                foreach (var entry in importedTypeNamespaces)
+                {
+                    Require(entry.Key >= 0 && entry.Key < globals.Count && globals[entry.Key].Name == Xs + "simpleType", "Invalid private imported-type projection.");
+                    globals[entry.Key].AddAnnotation(new NativeImportedTypeNamespace(entry.Value));
+                }
+            }
             var types = globals.Where(e => e.Name == Xs + "complexType" || e.Name == Xs + "simpleType").ToArray();
             var declarations = globals.Where(e => e.Name == Xs + "element").ToArray();
             Require(types.Length <= 16 && declarations.Length <= 16, "Global component ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
@@ -140,12 +150,12 @@ internal sealed partial class NativeDecimalSchema
             var typeNames = new HashSet<XName>();
             foreach (var type in types)
             {
-                Require(typeNames.Add(XName.Get(Name(type, NativeDecimalUnsupportedReason.DeclarationShape), targetNamespace)),
+                Require(typeNames.Add(XName.Get(Name(type, NativeDecimalUnsupportedReason.DeclarationShape), DefinitionNamespace(type, targetNamespace))),
                     "Duplicate named type.", NativeDecimalUnsupportedReason.DeclarationShape);
             }
             // Resolve closed simple-type dependencies eagerly, including forward date bases.
             var simpleDefinitions = types.Where(t => t.Name == Xs + "simpleType")
-                .ToDictionary(t => XName.Get(Name(t), targetNamespace));
+                .ToDictionary(t => XName.Get(Name(t), DefinitionNamespace(t, targetNamespace)));
             Require(!simpleDefinitions.Keys.Any(key => key.Namespace == Xs && KnownBuiltinNames.Contains(key.LocalName)), "Built-in type redeclaration is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
             var resolvingSimple = new HashSet<XName>();
             NativeType ResolveSimple(XName key)
@@ -158,7 +168,7 @@ internal sealed partial class NativeDecimalSchema
                 var restriction = Single(type, "restriction");
                 var dependency = ResolveTypeName(restriction, "base");
                 if (!simple.ContainsKey(dependency) && simpleDefinitions.ContainsKey(dependency)) ResolveSimple(dependency);
-                var restricted = CompileRestriction(type, Name(type), targetNamespace, limits, maxStringCharacters, patternCompilation, simple);
+                var restricted = CompileRestriction(type, Name(type), DefinitionNamespace(type, targetNamespace), limits, maxStringCharacters, patternCompilation, simple);
                 simple.Add(key, restricted);
                 resolvingSimple.Remove(key);
                 return restricted;

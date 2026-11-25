@@ -174,3 +174,5 @@ See the [bounded global element reference guide](docs/global-element-references/
 See the [named sequence group guide](docs/model-groups/README.md) for reusable content models and identity-preserving group references.
 
 Use an [explicit closed schema catalog](docs/closed-includes/README.md) to resolve supported same-namespace includes through either owned facade.
+
+The catalog also supports [bounded imports of named simple-type libraries](docs/simple-type-imports/README.md), with actual namespace and base-type identities.

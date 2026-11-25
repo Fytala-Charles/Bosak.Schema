@@ -1,0 +1,9 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="WordTrue"><xs:restriction base="Either">
+    <xs:pattern value="true"/>
+  </xs:restriction></xs:simpleType>
+  <xs:simpleType name="Either"><xs:restriction base="xs:boolean">
+    <xs:pattern value="(true|1)"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="enabled" type="WordTrue"/>
+</xs:schema>

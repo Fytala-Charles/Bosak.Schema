@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 25-11-2026     | Carry private imported-type namespace metadata in actual native fixture compilation |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -36,10 +37,10 @@ internal sealed class Fixture : IDisposable
     internal readonly SchemaQuerySnapshot? Snapshot;
     internal readonly SchemaQueryLimits Limits;
     internal readonly string Fingerprint;
-    internal Fixture(string schema,string xml,int cache=32,int digits=256,int scale=256,int documents=2)
+    internal Fixture(string schema,string xml,int cache=32,int digits=256,int scale=256,int documents=2,IReadOnlyDictionary<int,string>? importedTypeNamespaces=null)
     {
         Limits=new(documents,cache,1,digits,scale);
-        var compiled=NativeDecimalSchema.Compile(schema,new(256,256),maxStringCharacters:1024);Assert.Equal(NativeOutcome.Valid,compiled.Outcome);
+        var compiled=NativeDecimalSchema.Compile(schema,new(256,256),maxStringCharacters:1024,importedTypeNamespaces:importedTypeNamespaces);Assert.Equal(NativeOutcome.Valid,compiled.Outcome);
         Fingerprint=CaptureFingerprint(compiled.Value!,Limits);
         Provider=new(compiled.Value!,true,Fingerprint);
         var session=SchemaQuerySession.CompileXPath("data($node)",Limits,assessor:Provider);Assert.Equal(SchemaResultKind.Supported,session.Kind);Session=session.Value;Runner=new(Session);

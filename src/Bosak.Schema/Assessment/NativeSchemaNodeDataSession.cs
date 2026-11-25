@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Add explicit closed-catalog include compilation overload |
+//                      | Charles Korthout | 0.3   | 25-11-2026     | Compile closed foreign named simple-type libraries with actual namespace metadata |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -27,7 +28,7 @@ public sealed class NativeSchemaNodeDataSession : IDisposable
     private readonly NativeNodeDataCore core;
     private NativeSchemaNodeDataSession(NativeNodeDataCore core) => this.core = core;
 
-    /// <summary>Compiles matching-context includes from an explicit closed schema-text catalog.</summary>
+    /// <summary>Compiles bounded includes and foreign named simple types from a closed schema-text catalog.</summary>
     /// <param name="rootDocumentUri">Absolute fragment-free identifier of the root catalog document.</param>
     /// <param name="schemaDocuments">Closed schema texts keyed by absolute identifiers; no external resolution occurs.</param>
     /// <param name="options">Required immutable numerical and admission limits.</param>
@@ -42,10 +43,13 @@ public sealed class NativeSchemaNodeDataSession : IDisposable
         ArgumentNullException.ThrowIfNull(rootDocumentUri);
         ArgumentNullException.ThrowIfNull(schemaDocuments);
         ArgumentNullException.ThrowIfNull(options);
-        var assembled = NativeDecimalSchema.AssembleIncludes(rootDocumentUri, schemaDocuments, cancellationToken);
-        return assembled.Outcome == NativeOutcome.Valid
-            ? Create(assembled.Value!, options, cancellationToken)
-            : NativeSchemaResult<NativeSchemaNodeDataSession>.Refused(assembled.Outcome, "SCHEMA", assembled.UnsupportedReason);
+        var assembled = NativeDecimalSchema.AssembleCatalog(rootDocumentUri, schemaDocuments, cancellationToken);
+        if (assembled.Outcome != NativeOutcome.Valid)
+            return NativeSchemaResult<NativeSchemaNodeDataSession>.Refused(assembled.Outcome, "SCHEMA", assembled.UnsupportedReason);
+        var result = NativeNodeDataCore.Create(assembled.Value!.Text, options, cancellationToken, assembled.Value.SimpleTypeNamespaces);
+        return result.Outcome == NativeOutcome.Valid
+            ? NativeSchemaResult<NativeSchemaNodeDataSession>.Success(new(result.Value!))
+            : NativeSchemaResult<NativeSchemaNodeDataSession>.Refused(result.Outcome, "SCHEMA", result.UnsupportedReason);
     }
 
     /// <summary>Compiles the finite scalar schema and opens a separate owned node-data session.</summary>

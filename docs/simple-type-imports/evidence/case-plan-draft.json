@@ -1,0 +1,663 @@
+{
+  "contract": "docs/simple-type-imports/CONTRACT.md",
+  "cases": [
+    {
+      "id": "foreign-decimal",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-enum-invalid",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.24</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "root-namespace",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:root' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r xmlns='urn:root'>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "same-local-distinct",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='2.34'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' type='D'/><xs:element name='b' type='f:D'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r><a>2.34</a><b>1.23</b></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "2.34",
+          "path": [
+            0
+          ]
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            1
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "forward-foreign-base",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='f:E'/></xs:simpleType><xs:simpleType name='E'><xs:restriction base='xs:decimal'/></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "cross-library-base",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:b='urn:base'><xs:import namespace='urn:base' schemaLocation='base.xsd'/><xs:simpleType name='D'><xs:restriction base='b:E'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>",
+        "https://catalog.test/base.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:base'><xs:simpleType name='E'><xs:restriction base='xs:decimal'/></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "default-namespace-binding",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns='urn:base'><xs:import namespace='urn:base' schemaLocation='base.xsd'/><xs:simpleType name='D'><xs:restriction base='E'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>",
+        "https://catalog.test/base.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:base'><xs:simpleType name='E'><xs:restriction base='xs:decimal'/></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "prefix-binding-shadow",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:q='urn:wrong' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:q='http://www.w3.org/2001/XMLSchema' xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='q:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-string",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:string'/></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>  raw  </r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "  raw  ",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-boolean",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:boolean'/></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Boolean",
+          "value": "true",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-integer",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:integer'/></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>18446744073709551616</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Integer",
+          "value": "18446744073709551616",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-date",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:date'/></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>2000-01-02Z</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Date",
+          "value": "2000-01-02Z",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-simple-defaults-differ",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' elementFormDefault='qualified' attributeFormDefault='qualified' xpathDefaultNamespace='urn:other'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-library-include",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:include schemaLocation='parts.xsd'/></xs:schema>",
+        "https://catalog.test/parts.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "duplicate-import-deduplicates",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "legal-import-document-cycle",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:b='urn:base'><xs:import namespace='urn:base' schemaLocation='base.xsd'/><xs:simpleType name='D'><xs:restriction base='b:E'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>",
+        "https://catalog.test/base.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:base'><xs:simpleType name='E'><xs:restriction base='xs:decimal'/></xs:simpleType><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "mismatching-namespace",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:other'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "missing-imported-namespace",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "own-namespace-import",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "no-namespace-import",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "empty-namespace-import",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "relative-namespace-import",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='relative' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "missing-location",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "import-annotation",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'><xs:annotation/></xs:import><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "import-metadata",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd' id='i'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "missing-catalog-document",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-element-refused",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:element name='e' type='xs:decimal'/></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-complex-refused",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:complexType name='C'><xs:sequence><xs:element name='e' type='xs:decimal'/></xs:sequence></xs:complexType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-attribute-refused",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:attribute name='a' type='xs:decimal'/></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-group-refused",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:group name='G'><xs:sequence><xs:element name='e' type='xs:decimal'/></xs:sequence></xs:group></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-attribute-group-refused",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:attributeGroup name='A'><xs:attribute name='a' type='xs:decimal'/></xs:attributeGroup></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "wrong-namespace-revisit",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:import namespace='urn:other' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "foreign-type-cycle",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='f:E'/></xs:simpleType><xs:simpleType name='E'><xs:restriction base='f:D'/></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "unused-invalid-foreign-facet",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'/></xs:simpleType><xs:simpleType name='Bad'><xs:restriction base='xs:boolean'><xs:enumeration value='true'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    }
+  ]
+}
