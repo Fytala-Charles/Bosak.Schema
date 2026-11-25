@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Keep generic refusal probe on excluded date type after integer adoption                   |
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Reconcile measured date outcomes in isolated test copy |
 //                      | Charles Korthout | 0.5   | 24-11-2026     | Adopt qualified bounded native date transport |
+//                      | Charles Korthout | 0.6   | 25-11-2026     | Reconcile measured native calendar outcomes with original stimuli |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -119,7 +120,8 @@ public sealed class NativeSchemaContractTests
         foreach(var t in new[]{typeof(NativeSchemaSession),typeof(NativeSchemaDocument),typeof(NativeScalarValue),typeof(NativeSchemaDiagnostic),typeof(NativeSchemaResult<NativeSchemaDocument>)})Assert.Empty(t.GetConstructors());
         Assert.Equal(1,(int)NativeScalarKind.String);Assert.Equal(2,(int)NativeScalarKind.Decimal);
         var admitted=NativeSchemaSession.Create(Schema.Replace("type='xs:string'","type='xs:date'"),Options());Assert.Equal(NativeSchemaOutcome.Valid,admitted.Outcome);admitted.Value?.Dispose();
-        var result=NativeSchemaSession.Create(Schema.Replace("type='xs:string'","type='xs:time'"),Options());
+        var calendar=NativeSchemaSession.Create(Schema.Replace("type='xs:string'","type='xs:time'"),Options());Assert.Equal(NativeSchemaOutcome.Valid,calendar.Outcome);calendar.Value!.Dispose();
+        var result=NativeSchemaSession.Create(Schema.Replace("type='xs:string'","type='xs:duration'"),Options());
         Assert.Equal(NativeSchemaOutcome.Unsupported,result.Outcome);Assert.Null(result.Value);Assert.False(result.DiagnosticsTruncated);
         var diagnostic=Assert.Single(result.Diagnostics);Assert.Equal(NativeSchemaUnsupportedReason.ValueType,diagnostic.UnsupportedReason);
         Assert.Equal("The input or representation is outside the supported native scalar profile.",diagnostic.Message);Assert.True(diagnostic.Message.Length<=160);

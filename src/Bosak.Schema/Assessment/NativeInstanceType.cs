@@ -19,6 +19,7 @@
 //                      | Charles Korthout | 0.6   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      | Charles Korthout | 0.7   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.8   | 25-11-2026     | Validate scalar element constraints against provided original values |
+//                      | Charles Korthout | 0.9   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -106,7 +107,7 @@ internal sealed partial class NativeDecimalSchema
             if (ReferenceEquals(current, declared)) { derives = true; break; }
         Check(derives, "Instance type does not derive from the declared type.");
         Require(!selected.IsComplex && !declared.IsComplex && selected.IsString == declared.IsString &&
-            selected.IsDate == declared.IsDate && selected.IsBoolean == declared.IsBoolean && selected.IsInteger == declared.IsInteger,
+            (selected.CalendarKind == declared.CalendarKind || selected.CalendarKind == Bosak.XPath.Core.Xdm.XdmExactCalendarKind.DateTimeStamp && declared.CalendarKind == Bosak.XPath.Core.Xdm.XdmExactCalendarKind.DateTime) && selected.IsDate == declared.IsDate && selected.IsBoolean == declared.IsBoolean && selected.IsInteger == declared.IsInteger,
             "Valid type derivation changes the admitted scalar representation.", NativeDecimalUnsupportedReason.ValueType);
         return selected;
     }

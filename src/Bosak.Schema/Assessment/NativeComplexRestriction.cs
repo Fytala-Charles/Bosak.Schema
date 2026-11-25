@@ -22,6 +22,7 @@
 //                      | Charles Korthout | 0.9   | 24-11-2026     | Compile local complex-date patterns with the shared bounded context |
 //                      | Charles Korthout | 0.10   | 24-11-2026     | Refuse complex restrictions over newly enumerated decimal bases pending qualification |
 //                      | Charles Korthout | 0.11   | 25-11-2026     | Adopt native decimal complex enumeration and base-valid declarations |
+//                      | Charles Korthout | 0.12   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -78,6 +79,16 @@ internal sealed partial class NativeDecimalSchema
         var content = baseType.ContentType;
         Require(content is not null && !content.IsComplex && !content.IsString && !content.IsBoolean,
             "Complex base content is outside the decimal profile.", NativeDecimalUnsupportedReason.ValueType);
+        if (content!.CalendarKind is { } calendarKind)
+        {
+            Require(localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty, "Calendar assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+            var characters = maxStringCharacters ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Calendar character context required.", NativeDecimalUnsupportedReason.ValueType);
+            var compilation = patternCompilation ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Calendar pattern context required.", NativeDecimalUnsupportedReason.ValueType);
+            var calendarAtomic = new NativeType(null, false, targetNamespace, calendarKind: calendarKind,
+                calendarFacets: NativeCalendarFacets.Compile(new XElement(restriction.Name, restriction.Attributes(), children), calendarKind, limits, characters, compilation, content.CalendarFacets), derivationBase: content);
+            var calendarGoverning = new NativeType(root.Type.Name, false, targetNamespace, contentType: calendarAtomic, derivationBase: baseType, isComplexRestriction: true);
+            return new NativeDecimalSchema(new NativeDeclaration(root.Name, calendarGoverning, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
+        }
         if (content!.IsDate)
         {
             Require(localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty,

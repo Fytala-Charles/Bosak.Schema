@@ -1,0 +1,76 @@
+// ===========================================================================================================================================================
+// AUTHOR               : Charles Korthout
+// CREATE DATE          : 25 November 2026
+// PURPOSE              : Verifies exact calendar contracts through both public facades.
+// SPECIAL NOTES        : Unit tests verifying correctness of the underlying implementation.
+//
+// COPYRIGHT            : Fytala
+// LICENSE              : LICENSE.md (Apache-2.0)
+// SPDX-License-Identifier: Apache-2.0
+// ===========================================================================================================================================================
+// Change History:      |==================|=======|================|=========================================================================================
+//                      |     Author       |Version|  Date          | Notes                                                                                    |
+//                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
+//                      |==================|=======|================|=========================================================================================
+// ===========================================================================================================================================================
+using Bosak.Schema;
+using Xunit;
+namespace Bosak.Schema.PublicConsumer.Tests;
+/// <summary>Verifies calendar cancellation, detached values and lifetime refusal.</summary>
+public sealed class NativeCalendarLifetimeConsumerTests
+{
+    private static NativeSchemaSessionOptions Options => new(256,256,256,65536,1,256,1,256,256);
+    private static NativeSchemaAssessmentContext Context => new(DateTimeOffset.UnixEpoch,0);
+    /// <summary>Gets the seven lifetime contracts for all calendar types and both facades.</summary>
+    /// <returns>Stable contract IDs, native type and facade.</returns>
+    public static IEnumerable<object[]> Cases()
+    {
+        foreach(int i in Enumerable.Range(91,7)) foreach(string kind in new[]{"dateTime","time","dateTimeStamp"}) foreach(bool data in new[]{false,true}) yield return ["CAL-"+i.ToString("D3"),kind,data];
+    }
+    /// <summary>Exercises the successful operation and its refusal boundary.</summary>
+    /// <param name="id">Contract ID.</param><param name="kind">Native calendar type.</param><param name="data">Original-node facade.</param>
+    [Theory][MemberData(nameof(Cases))]
+    public void Contract(string id,string kind,bool data)
+    {
+        var schema="<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:"+kind+"'/></xs:schema>";
+        var value=(kind=="time"?"":"2000-01-01T")+"12:00:00.123456789Z";var xml="<r>"+value+"</r>";
+        using var cancellation=new CancellationTokenSource();cancellation.Cancel();var token=cancellation.Token;
+        NativeScalarValue detached;
+        if(data)
+        {
+            if(id=="CAL-093")Assert.ThrowsAny<OperationCanceledException>(()=>NativeSchemaNodeDataSession.Create(schema,Options,token));
+            using var session=NativeSchemaNodeDataSession.Create(schema,Options).Value!;
+            if(id=="CAL-093")Assert.ThrowsAny<OperationCanceledException>(()=>session.Assess(xml,Context,token));
+            using var document=session.Assess(xml,Context).Value!;detached=document.ReadElement([]);
+            switch(id)
+            {
+                case "CAL-091": document.Dispose();break;
+                case "CAL-092": Assert.Throws<InvalidOperationException>(()=>detached.DateValue);Assert.Throws<InvalidOperationException>(()=>detached.StringValue);break;
+                case "CAL-094": Assert.ThrowsAny<OperationCanceledException>(()=>document.ReadElement([],token));Assert.ThrowsAny<OperationCanceledException>(()=>document.ExportXml(token));Assert.Equal(value,document.ReadElement([]).CalendarValue.ToInvariantString(256));break;
+                case "CAL-095": document.Dispose();Assert.Throws<ObjectDisposedException>(()=>document.ReadElement([]));Assert.Throws<ObjectDisposedException>(()=>document.ExportXml());break;
+                case "CAL-096": session.Dispose();Assert.Throws<ObjectDisposedException>(()=>document.ReadElement([]));Assert.Throws<ObjectDisposedException>(()=>session.Assess(xml,Context));break;
+                case "CAL-097": Assert.Throws<InvalidOperationException>(()=>session.Assess(xml,Context));document.Dispose();Assert.Equal(NativeSchemaOutcome.Invalid,session.Assess("<r>bad</r>",Context).Outcome);using(var reopened=session.Assess(xml,Context).Value!)Assert.Equal(value,reopened.ReadElement([]).CalendarValue.ToInvariantString(256));break;
+            }
+        }
+        else
+        {
+            if(id=="CAL-093")Assert.ThrowsAny<OperationCanceledException>(()=>NativeSchemaSession.Create(schema,Options,token));
+            using var session=NativeSchemaSession.Create(schema,Options).Value!;
+            if(id=="CAL-093")Assert.ThrowsAny<OperationCanceledException>(()=>session.Assess(xml,Context,token));
+            using var document=session.Assess(xml,Context).Value!;detached=document.ReadRootScalar();
+            switch(id)
+            {
+                case "CAL-091": document.Dispose();break;
+                case "CAL-092": Assert.Throws<InvalidOperationException>(()=>detached.DateValue);Assert.Throws<InvalidOperationException>(()=>detached.StringValue);break;
+                case "CAL-094": Assert.ThrowsAny<OperationCanceledException>(()=>document.ReadRootScalar(token));Assert.ThrowsAny<OperationCanceledException>(()=>document.ExportXml(token));Assert.Equal(value,document.ReadRootScalar().CalendarValue.ToInvariantString(256));break;
+                case "CAL-095": document.Dispose();Assert.Throws<ObjectDisposedException>(()=>document.ReadRootScalar());Assert.Throws<ObjectDisposedException>(()=>document.ExportXml());break;
+                case "CAL-096": session.Dispose();Assert.Throws<ObjectDisposedException>(()=>document.ReadRootScalar());Assert.Throws<ObjectDisposedException>(()=>session.Assess(xml,Context));break;
+                case "CAL-097": Assert.Throws<InvalidOperationException>(()=>session.Assess(xml,Context));document.Dispose();Assert.Equal(NativeSchemaOutcome.Invalid,session.Assess("<r>bad</r>",Context).Outcome);using(var reopened=session.Assess(xml,Context).Value!)Assert.Equal(value,reopened.ReadRootScalar().CalendarValue.ToInvariantString(256));break;
+            }
+        }
+        Assert.Equal(value,detached.CalendarValue.ToInvariantString(256));
+        using var wrong=NativeSchemaSession.Create(schema.Replace("xs:"+kind+"'","xs:string'",StringComparison.Ordinal),Options).Value!;
+        using var text=wrong.Assess("<r>not a calendar</r>",Context).Value!;Assert.Throws<InvalidOperationException>(()=>text.ReadRootScalar().CalendarValue);
+    }
+}

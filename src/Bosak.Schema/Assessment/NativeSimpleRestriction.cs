@@ -35,6 +35,7 @@
 //                      | Charles Korthout | 0.22   | 24-11-2026     | Keep decimal enumeration opt-in while preserving the legacy grammar |
 //                      | Charles Korthout | 0.23   | 24-11-2026     | Admit closed named decimal bases with explicit native inherited-facet validation |
 //                      | Charles Korthout | 0.24   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
+//                      | Charles Korthout | 0.25   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -51,6 +52,9 @@ internal sealed partial class NativeDecimalSchema
         var restriction = Single(definition, "restriction");
         Attributes(restriction, "base");
         var baseName = ResolveTypeName(restriction, "base");
+        if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var calendarBase) && calendarBase.CalendarKind is { } calendarKind)
+            return new NativeType(name, false, namespaceUri, baseName: baseName, derivationBase: calendarBase,
+                calendarKind: calendarKind, calendarFacets: NativeCalendarFacets.Compile(restriction, calendarKind, limits, maxStringCharacters.Value, patternCompilation, calendarBase.CalendarFacets));
         if (maxStringCharacters is not null && baseName == Xs + "date")
         {
             var dateFacets = NativeDateFacets.Compile(restriction, maxStringCharacters.Value, patternCompilation);

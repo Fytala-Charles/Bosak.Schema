@@ -4,7 +4,7 @@
   <p>Apache-2.0 schema integration and staged XSD 1.1 services for .NET.</p>
 </div>
 
-See the [native calendar batch](docs/calendar-100/README.md) for the qualified Core 1.86.0 development baseline and upcoming bounded calendar support. Published Schema beta.1 remains unchanged.
+The development source supports bounded exact `dateTime`, `time` and `dateTimeStamp` validation and scalar reads on Core 1.86.0. See the [calendar guide](docs/calendar-100/GUIDE.md) for capacities, supported facets and examples. Published Schema beta.1 retains its historical scope.
 
 See the [current XSD 1.1 coverage audit](docs/specification-coverage-current/README.md) for implemented profiles, remaining gaps and release availability.
 

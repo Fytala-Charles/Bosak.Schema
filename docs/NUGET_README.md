@@ -2,11 +2,15 @@
 
 # Bosak.Schema
 
-The 0.6 development candidate requires Bosak Core 1.81.17 or later.
+The 0.7 development candidate requires Bosak Core 1.86.0 or later.
 
 Apache-2.0 schema integration and staged XSD 1.1 services for .NET 10. Schema services require no activation, license key or subscription.
 
 The owned, synchronous native decimal-session API was introduced in 0.5.0-beta.1. The 0.6 development line adds detected Unsupported reasons and a bounded namespace-aware decimal profile with optional assertions and reusable global named complex types and direct named decimal restrictions with selected facets. It assesses a finite decimal-only schema profile, reads exact scalar values and exports detached XML. Existing schema compilation, validation and schema-aware XSLT helpers remain available. Complete XSD 1.1 validation is not implemented.
+
+## Exact native calendars (0.7 source)
+
+NativeSchemaSession and NativeSchemaNodeDataSession admit bounded dateTime, time and dateTimeStamp validation and exact scalar reads. NativeScalarValue.CalendarValue returns detached Core exact components; fractional seconds retain their precision and timezone presence. Finite enumeration, ordering, timezone, whitespace and pattern facets use the existing original-node/lifetime contract. The legacy NativeDecimalSession stays decimal-only. See the [consumer guide and runnable example](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/calendar-100/GUIDE.md). Complete XSD 1.1, general PSVI/C45, full regex and default-node augmentation remain outside this source candidate.
 
 ## Install
 
@@ -16,7 +20,7 @@ Select a reviewed version explicitly. To select an available prerelease:
 dotnet add package Bosak.Schema --prerelease
 ```
 
-The package targets `net10.0` and declares minimum version 1.81.2 for Bosak.XPath.Api, Bosak.XPath.Providers, Bosak.Xslt and Bosak.XQuery. Its default package-consumer qualification uses published Core 1.81.2 packages. Current-Core source-consumer qualification is a separate lane; it does not change these package dependencies or promise every future dependency combination.
+The development package targets `net10.0` and declares minimum version 1.86.0 for Bosak.XPath.Api, Bosak.XPath.Providers, Bosak.Xslt and Bosak.XQuery. Source and fresh package-only public qualification use this single signed Core baseline. Published Schema 0.5.0-beta.1 retains its historical 1.81.2 dependency; a newer source candidate is not automatically available from NuGet.
 
 ## Native decimal workflow
 

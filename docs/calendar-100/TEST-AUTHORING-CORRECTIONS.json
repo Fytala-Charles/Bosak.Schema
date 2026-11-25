@@ -1,0 +1,32 @@
+[
+  {
+    "id": "CAL-050-positive",
+    "originalSchema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:pattern value='2000-01' /><xs:pattern value='1999-01' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+    "correctedSchema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:pattern value='2000-01.*' /><xs:pattern value='1999-01.*' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+    "reason": "Complete-string pattern language under XSD Datatypes 4.3.4.4; no production pattern change"
+  },
+  {
+    "id": "CAL-050-edge",
+    "originalSchema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:pattern value='2000-01' /><xs:pattern value='1999-01' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+    "correctedSchema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:pattern value='2000-01.*' /><xs:pattern value='1999-01.*' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+    "reason": "Complete-string pattern language under XSD Datatypes 4.3.4.4; no production pattern change"
+  },
+  {
+    "id": "CAL-057-positive",
+    "originalSchema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:pattern value='2000' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'><xs:pattern value='01-01' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+    "correctedSchema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:pattern value='2000.*' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'><xs:pattern value='[0-9]{4}-01-01T.*' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+    "reason": "Complete-string pattern language under XSD Datatypes 4.3.4.4; no production pattern change"
+  },
+  {
+    "id": "CAL-057-edge",
+    "originalSchema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:pattern value='2000' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'><xs:pattern value='01-01' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+    "correctedSchema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:pattern value='2000.*' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'><xs:pattern value='[0-9]{4}-01-01T.*' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+    "reason": "Complete-string pattern language under XSD Datatypes 4.3.4.4; no production pattern change"
+  },
+  {
+    "id": "CAL-088-positive",
+    "originalSchema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:pattern value='2000' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+    "correctedSchema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:pattern value='2000.*' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+    "reason": "Complete-string pattern language under XSD Datatypes 4.3.4.4; no production pattern change"
+  }
+]

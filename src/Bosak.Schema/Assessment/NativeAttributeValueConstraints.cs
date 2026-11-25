@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Xml.Linq;
@@ -30,6 +31,7 @@ internal sealed partial class NativeDecimalSchema
  }
  private static bool ConstraintIdentical(NativeValueConstraint expected,NativeValueConstraint other)
  {
+  if(expected.Calendar is { } calendar && other.Calendar is { } otherCalendar)return calendar.Equals(otherCalendar);
   if(expected.Date is { } date && other.Date is { } otherDate)return date.Year==otherDate.Year && date.Month==otherDate.Month && date.Day==otherDate.Day && date.HasTimezone==otherDate.HasTimezone && date.TimezoneOffsetMinutes==otherDate.TimezoneOffsetMinutes;
   if(expected.Decimal is { } a && other.Decimal is { } b)return a.Coefficient==b.Coefficient && a.Scale==b.Scale;
   if(expected.Text is { } x && other.Text is { } y)return string.Equals(x,y,StringComparison.Ordinal);

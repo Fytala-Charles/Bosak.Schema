@@ -35,6 +35,8 @@
 //                      | Charles Korthout | 1.13   | 25-11-2026     | Preserve canonical global attribute handles across uses, lookup and original facts |
 //                      | Charles Korthout | 1.14   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 1.15   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
+//                      | Charles Korthout | 1.16   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
+//                      | Charles Korthout | 1.17   | 25-11-2026     | Prove owned calendar derivation and bind an exact guarded comparison fingerprint |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -51,15 +53,18 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     private readonly NativeDecimalSchema schema;
     private readonly bool originalNodeData;
     private readonly string? expectedNodeFingerprint;
+    private readonly string? calendarComparisonFingerprint;
     private readonly Dictionary<object, Component> components = new(ReferenceEqualityComparer.Instance);
     internal Component RootDeclaration { get; }
     internal Component DecimalType { get; }
 
-    internal NativeSchemaProvider(NativeDecimalSchema schema, bool originalNodeData = false, string? expectedNodeFingerprint = null)
+    internal NativeSchemaProvider(NativeDecimalSchema schema, bool originalNodeData = false, string? expectedNodeFingerprint = null, string? calendarComparisonFingerprint = null)
     {
         this.schema = schema;
         this.originalNodeData = originalNodeData;
         this.expectedNodeFingerprint = expectedNodeFingerprint;
+        this.calendarComparisonFingerprint = calendarComparisonFingerprint;
+        if (calendarComparisonFingerprint is not null && originalNodeData) throw new ArgumentException("Calendar comparison and original-node modes are distinct.", nameof(calendarComparisonFingerprint));
         RootDeclaration = Add(schema.Root);
         foreach (var declaration in schema.GlobalAttributeDeclarations) { Add(declaration); Add(declaration.Type); }
         foreach (var plan in schema.Roots)
@@ -116,11 +121,12 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         if (environment.GetType().Assembly != typeof(SchemaQuerySession).Assembly ||
             environment.HostLanguage != QueryHostLanguage.XPath || environment.HostVersion != "3.1" ||
             environment.XdmSpecificationRevision.AbsoluteUri != "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/" ||
-            environment.BehaviorProfile != (originalNodeData ? "bosak-original-node-data-v1" : "bosak-typed-identity-v1") ||
-            environment.DescriptorFormatVersion != (originalNodeData ? "bosak-original-node-data-descriptor-v1" : "bosak-public-typed-identity-descriptor-v1") ||
+            environment.BehaviorProfile != (calendarComparisonFingerprint is not null ? "bosak-typed-calendar-comparison-v1" : originalNodeData ? "bosak-original-node-data-v1" : "bosak-typed-identity-v1") ||
+            environment.DescriptorFormatVersion != (calendarComparisonFingerprint is not null ? "bosak-typed-calendar-comparison-descriptor-v1" : originalNodeData ? "bosak-original-node-data-descriptor-v1" : "bosak-public-typed-identity-descriptor-v1") ||
             string.IsNullOrEmpty(environment.StaticContextFingerprint) ||
             environment.StaticContext.Namespaces.Count != 0 ||
-            originalNodeData && (expectedNodeFingerprint is null || environment.StaticContextFingerprint != expectedNodeFingerprint))
+            originalNodeData && (expectedNodeFingerprint is null || environment.StaticContextFingerprint != expectedNodeFingerprint) ||
+            calendarComparisonFingerprint is not null && calendarComparisonFingerprint != environment.StaticContextFingerprint)
             return NativeCoreResult<ISchemaAssessmentAdvisor>.Unsupported("BSK-NATIVE-ENVIRONMENT");
         return NativeCoreResult<ISchemaAssessmentAdvisor>.Supported(new Advisor(this, environment));
     }
@@ -170,7 +176,14 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     public SchemaResult<bool> IsDerivedFrom(ISchemaComponentHandle derived, ISchemaComponentHandle baseType, CancellationToken cancellationToken)
     {
         Validate(derived, cancellationToken); Validate(baseType, cancellationToken);
-        return NativeCoreResult<bool>.Unsupported("BSK-NATIVE-DERIVATION");
+        var selected = components.FirstOrDefault(pair => ReferenceEquals(pair.Value, derived)).Key as NativeType;
+        var required = components.FirstOrDefault(pair => ReferenceEquals(pair.Value, baseType)).Key as NativeType;
+        if (selected?.CalendarKind is null || required?.CalendarKind is null)
+            return NativeCoreResult<bool>.Unsupported("BSK-NATIVE-DERIVATION");
+        var visited = new HashSet<NativeType>(ReferenceEqualityComparer.Instance);
+        for (NativeType? current = selected; current is not null && visited.Add(current); current = current.DerivationBase)
+            if (ReferenceEquals(current, required)) return NativeCoreResult<bool>.Supported(true);
+        return NativeCoreResult<bool>.Supported(false);
     }
     public SchemaResult<bool> IsAffiliatedWith(ISchemaComponentHandle member, ISchemaComponentHandle head, CancellationToken cancellationToken)
     {
@@ -288,6 +301,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             else if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
             else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, state.GoverningType.MixedContent ? XdmValue.FromString(text, "untypedAtomic") : XdmValue.FromString(text), actualType);
             else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical), actualType);
+            else if (state.CalendarValue is { } calendar) value = new IssuedValue(input, origin, type, XdmValue.FromExactCalendar(calendar), actualType);
             else if (state.DateValue is { } date) value = new IssuedValue(input, origin, type, XdmValue.FromDate(date, date.HasTimezone), actualType);
             else if (state.IntegerValue is { } integer) value = new IssuedValue(input, origin, type, XdmValue.FromInteger(integer), actualType);
         }
