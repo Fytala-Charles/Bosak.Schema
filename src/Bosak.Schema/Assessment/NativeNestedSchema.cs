@@ -33,6 +33,7 @@
 //                      | Charles Korthout | 0.20   | 24-11-2026     | Preserve caller character capacity for nested date restrictions |
 //                      | Charles Korthout | 0.21   | 24-11-2026     | Share date/string pattern compilation across nested date restrictions |
 //                      | Charles Korthout | 0.22   | 25-11-2026     | Recognize admitted attribute-group references before owner assertions |
+//                      | Charles Korthout | 0.23   | 25-11-2026     | Preserve nested structural assertion exclusion for attribute groups |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -134,7 +135,7 @@ internal sealed partial class NativeDecimalSchema
                 Require(container?.ChoiceMinimum is null, "Nested choice containers are outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
                 children.Add(new NativeDeclaration(name, type, min, max, ns) { Container = container });
             }
-            Require(!members.Any(a => a.Name == Xs + "assert") || !members.Any(a => a.Name == Xs + "attribute"), "Structural assertions with application attributes are excluded.", NativeDecimalUnsupportedReason.Attributes);
+            Require(!members.Any(a => a.Name == Xs + "assert") || !members.Any(IsAttributeUseMember), "Structural assertions with application attributes are excluded.", NativeDecimalUnsupportedReason.Attributes);
             var attributes = CompileAttributes(members.Skip(1).TakeWhile(IsAttributeUseMember).ToArray(), targetNamespace, attributeForm,
                 decimalType, stringType, booleanType, integerType, simple, cancellationToken);
             var plan = new NativeDecimalSchema(root, children.ToImmutable(), [], limits) { AttributeUses = attributes, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(members.Skip(1).SkipWhile(IsAttributeUseMember), targetNamespace, assertionNamespace, cancellationToken) };

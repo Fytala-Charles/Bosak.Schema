@@ -1553,3 +1553,5 @@ Named attribute groups collect existing local attributes and global references. 
 Both facades read exact price 1.23 and preserve original XML and amount indexing. The required flag belongs to the group use. Group-local declarations remain local to their actual definition; global references retain their canonical global declaration.
 
 Limits are sixteen group definitions, sixteen raw attribute/group members and sixteen effective uses after union, with256UTF16name/ref source caps. Unused definitions are validated. Empty groups contribute no uses. Circular groups are permitted by XSD1.1, but fixed-point expansion is outside this bounded profile: cycles return Unsupported, never Invalid solely for circularity. Missing closed groups also return Unsupported. Wildcards, defaultAttributes, imports/redefine/override, annotations/default/fixed/prohibited metadata and previously excluded owner shapes remain separate. No external resolution, Core or public API change.
+
+Structural assertions combined with application attributes or attribute-group members remain Unsupported in the bounded nested profile, matching root/all/choice owner boundaries.

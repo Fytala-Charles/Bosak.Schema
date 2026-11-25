@@ -1,0 +1,18 @@
+{
+  "blockingFindings": [],
+  "resolvedFindings": [
+    {
+      "finding": "Nested structural-assertion guard inspected only direct attributes, allowing a new attribute-group member.",
+      "evidence": "boundary-discriminating-results: six compile-Valid outcomes for supported namespace-uri(.) comparison.",
+      "resolution": "Use IsAttributeUseMember in the existing nested guard; preserve the bounded Unsupported outcome."
+    },
+    {
+      "finding": "Initial count(v)=1 probe was outside structural grammar and inconclusive.",
+      "resolution": "Retained initial passing probe; used an admitted namespace-uri(.) assertion to isolate the missing guard."
+    }
+  ],
+  "originalPacketPreserved": "docs/attribute-groups/PACKET-SHA256.json",
+  "fullSourceReviewed": 7966,
+  "packageReviewed": 6550,
+  "apiCorePublicationChange": false
+}

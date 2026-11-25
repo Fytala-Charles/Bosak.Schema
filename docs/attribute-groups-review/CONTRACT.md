@@ -1,0 +1,5 @@
+# Attribute-group review correction
+
+25 November 2026; PR59 reviewed candidate, original base9f48b79521c2da64eecd1f85f3cd1b6d1b21d48b. Preserve the original sealed attribute-groups packet. This corrects a missed existing profile guard within slice11; it does not expand specification adoption. The original ADOPTION.json normative bodies/sections and intentional deviations remain authoritative.
+
+Nested structural assertions remain Unsupported when an application attribute/group member is present, matching existing root/all/choice boundaries. The new group predicate must be used by the nested guard. First probe count(v)=1 was inconclusive because it is outside the structural grammar. A supported namespace-uri(.) comparison reproduced six compile-Valid outcomes instead of expected Unsupported on both facades/three contexts. Record the correction before product edit; keep all original55group payloads and add this single discriminating case. Requalify full source/package/native/examples/API/corpus/retained/signature/supplemental/docs; original packet, initial package and all failure receipts remain immutable. No API/Core/publication or new batch slice.
