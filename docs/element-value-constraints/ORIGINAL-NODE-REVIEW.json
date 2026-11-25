@@ -1,0 +1,8 @@
+{
+  "reviewRevision": "495d60906946ec9333c652077a566161a03790fd",
+  "file": "src/Bosak.Schema/Assessment/NativeSessionNode.cs",
+  "sha256": "2fa04026283e37bc3179ed24ee1cdd8b06533d5acbc78173438154abf2bea83d",
+  "finding": "StringValue can use NormalizedStringValue facts, but Children and Attributes still project raw original nodes. Setting only defaulted string/typed values would omit required XDM constructed text/defaulted attribute nodes.",
+  "normativeSource": "ADOPTION.json XDM31 section6.2.4 / PSVI construction and Structures3.3.5.5",
+  "decision": "Refuse default/fixed application to empty present elements in this bounded slice; retain provided-content validation."
+}

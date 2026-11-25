@@ -18,6 +18,7 @@
 //                      | Charles Korthout | 0.5   | 24-11-2026     | Probe revised bounded date transport in isolated source copy |
 //                      | Charles Korthout | 0.6   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      | Charles Korthout | 0.7   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
+//                      | Charles Korthout | 0.8   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -114,7 +115,9 @@ internal sealed partial class NativeDecimalSchema
     {
         var selected = ResolveInstanceType(element, declaration.Type);
         if (NilledState(element, declaration, selected) is { } nilled) return nilled;
+        RequireProvidedElementValue(element, declaration);
         var governing = new NativeDeclaration(declaration.Name, selected, declaration.MinOccurs, declaration.MaxOccurs, declaration.NamespaceUri);
-        return AssessScalar(element.Value, governing, patternBudget) with { Declaration = declaration, EffectiveType = selected };
+        var state = AssessScalar(element.Value, governing, patternBudget) with { Declaration = declaration, EffectiveType = selected };
+        CheckFixedValue(declaration, state); return state;
     }
 }

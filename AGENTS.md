@@ -1,5 +1,10 @@
 # Bosak.Schema — Agent Guide
 
+## Provided element default/fixed constraints - 25 November 2026
+
+Batch slice 17 admits default/fixed metadata on existing simple element declarations, validates literals against complete actual types/facets and compares provided fixed values with exact family equality. Original provided values and XML remain unchanged; default metadata does not replace provided content. Empty-present default/fixed application remains Unsupported pending augmented XDM text/provenance; optional absent elements remain absent. Nil suppresses default while fixed forbids nil. Complex constraints and reference overrides remain excluded. REQ-009 remains In Progress; API55types/413rows and signed Core1.81.17 are unchanged. [Contract and qualification](docs/element-value-constraints/README.md).
+
+
 ## Simple nillability and empty typed values - 25 November 2026
 
 Batch slice 16 adds nillability on existing simple-valued element declarations with actual Core IsNilled facts and supported zero-atomic typed values. Any xsi:nil attribute on a nonnillable declaration is Invalid, including false. True nil requires no text/element children; complex nillability and assertion+nillability combinations remain Unsupported. Detached Empty=6, scalar IsRootNilled and node-data IsNilled(path) add three reviewed API rows. Opt-in scalar reads share captured original-node atomization; legacy decimal identity and FOTY0012 boundaries remain. REQ-009 remains In Progress; Core1.81.17 is unchanged. [Contract and transport review](docs/simple-nillability/README.md).

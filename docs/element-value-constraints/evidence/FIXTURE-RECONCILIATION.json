@@ -1,0 +1,34 @@
+{
+  "id": "NS-056",
+  "old": {
+    "id": "NS-056",
+    "label": "default scalar",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\" ><xs:complexType><xs:sequence><xs:element name=\"v\" default=\"1\" type=\"xs:decimal\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><a><v>12.50</v></a></r>",
+    "expectedCompile": "Unsupported",
+    "expectedAssessment": "Valid",
+    "values": [
+      "ABC-0001",
+      "2",
+      "12.5",
+      "XYZ-0002",
+      "1",
+      "3.75",
+      "false"
+    ],
+    "attributes": 0
+  },
+  "new": {
+    "id": "NS-056",
+    "label": "default scalar",
+    "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\" ><xs:complexType><xs:sequence><xs:element name=\"v\" default=\"1\" type=\"xs:decimal\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+    "instance": "<r><a><v>12.50</v></a></r>",
+    "expectedCompile": "Valid",
+    "expectedAssessment": "Valid",
+    "values": [
+      "12.5"
+    ],
+    "attributes": 0
+  },
+  "originalSchemaInstanceIdPreserved": true
+}

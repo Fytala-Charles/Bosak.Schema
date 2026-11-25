@@ -37,6 +37,7 @@
 //                      | Charles Korthout | 0.24   | 25-11-2026     | Resolve cached closed global elements with canonical particle uses and cycle budgets |
 //                      | Charles Korthout | 0.25   | 25-11-2026     | Share actual particles across closed named sequence groups |
 //                      | Charles Korthout | 0.26   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
+//                      | Charles Korthout | 0.27   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -91,11 +92,12 @@ internal sealed partial class NativeDecimalSchema
             if (roots.TryGetValue(key, out var existing)) return existing;
             Require(elementDefinitions.TryGetValue(key, out var element), "Unresolved closed global element.", NativeDecimalUnsupportedReason.DeclarationShape);
             Require(visitingElements.Add(key), "Recursive global element graph is outside the finite profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-            Attributes(element!, "name", "type", "nillable");
+            Attributes(element!, "name", "type", "nillable", "default", "fixed");
             var name = Name(element!);
             NativeDecimalSchema plan;
             var scalarRoot = TryCompileSimpleRoot(element!, targetNamespace, decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits);
             Require(scalarRoot is not null || !ReadNillable(element!), "Complex nillability is outside the simple-valued profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+            Require(scalarRoot is not null || !HasValueConstraint(element!), "Complex value constraints are outside the provided-content profile.", NativeDecimalUnsupportedReason.DeclarationShape);
             if (scalarRoot is not null) plan = scalarRoot;
             else if (element!.Attribute("type") is not null)
             {
@@ -171,7 +173,7 @@ internal sealed partial class NativeDecimalSchema
                     Require(names.Add(reference.ExpandedName), "Duplicate expanded sequence particle names are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
                     compilingParticles.Remove(local); particles.Add(local, reference); children.Add(reference); continue;
                 }
-                Attributes(local, "name", "type", "minOccurs", "maxOccurs", "form", "nillable");
+                Attributes(local, "name", "type", "minOccurs", "maxOccurs", "form", "nillable", "default", "fixed");
                 var name = Name(local);
                 var ns = Form(local, "form", defaultForm) == "qualified" ? targetNamespace : "";
                 Require(names.Add(XName.Get(name, ns)), "Duplicate expanded local name.", NativeDecimalUnsupportedReason.DeclarationShape);

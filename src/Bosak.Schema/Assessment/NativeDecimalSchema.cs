@@ -60,6 +60,7 @@
 //                      | Charles Korthout | 1.37   | 25-11-2026     | Admit bounded closed named sequence model groups |
 //                      | Charles Korthout | 1.38   | 25-11-2026     | Preserve imported named simple-type namespaces through private compile metadata |
 //                      | Charles Korthout | 1.39   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
+//                      | Charles Korthout | 1.40   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -118,6 +119,7 @@ internal sealed partial class NativeDecimalSchema
             var root = document.Root!;
             Require(root.Name == Xs + "schema", "Schema root or namespace is unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
             var mixedProfile = maxStringCharacters is not null;
+            if (mixedProfile) root.AddAnnotation(new NativeValueConstraintCompilation(limits, maxStringCharacters!.Value, cancellationToken));
             if (mixedProfile) Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault", "attributeFormDefault");
             else Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault");
             var attributeForm = mixedProfile ? Form(root, "attributeFormDefault", "unqualified") : "unqualified";
@@ -215,13 +217,14 @@ internal sealed partial class NativeDecimalSchema
             foreach (var declaration in declarations)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                if (mixedProfile) Attributes(declaration, "name", "type", "nillable"); else Attributes(declaration, "name", "type");
+                if (mixedProfile) Attributes(declaration, "name", "type", "nillable", "default", "fixed"); else Attributes(declaration, "name", "type");
                 var name = Name(declaration);
                 var key = XName.Get(name, targetNamespace);
                 Require(!compiled.ContainsKey(key), "Duplicate root declaration.", NativeDecimalUnsupportedReason.DeclarationShape);
                 NativeDecimalSchema plan;
                 var scalarRoot = TryCompileSimpleRoot(declaration, targetNamespace, decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits);
                 Require(scalarRoot is not null || !ReadNillable(declaration), "Complex nillability is outside the simple-valued profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+                Require(scalarRoot is not null || !HasValueConstraint(declaration), "Complex value constraints are outside the provided-content profile.", NativeDecimalUnsupportedReason.DeclarationShape);
                 if (scalarRoot is not null) plan = scalarRoot;
                 else if (declaration.Attribute("type") is not null)
                 {
@@ -303,7 +306,7 @@ internal sealed partial class NativeDecimalSchema
         {
             cancellationToken.ThrowIfCancellationRequested();
             Require(declaration.Name == Xs + "element", "Only local decimal elements are supported.", NativeDecimalUnsupportedReason.DeclarationShape);
-            if (stringType is not null) Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form", "nillable"); else Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form");
+            if (stringType is not null) Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form", "nillable", "default", "fixed"); else Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form");
             var inline = Elements(declaration);
             var name = Name(declaration);
             var namespaceUri = Form(declaration, "form", defaultForm) == "qualified" ? targetNamespace : "";
@@ -835,6 +838,7 @@ internal sealed class NativeDeclaration(string name, NativeType type, int minOcc
     internal XName ExpandedName { get; } = XName.Get(name, namespaceUri);
     internal NativeType Type { get; } = type;
     internal bool IsNillable { get; init; }
+    internal NativeValueConstraint? ValueConstraint { get; init; }
     internal int MinOccurs { get; } = minOccurs;
     internal int MaxOccurs { get; } = maxOccurs;
 }

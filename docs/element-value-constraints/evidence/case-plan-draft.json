@@ -1,0 +1,795 @@
+{
+  "contract": "docs/element-value-constraints/CONTRACT.md",
+  "cases": [
+    {
+      "id": "fixed-exact",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' fixed='1.23' /></xs:schema>",
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "fixed-different",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' fixed='1.23' /></xs:schema>",
+      "instance": "<r>1.24</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "default-keeps-provided",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' default='1.23' /></xs:schema>",
+      "instance": "<r>2.34</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "2.34",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "signed-zero",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' fixed='-0.00' /></xs:schema>",
+      "instance": "<r>+000</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "0",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "beyond-decimal-precision",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' fixed='123456789012345678901234567890.123400' /></xs:schema>",
+      "instance": "<r>123456789012345678901234567890.1234</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "123456789012345678901234567890.1234",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "default-empty-augmentation-refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' default='1.23' /></xs:schema>",
+      "instance": "<r/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "fixed-empty-augmentation-refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' fixed='1.23' /></xs:schema>",
+      "instance": "<r/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "string-empty-literal-needs-augmentation",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:string' fixed='' /></xs:schema>",
+      "instance": "<r/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "default-empty-present-whitespace-invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' default='1.23' /></xs:schema>",
+      "instance": "<r> </r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "default-invalid-literal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' default='x' /></xs:schema>",
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "fixed-invalid-literal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' fixed='x' /></xs:schema>",
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "mutually-exclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' default='1.23' fixed='1.23' /></xs:schema>",
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "literal-raw-256",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:string' default='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' /></xs:schema>",
+      "instance": "<r>provided</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "provided",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "literal-raw-257",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:string' default='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' /></xs:schema>",
+      "instance": "<r>provided</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "provided",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "integer-value-equality",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:integer' fixed='+00042' /></xs:schema>",
+      "instance": "<r>42</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Integer",
+          "value": "42",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "integer-not-equal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:integer' fixed='42' /></xs:schema>",
+      "instance": "<r>43</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "boolean-value-equality",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:boolean' fixed='true' /></xs:schema>",
+      "instance": "<r>1</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Boolean",
+          "value": "true",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "boolean-not-equal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:boolean' fixed='false' /></xs:schema>",
+      "instance": "<r>1</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "string-preserve-equal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:string' fixed=' raw ' /></xs:schema>",
+      "instance": "<r> raw </r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": " raw ",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "string-preserve-not-equal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:string' fixed='raw' /></xs:schema>",
+      "instance": "<r> raw </r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "date-zone-equality",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:date' fixed='2000-01-02Z' /></xs:schema>",
+      "instance": "<r>2000-01-02+00:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Date",
+          "value": "2000-01-02+00:00",
+          "path": [],
+          "nilled": false,
+          "date": {
+            "year": 2000,
+            "month": 1,
+            "day": 2,
+            "timezone": 0
+          }
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "date-offset-representation",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:date' fixed='2000-01-02+14:00' /></xs:schema>",
+      "instance": "<r>2000-01-01-10:00</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Date",
+          "value": "2000-01-01-10:00",
+          "path": [],
+          "nilled": false,
+          "date": {
+            "year": 2000,
+            "month": 1,
+            "day": 1,
+            "timezone": -600
+          }
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "date-presence-not-equal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:date' fixed='2000-01-02Z' /></xs:schema>",
+      "instance": "<r>2000-01-02</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "complete-facet-metadata-invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D' fixed='1.24' /></xs:schema>",
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "named-fixed-valid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D' fixed='1.23' /></xs:schema>",
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "pattern-invalid-default",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='S'><xs:restriction base='xs:string'><xs:pattern value='a+'/></xs:restriction></xs:simpleType><xs:element name='r' type='S' default='b' /></xs:schema>",
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "nil-default-suppressed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' default='1.23' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nil-fixed-invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' fixed='1.23' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "nil-false-fixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' fixed='1.23' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='false'>1.23</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "sequence-fixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' fixed='1.23'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1.2300</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "all-fixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:decimal' fixed='1.23'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1.2300</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "choice-fixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:decimal' fixed='1.23'/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1.2300</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "optional-absent-no-synthesis",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' default='1.23' minOccurs='0'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "required-missing-invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' default='1.23'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "global-reference-fixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='v'/></xs:sequence></xs:complexType></xs:element><xs:element name='v' type='xs:decimal' fixed='1.23'/></xs:schema>",
+      "instance": "<r><v>1.2300</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "global-reference-invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='v'/></xs:sequence></xs:complexType></xs:element><xs:element name='v' type='xs:decimal' fixed='1.23'/></xs:schema>",
+      "instance": "<r><v>1.24</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "group-fixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:group ref='G'/></xs:complexType></xs:element><xs:group name='G'><xs:sequence><xs:element name='v' type='xs:decimal' fixed='1.23'/></xs:sequence></xs:group></xs:schema>",
+      "instance": "<r><v>1.2300</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "nested-fixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='box'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' fixed='1.23'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><box><v>1.2300</v></box></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0,
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "complex-default-refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' default='1.23'><xs:complexType><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "complex-fixed-refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' fixed='1.23'><xs:complexType><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "unused-invalid-fixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal'/><xs:element name='unused' type='xs:decimal' fixed='bad'/></xs:schema>",
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "selected-type-first",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='xs:decimal' fixed='2.34' /></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:type='D'>2.34</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "imported-type-fixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' fixed='1.23' /></xs:schema>",
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0,
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D' fixed='1.23'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "rootUri": "https://catalog.test/root.xsd"
+    }
+  ]
+}
