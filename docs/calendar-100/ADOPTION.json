@@ -1,0 +1,57 @@
+{
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.3.4 element validity and actual type",
+        "3.4.4 complex type validation and typed assessment"
+      ]
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "3.3.7 dateTime value and lexical spaces",
+        "3.3.8 time value and lexical spaces",
+        "3.4.28 dateTimeStamp",
+        "D.2 date/time operations"
+      ]
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3.1.2 typed-value determination",
+        "6.2 element typed-value and type annotation"
+      ]
+    }
+  ],
+  "adoptedUtc": "2026-11-25T18:53:54.516324+00:00",
+  "adoption": "Owner-authorized bounded native calendar implementation; recorded before semantic source changes",
+  "sections": [
+    "Datatypes 3.3.7 dateTime",
+    "3.3.8 time",
+    "3.4.28 dateTimeStamp",
+    "4.3 constraining facets including pattern, enumeration, whiteSpace, bounds and explicitTimezone",
+    "D.2 calendar operations",
+    "Structures 3.3.4, 3.4.4 actual typed assessment",
+    "XDM 3.3.1.2 and 6.2 typed value/annotation"
+  ],
+  "deviations": [
+    "Finite existing native schema graph and scalar-placement bounds",
+    "Raw calendar lexical capacity 256 UTF-16 characters and explicit receiving digit/scale capacities before normalization",
+    "Astronomical years exclude Int64.MinValue and rollover beyond Int64.MaxValue",
+    "Existing bounded pattern grammar, not full XSD regex",
+    "No arbitrary XPath assertions, default-node augmentation, list/union or duration/fragment admission",
+    "No full PSVI/C45 or complete XSD conformance claim"
+  ],
+  "corePackage": "1.86.0",
+  "coreSource": "2d353912954f03caa44ba2d6e96a8a6224a077d5"
+}

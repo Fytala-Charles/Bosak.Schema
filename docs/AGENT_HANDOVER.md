@@ -1,3 +1,7 @@
+## Calendar batch: signed Core 1.86.0 baseline - 25 November 2026
+
+The approved 100-contract [calendar batch](calendar-100/README.md) first qualifies signed Core 1.86.0: all 10,248 source cases and 8,778 overlapping package-only public cases pass; all nine resolved Core DLLs match the verified signed publication. Development dependencies now select one Core baseline, 1.86.0. Existing calendar refusals and public APIs are unchanged at this checkpoint. Historical dossiers, the published beta.1 and its release controller remain unchanged. Ninety native calendar contracts remain planned; no Schema package publication.
+
 ## Current XSD 1.1 coverage audit - 25 November 2026
 
 The [current audit](specification-coverage-current/README.md) reconciles 24 areas against qualified source revisions, normative section references and hashed evidence. It distinguishes bounded native support, legacy descriptors, explicit refusals and unpublished Core prerequisites. Selected expanded sample: 19 matches / 110 Unsupported / zero mismatches or harness errors; no conformance percentage. Schema native calendars await signed Core availability and separate adoption. The 19 November matrix remains historical and unchanged.

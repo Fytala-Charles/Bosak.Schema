@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 17-11-2026     | Qualify compiler-owned snapshots without changing caller-created record compatibility      |
 //                      | Charles Korthout | 0.4   | 17-11-2026     | Qualify compile-diagnostic preconditions and assertion-only legacy success                  |
 //                      | Charles Korthout | 0.5   | 24-11-2026     | Qualify the adopted Core 1.81.17 development baseline                                      |
+//                      | Charles Korthout | 0.6   | 25-11-2026     | Qualify signed Core 1.86.0 development baseline |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -223,7 +224,7 @@ public sealed class NativeDecimalConsumerTests
         Assert.All(typeof(NativeDecimalSessionOptions).GetProperties(), property => Assert.Null(property.SetMethod));
         Assert.All(typeof(NativeDecimalAssessmentContext).GetProperties(), property => Assert.Null(property.SetMethod));
         Assert.DoesNotContain(schemaAssembly.GetExportedTypes(), type => type.Name.Contains("NativeSchemaProvider", StringComparison.Ordinal));
-        Assert.Equal(new Version(1, 81, 17, 0), typeof(XdmExactDecimal).Assembly.GetName().Version);
+        Assert.Equal(new Version(1, 86, 0, 0), typeof(XdmExactDecimal).Assembly.GetName().Version);
     }
 
     /// <summary>Checks the opt-in resolver returns detached read-only schema bytes outside friend access.</summary>
