@@ -1,0 +1,23 @@
+{
+  "blockingFindings": [],
+  "reviewedProperties": [
+    "Explicit owned catalog; no implicit resolver/network/file/DTD",
+    "Canonical URI document deduplication and legal include cycles",
+    "Matching namespace/context checks before private assembly",
+    "Source namespace bindings retained per component",
+    "Exactly two reviewed API overloads, no removal/type addition",
+    "Original instances, declaration authority and failure facts retained"
+  ],
+  "resolvedFindings": [
+    {
+      "finding": "Raw ##defaultNamespace equality can conceal different resolved namespaces.",
+      "resolution": "Compare effective AssertionNamespace results; qualify actual mismatch refusal."
+    },
+    {
+      "finding": "One authored no-namespace ##targetNamespace mismatch case expected Unsupported although both effective contexts are empty.",
+      "resolution": "Correct only the new proposed result to Valid/Valid, retaining its original input/ID and initial six failures."
+    }
+  ],
+  "publicApiChange": "Two additive Create overloads listed in EXPECTED-API.json; preserve all previous rows/types.",
+  "corePublicationChange": false
+}

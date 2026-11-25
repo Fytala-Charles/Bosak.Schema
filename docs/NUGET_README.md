@@ -1593,3 +1593,44 @@ Closed named sequence groups reuse actual local declarations across owners. Grou
 ```
 
 Both facades read exact Decimal values 1.23 and 2.34 using scalar indexes or physical element paths. Original XML remains unchanged.
+
+### Closed schema includes
+
+Both facades offer `Create(rootDocumentUri, schemaDocuments, options)`. Supply a closed `IReadOnlyDictionary<string,string>` of absolute URI identifiers and schema text. Relative includes use only that catalog. Matching target namespaces and effective form/assertion defaults are required; chameleon conversion and imports remain outside the profile. The existing single-string overload has no resolver.
+
+Root schema (`https://schemas.example/root.xsd`):
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="types.xsd"/>
+  <xs:element name="price" type="Price"/>
+</xs:schema>
+```
+
+Included schema (`https://schemas.example/types.xsd`):
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Price"><xs:restriction base="xs:decimal">
+    <xs:enumeration value="1.23"/>
+  </xs:restriction></xs:simpleType>
+</xs:schema>
+```
+
+Instance:
+
+```xml
+<price>+001.2300</price>
+```
+
+```csharp
+var schemaDocuments = new Dictionary<string, string>
+{
+    ["https://schemas.example/root.xsd"] = rootSchema,
+    ["https://schemas.example/types.xsd"] = includedSchema
+};
+using var session = NativeSchemaSession.Create(
+    "https://schemas.example/root.xsd", schemaDocuments, options).Value!;
+```
+
+ReadRootScalar returns exact Decimal 1.23. The node-data facade uses the same catalog overload and `ReadElement([])`. Original XML is preserved; catalog changes after creation do not affect the compiled session. Source URI provenance is not exposed as a new public fact.

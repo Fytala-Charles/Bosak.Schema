@@ -19,6 +19,7 @@
 //                      | Charles Korthout | 0.6   | 20-11-2026     | Document bounded nested element-only sequences with existing scalar reads                |
 //                      | Charles Korthout | 0.7   | 20-11-2026     | Document nested container attributes and preserved root/scalar access semantics          |
 //                      | Charles Korthout | 0.8   | 20-11-2026     | Document decimal simple content on root and nested scalar-bearing complex elements       |
+//                      | Charles Korthout | 0.9   | 25-11-2026     | Add explicit closed-catalog include compilation overload |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -32,6 +33,27 @@ public sealed class NativeSchemaSession : IDisposable
 {
     private readonly NativeDecimalSessionCore core;
     private NativeSchemaSession(NativeDecimalSessionCore core) => this.core = core;
+
+    /// <summary>Compiles matching-context includes from an explicit closed schema-text catalog.</summary>
+    /// <param name="rootDocumentUri">Absolute fragment-free identifier of the root catalog document.</param>
+    /// <param name="schemaDocuments">Closed schema texts keyed by absolute identifiers; no external resolution occurs.</param>
+    /// <param name="options">Required immutable numerical and admission limits.</param>
+    /// <param name="cancellationToken">Cancellation checked during catalog copying, assembly and compilation.</param>
+    /// <returns>An owned session only for Valid; other outcomes publish no session.</returns>
+    /// <exception cref="ArgumentNullException">An argument or catalog text is null.</exception>
+    /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
+    public static NativeSchemaResult<NativeSchemaSession> Create(string rootDocumentUri,
+        IReadOnlyDictionary<string,string> schemaDocuments, NativeSchemaSessionOptions options,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(rootDocumentUri);
+        ArgumentNullException.ThrowIfNull(schemaDocuments);
+        ArgumentNullException.ThrowIfNull(options);
+        var assembled = NativeDecimalSchema.AssembleIncludes(rootDocumentUri, schemaDocuments, cancellationToken);
+        return assembled.Outcome == NativeOutcome.Valid
+            ? Create(assembled.Value!, options, cancellationToken)
+            : NativeSchemaResult<NativeSchemaSession>.Refused(assembled.Outcome, "SCHEMA", assembled.UnsupportedReason);
+    }
 
     /// <summary>Compiles the finite scalar schema and opens an owned scalar session.</summary>
     /// <param name="schema">Complete XML schema text; the finite profile limits it to 32 KiB UTF-8.</param>
