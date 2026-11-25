@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Reconcile measured date outcomes in isolated test copy |
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      | Charles Korthout | 0.5   | 25-11-2026     | Verify admitted nil metadata and distinct supported empty typed sequences |
+//                      | Charles Korthout | 0.6   | 25-11-2026     | Verify provided default/fixed values and empty augmentation refusal |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -81,7 +82,7 @@ public sealed class NativeSimpleRootBoundaryCoreTests
     /// <param name="attribute">The attribute control input.</param>
     [Theory][InlineData("default='abc'")][InlineData("fixed='abc'")][InlineData("nillable='true'")]
     public void ExcludedDeclarationAttributes(string attribute)
-    {var result=NativeSchemaSession.Create(S($"<xs:element name='r' type='xs:string' {attribute}/>"),Options);if(attribute.StartsWith("nillable",StringComparison.Ordinal)){Assert.Equal(NativeSchemaOutcome.Valid,result.Outcome);using var session=result.Value!;using var document=session.Assess("<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/>",Context).Value!;Assert.True(document.IsRootNilled);Assert.Equal(NativeScalarKind.Empty,document.ReadRootScalar().Kind);}else{Assert.Equal(NativeSchemaOutcome.Unsupported,result.Outcome);Assert.Null(result.Value);}}
+    {var result=NativeSchemaSession.Create(S($"<xs:element name='r' type='xs:string' {attribute}/>"),Options);if(attribute.StartsWith("nillable",StringComparison.Ordinal)){Assert.Equal(NativeSchemaOutcome.Valid,result.Outcome);using var session=result.Value!;using var document=session.Assess("<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/>",Context).Value!;Assert.True(document.IsRootNilled);Assert.Equal(NativeScalarKind.Empty,document.ReadRootScalar().Kind);}else{Assert.Equal(NativeSchemaOutcome.Valid,result.Outcome);using var session=result.Value!;using(var document=session.Assess("<r>abc</r>",Context).Value!){Assert.Equal("abc",document.ReadRootScalar().StringValue);Assert.False(document.IsRootNilled);}var other=session.Assess("<r>other</r>",Context);Assert.Equal(attribute.StartsWith("default",StringComparison.Ordinal)?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Invalid,other.Outcome);using(other.Value){if(other.Value is { } value)Assert.Equal("other",value.ReadRootScalar().StringValue);}var empty=session.Assess("<r/>",Context);Assert.Equal(NativeSchemaOutcome.Unsupported,empty.Outcome);Assert.Null(empty.Value);}}
     /// <summary>Other Builtin Types Stay Excluded.</summary>
     /// <param name="type">The type control input.</param>
     [Theory][InlineData("int")][InlineData("date")][InlineData("anyType")]

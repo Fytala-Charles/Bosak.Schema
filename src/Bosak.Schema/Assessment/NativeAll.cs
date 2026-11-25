@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Recognize admitted attribute-group references before owner assertions |
 //                      | Charles Korthout | 0.3   | 25-11-2026     | Admit closed scalar global references with existing compositor occurrence limits |
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
+//                      | Charles Korthout | 0.5   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -47,7 +48,7 @@ internal sealed partial class NativeDecimalSchema
                 Require(reference.MinOccurs is 0 or 1 && reference.MaxOccurs == 1, "Referenced member occurrence outside compositor profile.", NativeDecimalUnsupportedReason.DeclarationShape);
                 children.Add(reference); continue;
             }
-            Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form", "nillable");
+            Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form", "nillable", "default", "fixed");
             var name = Name(declaration);var ns = Form(declaration, "form", defaultForm) == "qualified" ? targetNamespace : "";
             Check(names.Add(XName.Get(name, ns)), "Competing direct all element particles.");
             var min = Occurs(declaration, "minOccurs", 1);var max = Occurs(declaration, "maxOccurs", 1);

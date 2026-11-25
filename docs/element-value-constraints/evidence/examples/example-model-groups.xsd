@@ -1,0 +1,6 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="order"><xs:complexType><xs:group ref="Items"/></xs:complexType></xs:element>
+  <xs:group name="Items"><xs:sequence>
+    <xs:element name="item" type="xs:decimal" minOccurs="1" maxOccurs="2"/>
+  </xs:sequence></xs:group>
+</xs:schema>

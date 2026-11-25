@@ -1683,3 +1683,19 @@ Simple-valued declarations can be nillable. A nilled element has a supported emp
 For the scalar facade, `IsRootNilled` is true, `HasRootScalar` is false and `ReadRootScalar().Kind` is Empty. Descendant scalar-bearing positions, including nilled simple positions, retain document-order indexes. The node-data facade returns true from `IsNilled([])` and Empty from `ReadElement([])`. Nonempty accessors on Empty throw InvalidOperationException. The existing non-nilled empty-complex typed sequence is also readable as Empty, with its nil flag false; element-only absent typed values still raise FOTY0012.
 
 Both facades preserve the original XML and use authenticated original-node atomization for detached values. Empty results remain usable after disposal; nil flags and original facts retain their owner lifetime. The legacy decimal-only facade keeps its earlier grammar and typed-identity route.
+
+### Provided element default and fixed constraints
+
+Simple element default/fixed literals are checked against their complete declared types and facets. Provided fixed content uses actual value equality, including equivalent decimal/Boolean/integer/date lexical forms; existing string restrictions preserve strings. Default metadata does not replace supplied content. Both metadata attributes together are Invalid.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="price" type="xs:decimal" fixed="1.23"/>
+</xs:schema>
+```
+
+```xml
+<price>+001.2300</price>
+```
+
+Both facades read exact Decimal 1.23 and retain the original XML. A provided1.24 is Invalid. A nilled fixed-value element is Invalid; nilled defaults remain suppressed. An absent optional element is not created. A present empty element that requires default/fixed application returns Unsupported, because nonempty simple defaults also need correctly owned XDM text nodes. Complex value constraints and reference-use overrides remain outside this profile; this is not full default application.
