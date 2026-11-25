@@ -2,7 +2,11 @@
 
 # Bosak.Schema
 
-The 0.7 development candidate requires Bosak Core 1.86.0 or later.
+The 0.8 development candidate requires Bosak Core 1.86.0 or later.
+
+## Binary and QName values (0.8 source)
+
+Both native facades admit bounded hexBinary, base64Binary and namespace-sensitive QName values. Detached scalars expose immutable `BinaryValue` octets or `QNameValue` components under distinct `NativeScalarKind` values. Existing admitted placements, original XML, owned authority and lifetime gates remain. Enumeration, finite patterns, collapse whitespace and binary decoded-length facets follow the bounded [datatype guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/datatypes-200/GUIDE.md). Values are limited to 256 supplied UTF-16 code units and caller string capacity; binary payloads are limited to 128 octets. QName namespace bindings come from each original instance owner or schema literal context. Lists/unions remain pending; this source candidate does not represent a registry publication or full XSD 1.1 acceptance.
 
 Apache-2.0 schema integration and staged XSD 1.1 services for .NET 10. Schema services require no activation, license key or subscription.
 

@@ -37,6 +37,7 @@
 //                      | Charles Korthout | 1.15   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
 //                      | Charles Korthout | 1.16   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      | Charles Korthout | 1.17   | 25-11-2026     | Prove owned calendar derivation and bind an exact guarded comparison fingerprint |
+//                      | Charles Korthout | 0.10   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -301,6 +302,8 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             else if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
             else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, state.GoverningType.MixedContent ? XdmValue.FromString(text, "untypedAtomic") : XdmValue.FromString(text), actualType);
             else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical), actualType);
+            else if (state.InterchangeValue is { } interchange) value = new IssuedValue(input, origin, type,
+                interchange.Kind == NativeInterchangeKind.QName ? XdmValue.FromQName(interchange.Name) : XdmValue.FromString(interchange.Canonical, NativeDecimalSchema.InterchangeName(interchange.Kind)), actualType);
             else if (state.CalendarValue is { } calendar) value = new IssuedValue(input, origin, type, XdmValue.FromExactCalendar(calendar), actualType);
             else if (state.DateValue is { } date) value = new IssuedValue(input, origin, type, XdmValue.FromDate(date, date.HasTimezone), actualType);
             else if (state.IntegerValue is { } integer) value = new IssuedValue(input, origin, type, XdmValue.FromInteger(integer), actualType);

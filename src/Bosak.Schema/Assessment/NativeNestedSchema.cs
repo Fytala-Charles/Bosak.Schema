@@ -40,6 +40,7 @@
 //                      | Charles Korthout | 0.27   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      | Charles Korthout | 0.28   | 25-11-2026     | Validate provided effective attribute constraints and fixed override identity |
 //                      | Charles Korthout | 0.29   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
+//                      | Charles Korthout | 0.30   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -280,7 +281,7 @@ internal sealed partial class NativeDecimalSchema
                     cancellationToken.ThrowIfCancellationRequested();
                     var attribute = element.Attribute(use.ExpandedName);
                     Check(attribute is not null || use.MinOccurs == 0, "Required descendant attribute is missing.");
-                    if (attribute is not null) attributes.Add(AssessAttributeValue(attribute.Value, use, patternBudget) with { OwnerElementPath = ownerPath, OwnerElementIndex = states.Count });
+                    if (attribute is not null) attributes.Add(AssessAttributeValue(attribute.Value, use, patternBudget, element) with { OwnerElementPath = ownerPath, OwnerElementIndex = states.Count });
                     else RequireUnconstrainedAttributeAbsence(use);
                 }
                 Check(element.Attributes().All(a => IsAdmittedInstanceAttribute(a) || plan.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared descendant attribute.");
@@ -291,7 +292,7 @@ internal sealed partial class NativeDecimalSchema
             Check(!element.HasElements, "Simple-content terminal cannot contain child elements.");
             Require(element.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
             var atomicDeclaration = new NativeDeclaration(declaration.Name, contentType, 1, 1, declaration.NamespaceUri);
-            var scalarState = AssessScalar(element.Value, atomicDeclaration, patternBudget) with { Declaration = declaration, EffectiveType = effectiveType, NormalizedStringValue = Collapse(element.Value) };
+            var scalarState = AssessScalar(element.Value, atomicDeclaration, patternBudget, element) with { Declaration = declaration, EffectiveType = effectiveType, NormalizedStringValue = Collapse(element.Value) };
             plan.AssessIntegerAssertions(element, scalarState, cancellationToken);
             states.Add(scalarState);
             cancellationToken.ThrowIfCancellationRequested();

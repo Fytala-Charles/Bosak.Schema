@@ -20,6 +20,7 @@
 //                      | Charles Korthout | 0.7   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.8   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      | Charles Korthout | 0.9   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
+//                      | Charles Korthout | 0.10   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -109,6 +110,7 @@ internal sealed partial class NativeDecimalSchema
         Require(!selected.IsComplex && !declared.IsComplex && selected.IsString == declared.IsString &&
             (selected.CalendarKind == declared.CalendarKind || selected.CalendarKind == Bosak.XPath.Core.Xdm.XdmExactCalendarKind.DateTimeStamp && declared.CalendarKind == Bosak.XPath.Core.Xdm.XdmExactCalendarKind.DateTime) && selected.IsDate == declared.IsDate && selected.IsBoolean == declared.IsBoolean && selected.IsInteger == declared.IsInteger,
             "Valid type derivation changes the admitted scalar representation.", NativeDecimalUnsupportedReason.ValueType);
+        Require(selected.InterchangeKind == declared.InterchangeKind, "Instance type changes interchange representation.", NativeDecimalUnsupportedReason.ValueType);
         return selected;
     }
 
@@ -118,7 +120,7 @@ internal sealed partial class NativeDecimalSchema
         if (NilledState(element, declaration, selected) is { } nilled) return nilled;
         RequireProvidedElementValue(element, declaration);
         var governing = new NativeDeclaration(declaration.Name, selected, declaration.MinOccurs, declaration.MaxOccurs, declaration.NamespaceUri);
-        var state = AssessScalar(element.Value, governing, patternBudget) with { Declaration = declaration, EffectiveType = selected };
+        var state = AssessScalar(element.Value, governing, patternBudget, element) with { Declaration = declaration, EffectiveType = selected };
         CheckFixedValue(declaration, state); return state;
     }
 }

@@ -192,3 +192,7 @@ See [element value constraints](docs/element-value-constraints/README.md) for su
 The [attribute value-constraint guide](docs/attribute-value-constraints/README.md) covers provided values, global/use inheritance and the defaulted-node boundary.
 
 Use [bounded mixed sequences](docs/mixed-sequences/README.md) for interleaved original text with validated children and correctly typed aggregate values.
+
+## Datatype composition candidate — 25 November 2026
+
+The next native datatype candidate adds bounded binary and QName values; list/union integration is in progress. See the [datatype composition work](docs/datatypes-200/README.md) for its scope and qualification status.
