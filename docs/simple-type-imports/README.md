@@ -1,0 +1,11 @@
+# Batch slice 15: closed named simple-type imports
+
+25 November 2026. Batch slice 15 extends the explicit catalog overloads with closed imports of named simple-type libraries. Private immutable component namespace metadata preserves actual foreign type/derivation identities and same-local-name distinctions; source QName bindings remain intact. Includes/imports validate expected namespaces even on reused documents. Foreign global elements, complex owners, attributes/groups and no-namespace imports remain Unsupported. Current catalog/component/value bounds apply. All8,788prior outcomes remain unchanged. REQ-009 remains In Progress; public API remains55types/410rows and signed Core1.81.17 is unchanged.
+
+[Contract](CONTRACT.md), [adoption](ADOPTION.json), [cases](CASE-PLAN.json), [admissions](ADMISSIONS.json), [review](REVIEW.json), [summary](SUMMARY.json).
+
+Only closed catalog assembly creates the private namespace projection; plain schema XML cannot supply that authority. Imported named type definitions use actual expanded keys and base components. There is no new public API beyond slice14 catalog overloads. Current public facts do not expose source URI provenance. Full imports and foreign owner contexts remain separate.
+
+Qualification uses local unsigned alpha.0.59, fresh-cache consumers, actual native identities, exact packaged examples, API comparison, original corpus requests, signed Core signatures/identities and supporting tools/docs. Retained migration upgrades Schema, nine Core DLLs and dependency graphs:124pass, historical full23/33retain their old-Core assertion failure, filtered22/32behavior passes. No full23/33success or Schema-only replacement claim. HTML checks are programmatic, without visual acceptance. No registry publication, tag/controller/Core/C45/full XSD/PSVI claim.
+
+Measured qualification:8,998source (1,440internal/7,558public),7,558package consumers,95native controls and21exact packaged examples pass. All8,788prior names/outcomes remain. API55types/410rows is unchanged from slice14; comparison to the retained408row baseline permits only its two reviewed catalog overloads. Frozen21 and expanded129 original requests retain21matches and17matches/112Unsupported, with zero mismatches/harness errors.

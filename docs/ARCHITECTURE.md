@@ -3,6 +3,11 @@
   <h1>Bosak.Schema Architecture</h1>
   <p>Modular Apache schema services with explicit resource and engine boundaries.</p>
 </div>
+## Closed named simple-type imports - 25 November 2026
+
+Batch slice 15 extends the explicit catalog overloads with closed imports of named simple-type libraries. Private immutable component namespace metadata preserves actual foreign type/derivation identities and same-local-name distinctions; source QName bindings remain intact. Includes/imports validate expected namespaces even on reused documents. Foreign global elements, complex owners, attributes/groups and no-namespace imports remain Unsupported. Current catalog/component/value bounds apply. All8,788prior outcomes remain unchanged. REQ-009 remains In Progress; public API remains55types/410rows and signed Core1.81.17 is unchanged. [Contract and qualification](simple-type-imports/README.md).
+
+
 ## Closed schema inclusion - 25 November 2026
 
 Batch slice 14 adds explicit closed schema catalogs to both owned facades through two additive Create overloads. Matching-namespace/context includes resolve relative identifiers and deduplicate cycles/diamonds without external I/O. Original per-source prefix bindings survive private assembly; chameleon conversion, differing effective form/assertion contexts and imports remain Unsupported. Catalog8/32KiB-per-source/64KiB-total/32KiB-aggregate limits apply. All 8,554 prior outcomes remain unchanged; original instance nodes and canonical declaration identities are retained. REQ-009 remains In Progress; nine signed Core 1.81.17 payloads are unchanged. [Contract and API review](closed-includes/README.md).

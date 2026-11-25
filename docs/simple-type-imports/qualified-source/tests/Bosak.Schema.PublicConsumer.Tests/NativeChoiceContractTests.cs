@@ -1,0 +1,45 @@
+// ===========================================================================================================================================================
+// AUTHOR               : Charles Korthout
+// CREATE DATE          : 23 November 2026
+// PURPOSE              : Verifies bounded choice outcomes, physical original facts and omission semantics.
+// SPECIAL NOTES        : Public consumer tests without friend access.
+//
+// COPYRIGHT            : Fytala
+// LICENSE              : LICENSE.md (Apache-2.0)
+// SPDX-License-Identifier: Apache-2.0
+// ===========================================================================================================================================================
+// Change History:      |==================|=======|================|=========================================================================================
+//                      |     Author       |Version|  Date          | Notes                                                                                    |
+//                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.1   | 23-11-2026     | Creation                                                                                 |
+//                      |==================|=======|================|=========================================================================================
+// ===========================================================================================================================================================
+
+
+using System.Collections.Immutable;
+using System.Globalization;
+using System.Text.Json;
+using System.Xml.Linq;
+using Bosak.Schema;
+using Bosak.XPath.Core.Schema;
+using Bosak.XPath.Core.Xdm;
+using Xunit;
+namespace Bosak.Schema.PublicConsumer.Tests;
+/// <summary>Checks real public choice routes and actual original node evidence.</summary>
+public sealed class NativeChoiceContractTests
+{
+    private static NativeSchemaSessionOptions Options=>new(256,256,16384,65536,1,256,1,256,256);
+    private static NativeSchemaAssessmentContext Context=>new(DateTimeOffset.UnixEpoch,0);
+    /// <summary>Gets only choice-phase payloads through both facades.</summary><returns>Planned controls.</returns>
+    public static IEnumerable<object[]> Cases(){using var d=JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"case-plan.json")));foreach(var r in d.RootElement.GetProperty("cases").EnumerateArray().Where(x=>x.GetProperty("phase").GetString()=="choice-first"))foreach(bool data in new[]{false,true})yield return[r.GetProperty("id").GetString()!,r.GetRawText(),data];}
+    /// <summary>Measures adopted choice scope; all is a separate unexecuted phase.</summary>
+    /// <param name="id">Case identity.</param><param name="json">Exact payload.</param><param name="data">Selects original-node facade.</param>
+    [Theory][MemberData(nameof(Cases))]
+    public void PlannedPayloads(string id,string json,bool data)
+    {
+        Assert.StartsWith("PT-",id);using var doc=JsonDocument.Parse(json);var r=doc.RootElement;string schema=r.GetProperty("schema").GetString()!,xml=r.GetProperty("instance").GetString()!;var compile=r.GetProperty("expectedCompile").GetString();var assessment=r.GetProperty("expectedAssessment").GetString();var root=XElement.Parse(xml);var children=root.Elements().ToArray();
+        if(data){var c=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(compile,c.Outcome.ToString());if(c.Value is not{}s){Assert.Null(c.Value);return;}using(s){var a=s.Assess(xml,Context);Assert.Equal(assessment,a.Outcome.ToString());if(a.Value is not{}d){Assert.Null(a.Value);return;}using(d){for(int i=0;i<children.Length;i++)Assert.Equal(children[i].Value,Text(d.ReadElement([i])));Assert.Throws<NotSupportedException>(()=>d.ReadElement([]));Assert.True(XNode.DeepEquals(root,XElement.Parse(d.ExportXml())));}}}
+        else{var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(compile,c.Outcome.ToString());if(c.Value is not{}s){Assert.Null(c.Value);return;}using(s){var a=s.Assess(xml,Context);Assert.Equal(assessment,a.Outcome.ToString());if(a.Value is not{}d){Assert.Null(a.Value);return;}using(d){Assert.False(d.HasRootScalar);Assert.Equal(children.Length,d.ScalarCount);for(int i=0;i<children.Length;i++)Assert.Equal(children[i].Value,Text(d.ReadScalar(i)));Assert.Throws<NotSupportedException>(()=>d.ReadRootScalar());Assert.True(XNode.DeepEquals(root,XElement.Parse(d.ExportXml())));}}}
+    }
+    private static string Text(NativeScalarValue v)=>v.Kind switch{NativeScalarKind.String=>v.StringValue,NativeScalarKind.Integer=>v.IntegerValue.ToString(CultureInfo.InvariantCulture),NativeScalarKind.Boolean=>v.BooleanValue?"true":"false",_=>v.DecimalValue.ToInvariantString(256)};
+}

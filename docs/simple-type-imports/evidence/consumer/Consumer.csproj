@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);IDE0005</NoWarn>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.0.2"><PrivateAssets>all</PrivateAssets></PackageReference>
+    <PackageReference Include="Bosak.Schema" Version="[0.6.0-alpha.0.59]"/>
+    <PackageReference Include="Bosak.Schema" Version="$(SchemaConsumerPackageVersion)" Condition="'$(SchemaConsumerPackageVersion)' != ''" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/Schemas/orders.xsd;D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/Schemas/sku.xsd" CopyToOutputDirectory="PreserveNewest" Link="TestData/Schemas/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/Schemas/native-decimal.*" CopyToOutputDirectory="PreserveNewest" Link="TestData/Schemas/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/Namespaces/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/Namespaces/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/NamedTypes/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NamedTypes/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/DecimalFacets/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/DecimalFacets/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/Strings/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/Strings/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/Booleans/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/Booleans/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/Integers/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/Integers/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/StringFacets/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/StringFacets/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/Attributes/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/Attributes/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/SimpleContent/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/SimpleContent/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/NestedSequences/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/NestedSequences/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/NestedAttributes/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/NestedAttributes/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/NestedSimpleContent/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/NestedSimpleContent/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/AnonymousSimpleRestrictions/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/AnonymousSimpleRestrictions/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/IntegerRestrictions/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/IntegerRestrictions/%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/NodeData/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NodeData/%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/StringAssertions/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/StringAssertions/%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/InstanceTypes/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/InstanceTypes/%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/NamespaceForm/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/NamespaceForm/%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/ComplexSimpleRestriction/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/ComplexSimpleRestriction/%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/IntegerSimpleContent/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/IntegerSimpleContent/%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/ContextualAssertions/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/ContextualAssertions/%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup>
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/StructuralAssertions/*.json" CopyToOutputDirectory="PreserveNewest" Link="TestData/StructuralAssertions/%(Filename)%(Extension)" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/ConformancePilot/upstream/ibmData/mixed/assertions/namespace/ns3.xsd" CopyToOutputDirectory="PreserveNewest" Link="original-ns3.xsd" />
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/ConformancePilot/upstream/ibmData/mixed/assertions/namespace/ns3.xml" CopyToOutputDirectory="PreserveNewest" Link="original-ns3.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/StringPatterns/**/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/StringPatterns/%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/SimpleRoots/**/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/SimpleRoots/%(RecursiveDir)%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/DerivedIntegers/**/*" CopyToOutputDirectory="PreserveNewest" Link="TestData/DerivedIntegers/%(RecursiveDir)%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/Particles/*" CopyToOutputDirectory="Always" Link="%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/AllParticles/*" CopyToOutputDirectory="Always" Link="TestData/AllParticles/%(Filename)%(Extension)" /></ItemGroup>
+  <ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/IntegerEnumeration/*" CopyToOutputDirectory="Always" Link="TestData/IntegerEnumeration/%(Filename)%(Extension)" /></ItemGroup>
+<ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/Dates/*" CopyToOutputDirectory="Always" Link="TestData/Dates/%(Filename)%(Extension)" /></ItemGroup>
+<ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/DateSimpleContent/*" CopyToOutputDirectory="Always" Link="TestData/DateSimpleContent/%(Filename)%(Extension)" /></ItemGroup>
+<ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/DateEnumeration/*" CopyToOutputDirectory="Always" Link="TestData/DateEnumeration/%(Filename)%(Extension)"/></ItemGroup>
+<ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/DateBounds/*" CopyToOutputDirectory="Always" Link="TestData/DateBounds/%(Filename)%(Extension)"/></ItemGroup><ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/DateChains/*" CopyToOutputDirectory="Always" Link="TestData/DateChains/%(Filename)%(Extension)"/></ItemGroup><ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/DateComplexRestriction/*" CopyToOutputDirectory="Always" Link="TestData/DateComplexRestriction/%(Filename)%(Extension)"/></ItemGroup><ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/DatePatterns/*" CopyToOutputDirectory="Always" Link="TestData/DatePatterns/%(Filename)%(Extension)"/></ItemGroup><ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/BooleanPatterns/*" CopyToOutputDirectory="Always" Link="TestData/BooleanPatterns/%(Filename)%(Extension)"/></ItemGroup><ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/BooleanChains/*" CopyToOutputDirectory="Always" Link="TestData/BooleanChains/%(Filename)%(Extension)"/></ItemGroup><ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/DecimalEnumeration/*" CopyToOutputDirectory="Always" Link="TestData/DecimalEnumeration/%(Filename)%(Extension)"/></ItemGroup><ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/DecimalChains/*" CopyToOutputDirectory="Always" Link="TestData/DecimalChains/%(Filename)%(Extension)"/></ItemGroup><ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/DecimalComplexRestriction/*" CopyToOutputDirectory="Always" Link="TestData/DecimalComplexRestriction/%(Filename)%(Extension)"/></ItemGroup><ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/GlobalAttributeReferences/*" CopyToOutputDirectory="Always" Link="TestData/GlobalAttributeReferences/%(Filename)%(Extension)"/></ItemGroup><ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/AttributeGroups/*" CopyToOutputDirectory="Always" Link="TestData/AttributeGroups/%(Filename)%(Extension)"/></ItemGroup><ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/GlobalElementReferences/*" CopyToOutputDirectory="Always" Link="TestData/GlobalElementReferences/%(Filename)%(Extension)" /></ItemGroup>
+<ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/ModelGroups/*" CopyToOutputDirectory="Always" Link="TestData/ModelGroups/%(Filename)%(Extension)" /></ItemGroup>
+<ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/ClosedIncludes/*" CopyToOutputDirectory="Always" Link="TestData/ClosedIncludes/%(Filename)%(Extension)" /></ItemGroup>
+<ItemGroup><None Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/TestData/SimpleTypeImports/*" CopyToOutputDirectory="Always" Link="TestData/SimpleTypeImports/%(Filename)%(Extension)" /></ItemGroup>
+<ItemGroup><Compile Include="D:/Development/Bosak/.worktrees/Schema.Coverage/tests/Bosak.Schema.PublicConsumer.Tests/*.cs"/></ItemGroup></Project>

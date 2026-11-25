@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 25-11-2026     | Carry private imported simple-type namespace projection through compilation |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -43,9 +44,9 @@ internal sealed class NativeNodeDataCore : IDisposable
     }
 
     internal static NativeResult<NativeNodeDataCore> Create(string schema, NativeSchemaSessionOptions options,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default, IReadOnlyDictionary<int,string>? importedTypeNamespaces = null)
     {
-        var compiled = NativeDecimalSchema.Compile(schema, options.NumericLimits, cancellationToken, options.MaxStringCharacters);
+        var compiled = NativeDecimalSchema.Compile(schema, options.NumericLimits, cancellationToken, options.MaxStringCharacters, importedTypeNamespaces);
         if (compiled.Outcome != NativeOutcome.Valid)
             return NativeResult<NativeNodeDataCore>.Failure(compiled.Outcome, compiled.Diagnostic!, compiled.UnsupportedReason);
         var recorder = new ContextRecorder(new NativeSchemaProvider(compiled.Value!));

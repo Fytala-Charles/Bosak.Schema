@@ -1634,3 +1634,34 @@ using var session = NativeSchemaSession.Create(
 ```
 
 ReadRootScalar returns exact Decimal 1.23. The node-data facade uses the same catalog overload and `ReadElement([])`. Original XML is preserved; catalog changes after creation do not affect the compiled session. Source URI provenance is not exposed as a new public fact.
+
+### Closed named simple-type imports
+
+The catalog overloads can import foreign named simple restrictions, including cross-library base chains. Imported documents may contain only named simple types and closed composition directives. Foreign element/complex/attribute/group owners remain outside this profile. The import namespace must match the actual library targetNamespace; source prefix bindings and actual type identities remain intact.
+
+Root schema (`https://schemas.example/root.xsd`):
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="urn:pricing">
+  <xs:import namespace="urn:pricing" schemaLocation="types.xsd"/>
+  <xs:element name="price" type="p:Price"/>
+</xs:schema>
+```
+
+Library (`https://schemas.example/types.xsd`):
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:pricing">
+  <xs:simpleType name="Price"><xs:restriction base="xs:decimal">
+    <xs:enumeration value="1.23"/>
+  </xs:restriction></xs:simpleType>
+</xs:schema>
+```
+
+Instance:
+
+```xml
+<price>+001.2300</price>
+```
+
+Supply these texts using the preceding catalog example. Both facades read exact Decimal 1.23; the governing named type is `{urn:pricing}Price`. Existing single-string Create still refuses composition. No host network/file lookup or new public source-URI provenance is implied.

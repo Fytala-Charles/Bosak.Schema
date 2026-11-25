@@ -21,6 +21,7 @@
 //                      | Charles Korthout | 0.8   | 20-11-2026     | Read detached descendant attributes through original owner-bound facts and shared gate   |
 //                      | Charles Korthout | 0.9   | 21-11-2026     | Probe empty complex typing in isolated copies only |
 //                      | Charles Korthout | 0.10   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
+//                      | Charles Korthout | 0.11   | 25-11-2026     | Carry private imported simple-type namespace projection through compilation |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -61,9 +62,9 @@ internal sealed class NativeDecimalSessionCore : IDisposable
     }
 
     internal static NativeResult<NativeDecimalSessionCore> CreateMixed(string schema, NativeSchemaSessionOptions options,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default, IReadOnlyDictionary<int,string>? importedTypeNamespaces = null)
     {
-        var compiled = NativeDecimalSchema.Compile(schema, options.NumericLimits, cancellationToken, options.MaxStringCharacters);
+        var compiled = NativeDecimalSchema.Compile(schema, options.NumericLimits, cancellationToken, options.MaxStringCharacters, importedTypeNamespaces);
         if (compiled.Outcome != NativeOutcome.Valid)
             return NativeResult<NativeDecimalSessionCore>.Failure(compiled.Outcome, compiled.Diagnostic!, compiled.UnsupportedReason);
         var result = SchemaQuerySession.CompileXPath("$value", options.QueryLimits, assessor: new NativeSchemaProvider(compiled.Value!), cancellationToken: cancellationToken);
