@@ -1,0 +1,13 @@
+# Batch slice 18: provided attribute value constraints
+
+25 November2026. Batch slice 18 admits provided attribute default/fixed constraints across existing local/global/reference/group owners. Complete-type literals are checked eagerly, effective use/global fixed values compare exactly, and overrides of global fixed require identical values, including date calendar/offset identity. Explicit default+required and fixed+prohibited are Invalid. Provided defaults remain original; optional missing constrained attributes remain Unsupported pending augmented nodes, while required absence stays Invalid. REQ-009 remains In Progress; API55types/413rows and signed Core1.81.17 are unchanged.
+
+[Contract](CONTRACT.md), [adoption](ADOPTION.json), [cases](CASE-PLAN.json), [admissions](ADMISSIONS.json), [review](REVIEW.json), [summary](SUMMARY.json).
+
+Thirty-three measured old controls are reconciled without changing schema/instance/IDs:26valid provided cases,2Invalid default+required schemas,1valid-compile/Invalid missing-required-element instance, and4valid-compile/Unsupported missing constrained attributes. M2E1-077 now checks its actual code=x attribute; previously unreachable empty projection data is corrected. Pure metadata never becomes an original attribute node or authoritative per-use global copy. Shared group uses keep their actual declaration identity.
+
+Exact date value equality applies to provided fixed attributes; stricter metadata override identity retains date and offset components. Required refs inheriting global defaults still require presence, while explicit local default+required is Invalid. Empty provided strings are present values; they are not nil/typed-empty or absent attributes. Missing optional constrained values cause whole-assessment refusal with no partial facts.
+
+Qualification uses local unsigned alpha.0.62, fresh-cache consumers/native facts, exact packaged examples, API/corpus/retained/signed Core identities/signatures and supporting checks. Retained migration upgrades Schema, nine Core DLLs and dependency graphs:124pass, full historical23/33retain their old-Core assertion failure, filtered22/32behavior passes. No full23/33success or Schema-only replacement claim. HTML is programmatic, not visual acceptance. No full default-application/PSVI/C45/registry/tag/controller/Core change.
+
+Measured qualification:9,952source (1,462internal/8,490public),8,490package consumers,117native controls and24exact packaged examples pass. All9,657prior names remain with33measured changes and295new controls. API55types/413rows and signed Core1.81.17 payloads remain unchanged. Frozen21matches and expanded17matches/112Unsupported have no new row changes, mismatches or harness errors.

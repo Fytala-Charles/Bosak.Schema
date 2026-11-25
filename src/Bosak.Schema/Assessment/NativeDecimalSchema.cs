@@ -61,6 +61,7 @@
 //                      | Charles Korthout | 1.38   | 25-11-2026     | Preserve imported named simple-type namespaces through private compile metadata |
 //                      | Charles Korthout | 1.39   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 1.40   | 25-11-2026     | Validate scalar element constraints against provided original values |
+//                      | Charles Korthout | 1.41   | 25-11-2026     | Validate provided effective attribute constraints and fixed override identity |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -384,7 +385,8 @@ internal sealed partial class NativeDecimalSchema
             {
                 Check(attribute.Attribute("name") is null && attribute.Attribute("type") is null && attribute.Attribute("form") is null,
                     "An attribute reference cannot redefine name, type or form.");
-                Attributes(attribute, "ref", "use");
+                Attributes(attribute, "ref", "use", "default", "fixed");
+                AttributeConstraintRepresentation(attribute);
                 Require(Elements(attribute).Count == 0, "Reference children are unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
                 var key = AttributeReferenceName(attribute);
                 var context = NativeAttributeDeclarations.For(attribute);
@@ -393,10 +395,11 @@ internal sealed partial class NativeDecimalSchema
                 var referenceUse = Collapse((string?)attribute.Attribute("use") ?? "optional");
                 Require(referenceUse is "optional" or "required", "Unsupported attribute reference use.", NativeDecimalUnsupportedReason.DeclarationShape);
                 AddUse(new NativeDeclaration(global.Name, global.Type, referenceUse == "required" ? 1 : 0, 1,
-                    global.NamespaceUri, isAttribute: true, referencedDeclaration: global));
+                    global.NamespaceUri, isAttribute: true, referencedDeclaration: global) { ValueConstraint = CompileAttributeConstraint(attribute, global.Type, global) });
                 continue;
             }
-            Attributes(attribute, "name", "type", "use", "form");
+            Attributes(attribute, "name", "type", "use", "form", "default", "fixed");
+            AttributeConstraintRepresentation(attribute);
             Require(Elements(attribute).Count == 0, "Attribute children are unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
             var name = Name(attribute, NativeDecimalUnsupportedReason.DeclarationShape);
             var ns = Form(attribute, "form", attributeForm) == "qualified" ? targetNamespace : "";
@@ -405,7 +408,7 @@ internal sealed partial class NativeDecimalSchema
             var use = Collapse((string?)attribute.Attribute("use") ?? "optional");
             Require(use is "optional" or "required", "Unsupported attribute use.", NativeDecimalUnsupportedReason.DeclarationShape);
             var type = ResolveScalarType(attribute, decimalType, stringType, booleanType, integerType, simple);
-            AddUse(new NativeDeclaration(name, type, use == "required" ? 1 : 0, 1, ns, isAttribute: true));
+            AddUse(new NativeDeclaration(name, type, use == "required" ? 1 : 0, 1, ns, isAttribute: true) { ValueConstraint = CompileAttributeConstraint(attribute, type) });
         }
 
         return attributeUses.ToImmutable();
@@ -486,7 +489,8 @@ internal sealed partial class NativeDecimalSchema
                     cancellationToken.ThrowIfCancellationRequested();
                     var attribute = root.Attribute(use.ExpandedName);
                     Check(attribute is not null || use.MinOccurs == 0, "Required root attribute is missing.");
-                    if (attribute is not null) attributeStates.Add(AssessScalar(attribute.Value, use, patternBudget));
+                    if (attribute is not null) attributeStates.Add(AssessAttributeValue(attribute.Value, use, patternBudget));
+                    else RequireUnconstrainedAttributeAbsence(use);
                 }
                 Check(root.Attributes().All(a => IsAdmittedInstanceAttribute(a) || selected.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared root attribute.");
             }

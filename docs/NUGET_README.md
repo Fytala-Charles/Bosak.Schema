@@ -1699,3 +1699,23 @@ Simple element default/fixed literals are checked against their complete declare
 ```
 
 Both facades read exact Decimal 1.23 and retain the original XML. A provided1.24 is Invalid. A nilled fixed-value element is Invalid; nilled defaults remain suppressed. An absent optional element is not created. A present empty element that requires default/fixed application returns Unsupported, because nonempty simple defaults also need correctly owned XDM text nodes. Complex value constraints and reference-use overrides remain outside this profile; this is not full default application.
+
+### Provided attribute default and fixed constraints
+
+Existing attribute owners admit default/fixed metadata, including globals and reference uses. Literals must satisfy complete type/facets. Provided fixed values compare by value; a local override of a global fixed declaration must be fixed with an identical value. Date equality can span different calendar/offset representations, while override identity cannot. Provided defaults never replace actual attributes, including empty strings.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:attribute name="price" type="xs:decimal" fixed="1.23"/>
+  <xs:element name="order"><xs:complexType>
+    <xs:sequence><xs:element name="amount" type="xs:decimal"/></xs:sequence>
+    <xs:attribute ref="price" use="required"/>
+  </xs:complexType></xs:element>
+</xs:schema>
+```
+
+```xml
+<order price="+001.2300"><amount>1</amount></order>
+```
+
+Both facades read exact Decimal1.23 from the attribute and1from the child, preserving original XML. A supplied1.24 or required absence is Invalid. Optional missing attributes needing default/fixed application return Unsupported until correctly owned augmented attribute nodes are supported. Explicit default requires optional use; explicit fixed cannot use prohibited. Inline attribute types, inherited attributes, wildcards and schema defaultAttributes remain outside this profile.

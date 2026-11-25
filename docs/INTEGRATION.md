@@ -3,6 +3,11 @@
   <h1>Bosak.Schema Integration</h1>
   <p>Use schema services without activation and with explicit supported coverage.</p>
 </div>
+## Provided attribute default/fixed constraints - 25 November 2026
+
+Batch slice 18 admits provided attribute default/fixed constraints across existing local/global/reference/group owners. Complete-type literals are checked eagerly, effective use/global fixed values compare exactly, and overrides of global fixed require identical values, including date calendar/offset identity. Explicit default+required and fixed+prohibited are Invalid. Provided defaults remain original; optional missing constrained attributes remain Unsupported pending augmented nodes, while required absence stays Invalid. REQ-009 remains In Progress; API55types/413rows and signed Core1.81.17 are unchanged. [Contract and qualification](attribute-value-constraints/README.md).
+
+
 ## Provided element default/fixed constraints - 25 November 2026
 
 Batch slice 17 admits default/fixed metadata on existing simple element declarations, validates literals against complete actual types/facets and compares provided fixed values with exact family equality. Original provided values and XML remain unchanged; default metadata does not replace provided content. Empty-present default/fixed application remains Unsupported pending augmented XDM text/provenance; optional absent elements remain absent. Nil suppresses default while fixed forbids nil. Complex constraints and reference overrides remain excluded. REQ-009 remains In Progress; API55types/413rows and signed Core1.81.17 are unchanged. [Contract and qualification](element-value-constraints/README.md).

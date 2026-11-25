@@ -38,6 +38,7 @@
 //                      | Charles Korthout | 0.25   | 25-11-2026     | Share actual particles across closed named sequence groups |
 //                      | Charles Korthout | 0.26   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.27   | 25-11-2026     | Validate scalar element constraints against provided original values |
+//                      | Charles Korthout | 0.28   | 25-11-2026     | Validate provided effective attribute constraints and fixed override identity |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -271,7 +272,8 @@ internal sealed partial class NativeDecimalSchema
                     cancellationToken.ThrowIfCancellationRequested();
                     var attribute = element.Attribute(use.ExpandedName);
                     Check(attribute is not null || use.MinOccurs == 0, "Required descendant attribute is missing.");
-                    if (attribute is not null) attributes.Add(AssessScalar(attribute.Value, use, patternBudget) with { OwnerElementPath = ownerPath, OwnerElementIndex = states.Count });
+                    if (attribute is not null) attributes.Add(AssessAttributeValue(attribute.Value, use, patternBudget) with { OwnerElementPath = ownerPath, OwnerElementIndex = states.Count });
+                    else RequireUnconstrainedAttributeAbsence(use);
                 }
                 Check(element.Attributes().All(a => IsAdmittedInstanceAttribute(a) || plan.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared descendant attribute.");
             }

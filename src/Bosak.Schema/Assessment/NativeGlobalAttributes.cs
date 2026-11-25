@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 25-11-2026     | Validate provided effective attribute constraints and fixed override identity |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -38,7 +39,7 @@ internal sealed partial class NativeDecimalSchema
   var declarations=ImmutableDictionary.CreateBuilder<XName,NativeDeclaration>();
   foreach(var definition in definitions)
   {
-   token.ThrowIfCancellationRequested();Attributes(definition,"name","type");
+   token.ThrowIfCancellationRequested();Attributes(definition,"name","type","default","fixed");
    Require(Elements(definition).Count==0,"Global attribute children are outside the profile.",NativeDecimalUnsupportedReason.DeclarationShape);
    var name=Name(definition,NativeDecimalUnsupportedReason.DeclarationShape);
    Require(name.Length<=256,"Global attribute name capacity exceeded.",NativeDecimalUnsupportedReason.RepresentationCapacity);
@@ -46,7 +47,7 @@ internal sealed partial class NativeDecimalSchema
     "Reserved global attribute declaration.",NativeDecimalUnsupportedReason.Attributes);
    var key=XName.Get(name,targetNamespace);Check(!declarations.ContainsKey(key),"Duplicate global attribute declaration.");
    var type=ResolveScalarType(definition,decimalType,stringType,booleanType,integerType,simple);
-   declarations.Add(key,new NativeDeclaration(name,type,0,1,targetNamespace,isAttribute:true));
+   declarations.Add(key,new NativeDeclaration(name,type,0,1,targetNamespace,isAttribute:true){ValueConstraint=CompileAttributeConstraint(definition,type)});
   }
   var context=new NativeAttributeDeclarations(declarations.ToImmutable());schema.AddAnnotation(context);return context;
  }
