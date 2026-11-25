@@ -34,6 +34,7 @@
 //                      | Charles Korthout | 1.12   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      | Charles Korthout | 1.13   | 25-11-2026     | Preserve canonical global attribute handles across uses, lookup and original facts |
 //                      | Charles Korthout | 1.14   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
+//                      | Charles Korthout | 1.15   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -72,6 +73,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         if (schema.StringType is { } stringType) Add(stringType);
         if (schema.BooleanType is { } booleanType) Add(booleanType);
         if (schema.IntegerType is { } integerType) Add(integerType);
+        if (schema.UntypedAtomicType is { } untypedAtomicType) Add(untypedAtomicType);
     }
 
     private void RegisterChildren(NativeDecimalSchema plan)
@@ -136,6 +138,8 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             return NativeCoreResult<ISchemaComponentHandle>.Supported(components[booleanType]);
         if (name.NamespaceUri == "http://www.w3.org/2001/XMLSchema" && name.LocalName == "integer" && schema.IntegerType is { } integerType)
             return NativeCoreResult<ISchemaComponentHandle>.Supported(components[integerType]);
+        if (name.NamespaceUri == "http://www.w3.org/2001/XMLSchema" && name.LocalName == "untypedAtomic" && schema.UntypedAtomicType is { } untypedAtomicType)
+            return NativeCoreResult<ISchemaComponentHandle>.Supported(components[untypedAtomicType]);
         var type = schema.NamedTypes.FirstOrDefault(t => t.Name == name.LocalName && t.NamespaceUri == name.NamespaceUri);
         return type is not null ? NativeCoreResult<ISchemaComponentHandle>.Supported(components[type])
             : NativeCoreResult<ISchemaComponentHandle>.Unsupported("BSK-NATIVE-TYPE");
@@ -242,11 +246,11 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             var states = result.Value!.Elements;
             var facts = states.Select((state, index) => new Facts(input, input.ElementNodes[index], origin,
                 provider.TypeComponent(state.GoverningType), provider.components[state.Declaration], state,
-                provider.TypeComponent(state.GoverningType.ContentType ?? state.GoverningType))).ToImmutableArray();
+                provider.TypeComponent(state.GoverningType.MixedContent ? provider.schema.UntypedAtomicType! : state.GoverningType.ContentType ?? state.GoverningType))).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
             var attributeFacts = result.Value.Attributes.Select(state => new Facts(input, input.ElementAttributeNode(state.OwnerElementIndex, state.OwnerElementPath, states[state.OwnerElementIndex].Declaration.ExpandedName, state.Declaration.ExpandedName), origin,
                 provider.TypeComponent(state.GoverningType), provider.components[state.Declaration], state,
-                provider.TypeComponent(state.GoverningType.ContentType ?? state.GoverningType))).ToImmutableArray();
+                provider.TypeComponent(state.GoverningType.MixedContent ? provider.schema.UntypedAtomicType! : state.GoverningType.ContentType ?? state.GoverningType))).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
             if (!input.Publish(origin, facts.AddRange(attributeFacts)))
                 return Assessment.Failure(SchemaAssessmentStatus.Unsupported, "BSK-NATIVE-REASSESSMENT", "Original assessment cannot be replaced.", request.Limits);
@@ -282,7 +286,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             Input = input; Node = node; this.origin = origin; this.type = type; this.declaration = declaration; this.state = state;
             if (state.IsNilled || state.GoverningType.EmptyContent) value = new IssuedValue(input, origin, type, XdmValue.Undefined, empty: true);
             else if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
-            else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, XdmValue.FromString(text), actualType);
+            else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, state.GoverningType.MixedContent ? XdmValue.FromString(text, "untypedAtomic") : XdmValue.FromString(text), actualType);
             else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical), actualType);
             else if (state.DateValue is { } date) value = new IssuedValue(input, origin, type, XdmValue.FromDate(date, date.HasTimezone), actualType);
             else if (state.IntegerValue is { } integer) value = new IssuedValue(input, origin, type, XdmValue.FromInteger(integer), actualType);

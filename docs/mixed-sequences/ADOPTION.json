@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-25",
+  "base": "5dffaaba6115656d3f64c42a5e6146c558e3cbdf",
+  "batchSlice": 19,
+  "status": "Production adoption recorded before implementation",
+  "scope": "Finite sequence mixed complex content with original untypedAtomic aggregate facts",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.4.1 mixed complex content variety",
+        "3.4.2 complex XML mixed mapping",
+        "3.4.4 element/particle validity with mixed text",
+        "3.9 finite particle occurrence and routing"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\structures.html"
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "Adopted scalar child type/facet validity remains independent",
+        "Datatypes1.1 primitive string spaces; xs:untypedAtomic is an XDM type, not an XSD schema declaration type"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\datatypes.html"
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3.1.2 mixed complex typed value is xs:untypedAtomic",
+        "6.2 element original string-value/children/typed-value properties"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\xdm31.html"
+    }
+  ],
+  "intentionalDeviations": [
+    "Only finite nonempty sequence/group-expanded mixed models; all/choice/empty/simple-content/derivation mixed forms Unsupported",
+    "Mixed+assertion schemas Unsupported; comments/PI remain excluded",
+    "16value-bearing nodes includes mixed aggregates, each bounded by MaxStringCharacters",
+    "No new public API or Core payload; detached String DTO does not transfer Core type authority"
+  ],
+  "productionAdoption": true,
+  "published": false
+}

@@ -21,6 +21,7 @@
 //                      | Charles Korthout | 0.8   | 20-11-2026     | Document scalar-bearing complex terminals in the unchanged descendant read projection    |
 //                      | Charles Korthout | 0.9   | 22-11-2026     | Document simple scalar root reads without widening the API |
 //                      | Charles Korthout | 0.10   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
+//                      | Charles Korthout | 0.11   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -33,13 +34,13 @@ public sealed class NativeSchemaDocument : IDisposable
     private readonly NativeDecimalSessionCore.Document document;
     internal NativeSchemaDocument(NativeDecimalSessionCore.Document document) => this.document = document;
 
-    /// <summary>Gets the count of present scalar leaves; absent optional children have no index.</summary>
+    /// <summary>Gets the count of present descendant value-bearing elements; absent optional children have no index.</summary>
     /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
     /// <exception cref="NotSupportedException">Another session operation is admitted.</exception>
     public int ScalarCount => document.DecimalCount;
 
     /// <summary>Reads one scalar-bearing descendant through original facts and returns its detached typed value.</summary>
-    /// <param name="leafIndex">Zero-based terminal-leaf index in document order; element-only containers and attributes are excluded.</param>
+    /// <param name="leafIndex">Zero-based value-bearing descendant index, including supported mixed containers; element-only containers and attributes are excluded.</param>
     /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
     /// <returns>A detached scalar or Empty typed sequence usable after document and session disposal.</returns>
     /// <exception cref="ArgumentOutOfRangeException">The index is outside the present leaves.</exception>
@@ -54,7 +55,7 @@ public sealed class NativeSchemaDocument : IDisposable
     /// <exception cref="NotSupportedException">Another session operation is admitted.</exception>
     public bool IsRootNilled => document.IsRootNilled;
 
-    /// <summary>Gets whether the assessed root has an admitted scalar typed value.</summary>
+    /// <summary>Gets whether the assessed root has one admitted atomic typed value, including mixed untypedAtomic.</summary>
     /// <remarks>False for nilled, empty-complex and existing element-only roots; independent of leaf and attribute counts.</remarks>
     /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
     /// <exception cref="NotSupportedException">Another session operation is admitted.</exception>

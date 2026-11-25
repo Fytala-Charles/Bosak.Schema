@@ -62,6 +62,7 @@
 //                      | Charles Korthout | 1.39   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 1.40   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      | Charles Korthout | 1.41   | 25-11-2026     | Validate provided effective attribute constraints and fixed override identity |
+//                      | Charles Korthout | 1.42   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -101,6 +102,7 @@ internal sealed partial class NativeDecimalSchema
     internal NativeType? StringType { get; private set; }
     internal NativeType? BooleanType { get; private set; }
     internal NativeType? IntegerType { get; private set; }
+    internal NativeType? UntypedAtomicType { get; private set; }
     private int? maxStringCharacters;
     internal NativeDeclaration Root { get; }
     internal ImmutableArray<NativeDeclaration> Children { get; }
@@ -142,6 +144,8 @@ internal sealed partial class NativeDecimalSchema
             }
             if (mixedProfile && root.Descendants(Xs + "element").Any(ReadNillable))
                 Require(!root.Descendants().Any(e => e.Name == Xs + "assert" || e.Name == Xs + "assertion"), "Nillability with assertions is outside the current profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+            if (mixedProfile && root.Descendants(Xs + "complexType").Any(ReadMixedContent))
+                Require(!root.Descendants().Any(e => e.Name == Xs + "assert" || e.Name == Xs + "assertion"), "Mixed content with assertions is outside the current profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
             var types = globals.Where(e => e.Name == Xs + "complexType" || e.Name == Xs + "simpleType").ToArray();
             var declarations = globals.Where(e => e.Name == Xs + "element").ToArray();
             Require(types.Length <= 16 && declarations.Length <= 16, "Global component ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
@@ -811,7 +815,7 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null, bool isMixed = false)
 {
     internal NativeType? DerivationBase { get; } = derivationBase;
     internal bool IsComplexRestriction { get; } = isComplexRestriction;
@@ -819,7 +823,8 @@ internal sealed class NativeType(string? name, bool hasNoTypedValue, string name
     internal NativeIntegerFacets? IntegerFacets { get; } = integerFacets;
     internal NativeType? ContentType { get; } = contentType;
     internal bool EmptyContent { get; init; }
-    internal bool IsComplex => EmptyContent || HasNoTypedValue || ContentType is not null;
+    internal bool MixedContent { get; } = isMixed;
+    internal bool IsComplex => MixedContent || EmptyContent || HasNoTypedValue || ContentType is not null;
     internal NativeStringFacets? StringFacets { get; } = stringFacets;
     internal bool IsDate { get; } = isDate;
     internal NativeDateFacets? DateFacets { get; } = dateFacets;

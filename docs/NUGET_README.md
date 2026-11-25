@@ -1719,3 +1719,23 @@ Existing attribute owners admit default/fixed metadata, including globals and re
 ```
 
 Both facades read exact Decimal1.23 from the attribute and1from the child, preserving original XML. A supplied1.24 or required absence is Invalid. Optional missing attributes needing default/fixed application return Unsupported until correctly owned augmented attribute nodes are supported. Explicit default requires optional use; explicit fixed cannot use prohibited. Inline attribute types, inherited attributes, wildcards and schema defaultAttributes remain outside this profile.
+
+### Mixed sequence content
+
+Finite nonempty sequence models can be mixed. Their original aggregate text is one xs:untypedAtomic value under the actual governing complex type, while child types/facets and attribute constraints remain independently validated. The detached facade projects textual payloads as Kind.String without transferable authority; actual Core facts retain xs:untypedAtomic rather than xs:string.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="message"><xs:complexType mixed="true"><xs:sequence>
+    <xs:element name="amount" type="xs:decimal"/>
+  </xs:sequence></xs:complexType></xs:element>
+</xs:schema>
+```
+
+```xml
+<message>Total: <amount>1.2300</amount> EUR</message>
+```
+
+HasRootScalar is true; ReadRootScalar returns String `Total: 1.2300 EUR`, and ReadScalar(0) returns exact Decimal1.23. Node-data reads the same values at paths[]and[0]. ScalarCount includes supported descendant mixed value-bearing containers in preorder, plus existing simple/simple-content positions; element-only containers and attributes remain excluded. Original element paths ignore intervening text nodes.
+
+An empty mixed aggregate is an empty string atom, not an empty typed sequence or nil. The16value-bearing-node ceiling includes each mixed aggregate and the root; each aggregate also obeys MaxStringCharacters. Mixed all/choice/empty/simple-content/assertion forms, default augmentation and complex nillability remain outside this profile. Comments/PI remain excluded; mixed text does not allow unknown children or invalid child values.
