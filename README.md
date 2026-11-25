@@ -182,3 +182,5 @@ The [simple nillability guide](docs/simple-nillability/README.md) explains nil f
 See [element value constraints](docs/element-value-constraints/README.md) for supplied-content fixed validation and the explicit boundary around default application.
 
 The [attribute value-constraint guide](docs/attribute-value-constraints/README.md) covers provided values, global/use inheritance and the defaulted-node boundary.
+
+Use [bounded mixed sequences](docs/mixed-sequences/README.md) for interleaved original text with validated children and correctly typed aggregate values.

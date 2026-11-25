@@ -1,0 +1,1239 @@
+{
+  "contract": "docs/mixed-sequences/CONTRACT.md",
+  "cases": [
+    {
+      "id": "mixed-text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-one",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='1'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-collapse",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='  true  '><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "whitespace-original",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>\n <v>1</v>\t</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "\n 1\t",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "explicit-false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='false'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1.2300</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "false-forbids-text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='0'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "bad-mixed-True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='True'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "bad-mixed-yes",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='yes'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "bad-mixed-2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='2'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "bad-mixed-empty",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed=''><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-raw-256",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='                                                                                                                                                                                                                                                               1'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-raw-257",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='                                                                                                                                                                                                                                                                1'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "empty-aggregate-string",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal' minOccurs='0'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "missing-required",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>text</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "extra-child",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<x>1</x>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "duplicate-child",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v><v>2</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "invalid-child-value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>bad</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "wrong-order",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/><xs:element name='w' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><w>1</w><v>1</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "comments-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<!--c--><v>1</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "pi-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<?p x?><v>1</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-all-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:all><xs:element name='v' type='xs:decimal'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-choice-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:choice><xs:element name='v' type='xs:decimal'/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-empty-model-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'/></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-simple-content-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:simpleContent><xs:extension base='xs:string'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-assertion-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:assert test='namespace-uri(.)=&quot;&quot;'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-wildcard-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:any/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-attribute-fixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:decimal' fixed='1.23'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1.2300'>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-attribute-invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:decimal' fixed='1.23'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1.24'>pre<v>1</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-attribute-default-absence",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:decimal' default='1.23'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-child-string",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v> raw </v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre raw post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "String",
+          "value": " raw ",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-child-boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:boolean'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Boolean",
+          "value": "true",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-child-integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:integer'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>18446744073709551616</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre18446744073709551616post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Integer",
+          "value": "18446744073709551616",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-child-date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:date'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>2000-01-02Z</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre2000-01-02Zpost",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Date",
+          "value": "2000-01-02Z",
+          "path": [
+            0
+          ],
+          "nilled": false,
+          "date": {
+            "year": 2000,
+            "month": 1,
+            "day": 2,
+            "timezone": 0
+          }
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-simple-nil-child",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal' nillable='true'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "prepost",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-complex-nil-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' nillable='true'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "mixed-element-default-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' default='text'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "named-mixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:complexType name='M' mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='r' type='M'/></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "named-xsi-same-type",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:complexType name='M' mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='r' type='M'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:type='M'>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "global-mixed-reference",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:complexType name='M' mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='box'/></xs:sequence></xs:complexType></xs:element><xs:element name='box' type='M'/></xs:schema>",
+      "instance": "<r><box>pre<v>1.2300</v>post</box></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [
+            0
+          ],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0,
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 2
+    },
+    {
+      "id": "nested-mixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='box'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><box>pre<v>1.2300</v>post</box></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [
+            0
+          ],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0,
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 2
+    },
+    {
+      "id": "nested-both-mixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='box'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>out<box>pre<v>1.2300</v>post</box>end</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "outpre1.2300postend",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [
+            0
+          ],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0,
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 2
+    },
+    {
+      "id": "model-group-mixed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:group name='G'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:group><xs:element name='r'><xs:complexType mixed='true'><xs:group ref='G'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "aggregate-cap-1024",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>x<v>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</v>y</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaay",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "String",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "aggregate-cap-1025",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>x<v>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</v>y</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "String",
+          "value": "xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaay",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "String",
+          "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "value-bearing-cap-15",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal' maxOccurs='15'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "1",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "value-bearing-cap-16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal' maxOccurs='16'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "String",
+          "value": "1",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "imported-child-type",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<v>1.2300</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1,
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='f:D'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "rootUri": "https://catalog.test/root.xsd"
+    }
+  ]
+}

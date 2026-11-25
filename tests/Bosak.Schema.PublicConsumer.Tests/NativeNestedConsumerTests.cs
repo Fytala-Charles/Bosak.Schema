@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 25-11-2026     | Verify original mixed root aggregate and its independent decimal descendant |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -47,7 +48,7 @@ public sealed class NativeNestedConsumerTests
         using var session=created.Value!;var xml=r.GetProperty("instance").GetString()!;var result=session.Assess(xml,Context());Assert.Equal(r.GetProperty("expectedAssessment").GetString(),result.Outcome.ToString());
         if(result.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(result.Value);Assert.Equal("BSK-NATIVE-INSTANCE-"+result.Outcome.ToString().ToUpperInvariant(),Assert.Single(result.Diagnostics).Code);return;}
         using var d=result.Value!;var expected=r.GetProperty("values").EnumerateArray().Select(v=>v.GetString()!).ToArray();
-        Assert.False(d.HasRootScalar);Assert.Throws<NotSupportedException>(()=>d.ReadRootScalar());Assert.Equal(expected.Length,d.ScalarCount);Assert.Equal(r.GetProperty("attributes").GetInt32(),d.AttributeCount);
+        if(id=="NS-053"){Assert.True(d.HasRootScalar);Assert.Equal(NativeScalarKind.String,d.ReadRootScalar().Kind);Assert.Equal("12.50",d.ReadRootScalar().StringValue);}else{Assert.False(d.HasRootScalar);Assert.Throws<NotSupportedException>(()=>d.ReadRootScalar());}Assert.Equal(expected.Length,d.ScalarCount);Assert.Equal(r.GetProperty("attributes").GetInt32(),d.AttributeCount);
         var values=Enumerable.Range(0,d.ScalarCount).Select(i=>d.ReadScalar(i)).ToArray();Assert.Equal(expected,values.Select(Text));
         Assert.Throws<ArgumentOutOfRangeException>(()=>d.ReadScalar(-1));Assert.Throws<ArgumentOutOfRangeException>(()=>d.ReadScalar(d.ScalarCount));
         var exported=d.ExportXml();Assert.True(XNode.DeepEquals(XDocument.Parse(xml,LoadOptions.PreserveWhitespace).Root,XDocument.Parse(exported,LoadOptions.PreserveWhitespace).Root));

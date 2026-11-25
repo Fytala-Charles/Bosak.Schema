@@ -39,6 +39,7 @@
 //                      | Charles Korthout | 0.26   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.27   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      | Charles Korthout | 0.28   | 25-11-2026     | Validate provided effective attribute constraints and fixed override identity |
+//                      | Charles Korthout | 0.29   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -52,6 +53,7 @@ internal sealed partial class NativeDecimalSchema
 
     private static bool HasNestedDeclarations(XElement schema, XElement[] types, string targetNamespace)
     {
+        if (schema.Descendants(Xs + "complexType").Any(t => t.Attribute("mixed") is not null)) return true;
         if (schema.Elements(Xs + "group").Any()) return true;
         if (schema.Descendants(Xs + "element").Any(e => e.Attribute("ref") is not null &&
             (e.Parent?.Name == Xs + "sequence" || e.Parent?.Name == Xs + "all" || e.Parent?.Name == Xs + "choice"))) return true;
@@ -109,8 +111,8 @@ internal sealed partial class NativeDecimalSchema
             }
             else
             {
-                var complex = Single(element!, "complexType"); Attributes(complex);
-                plan = Complex(complex, new NativeDeclaration(name, new NativeType(null, true), 1, 1, targetNamespace));
+                var complex = Single(element!, "complexType"); Attributes(complex, "mixed");
+                plan = Complex(complex, new NativeDeclaration(name, MixedComplexType(complex, null, targetNamespace), 1, 1, targetNamespace));
             }
             NestedBudget(plan, cancellationToken); visitingElements.Remove(key); roots.Add(key, plan); return plan;
         }
@@ -122,8 +124,8 @@ internal sealed partial class NativeDecimalSchema
             if (named.TryGetValue(name, out var existing)) return existing;
             Require(definitions.TryGetValue(name, out var definition), "Unresolved complex type.", NativeDecimalUnsupportedReason.ValueType);
             Require(visiting.Add(name), "Recursive complex types are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-            Attributes(definition!, "name");
-            var plan = Complex(definition!, new NativeDeclaration(name.LocalName, new NativeType(name.LocalName, true, targetNamespace), 1, 1, targetNamespace));
+            Attributes(definition!, "name", "mixed");
+            var plan = Complex(definition!, new NativeDeclaration(name.LocalName, MixedComplexType(definition!, name.LocalName, targetNamespace), 1, 1, targetNamespace));
             named.Add(name, plan);
             visiting.Remove(name);
             return plan;
@@ -132,6 +134,11 @@ internal sealed partial class NativeDecimalSchema
         NativeDecimalSchema Complex(XElement complex, NativeDeclaration root)
         {
             cancellationToken.ThrowIfCancellationRequested();
+            if (root.Type.MixedContent)
+            {
+                var mixedMembers = Elements(complex);
+                Require(mixedMembers.Count > 0 && (mixedMembers[0].Name == Xs + "sequence" && Elements(mixedMembers[0]).Count > 0 || mixedMembers[0].Name == Xs + "group"), "Only finite sequence mixed content is admitted.", NativeDecimalUnsupportedReason.DeclarationShape);
+            }
             if (TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken) is { } empty) return empty;
             if (TryCompileAll(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
                 decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } all) return all;
@@ -196,8 +203,8 @@ internal sealed partial class NativeDecimalSchema
                 else
                 {
                     Require(inline.Count == 1 && inline[0].Name == Xs + "complexType", "Expected an inline complex type.", NativeDecimalUnsupportedReason.DeclarationShape);
-                    Attributes(inline[0]);
-                    container = Complex(inline[0], new NativeDeclaration(name, new NativeType(null, true), 1, 1, ns));
+                    Attributes(inline[0], "mixed");
+                    container = Complex(inline[0], new NativeDeclaration(name, MixedComplexType(inline[0], null, ns), 1, 1, ns));
                     type = container.Root.Type;
                 }
                 Require(container?.AllMinimum is null, "Nested all containers are outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
@@ -221,6 +228,7 @@ internal sealed partial class NativeDecimalSchema
         first.NamedTypes = simple.Values.Concat(named.Values.Select(p => p.Root.Type)).ToImmutableArray();
         first.DecimalType = decimalType; first.StringType = stringType; first.BooleanType = booleanType; first.IntegerType = integerType;
         first.maxStringCharacters = maxStringCharacters;
+        if (schema.Descendants(Xs + "complexType").Any(ReadMixedContent)) first.UntypedAtomicType = new NativeType("untypedAtomic", false, Xs.NamespaceName, isString: true);
         first.PrepareInstanceTypes();
         return first;
     }
@@ -239,7 +247,7 @@ internal sealed partial class NativeDecimalSchema
             var maximum = plan.Children.Max(c => c.MaxOccurs);
             return (1 + maximum, maximum, 2, plan.AttributeUses.Length);
         }
-        var nodes = 1; var scalars = 0; var depth = 1; var attributes = plan.AttributeUses.Length;
+        var nodes = 1; var scalars = plan.Root.Type.MixedContent ? 1 : 0; var depth = 1; var attributes = plan.AttributeUses.Length;
         foreach (var child in plan.Children)
         {
             var budget = child.Container is { } nested ? NestedBudget(nested, cancellationToken) : (Nodes: 1, Scalars: 1, Depth: 1, Attributes: 0);
@@ -298,9 +306,9 @@ internal sealed partial class NativeDecimalSchema
             cancellationToken.ThrowIfCancellationRequested();
             return;
         }
-        foreach (var text in element.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only container contains non-whitespace text.");
+        if (!effectiveType.MixedContent) foreach (var text in element.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only container contains non-whitespace text.");
         Require(element.Nodes().All(n => n is XElement or XText), "Container comments or processing instructions are unsupported.");
-        states.Add(new NativeElementState(declaration, null) { EffectiveType = effectiveType });
+        states.Add(ContainerValueState(element, declaration, effectiveType));
         var nodes = element.Elements().ToArray(); var index = 0;
         foreach (var child in plan.Children)
         {

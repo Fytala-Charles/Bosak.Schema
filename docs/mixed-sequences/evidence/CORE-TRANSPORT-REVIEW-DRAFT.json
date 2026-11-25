@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-25",
+  "implementationReviewRevision": "6a7618e9dcf70eb8a67d5d1789ff7b787133b52d",
+  "unchangedSignedPackage": "Core1.81.17",
+  "files": [
+    {
+      "path": "src/Bosak.XPath.Core/Xdm/XdmValue.cs",
+      "sha256": "4869627a5454d76f60da2378e77cb2f71a4ed655815c9f636aba9f653652b23e"
+    },
+    {
+      "path": "src/Bosak.XPath.Runtime/Vm/QueryTypedContainer.cs",
+      "sha256": "86e62f47d5a7ac86b65afc2f4a0d9f246f3b629dabd03d475514b14ff43176cd"
+    },
+    {
+      "path": "src/Bosak.XPath.Runtime/Vm/QueryTypedScalarCache.cs",
+      "sha256": "647e96770d62da3879ae90624678dc349995629783289752687938adfc13b791"
+    },
+    {
+      "path": "src/Bosak.XPath.Api/Schema/OriginalNodeDataPlan.cs",
+      "sha256": "85f176a78949ae38f4259dc2f80abf815b23fc09cd5e0b96a9d39e1c3204ee16"
+    }
+  ],
+  "decision": "Existing plain String payload can retain untypedAtomic annotation, while actual Core atomic provenance must carry the owned xs:untypedAtomic component distinct from xs:string. Original-node atomization retains declared governing complex and actual atomic components. No Core change is adopted."
+}

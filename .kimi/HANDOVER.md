@@ -1,5 +1,10 @@
 Last updated: 2026-11-25
 
+## Mixed sequence content - 25 November 2026
+
+Batch slice 19 admits finite sequence mixed content with actual complex governing types and xs:untypedAtomic aggregate facts. Original interleaved text, child order/types/attributes and physical paths remain; invalid children still prevent all fact publication. Empty mixed aggregate is one empty string atom, distinct from nil/Empty/FOTY0012. Existing original-node transport preserves payload annotation and actual atomic provenance. Mixed all/choice/empty/simple-content/assertion/default augmentation/complex nil remain excluded. The16value-bearing budget includes mixed aggregates, each under MaxStringCharacters. REQ-009 remains In Progress; API55types/413rows and signed Core1.81.17 are unchanged. [Contract and Core transport review](../docs/mixed-sequences/README.md).
+
+
 ## Provided attribute default/fixed constraints - 25 November 2026
 
 Batch slice 18 admits provided attribute default/fixed constraints across existing local/global/reference/group owners. Complete-type literals are checked eagerly, effective use/global fixed values compare exactly, and overrides of global fixed require identical values, including date calendar/offset identity. Explicit default+required and fixed+prohibited are Invalid. Provided defaults remain original; optional missing constrained attributes remain Unsupported pending augmented nodes, while required absence stays Invalid. REQ-009 remains In Progress; API55types/413rows and signed Core1.81.17 are unchanged. [Contract and qualification](../docs/attribute-value-constraints/README.md).
