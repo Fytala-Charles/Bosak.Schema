@@ -1,0 +1,1178 @@
+{
+  "contract": "docs/simple-nillability/CONTRACT.md",
+  "cases": [
+    {
+      "id": "true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "one",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='1' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "collapsed-boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='  1  '/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='  true  ' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nil-string",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:string' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nil-boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:boolean' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nil-integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:integer' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nil-date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:date' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "false-false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='false' >1.23</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "false-0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='0' >1.23</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "false-empty-decimal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='false' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "false-empty-string",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:string' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='false' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "absent-request",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "absent-empty-decimal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nonnillable-false-true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='false'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nonnillable-false-false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='false'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='false' >1.23</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nonnillable-false-1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='false'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='1' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nonnillable-false-0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='false'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='0' >1.23</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nonnillable-0-true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='0'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nonnillable-0-false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='0'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='false' >1.23</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nonnillable-0-1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='0'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='1' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nonnillable-0-0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='0'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='0' >1.23</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "implicit-nonnillable-true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' >1.23</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "implicit-nonnillable-false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='false' >1.23</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "bad-instance-True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='True' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "bad-instance-yes",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='yes' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "bad-instance-2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='2' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "bad-instance-empty",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "bad-declaration-True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='True'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "bad-declaration-yes",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='yes'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "bad-declaration-2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='2'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "bad-declaration-empty",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable=''/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "whitespace-content",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' > </r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "character-content",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' >1.23</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "element-content",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ><x/></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "comment-content",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ><!--c--></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "pi-content",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ><?p x?></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "ordinary-attribute",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' a='x'></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "namespace-alias",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:n='http://www.w3.org/2001/XMLSchema-instance' n:nil='true'/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "wrong-nil-namespace",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:n='urn:wrong' n:nil='true'/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "instance-raw-256",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='                                                                                                                                                                                                                                                               1' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "instance-raw-257",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='                                                                                                                                                                                                                                                                1' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "declaration-raw-256",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='                                                                                                                                                                                                                                                               1'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "declaration-raw-257",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='                                                                                                                                                                                                                                                                1'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "nil-ignores-enumeration",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "false-checks-enumeration",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='false' >1.24</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "derived-xsi-type",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' xmlns:xs='http://www.w3.org/2001/XMLSchema' i:type='D'></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "invalid-xsi-base",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r' type='D' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' xmlns:xs='http://www.w3.org/2001/XMLSchema' i:type='xs:decimal'></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "sequence",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' nillable='true'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "sequence-required",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' nillable='true'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "all",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:decimal' nillable='true'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "all-required",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:decimal' nillable='true'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "choice",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:decimal' nillable='true'/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "choice-required",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:decimal' nillable='true'/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "optional-absent",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' nillable='true' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "repeated-nil-normal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' nillable='true' minOccurs='0' maxOccurs='2'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/><v>1.23</v></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [
+            0
+          ],
+          "nilled": true
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            1
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 2
+    },
+    {
+      "id": "global-reference",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='v'/></xs:sequence></xs:complexType></xs:element><xs:element name='v' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r><v xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "model-group",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:group ref='G'/></xs:complexType></xs:element><xs:group name='G'><xs:sequence><xs:element name='v' type='xs:decimal' nillable='true'/></xs:sequence></xs:group></xs:schema>",
+      "instance": "<r><v xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "nested-leaf",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='box'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' nillable='true'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><box><v xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/></box></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [
+            0,
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    {
+      "id": "complex-nillable-refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' nillable='true'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "simple-content-nillable-refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' nillable='true'><xs:complexType><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "empty-complex-nillable-refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' nillable='true'><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "empty-complex-typed-empty",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType/></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": false,
+      "scalarCount": 0
+    },
+    {
+      "id": "assertion-with-nillability-refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' nillable='true'/></xs:sequence><xs:assert test='namespace-uri(.) = &quot;&quot;'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    {
+      "id": "imported-type",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0,
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'/><xs:element name='r' type='f:D' nillable='true'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "rootUri": "https://catalog.test/root.xsd"
+    }
+  ]
+}

@@ -1,5 +1,10 @@
 Last updated: 2026-11-25
 
+## Simple nillability and empty typed values - 25 November 2026
+
+Batch slice 16 adds nillability on existing simple-valued element declarations with actual Core IsNilled facts and supported zero-atomic typed values. Any xsi:nil attribute on a nonnillable declaration is Invalid, including false. True nil requires no text/element children; complex nillability and assertion+nillability combinations remain Unsupported. Detached Empty=6, scalar IsRootNilled and node-data IsNilled(path) add three reviewed API rows. Opt-in scalar reads share captured original-node atomization; legacy decimal identity and FOTY0012 boundaries remain. REQ-009 remains In Progress; Core1.81.17 is unchanged. [Contract and transport review](simple-nillability/README.md).
+
+
 ## Closed named simple-type imports - 25 November 2026
 
 Batch slice 15 extends the explicit catalog overloads with closed imports of named simple-type libraries. Private immutable component namespace metadata preserves actual foreign type/derivation identities and same-local-name distinctions; source QName bindings remain intact. Includes/imports validate expected namespaces even on reused documents. Foreign global elements, complex owners, attributes/groups and no-namespace imports remain Unsupported. Current catalog/component/value bounds apply. All8,788prior outcomes remain unchanged. REQ-009 remains In Progress; public API remains55types/410rows and signed Core1.81.17 is unchanged. [Contract and qualification](simple-type-imports/README.md).

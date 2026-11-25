@@ -661,7 +661,7 @@
     "schema": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:bosak:nested-plan\"\n targetNamespace=\"urn:bosak:nested-plan\" elementFormDefault=\"qualified\">\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"line\" type=\"t:LineType\" minOccurs=\"1\" maxOccurs=\"2\"/>\n      <xs:element name=\"approved\" type=\"xs:boolean\" minOccurs=\"0\"/>\n    </xs:sequence>\n    <xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/>\n  </xs:complexType>\n  <xs:complexType name=\"LineType\">\n    <xs:sequence>\n      <xs:element name=\"sku\" type=\"xs:string\"/>\n      <xs:element name=\"quantity\" type=\"xs:integer\"/>\n      <xs:element name=\"amount\" type=\"xs:decimal\"/>\n    </xs:sequence>\n  </xs:complexType>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
     "instance": "<order xmlns=\"urn:bosak:nested-plan\" id=\"ORDER-1\">\n  <line xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"><sku>ABC-0001</sku><quantity>2</quantity><amount>12.50</amount></line>\n  <line><sku>XYZ-0002</sku><quantity>1</quantity><amount>3.75</amount></line>\n  <approved>false</approved>\n</order>\n",
     "expectedCompile": "Valid",
-    "expectedAssessment": "Unsupported",
+    "expectedAssessment": "Invalid",
     "values": [
       "ABC-0001",
       "2",
@@ -972,17 +972,9 @@
     "label": "nil scalar",
     "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\" ><xs:complexType><xs:sequence><xs:element name=\"v\" nillable=\"true\" type=\"xs:decimal\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
     "instance": "<r><a><v>12.50</v></a></r>",
-    "expectedCompile": "Unsupported",
+    "expectedCompile": "Valid",
     "expectedAssessment": "Valid",
-    "values": [
-      "ABC-0001",
-      "2",
-      "12.5",
-      "XYZ-0002",
-      "1",
-      "3.75",
-      "false"
-    ],
+    "values": ["12.5"],
     "attributes": 0
   },
   {

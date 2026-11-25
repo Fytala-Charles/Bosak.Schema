@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -27,6 +28,17 @@ public sealed class NativeSchemaNodeDataDocument : IDisposable
     private readonly NativeNodeDataCore.Document document;
     private NativeSchemaNodeDataDocument(NativeNodeDataCore.Document document) => this.document = document;
     internal static NativeSchemaNodeDataDocument Own(NativeNodeDataCore.Document document) => new(document);
+
+    /// <summary>Reads the actual nilled flag of an assessed original element.</summary>
+    /// <param name="elementPath">Physical zero-based child-element path; empty selects the root.</param>
+    /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
+    /// <returns>True exactly when the original assessed element is nilled.</returns>
+    /// <exception cref="ArgumentException">The path is default.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The path is outside admitted depth or original children.</exception>
+    /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
+    /// <exception cref="NotSupportedException">Another operation is admitted or original facts are unavailable.</exception>
+    /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
+    public bool IsNilled(ImmutableArray<int> elementPath, CancellationToken cancellationToken = default) => document.IsNilled(elementPath, cancellationToken);
 
     /// <summary>Atomizes one original element and returns its detached scalar typed value.</summary>
     /// <param name="elementPath">Explicit immutable element-child indexes, at most three; empty selects root.</param>

@@ -59,6 +59,7 @@
 //                      | Charles Korthout | 1.36   | 25-11-2026     | Apply component-preserving attribute-group set union across admitted owners |
 //                      | Charles Korthout | 1.37   | 25-11-2026     | Admit bounded closed named sequence model groups |
 //                      | Charles Korthout | 1.38   | 25-11-2026     | Preserve imported named simple-type namespaces through private compile metadata |
+//                      | Charles Korthout | 1.39   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -136,6 +137,8 @@ internal sealed partial class NativeDecimalSchema
                     globals[entry.Key].AddAnnotation(new NativeImportedTypeNamespace(entry.Value));
                 }
             }
+            if (mixedProfile && root.Descendants(Xs + "element").Any(ReadNillable))
+                Require(!root.Descendants().Any(e => e.Name == Xs + "assert" || e.Name == Xs + "assertion"), "Nillability with assertions is outside the current profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
             var types = globals.Where(e => e.Name == Xs + "complexType" || e.Name == Xs + "simpleType").ToArray();
             var declarations = globals.Where(e => e.Name == Xs + "element").ToArray();
             Require(types.Length <= 16 && declarations.Length <= 16, "Global component ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
@@ -212,12 +215,13 @@ internal sealed partial class NativeDecimalSchema
             foreach (var declaration in declarations)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                Attributes(declaration, "name", "type");
+                if (mixedProfile) Attributes(declaration, "name", "type", "nillable"); else Attributes(declaration, "name", "type");
                 var name = Name(declaration);
                 var key = XName.Get(name, targetNamespace);
                 Require(!compiled.ContainsKey(key), "Duplicate root declaration.", NativeDecimalUnsupportedReason.DeclarationShape);
                 NativeDecimalSchema plan;
                 var scalarRoot = TryCompileSimpleRoot(declaration, targetNamespace, decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits);
+                Require(scalarRoot is not null || !ReadNillable(declaration), "Complex nillability is outside the simple-valued profile.", NativeDecimalUnsupportedReason.DeclarationShape);
                 if (scalarRoot is not null) plan = scalarRoot;
                 else if (declaration.Attribute("type") is not null)
                 {
@@ -299,7 +303,7 @@ internal sealed partial class NativeDecimalSchema
         {
             cancellationToken.ThrowIfCancellationRequested();
             Require(declaration.Name == Xs + "element", "Only local decimal elements are supported.", NativeDecimalUnsupportedReason.DeclarationShape);
-            Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form");
+            if (stringType is not null) Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form", "nillable"); else Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form");
             var inline = Elements(declaration);
             var name = Name(declaration);
             var namespaceUri = Form(declaration, "form", defaultForm) == "qualified" ? targetNamespace : "";
@@ -318,7 +322,7 @@ internal sealed partial class NativeDecimalSchema
             Require(min is 0 or 1 && max is >= 1 and <= 16 && min <= max, "Occurrence limits are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
             maximum += max;
             Require(maximum <= 16, "Aggregate maximum exceeds sixteen.", NativeDecimalUnsupportedReason.DeclarationShape);
-            children.Add(new NativeDeclaration(name, localType, min, max, namespaceUri));
+            children.Add(ElementDeclaration(declaration, name, localType, min, max, namespaceUri));
         }
 
         var attributeUses = CompileAttributes(attributeMembers, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
@@ -485,6 +489,8 @@ internal sealed partial class NativeDecimalSchema
             }
             else InstanceAttributes(root);
             Check(found, "Unexpected root element.");
+            if (NilledState(root, selected!.Root, rootType!) is { } nilled)
+                return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [nilled], attributeStates.ToImmutable()));
             if (!selected!.Root.Type.IsComplex)
             {
                 Check(!root.HasElements, "Simple root cannot contain child elements.");
@@ -828,6 +834,7 @@ internal sealed class NativeDeclaration(string name, NativeType type, int minOcc
     internal string NamespaceUri { get; } = namespaceUri;
     internal XName ExpandedName { get; } = XName.Get(name, namespaceUri);
     internal NativeType Type { get; } = type;
+    internal bool IsNillable { get; init; }
     internal int MinOccurs { get; } = minOccurs;
     internal int MaxOccurs { get; } = maxOccurs;
 }
@@ -837,7 +844,7 @@ internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExac
     internal NativeType GoverningType => EffectiveType ?? Declaration.Type;
     internal ImmutableArray<int> OwnerElementPath { get; init; } = [];
     internal int OwnerElementIndex { get; init; }
-    internal bool IsNilled => false;
+    internal bool IsNilled { get; init; }
 }
 internal sealed class NativeAssessedDocument(XDocument document, ImmutableArray<NativeElementState> elements, ImmutableArray<NativeElementState> attributes = default)
 {

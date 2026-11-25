@@ -36,6 +36,7 @@
 //                      | Charles Korthout | 0.23   | 25-11-2026     | Preserve nested structural assertion exclusion for attribute groups |
 //                      | Charles Korthout | 0.24   | 25-11-2026     | Resolve cached closed global elements with canonical particle uses and cycle budgets |
 //                      | Charles Korthout | 0.25   | 25-11-2026     | Share actual particles across closed named sequence groups |
+//                      | Charles Korthout | 0.26   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -90,10 +91,11 @@ internal sealed partial class NativeDecimalSchema
             if (roots.TryGetValue(key, out var existing)) return existing;
             Require(elementDefinitions.TryGetValue(key, out var element), "Unresolved closed global element.", NativeDecimalUnsupportedReason.DeclarationShape);
             Require(visitingElements.Add(key), "Recursive global element graph is outside the finite profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-            Attributes(element!, "name", "type");
+            Attributes(element!, "name", "type", "nillable");
             var name = Name(element!);
             NativeDecimalSchema plan;
             var scalarRoot = TryCompileSimpleRoot(element!, targetNamespace, decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits);
+            Require(scalarRoot is not null || !ReadNillable(element!), "Complex nillability is outside the simple-valued profile.", NativeDecimalUnsupportedReason.DeclarationShape);
             if (scalarRoot is not null) plan = scalarRoot;
             else if (element!.Attribute("type") is not null)
             {
@@ -169,7 +171,7 @@ internal sealed partial class NativeDecimalSchema
                     Require(names.Add(reference.ExpandedName), "Duplicate expanded sequence particle names are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
                     compilingParticles.Remove(local); particles.Add(local, reference); children.Add(reference); continue;
                 }
-                Attributes(local, "name", "type", "minOccurs", "maxOccurs", "form");
+                Attributes(local, "name", "type", "minOccurs", "maxOccurs", "form", "nillable");
                 var name = Name(local);
                 var ns = Form(local, "form", defaultForm) == "qualified" ? targetNamespace : "";
                 Require(names.Add(XName.Get(name, ns)), "Duplicate expanded local name.", NativeDecimalUnsupportedReason.DeclarationShape);
@@ -197,7 +199,7 @@ internal sealed partial class NativeDecimalSchema
                 }
                 Require(container?.AllMinimum is null, "Nested all containers are outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
                 Require(container?.ChoiceMinimum is null, "Nested choice containers are outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
-                var particle = new NativeDeclaration(name, type, min, max, ns) { Container = container };
+                var particle = ElementDeclaration(local, name, type, min, max, ns, container);
                 compilingParticles.Remove(local); particles.Add(local, particle); children.Add(particle);
             }
             return children.ToImmutable();
@@ -254,6 +256,7 @@ internal sealed partial class NativeDecimalSchema
     {
         cancellationToken.ThrowIfCancellationRequested();
         var effectiveType = ResolveInstanceType(element, declaration.Type);
+        _ = NilledState(element, declaration, effectiveType);
         if (!isRoot)
         {
             if (plan.AttributeUses.IsEmpty && plan.Root.Type.ContentType?.IsDate != true) InstanceAttributes(element);

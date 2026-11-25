@@ -176,3 +176,5 @@ See the [named sequence group guide](docs/model-groups/README.md) for reusable c
 Use an [explicit closed schema catalog](docs/closed-includes/README.md) to resolve supported same-namespace includes through either owned facade.
 
 The catalog also supports [bounded imports of named simple-type libraries](docs/simple-type-imports/README.md), with actual namespace and base-type identities.
+
+The [simple nillability guide](docs/simple-nillability/README.md) explains nil flags, empty typed values and their distinction from empty strings and absent typed values.

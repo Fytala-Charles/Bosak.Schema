@@ -520,7 +520,7 @@
       "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
       "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\" i:nil=\"false\">9</t:v></t:r>",
       "expectedCompile": "Valid",
-      "proposedAssessment": "Unsupported/Attributes"
+      "proposedAssessment": "Invalid"
     },
     {
       "id": "XT-042",

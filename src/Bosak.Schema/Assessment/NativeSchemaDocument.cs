@@ -20,6 +20,7 @@
 //                      | Charles Korthout | 0.7   | 20-11-2026     | Expose separate descendant attribute reads without changing root or scalar indexes       |
 //                      | Charles Korthout | 0.8   | 20-11-2026     | Document scalar-bearing complex terminals in the unchanged descendant read projection    |
 //                      | Charles Korthout | 0.9   | 22-11-2026     | Document simple scalar root reads without widening the API |
+//                      | Charles Korthout | 0.10   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -40,7 +41,7 @@ public sealed class NativeSchemaDocument : IDisposable
     /// <summary>Reads one scalar-bearing descendant through original facts and returns its detached typed value.</summary>
     /// <param name="leafIndex">Zero-based terminal-leaf index in document order; element-only containers and attributes are excluded.</param>
     /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
-    /// <returns>A detached string, Boolean, exact integer or exact decimal usable after document and session disposal.</returns>
+    /// <returns>A detached scalar or Empty typed sequence usable after document and session disposal.</returns>
     /// <exception cref="ArgumentOutOfRangeException">The index is outside the present leaves.</exception>
     /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
     /// <exception cref="NotSupportedException">Overlapping work or a value outside explicit query limits is refused.</exception>
@@ -48,15 +49,20 @@ public sealed class NativeSchemaDocument : IDisposable
     public NativeScalarValue ReadScalar(int leafIndex, CancellationToken cancellationToken = default) =>
         document.ReadScalar(leafIndex, cancellationToken);
 
+    /// <summary>Gets whether the actual assessed root is nilled.</summary>
+    /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
+    /// <exception cref="NotSupportedException">Another session operation is admitted.</exception>
+    public bool IsRootNilled => document.IsRootNilled;
+
     /// <summary>Gets whether the assessed root has an admitted scalar typed value.</summary>
-    /// <remarks>False for existing element-only roots; independent of leaf and attribute counts.</remarks>
+    /// <remarks>False for nilled, empty-complex and existing element-only roots; independent of leaf and attribute counts.</remarks>
     /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
     /// <exception cref="NotSupportedException">Another session operation is admitted.</exception>
     public bool HasRootScalar => document.HasRootScalar;
 
     /// <summary>Reads an admitted simple or simple-content root through its original typed facts.</summary>
     /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
-    /// <returns>A detached root scalar usable after document and session disposal.</returns>
+    /// <returns>A detached root scalar or supported Empty typed sequence usable after owner disposal.</returns>
     /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
     /// <exception cref="NotSupportedException">The root has no typed scalar (FOTY0012), overlapping work is admitted, or query limits are exceeded.</exception>
     /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>

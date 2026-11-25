@@ -1,0 +1,468 @@
+[
+  {
+    "file": "tests/TestData/AnonymousSimpleRestrictions/cases.json",
+    "id": "AS-030",
+    "old": {
+      "id": "AS-030",
+      "label": "xsi nil remains excluded",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:decimal\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\"><v h:nil=\"true\">1</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "values": [],
+      "reason": null,
+      "clauses": [
+        "Structures3.3.2-3.3.4",
+        "Structures3.16.2.1-2",
+        "Datatypes4.1-4.3"
+      ]
+    },
+    "new": {
+      "id": "AS-030",
+      "label": "xsi nil remains excluded",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:decimal\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\"><v h:nil=\"true\">1</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "values": [],
+      "reason": null,
+      "clauses": [
+        "Structures3.3.2-3.3.4",
+        "Structures3.16.2.1-2",
+        "Datatypes4.1-4.3"
+      ]
+    }
+  },
+  {
+    "file": "tests/TestData/Attributes/m2e1-cases.json",
+    "id": "M2E1-008",
+    "old": {
+      "id": "M2E1-008",
+      "description": "Root xsi request stays excluded",
+      "sections": [
+        "Structures3.2/3.4/3.5",
+        "XML1.0 3.3.3",
+        "Existing datatype adoptions"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns='urn:a' code='x' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false'><amount>12.50</amount></r>",
+      "maxStringCharacters": 256,
+      "maxNativeCoefficientDigits": 256,
+      "maxNativeScale": 256,
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "attributes": [],
+      "leaves": [
+        {
+          "kind": "Decimal",
+          "value": "12.5"
+        }
+      ],
+      "unsupportedReason": "Attributes"
+    },
+    "new": {
+      "id": "M2E1-008",
+      "description": "Root xsi request stays excluded",
+      "sections": [
+        "Structures3.2/3.4/3.5",
+        "XML1.0 3.3.3",
+        "Existing datatype adoptions"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns='urn:a' code='x' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false'><amount>12.50</amount></r>",
+      "maxStringCharacters": 256,
+      "maxNativeCoefficientDigits": 256,
+      "maxNativeScale": 256,
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "attributes": [],
+      "leaves": [
+        {
+          "kind": "Decimal",
+          "value": "12.5"
+        }
+      ],
+      "unsupportedReason": "Attributes"
+    }
+  },
+  {
+    "file": "tests/TestData/DateSimpleContent/case-plan.json",
+    "id": "DSC-037",
+    "old": {
+      "id": "DSC-037",
+      "purpose": "nil remains deferred",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false
+    },
+    "new": {
+      "id": "DSC-037",
+      "purpose": "nil remains deferred",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'/>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "executed": false
+    }
+  },
+  {
+    "file": "tests/TestData/GlobalElementReferences/case-plan.json",
+    "id": "nil-metadata-separate",
+    "old": {
+      "id": "nil-metadata-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    "new": {
+      "id": "nil-metadata-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    }
+  },
+  {
+    "file": "tests/TestData/InstanceTypes/cases.json",
+    "id": "XT-041",
+    "old": {
+      "id": "XT-041",
+      "label": "xsi:nil false remains outside slice",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Even with an otherwise supported xsi:type",
+      "proposedBoundedOutcome": "Unsupported/Attributes",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\" i:nil=\"false\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Unsupported/Attributes"
+    },
+    "new": {
+      "id": "XT-041",
+      "label": "xsi:nil false remains outside slice",
+      "status": "Authored production qualification input",
+      "fixtureRequirement": "Even with an otherwise supported xsi:type",
+      "proposedBoundedOutcome": "Unsupported/Attributes",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:types\" targetNamespace=\"urn:types\" elementFormDefault=\"qualified\"><xs:simpleType name=\"Limited\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:simpleType name=\"Sibling\"><xs:restriction base=\"xs:decimal\"><xs:maxInclusive value=\"10\"/></xs:restriction></xs:simpleType><xs:complexType name=\"Root\"><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence></xs:complexType><xs:element name=\"r\" type=\"t:Root\"/></xs:schema>",
+      "instance": "<t:r xmlns:t=\"urn:types\" xmlns=\"urn:types\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><t:v i:type=\"t:Limited\" i:nil=\"false\">9</t:v></t:r>",
+      "expectedCompile": "Valid",
+      "proposedAssessment": "Invalid"
+    }
+  },
+  {
+    "file": "tests/TestData/IntegerRestrictions/cases.json",
+    "id": "IR-087",
+    "old": {
+      "id": "IR-087",
+      "label": "xsi remains excluded nil",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\"><v h:nil=\"true\">1</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "values": [],
+      "reason": "Attributes",
+      "digits": 256,
+      "attributes": [],
+      "descendantAttributes": [],
+      "clauses": [
+        "Datatypes3.4.13.1-3",
+        "Datatypes4.3.6-4.3.12",
+        "Structures3.16.1-4"
+      ]
+    },
+    "new": {
+      "id": "IR-087",
+      "label": "xsi remains excluded nil",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType><xs:restriction base=\"xs:integer\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:h=\"http://www.w3.org/2001/XMLSchema-instance\"><v h:nil=\"true\">1</v></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "values": [],
+      "reason": "Attributes",
+      "digits": 256,
+      "attributes": [],
+      "descendantAttributes": [],
+      "clauses": [
+        "Datatypes3.4.13.1-3",
+        "Datatypes4.3.6-4.3.12",
+        "Structures3.16.1-4"
+      ]
+    }
+  },
+  {
+    "file": "tests/TestData/NestedAttributes/cases.json",
+    "id": "NA-031",
+    "old": {
+      "id": "NA-031",
+      "label": "special xsi request",
+      "schema": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:bosak:nested-plan\"\n targetNamespace=\"urn:bosak:nested-plan\" elementFormDefault=\"qualified\">\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"line\" type=\"t:LineType\" minOccurs=\"1\" maxOccurs=\"2\"/>\n      <xs:element name=\"approved\" type=\"xs:boolean\" minOccurs=\"0\"/>\n    </xs:sequence>\n    <xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/>\n  </xs:complexType>\n  <xs:complexType name=\"LineType\">\n    <xs:sequence>\n      <xs:element name=\"sku\" type=\"xs:string\"/>\n      <xs:element name=\"quantity\" type=\"xs:integer\"/>\n      <xs:element name=\"amount\" type=\"xs:decimal\"/>\n    </xs:sequence>\n    <xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/>\n    <xs:attribute name=\"paid\" type=\"xs:boolean\"/>\n  </xs:complexType>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
+      "instance": "<order xmlns=\"urn:bosak:nested-plan\" id=\"ORDER-1\">\n  <line paid=\"0\" currency=\"EUR\"><sku>ABC-0001</sku><quantity>2</quantity><amount>12.50</amount></line>\n  <line currency=\"USD\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"><sku>XYZ-0002</sku><quantity>1</quantity><amount>3.75</amount></line>\n  <approved>false</approved>\n</order>\n",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "scalars": [
+        "ABC-0001",
+        "2",
+        "12.5",
+        "XYZ-0002",
+        "1",
+        "3.75",
+        "false"
+      ],
+      "rootAttributes": 1,
+      "descendants": [
+        {
+          "path": [
+            0
+          ],
+          "namespace": "",
+          "name": "currency",
+          "kind": "String",
+          "value": "EUR"
+        },
+        {
+          "path": [
+            0
+          ],
+          "namespace": "",
+          "name": "paid",
+          "kind": "Boolean",
+          "value": "false"
+        },
+        {
+          "path": [
+            1
+          ],
+          "namespace": "",
+          "name": "currency",
+          "kind": "String",
+          "value": "USD"
+        }
+      ]
+    },
+    "new": {
+      "id": "NA-031",
+      "label": "special xsi request",
+      "schema": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:bosak:nested-plan\"\n targetNamespace=\"urn:bosak:nested-plan\" elementFormDefault=\"qualified\">\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"line\" type=\"t:LineType\" minOccurs=\"1\" maxOccurs=\"2\"/>\n      <xs:element name=\"approved\" type=\"xs:boolean\" minOccurs=\"0\"/>\n    </xs:sequence>\n    <xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/>\n  </xs:complexType>\n  <xs:complexType name=\"LineType\">\n    <xs:sequence>\n      <xs:element name=\"sku\" type=\"xs:string\"/>\n      <xs:element name=\"quantity\" type=\"xs:integer\"/>\n      <xs:element name=\"amount\" type=\"xs:decimal\"/>\n    </xs:sequence>\n    <xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/>\n    <xs:attribute name=\"paid\" type=\"xs:boolean\"/>\n  </xs:complexType>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
+      "instance": "<order xmlns=\"urn:bosak:nested-plan\" id=\"ORDER-1\">\n  <line paid=\"0\" currency=\"EUR\"><sku>ABC-0001</sku><quantity>2</quantity><amount>12.50</amount></line>\n  <line currency=\"USD\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"><sku>XYZ-0002</sku><quantity>1</quantity><amount>3.75</amount></line>\n  <approved>false</approved>\n</order>\n",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "scalars": [
+        "ABC-0001",
+        "2",
+        "12.5",
+        "XYZ-0002",
+        "1",
+        "3.75",
+        "false"
+      ],
+      "rootAttributes": 1,
+      "descendants": [
+        {
+          "path": [
+            0
+          ],
+          "namespace": "",
+          "name": "currency",
+          "kind": "String",
+          "value": "EUR"
+        },
+        {
+          "path": [
+            0
+          ],
+          "namespace": "",
+          "name": "paid",
+          "kind": "Boolean",
+          "value": "false"
+        },
+        {
+          "path": [
+            1
+          ],
+          "namespace": "",
+          "name": "currency",
+          "kind": "String",
+          "value": "USD"
+        }
+      ]
+    }
+  },
+  {
+    "file": "tests/TestData/NestedSequences/cases.json",
+    "id": "NS-039",
+    "old": {
+      "id": "NS-039",
+      "label": "special xsi",
+      "schema": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:bosak:nested-plan\"\n targetNamespace=\"urn:bosak:nested-plan\" elementFormDefault=\"qualified\">\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"line\" type=\"t:LineType\" minOccurs=\"1\" maxOccurs=\"2\"/>\n      <xs:element name=\"approved\" type=\"xs:boolean\" minOccurs=\"0\"/>\n    </xs:sequence>\n    <xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/>\n  </xs:complexType>\n  <xs:complexType name=\"LineType\">\n    <xs:sequence>\n      <xs:element name=\"sku\" type=\"xs:string\"/>\n      <xs:element name=\"quantity\" type=\"xs:integer\"/>\n      <xs:element name=\"amount\" type=\"xs:decimal\"/>\n    </xs:sequence>\n  </xs:complexType>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
+      "instance": "<order xmlns=\"urn:bosak:nested-plan\" id=\"ORDER-1\">\n  <line xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"><sku>ABC-0001</sku><quantity>2</quantity><amount>12.50</amount></line>\n  <line><sku>XYZ-0002</sku><quantity>1</quantity><amount>3.75</amount></line>\n  <approved>false</approved>\n</order>\n",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "values": [
+        "ABC-0001",
+        "2",
+        "12.5",
+        "XYZ-0002",
+        "1",
+        "3.75",
+        "false"
+      ],
+      "attributes": 1
+    },
+    "new": {
+      "id": "NS-039",
+      "label": "special xsi",
+      "schema": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:bosak:nested-plan\"\n targetNamespace=\"urn:bosak:nested-plan\" elementFormDefault=\"qualified\">\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"line\" type=\"t:LineType\" minOccurs=\"1\" maxOccurs=\"2\"/>\n      <xs:element name=\"approved\" type=\"xs:boolean\" minOccurs=\"0\"/>\n    </xs:sequence>\n    <xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/>\n  </xs:complexType>\n  <xs:complexType name=\"LineType\">\n    <xs:sequence>\n      <xs:element name=\"sku\" type=\"xs:string\"/>\n      <xs:element name=\"quantity\" type=\"xs:integer\"/>\n      <xs:element name=\"amount\" type=\"xs:decimal\"/>\n    </xs:sequence>\n  </xs:complexType>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
+      "instance": "<order xmlns=\"urn:bosak:nested-plan\" id=\"ORDER-1\">\n  <line xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"><sku>ABC-0001</sku><quantity>2</quantity><amount>12.50</amount></line>\n  <line><sku>XYZ-0002</sku><quantity>1</quantity><amount>3.75</amount></line>\n  <approved>false</approved>\n</order>\n",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "values": [
+        "ABC-0001",
+        "2",
+        "12.5",
+        "XYZ-0002",
+        "1",
+        "3.75",
+        "false"
+      ],
+      "attributes": 1
+    }
+  },
+  {
+    "file": "tests/TestData/NestedSequences/cases.json",
+    "id": "NS-057",
+    "old": {
+      "id": "NS-057",
+      "label": "nil scalar",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\" ><xs:complexType><xs:sequence><xs:element name=\"v\" nillable=\"true\" type=\"xs:decimal\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a><v>12.50</v></a></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Valid",
+      "values": [
+        "ABC-0001",
+        "2",
+        "12.5",
+        "XYZ-0002",
+        "1",
+        "3.75",
+        "false"
+      ],
+      "attributes": 0
+    },
+    "new": {
+      "id": "NS-057",
+      "label": "nil scalar",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\" ><xs:complexType><xs:sequence><xs:element name=\"v\" nillable=\"true\" type=\"xs:decimal\"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a><v>12.50</v></a></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "values": [
+        "12.5"
+      ],
+      "attributes": 0
+    }
+  },
+  {
+    "file": "tests/TestData/SimpleContent/cases.json",
+    "id": "SC-046",
+    "old": {
+      "id": "SC-046",
+      "description": "xsi nil request excluded",
+      "sections": [
+        "Structures3.4.2.2/3.4.4",
+        "Datatypes3.3.3/4.3.6",
+        "XDM3.3.1.2/6.2"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+      "instance": "<price xmlns='urn:price' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' currency='EUR'>12.50</price>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "expectedRoot": "12.5",
+      "maxNativeCoefficientDigits": 256,
+      "maxNativeScale": 256,
+      "maxStringCharacters": 256,
+      "attributes": [
+        {
+          "namespaceUri": "",
+          "localName": "currency",
+          "kind": "String",
+          "value": "EUR"
+        }
+      ],
+      "unsupportedReason": "Attributes"
+    },
+    "new": {
+      "id": "SC-046",
+      "description": "xsi nil request excluded",
+      "sections": [
+        "Structures3.4.2.2/3.4.4",
+        "Datatypes3.3.3/4.3.6",
+        "XDM3.3.1.2/6.2"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+      "instance": "<price xmlns='urn:price' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' currency='EUR'>12.50</price>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "expectedRoot": "12.5",
+      "maxNativeCoefficientDigits": 256,
+      "maxNativeScale": 256,
+      "maxStringCharacters": 256,
+      "attributes": [
+        {
+          "namespaceUri": "",
+          "localName": "currency",
+          "kind": "String",
+          "value": "EUR"
+        }
+      ],
+      "unsupportedReason": "Attributes"
+    }
+  },
+  {
+    "file": "tests/TestData/SimpleRoots/cases.json",
+    "id": "SR-031",
+    "old": {
+      "id": "SR-031",
+      "purpose": "Nil remains outside the native profile",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\" type=\"xs:string\"/></xs:schema>",
+      "instance": "<r xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "scalarFamily": "string",
+      "placement": "builtin",
+      "selectedValue": null
+    },
+    "new": {
+      "id": "SR-031",
+      "purpose": "Nil remains outside the native profile",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\" type=\"xs:string\"/></xs:schema>",
+      "instance": "<r xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:nil=\"true\"/>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Invalid",
+      "scalarFamily": "string",
+      "placement": "builtin",
+      "selectedValue": null
+    }
+  }
+]

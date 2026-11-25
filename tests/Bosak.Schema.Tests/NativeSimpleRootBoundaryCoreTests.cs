@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 22-11-2026     | Adopt derived-integer expectations without changing original stimuli |
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Reconcile measured date outcomes in isolated test copy |
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Adopt qualified bounded native date transport |
+//                      | Charles Korthout | 0.5   | 25-11-2026     | Verify admitted nil metadata and distinct supported empty typed sequences |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -80,7 +81,7 @@ public sealed class NativeSimpleRootBoundaryCoreTests
     /// <param name="attribute">The attribute control input.</param>
     [Theory][InlineData("default='abc'")][InlineData("fixed='abc'")][InlineData("nillable='true'")]
     public void ExcludedDeclarationAttributes(string attribute)
-    {var result=NativeSchemaSession.Create(S($"<xs:element name='r' type='xs:string' {attribute}/>"),Options);Assert.Equal(NativeSchemaOutcome.Unsupported,result.Outcome);Assert.Null(result.Value);}
+    {var result=NativeSchemaSession.Create(S($"<xs:element name='r' type='xs:string' {attribute}/>"),Options);if(attribute.StartsWith("nillable",StringComparison.Ordinal)){Assert.Equal(NativeSchemaOutcome.Valid,result.Outcome);using var session=result.Value!;using var document=session.Assess("<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/>",Context).Value!;Assert.True(document.IsRootNilled);Assert.Equal(NativeScalarKind.Empty,document.ReadRootScalar().Kind);}else{Assert.Equal(NativeSchemaOutcome.Unsupported,result.Outcome);Assert.Null(result.Value);}}
     /// <summary>Other Builtin Types Stay Excluded.</summary>
     /// <param name="type">The type control input.</param>
     [Theory][InlineData("int")][InlineData("date")][InlineData("anyType")]
