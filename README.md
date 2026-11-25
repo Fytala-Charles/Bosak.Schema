@@ -180,3 +180,5 @@ The catalog also supports [bounded imports of named simple-type libraries](docs/
 The [simple nillability guide](docs/simple-nillability/README.md) explains nil flags, empty typed values and their distinction from empty strings and absent typed values.
 
 See [element value constraints](docs/element-value-constraints/README.md) for supplied-content fixed validation and the explicit boundary around default application.
+
+The [attribute value-constraint guide](docs/attribute-value-constraints/README.md) covers provided values, global/use inheritance and the defaulted-node boundary.

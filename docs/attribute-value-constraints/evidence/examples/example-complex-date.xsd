@@ -1,0 +1,11 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Dated"><xs:simpleContent>
+    <xs:extension base="xs:date"/>
+  </xs:simpleContent></xs:complexType>
+  <xs:complexType name="Window"><xs:simpleContent><xs:restriction base="Dated">
+    <xs:minInclusive value="2000-01-01Z"/>
+    <xs:maxExclusive value="2000-01-03Z"/>
+    <xs:explicitTimezone value="required"/>
+  </xs:restriction></xs:simpleContent></xs:complexType>
+  <xs:element name="issued" type="Window"/>
+</xs:schema>
