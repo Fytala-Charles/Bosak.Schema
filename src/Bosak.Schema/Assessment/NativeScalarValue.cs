@@ -18,12 +18,14 @@
 //                      | Charles Korthout | 0.5   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      | Charles Korthout | 0.6   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.7   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
+//                      | Charles Korthout | 0.8   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
 using Bosak.XPath.Core.Xdm;
 
 using System.Numerics;
+using System.Collections.Immutable;
 
 namespace Bosak.Schema;
 
@@ -47,12 +49,28 @@ public enum NativeScalarKind
     /// <summary>An exact time without schema authority.</summary>
     Time = 8,
     /// <summary>An exact dateTimeStamp with required timezone and no schema authority.</summary>
-    DateTimeStamp = 9
+    DateTimeStamp = 9,
+    /// <summary>An immutable hexadecimal binary value without schema authority.</summary>
+    HexBinary = 10,
+    /// <summary>An immutable base64 binary value without schema authority.</summary>
+    Base64Binary = 11,
+    /// <summary>An expanded QName without schema authority.</summary>
+    QName = 12
 }
 
 /// <summary>Contains a detached immutable scalar with no transferable schema authority.</summary>
 public sealed class NativeScalarValue
 {
+    private readonly ImmutableArray<byte> binary;
+    private readonly XsQName qname;
+    private NativeScalarValue(XsQName value) { qname = value; Kind = NativeScalarKind.QName; }
+    private NativeScalarValue(string value, bool base64) { binary = ImmutableArray.CreateRange(base64 ? Convert.FromBase64String(value) : Convert.FromHexString(value)); Kind = base64 ? NativeScalarKind.Base64Binary : NativeScalarKind.HexBinary; }
+    /// <summary>Gets immutable decoded octets, usable after owner disposal.</summary>
+    /// <exception cref="InvalidOperationException">The scalar is not binary.</exception>
+    public ImmutableArray<byte> BinaryValue => Kind is NativeScalarKind.HexBinary or NativeScalarKind.Base64Binary ? binary : throw new InvalidOperationException("The scalar is not binary.");
+    /// <summary>Gets detached expanded QName components, usable after owner disposal.</summary>
+    /// <exception cref="InvalidOperationException">The scalar is not a QName.</exception>
+    public XsQName QNameValue => Kind == NativeScalarKind.QName ? qname : throw new InvalidOperationException("The scalar is not a QName.");
     private NativeScalarValue() { Kind = NativeScalarKind.Empty; }
     private readonly XdmExactCalendarValue calendar;
     private NativeScalarValue(XdmExactCalendarValue value)
@@ -93,6 +111,8 @@ public sealed class NativeScalarValue
     internal static NativeScalarValue FromValue(XdmValue value) => value.IsExactCalendar ? new NativeScalarValue(value.ExactCalendarValue) : value.Kind switch
     {
         XdmValueKind.Undefined => new NativeScalarValue(),
+        XdmValueKind.QName => new NativeScalarValue(value.QNameValue),
+        XdmValueKind.String when value.SchemaTypeName is "hexBinary" or "base64Binary" => new NativeScalarValue(value.StringValue, value.SchemaTypeName == "base64Binary"),
         XdmValueKind.String => new NativeScalarValue(value.StringValue),
         XdmValueKind.Decimal => new NativeScalarValue(value.ExactDecimalValue),
         XdmValueKind.Boolean => new NativeScalarValue(value.BooleanValue),

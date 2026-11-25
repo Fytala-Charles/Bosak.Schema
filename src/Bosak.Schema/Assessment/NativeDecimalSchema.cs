@@ -64,6 +64,7 @@
 //                      | Charles Korthout | 1.41   | 25-11-2026     | Validate provided effective attribute constraints and fixed override identity |
 //                      | Charles Korthout | 1.42   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
 //                      | Charles Korthout | 1.43   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
+//                      | Charles Korthout | 0.10   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -159,6 +160,8 @@ internal sealed partial class NativeDecimalSchema
             var simple = CreateBuiltinIntegerTypes(integerType);
             if (maxStringCharacters is not null)
             {
+                foreach (var kind in Enum.GetValues<NativeInterchangeKind>())
+                    simple.Add(Xs + InterchangeName(kind), new NativeType(InterchangeName(kind), false, Xs.NamespaceName, interchangeKind: kind));
                 simple.Add(Xs + "date", new NativeType("date", false, Xs.NamespaceName, isDate: true));
                 var calendarDateTime = new NativeType("dateTime", false, Xs.NamespaceName, calendarKind: XdmExactCalendarKind.DateTime);
                 simple.Add(Xs + "dateTime", calendarDateTime);
@@ -343,7 +346,7 @@ internal sealed partial class NativeDecimalSchema
 
         var attributeUses = CompileAttributes(attributeMembers, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
 
-        var assertionNames = children.Where(c => !c.Type.IsBoolean && !c.Type.IsInteger && !c.Type.IsDate && c.Type.CalendarKind is null).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
+        var assertionNames = children.Where(c => !c.Type.IsBoolean && !c.Type.IsInteger && !c.Type.IsDate && c.Type.CalendarKind is null && c.Type.InterchangeKind is null).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var stringNames = stringType is null ? null : children.Where(c => c.Type.IsString).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var structuralPlans = CompileStructuralAssertions(assertionMembers.Where(IsStructuralAssertion), targetNamespace, assertionNamespace, cancellationToken);
         var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
@@ -501,7 +504,7 @@ internal sealed partial class NativeDecimalSchema
                     cancellationToken.ThrowIfCancellationRequested();
                     var attribute = root.Attribute(use.ExpandedName);
                     Check(attribute is not null || use.MinOccurs == 0, "Required root attribute is missing.");
-                    if (attribute is not null) attributeStates.Add(AssessAttributeValue(attribute.Value, use, patternBudget));
+                    if (attribute is not null) attributeStates.Add(AssessAttributeValue(attribute.Value, use, patternBudget, root));
                     else RequireUnconstrainedAttributeAbsence(use);
                 }
                 Check(root.Attributes().All(a => IsAdmittedInstanceAttribute(a) || selected.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared root attribute.");
@@ -524,7 +527,7 @@ internal sealed partial class NativeDecimalSchema
                 Check(!root.HasElements, "Simple-content root cannot contain child elements.");
                 Require(root.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
                 var scalarDeclaration = new NativeDeclaration(selected.Root.Name, contentType, 1, 1, selected.Root.NamespaceUri);
-                var state = AssessScalar(root.Value, scalarDeclaration, patternBudget) with { Declaration = selected.Root, EffectiveType = rootType, NormalizedStringValue = Collapse(root.Value) };
+                var state = AssessScalar(root.Value, scalarDeclaration, patternBudget, root) with { Declaration = selected.Root, EffectiveType = rootType, NormalizedStringValue = Collapse(root.Value) };
                 selected.AssessIntegerAssertions(root, state, cancellationToken);
                 cancellationToken.ThrowIfCancellationRequested();
                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [state], attributeStates.ToImmutable()));
@@ -602,9 +605,17 @@ internal sealed partial class NativeDecimalSchema
         }
     }
 
-    private NativeElementState AssessScalar(string text, NativeDeclaration declaration, NativePatternBudget patternBudget)
+    internal static string InterchangeName(NativeInterchangeKind kind) => kind switch { NativeInterchangeKind.HexBinary => "hexBinary", NativeInterchangeKind.Base64Binary => "base64Binary", _ => "QName" };
+
+    private NativeElementState AssessScalar(string text, NativeDeclaration declaration, NativePatternBudget patternBudget, XElement? scope = null)
     {
-        if (declaration.Type.IsString)
+        if (declaration.Type.InterchangeKind is { } interchangeKind)
+        {
+            var value = NativeInterchangeParser.Parse(text, interchangeKind, maxStringCharacters!.Value, scope);
+            Check(declaration.Type.InterchangeFacets?.Accepts(value, patternBudget) ?? true, "Interchange facet violation.");
+            return new NativeElementState(declaration, null, InterchangeValue: value);
+        }
+        else if (declaration.Type.IsString)
         {
             Require(text.Length <= maxStringCharacters!.Value, "String capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
             Check(declaration.Type.StringFacets?.Accepts(text, patternBudget) ?? true, "String facet violation.");
@@ -829,8 +840,10 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null, bool isMixed = false, XdmExactCalendarKind? calendarKind = null, NativeCalendarFacets? calendarFacets = null)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null, bool isMixed = false, XdmExactCalendarKind? calendarKind = null, NativeCalendarFacets? calendarFacets = null, NativeInterchangeKind? interchangeKind = null, NativeInterchangeFacets? interchangeFacets = null)
 {
+    internal NativeInterchangeKind? InterchangeKind { get; } = interchangeKind;
+    internal NativeInterchangeFacets? InterchangeFacets { get; } = interchangeFacets;
     internal NativeType? DerivationBase { get; } = derivationBase;
     internal bool IsComplexRestriction { get; } = isComplexRestriction;
     internal XName? BaseName { get; } = baseName;
@@ -867,7 +880,7 @@ internal sealed class NativeDeclaration(string name, NativeType type, int minOcc
     internal int MinOccurs { get; } = minOccurs;
     internal int MaxOccurs { get; } = maxOccurs;
 }
-internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null, XPathDateTime? DateValue = null, XdmExactCalendarValue? CalendarValue = null)
+internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null, XPathDateTime? DateValue = null, XdmExactCalendarValue? CalendarValue = null, NativeInterchangeValue? InterchangeValue = null)
 {
     internal NativeType? EffectiveType { get; init; }
     internal NativeType GoverningType => EffectiveType ?? Declaration.Type;

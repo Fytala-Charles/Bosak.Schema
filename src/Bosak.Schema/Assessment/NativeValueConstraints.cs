@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
+//                      | Charles Korthout | 0.3   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Numerics;
@@ -20,7 +21,7 @@ using System.Xml.Linq;
 using Bosak.XPath.Core.Xdm;
 namespace Bosak.Schema;
 
-internal sealed record NativeValueConstraint(bool IsFixed,XdmExactDecimal? Decimal,string? Text,bool? Boolean,BigInteger? Integer,XPathDateTime? Date,XdmExactCalendarValue? Calendar);
+internal sealed record NativeValueConstraint(bool IsFixed,XdmExactDecimal? Decimal,string? Text,bool? Boolean,BigInteger? Integer,XPathDateTime? Date,XdmExactCalendarValue? Calendar,NativeInterchangeValue? Interchange);
 internal sealed class NativeValueConstraintCompilation(NativeNumericLimits limits,int maxStringCharacters,CancellationToken token)
 {
  internal NativeNumericLimits Limits=>limits;
@@ -39,8 +40,8 @@ internal sealed partial class NativeDecimalSchema
   Require(!type.IsComplex,"Complex value constraints are outside the provided-content profile.",NativeDecimalUnsupportedReason.DeclarationShape);var text=(fixedValue??defaultValue)!.Value;Require(text.Length<=256,"Value constraint literal capacity exceeded.",NativeDecimalUnsupportedReason.RepresentationCapacity);
   var context=NativeValueConstraintCompilation.For(source);Require(context is not null,"Value constraint compile context unavailable.",NativeDecimalUnsupportedReason.DeclarationShape);context!.Token.ThrowIfCancellationRequested();
   // This scratch declaration is only a pure literal parser input, never registered or issued as a component.
-  var scratch=new NativeDeclaration("literal",type,1,1);var parser=new NativeDecimalSchema(scratch,[],[],context.Limits){maxStringCharacters=context.MaxStringCharacters};var value=parser.AssessScalar(text,scratch,context.PatternBudget);
-  return new(fixedValue is not null,value.TypedValue,value.StringValue,value.BooleanValue,value.IntegerValue,value.DateValue,value.CalendarValue);
+  var scratch=new NativeDeclaration("literal",type,1,1);var parser=new NativeDecimalSchema(scratch,[],[],context.Limits){maxStringCharacters=context.MaxStringCharacters};var value=parser.AssessScalar(text,scratch,context.PatternBudget,source);
+  return new(fixedValue is not null,value.TypedValue,value.StringValue,value.BooleanValue,value.IntegerValue,value.DateValue,value.CalendarValue,value.InterchangeValue);
  }
  private static void RequireProvidedElementValue(XElement element,NativeDeclaration declaration)
  {
@@ -49,6 +50,7 @@ internal sealed partial class NativeDecimalSchema
  }
  private static bool ConstraintEquals(NativeValueConstraint expected,NativeElementState actual)
  {
+  if(expected.Interchange is { } interchange && actual.InterchangeValue is { } otherInterchange)return interchange.ValueEquals(otherInterchange);
   if(expected.Decimal is { } a && actual.TypedValue is { } b)return a.Coefficient==b.Coefficient && a.Scale==b.Scale;
   if(expected.Text is { } x && actual.StringValue is { } y)return string.Equals(x,y,StringComparison.Ordinal);
   if(expected.Boolean is { } logical && actual.BooleanValue is { } otherLogical)return logical==otherLogical;

@@ -23,6 +23,7 @@
 //                      | Charles Korthout | 0.10   | 24-11-2026     | Refuse complex restrictions over newly enumerated decimal bases pending qualification |
 //                      | Charles Korthout | 0.11   | 25-11-2026     | Adopt native decimal complex enumeration and base-valid declarations |
 //                      | Charles Korthout | 0.12   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
+//                      | Charles Korthout | 0.13   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -79,6 +80,16 @@ internal sealed partial class NativeDecimalSchema
         var content = baseType.ContentType;
         Require(content is not null && !content.IsComplex && !content.IsString && !content.IsBoolean,
             "Complex base content is outside the decimal profile.", NativeDecimalUnsupportedReason.ValueType);
+        if (content!.InterchangeKind is { } interchangeKind)
+        {
+            Require(localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty, "Interchange assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+            var characters = maxStringCharacters ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Interchange character context required.", NativeDecimalUnsupportedReason.ValueType);
+            var compilation = patternCompilation ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Interchange pattern context required.", NativeDecimalUnsupportedReason.ValueType);
+            var interchangeAtomic = new NativeType(null, false, targetNamespace, interchangeKind: interchangeKind,
+                interchangeFacets: NativeInterchangeFacets.Compile(restriction, interchangeKind, characters, compilation, content.InterchangeFacets), derivationBase: content);
+            var interchangeGoverning = new NativeType(root.Type.Name, false, targetNamespace, contentType: interchangeAtomic, derivationBase: baseType, isComplexRestriction: true);
+            return new NativeDecimalSchema(new NativeDeclaration(root.Name, interchangeGoverning, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
+        }
         if (content!.CalendarKind is { } calendarKind)
         {
             Require(localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty, "Calendar assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);

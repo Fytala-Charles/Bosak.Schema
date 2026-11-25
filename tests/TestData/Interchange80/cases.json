@@ -1,0 +1,1651 @@
+{
+  "cases": [
+    {
+      "id": "DT-101-good",
+      "contract": "DT-101",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": ""
+    },
+    {
+      "id": "DT-101-edge",
+      "contract": "DT-101",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>0</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-102-good",
+      "contract": "DT-102",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ABCD</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "ABCD"
+    },
+    {
+      "id": "DT-102-edge",
+      "contract": "DT-102",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ABCG</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-103-good",
+      "contract": "DT-103",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>abcd</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "ABCD"
+    },
+    {
+      "id": "DT-103-edge",
+      "contract": "DT-103",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>abcg</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-104-good",
+      "contract": "DT-104",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>0123</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "0123"
+    },
+    {
+      "id": "DT-104-edge",
+      "contract": "DT-104",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>012</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-105-good",
+      "contract": "DT-105",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>aF09</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "AF09"
+    },
+    {
+      "id": "DT-105-edge",
+      "contract": "DT-105",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ＡＦ</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-106-good",
+      "contract": "DT-106",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> \t61\n</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-106-edge",
+      "contract": "DT-106",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>6 1</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-107-good",
+      "contract": "DT-107",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-107-edge",
+      "contract": "DT-107",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61:00</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-108-good",
+      "contract": "DT-108",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-108-edge",
+      "contract": "DT-108",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>+61</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-109-good",
+      "contract": "DT-109",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>0000</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "0000"
+    },
+    {
+      "id": "DT-109-edge",
+      "contract": "DT-109",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>0x00</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-110-good",
+      "contract": "DT-110",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "DT-110-edge",
+      "contract": "DT-110",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</r>",
+      "outcome": "Unsupported",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-111-good",
+      "contract": "DT-111",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "outcome": "Valid",
+      "family": "base64Binary",
+      "bytes": ""
+    },
+    {
+      "id": "DT-111-edge",
+      "contract": "DT-111",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>A</r>",
+      "outcome": "Invalid",
+      "family": "base64Binary"
+    },
+    {
+      "id": "DT-112-good",
+      "contract": "DT-112",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>YWJj</r>",
+      "outcome": "Valid",
+      "family": "base64Binary",
+      "bytes": "616263"
+    },
+    {
+      "id": "DT-112-edge",
+      "contract": "DT-112",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>YWJ</r>",
+      "outcome": "Invalid",
+      "family": "base64Binary"
+    },
+    {
+      "id": "DT-113-good",
+      "contract": "DT-113",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>YQ==</r>",
+      "outcome": "Valid",
+      "family": "base64Binary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-113-edge",
+      "contract": "DT-113",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>YQ=</r>",
+      "outcome": "Invalid",
+      "family": "base64Binary"
+    },
+    {
+      "id": "DT-114-good",
+      "contract": "DT-114",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>YWI=</r>",
+      "outcome": "Valid",
+      "family": "base64Binary",
+      "bytes": "6162"
+    },
+    {
+      "id": "DT-114-edge",
+      "contract": "DT-114",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>YWI==</r>",
+      "outcome": "Invalid",
+      "family": "base64Binary"
+    },
+    {
+      "id": "DT-115-good",
+      "contract": "DT-115",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>YWJj</r>",
+      "outcome": "Valid",
+      "family": "base64Binary",
+      "bytes": "616263"
+    },
+    {
+      "id": "DT-115-edge",
+      "contract": "DT-115",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>YWJj=</r>",
+      "outcome": "Invalid",
+      "family": "base64Binary"
+    },
+    {
+      "id": "DT-116-good",
+      "contract": "DT-116",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>Y W\tJ\nj</r>",
+      "outcome": "Valid",
+      "family": "base64Binary",
+      "bytes": "616263"
+    },
+    {
+      "id": "DT-116-edge",
+      "contract": "DT-116",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>Y WJj</r>",
+      "outcome": "Invalid",
+      "family": "base64Binary"
+    },
+    {
+      "id": "DT-117-good",
+      "contract": "DT-117",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>YQ==</r>",
+      "outcome": "Valid",
+      "family": "base64Binary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-117-edge",
+      "contract": "DT-117",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>Y!==</r>",
+      "outcome": "Invalid",
+      "family": "base64Binary"
+    },
+    {
+      "id": "DT-118-good",
+      "contract": "DT-118",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>YQ==</r>",
+      "outcome": "Valid",
+      "family": "base64Binary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-118-edge",
+      "contract": "DT-118",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>YQ===</r>",
+      "outcome": "Invalid",
+      "family": "base64Binary"
+    },
+    {
+      "id": "DT-119-good",
+      "contract": "DT-119",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>AA==</r>",
+      "outcome": "Valid",
+      "family": "base64Binary",
+      "bytes": "00"
+    },
+    {
+      "id": "DT-119-edge",
+      "contract": "DT-119",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>AB==</r>",
+      "outcome": "Invalid",
+      "family": "base64Binary"
+    },
+    {
+      "id": "DT-120-good",
+      "contract": "DT-120",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>AAA=</r>",
+      "outcome": "Valid",
+      "family": "base64Binary",
+      "bytes": "0000"
+    },
+    {
+      "id": "DT-120-edge",
+      "contract": "DT-120",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>AAB=</r>",
+      "outcome": "Invalid",
+      "family": "base64Binary"
+    },
+    {
+      "id": "DT-121-good",
+      "contract": "DT-121",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-121-edge",
+      "contract": "DT-121",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>6162</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-122-good",
+      "contract": "DT-122",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:minLength value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-122-edge",
+      "contract": "DT-122",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:minLength value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-123-good",
+      "contract": "DT-123",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:maxLength value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-123-edge",
+      "contract": "DT-123",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:maxLength value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>6162</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-124-good",
+      "contract": "DT-124",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:enumeration value='61'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-124-edge",
+      "contract": "DT-124",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:enumeration value='61'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>62</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-125-good",
+      "contract": "DT-125",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='B'><xs:restriction base='xs:hexBinary'><xs:enumeration value='61'/><xs:enumeration value='62'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:enumeration value='61'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-125-edge",
+      "contract": "DT-125",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='B'><xs:restriction base='xs:hexBinary'><xs:enumeration value='61'/><xs:enumeration value='62'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:enumeration value='61'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>6162</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-126-good",
+      "contract": "DT-126",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='B'><xs:restriction base='xs:hexBinary'><xs:minLength value='1'/><xs:maxLength value='2'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-126-edge",
+      "contract": "DT-126",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='B'><xs:restriction base='xs:hexBinary'><xs:minLength value='1'/><xs:maxLength value='2'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>6162</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-127-good",
+      "contract": "DT-127",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='B'><xs:restriction base='xs:hexBinary'><xs:length value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-127-edge",
+      "contract": "DT-127",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='B'><xs:restriction base='xs:hexBinary'><xs:length value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='2'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>6162</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary",
+      "compile": "Invalid"
+    },
+    {
+      "id": "DT-128-good",
+      "contract": "DT-128",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:pattern value='[A-F]+'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>AB</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "AB"
+    },
+    {
+      "id": "DT-128-edge",
+      "contract": "DT-128",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:pattern value='[A-F]+'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-129-good",
+      "contract": "DT-129",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:whiteSpace value='collapse' fixed='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> 61 </r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-129-edge",
+      "contract": "DT-129",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:whiteSpace value='collapse' fixed='true'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>6 1</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-130-good",
+      "contract": "DT-130",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:enumeration value='61'/><xs:pattern value='61'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-130-edge",
+      "contract": "DT-130",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/><xs:enumeration value='61'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "compile": "Unsupported"
+    },
+    {
+      "id": "DT-131-good",
+      "contract": "DT-131",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-131-edge",
+      "contract": "DT-131",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>0</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-132-good",
+      "contract": "DT-132",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:hexBinary' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>61</v></r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "path": [
+        0
+      ],
+      "bytes": "61"
+    },
+    {
+      "id": "DT-132-edge",
+      "contract": "DT-132",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:hexBinary' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>0</v></r>",
+      "outcome": "Invalid",
+      "family": "hexBinary",
+      "path": [
+        0
+      ]
+    },
+    {
+      "id": "DT-133-good",
+      "contract": "DT-133",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:hexBinary' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>61</v></r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "path": [
+        0
+      ],
+      "bytes": "61"
+    },
+    {
+      "id": "DT-133-edge",
+      "contract": "DT-133",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:hexBinary' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>0</v></r>",
+      "outcome": "Invalid",
+      "family": "hexBinary",
+      "path": [
+        0
+      ]
+    },
+    {
+      "id": "DT-134-good",
+      "contract": "DT-134",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:hexBinary' /></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><c><v>61</v></c></r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "path": [
+        0,
+        0
+      ],
+      "bytes": "61"
+    },
+    {
+      "id": "DT-134-edge",
+      "contract": "DT-134",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:hexBinary' /></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><c><v>0</v></c></r>",
+      "outcome": "Invalid",
+      "family": "hexBinary",
+      "path": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "DT-135-good",
+      "contract": "DT-135",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:hexBinary' use='required' /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x' a=\"61\"><v>1</v></r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "target": "attribute",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-135-edge",
+      "contract": "DT-135",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:hexBinary' use='required' /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x' a=\"0\"><v>1</v></r>",
+      "outcome": "Invalid",
+      "family": "hexBinary",
+      "target": "attribute"
+    },
+    {
+      "id": "DT-136-good",
+      "contract": "DT-136",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' ><xs:simpleType><xs:restriction base='xs:hexBinary'/></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-136-edge",
+      "contract": "DT-136",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' ><xs:simpleType><xs:restriction base='xs:hexBinary'/></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>0</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-137-good",
+      "contract": "DT-137",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:hexBinary'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-137-edge",
+      "contract": "DT-137",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:hexBinary'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>0</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-138-good",
+      "contract": "DT-138",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' fixed='61'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-138-edge",
+      "contract": "DT-138",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' fixed='61'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>62</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-139-good",
+      "contract": "DT-139",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-139-edge",
+      "contract": "DT-139",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>0</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-140-good",
+      "contract": "DT-140",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-140-edge",
+      "contract": "DT-140",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>0</r>",
+      "outcome": "Invalid",
+      "family": "hexBinary"
+    },
+    {
+      "id": "DT-141-good",
+      "contract": "DT-141",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": ""
+    },
+    {
+      "id": "DT-141-edge",
+      "contract": "DT-141",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>1item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-142-good",
+      "contract": "DT-142",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-142-edge",
+      "contract": "DT-142",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-143-good",
+      "contract": "DT-143",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> p:item </r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-143-edge",
+      "contract": "DT-143",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p: item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-144-good",
+      "contract": "DT-144",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-144-edge",
+      "contract": "DT-144",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:i:x</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-145-good",
+      "contract": "DT-145",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a-b.c</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "a-b.c",
+      "namespace": ""
+    },
+    {
+      "id": "DT-145-edge",
+      "contract": "DT-145",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a/b</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-146-good",
+      "contract": "DT-146",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>é名</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "é名",
+      "namespace": ""
+    },
+    {
+      "id": "DT-146-edge",
+      "contract": "DT-146",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>́x</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-147-good",
+      "contract": "DT-147",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>xml:lang</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "lang",
+      "namespace": "http://www.w3.org/XML/1998/namespace"
+    },
+    {
+      "id": "DT-147-edge",
+      "contract": "DT-147",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>xml:</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-148-good",
+      "contract": "DT-148",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>xmlns</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "xmlns",
+      "namespace": ""
+    },
+    {
+      "id": "DT-148-edge",
+      "contract": "DT-148",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>xmlns:x</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-149-good",
+      "contract": "DT-149",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:名</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "名",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-149-edge",
+      "contract": "DT-149",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:1名</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-150-good",
+      "contract": "DT-150",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>𐀀name</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "𐀀name",
+      "namespace": ""
+    },
+    {
+      "id": "DT-150-edge",
+      "contract": "DT-150",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>󰀀name</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-151-good",
+      "contract": "DT-151",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": ""
+    },
+    {
+      "id": "DT-151-edge",
+      "contract": "DT-151",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-152-good",
+      "contract": "DT-152",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-152-edge",
+      "contract": "DT-152",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-153-good",
+      "contract": "DT-153",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' targetNamespace='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns='urn:x'>item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-153-edge",
+      "contract": "DT-153",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-154-good",
+      "contract": "DT-154",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:QName'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:outer'><v xmlns:p='urn:inner'>p:item</v></r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:inner",
+      "path": [
+        0
+      ]
+    },
+    {
+      "id": "DT-154-edge",
+      "contract": "DT-154",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:QName'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:outer'><v xmlns:p='urn:inner'>u:item</v></r>",
+      "outcome": "Invalid",
+      "family": "QName",
+      "path": [
+        0
+      ]
+    },
+    {
+      "id": "DT-155-good",
+      "contract": "DT-155",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:QName' use='required' /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x' a=\"p:item\"><v>1</v></r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "target": "attribute",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-155-edge",
+      "contract": "DT-155",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:QName' use='required' /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x' a=\"u:item\"><v>1</v></r>",
+      "outcome": "Invalid",
+      "family": "QName",
+      "target": "attribute"
+    },
+    {
+      "id": "DT-156-good",
+      "contract": "DT-156",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-156-edge",
+      "contract": "DT-156",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-157-good",
+      "contract": "DT-157",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-157-edge",
+      "contract": "DT-157",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-158-good",
+      "contract": "DT-158",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-158-edge",
+      "contract": "DT-158",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-159-good",
+      "contract": "DT-159",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-159-edge",
+      "contract": "DT-159",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-160-good",
+      "contract": "DT-160",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:x</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "maxCharacters": 5,
+      "local": "x",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-160-edge",
+      "contract": "DT-160",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:x</r>",
+      "outcome": "Unsupported",
+      "family": "QName",
+      "maxCharacters": 4,
+      "local": "x",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-161-good",
+      "contract": "DT-161",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>q:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-161-edge",
+      "contract": "DT-161",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:other</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-162-good",
+      "contract": "DT-162",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>q:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-162-edge",
+      "contract": "DT-162",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:other</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-163-good",
+      "contract": "DT-163",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-163-edge",
+      "contract": "DT-163",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:other'>p:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-164-good",
+      "contract": "DT-164",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/><xs:enumeration value='p:other'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>q:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-164-edge",
+      "contract": "DT-164",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/><xs:enumeration value='p:other'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:other</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-165-good",
+      "contract": "DT-165",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:pattern value='p:[a-z]+'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-165-edge",
+      "contract": "DT-165",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:pattern value='p:[a-z]+'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:1bad</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-166-good",
+      "contract": "DT-166",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-166-edge",
+      "contract": "DT-166",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:1bad</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-167-good",
+      "contract": "DT-167",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:enumeration xmlns:p='urn:facet' value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:q='urn:facet'>q:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:facet"
+    },
+    {
+      "id": "DT-167-edge",
+      "contract": "DT-167",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:other</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-168-good",
+      "contract": "DT-168",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:pattern value='p:[a-z]+'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-168-edge",
+      "contract": "DT-168",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:pattern value='p:[a-z]+'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:1bad</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-169-good",
+      "contract": "DT-169",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-169-edge",
+      "contract": "DT-169",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:other</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-170-good",
+      "contract": "DT-170",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-170-edge",
+      "contract": "DT-170",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:1bad</r>",
+      "outcome": "Invalid",
+      "family": "QName",
+      "compile": "Unsupported"
+    },
+    {
+      "id": "DT-171-good",
+      "contract": "DT-171",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-171-edge",
+      "contract": "DT-171",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-172-good",
+      "contract": "DT-172",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:QName' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>p:item</v></r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "path": [
+        0
+      ],
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-172-edge",
+      "contract": "DT-172",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:QName' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>u:item</v></r>",
+      "outcome": "Invalid",
+      "family": "QName",
+      "path": [
+        0
+      ]
+    },
+    {
+      "id": "DT-173-good",
+      "contract": "DT-173",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:QName' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>p:item</v></r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "path": [
+        0
+      ],
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-173-edge",
+      "contract": "DT-173",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:QName' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>u:item</v></r>",
+      "outcome": "Invalid",
+      "family": "QName",
+      "path": [
+        0
+      ]
+    },
+    {
+      "id": "DT-174-good",
+      "contract": "DT-174",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:QName' /></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><c><v>p:item</v></c></r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "path": [
+        0,
+        0
+      ],
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-174-edge",
+      "contract": "DT-174",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:QName' /></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><c><v>u:item</v></c></r>",
+      "outcome": "Invalid",
+      "family": "QName",
+      "path": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "DT-175-good",
+      "contract": "DT-175",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:QName' use='required' /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x' a=\"p:item\"><v>1</v></r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "target": "attribute",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-175-edge",
+      "contract": "DT-175",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:QName' use='required' /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x' a=\"u:item\"><v>1</v></r>",
+      "outcome": "Invalid",
+      "family": "QName",
+      "target": "attribute"
+    },
+    {
+      "id": "DT-176-good",
+      "contract": "DT-176",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' ><xs:simpleType><xs:restriction base='xs:QName'/></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-176-edge",
+      "contract": "DT-176",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' ><xs:simpleType><xs:restriction base='xs:QName'/></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-177-good",
+      "contract": "DT-177",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:QName'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-177-edge",
+      "contract": "DT-177",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:QName'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-178-good",
+      "contract": "DT-178",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' fixed='p:item'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-178-edge",
+      "contract": "DT-178",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' fixed='p:item'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:other</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-179-good",
+      "contract": "DT-179",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-179-edge",
+      "contract": "DT-179",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-180-good",
+      "contract": "DT-180",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-180-edge",
+      "contract": "DT-180",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>u:item</r>",
+      "outcome": "Invalid",
+      "family": "QName"
+    },
+    {
+      "id": "DT-133-all-good",
+      "contract": "DT-133",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:hexBinary' /></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>61</v></r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "path": [
+        0
+      ],
+      "bytes": "61"
+    },
+    {
+      "id": "DT-133-all-edge",
+      "contract": "DT-133",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:hexBinary' /></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>0</v></r>",
+      "outcome": "Invalid",
+      "family": "hexBinary",
+      "path": [
+        0
+      ]
+    },
+    {
+      "id": "DT-173-all-good",
+      "contract": "DT-173",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:QName' /></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>p:item</v></r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "path": [
+        0
+      ],
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-173-all-edge",
+      "contract": "DT-173",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:QName' /></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>u:item</v></r>",
+      "outcome": "Invalid",
+      "family": "QName",
+      "path": [
+        0
+      ]
+    },
+    {
+      "id": "DT-135-descendant-good",
+      "contract": "DT-135",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:hexBinary' use='required' /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><c xmlns:p='urn:x' xmlns:q='urn:x' a=\"61\"><v>1</v></c></r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "target": "attribute",
+      "bytes": "61",
+      "path": [
+        0
+      ]
+    },
+    {
+      "id": "DT-135-descendant-edge",
+      "contract": "DT-135",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:hexBinary' use='required' /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><c xmlns:p='urn:x' xmlns:q='urn:x' a=\"0\"><v>1</v></c></r>",
+      "outcome": "Invalid",
+      "family": "hexBinary",
+      "target": "attribute",
+      "path": [
+        0
+      ]
+    },
+    {
+      "id": "DT-175-descendant-good",
+      "contract": "DT-175",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:QName' use='required' /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><c xmlns:p='urn:x' xmlns:q='urn:x' a=\"p:item\"><v>1</v></c></r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "target": "attribute",
+      "local": "item",
+      "namespace": "urn:x",
+      "path": [
+        0
+      ]
+    },
+    {
+      "id": "DT-175-descendant-edge",
+      "contract": "DT-175",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:QName' use='required' /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><c xmlns:p='urn:x' xmlns:q='urn:x' a=\"u:item\"><v>1</v></c></r>",
+      "outcome": "Invalid",
+      "family": "QName",
+      "target": "attribute",
+      "path": [
+        0
+      ]
+    },
+    {
+      "id": "DT-138-equal-value",
+      "contract": "DT-138",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' fixed='61'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> 61 </r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61"
+    },
+    {
+      "id": "DT-178-equal-value",
+      "contract": "DT-178",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:QName' fixed='p:item'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>q:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x"
+    },
+    {
+      "id": "DT-130-pattern-capacity",
+      "contract": "DT-130",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61",
+      "compile": "Unsupported"
+    },
+    {
+      "id": "DT-170-pattern-capacity",
+      "contract": "DT-170",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x",
+      "compile": "Unsupported"
+    },
+    {
+      "id": "DT-168-excluded-facet",
+      "contract": "DT-168",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value=\"1\"/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>p:item</r>",
+      "outcome": "Valid",
+      "family": "QName",
+      "local": "item",
+      "namespace": "urn:x",
+      "compile": "Unsupported"
+    },
+    {
+      "id": "DT-129-excluded-facet",
+      "contract": "DT-129",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:whiteSpace value=\"preserve\"/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> 61 </r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61",
+      "compile": "Invalid"
+    },
+    {
+      "id": "DT-126-invalid-widening",
+      "contract": "DT-126",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:simpleType name='B'><xs:restriction base='xs:hexBinary'><xs:minLength value='1'/><xs:maxLength value='2'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='3'/></xs:restriction></xs:simpleType><xs:element name='r' type='T' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>61</r>",
+      "outcome": "Valid",
+      "family": "hexBinary",
+      "bytes": "61",
+      "compile": "Invalid"
+    },
+    {
+      "id": "DT-110-caller-capacity",
+      "contract": "DT-110",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:hexBinary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</r>",
+      "outcome": "Unsupported",
+      "family": "hexBinary",
+      "bytes": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "maxCharacters": 255
+    },
+    {
+      "id": "DT-120-pad-bits-equal",
+      "contract": "DT-120",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x' ><xs:element name='r' type='xs:base64Binary' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>AA A=</r>",
+      "outcome": "Valid",
+      "family": "base64Binary",
+      "bytes": "0000"
+    }
+  ]
+}

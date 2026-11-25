@@ -1300,3 +1300,7 @@ The [date extension implementation](date-simple-content-implementation/README.md
 
 
 Date simple-content extensions use the existing DateValue accessor at complex roots and terminal paths; attributes use existing owner-aware reads. No new scalar kind or constructor is added. The governing complex component and atomic date content component remain distinct. Ordinary undeclared attributes are Invalid in this date-extension closure even with zero uses; older scalar/decimal behavior is unchanged. [Exact packaged example and limits](date-simple-content-implementation/README.md).
+
+## Datatype composition candidate — 25 November 2026
+
+The 0.8 development candidate qualifies DT-101–DT-180: bounded hexBinary/base64Binary/QName values through both native facades, finite facets, original namespace contexts, actual owned Core provenance and detached immutable reads. All 11,848 source tests and 10,308 overlapping fresh package-only tests pass; all nine Core1.86.0 signed archives/DLLs match publication. API review preserves 55 exported type names and all existing members, adding seven reflection rows. The frozen pilot remains 21 matches; expanded samples now have20matches/109Unsupported/zero errors. Lists/unions (DT-181–DT-300) remain planned. No Schema publication, public query factory or full-XSD/C45 acceptance. [Scope and evidence](datatypes-200/README.md).
