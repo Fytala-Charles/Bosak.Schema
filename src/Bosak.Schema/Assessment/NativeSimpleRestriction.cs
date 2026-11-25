@@ -37,6 +37,7 @@
 //                      | Charles Korthout | 0.24   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.25   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      | Charles Korthout | 0.26   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
+//                      | Charles Korthout | 0.27   | 25-11-2026     | Preserve bounded list/union types and ordered selected member facts |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -47,12 +48,19 @@ namespace Bosak.Schema;
 internal sealed partial class NativeDecimalSchema
 {
     private static NativeType CompileRestriction(XElement definition, string? name, string namespaceUri,
-        NativeNumericLimits limits, int? maxStringCharacters, NativePatternCompilation patternCompilation, Dictionary<XName, NativeType> simple)
+        NativeNumericLimits limits, int? maxStringCharacters, NativePatternCompilation patternCompilation, Dictionary<XName, NativeType> simple, int inlineDepth = 0)
     {
+        Require(inlineDepth <= 4, "Inline compound depth exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+        var members = Elements(definition);
+        if (maxStringCharacters is not null && members.Count == 1 && members[0].Name is var variety && (variety == Xs + "list" || variety == Xs + "union"))
+            return CompileCompound(definition, name, namespaceUri, limits, maxStringCharacters.Value, patternCompilation, simple, inlineDepth);
         Attributes(definition, name is null ? [] : ["name"]);
         var restriction = Single(definition, "restriction");
         Attributes(restriction, "base");
         var baseName = ResolveTypeName(restriction, "base");
+        if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var compoundBase) && compoundBase.IsCompound)
+            return new NativeType(name, false, namespaceUri, baseName: baseName, derivationBase: compoundBase, listItemType: compoundBase.ListItemType, unionMembers: compoundBase.UnionMembers,
+                compoundFacets: NativeCompoundFacets.Compile(restriction, compoundBase, limits, maxStringCharacters.Value, patternCompilation));
         if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var interchangeBase) && interchangeBase.InterchangeKind is { } interchangeKind)
             return new NativeType(name, false, namespaceUri, baseName: baseName, derivationBase: interchangeBase,
                 interchangeKind: interchangeKind, interchangeFacets: NativeInterchangeFacets.Compile(restriction, interchangeKind, maxStringCharacters.Value, patternCompilation, interchangeBase.InterchangeFacets));

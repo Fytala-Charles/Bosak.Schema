@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Carry private imported-type namespace metadata in actual native fixture compilation |
+//                      | Charles Korthout | 0.3   | 25-11-2026     | Allow explicit multi-item budgets for actual native compound proof tests |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -37,9 +38,9 @@ internal sealed class Fixture : IDisposable
     internal readonly SchemaQuerySnapshot? Snapshot;
     internal readonly SchemaQueryLimits Limits;
     internal readonly string Fingerprint;
-    internal Fixture(string schema,string xml,int cache=32,int digits=256,int scale=256,int documents=2,IReadOnlyDictionary<int,string>? importedTypeNamespaces=null)
+    internal Fixture(string schema,string xml,int cache=32,int digits=256,int scale=256,int documents=2,IReadOnlyDictionary<int,string>? importedTypeNamespaces=null,int atoms=1)
     {
-        Limits=new(documents,cache,1,digits,scale);
+        Limits=new(documents,cache,atoms,digits,scale);
         var compiled=NativeDecimalSchema.Compile(schema,new(256,256),maxStringCharacters:1024,importedTypeNamespaces:importedTypeNamespaces);Assert.Equal(NativeOutcome.Valid,compiled.Outcome);
         Fingerprint=CaptureFingerprint(compiled.Value!,Limits);
         Provider=new(compiled.Value!,true,Fingerprint);

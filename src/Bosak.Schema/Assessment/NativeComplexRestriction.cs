@@ -24,6 +24,7 @@
 //                      | Charles Korthout | 0.11   | 25-11-2026     | Adopt native decimal complex enumeration and base-valid declarations |
 //                      | Charles Korthout | 0.12   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      | Charles Korthout | 0.13   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
+//                      | Charles Korthout | 0.14   | 25-11-2026     | Preserve compound simple-content enumeration and member identity |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -80,6 +81,16 @@ internal sealed partial class NativeDecimalSchema
         var content = baseType.ContentType;
         Require(content is not null && !content.IsComplex && !content.IsString && !content.IsBoolean,
             "Complex base content is outside the decimal profile.", NativeDecimalUnsupportedReason.ValueType);
+        if (content!.IsCompound)
+        {
+            Require(localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty, "Compound assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+            var characters = maxStringCharacters ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Compound character context required.", NativeDecimalUnsupportedReason.ValueType);
+            var compilation = patternCompilation ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Compound pattern context required.", NativeDecimalUnsupportedReason.ValueType);
+            var compoundAtomic = new NativeType(null, false, targetNamespace, listItemType: content.ListItemType, unionMembers: content.UnionMembers,
+                compoundFacets: NativeCompoundFacets.Compile(restriction, content, limits, characters, compilation), derivationBase: content);
+            var compoundGoverning = new NativeType(root.Type.Name, false, targetNamespace, contentType: compoundAtomic, derivationBase: baseType, isComplexRestriction: true);
+            return new NativeDecimalSchema(new NativeDeclaration(root.Name, compoundGoverning, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
+        }
         if (content!.InterchangeKind is { } interchangeKind)
         {
             Require(localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty, "Interchange assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);

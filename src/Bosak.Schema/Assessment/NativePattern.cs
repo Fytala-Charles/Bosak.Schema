@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 22-11-2026     | Prototype bounded string patterns and per-assessment accounting |
 //                      | Charles Korthout | 0.3   | 22-11-2026     | Adopt qualified bounded native string patterns |
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Share schema base-literal pattern work and cancellation across date types |
+//                      | Charles Korthout | 0.5   | 25-11-2026     | Preserve bounded list/union types and ordered selected member facts |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -26,6 +27,12 @@ internal sealed class NativePatternBudget(CancellationToken token, int limit = 4
 {
     private int consumed;
     internal int Consumed => Volatile.Read(ref consumed);
+    private int compoundAttempts;
+    internal void CompoundAttempt()
+    {
+        Tick();
+        NativeDecimalSchema.Require(++compoundAttempts <= 4096, "Compound attempt budget exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+    }
     internal void Tick()
     {
         token.ThrowIfCancellationRequested();

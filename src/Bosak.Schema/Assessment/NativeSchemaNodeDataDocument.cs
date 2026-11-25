@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
+//                      | Charles Korthout | 0.3   | 25-11-2026     | Add gated immutable item reads and refuse implicit list flattening |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -43,7 +44,7 @@ public sealed class NativeSchemaNodeDataDocument : IDisposable
     /// <summary>Atomizes one original element and returns its detached scalar typed value.</summary>
     /// <param name="elementPath">Explicit immutable element-child indexes, at most three; empty selects root.</param>
     /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
-    /// <returns>One detached string, Boolean, exact integer or exact decimal.</returns>
+    /// <returns>One detached atomic value or Empty; lists require explicit item reads.</returns>
     /// <exception cref="ArgumentException">The path is default.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The path is too deep, negative or absent.</exception>
     /// <exception cref="ObjectDisposedException">This document or its session is closed.</exception>
@@ -57,7 +58,7 @@ public sealed class NativeSchemaNodeDataDocument : IDisposable
     /// <param name="namespaceUri">Exact namespace URI; empty selects no namespace.</param>
     /// <param name="localName">Exact XML NCName.</param>
     /// <param name="cancellationToken">Cancellation checked before and during the read.</param>
-    /// <returns>One detached string, Boolean, exact integer or exact decimal.</returns>
+    /// <returns>One detached atomic value or Empty; lists require explicit item reads.</returns>
     /// <exception cref="ArgumentNullException">Namespace URI or local name is null.</exception>
     /// <exception cref="ArgumentException">Default path, invalid NCName or missing attribute.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The owner path is too deep, negative or absent.</exception>
@@ -66,6 +67,30 @@ public sealed class NativeSchemaNodeDataDocument : IDisposable
     /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
     public NativeScalarValue ReadAttribute(ImmutableArray<int> ownerElementPath, string namespaceUri, string localName,
         CancellationToken cancellationToken = default) => document.ReadAttribute(ownerElementPath, namespaceUri, localName, cancellationToken);
+
+    /// <summary>Reads immutable ordered typed items through original assessed node facts.</summary>
+    /// <param name="elementPath">Physical child-element path; empty selects the root owner.</param>
+    /// <param name="cancellationToken">Cancellation checked before and during materialization.</param>
+    /// <returns>Detached immutable typed items, empty for nil or an empty list.</returns>
+    /// <exception cref="ArgumentException">A path or attribute name is invalid or absent.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The path is outside the original admitted tree.</exception>
+    /// <exception cref="ObjectDisposedException">The owner is closed.</exception>
+    /// <exception cref="NotSupportedException">No typed value, overlap or explicit query limits prevent the read.</exception>
+    /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
+    public ImmutableArray<NativeScalarValue> ReadElementItems(ImmutableArray<int> elementPath, CancellationToken cancellationToken = default) => document.ReadElementItems(elementPath, cancellationToken);
+
+    /// <summary>Reads immutable ordered typed items through original assessed node facts.</summary>
+    /// <param name="ownerElementPath">Physical child-element path; empty selects the root owner.</param>
+    /// <param name="namespaceUri">Exact attribute namespace URI.</param>
+    /// <param name="localName">Exact attribute local NCName.</param>
+    /// <param name="cancellationToken">Cancellation checked before and during materialization.</param>
+    /// <returns>Detached immutable typed items, empty for nil or an empty list.</returns>
+    /// <exception cref="ArgumentException">A path or attribute name is invalid or absent.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The path is outside the original admitted tree.</exception>
+    /// <exception cref="ObjectDisposedException">The owner is closed.</exception>
+    /// <exception cref="NotSupportedException">No typed value, overlap or explicit query limits prevent the read.</exception>
+    /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
+    public ImmutableArray<NativeScalarValue> ReadAttributeItems(ImmutableArray<int> ownerElementPath, string namespaceUri, string localName, CancellationToken cancellationToken = default) => document.ReadAttributeItems(ownerElementPath, namespaceUri, localName, cancellationToken);
 
     /// <summary>Exports bounded parsed lexical XML without PSVI or transferable authority.</summary>
     /// <param name="cancellationToken">Cancellation checked before and during serialization.</param>

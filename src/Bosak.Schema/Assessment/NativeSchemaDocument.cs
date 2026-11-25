@@ -22,8 +22,11 @@
 //                      | Charles Korthout | 0.9   | 22-11-2026     | Document simple scalar root reads without widening the API |
 //                      | Charles Korthout | 0.10   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.11   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
+//                      | Charles Korthout | 0.12   | 25-11-2026     | Add gated immutable item reads and refuse implicit list flattening |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
+
+using System.Collections.Immutable;
 
 namespace Bosak.Schema;
 
@@ -56,7 +59,7 @@ public sealed class NativeSchemaDocument : IDisposable
     public bool IsRootNilled => document.IsRootNilled;
 
     /// <summary>Gets whether the assessed root has one admitted atomic typed value, including mixed untypedAtomic.</summary>
-    /// <remarks>False for nilled, empty-complex and existing element-only roots; independent of leaf and attribute counts.</remarks>
+    /// <remarks>False for list-variety, nilled, empty-complex and existing element-only roots; independent of leaf and attribute counts.</remarks>
     /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
     /// <exception cref="NotSupportedException">Another session operation is admitted.</exception>
     public bool HasRootScalar => document.HasRootScalar;
@@ -108,6 +111,45 @@ public sealed class NativeSchemaDocument : IDisposable
     /// <exception cref="NotSupportedException">Another operation is admitted or output capacity is exceeded.</exception>
     /// <exception cref="OperationCanceledException">Cancellation is requested during the operation.</exception>
     public string ExportXml(CancellationToken cancellationToken = default) => document.ExportXml(cancellationToken);
+
+    /// <summary>Reads the ordered root typed items without flattening list variety into a scalar.</summary>
+    /// <param name="cancellationToken">Cancellation checked before and during materialization.</param>
+    /// <returns>Immutable detached typed items, empty for nil or an empty list.</returns>
+    /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The supplied index is absent.</exception>
+    /// <exception cref="NotSupportedException">No typed value, overlapping work or explicit query limits prevent the read.</exception>
+    /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
+    public ImmutableArray<NativeScalarValue> ReadRootItems(CancellationToken cancellationToken = default) => document.ReadRootItems(cancellationToken);
+
+    /// <summary>Reads the ordered typed items of one value-bearing descendant.</summary>
+    /// <param name="leafIndex">Zero-based present value index in the corresponding existing count.</param>
+    /// <param name="cancellationToken">Cancellation checked before and during materialization.</param>
+    /// <returns>Immutable detached typed items, empty for nil or an empty list.</returns>
+    /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The supplied index is absent.</exception>
+    /// <exception cref="NotSupportedException">No typed value, overlapping work or explicit query limits prevent the read.</exception>
+    /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
+    public ImmutableArray<NativeScalarValue> ReadScalarItems(int leafIndex, CancellationToken cancellationToken = default) => document.ReadScalarItems(leafIndex, cancellationToken);
+
+    /// <summary>Reads ordered typed items of a present root attribute.</summary>
+    /// <param name="attributeIndex">Zero-based present value index in the corresponding existing count.</param>
+    /// <param name="cancellationToken">Cancellation checked before and during materialization.</param>
+    /// <returns>Immutable detached typed items, empty for nil or an empty list.</returns>
+    /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The supplied index is absent.</exception>
+    /// <exception cref="NotSupportedException">No typed value, overlapping work or explicit query limits prevent the read.</exception>
+    /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
+    public ImmutableArray<NativeScalarValue> ReadAttributeItems(int attributeIndex, CancellationToken cancellationToken = default) => document.ReadAttributeItems(attributeIndex, cancellationToken);
+
+    /// <summary>Reads ordered typed items of a present descendant attribute.</summary>
+    /// <param name="attributeIndex">Zero-based present value index in the corresponding existing count.</param>
+    /// <param name="cancellationToken">Cancellation checked before and during materialization.</param>
+    /// <returns>Immutable detached typed items, empty for nil or an empty list.</returns>
+    /// <exception cref="ObjectDisposedException">The document or its session is closed.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The supplied index is absent.</exception>
+    /// <exception cref="NotSupportedException">No typed value, overlapping work or explicit query limits prevent the read.</exception>
+    /// <exception cref="OperationCanceledException">Cancellation is requested.</exception>
+    public ImmutableArray<NativeScalarValue> ReadDescendantAttributeItems(int attributeIndex, CancellationToken cancellationToken = default) => document.ReadDescendantAttributeItems(attributeIndex, cancellationToken);
 
     /// <summary>Revokes this document and frees its admission, waiting for admitted synchronous session work.</summary>
     /// <remarks>Repeated disposal is harmless; the parent session remains usable.</remarks>
