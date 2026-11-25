@@ -1,0 +1,11 @@
+# Batch slice 14: closed schema includes
+
+25 November 2026. Batch slice 14 adds explicit closed schema catalogs to both owned facades through two additive Create overloads. Matching-namespace/context includes resolve relative identifiers and deduplicate cycles/diamonds without external I/O. Original per-source prefix bindings survive private assembly; chameleon conversion, differing effective form/assertion contexts and imports remain Unsupported. Catalog8/32KiB-per-source/64KiB-total/32KiB-aggregate limits apply. All 8,554 prior outcomes remain unchanged; original instance nodes and canonical declaration identities are retained. REQ-009 remains In Progress; nine signed Core 1.81.17 payloads are unchanged.
+
+[Contract](CONTRACT.md), [adoption](ADOPTION.json), [expected API additions](EXPECTED-API.json), [cases](CASE-PLAN.json), [admissions](ADMISSIONS.json), [review](REVIEW.json), [summary](SUMMARY.json).
+
+The catalog owns explicit text and treats URIs only as identifiers; no network/file/DTD resolution occurs. Unused inventory entries are bounded but are not schema components. Includes preserve source-local namespace bindings; current public facts do not expose source URI provenance. The prior single-string API and all previous public rows remain.
+
+Qualification uses local unsigned alpha.0.58, fresh-cache consumers, actual native facts, exact packaged examples, explicit two-row additive API comparison, original corpus requests, signed Core identity/signatures and supporting tools/docs. Retained migration upgrades Schema, nine Core DLLs and dependency graphs:124pass, historical full23/33 retain only their known old-Core assertion failure, filtered22/32 behavior passes. No full23/33 success or Schema-only replacement claim. HTML checks are programmatic, without visual acceptance. No registry publication, tag/controller/Core/C45/full XSD/PSVI claim.
+
+Measured qualification: 8,788 source (1,434 internal/7,354 public), 7,354 package consumers, 89 native controls and 20 exact packaged examples pass. All8,554prior names/outcomes remain. API55types preserves408rows and adds exactly2reviewed rows. Frozen21 and expanded129 original corpus requests have zero mismatches/harness errors; outcomes remain21matches and17matches/112Unsupported respectively.

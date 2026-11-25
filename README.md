@@ -172,3 +172,5 @@ The 0.6 development mixed native profile also supports [bounded string equality 
 See the [bounded global element reference guide](docs/global-element-references/README.md) for reusable declarations and supported particle shapes.
 
 See the [named sequence group guide](docs/model-groups/README.md) for reusable content models and identity-preserving group references.
+
+Use an [explicit closed schema catalog](docs/closed-includes/README.md) to resolve supported same-namespace includes through either owned facade.
