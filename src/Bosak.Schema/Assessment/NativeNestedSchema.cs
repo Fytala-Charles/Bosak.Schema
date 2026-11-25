@@ -32,6 +32,8 @@
 //                      | Charles Korthout | 0.19   | 24-11-2026     | Adopt qualified bounded date simple-content extension |
 //                      | Charles Korthout | 0.20   | 24-11-2026     | Preserve caller character capacity for nested date restrictions |
 //                      | Charles Korthout | 0.21   | 24-11-2026     | Share date/string pattern compilation across nested date restrictions |
+//                      | Charles Korthout | 0.22   | 25-11-2026     | Recognize admitted attribute-group references before owner assertions |
+//                      | Charles Korthout | 0.23   | 25-11-2026     | Preserve nested structural assertion exclusion for attribute groups |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -91,7 +93,7 @@ internal sealed partial class NativeDecimalSchema
             if (members.Count == 1 && members[0].Name == Xs + "simpleContent")
                 return CompileComplex(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
                     decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null, nestedContext: true, maxStringCharacters: maxStringCharacters, patternCompilation: patternCompilation);
-            Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").Count() + members.Skip(1).SkipWhile(e => e.Name == Xs + "attribute").Count(e => e.Name == Xs + "assert") == members.Count - 1,
+            Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && members.Skip(1).TakeWhile(IsAttributeUseMember).Count() + members.Skip(1).SkipWhile(IsAttributeUseMember).Count(e => e.Name == Xs + "assert") == members.Count - 1,
                 "Expected an element-only sequence and root attributes.", NativeDecimalUnsupportedReason.DeclarationShape);
             var sequence = members[0];
             Attributes(sequence);
@@ -133,10 +135,10 @@ internal sealed partial class NativeDecimalSchema
                 Require(container?.ChoiceMinimum is null, "Nested choice containers are outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
                 children.Add(new NativeDeclaration(name, type, min, max, ns) { Container = container });
             }
-            Require(!members.Any(a => a.Name == Xs + "assert") || !members.Any(a => a.Name == Xs + "attribute"), "Structural assertions with application attributes are excluded.", NativeDecimalUnsupportedReason.Attributes);
-            var attributes = CompileAttributes(members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray(), targetNamespace, attributeForm,
+            Require(!members.Any(a => a.Name == Xs + "assert") || !members.Any(IsAttributeUseMember), "Structural assertions with application attributes are excluded.", NativeDecimalUnsupportedReason.Attributes);
+            var attributes = CompileAttributes(members.Skip(1).TakeWhile(IsAttributeUseMember).ToArray(), targetNamespace, attributeForm,
                 decimalType, stringType, booleanType, integerType, simple, cancellationToken);
-            var plan = new NativeDecimalSchema(root, children.ToImmutable(), [], limits) { AttributeUses = attributes, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(members.Skip(1).SkipWhile(e => e.Name == Xs + "attribute"), targetNamespace, assertionNamespace, cancellationToken) };
+            var plan = new NativeDecimalSchema(root, children.ToImmutable(), [], limits) { AttributeUses = attributes, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(members.Skip(1).SkipWhile(IsAttributeUseMember), targetNamespace, assertionNamespace, cancellationToken) };
             NestedBudget(plan, cancellationToken);
             return plan;
         }

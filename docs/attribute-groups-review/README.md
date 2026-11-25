@@ -1,0 +1,11 @@
+# Attribute-group review correction
+
+25 November 2026. The [original candidate packet](../attribute-groups/README.md) remains sealed and historical. [Review contract](CONTRACT.md) records a correction within the already-adopted bounded profile: nested structural assertions combined with application attribute-group members must remain Unsupported, matching existing root/all/choice exclusions.
+
+The first count(v)=1 probe was inconclusive because that expression is outside the structural grammar. A supported namespace-uri(.) comparison then reproduced six compile-Valid outcomes instead of the intended Unsupported result. The nested guard now uses the same attribute/group member predicate as the owner parser. All original55case payloads and7,960candidate test names remain, with one new case across two facades/three contexts. [Case](BOUNDARY-CASE.json), [review](REVIEW.json).
+
+Corrected qualification passes7,966source tests (1,416internal/6,550public),6,550fresh reviewed-cache package consumers,71native controls and17exact README examples. The original batch baseline7,624names remains intact; its nine measured old-result reconciliations are unchanged. Only the six new boundary executions distinguish this corrected candidate. API55types/408rows, signed Core1.81.17payload identities and corpus outcomes remain unchanged. Current source/package/reviewed-cache/runtime DLLs agree. [Summary](SUMMARY.json), [original outcomes and correction](ADMISSIONS.json).
+
+Original package/feed/cache, first qualification and both probes remain preserved. The corrected package uses a fresh reviewed cache at the same unpublished local alpha.0.55 version; no package was published. Retained migration passes124/22/32behavior cases, with only the documented historical1.81.2-versus1.81.17pin assertion failure in full23/33catalogs. Schema/nine Core DLLs/dependency graphs migrate; caller binaries remain unchanged. Prior packets are hash-verified without executing their historical current-input validators. Supplemental/docs gates pass; HTML checks are programmatic rather than visual acceptance.
+
+No new feature slice, public API/Core change, registry publication, tag or release-controller change. PR59 receives the corrected reviewed head and must pass CI before the authorized merge, followed by exact main verification.

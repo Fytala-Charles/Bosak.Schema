@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 23-11-2026     | Adopt qualified bounded root all groups |
+//                      | Charles Korthout | 0.2   | 25-11-2026     | Recognize admitted attribute-group references before owner assertions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -53,7 +54,7 @@ internal sealed partial class NativeDecimalSchema
             }
             children.Add(new NativeDeclaration(name, type, min, max, ns));
         }
-        var attributes = members.Skip(1).TakeWhile(e => e.Name == Xs + "attribute").ToArray();
+        var attributes = members.Skip(1).TakeWhile(IsAttributeUseMember).ToArray();
         var assertions = members.Skip(1 + attributes.Length).ToArray();
         Require(assertions.All(e => e.Name == Xs + "assert" && IsStructuralAssertion(e)), "All child-value assertion grammar is excluded.", NativeDecimalUnsupportedReason.AssertionGrammar);
         Require(assertions.Length <= 8, "All assertion capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);

@@ -1,0 +1,16 @@
+{
+  "id": "nested-group-structural-assertion-separate",
+  "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' attributeFormDefault='unqualified' ><xs:attribute name='a' type='xs:decimal'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attributeGroup ref='G'/><xs:assert test='namespace-uri(.) = &quot;&quot;'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute ref='a' use='required'/></xs:attributeGroup></xs:schema>",
+  "instance": "<r><n a='1.23'><v>1</v></n></r>",
+  "owner": "nested",
+  "path": [
+    0
+  ],
+  "namespace": "",
+  "name": "a",
+  "expectedKind": "Decimal",
+  "expectedValue": "1.23",
+  "expectAttribute": true,
+  "proposedCompile": "Unsupported",
+  "proposedAssessment": null
+}
