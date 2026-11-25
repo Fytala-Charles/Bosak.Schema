@@ -1,5 +1,10 @@
 Last updated: 2026-11-25
 
+## Global element references - 25 November 2026
+
+Batch slice 12 adds closed global element reference particles with canonical global declaration identity and independent occurrence bounds. Scalar references work in admitted sequence/all/choice shapes; admitted complex containers and simple-content terminals work in sequences. Forward references and eager globals preserve source-order root selection, original nodes and values. Recursive graphs and broader metadata remain Unsupported. All 7,966 previous tests retain their outcomes; 48 cases across both facades/three contexts plus six native identity controls bring source tests to 8,260. REQ-009 remains In Progress; public API and signed Core 1.81.17 payloads remain unchanged. [Contract and qualification](global-element-references/README.md).
+
+
 ## Attribute-group review correction - 25 November 2026
 
 The corrected candidate preserves the existing nested structural-assertion/application-attribute exclusion for group members. A supported namespace-uri(.) probe reproduced six unintended compile-Valid outcomes; the shared member predicate now retains Unsupported. Original candidate receipts remain sealed, and the final candidate passes7,966source/6,550reviewed package cases. No API/Core/publication change. [Corrected evidence](attribute-groups-review/README.md).

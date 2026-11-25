@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 23-11-2026     | Adopt qualified bounded root all groups |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Recognize admitted attribute-group references before owner assertions |
+//                      | Charles Korthout | 0.3   | 25-11-2026     | Admit closed scalar global references with existing compositor occurrence limits |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -39,6 +40,12 @@ internal sealed partial class NativeDecimalSchema
         {
             token.ThrowIfCancellationRequested();
             Require(declaration.Name == Xs + "element", "All requires direct scalar element members.", NativeDecimalUnsupportedReason.DeclarationShape);
+            if (CompileElementReference(declaration, allowComplex: false) is { } reference)
+            {
+                Check(names.Add(reference.ExpandedName), "Competing referenced element particles.");
+                Require(reference.MinOccurs is 0 or 1 && reference.MaxOccurs == 1, "Referenced member occurrence outside compositor profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+                children.Add(reference); continue;
+            }
             Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form");
             var name = Name(declaration);var ns = Form(declaration, "form", defaultForm) == "qualified" ? targetNamespace : "";
             Check(names.Add(XName.Get(name, ns)), "Competing direct all element particles.");
