@@ -1,3 +1,7 @@
+## Exact native calendars - 25 November 2026
+
+The 0.7 development candidate admits bounded dateTime/time/dateTimeStamp on signed Core 1.86.0 through both native facades, with exact fractional seconds, applicable finite facets, original typed facts and preserved lifetime/capacity gates. All 100 [calendar contracts](docs/calendar-100/README.md) are qualified: 11,024 source tests and 9,516 overlapping package-only public tests pass. API additions are three enum values and CalendarValue; existing exported type names and members are preserved. The frozen pilot is 21/21; the expanded sample remains 19 matches/110 Unsupported/zero errors. This supersedes earlier calendar-refusal/planned notices below. Published beta.1 and its controller remain historical; no Schema publication or general C45/full-XSD acceptance.
+
 ## Calendar batch: signed Core 1.86.0 baseline - 25 November 2026
 
 The approved 100-contract [calendar batch](docs/calendar-100/README.md) first qualifies signed Core 1.86.0: all 10,248 source cases and 8,778 overlapping package-only public cases pass; all nine resolved Core DLLs match the verified signed publication. Development dependencies now select one Core baseline, 1.86.0. Existing calendar refusals and public APIs are unchanged at this checkpoint. Historical dossiers, the published beta.1 and its release controller remain unchanged. Ninety native calendar contracts remain planned; no Schema package publication.

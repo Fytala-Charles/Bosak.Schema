@@ -1,0 +1,35 @@
+{
+  "measuredFailures": 24,
+  "originalResults": "first-calendar-results",
+  "preservedInputs": true,
+  "changes": [
+    {
+      "ids": [
+        "excluded-base-xs:dateTime",
+        "excluded-base-xs:time",
+        "excluded-base-xs:dateTimeStamp"
+      ],
+      "oldCompile": "Unsupported",
+      "newCompile": "Invalid",
+      "reason": "Existing date-only enumeration literals are invalid calendar lexicals, unchanged inputs"
+    },
+    {
+      "ids": [
+        "DSC-076",
+        "DSC-077"
+      ],
+      "oldCompile": "Unsupported",
+      "newCompile": "Valid",
+      "assessment": "Invalid",
+      "reason": "Existing date-only instances fail newly admitted calendar simple-content lexicals"
+    },
+    {
+      "test": "DeferredTypes",
+      "reason": "Original three calendar declarations now compile Valid; remaining families retain refusals"
+    },
+    {
+      "test": "SurfaceAndDiagnostics_AreProducerOnlyAndRedacted",
+      "reason": "Preserve original time declaration as Valid, add separate duration diagnostic control"
+    }
+  ]
+}

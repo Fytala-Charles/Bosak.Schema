@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Probe revised bounded date transport in isolated source copy |
 //                      | Charles Korthout | 0.5   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      | Charles Korthout | 0.6   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
+//                      | Charles Korthout | 0.7   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -40,13 +41,28 @@ public enum NativeScalarKind
     /// <summary>A checked date without schema authority.</summary>
     Date = 5,
     /// <summary>A supported empty typed sequence, distinct from an empty string or absent typed value.</summary>
-    Empty = 6
+    Empty = 6,
+    /// <summary>An exact dateTime without schema authority.</summary>
+    DateTime = 7,
+    /// <summary>An exact time without schema authority.</summary>
+    Time = 8,
+    /// <summary>An exact dateTimeStamp with required timezone and no schema authority.</summary>
+    DateTimeStamp = 9
 }
 
 /// <summary>Contains a detached immutable scalar with no transferable schema authority.</summary>
 public sealed class NativeScalarValue
 {
     private NativeScalarValue() { Kind = NativeScalarKind.Empty; }
+    private readonly XdmExactCalendarValue calendar;
+    private NativeScalarValue(XdmExactCalendarValue value)
+    {
+        calendar = value;
+        Kind = value.Kind switch { XdmExactCalendarKind.DateTime => NativeScalarKind.DateTime, XdmExactCalendarKind.Time => NativeScalarKind.Time, XdmExactCalendarKind.DateTimeStamp => NativeScalarKind.DateTimeStamp, _ => throw new ArgumentException("Initialized calendar required.", nameof(value)) };
+    }
+    /// <summary>Gets exact detached calendar components, usable after owner disposal.</summary>
+    /// <exception cref="InvalidOperationException">The scalar is not a calendar.</exception>
+    public XdmExactCalendarValue CalendarValue => Kind is NativeScalarKind.DateTime or NativeScalarKind.Time or NativeScalarKind.DateTimeStamp ? calendar : throw new InvalidOperationException("The scalar is not a calendar.");
     private readonly NativeDateValue? date;
     private NativeScalarValue(XPathDateTime value) { date = new(value); Kind = NativeScalarKind.Date; }
     /// <summary>Gets the detached date components.</summary>
@@ -74,7 +90,7 @@ public sealed class NativeScalarValue
     /// <summary>Gets the detached exact integer, usable after owner disposal.</summary>
     /// <exception cref="InvalidOperationException">This scalar is not an integer.</exception>
     public BigInteger IntegerValue => Kind == NativeScalarKind.Integer ? integer : throw new InvalidOperationException("The scalar is not an integer.");
-    internal static NativeScalarValue FromValue(XdmValue value) => value.Kind switch
+    internal static NativeScalarValue FromValue(XdmValue value) => value.IsExactCalendar ? new NativeScalarValue(value.ExactCalendarValue) : value.Kind switch
     {
         XdmValueKind.Undefined => new NativeScalarValue(),
         XdmValueKind.String => new NativeScalarValue(value.StringValue),

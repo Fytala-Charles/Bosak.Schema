@@ -1,0 +1,47 @@
+{
+  "recordedBeforeFixUtc": "2026-11-25T19:51:38.831431+00:00",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.3.4 element validity and actual type",
+        "3.4.4 complex type validation and typed assessment"
+      ]
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "3.3.7 dateTime value and lexical spaces",
+        "3.3.8 time value and lexical spaces",
+        "3.4.28 dateTimeStamp",
+        "D.2 date/time operations"
+      ]
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3.1.2 typed-value determination",
+        "6.2 element typed-value and type annotation"
+      ]
+    }
+  ],
+  "sections": [
+    "Datatypes3.3.7.2 dateTimeLexicalRep",
+    "D.2.2 yearFrag production56",
+    "E.3.5 yearFragValue and dateTimeLexicalMap"
+  ],
+  "adoption": "The signed four-zero year lexical maps to integer zero; preserve original lexical text for pattern matching/export while supplying year-zero components to Core.",
+  "coreSource": "2d353912954f03caa44ba2d6e96a8a6224a077d5",
+  "corePackage": "1.86.0",
+  "coreHelperLimitation": "XdmExactCalendarValue.Parse explicitly rejects -0000; the existing exact component representation supports year zero. Schema owns its XSD lexical mapping; no Core engine, package or default-operator change.",
+  "deviations": "Existing raw lexical/year/digit/scale capacities remain unchanged; five-digit leading-zero years remain invalid."
+}

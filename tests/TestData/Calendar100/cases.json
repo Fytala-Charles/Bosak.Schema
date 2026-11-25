@@ -1,0 +1,1555 @@
+{
+  "cases": [
+    {
+      "id": "CAL-011-positive",
+      "contract": "CAL-011",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-011-edge",
+      "contract": "CAL-011",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01t12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-012-positive",
+      "contract": "CAL-012",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>0000-02-29T00:00:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-012-edge",
+      "contract": "CAL-012",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>-0000-02-29T00:00:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "0000-02-29T00:00:00"
+    },
+    {
+      "id": "CAL-013-positive",
+      "contract": "CAL-013",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>-0004-02-29T00:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-013-edge",
+      "contract": "CAL-013",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>-0001-02-29T00:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-014-positive",
+      "contract": "CAL-014",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>10000-01-01T00:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-014-edge",
+      "contract": "CAL-014",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>010000-01-01T00:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-015-positive",
+      "contract": "CAL-015",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-02-29T00:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-015-edge",
+      "contract": "CAL-015",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>1900-02-29T00:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-016-positive",
+      "contract": "CAL-016",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T23:59:59Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-016-edge",
+      "contract": "CAL-016",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T23:60:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-017-positive",
+      "contract": "CAL-017",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "2000-01-01T12:00:00.123456789Z"
+    },
+    {
+      "id": "CAL-017-edge",
+      "contract": "CAL-017",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.1e2Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-018-positive",
+      "contract": "CAL-018",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>1999-12-31T24:00:00.000Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "2000-01-01T00:00:00Z"
+    },
+    {
+      "id": "CAL-018-edge",
+      "contract": "CAL-018",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T24:00:00.001Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-019-positive",
+      "contract": "CAL-019",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T00:00:00-14:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-019-edge",
+      "contract": "CAL-019",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T00:00:00+14:01</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-020-positive",
+      "contract": "CAL-020",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r> \t2000-01-01T12:00:00.123456789Z\r\n</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "2000-01-01T12:00:00.123456789Z"
+    },
+    {
+      "id": "CAL-020-edge",
+      "contract": "CAL-020",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>\u00a02000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-021-positive",
+      "contract": "CAL-021",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-021-edge",
+      "contract": "CAL-021",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-022-positive",
+      "contract": "CAL-022",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>01:02:03</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-022-edge",
+      "contract": "CAL-022",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>1:02:03</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-023-positive",
+      "contract": "CAL-023",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>01:02:03.4</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-023-edge",
+      "contract": "CAL-023",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>01:02:03.</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-024-positive",
+      "contract": "CAL-024",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>01:02:03.4000</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "01:02:03.4"
+    },
+    {
+      "id": "CAL-024-edge",
+      "contract": "CAL-024",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>01:02:-3.4</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-025-positive",
+      "contract": "CAL-025",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>24:00:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "00:00:00"
+    },
+    {
+      "id": "CAL-025-edge",
+      "contract": "CAL-025",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>25:00:00</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-026-positive",
+      "contract": "CAL-026",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>24:00:00.000Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "00:00:00Z"
+    },
+    {
+      "id": "CAL-026-edge",
+      "contract": "CAL-026",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>24:00:00.0001Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-027-positive",
+      "contract": "CAL-027",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>23:59:59.999999999</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-027-edge",
+      "contract": "CAL-027",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>23:59:60</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-028-positive",
+      "contract": "CAL-028",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>12:00:00+14:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-028-edge",
+      "contract": "CAL-028",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>12:00:00+13:60</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-029-positive",
+      "contract": "CAL-029",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>00:00:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "00:00:00"
+    },
+    {
+      "id": "CAL-029-edge",
+      "contract": "CAL-029",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:time' /></xs:schema>",
+      "instance": "<r>00:00:00-00:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "00:00:00Z"
+    },
+    {
+      "id": "CAL-030-positive",
+      "contract": "CAL-030",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:time'><xs:enumeration value='00:00:00Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>12:00:00+12:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-030-edge",
+      "contract": "CAL-030",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:time'><xs:enumeration value='00:00:00Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>00:00:00+12:00</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-031-positive",
+      "contract": "CAL-031",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTimeStamp' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-031-edge",
+      "contract": "CAL-031",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTimeStamp' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-032-positive",
+      "contract": "CAL-032",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTimeStamp' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-032-edge",
+      "contract": "CAL-032",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTimeStamp' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-033-positive",
+      "contract": "CAL-033",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTimeStamp' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789-14:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-033-edge",
+      "contract": "CAL-033",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTimeStamp' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789+15:00</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-034-positive",
+      "contract": "CAL-034",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xsi:type='xs:dateTimeStamp'>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-034-edge",
+      "contract": "CAL-034",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xsi:type='xs:time'>12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-035-positive",
+      "contract": "CAL-035",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTimeStamp'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-035-edge",
+      "contract": "CAL-035",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTimeStamp'><xs:enumeration value='2000-01-01T12:00:00.123456789' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Invalid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-036-positive",
+      "contract": "CAL-036",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTimeStamp'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-036-edge",
+      "contract": "CAL-036",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTimeStamp'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456788Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-037-positive",
+      "contract": "CAL-037",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTimeStamp'><xs:explicitTimezone value='required' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-037-edge",
+      "contract": "CAL-037",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTimeStamp'><xs:explicitTimezone value='optional' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Invalid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-038-positive",
+      "contract": "CAL-038",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTimeStamp' /></xs:schema>",
+      "instance": "<r>0000-02-29T24:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "0000-03-01T00:00:00Z"
+    },
+    {
+      "id": "CAL-038-edge",
+      "contract": "CAL-038",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTimeStamp' /></xs:schema>",
+      "instance": "<r>1900-02-29T24:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-039-positive",
+      "contract": "CAL-039",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTimeStamp'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T14:00:00.123456789000+02:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-039-edge",
+      "contract": "CAL-039",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTimeStamp'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456788Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-040-positive",
+      "contract": "CAL-040",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:x='http://www.w3.org/2001/XMLSchema' xsi:type='x:dateTimeStamp'>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-040-edge",
+      "contract": "CAL-040",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='missing:dateTimeStamp'>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-041-positive",
+      "contract": "CAL-041",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T14:00:00.123456789+02:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-041-edge",
+      "contract": "CAL-041",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T14:00:00.123456788+02:00</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-042-positive",
+      "contract": "CAL-042",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-042-edge",
+      "contract": "CAL-042",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-043-positive",
+      "contract": "CAL-043",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:minInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-043-edge",
+      "contract": "CAL-043",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:minInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456788Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-044-positive",
+      "contract": "CAL-044",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:minExclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456790Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-044-edge",
+      "contract": "CAL-044",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:minExclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-045-positive",
+      "contract": "CAL-045",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:maxInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-045-edge",
+      "contract": "CAL-045",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:maxInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456790Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-046-positive",
+      "contract": "CAL-046",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:maxExclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456788Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-046-edge",
+      "contract": "CAL-046",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:maxExclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-047-positive",
+      "contract": "CAL-047",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:minInclusive value='2000-01-01T12:00:00Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-03T00:00:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-047-edge",
+      "contract": "CAL-047",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:minInclusive value='2000-01-01T12:00:00Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-048-positive",
+      "contract": "CAL-048",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:explicitTimezone value='required' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-048-edge",
+      "contract": "CAL-048",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:explicitTimezone value='required' /><xs:explicitTimezone value='optional' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Invalid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-049-positive",
+      "contract": "CAL-049",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:minInclusive value='2000-01-01T12:00:00.123456789Z' /><xs:maxInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-049-edge",
+      "contract": "CAL-049",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:minExclusive value='2000-01-01T12:00:00.123456789Z' /><xs:maxInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Invalid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-050-positive",
+      "contract": "CAL-050",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:pattern value='2000-01.*' /><xs:pattern value='1999-01.*' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r> \t2000-01-01T12:00:00.123456789Z\n</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "2000-01-01T12:00:00.123456789Z"
+    },
+    {
+      "id": "CAL-050-edge",
+      "contract": "CAL-050",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:pattern value='2000-01.*' /><xs:pattern value='1999-01.*' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2001-01-01T12:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-051-positive",
+      "contract": "CAL-051",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-051-edge",
+      "contract": "CAL-051",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='Unknown'></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Unsupported",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-052-positive",
+      "contract": "CAL-052",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:simpleType><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-052-edge",
+      "contract": "CAL-052",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:simpleType><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456788Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-053-positive",
+      "contract": "CAL-053",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:minInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-053-edge",
+      "contract": "CAL-053",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:minInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>1999-01-01T12:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-054-positive",
+      "contract": "CAL-054",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-054-edge",
+      "contract": "CAL-054",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'><xs:enumeration value='2001-01-01T12:00:00Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Invalid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-055-positive",
+      "contract": "CAL-055",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:minInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'><xs:minInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-055-edge",
+      "contract": "CAL-055",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:minInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'><xs:minInclusive value='1999-01-01T00:00:00Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Invalid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-056-positive",
+      "contract": "CAL-056",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:minExclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'><xs:minExclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456790Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-056-edge",
+      "contract": "CAL-056",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:minExclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'><xs:minExclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-057-positive",
+      "contract": "CAL-057",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:pattern value='2000.*' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'><xs:pattern value='[0-9]{4}-01-01T.*' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-057-edge",
+      "contract": "CAL-057",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='B'><xs:restriction base='xs:dateTime'><xs:pattern value='2000.*' /></xs:restriction></xs:simpleType><xs:simpleType name='N'><xs:restriction base='B'><xs:pattern value='[0-9]{4}-01-01T.*' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-02-01T12:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-058-positive",
+      "contract": "CAL-058",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:whiteSpace value='collapse' fixed=\"true\"/></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r> \t2000-01-01T12:00:00.123456789Z\n</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "2000-01-01T12:00:00.123456789Z"
+    },
+    {
+      "id": "CAL-058-edge",
+      "contract": "CAL-058",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:whiteSpace value='preserve' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Invalid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-059-positive",
+      "contract": "CAL-059",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:whiteSpace value='collapse' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-059-edge",
+      "contract": "CAL-059",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:fractionDigits value='3' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Unsupported",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-060-positive",
+      "contract": "CAL-060",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-060-edge",
+      "contract": "CAL-060",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Unsupported",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-061-positive",
+      "contract": "CAL-061",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "2000-01-01T12:00:00.123456789Z"
+    },
+    {
+      "id": "CAL-061-edge",
+      "contract": "CAL-061",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>bad</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-062-positive",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:dateTime'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>2000-01-01T12:00:00.123456789Z</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-062-edge",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:dateTime'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>bad</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-063-positive",
+      "contract": "CAL-063",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='g'><xs:complexType><xs:sequence><xs:element name='d' type='xs:dateTime'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><g><d>2000-01-01T12:00:00.123456789Z</d></g></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0,
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-063-edge",
+      "contract": "CAL-063",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='g'><xs:complexType><xs:sequence><xs:element name='d' type='xs:dateTime'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><g><d>bad</d></g></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0,
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-064-positive",
+      "contract": "CAL-064",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence><xs:attribute name='a' type='xs:dateTime' use='required'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='2000-01-01T12:00:00.123456789Z'><d>x</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "target": "attribute"
+    },
+    {
+      "id": "CAL-064-edge",
+      "contract": "CAL-064",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence><xs:attribute name='a' type='xs:dateTime' use='required'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'><d>x</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "target": "attribute"
+    },
+    {
+      "id": "CAL-065-positive",
+      "contract": "CAL-065",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='g'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence><xs:attribute name='a' type='xs:dateTime' use='required'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><g a='2000-01-01T12:00:00.123456789Z'><d>x</d></g></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "target": "attribute"
+    },
+    {
+      "id": "CAL-065-edge",
+      "contract": "CAL-065",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='g'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence><xs:attribute name='a' type='xs:dateTime' use='required'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><g a='bad'><d>x</d></g></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "target": "attribute"
+    },
+    {
+      "id": "CAL-066-positive",
+      "contract": "CAL-066",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:dateTime'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence><xs:attribute ref='a' use='required'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='2000-01-01T12:00:00.123456789Z'><d>x</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "target": "attribute"
+    },
+    {
+      "id": "CAL-066-edge",
+      "contract": "CAL-066",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:dateTime'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence><xs:attribute ref='a' use='required'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'><d>x</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "target": "attribute"
+    },
+    {
+      "id": "CAL-067-positive",
+      "contract": "CAL-067",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attributeGroup name='G'><xs:attribute name='a' type='xs:dateTime' use='required'/></xs:attributeGroup><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence><xs:attributeGroup ref='G'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='2000-01-01T12:00:00.123456789Z'><d>x</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "target": "attribute"
+    },
+    {
+      "id": "CAL-067-edge",
+      "contract": "CAL-067",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attributeGroup name='G'><xs:attribute name='a' type='xs:dateTime' use='required'/></xs:attributeGroup><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence><xs:attributeGroup ref='G'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'><d>x</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "target": "attribute"
+    },
+    {
+      "id": "CAL-068-positive",
+      "contract": "CAL-068",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='d'/></xs:sequence></xs:complexType></xs:element><xs:element name='d' type='xs:dateTime'/></xs:schema>",
+      "instance": "<r><d>2000-01-01T12:00:00.123456789Z</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-068-edge",
+      "contract": "CAL-068",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='d'/></xs:sequence></xs:complexType></xs:element><xs:element name='d' type='xs:dateTime'/></xs:schema>",
+      "instance": "<r><d>bad</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-069-positive",
+      "contract": "CAL-069",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:dateTime'/></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-069-edge",
+      "contract": "CAL-069",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:dateTime'/></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>bad</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-070-positive",
+      "contract": "CAL-070",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='B'><xs:simpleContent><xs:extension base='xs:dateTime'/></xs:simpleContent></xs:complexType><xs:complexType name='C'><xs:simpleContent><xs:restriction base='B'><xs:minInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-070-edge",
+      "contract": "CAL-070",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='B'><xs:simpleContent><xs:extension base='xs:dateTime'/></xs:simpleContent></xs:complexType><xs:complexType name='C'><xs:simpleContent><xs:restriction base='B'><xs:minInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456788Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-071-positive",
+      "contract": "CAL-071",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z<![CDATA[]]></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "2000-01-01T12:00:00.123456789Z"
+    },
+    {
+      "id": "CAL-071-edge",
+      "contract": "CAL-071",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z<bad/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-072-positive",
+      "contract": "CAL-072",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:minInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='N'>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-072-edge",
+      "contract": "CAL-072",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:minInclusive value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='N'>1999-01-01T00:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-073-positive",
+      "contract": "CAL-073",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:simpleType><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-073-edge",
+      "contract": "CAL-073",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:simpleType><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r>bad</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-074-positive",
+      "contract": "CAL-074",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='N'/><xs:element name='e' type='N'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>2000-01-01T12:00:00.123456789Z</d><e>2000-01-01T12:00:00.123456789Z</e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-074-edge",
+      "contract": "CAL-074",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='N'/><xs:element name='e' type='N'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>2000-01-01T12:00:00.123456789Z</d><e>bad</e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-075-positive",
+      "contract": "CAL-075",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='d'/></xs:sequence></xs:complexType></xs:element><xs:element name='d' type='xs:dateTime'/></xs:schema>",
+      "instance": "<r><d>2000-01-01T12:00:00.123456789Z</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-075-edge",
+      "contract": "CAL-075",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='d'/></xs:sequence></xs:complexType></xs:element><xs:element name='d' type='xs:dateTime'/></xs:schema>",
+      "instance": "<r><d>bad</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-076-positive",
+      "contract": "CAL-076",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' fixed='2000-01-01T12:00:00.123456789Z'/></xs:schema>",
+      "instance": "<r>2000-01-01T14:00:00.123456789+02:00</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-076-edge",
+      "contract": "CAL-076",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' fixed='2000-01-01T12:00:00.123456789Z'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456788Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-077-positive",
+      "contract": "CAL-077",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence><xs:attribute name='a' type='xs:dateTime' fixed='2000-01-01T12:00:00.123456789Z'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='2000-01-01T14:00:00.123456789+02:00'><d>x</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "target": "attribute",
+      "path": []
+    },
+    {
+      "id": "CAL-077-edge",
+      "contract": "CAL-077",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence><xs:attribute name='a' type='xs:dateTime' fixed='2000-01-01T12:00:00.123456789Z'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='2000-01-01T12:00:00.123456788Z'><d>x</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "target": "attribute",
+      "path": []
+    },
+    {
+      "id": "CAL-078-positive",
+      "contract": "CAL-078",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:dateTime' fixed='2000-01-01T12:00:00.123456789Z'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence><xs:attribute ref='a' fixed='2000-01-01T12:00:00.123456789Z'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='2000-01-01T12:00:00.123456789Z'><d>x</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "target": "attribute",
+      "path": []
+    },
+    {
+      "id": "CAL-078-edge",
+      "contract": "CAL-078",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:dateTime' fixed='2000-01-01T12:00:00.123456789Z'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence><xs:attribute ref='a' fixed='2000-01-01T14:00:00.123456789+02:00'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='2000-01-01T12:00:00.123456789Z'><d>x</d></r>",
+      "compile": "Invalid",
+      "outcome": "Invalid",
+      "target": "attribute",
+      "path": []
+    },
+    {
+      "id": "CAL-079-positive",
+      "contract": "CAL-079",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "empty": true
+    },
+    {
+      "id": "CAL-079-edge",
+      "contract": "CAL-079",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "empty": true
+    },
+    {
+      "id": "CAL-080-positive",
+      "contract": "CAL-080",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:dateTime'/><xs:element name='e' type='xs:dateTime'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>2000-01-01T12:00:00.123456789Z</d><e>2000-01-01T12:00:00.123456789Z</e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-080-edge",
+      "contract": "CAL-080",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='d' type='xs:dateTime'/><xs:element name='e' type='xs:dateTime'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>2000-01-01T12:00:00.123456789Z</d><e>bad</e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-081-positive",
+      "contract": "CAL-081",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-081-edge",
+      "contract": "CAL-081",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>                                                                                                                                                                                                                                                2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "CAL-082-positive",
+      "contract": "CAL-082",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T00:00:01.2Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "digits": 3
+    },
+    {
+      "id": "CAL-082-edge",
+      "contract": "CAL-082",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T00:00:01.23Z</r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "digits": 3
+    },
+    {
+      "id": "CAL-083-positive",
+      "contract": "CAL-083",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T00:00:01.12Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "scale": 2
+    },
+    {
+      "id": "CAL-083-edge",
+      "contract": "CAL-083",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T00:00:01.123Z</r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "scale": 2
+    },
+    {
+      "id": "CAL-084-positive",
+      "contract": "CAL-084",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T00:00:01.00Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "scale": 2,
+      "expectedValue": "2000-01-01T00:00:01Z"
+    },
+    {
+      "id": "CAL-084-edge",
+      "contract": "CAL-084",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T00:00:01.000Z</r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "scale": 2
+    },
+    {
+      "id": "CAL-085-positive",
+      "contract": "CAL-085",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>9223372036854775807-01-01T00:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-085-edge",
+      "contract": "CAL-085",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>-9223372036854775808-01-01T00:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "CAL-086-positive",
+      "contract": "CAL-086",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>9223372036854775807-12-30T24:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "9223372036854775807-12-31T00:00:00Z"
+    },
+    {
+      "id": "CAL-086-edge",
+      "contract": "CAL-086",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>9223372036854775807-12-31T24:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "CAL-087-positive",
+      "contract": "CAL-087",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.123456789Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxCharacters": 40
+    },
+    {
+      "id": "CAL-087-edge",
+      "contract": "CAL-087",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:enumeration value='2000-01-01T12:00:00.111111111111111111111111111111111111111111111111111111111111Z' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Unsupported",
+      "outcome": "Invalid",
+      "maxCharacters": 40
+    },
+    {
+      "id": "CAL-088-positive",
+      "contract": "CAL-088",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:pattern value='2000.*' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-088-edge",
+      "contract": "CAL-088",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='N'><xs:restriction base='xs:dateTime'><xs:pattern value='0' /><xs:pattern value='1' /><xs:pattern value='2' /><xs:pattern value='3' /><xs:pattern value='4' /><xs:pattern value='5' /><xs:pattern value='6' /><xs:pattern value='7' /><xs:pattern value='8' /></xs:restriction></xs:simpleType><xs:element name='r' type='N'/></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Unsupported",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-089-positive",
+      "contract": "CAL-089",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "queryScale": 8,
+      "goodRead": "Unsupported",
+      "badRead": "Unsupported"
+    },
+    {
+      "id": "CAL-089-edge",
+      "contract": "CAL-089",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "queryScale": 8,
+      "goodRead": "Unsupported",
+      "badRead": "Unsupported"
+    },
+    {
+      "id": "CAL-090-positive",
+      "contract": "CAL-090",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>2000-01-01T12:00:00.123456789Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "CAL-090-edge",
+      "contract": "CAL-090",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:duration' /></xs:schema>",
+      "instance": "<r>2000-01-01</r>",
+      "compile": "Unsupported",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-062-choice-dateTime-positive",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='d' type='xs:dateTime'/><xs:element name='s' type='xs:string' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>2000-01-01T12:00:00.123456789Z</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-062-choice-dateTime-edge",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='d' type='xs:dateTime'/><xs:element name='s' type='xs:string' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>bad</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-062-choice-time-positive",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='d' type='xs:time'/><xs:element name='s' type='xs:string' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>12:00:00.123456789Z</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-062-choice-time-edge",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='d' type='xs:time'/><xs:element name='s' type='xs:string' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>bad</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-062-choice-dateTimeStamp-positive",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='d' type='xs:dateTimeStamp'/><xs:element name='s' type='xs:string' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>2000-01-01T12:00:00.123456789Z</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-062-choice-dateTimeStamp-edge",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='d' type='xs:dateTimeStamp'/><xs:element name='s' type='xs:string' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>bad</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-062-all-dateTime-positive",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='d' type='xs:dateTime'/><xs:element name='s' type='xs:string' minOccurs='0'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>2000-01-01T12:00:00.123456789Z</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-062-all-dateTime-edge",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='d' type='xs:dateTime'/><xs:element name='s' type='xs:string' minOccurs='0'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>bad</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-062-all-time-positive",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='d' type='xs:time'/><xs:element name='s' type='xs:string' minOccurs='0'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>12:00:00.123456789Z</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-062-all-time-edge",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='d' type='xs:time'/><xs:element name='s' type='xs:string' minOccurs='0'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>bad</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-062-all-dateTimeStamp-positive",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='d' type='xs:dateTimeStamp'/><xs:element name='s' type='xs:string' minOccurs='0'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>2000-01-01T12:00:00.123456789Z</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-062-all-dateTimeStamp-edge",
+      "contract": "CAL-062",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='d' type='xs:dateTimeStamp'/><xs:element name='s' type='xs:string' minOccurs='0'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><d>bad</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "target": "element"
+    },
+    {
+      "id": "CAL-012-invalid-leading-zero",
+      "contract": "CAL-012",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTime' /></xs:schema>",
+      "instance": "<r>-00000-02-29T00:00:00</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "CAL-038-signed-zero-rollover",
+      "contract": "CAL-038",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:dateTimeStamp' /></xs:schema>",
+      "instance": "<r>-0000-02-29T24:00:00Z</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expectedValue": "0000-03-01T00:00:00Z"
+    }
+  ]
+}

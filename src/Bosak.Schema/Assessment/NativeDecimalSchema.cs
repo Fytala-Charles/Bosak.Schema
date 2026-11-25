@@ -63,6 +63,7 @@
 //                      | Charles Korthout | 1.40   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      | Charles Korthout | 1.41   | 25-11-2026     | Validate provided effective attribute constraints and fixed override identity |
 //                      | Charles Korthout | 1.42   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
+//                      | Charles Korthout | 1.43   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -156,7 +157,14 @@ internal sealed partial class NativeDecimalSchema
             var integerType = maxStringCharacters is null ? null : new NativeType("integer", false, Xs.NamespaceName, isInteger: true);
             var named = new Dictionary<XName, NativeDecimalSchema>();
             var simple = CreateBuiltinIntegerTypes(integerType);
-            if (maxStringCharacters is not null) simple.Add(Xs + "date", new NativeType("date", false, Xs.NamespaceName, isDate: true));
+            if (maxStringCharacters is not null)
+            {
+                simple.Add(Xs + "date", new NativeType("date", false, Xs.NamespaceName, isDate: true));
+                var calendarDateTime = new NativeType("dateTime", false, Xs.NamespaceName, calendarKind: XdmExactCalendarKind.DateTime);
+                simple.Add(Xs + "dateTime", calendarDateTime);
+                simple.Add(Xs + "time", new NativeType("time", false, Xs.NamespaceName, calendarKind: XdmExactCalendarKind.Time));
+                simple.Add(Xs + "dateTimeStamp", new NativeType("dateTimeStamp", false, Xs.NamespaceName, calendarKind: XdmExactCalendarKind.DateTimeStamp, derivationBase: calendarDateTime));
+            }
             var typeNames = new HashSet<XName>();
             foreach (var type in types)
             {
@@ -335,7 +343,7 @@ internal sealed partial class NativeDecimalSchema
 
         var attributeUses = CompileAttributes(attributeMembers, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
 
-        var assertionNames = children.Where(c => !c.Type.IsBoolean && !c.Type.IsInteger && !c.Type.IsDate).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
+        var assertionNames = children.Where(c => !c.Type.IsBoolean && !c.Type.IsInteger && !c.Type.IsDate && c.Type.CalendarKind is null).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var stringNames = stringType is null ? null : children.Where(c => c.Type.IsString).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var structuralPlans = CompileStructuralAssertions(assertionMembers.Where(IsStructuralAssertion), targetNamespace, assertionNamespace, cancellationToken);
         var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
@@ -610,6 +618,12 @@ internal sealed partial class NativeDecimalSchema
             Check(declaration.Type.BooleanFacets?.Accepts(lexical, patternBudget) ?? true, "Boolean pattern violation.");
             return new NativeElementState(declaration, null, BooleanValue: lexical is "true" or "1");
         }
+        else if (declaration.Type.CalendarKind is { } calendarKind)
+        {
+            var calendar = NativeCalendarParser.Parse(text, calendarKind, limits, maxStringCharacters!.Value);
+            Check(declaration.Type.CalendarFacets?.Accepts(calendar, NativeCalendarParser.Collapse(text), patternBudget) ?? true, "Calendar facet violation.");
+            return new NativeElementState(declaration, null, CalendarValue: calendar);
+        }
         else if (declaration.Type.IsDate)
         {
             if (declaration.Type.DateFacets is not null) Require(text.Length <= maxStringCharacters!.Value, "Date enumeration value capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
@@ -815,7 +829,7 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null, bool isMixed = false)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null, bool isMixed = false, XdmExactCalendarKind? calendarKind = null, NativeCalendarFacets? calendarFacets = null)
 {
     internal NativeType? DerivationBase { get; } = derivationBase;
     internal bool IsComplexRestriction { get; } = isComplexRestriction;
@@ -827,6 +841,8 @@ internal sealed class NativeType(string? name, bool hasNoTypedValue, string name
     internal bool IsComplex => MixedContent || EmptyContent || HasNoTypedValue || ContentType is not null;
     internal NativeStringFacets? StringFacets { get; } = stringFacets;
     internal bool IsDate { get; } = isDate;
+    internal XdmExactCalendarKind? CalendarKind { get; } = calendarKind;
+    internal NativeCalendarFacets? CalendarFacets { get; } = calendarFacets;
     internal NativeDateFacets? DateFacets { get; } = dateFacets;
     internal bool IsInteger { get; } = isInteger;
     internal bool IsBoolean { get; } = isBoolean;
@@ -851,7 +867,7 @@ internal sealed class NativeDeclaration(string name, NativeType type, int minOcc
     internal int MinOccurs { get; } = minOccurs;
     internal int MaxOccurs { get; } = maxOccurs;
 }
-internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null, XPathDateTime? DateValue = null)
+internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null, XPathDateTime? DateValue = null, XdmExactCalendarValue? CalendarValue = null)
 {
     internal NativeType? EffectiveType { get; init; }
     internal NativeType GoverningType => EffectiveType ?? Declaration.Type;

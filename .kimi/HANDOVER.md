@@ -1,3 +1,7 @@
+## Exact native calendars - 25 November 2026
+
+The 0.7 development candidate admits bounded dateTime/time/dateTimeStamp on signed Core 1.86.0 through both native facades, with exact fractional seconds, applicable finite facets, original typed facts and preserved lifetime/capacity gates. All 100 [calendar contracts](../docs/calendar-100/README.md) are qualified: 11,024 source tests and 9,516 overlapping package-only public tests pass. API additions are three enum values and CalendarValue; existing exported type names and members are preserved. The frozen pilot is 21/21; the expanded sample remains 19 matches/110 Unsupported/zero errors. This supersedes earlier calendar-refusal/planned notices below. Published beta.1 and its controller remain historical; no Schema publication or general C45/full-XSD acceptance.
+
 Last updated: 2026-11-25
 
 

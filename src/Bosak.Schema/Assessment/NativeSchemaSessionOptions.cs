@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.4   | 19-11-2026     | Document shared leaf and enumeration UTF16 representation capacity                         |
 //                      | Charles Korthout | 0.5   | 19-11-2026     | Document root attribute strings under the existing UTF16 capacity                         |
 //                      | Charles Korthout | 0.6   | 20-11-2026     | Document shared UTF16 capacity for original root and descendant attribute strings        |
+//                      | Charles Korthout | 0.7   | 25-11-2026     | Document supplied calendar-second and lexical capacities |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -29,9 +30,9 @@ namespace Bosak.Schema;
 public sealed class NativeSchemaSessionOptions
 {
     /// <summary>Creates explicit native, string, export and Core admission limits.</summary>
-    /// <param name="maxNativeCoefficientDigits">Native supplied decimal coefficient or integer digits before normalization.</param>
-    /// <param name="maxNativeScale">Native supplied decimal scale before normalization.</param>
-    /// <param name="maxStringCharacters">Parsed leaf, root/descendant attribute and enumeration string capacity in UTF-16 code units.</param>
+    /// <param name="maxNativeCoefficientDigits">Native supplied decimal/integer or two-digit calendar-second coefficient digits before normalization.</param>
+    /// <param name="maxNativeScale">Native supplied decimal or calendar-second scale before normalization.</param>
+    /// <param name="maxStringCharacters">Parsed string and calendar lexical/facet capacity in UTF-16 code units.</param>
     /// <param name="maxExportCharacters">Serialized XML capacity in UTF-16 code units.</param>
     /// <param name="maxOpenDocuments">Simultaneously admitted document count.</param>
     /// <param name="maxCachedScalarValuesPerDocument">Core scalar cache capacity per document.</param>
