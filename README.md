@@ -4,6 +4,10 @@
   <p>Apache-2.0 schema integration and staged XSD 1.1 services for .NET.</p>
 </div>
 
+See the [calendar transport prerequisite assessment](docs/calendar-transport-prerequisites/README.md) for calendar precision limits and the proposed extension.
+
+
+
 # Bosak.Schema
 
 The 0.6 development candidate requires **Bosak Core 1.81.17 or later**. [Dependency compatibility](docs/core-18117-baseline/README.md). Native scalar and original-node assessment preserve original XML, exact typed values and component identity within an explicit bounded profile.

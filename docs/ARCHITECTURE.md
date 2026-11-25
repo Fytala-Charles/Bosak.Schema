@@ -3,6 +3,10 @@
   <h1>Bosak.Schema Architecture</h1>
   <p>Modular Apache schema services with explicit resource and engine boundaries.</p>
 </div>
+
+The [calendar transport prerequisite assessment](calendar-transport-prerequisites/README.md) completes item 20 of the approved batch. Its 48 handled observations confirm current millisecond precision loss and native dateTime/time/dateTimeStamp refusals against the qualified package. Next is a separately adopted additive exact fractional-second Core contract. No production source/API/pin or publication changes occur; slice 19 qualification is reused without a new execution claim. The batch stops at 20.
+
+
 ## Mixed sequence content - 25 November 2026
 
 Batch slice 19 admits finite sequence mixed content with actual complex governing types and xs:untypedAtomic aggregate facts. Original interleaved text, child order/types/attributes and physical paths remain; invalid children still prevent all fact publication. Empty mixed aggregate is one empty string atom, distinct from nil/Empty/FOTY0012. Existing original-node transport preserves payload annotation and actual atomic provenance. Mixed all/choice/empty/simple-content/assertion/default augmentation/complex nil remain excluded. The16value-bearing budget includes mixed aggregates, each under MaxStringCharacters. REQ-009 remains In Progress; API55types/413rows and signed Core1.81.17 are unchanged. [Contract and Core transport review](mixed-sequences/README.md).
