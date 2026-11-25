@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-25",
+  "implementationReviewRevision": "6a7618e9dcf70eb8a67d5d1789ff7b787133b52d",
+  "package": "Core1.81.17 existing signed baseline",
+  "normativeAdoption": "ADOPTION.json remains separate and unchanged",
+  "files": [
+    {
+      "path": "src/Bosak.XPath.Api/Schema/OriginalNodeDataPlan.cs",
+      "sha256": "85f176a78949ae38f4259dc2f80abf815b23fc09cd5e0b96a9d39e1c3204ee16"
+    },
+    {
+      "path": "src/Bosak.XPath.Api/Schema/SchemaQuerySession.cs",
+      "sha256": "52ed9b5eb06b7810ed47009364747d1ff133552b437e35b3ae2acc65aeda850a"
+    }
+  ],
+  "finding": "Typed-identity ReadTypedValue rejects empty typed sequences. Existing original-node data($node) admits scoped ordered atomization including empty sequences.",
+  "decision": "Share captured-fingerprint original-node session creation for opt-in scalar/node-data facades; legacy decimal-only typed identity remains. No manufactured empty result or Core change."
+}

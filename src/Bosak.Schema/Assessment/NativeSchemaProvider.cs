@@ -33,6 +33,7 @@
 //                      | Charles Korthout | 1.11   | 24-11-2026     | Probe revised bounded date transport in isolated source copy |
 //                      | Charles Korthout | 1.12   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      | Charles Korthout | 1.13   | 25-11-2026     | Preserve canonical global attribute handles across uses, lookup and original facts |
+//                      | Charles Korthout | 1.14   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -279,7 +280,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         internal Facts(NativeSchemaInput input, NativeSessionNode node, Origin origin, Component type, Component declaration, NativeElementState state, Component? actualType = null)
         {
             Input = input; Node = node; this.origin = origin; this.type = type; this.declaration = declaration; this.state = state;
-            if (state.GoverningType.EmptyContent) value = new IssuedValue(input, origin, type, XdmValue.Undefined, empty: true);
+            if (state.IsNilled || state.GoverningType.EmptyContent) value = new IssuedValue(input, origin, type, XdmValue.Undefined, empty: true);
             else if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
             else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, XdmValue.FromString(text), actualType);
             else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical), actualType);
@@ -296,7 +297,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         public ISchemaComponentHandle Declaration { get { Input.Check(); return declaration; } }
         public ISchemaAssessmentOrigin Origin => origin;
         public bool HasNoTypedValue { get { Input.Check(); return state.GoverningType.HasNoTypedValue; } }
-        public bool IsNilled { get { Input.Check(); return false; } }
+        public bool IsNilled { get { Input.Check(); return state.IsNilled; } }
         public SchemaResult<ISchemaTypedValue> ReadTypedValue(CancellationToken cancellationToken)
         {
             Input.Check(cancellationToken);

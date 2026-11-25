@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 22-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 22-11-2026     | Adapt native controls for bounded integer simple content |
 //                      | Charles Korthout | 0.3   | 22-11-2026     | Verify isolated contextual assertions and retained native baseline |
+//                      | Charles Korthout | 0.4   | 25-11-2026     | Verify admitted nil metadata and distinct supported empty typed sequences |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -64,9 +65,9 @@ public sealed class NativeStructuralEmptyCoreTests
     {
         var schema=Schema(nested,named,sequence);var xml=Xml(nested);
         using(var s=NativeSchemaNodeDataSession.Create(schema,Options).Value!)
-        {using var d=s.Assess(xml,Context).Value!;var error=Assert.Throws<NotSupportedException>(()=>d.ReadElement(nested?[0]:[]));Assert.Equal("The scalar family is outside the supported profile.",error.Message);Assert.True(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));var exported=d.ExportXml();d.Dispose();using var again=s.Assess(exported,Context).Value!;Assert.Throws<NotSupportedException>(()=>again.ReadElement(nested?[0]:[]));}
+        {using var d=s.Assess(xml,Context).Value!;Assert.Equal(NativeScalarKind.Empty,d.ReadElement(nested?[0]:[]).Kind);Assert.False(d.IsNilled(nested?[0]:[]));Assert.True(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));var exported=d.ExportXml();d.Dispose();using var again=s.Assess(exported,Context).Value!;Assert.Equal(NativeScalarKind.Empty,again.ReadElement(nested?[0]:[]).Kind);}
         using(var s=NativeSchemaSession.Create(schema,Options).Value!)
-        {using var d=s.Assess(xml,Context).Value!;Assert.False(d.HasRootScalar);Assert.Equal(0,d.ScalarCount);Assert.Throws<NotSupportedException>(()=>d.ReadRootScalar());Assert.True(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}
+        {using var d=s.Assess(xml,Context).Value!;Assert.False(d.HasRootScalar);Assert.Equal(0,d.ScalarCount);Assert.False(d.IsRootNilled);if(nested)Assert.Throws<NotSupportedException>(()=>d.ReadRootScalar());else Assert.Equal(NativeScalarKind.Empty,d.ReadRootScalar().Kind);Assert.True(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}
     }
     /// <summary>Empty content rejects whitespace as well as non-whitespace and child elements without publication.</summary>
     /// <param name="nested">Nested owner.</param><param name="text">Disallowed content.</param>

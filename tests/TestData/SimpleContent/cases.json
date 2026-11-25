@@ -1130,7 +1130,7 @@
     "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
     "instance": "<price xmlns='urn:price' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' currency='EUR'>12.50</price>",
     "expectedCompile": "Valid",
-    "expectedAssessment": "Unsupported",
+    "expectedAssessment": "Invalid",
     "expectedRoot": "12.5",
     "maxNativeCoefficientDigits": 256,
     "maxNativeScale": 256,

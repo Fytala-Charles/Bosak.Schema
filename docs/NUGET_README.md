@@ -1665,3 +1665,21 @@ Instance:
 ```
 
 Supply these texts using the preceding catalog example. Both facades read exact Decimal 1.23; the governing named type is `{urn:pricing}Price`. Existing single-string Create still refuses composition. No host network/file lookup or new public source-URI provenance is implied.
+
+### Simple nillability and empty typed values
+
+Simple-valued declarations can be nillable. A nilled element has a supported empty typed sequence: `NativeScalarKind.Empty`. This differs from the scalar empty string and from an element-only container with no typed value (`FOTY0012`). Any xsi:nil attribute, including false, requires a nillable declaration. True nil forbids character or element content, including whitespace. Complex nillability and assertion+nillability combinations remain outside this profile.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="price" type="xs:decimal" nillable="true"/>
+</xs:schema>
+```
+
+```xml
+<price xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+```
+
+For the scalar facade, `IsRootNilled` is true, `HasRootScalar` is false and `ReadRootScalar().Kind` is Empty. Descendant scalar-bearing positions, including nilled simple positions, retain document-order indexes. The node-data facade returns true from `IsNilled([])` and Empty from `ReadElement([])`. Nonempty accessors on Empty throw InvalidOperationException. The existing non-nilled empty-complex typed sequence is also readable as Empty, with its nil flag false; element-only absent typed values still raise FOTY0012.
+
+Both facades preserve the original XML and use authenticated original-node atomization for detached values. Empty results remain usable after disposal; nil flags and original facts retain their owner lifetime. The legacy decimal-only facade keeps its earlier grammar and typed-identity route.

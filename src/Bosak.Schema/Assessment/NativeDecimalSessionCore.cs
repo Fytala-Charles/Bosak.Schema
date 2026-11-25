@@ -22,6 +22,8 @@
 //                      | Charles Korthout | 0.9   | 21-11-2026     | Probe empty complex typing in isolated copies only |
 //                      | Charles Korthout | 0.10   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
 //                      | Charles Korthout | 0.11   | 25-11-2026     | Carry private imported simple-type namespace projection through compilation |
+//                      | Charles Korthout | 0.12   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
+//                      | Charles Korthout | 0.13   | 25-11-2026     | Share captured original-node atomization for mixed scalar empty transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -67,10 +69,10 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         var compiled = NativeDecimalSchema.Compile(schema, options.NumericLimits, cancellationToken, options.MaxStringCharacters, importedTypeNamespaces);
         if (compiled.Outcome != NativeOutcome.Valid)
             return NativeResult<NativeDecimalSessionCore>.Failure(compiled.Outcome, compiled.Diagnostic!, compiled.UnsupportedReason);
-        var result = SchemaQuerySession.CompileXPath("$value", options.QueryLimits, assessor: new NativeSchemaProvider(compiled.Value!), cancellationToken: cancellationToken);
-        if (result.Kind != SchemaResultKind.Supported)
-            return NativeResult<NativeDecimalSessionCore>.Failure(NativeOutcome.Unsupported, "Unsupported native scalar session.");
-        return NativeResult<NativeDecimalSessionCore>.Valid(new NativeDecimalSessionCore(result.Value) { scalarOptions = options });
+        var query = NativeNodeDataCore.CreateOriginalDataQuery(compiled.Value!, options, cancellationToken);
+        return query.Outcome == NativeOutcome.Valid
+            ? NativeResult<NativeDecimalSessionCore>.Valid(new NativeDecimalSessionCore(query.Value!) { scalarOptions = options })
+            : NativeResult<NativeDecimalSessionCore>.Failure(query.Outcome, query.Diagnostic!, query.UnsupportedReason);
     }
 
     internal NativeResult<Document> Assess(string instance, DateTimeOffset currentDateTime, int implicitTimezoneOffsetMinutes,
@@ -119,6 +121,10 @@ internal sealed class NativeDecimalSessionCore : IDisposable
 
     private T ReadFact<T>(Document document, NativeSchemaProvider.Facts fact, Func<XdmValue, T> project, CancellationToken cancellationToken)
     {
+        if (fact.HasNoTypedValue) throw new NotSupportedException("FOTY0012");
+        if (scalarOptions is not null)
+            return runner.Run([document.Snapshot], operation => project(operation.Evaluate(
+                new EvaluationContext().WithVariable("node", XdmValue.FromNode(fact.Node)))), cancellationToken);
         return runner.Run([document.Snapshot], operation =>
         {
             var value = fact.ReadTypedValue(cancellationToken);
@@ -129,10 +135,12 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         }, cancellationToken);
     }
 
+    private bool IsRootNilled(Document document) => Work(() => { Check(document); return document.Assessment.ElementFacts[0].IsNilled; }, default);
+
     private bool HasRootScalar(Document document) => Work(() =>
     {
         Check(document);
-        return !document.Assessment.ElementFacts[0].HasNoTypedValue && !document.Assessment.ElementFacts[0].NativeType.EmptyContent;
+        return !document.Assessment.ElementFacts[0].IsNilled && !document.Assessment.ElementFacts[0].HasNoTypedValue && !document.Assessment.ElementFacts[0].NativeType.EmptyContent;
     }, default);
 
     private NativeScalarValue ReadRootScalar(Document document, CancellationToken cancellationToken) => Work(() =>
@@ -244,6 +252,7 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         internal NativeSchemaProvider.Assessment Assessment { get; }
         internal int DecimalCount => owner.LeafCount(this);
         internal bool HasRootScalar => owner.HasRootScalar(this);
+        internal bool IsRootNilled => owner.IsRootNilled(this);
         internal NativeScalarValue ReadRootScalar(CancellationToken cancellationToken = default) => owner.ReadRootScalar(this, cancellationToken);
         internal int AttributeCount => owner.AttributeCount(this);
         internal int DescendantAttributeCount => owner.DescendantAttributeCount(this);

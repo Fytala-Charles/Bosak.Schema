@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 23-11-2026     | Adopt qualified bounded root all groups |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Recognize admitted attribute-group references before owner assertions |
 //                      | Charles Korthout | 0.3   | 25-11-2026     | Admit closed scalar global references with existing compositor occurrence limits |
+//                      | Charles Korthout | 0.4   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -46,7 +47,7 @@ internal sealed partial class NativeDecimalSchema
                 Require(reference.MinOccurs is 0 or 1 && reference.MaxOccurs == 1, "Referenced member occurrence outside compositor profile.", NativeDecimalUnsupportedReason.DeclarationShape);
                 children.Add(reference); continue;
             }
-            Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form");
+            Attributes(declaration, "name", "type", "minOccurs", "maxOccurs", "form", "nillable");
             var name = Name(declaration);var ns = Form(declaration, "form", defaultForm) == "qualified" ? targetNamespace : "";
             Check(names.Add(XName.Get(name, ns)), "Competing direct all element particles.");
             var min = Occurs(declaration, "minOccurs", 1);var max = Occurs(declaration, "maxOccurs", 1);
@@ -59,7 +60,7 @@ internal sealed partial class NativeDecimalSchema
                     "Only admitted anonymous scalar all members are supported.", NativeDecimalUnsupportedReason.DeclarationShape);
                 type = anonymousSimple[inline[0]];
             }
-            children.Add(new NativeDeclaration(name, type, min, max, ns));
+            children.Add(ElementDeclaration(declaration, name, type, min, max, ns));
         }
         var attributes = members.Skip(1).TakeWhile(IsAttributeUseMember).ToArray();
         var assertions = members.Skip(1 + attributes.Length).ToArray();

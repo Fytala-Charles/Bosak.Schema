@@ -34,6 +34,7 @@
 //                      | Charles Korthout | 0.21   | 24-11-2026     | Resolve named Boolean bases with actual derivation identity |
 //                      | Charles Korthout | 0.22   | 24-11-2026     | Keep decimal enumeration opt-in while preserving the legacy grammar |
 //                      | Charles Korthout | 0.23   | 24-11-2026     | Admit closed named decimal bases with explicit native inherited-facet validation |
+//                      | Charles Korthout | 0.24   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -136,7 +137,7 @@ internal sealed partial class NativeDecimalSchema
             var members = Elements(declaration);
             if (members.Count == 1 && members[0].Name == Xs + "simpleType") type = anonymousSimple[members[0]];
         }
-        return type is null ? null : new NativeDecimalSchema(new NativeDeclaration(Name(declaration), type, 1, 1, targetNamespace), [], [], limits);
+        return type is null ? null : new NativeDecimalSchema(ElementDeclaration(declaration, Name(declaration), type, 1, 1, targetNamespace), [], [], limits);
     }
 
 }

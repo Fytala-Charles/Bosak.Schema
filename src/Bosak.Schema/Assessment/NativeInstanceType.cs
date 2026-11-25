@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.4   | 22-11-2026     | Adopt qualified bounded native string patterns |
 //                      | Charles Korthout | 0.5   | 24-11-2026     | Probe revised bounded date transport in isolated source copy |
 //                      | Charles Korthout | 0.6   | 24-11-2026     | Adopt qualified bounded native date transport |
+//                      | Charles Korthout | 0.7   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -75,7 +76,7 @@ internal sealed partial class NativeDecimalSchema
     // Admission of the special attribute is separate from hint ignoring. Every assessed
     // element invokes ResolveInstanceType before this helper can admit its attributes.
     private bool IsAdmittedInstanceAttribute(XAttribute attribute) => IsNamespaceOrLocationHint(attribute) ||
-        maxStringCharacters is not null && attribute.Name == Xsi + "type";
+        maxStringCharacters is not null && (attribute.Name == Xsi + "type" || attribute.Name == Xsi + "nil");
 
     private NativeType ResolveInstanceType(XElement element, NativeType declared)
     {
@@ -112,6 +113,7 @@ internal sealed partial class NativeDecimalSchema
     private NativeElementState AssessElementScalar(XElement element, NativeDeclaration declaration, NativePatternBudget patternBudget)
     {
         var selected = ResolveInstanceType(element, declaration.Type);
+        if (NilledState(element, declaration, selected) is { } nilled) return nilled;
         var governing = new NativeDeclaration(declaration.Name, selected, declaration.MinOccurs, declaration.MaxOccurs, declaration.NamespaceUri);
         return AssessScalar(element.Value, governing, patternBudget) with { Declaration = declaration, EffectiveType = selected };
     }

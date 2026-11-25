@@ -13,6 +13,8 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Carry private imported simple-type namespace projection through compilation |
+//                      | Charles Korthout | 0.3   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
+//                      | Charles Korthout | 0.4   | 25-11-2026     | Share captured original-node atomization for mixed scalar empty transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -49,20 +51,29 @@ internal sealed class NativeNodeDataCore : IDisposable
         var compiled = NativeDecimalSchema.Compile(schema, options.NumericLimits, cancellationToken, options.MaxStringCharacters, importedTypeNamespaces);
         if (compiled.Outcome != NativeOutcome.Valid)
             return NativeResult<NativeNodeDataCore>.Failure(compiled.Outcome, compiled.Diagnostic!, compiled.UnsupportedReason);
-        var recorder = new ContextRecorder(new NativeSchemaProvider(compiled.Value!));
+        var query = CreateOriginalDataQuery(compiled.Value!, options, cancellationToken);
+        return query.Outcome == NativeOutcome.Valid
+            ? NativeResult<NativeNodeDataCore>.Valid(new NativeNodeDataCore(query.Value!, options))
+            : NativeResult<NativeNodeDataCore>.Failure(query.Outcome, query.Diagnostic!, query.UnsupportedReason);
+    }
+
+    internal static NativeResult<SchemaQuerySession> CreateOriginalDataQuery(NativeDecimalSchema compiled,
+        NativeSchemaSessionOptions options, CancellationToken cancellationToken)
+    {
+        var recorder = new ContextRecorder(new NativeSchemaProvider(compiled));
         var capture = SchemaQuerySession.CompileXPath("data($node)", options.QueryLimits, assessor: recorder, cancellationToken: cancellationToken);
         if (capture.Kind == SchemaResultKind.Supported)
         {
             capture.Value.Dispose();
-            return NativeResult<NativeNodeDataCore>.Failure(NativeOutcome.Unsupported, "Native context capture refused.");
+            return NativeResult<SchemaQuerySession>.Failure(NativeOutcome.Unsupported, "Native context capture refused.");
         }
         if (string.IsNullOrEmpty(recorder.Fingerprint))
-            return NativeResult<NativeNodeDataCore>.Failure(NativeOutcome.Unsupported, "Native context capture refused.");
-        var provider = new NativeSchemaProvider(compiled.Value!, true, recorder.Fingerprint);
+            return NativeResult<SchemaQuerySession>.Failure(NativeOutcome.Unsupported, "Native context capture refused.");
+        var provider = new NativeSchemaProvider(compiled, true, recorder.Fingerprint);
         var result = SchemaQuerySession.CompileXPath("data($node)", options.QueryLimits, assessor: provider, cancellationToken: cancellationToken);
         return result.Kind == SchemaResultKind.Supported
-            ? NativeResult<NativeNodeDataCore>.Valid(new NativeNodeDataCore(result.Value, options))
-            : NativeResult<NativeNodeDataCore>.Failure(NativeOutcome.Unsupported, "Native node-data session refused.");
+            ? NativeResult<SchemaQuerySession>.Valid(result.Value)
+            : NativeResult<SchemaQuerySession>.Failure(NativeOutcome.Unsupported, "Native node-data session refused.");
     }
 
     internal NativeResult<Document> Assess(string instance, DateTimeOffset currentDateTime, int implicitTimezoneOffsetMinutes,
@@ -121,6 +132,14 @@ internal sealed class NativeNodeDataCore : IDisposable
         return runner.Run([document.Snapshot], operation => NativeScalarValue.FromValue(
             operation.Evaluate(new EvaluationContext().WithVariable("node", XdmValue.FromNode(original)))), cancellationToken);
     }
+
+    private bool IsNilled(Document document, ImmutableArray<int> elementPath, CancellationToken cancellationToken) => Work(() =>
+    {
+        var node = Element(document, elementPath, nameof(elementPath));
+        if (node is not NativeSessionNode original || document.Input.FactsFor(original) is not { } facts)
+            throw new NotSupportedException("The original node has no admitted native facts.");
+        return facts.IsNilled;
+    }, cancellationToken);
 
     private NativeScalarValue ReadElement(Document document, ImmutableArray<int> elementPath, CancellationToken cancellationToken) => Work(() =>
         Read(document, Element(document, elementPath, nameof(elementPath)), cancellationToken), cancellationToken);
@@ -201,6 +220,7 @@ internal sealed class NativeNodeDataCore : IDisposable
         internal NativeSchemaInput Input { get; }
         internal SchemaQuerySnapshot Snapshot { get; }
         internal NativeSchemaProvider.Assessment Assessment { get; }
+        internal bool IsNilled(ImmutableArray<int> elementPath, CancellationToken cancellationToken) => owner.IsNilled(this, elementPath, cancellationToken);
         internal NativeScalarValue ReadElement(ImmutableArray<int> elementPath, CancellationToken cancellationToken) => owner.ReadElement(this, elementPath, cancellationToken);
         internal NativeScalarValue ReadAttribute(ImmutableArray<int> ownerElementPath, string namespaceUri, string localName, CancellationToken cancellationToken) => owner.ReadAttribute(this, ownerElementPath, namespaceUri, localName, cancellationToken);
         internal string ExportXml(CancellationToken cancellationToken) => owner.Export(this, cancellationToken);

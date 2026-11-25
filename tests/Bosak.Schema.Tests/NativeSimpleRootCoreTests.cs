@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 22-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 25-11-2026     | Verify admitted nil metadata and distinct supported empty typed sequences |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -75,7 +76,7 @@ public sealed class NativeSimpleRootCoreTests
     /// <param name="empty">The empty control input.</param>
     [Theory][InlineData("",true)][InlineData("<xs:sequence><xs:element name='v' type='xs:string' minOccurs='0'/></xs:sequence>",false)]
     public void EmptyComplexAndAbsentStayDistinct(string body,bool empty)
-    {string schema=$"<xs:schema xmlns:xs='{Xs}'><xs:element name='r'><xs:complexType>{body}</xs:complexType></xs:element></xs:schema>";using var f=new Fixture(schema,"<r/>");var fact=f.Input.FactsFor((NativeSessionNode)f.Input.Root)!;Assert.Equal(!empty,fact.HasNoTypedValue);if(empty){var value=fact.ReadTypedValue(default).Value;Assert.False(value.TryGetSingleAtomic(out _));}if(empty)Assert.Throws<NotSupportedException>(()=>f.Read(f.Input.Root));else Assert.Throws<InvalidOperationException>(()=>f.Read(f.Input.Root));}
+    {string schema=$"<xs:schema xmlns:xs='{Xs}'><xs:element name='r'><xs:complexType>{body}</xs:complexType></xs:element></xs:schema>";using var f=new Fixture(schema,"<r/>");var fact=f.Input.FactsFor((NativeSessionNode)f.Input.Root)!;Assert.Equal(!empty,fact.HasNoTypedValue);if(empty){var value=fact.ReadTypedValue(default).Value;Assert.False(value.TryGetSingleAtomic(out _));}if(empty){Assert.Equal(NativeScalarKind.Empty,f.Read(f.Input.Root).Kind);Assert.False(fact.IsNilled);}else Assert.Throws<InvalidOperationException>(()=>f.Read(f.Input.Root));}
     /// <summary>No Facts On Failure.</summary>
     /// <param name="xml">The xml control input.</param>
     /// <param name="expected">The expected control input.</param>

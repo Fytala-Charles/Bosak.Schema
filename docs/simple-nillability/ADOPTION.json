@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-25",
+  "base": "f861575ac1ca9a130fac42e383aabe157f9dfb9e",
+  "batchSlice": 16,
+  "status": "Production adoption recorded before implementation",
+  "scope": "Nillable simple-valued elements with actual nilled facts and typed-empty detached reads",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "2.7.2 xsi:nil",
+        "3.3.1 nillable declaration property",
+        "3.3.4.3 clause3 any xsi:nil requires nillable; true has no character/element children",
+        "3.3.4.4 element/type validity",
+        "3.3.5 assessed nil information"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\structures.html"
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "3.3.2 boolean lexical/value spaces",
+        "4.1 admitted simple restrictions"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\datatypes.html"
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3 typed values",
+        "6.2 element nodes",
+        "6.3 attribute nodes"
+      ],
+      "reviewBodyPath": "D:\\Development\\Bosak\\.guard-tmp\\schema-xsi-type-contract-20261120\\xdm31.html"
+    }
+  ],
+  "intentionalDeviations": [
+    "Only simple-valued nillable declarations; complex true remains Unsupported",
+    "Any assertion/assertion-facet combined with true nillability remains Unsupported",
+    "Raw Boolean metadata/request256UTF16 cap; comments/PI on nilled content remain Unsupported",
+    "Three additive detached empty/nil API rows; no broader PSVI"
+  ],
+  "productionAdoption": true,
+  "published": false
+}

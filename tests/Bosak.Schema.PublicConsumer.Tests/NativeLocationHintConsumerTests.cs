@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 21-11-2026     | Distinguish absent instance type from other unsupported requests                          |
+//                      | Charles Korthout | 0.3   | 25-11-2026     | Verify admitted nil metadata and distinct supported empty typed sequences |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -103,8 +104,8 @@ public sealed class NativeLocationHintConsumerTests
         var xml=XElement.Parse(NestedXml);var target=owner==0?xml:xml.Element("box")!;
         target.SetAttributeValue(XName.Get("noNamespaceSchemaLocation",Xsi),"missing.xsd");target.SetAttributeValue(XName.Get(request,Xsi),"true");
         using var session=NativeSchemaSession.Create(NestedSchema,Options).Value!;
-        var result=session.Assess(xml.ToString(),Context);Assert.Equal(request=="type"?NativeSchemaOutcome.Invalid:NativeSchemaOutcome.Unsupported,result.Outcome);Assert.Null(result.Value);
-        if(request!="type")Assert.Equal(NativeSchemaUnsupportedReason.Attributes,result.Diagnostics[0].UnsupportedReason);else Assert.Equal("BSK-NATIVE-INSTANCE-INVALID",Assert.Single(result.Diagnostics).Code);
+        var result=session.Assess(xml.ToString(),Context);Assert.Equal(request is "type" or "nil"?NativeSchemaOutcome.Invalid:NativeSchemaOutcome.Unsupported,result.Outcome);Assert.Null(result.Value);
+        if(request is not "type" and not "nil")Assert.Equal(NativeSchemaUnsupportedReason.Attributes,result.Diagnostics[0].UnsupportedReason);else Assert.Equal("BSK-NATIVE-INSTANCE-INVALID",Assert.Single(result.Diagnostics).Code);
     }
 
     /// <summary>Unqualified and wrong-namespace lookalikes do not acquire special hint treatment.</summary>

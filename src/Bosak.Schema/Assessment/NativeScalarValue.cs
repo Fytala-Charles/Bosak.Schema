@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 19-11-2026     | Add bounded exact integer leaves with original typed provenance                           |
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Probe revised bounded date transport in isolated source copy |
 //                      | Charles Korthout | 0.5   | 24-11-2026     | Adopt qualified bounded native date transport |
+//                      | Charles Korthout | 0.6   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -37,12 +38,15 @@ public enum NativeScalarKind
     /// <summary>An exact integer under the explicit native digit capacity.</summary>
     Integer = 4,
     /// <summary>A checked date without schema authority.</summary>
-    Date = 5
+    Date = 5,
+    /// <summary>A supported empty typed sequence, distinct from an empty string or absent typed value.</summary>
+    Empty = 6
 }
 
 /// <summary>Contains a detached immutable scalar with no transferable schema authority.</summary>
 public sealed class NativeScalarValue
 {
+    private NativeScalarValue() { Kind = NativeScalarKind.Empty; }
     private readonly NativeDateValue? date;
     private NativeScalarValue(XPathDateTime value) { date = new(value); Kind = NativeScalarKind.Date; }
     /// <summary>Gets the detached date components.</summary>
@@ -72,6 +76,7 @@ public sealed class NativeScalarValue
     public BigInteger IntegerValue => Kind == NativeScalarKind.Integer ? integer : throw new InvalidOperationException("The scalar is not an integer.");
     internal static NativeScalarValue FromValue(XdmValue value) => value.Kind switch
     {
+        XdmValueKind.Undefined => new NativeScalarValue(),
         XdmValueKind.String => new NativeScalarValue(value.StringValue),
         XdmValueKind.Decimal => new NativeScalarValue(value.ExactDecimalValue),
         XdmValueKind.Boolean => new NativeScalarValue(value.BooleanValue),
