@@ -65,6 +65,7 @@
 //                      | Charles Korthout | 1.42   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
 //                      | Charles Korthout | 1.43   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      | Charles Korthout | 0.10   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
+//                      | Charles Korthout | 0.11   | 25-11-2026     | Preserve bounded list/union types and ordered selected member facts |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -160,6 +161,8 @@ internal sealed partial class NativeDecimalSchema
             var simple = CreateBuiltinIntegerTypes(integerType);
             if (maxStringCharacters is not null)
             {
+                simple.Add(Xs + "decimal", decimalType); simple.Add(Xs + "string", stringType!); simple.Add(Xs + "boolean", booleanType!); simple.Add(Xs + "integer", integerType!);
+                Require(root.Descendants(Xs + "simpleType").Count(e => e.Parent?.Name == Xs + "list" || e.Parent?.Name == Xs + "union") <= 16, "Inline compound type capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
                 foreach (var kind in Enum.GetValues<NativeInterchangeKind>())
                     simple.Add(Xs + InterchangeName(kind), new NativeType(InterchangeName(kind), false, Xs.NamespaceName, interchangeKind: kind));
                 simple.Add(Xs + "date", new NativeType("date", false, Xs.NamespaceName, isDate: true));
@@ -186,9 +189,8 @@ internal sealed partial class NativeDecimalSchema
                 Require(resolvingSimple.Add(key), "Simple dependency cycle is outside the profile.", NativeDecimalUnsupportedReason.ValueType);
                 var type = simpleDefinitions[key];
                 Attributes(type, "name");
-                var restriction = Single(type, "restriction");
-                var dependency = ResolveTypeName(restriction, "base");
-                if (!simple.ContainsKey(dependency) && simpleDefinitions.ContainsKey(dependency)) ResolveSimple(dependency);
+                foreach (var dependency in CompoundDependencies(type))
+                    if (!simple.ContainsKey(dependency) && simpleDefinitions.ContainsKey(dependency)) ResolveSimple(dependency);
                 var restricted = CompileRestriction(type, Name(type), DefinitionNamespace(type, targetNamespace), limits, maxStringCharacters, patternCompilation, simple);
                 simple.Add(key, restricted);
                 resolvingSimple.Remove(key);
@@ -346,7 +348,7 @@ internal sealed partial class NativeDecimalSchema
 
         var attributeUses = CompileAttributes(attributeMembers, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
 
-        var assertionNames = children.Where(c => !c.Type.IsBoolean && !c.Type.IsInteger && !c.Type.IsDate && c.Type.CalendarKind is null && c.Type.InterchangeKind is null).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
+        var assertionNames = children.Where(c => !c.Type.IsBoolean && !c.Type.IsInteger && !c.Type.IsDate && c.Type.CalendarKind is null && c.Type.InterchangeKind is null && !c.Type.IsCompound).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var stringNames = stringType is null ? null : children.Where(c => c.Type.IsString).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var structuralPlans = CompileStructuralAssertions(assertionMembers.Where(IsStructuralAssertion), targetNamespace, assertionNamespace, cancellationToken);
         var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
@@ -517,8 +519,8 @@ internal sealed partial class NativeDecimalSchema
             {
                 Check(!root.HasElements, "Simple root cannot contain child elements.");
                 Require(root.Nodes().All(n => n is XText), "Simple-root comments or processing instructions are unsupported.");
-                var scalar = AssessElementScalar(root, selected.Root, patternBudget) with
-                { NormalizedStringValue = rootType!.IsString ? root.Value : Collapse(root.Value) };
+                var scalar = AssessElementScalar(root, selected.Root, patternBudget);
+                scalar = scalar with { NormalizedStringValue = NormalizedScalarText(scalar, root.Value) };
                 cancellationToken.ThrowIfCancellationRequested();
                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [scalar], []));
             }
@@ -527,7 +529,8 @@ internal sealed partial class NativeDecimalSchema
                 Check(!root.HasElements, "Simple-content root cannot contain child elements.");
                 Require(root.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
                 var scalarDeclaration = new NativeDeclaration(selected.Root.Name, contentType, 1, 1, selected.Root.NamespaceUri);
-                var state = AssessScalar(root.Value, scalarDeclaration, patternBudget, root) with { Declaration = selected.Root, EffectiveType = rootType, NormalizedStringValue = Collapse(root.Value) };
+                var state = AssessScalar(root.Value, scalarDeclaration, patternBudget, root) with { Declaration = selected.Root, EffectiveType = rootType };
+                state = state with { NormalizedStringValue = NormalizedScalarText(state, root.Value) };
                 selected.AssessIntegerAssertions(root, state, cancellationToken);
                 cancellationToken.ThrowIfCancellationRequested();
                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [state], attributeStates.ToImmutable()));
@@ -605,10 +608,14 @@ internal sealed partial class NativeDecimalSchema
         }
     }
 
+    private static string NormalizedScalarText(NativeElementState state, string text) =>
+        (state.ActualAtomicType ?? state.GoverningType.ContentType ?? state.GoverningType).IsString ? text : Collapse(text);
+
     internal static string InterchangeName(NativeInterchangeKind kind) => kind switch { NativeInterchangeKind.HexBinary => "hexBinary", NativeInterchangeKind.Base64Binary => "base64Binary", _ => "QName" };
 
     private NativeElementState AssessScalar(string text, NativeDeclaration declaration, NativePatternBudget patternBudget, XElement? scope = null)
     {
+        if (declaration.Type.IsCompound) return AssessCompound(text, declaration, patternBudget, scope);
         if (declaration.Type.InterchangeKind is { } interchangeKind)
         {
             var value = NativeInterchangeParser.Parse(text, interchangeKind, maxStringCharacters!.Value, scope);
@@ -840,8 +847,13 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null, bool isMixed = false, XdmExactCalendarKind? calendarKind = null, NativeCalendarFacets? calendarFacets = null, NativeInterchangeKind? interchangeKind = null, NativeInterchangeFacets? interchangeFacets = null)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null, bool isMixed = false, XdmExactCalendarKind? calendarKind = null, NativeCalendarFacets? calendarFacets = null, NativeInterchangeKind? interchangeKind = null, NativeInterchangeFacets? interchangeFacets = null, NativeType? listItemType = null, ImmutableArray<NativeType> unionMembers = default, NativeCompoundFacets? compoundFacets = null)
 {
+    internal NativeType? ListItemType { get; } = listItemType;
+    internal ImmutableArray<NativeType> UnionMembers { get; } = unionMembers;
+    internal bool IsUnion => !UnionMembers.IsDefault;
+    internal bool IsCompound => ListItemType is not null || IsUnion;
+    internal NativeCompoundFacets? CompoundFacets { get; } = compoundFacets;
     internal NativeInterchangeKind? InterchangeKind { get; } = interchangeKind;
     internal NativeInterchangeFacets? InterchangeFacets { get; } = interchangeFacets;
     internal NativeType? DerivationBase { get; } = derivationBase;
@@ -882,6 +894,9 @@ internal sealed class NativeDeclaration(string name, NativeType type, int minOcc
 }
 internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null, XPathDateTime? DateValue = null, XdmExactCalendarValue? CalendarValue = null, NativeInterchangeValue? InterchangeValue = null)
 {
+    internal NativeType? ActualAtomicType { get; init; }
+    internal ImmutableArray<NativeElementState> Items { get; init; }
+    internal bool IsListValue => !Items.IsDefault;
     internal NativeType? EffectiveType { get; init; }
     internal NativeType GoverningType => EffectiveType ?? Declaration.Type;
     internal ImmutableArray<int> OwnerElementPath { get; init; } = [];

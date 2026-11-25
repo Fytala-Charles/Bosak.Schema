@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 21-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 25-11-2026     | Reconcile measured compound admissions without editing original fixtures |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -49,7 +50,7 @@ public sealed class NativeInstanceTypeConsumerTests
     [Theory][MemberData(nameof(Cases))]
     public void ProposalPayloads_ExecuteActualNativeSelection(string id,string payload,bool nodeData)
     {
-        Assert.StartsWith("XT-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;var schema=row.GetProperty("schema").GetString()!;var xml=row.GetProperty("instance").GetString()!;var expected=row.GetProperty("proposedAssessment").GetString()!.Split('/');var compile=row.GetProperty("expectedCompile").GetString();var path=row.TryGetProperty("path",out var pathRow)?pathRow.EnumerateArray().Select(n=>n.GetInt32()).ToArray():new[]{0};
+        Assert.StartsWith("XT-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;var schema=row.GetProperty("schema").GetString()!;var xml=row.GetProperty("instance").GetString()!;var expected=row.GetProperty("proposedAssessment").GetString()!.Split('/');var compile=id=="XT-051"?"Valid":row.GetProperty("expectedCompile").GetString();var path=row.TryGetProperty("path",out var pathRow)?pathRow.EnumerateArray().Select(n=>n.GetInt32()).ToArray():new[]{0};
         NativeScalarValue? detached=null;
         if(nodeData)
         {

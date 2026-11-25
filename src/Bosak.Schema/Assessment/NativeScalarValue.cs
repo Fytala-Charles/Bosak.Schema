@@ -19,6 +19,7 @@
 //                      | Charles Korthout | 0.6   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.7   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      | Charles Korthout | 0.8   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
+//                      | Charles Korthout | 0.9   | 25-11-2026     | Transport ordered compound items with original member provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -108,6 +109,16 @@ public sealed class NativeScalarValue
     /// <summary>Gets the detached exact integer, usable after owner disposal.</summary>
     /// <exception cref="InvalidOperationException">This scalar is not an integer.</exception>
     public BigInteger IntegerValue => Kind == NativeScalarKind.Integer ? integer : throw new InvalidOperationException("The scalar is not an integer.");
+    internal static ImmutableArray<NativeScalarValue> FromItems(XdmValue value, CancellationToken token)
+    {
+        var result = ImmutableArray.CreateBuilder<NativeScalarValue>();
+        if (value.Kind == XdmValueKind.Sequence)
+        {
+            foreach (var item in XdmSequence.FromSource(value.SequenceValue!)) { token.ThrowIfCancellationRequested(); result.Add(FromValue(item)); }
+        }
+        else if (value.Kind != XdmValueKind.Undefined) { token.ThrowIfCancellationRequested(); result.Add(FromValue(value)); }
+        return result.ToImmutable();
+    }
     internal static NativeScalarValue FromValue(XdmValue value) => value.IsExactCalendar ? new NativeScalarValue(value.ExactCalendarValue) : value.Kind switch
     {
         XdmValueKind.Undefined => new NativeScalarValue(),

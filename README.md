@@ -196,3 +196,7 @@ Use [bounded mixed sequences](docs/mixed-sequences/README.md) for interleaved or
 ## Datatype composition candidate — 25 November 2026
 
 The next native datatype candidate adds bounded binary and QName values; list/union integration is in progress. See the [datatype composition work](docs/datatypes-200/README.md) for its scope and qualification status.
+
+## Native list and union candidate — 25 November 2026
+
+The native datatype candidate now includes bounded lists/unions with explicit immutable item reads. See the [datatype consumer guide](docs/datatypes-200/GUIDE.md) for scope, capacities and qualification status.

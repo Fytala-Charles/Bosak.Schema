@@ -21,6 +21,7 @@
 //                      | Charles Korthout | 0.8   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      | Charles Korthout | 0.9   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      | Charles Korthout | 0.10   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
+//                      | Charles Korthout | 0.11   | 25-11-2026     | Preserve bounded list/union types and ordered selected member facts |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -43,13 +44,15 @@ internal sealed partial class NativeDecimalSchema
     private void PrepareInstanceTypes()
     {
         var named = NamedTypes.Concat(new NativeType?[] { DecimalType, StringType, BooleanType, IntegerType }.OfType<NativeType>())
-            .Where(type => type.Name is not null).ToImmutableDictionary(type => XName.Get(type.Name!, type.NamespaceUri));
+            .Where(type => type.Name is not null).Distinct().ToImmutableDictionary(type => XName.Get(type.Name!, type.NamespaceUri));
         instanceTypes = named;
         var all = new HashSet<NativeType>(ReferenceEqualityComparer.Instance);
         var seenPlans = new HashSet<NativeDecimalSchema>(ReferenceEqualityComparer.Instance);
         void AddType(NativeType type)
         {
             if (!all.Add(type)) return;
+            if (type.ListItemType is { } item) AddType(item);
+            if (type.IsUnion) foreach (var member in type.UnionMembers) AddType(member);
             if (type.ContentType is { } content) AddType(content);
             if (type.DerivationBase is { } parent) AddType(parent);
         }
@@ -106,10 +109,18 @@ internal sealed partial class NativeDecimalSchema
         var visited = new HashSet<NativeType>(ReferenceEqualityComparer.Instance);
         for (NativeType? current = selected; current is not null && visited.Add(current); current = instanceBases.GetValueOrDefault(current))
             if (ReferenceEquals(current, declared)) { derives = true; break; }
+        if (!derives && declared.IsUnion)
+        {
+            var seenMembers = new HashSet<NativeType>(ReferenceEqualityComparer.Instance);
+            bool ContainsSelectedMember(NativeType type) => seenMembers.Add(type) &&
+                (visited.Contains(type) || type.IsUnion && type.UnionMembers.Any(ContainsSelectedMember));
+            Require(!declared.UnionMembers.Any(ContainsSelectedMember), "Union member xsi:type selection awaits qualification.", NativeDecimalUnsupportedReason.ValueType);
+        }
         Check(derives, "Instance type does not derive from the declared type.");
         Require(!selected.IsComplex && !declared.IsComplex && selected.IsString == declared.IsString &&
             (selected.CalendarKind == declared.CalendarKind || selected.CalendarKind == Bosak.XPath.Core.Xdm.XdmExactCalendarKind.DateTimeStamp && declared.CalendarKind == Bosak.XPath.Core.Xdm.XdmExactCalendarKind.DateTime) && selected.IsDate == declared.IsDate && selected.IsBoolean == declared.IsBoolean && selected.IsInteger == declared.IsInteger,
             "Valid type derivation changes the admitted scalar representation.", NativeDecimalUnsupportedReason.ValueType);
+        Require(selected.IsCompound == declared.IsCompound, "Instance type changes compound variety.", NativeDecimalUnsupportedReason.ValueType);
         Require(selected.InterchangeKind == declared.InterchangeKind, "Instance type changes interchange representation.", NativeDecimalUnsupportedReason.ValueType);
         return selected;
     }

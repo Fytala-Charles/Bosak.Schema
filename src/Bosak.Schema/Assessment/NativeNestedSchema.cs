@@ -41,6 +41,7 @@
 //                      | Charles Korthout | 0.28   | 25-11-2026     | Validate provided effective attribute constraints and fixed override identity |
 //                      | Charles Korthout | 0.29   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
 //                      | Charles Korthout | 0.30   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
+//                      | Charles Korthout | 0.31   | 25-11-2026     | Preserve compound selected-member text and original typed reads |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -292,7 +293,8 @@ internal sealed partial class NativeDecimalSchema
             Check(!element.HasElements, "Simple-content terminal cannot contain child elements.");
             Require(element.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
             var atomicDeclaration = new NativeDeclaration(declaration.Name, contentType, 1, 1, declaration.NamespaceUri);
-            var scalarState = AssessScalar(element.Value, atomicDeclaration, patternBudget, element) with { Declaration = declaration, EffectiveType = effectiveType, NormalizedStringValue = Collapse(element.Value) };
+            var scalarState = AssessScalar(element.Value, atomicDeclaration, patternBudget, element) with { Declaration = declaration, EffectiveType = effectiveType };
+            scalarState = scalarState with { NormalizedStringValue = NormalizedScalarText(scalarState, element.Value) };
             plan.AssessIntegerAssertions(element, scalarState, cancellationToken);
             states.Add(scalarState);
             cancellationToken.ThrowIfCancellationRequested();

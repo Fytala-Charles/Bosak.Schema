@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Carry private imported simple-type namespace projection through compilation |
 //                      | Charles Korthout | 0.3   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Share captured original-node atomization for mixed scalar empty transport |
+//                      | Charles Korthout | 0.5   | 25-11-2026     | Add gated immutable item reads and refuse implicit list flattening |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -124,12 +125,13 @@ internal sealed class NativeNodeDataCore : IDisposable
         return node;
     }
 
-    private NativeScalarValue Read(Document document, IXdmNode node, CancellationToken cancellationToken)
+    private T Read<T>(Document document, IXdmNode node, CancellationToken cancellationToken, Func<XdmValue, T> project, bool allowList = false)
     {
         if (node is not NativeSessionNode original || document.Input.FactsFor(original) is not { } facts)
             throw new NotSupportedException("The original node has no admitted native facts.");
+        if (facts.IsListValue && !allowList) throw new NotSupportedException("List values require an explicit item read.");
         if (facts.HasNoTypedValue) throw new NotSupportedException("FOTY0012: The original node has no typed value.");
-        return runner.Run([document.Snapshot], operation => NativeScalarValue.FromValue(
+        return runner.Run([document.Snapshot], operation => project(
             operation.Evaluate(new EvaluationContext().WithVariable("node", XdmValue.FromNode(original)))), cancellationToken);
     }
 
@@ -142,10 +144,19 @@ internal sealed class NativeNodeDataCore : IDisposable
     }, cancellationToken);
 
     private NativeScalarValue ReadElement(Document document, ImmutableArray<int> elementPath, CancellationToken cancellationToken) => Work(() =>
-        Read(document, Element(document, elementPath, nameof(elementPath)), cancellationToken), cancellationToken);
+        Read(document, Element(document, elementPath, nameof(elementPath)), cancellationToken, NativeScalarValue.FromValue), cancellationToken);
 
-    private NativeScalarValue ReadAttribute(Document document, ImmutableArray<int> ownerElementPath, string namespaceUri,
-        string localName, CancellationToken cancellationToken) => Work(() =>
+    private ImmutableArray<NativeScalarValue> ReadElementItems(Document document, ImmutableArray<int> elementPath, CancellationToken token) => Work(() =>
+        Read(document, Element(document, elementPath, nameof(elementPath)), token, value => NativeScalarValue.FromItems(value, token), true), token);
+
+    private NativeScalarValue ReadAttribute(Document document, ImmutableArray<int> ownerElementPath, string namespaceUri, string localName, CancellationToken token) =>
+        ReadAttributeValue(document, ownerElementPath, namespaceUri, localName, token, NativeScalarValue.FromValue);
+
+    private ImmutableArray<NativeScalarValue> ReadAttributeItems(Document document, ImmutableArray<int> ownerElementPath, string namespaceUri, string localName, CancellationToken token) =>
+        ReadAttributeValue(document, ownerElementPath, namespaceUri, localName, token, value => NativeScalarValue.FromItems(value, token), true);
+
+    private T ReadAttributeValue<T>(Document document, ImmutableArray<int> ownerElementPath, string namespaceUri,
+        string localName, CancellationToken cancellationToken, Func<XdmValue, T> project, bool allowList = false) => Work(() =>
     {
         Check(document);
         ArgumentNullException.ThrowIfNull(namespaceUri);
@@ -154,7 +165,7 @@ internal sealed class NativeNodeDataCore : IDisposable
         catch (Exception error) when (error is XmlException or ArgumentException) { throw new ArgumentException("An XML NCName is required.", nameof(localName)); }
         var owner = Element(document, ownerElementPath, nameof(ownerElementPath));
         foreach (var attribute in owner.Attributes(localName, namespaceUri))
-            return Read(document, attribute.NodeValue, cancellationToken);
+            return Read(document, attribute.NodeValue, cancellationToken, project, allowList);
         throw new ArgumentException("The requested attribute is absent.", nameof(localName));
     }, cancellationToken);
 
@@ -220,6 +231,8 @@ internal sealed class NativeNodeDataCore : IDisposable
         internal NativeSchemaInput Input { get; }
         internal SchemaQuerySnapshot Snapshot { get; }
         internal NativeSchemaProvider.Assessment Assessment { get; }
+        internal ImmutableArray<NativeScalarValue> ReadElementItems(ImmutableArray<int> path, CancellationToken token) => owner.ReadElementItems(this, path, token);
+        internal ImmutableArray<NativeScalarValue> ReadAttributeItems(ImmutableArray<int> path, string namespaceUri, string localName, CancellationToken token) => owner.ReadAttributeItems(this, path, namespaceUri, localName, token);
         internal bool IsNilled(ImmutableArray<int> elementPath, CancellationToken cancellationToken) => owner.IsNilled(this, elementPath, cancellationToken);
         internal NativeScalarValue ReadElement(ImmutableArray<int> elementPath, CancellationToken cancellationToken) => owner.ReadElement(this, elementPath, cancellationToken);
         internal NativeScalarValue ReadAttribute(ImmutableArray<int> ownerElementPath, string namespaceUri, string localName, CancellationToken cancellationToken) => owner.ReadAttribute(this, ownerElementPath, namespaceUri, localName, cancellationToken);

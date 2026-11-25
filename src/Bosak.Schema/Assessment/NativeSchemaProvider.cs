@@ -38,6 +38,7 @@
 //                      | Charles Korthout | 1.16   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      | Charles Korthout | 1.17   | 25-11-2026     | Prove owned calendar derivation and bind an exact guarded comparison fingerprint |
 //                      | Charles Korthout | 0.10   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
+//                      | Charles Korthout | 0.11   | 25-11-2026     | Transport ordered compound items with original member provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -104,6 +105,8 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         components.Add(value, component);
         if (value is NativeType type)
         {
+            if (type.ListItemType is { } item) Add(item);
+            if (type.IsUnion) foreach (var member in type.UnionMembers) Add(member);
             if (type.ContentType is { } content) Add(content);
             if (type.DerivationBase is { } parent) Add(parent);
         }
@@ -298,7 +301,10 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         internal Facts(NativeSchemaInput input, NativeSessionNode node, Origin origin, Component type, Component declaration, NativeElementState state, Component? actualType = null)
         {
             Input = input; Node = node; this.origin = origin; this.type = type; this.declaration = declaration; this.state = state;
-            if (state.IsNilled || state.GoverningType.EmptyContent) value = new IssuedValue(input, origin, type, XdmValue.Undefined, empty: true);
+            if (state.ActualAtomicType is { } selected) actualType = type.Provider.TypeComponent(selected);
+            if (state.IsNilled || state.GoverningType.EmptyContent) value = new IssuedValue(input, origin, type, [], (state.GoverningType.ContentType ?? state.GoverningType).ListItemType is not null);
+            else if (state.IsListValue) value = new IssuedValue(input, origin, type,
+                state.Items.Select(item => (PlainAtomic(item), type.Provider.TypeComponent(item.ActualAtomicType ?? item.GoverningType))).ToImmutableArray(), true);
             else if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
             else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, state.GoverningType.MixedContent ? XdmValue.FromString(text, "untypedAtomic") : XdmValue.FromString(text), actualType);
             else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical), actualType);
@@ -308,6 +314,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             else if (state.DateValue is { } date) value = new IssuedValue(input, origin, type, XdmValue.FromDate(date, date.HasTimezone), actualType);
             else if (state.IntegerValue is { } integer) value = new IssuedValue(input, origin, type, XdmValue.FromInteger(integer), actualType);
         }
+        internal bool IsListValue { get { Input.Check(); return value?.IsList ?? false; } }
         internal NativeSchemaInput Input { get; }
         internal NativeSessionNode Node { get; }
         internal string? NormalizedStringValue { get { Input.Check(); return state.NormalizedStringValue; } }
@@ -327,28 +334,46 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         }
     }
 
-    private sealed class IssuedValue(NativeSchemaInput input, Origin origin, Component type, XdmValue scalar, Component? actualType = null, bool empty = false) : ISchemaTypedValue
+    private static XdmValue PlainAtomic(NativeElementState state)
     {
+        if (state.TypedValue is { } number) return XdmValue.FromDecimal(number);
+        if (state.IntegerValue is { } integer) return XdmValue.FromInteger(integer);
+        if (state.StringValue is { } text) return XdmValue.FromString(text);
+        if (state.BooleanValue is { } logical) return XdmValue.FromBoolean(logical);
+        if (state.CalendarValue is { } calendar) return XdmValue.FromExactCalendar(calendar);
+        if (state.DateValue is { } date) return XdmValue.FromDate(date,date.HasTimezone);
+        if (state.InterchangeValue is { } interchange) return interchange.Kind == NativeInterchangeKind.QName ?
+            XdmValue.FromQName(interchange.Name) : XdmValue.FromString(interchange.Canonical,NativeDecimalSchema.InterchangeName(interchange.Kind));
+        throw new InvalidOperationException("An admitted list item must be atomic.");
+    }
+
+    private sealed class IssuedValue : ISchemaTypedValue
+    {
+        private readonly NativeSchemaInput input;
+        private readonly Origin origin;
+        private readonly Component type;
+        private readonly ImmutableArray<(XdmValue Value, Component ActualType)> items;
+        private readonly bool list;
+        internal IssuedValue(NativeSchemaInput input, Origin origin, Component type, XdmValue scalar, Component? actualType = null, bool empty = false)
+            : this(input, origin, type, empty ? [] : [(scalar, actualType ?? type)], false) { }
+        internal IssuedValue(NativeSchemaInput input, Origin origin, Component type, ImmutableArray<(XdmValue Value, Component ActualType)> items, bool list)
+        { this.input=input;this.origin=origin;this.type=type;this.items=items;this.list=list; }
         internal NativeSchemaInput Input => input;
         internal Origin Origin => origin;
         public ISchemaComponentHandle GoverningType { get { input.Check(); return type; } }
-        public bool IsList { get { input.Check(); return false; } }
-        public IEnumerable<SchemaAtomicItem> AtomicItems
-        {
-            get { input.Check(); return Enumerate(); }
-        }
+        public bool IsList { get { input.Check(); return list; } }
+        public IEnumerable<SchemaAtomicItem> AtomicItems { get { input.Check(); return Enumerate(); } }
         private IEnumerable<SchemaAtomicItem> Enumerate()
         {
             input.Check();
-            if (!empty) yield return Item();
+            foreach(var item in items) { input.Check();yield return Cell(item); }
         }
-        private SchemaAtomicItem Item() => new(scalar, new Provenance(input, origin, type, actualType ?? type));
+        private SchemaAtomicItem Cell((XdmValue Value,Component ActualType) item) => new(item.Value,new Provenance(input,origin,type,item.ActualType));
         public bool TryGetSingleAtomic(out SchemaAtomicItem item)
         {
             input.Check();
-            if (empty) { item = default; return false; }
-            item = Item();
-            return true;
+            if(list || items.Length!=1) { item=default;return false; }
+            item=Cell(items[0]);return true;
         }
     }
 

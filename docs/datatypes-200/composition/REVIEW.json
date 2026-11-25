@@ -1,0 +1,29 @@
+{
+  "utc": "2026-11-25T22:35:52.045884+00:00",
+  "blockingFindings": [],
+  "scope": "Bounded list/union construction, ordered member selection, exact value equality, original namespace/text contexts, immutable item reads, actual member authority and lifetime/query limits",
+  "sourceCases": 12907,
+  "sourceInternal": 1551,
+  "packageCases": 11356,
+  "newCompositionSourceCases": 1059,
+  "totalBatchNewSourceCases": 1883,
+  "countsOverlap": true,
+  "apiAdditions": 6,
+  "apiRemovals": 0,
+  "reviewCorrections": [
+    "Admit empty unions as legal schemas accepting no values; retain planning-label correction",
+    "Bound shared compound attempts and memoize transitive list-membership checks",
+    "Preserve xs:string member whitespace in actual node facts",
+    "Do not label valid union member xsi:type overrides Invalid; keep explicit Unsupported boundary",
+    "Use schema value equality for new compound fixed overrides independently of provenance",
+    "Reconcile four measured old consumer outcomes without changing original fixture bytes"
+  ],
+  "limitations": [
+    "Direct union member xsi:type override Unsupported; compound named restriction selection supported",
+    "Enumeration over patterned compound ancestors Unsupported",
+    "Earlier complex restriction facet/attribute/chain exclusions remain",
+    "Earlier atomic calendar/date fixed-override behavior remains a legacy bounded deviation",
+    "No identity-graph builtins, arbitrary recursion/assertions, broader regex, augmentation or full-XSD/C45 acceptance"
+  ],
+  "newSchemaPublished": false
+}

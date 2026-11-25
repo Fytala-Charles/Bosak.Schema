@@ -24,6 +24,7 @@
 //                      | Charles Korthout | 0.11   | 25-11-2026     | Carry private imported simple-type namespace projection through compilation |
 //                      | Charles Korthout | 0.12   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.13   | 25-11-2026     | Share captured original-node atomization for mixed scalar empty transport |
+//                      | Charles Korthout | 0.14   | 25-11-2026     | Add gated immutable item reads and refuse implicit list flattening |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -31,6 +32,8 @@ using Bosak.XPath.Api.Schema;
 using Bosak.XPath.Core.Schema;
 using Bosak.XPath.Core.Xdm;
 using Bosak.XPath.Runtime.Vm;
+
+using System.Collections.Immutable;
 
 namespace Bosak.Schema;
 
@@ -119,8 +122,9 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         return ReadFact(document, document.Assessment.ScalarFacts[leafIndex], project, cancellationToken);
     }
 
-    private T ReadFact<T>(Document document, NativeSchemaProvider.Facts fact, Func<XdmValue, T> project, CancellationToken cancellationToken)
+    private T ReadFact<T>(Document document, NativeSchemaProvider.Facts fact, Func<XdmValue, T> project, CancellationToken cancellationToken, bool allowList = false)
     {
+        if (fact.IsListValue && !allowList) throw new NotSupportedException("List values require an explicit item read.");
         if (fact.HasNoTypedValue) throw new NotSupportedException("FOTY0012");
         if (scalarOptions is not null)
             return runner.Run([document.Snapshot], operation => project(operation.Evaluate(
@@ -135,12 +139,20 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         }, cancellationToken);
     }
 
+    private ImmutableArray<NativeScalarValue> ReadItems(Document document, int index, int category, CancellationToken token) => Work(() =>
+    {
+        Check(document);
+        var facts = category switch { 0 => document.Assessment.ElementFacts, 1 => document.Assessment.ScalarFacts, 2 => document.Assessment.AttributeFacts, _ => document.Assessment.DescendantAttributeFacts };
+        if (index < 0 || index >= facts.Length) throw new ArgumentOutOfRangeException(nameof(index));
+        return ReadFact(document, facts[index], value => NativeScalarValue.FromItems(value, token), token, true);
+    }, token);
+
     private bool IsRootNilled(Document document) => Work(() => { Check(document); return document.Assessment.ElementFacts[0].IsNilled; }, default);
 
     private bool HasRootScalar(Document document) => Work(() =>
     {
         Check(document);
-        return !document.Assessment.ElementFacts[0].IsNilled && !document.Assessment.ElementFacts[0].HasNoTypedValue && !document.Assessment.ElementFacts[0].NativeType.EmptyContent;
+        return !document.Assessment.ElementFacts[0].IsListValue && !document.Assessment.ElementFacts[0].IsNilled && !document.Assessment.ElementFacts[0].HasNoTypedValue && !document.Assessment.ElementFacts[0].NativeType.EmptyContent;
     }, default);
 
     private NativeScalarValue ReadRootScalar(Document document, CancellationToken cancellationToken) => Work(() =>
@@ -251,6 +263,10 @@ internal sealed class NativeDecimalSessionCore : IDisposable
         internal SchemaQuerySnapshot Snapshot { get; }
         internal NativeSchemaProvider.Assessment Assessment { get; }
         internal int DecimalCount => owner.LeafCount(this);
+        internal ImmutableArray<NativeScalarValue> ReadRootItems(CancellationToken token) => owner.ReadItems(this, 0, 0, token);
+        internal ImmutableArray<NativeScalarValue> ReadScalarItems(int index, CancellationToken token) => owner.ReadItems(this, index, 1, token);
+        internal ImmutableArray<NativeScalarValue> ReadAttributeItems(int index, CancellationToken token) => owner.ReadItems(this, index, 2, token);
+        internal ImmutableArray<NativeScalarValue> ReadDescendantAttributeItems(int index, CancellationToken token) => owner.ReadItems(this, index, 3, token);
         internal bool HasRootScalar => owner.HasRootScalar(this);
         internal bool IsRootNilled => owner.IsRootNilled(this);
         internal NativeScalarValue ReadRootScalar(CancellationToken cancellationToken = default) => owner.ReadRootScalar(this, cancellationToken);
