@@ -8,6 +8,11 @@ Batch slice 12 adds closed global element reference particles with canonical glo
   <h1>Bosak.Schema Roadmap</h1>
   <p>An open schema foundation with staged validation and integration.</p>
 </div>
+## Named sequence model groups - 25 November 2026
+
+Batch slice 13 adds closed named sequence groups at owner content roots and inside sequences, with exactly-one group occurrences. Forward/nested groups cache their original source particles; actual local declarations and anonymous types remain shared across owners. Circular model groups are Invalid under the REC; recursive element graphs through groups are separately Unsupported. Current scalar facets, attribute/assertion exclusions, namespaces and finite budgets remain. All 8,260 earlier outcomes are unchanged; 48 authored cases across both facades/three contexts and six native identity controls qualify the candidate. REQ-009 remains In Progress; API and Core 1.81.17 are unchanged. [Contract and qualification](docs/model-groups/README.md).
+
+
 ## Attribute-group review correction - 25 November 2026
 
 The corrected candidate preserves the existing nested structural-assertion/application-attribute exclusion for group members. A supported namespace-uri(.) probe reproduced six unintended compile-Valid outcomes; the shared member predicate now retains Unsupported. Original candidate receipts remain sealed, and the final candidate passes7,966source/6,550reviewed package cases. No API/Core/publication change. [Corrected evidence](docs/attribute-groups-review/README.md).

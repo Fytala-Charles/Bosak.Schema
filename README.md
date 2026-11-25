@@ -170,3 +170,5 @@ The 0.6 development mixed native profile also supports [bounded string equality 
 [Bounded string assertion review](docs/string-assertions-review/README.md) records the development slice and its delivery scope.
 
 See the [bounded global element reference guide](docs/global-element-references/README.md) for reusable declarations and supported particle shapes.
+
+See the [named sequence group guide](docs/model-groups/README.md) for reusable content models and identity-preserving group references.

@@ -1,0 +1,24 @@
+{
+  "blockingFindings": [],
+  "reviewedProperties": [
+    "Actual source particles and declaration/type cache reused across owners",
+    "No XML cloning or per-owner authoritative components",
+    "Checked eager closed group definitions and forward resolution",
+    "Invalid direct group cycles versus Unsupported recursive element graphs",
+    "Group min=max1 and source/expanded/definition/QName capacities",
+    "Namespaces, canonical global refs, original nodes and lifetime",
+    "Legacy and existing owner exclusions retained"
+  ],
+  "resolvedFindings": [
+    {
+      "finding": "Anonymous recursive element graphs through groups need a separate guard beyond named-group cycle detection.",
+      "resolution": "Track compiling source particles before recursive owner construction; add explicit caught refusal case before executing it."
+    },
+    {
+      "finding": "Initial fresh-cache restore blocked by sandbox socket permissions before consumer execution.",
+      "resolution": "Preserved initial logs and repeated qualification with network access and a separate cache-reviewed directory; no product edits."
+    }
+  ],
+  "sourceRunNote": "First48case final source run is separately executed after adding expanded16/17 controls; earlier46case run retained. Only PURPOSE header descriptions in the two new test files were clarified afterward; reviewed package lanes compile these final files.",
+  "apiCorePublicationChange": false
+}

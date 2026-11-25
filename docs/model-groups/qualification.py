@@ -1,0 +1,154 @@
+from pathlib import Path
+import json,re,shutil,subprocess,hashlib,zipfile,xml.etree.ElementTree as E,sys
+R=Path('D:/Development/Bosak/.worktrees/Schema.Coverage');N=int(sys.argv[1]);P=Path(f'D:/Development/Bosak/.guard-tmp/schema-batch-{N:02}');V='0.6.0-alpha.0.'+str(44+N);O=Path('D:/Development/Bosak/.guard-tmp/schema-date-enumeration-production-20261124');READ=lambda p:json.loads(p.read_text(encoding='utf-8-sig'));H=lambda b:hashlib.sha256(b).hexdigest()
+REVIEWED=len(sys.argv)>2 and sys.argv[2]=='reviewed'; SUFFIX='-reviewed' if REVIEWED else ''; CACHE=P/('cache-reviewed' if REVIEWED else 'cache')
+def run(cmd,label,allow=False):
+ with (P/(label+'.log')).open('wb') as log:cp=subprocess.run(cmd,cwd=R,stdout=log,stderr=subprocess.STDOUT,timeout=300)
+ if not allow:assert cp.returncode==0,(label,cp.returncode)
+ return cp.returncode
+for name in ['Directory.Build.props','Directory.Build.targets']:shutil.copyfile(O/name,P/name)
+for name in ['consumer','native','runner','surface','examples']:
+ d=P/name;d.mkdir(exist_ok=True);(d/'NuGet.Config').write_text('<configuration><packageSources><clear/><add key="candidate" value="../feed"/><add key="nuget" value="https://api.nuget.org/v3/index.json"/></packageSources><config><add key="globalPackagesFolder" value="../'+CACHE.name+'"/></config></configuration>',encoding='utf-8')
+s=(R/'tests/Bosak.Schema.PublicConsumer.Tests/Bosak.Schema.PublicConsumer.Tests.csproj').read_text(encoding='utf-8-sig');s=re.sub(r'<ProjectReference[^>]*/>',f'<PackageReference Include="Bosak.Schema" Version="[{V}]"/>',s);s=s.replace('../TestData/',(R/'tests/TestData').as_posix()+'/');s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.PublicConsumer.Tests/*.cs"/></ItemGroup></Project>');(P/'consumer/Consumer.csproj').write_text(s,encoding='utf-8')
+s=(O/'native/Native.csproj').read_text(encoding='utf-8').replace('0.6.0-alpha.0.44',V);s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeDateBoundsIdentityTests.cs"/>'+ (f'<Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeDateChainsIdentityTests.cs"/>' if N>=2 else '')+'</ItemGroup></Project>');
+if N>=3:s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeDateComplexRestrictionIdentityTests.cs"/></ItemGroup></Project>')
+if N>=4:s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeDatePatternsIdentityTests.cs"/></ItemGroup></Project>')
+if N>=5:s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeBooleanPatternsIdentityTests.cs"/></ItemGroup></Project>')
+if N>=6:s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeBooleanChainsIdentityTests.cs"/></ItemGroup></Project>')
+if N>=7:s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeDecimalEnumerationIdentityTests.cs"/></ItemGroup></Project>')
+if N>=8:s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeDecimalChainsIdentityTests.cs"/></ItemGroup></Project>')
+if N>=9:s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeDecimalComplexRestrictionIdentityTests.cs"/></ItemGroup></Project>')
+if N>=10:s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeGlobalAttributeReferencesIdentityTests.cs"/></ItemGroup></Project>')
+if N>=11:s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeAttributeGroupsIdentityTests.cs"/></ItemGroup></Project>')
+if N>=12:s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeGlobalElementReferencesIdentityTests.cs"/></ItemGroup></Project>')
+if N>=13:s=s.replace('</Project>',f'<ItemGroup><Compile Include="{R.as_posix()}/tests/Bosak.Schema.Tests/NativeModelGroupsIdentityTests.cs"/></ItemGroup></Project>')
+(P/'native/Native.csproj').write_text(s,encoding='utf-8')
+for name,old in [('runner','runner'),('surface','surface'),('examples','examples')]:
+ for f in (O/old).iterdir():
+  if f.is_file() and f.suffix in ['.cs','.csproj','.xml','.xsd']:(P/name/f.name).write_text(f.read_text(encoding='utf-8-sig').replace('0.6.0-alpha.0.44',V),encoding='utf-8')
+# Exact bounds example from the final packaged README.
+text=(R/'docs/NUGET_README.md').read_text(encoding='utf-8-sig');part=text.split('### Date bounds and timezone presence',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+for name,s in zip(['example-bounds.xsd','example-bounds.xml'],blocks):(P/'examples'/name).write_text(s,encoding='utf-8')
+p=P/'examples/Example.csproj';s=p.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-bounds.xsd;example-bounds.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>');p.write_text(s,encoding='utf-8')
+p=P/'examples/Program.cs';s=p.read_text(encoding='utf-8');idx=s.index('    private static int Main');s=s[:idx]+'''    private static void DateBoundsExample()
+    {
+        var schema=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"example-bounds.xsd"));var xml=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"example-bounds.xml"));var options=new NativeSchemaSessionOptions(256,256,1024,65536,2,32,1,256,256);var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,840);NativeDateValue detached;
+        using(var session=NativeSchemaSession.Create(schema,options).Value!){using(var d=session.Assess(xml,context).Value!){detached=d.ReadRootScalar().DateValue;Check(detached.Year==2000&&detached.Month==1&&detached.Day==2&&detached.TimezoneOffsetMinutes==0);Check(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}Check(session.Assess("<issued>2000-01-02</issued>",context).Outcome==NativeSchemaOutcome.Invalid);Check(session.Assess("<issued>2000-01-03Z</issued>",context).Outcome==NativeSchemaOutcome.Invalid);}Check(detached.Day==2);
+        using(var session=NativeSchemaNodeDataSession.Create(schema,options).Value!){using(var d=session.Assess(xml,context).Value!){detached=d.ReadElement([]).DateValue;Check(detached.Year==2000&&detached.Month==1&&detached.Day==2&&detached.TimezoneOffsetMinutes==0);Check(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}Check(session.Assess("<issued>2000-01-02</issued>",context).Outcome==NativeSchemaOutcome.Invalid);Check(session.Assess("<issued>2000-01-03Z</issued>",context).Outcome==NativeSchemaOutcome.Invalid);}Check(detached.Day==2);
+        Console.WriteLine("Exact packaged date bounds example passes both facades, bound/timezone refusals, export and detached lifetime.");
+    }
+'''+s[idx:];s=s.replace('EnumerationAcceptanceGates();DateEnumerationExample();','DateBoundsExample();EnumerationAcceptanceGates();DateEnumerationExample();');p.write_text(s,encoding='utf-8')
+if N>=2:
+ part=text.split('### Named date derivation chains',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+ for name,body in zip(['example-chains.xsd','example-chains.xml'],blocks):(P/'examples'/name).write_text(body,encoding='utf-8')
+ f=P/'examples/Example.csproj';f.write_text(f.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-chains.xsd;example-chains.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>'),encoding='utf-8')
+ f=P/'examples/Program.cs';body=f.read_text(encoding='utf-8');body=body.replace('private static void DateBoundsExample()','private static void DateBoundsExample(string schemaFile="example-bounds.xsd", string xmlFile="example-bounds.xml")').replace('Path.Combine(AppContext.BaseDirectory,"example-bounds.xsd")','Path.Combine(AppContext.BaseDirectory,schemaFile)').replace('Path.Combine(AppContext.BaseDirectory,"example-bounds.xml")','Path.Combine(AppContext.BaseDirectory,xmlFile)');body=body.replace('DateBoundsExample();EnumerationAcceptanceGates();','DateBoundsExample("example-chains.xsd","example-chains.xml");Console.WriteLine("Exact packaged named date chain example passes both facades and inherited constraints.");DateBoundsExample();EnumerationAcceptanceGates();');f.write_text(body,encoding='utf-8')
+if N>=3:
+ part=text.split('### Date complex simple-content restriction',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+ for name,body in zip(['example-complex-date.xsd','example-complex-date.xml'],blocks):(P/'examples'/name).write_text(body,encoding='utf-8')
+ f=P/'examples/Example.csproj';f.write_text(f.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-complex-date.xsd;example-complex-date.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>'),encoding='utf-8')
+ f=P/'examples/Program.cs';body=f.read_text(encoding='utf-8').replace('DateBoundsExample("example-chains.xsd","example-chains.xml");','DateBoundsExample("example-complex-date.xsd","example-complex-date.xml");Console.WriteLine("Exact packaged date complex restriction example passes both facades, inherited constraints and original values.");DateBoundsExample("example-chains.xsd","example-chains.xml");');f.write_text(body,encoding='utf-8')
+if N>=4:
+ part=text.split('### Date lexical patterns',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+ for name,b in zip(['example-patterns.xsd','example-patterns.xml'],blocks):(P/'examples'/name).write_text(b,encoding='utf-8')
+ p=P/'examples/Example.csproj';p.write_text(p.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-patterns.xsd;example-patterns.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>'),encoding='utf-8')
+ p=P/'examples/Program.cs';p.write_text(p.read_text(encoding='utf-8').replace('DateBoundsExample();','DateBoundsExample();DateBoundsExample("example-patterns.xsd","example-patterns.xml");'),encoding='utf-8')
+if N>=5:
+ part=text.split('### Boolean patterns and whitespace',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+ for name,b in zip(['example-boolean.xsd','example-boolean.xml'],blocks):(P/'examples'/name).write_text(b,encoding='utf-8')
+ p=P/'examples/Example.csproj';p.write_text(p.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-boolean.xsd;example-boolean.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>'),encoding='utf-8')
+ p=P/'examples/Program.cs';body=p.read_text(encoding='utf-8');idx=body.index('    private static int Main');method='    private static void BooleanPatternExample() { var schema=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"example-boolean.xsd"));var xml=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"example-boolean.xml"));var options=new NativeSchemaSessionOptions(256,256,1024,65536,2,32,1,256,256);var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);using(var session=NativeSchemaSession.Create(schema,options).Value!){using(var d=session.Assess(xml,context).Value!){Check(d.ReadRootScalar().BooleanValue);Check(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}Check(session.Assess("<enabled>1</enabled>",context).Outcome==NativeSchemaOutcome.Invalid);}using(var session=NativeSchemaNodeDataSession.Create(schema,options).Value!){using(var d=session.Assess(xml,context).Value!){Check(d.ReadElement([]).BooleanValue);Check(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}Check(session.Assess("<enabled>1</enabled>",context).Outcome==NativeSchemaOutcome.Invalid);}Console.WriteLine("Exact packaged Boolean pattern example passes both facades and lexical/value distinction.");}\n'
+ body=body[:idx]+method+body[idx:];body=body.replace('DateBoundsExample();','BooleanPatternExample();DateBoundsExample();');p.write_text(body,encoding='utf-8')
+if N>=6:
+ part=text.split('### Named Boolean restriction chains',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+ for name,b in zip(['example-boolean-chains.xsd','example-boolean-chains.xml'],blocks):(P/'examples'/name).write_text(b,encoding='utf-8')
+ p=P/'examples/Example.csproj';p.write_text(p.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-boolean-chains.xsd;example-boolean-chains.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>'),encoding='utf-8')
+ p=P/'examples/Program.cs';body=p.read_text(encoding='utf-8').replace('void BooleanPatternExample()','void BooleanPatternExample(string schemaFile="example-boolean.xsd",string xmlFile="example-boolean.xml")').replace('Path.Combine(AppContext.BaseDirectory,"example-boolean.xsd")','Path.Combine(AppContext.BaseDirectory,schemaFile)').replace('Path.Combine(AppContext.BaseDirectory,"example-boolean.xml")','Path.Combine(AppContext.BaseDirectory,xmlFile)').replace('BooleanPatternExample();','BooleanPatternExample("example-boolean-chains.xsd","example-boolean-chains.xml");BooleanPatternExample();');p.write_text(body,encoding='utf-8')
+if N>=7:
+ part=text.split('### Direct decimal enumeration',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+ for name,b in zip(['example-decimal-enum.xsd','example-decimal-enum.xml'],blocks):(P/'examples'/name).write_text(b,encoding='utf-8')
+ p=P/'examples/Example.csproj';p.write_text(p.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-decimal-enum.xsd;example-decimal-enum.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>'),encoding='utf-8')
+ p=P/'examples/Program.cs';body=p.read_text(encoding='utf-8');idx=body.index('    private static int Main');method='    private static void DecimalEnumerationExample(string schemaFile="example-decimal-enum.xsd",string xmlFile="example-decimal-enum.xml") { var schema=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,schemaFile));var xml=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,xmlFile));var options=new NativeSchemaSessionOptions(256,256,1024,65536,2,32,1,256,256);var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);using(var session=NativeSchemaSession.Create(schema,options).Value!){using(var d=session.Assess(xml,context).Value!){Check(d.ReadRootScalar().DecimalValue.ToInvariantString(256)=="1.23");Check(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}Check(session.Assess("<price>1.24</price>",context).Outcome==NativeSchemaOutcome.Invalid);}using(var session=NativeSchemaNodeDataSession.Create(schema,options).Value!){using(var d=session.Assess(xml,context).Value!){Check(d.ReadElement([]).DecimalValue.ToInvariantString(256)=="1.23");Check(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}Check(session.Assess("<price>1.24</price>",context).Outcome==NativeSchemaOutcome.Invalid);}Console.WriteLine("Exact packaged decimal enumeration passes both facades and original exact values.");}\n';body=body[:idx]+method+body[idx:];body=body.replace('DateBoundsExample();','DecimalEnumerationExample();DateBoundsExample();');p.write_text(body,encoding='utf-8')
+if N>=8:
+ part=text.split('### Named decimal restriction chains',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+ for name,b in zip(['example-decimal-chains.xsd','example-decimal-chains.xml'],blocks):(P/'examples'/name).write_text(b,encoding='utf-8')
+ p=P/'examples/Example.csproj';p.write_text(p.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-decimal-chains.xsd;example-decimal-chains.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>'),encoding='utf-8')
+ p=P/'examples/Program.cs';body=p.read_text(encoding='utf-8').replace('DecimalEnumerationExample();','DecimalEnumerationExample("example-decimal-chains.xsd","example-decimal-chains.xml");DecimalEnumerationExample();');p.write_text(body,encoding='utf-8')
+if N>=9:
+ part=text.split('### Decimal complex enumeration restriction',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+ for name,b in zip(['example-decimal-complex.xsd','example-decimal-complex.xml'],blocks):(P/'examples'/name).write_text(b,encoding='utf-8')
+ p=P/'examples/Example.csproj';p.write_text(p.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-decimal-complex.xsd;example-decimal-complex.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>'),encoding='utf-8')
+ p=P/'examples/Program.cs';body=p.read_text(encoding='utf-8').replace('DecimalEnumerationExample();','DecimalEnumerationExample("example-decimal-complex.xsd","example-decimal-complex.xml");DecimalEnumerationExample();');p.write_text(body,encoding='utf-8')
+if N>=10:
+ part=text.split('### Global attribute declarations and references',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+ for name,b in zip(['example-global-attr.xsd','example-global-attr.xml'],blocks):(P/'examples'/name).write_text(b,encoding='utf-8')
+ p=P/'examples/Example.csproj';p.write_text(p.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-global-attr.xsd;example-global-attr.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>'),encoding='utf-8')
+ p=P/'examples/Program.cs';body=p.read_text(encoding='utf-8');idx=body.index('    private static int Main');method='    private static void GlobalAttributeExample() { var schema=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"example-global-attr.xsd"));var xml=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"example-global-attr.xml"));var options=new NativeSchemaSessionOptions(256,256,1024,65536,2,32,1,256,256);var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);using(var session=NativeSchemaSession.Create(schema,options).Value!){using(var d=session.Assess(xml,context).Value!){Check(d.ReadAttribute(0).Value.DecimalValue.ToInvariantString(256)=="1.23");Check(d.ReadScalar(0).DecimalValue.ToInvariantString(256)=="1");Check(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}Check(session.Assess("<order><amount>1</amount></order>",context).Outcome==NativeSchemaOutcome.Invalid);}using(var session=NativeSchemaNodeDataSession.Create(schema,options).Value!){using(var d=session.Assess(xml,context).Value!){Check(d.ReadAttribute([],"","price").DecimalValue.ToInvariantString(256)=="1.23");Check(d.ReadElement([0]).DecimalValue.ToInvariantString(256)=="1");Check(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}Check(session.Assess(xml.Replace("+001.2300","1.24",StringComparison.Ordinal),context).Outcome==NativeSchemaOutcome.Invalid);}Console.WriteLine("Exact packaged global attribute example passes both facades, exact attribute values and leaf indexes.");}\n';body=body[:idx]+method+body[idx:];body=body.replace('DateBoundsExample();','GlobalAttributeExample();DateBoundsExample();');p.write_text(body,encoding='utf-8')
+if N>=11:
+ part=text.split('### Attribute groups',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+ for name,b in zip(['example-attribute-groups.xsd','example-attribute-groups.xml'],blocks):(P/'examples'/name).write_text(b,encoding='utf-8')
+ p=P/'examples/Example.csproj';p.write_text(p.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-attribute-groups.xsd;example-attribute-groups.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>'),encoding='utf-8')
+ p=P/'examples/Program.cs';body=p.read_text(encoding='utf-8').replace('void GlobalAttributeExample()','void GlobalAttributeExample(string schemaFile="example-global-attr.xsd",string xmlFile="example-global-attr.xml")').replace('Path.Combine(AppContext.BaseDirectory,"example-global-attr.xsd")','Path.Combine(AppContext.BaseDirectory,schemaFile)').replace('Path.Combine(AppContext.BaseDirectory,"example-global-attr.xml")','Path.Combine(AppContext.BaseDirectory,xmlFile)').replace('GlobalAttributeExample();','GlobalAttributeExample("example-attribute-groups.xsd","example-attribute-groups.xml");GlobalAttributeExample();').replace('Exact packaged global attribute example passes','Exact packaged attribute example passes');p.write_text(body,encoding='utf-8')
+if N>=12:
+ part=text.split('### Global element references',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+ for name,b in zip(['example-element-refs.xsd','example-element-refs.xml'],blocks):(P/'examples'/name).write_text(b,encoding='utf-8')
+ p=P/'examples/Example.csproj';p.write_text(p.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-element-refs.xsd;example-element-refs.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>'),encoding='utf-8')
+ p=P/'examples/Program.cs';body=p.read_text(encoding='utf-8');idx=body.index('    private static int Main');method='    private static void ElementReferencesExample() { var schema=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"example-element-refs.xsd"));var xml=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"example-element-refs.xml"));var options=new NativeSchemaSessionOptions(256,256,1024,65536,2,32,1,256,256);var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);using(var session=NativeSchemaSession.Create(schema,options).Value!){using(var d=session.Assess(xml,context).Value!){Check(d.ScalarCount==2);Check(d.ReadScalar(0).DecimalValue.ToInvariantString(256)=="1.23");Check(d.ReadScalar(1).DecimalValue.ToInvariantString(256)=="2.34");Check(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}Check(session.Assess("<order/>",context).Outcome==NativeSchemaOutcome.Invalid);}using(var session=NativeSchemaNodeDataSession.Create(schema,options).Value!){using(var d=session.Assess(xml,context).Value!){Check(d.ReadElement([0]).DecimalValue.ToInvariantString(256)=="1.23");Check(d.ReadElement([1]).DecimalValue.ToInvariantString(256)=="2.34");Check(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(d.ExportXml())));}}Console.WriteLine("Exact packaged element reference example passes both facades and original node values.");}\n';body=body[:idx]+method+body[idx:];body=body.replace('DateBoundsExample();','ElementReferencesExample();DateBoundsExample();');p.write_text(body,encoding='utf-8')
+if N>=13:
+ part=text.split('### Named sequence model groups',1)[1].split('\n### ',1)[0];blocks=re.findall(chr(96)*3+'xml\n(.*?)'+chr(96)*3,part,re.S);assert len(blocks)==2
+ for name,b in zip(['example-model-groups.xsd','example-model-groups.xml'],blocks):(P/'examples'/name).write_text(b,encoding='utf-8')
+ p=P/'examples/Example.csproj';p.write_text(p.read_text(encoding='utf-8').replace('</Project>','<ItemGroup><None Include="example-model-groups.xsd;example-model-groups.xml" CopyToOutputDirectory="Always"/></ItemGroup></Project>'),encoding='utf-8')
+ p=P/'examples/Program.cs';body=p.read_text(encoding='utf-8').replace('void ElementReferencesExample()','void ElementReferencesExample(string schemaFile="example-element-refs.xsd",string xmlFile="example-element-refs.xml")').replace('Path.Combine(AppContext.BaseDirectory,"example-element-refs.xsd")','Path.Combine(AppContext.BaseDirectory,schemaFile)').replace('Path.Combine(AppContext.BaseDirectory,"example-element-refs.xml")','Path.Combine(AppContext.BaseDirectory,xmlFile)').replace('ElementReferencesExample();','ElementReferencesExample("example-model-groups.xsd","example-model-groups.xml");ElementReferencesExample();');p.write_text(body,encoding='utf-8')
+run(['dotnet','test',str(P/'consumer/Consumer.csproj'),'-c','Release','--logger','trx','--results-directory',str(P/('consumer'+SUFFIX+'-results'))],'consumer')
+run(['dotnet','test',str(P/'native/Native.csproj'),'-c','Release','--logger','trx','--results-directory',str(P/('native'+SUFFIX+'-results'))],'native')
+run(['dotnet','run','--project',str(P/'examples/Example.csproj'),'-c','Release'],'examples')
+run(['dotnet','run','--project',str(P/'surface/Surface.csproj'),'-c','Release','--',str(O/'consumer/bin/Release/net10.0/Bosak.Schema.dll'),'unused',str(P/'SURFACE.json')],'surface')
+run(['dotnet','build',str(P/'runner/Runner.csproj'),'-c','Release'],'runner')
+# Classify exact original requests against unchanged upstream expected validities.
+C=Path('D:/Development/Bosak/.guard-tmp/schema-date-simple-content-production-20261124');corpus=[]
+for label,old in [('pilot','pilot-final-current'),('expanded1','expanded-final-current-1'),('expanded2','expanded-final-current-2')]:
+ d=P/label;d.mkdir(exist_ok=True);shutil.copyfile(C/old/'request.json',d/'request.json');run(['dotnet',str(P/'runner/bin/Release/net10.0/Runner.dll'),str(d/'request.json'),str(d/'native.json')],label)
+ rows=READ(d/'native.json')['rows'];before=READ((O/label/'native-reviewed.json') if N==1 else Path(f'D:/Development/Bosak/.guard-tmp/schema-batch-{N-1:02}')/label/'native.json')['rows'];changes=[{'before':a,'after':b} for a,b in zip(before,rows) if a!=b];assert [a['id'] for a in before]==[a['id'] for a in rows]
+ if label=='pilot':counts={'match':21,'unsupported':0,'mismatch':0,'harnessError':0};assert before==rows
+ else:
+  expectations={x['id']:x for x in READ(C/old/'RESULTS.json')['rows']};counts=dict(match=0,unsupported=0,mismatch=0,harnessError=0)
+  for row in rows:
+   expected=expectations[row['id']];status=row['assessment'] or row['compile'];classification='harnessError' if row['error'] else 'unsupported' if status=='Unsupported' else 'match' if status.lower()==expected['upstreamExpected'] else 'mismatch';counts[classification]+=1
+ assert counts['mismatch']==counts['harnessError']==0;corpus.append({'lane':label,'cases':len(rows),'counts':counts,'changes':changes})
+(P/'CORPUS.json').write_text(json.dumps(corpus,indent=2)+'\n',encoding='utf-8')
+package=P/'feed'/('Bosak.Schema.'+V+'.nupkg')
+with zipfile.ZipFile(package) as z:dll=z.read('lib/net10.0/Bosak.Schema.dll')
+core=READ(O/'IDENTITY.json')['core'];fresh=READ(P/'consumer/bin/Release/net10.0/Consumer.deps.json');retained=[]
+for row in READ(O/'RETAINED-MIGRATION.json'):
+ d=P/(row['label']+'-retained');shutil.copytree(Path(row['source']),d,dirs_exist_ok=True);(d/'Bosak.Schema.dll').write_bytes(dll)
+ for item in core:(d/(item['id']+'.dll')).write_bytes((P/'consumer/bin/Release/net10.0'/(item['id']+'.dll')).read_bytes())
+ for dep in d.glob('*.deps.json'):
+  graph=READ(dep)
+  for target,packages in graph['targets'].items():
+   for key in list(packages):
+    if key.startswith(('Bosak.XPath.','Bosak.XQuery/','Bosak.Xslt/')):del packages[key]
+   for key,value in fresh['targets'][target].items():
+    if key.startswith(('Bosak.XPath.','Bosak.XQuery/','Bosak.Xslt/')):packages[key]=value
+   for key,value in packages.items():
+    for name,version in value.get('dependencies',{}).items():
+     if name.startswith(('Bosak.XPath.','Bosak.XQuery','Bosak.Xslt')):value['dependencies'][name]='1.81.17'
+  for key in list(graph['libraries']):
+   if key.startswith(('Bosak.XPath.','Bosak.XQuery/','Bosak.Xslt/')):del graph['libraries'][key]
+  graph['libraries'].update({k:v for k,v in fresh['libraries'].items() if k.startswith(('Bosak.XPath.','Bosak.XQuery/','Bosak.Xslt/'))});dep.write_text(json.dumps(graph,indent=2)+'\n',encoding='utf-8')
+ assert H((d/row['assembly']).read_bytes())==row['retainedCallerSha256']
+ for filtered in ([False] if row['label']=='legacy124' else [False,True]):
+  label=row['label']+('-migration' if filtered else '-full')+SUFFIX;cmd=['dotnet','vstest',str(d/row['assembly']),'--Logger:trx','--ResultsDirectory:'+str(P/(label+'-results'))]
+  if filtered:cmd+=['--TestCaseFilter:FullyQualifiedName!~PublicSurface_NoFriendGrantOrPublicFactoriesForAuthority']
+  run(cmd,label,allow=True);ns={'t':'http://microsoft.com/schemas/VisualStudio/TeamTest/2010'};results=[]
+  for t in (P/(label+'-results')).glob('*.trx'):results+=E.parse(t).getroot().findall('.//t:UnitTestResult',ns)
+  failures=[x for x in results if x.attrib['outcome']!='Passed'];assert len(failures)==(0 if filtered or row['label']=='legacy124' else 1)
+  if failures:assert failures[0].attrib['testName'].endswith('PublicSurface_NoFriendGrantOrPublicFactoriesForAuthority')
+  retained.append({'label':label,'total':len(results),'passed':len(results)-len(failures),'historicalPinFailures':len(failures),'callerSha256':row['retainedCallerSha256'],'excludedHistoricalPinFact':filtered})
+(P/'RETAINED.json').write_text(json.dumps(retained,indent=2)+'\n',encoding='utf-8')
+for item in core:
+ archive=CACHE/item['id'].lower()/'1.81.17'/(item['id'].lower()+'.1.81.17.nupkg');assert H(archive.read_bytes())==item['archiveSha256'];run(['dotnet','nuget','verify','--all',str(archive)],item['id']+'-signature')
+ for lane in ['consumer','native','runner','surface','examples']:assert H((P/lane/'bin/Release/net10.0'/(item['id']+'.dll')).read_bytes())==item['runtimeSha256']
+for lane in ['consumer','native','runner','surface','examples']:assert (P/lane/'bin/Release/net10.0/Bosak.Schema.dll').read_bytes()==dll
+assert (R/'src/Bosak.Schema/bin/Release/net10.0/Bosak.Schema.dll').read_bytes()==dll
+assert (CACHE/'bosak.schema'/V/('bosak.schema.'+V+'.nupkg')).read_bytes()==package.read_bytes()
+(P/'IDENTITY.json').write_text(json.dumps({'package':package.name,'packageSha256':H(package.read_bytes()),'schemaDllSha256':H(dll),'core':core,'coreSourcePin':'6a7618e9dcf70eb8a67d5d1789ff7b787133b52d','allRuntimePayloadsIdentical':True,'freshCoreSignatures':9,'unsignedLocalOnly':True},indent=2)+'\n',encoding='utf-8');print(json.dumps({'slice':N,'corpus':corpus,'retained':retained},indent=2))

@@ -3,6 +3,11 @@
   <h1>Bosak.Schema Feature Requests</h1>
   <p>Current public schema scope, status and acceptance boundaries.</p>
 </div>
+## Named sequence model groups - 25 November 2026
+
+Batch slice 13 adds closed named sequence groups at owner content roots and inside sequences, with exactly-one group occurrences. Forward/nested groups cache their original source particles; actual local declarations and anonymous types remain shared across owners. Circular model groups are Invalid under the REC; recursive element graphs through groups are separately Unsupported. Current scalar facets, attribute/assertion exclusions, namespaces and finite budgets remain. All 8,260 earlier outcomes are unchanged; 48 authored cases across both facades/three contexts and six native identity controls qualify the candidate. REQ-009 remains In Progress; API and Core 1.81.17 are unchanged. [Contract and qualification](model-groups/README.md).
+
+
 
 ## Global element references - 25 November 2026
 

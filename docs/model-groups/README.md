@@ -1,0 +1,7 @@
+# Batch slice 13: named sequence model groups
+
+25 November 2026. Batch slice 13 adds closed named sequence groups at owner content roots and inside sequences, with exactly-one group occurrences. Forward/nested groups cache their original source particles; actual local declarations and anonymous types remain shared across owners. Circular model groups are Invalid under the REC; recursive element graphs through groups are separately Unsupported. Current scalar facets, attribute/assertion exclusions, namespaces and finite budgets remain. All 8,260 earlier outcomes are unchanged; 48 authored cases across both facades/three contexts and six native identity controls qualify the candidate. REQ-009 remains In Progress; API and Core 1.81.17 are unchanged.
+
+[Contract](CONTRACT.md), [adoption](ADOPTION.json), [cases](CASE-PLAN.json), [admissions](ADMISSIONS.json), [review](REVIEW.json) and [summary](SUMMARY.json).
+
+Source/package/native/examples/API/corpus/retained/signatures/supplemental/docs qualification uses unsigned local alpha.0.57 only. Retained migration upgrades Schema, nine Core DLLs and dependency graphs: 124 pass, full historical23/33 retain their documented old-Core assertion failure, and filtered22/32 behavior passes. No full23/33 success or Schema-only replacement claim. Programmatic HTML checks do not claim visual acceptance. No public API/Core/publication/tag/controller change or full XSD/PSVI/C45 claim.
