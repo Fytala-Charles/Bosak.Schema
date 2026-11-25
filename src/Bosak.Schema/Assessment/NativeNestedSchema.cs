@@ -34,6 +34,7 @@
 //                      | Charles Korthout | 0.21   | 24-11-2026     | Share date/string pattern compilation across nested date restrictions |
 //                      | Charles Korthout | 0.22   | 25-11-2026     | Recognize admitted attribute-group references before owner assertions |
 //                      | Charles Korthout | 0.23   | 25-11-2026     | Preserve nested structural assertion exclusion for attribute groups |
+//                      | Charles Korthout | 0.24   | 25-11-2026     | Resolve cached closed global elements with canonical particle uses and cycle budgets |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -47,6 +48,8 @@ internal sealed partial class NativeDecimalSchema
 
     private static bool HasNestedDeclarations(XElement schema, XElement[] types, string targetNamespace)
     {
+        if (schema.Descendants(Xs + "element").Any(e => e.Attribute("ref") is not null &&
+            (e.Parent?.Name == Xs + "sequence" || e.Parent?.Name == Xs + "all" || e.Parent?.Name == Xs + "choice"))) return true;
         var names = types.Where(t => t.Name == Xs + "complexType")
             .Select(t => XName.Get(Name(t), targetNamespace)).ToHashSet();
         foreach (var local in schema.Descendants(Xs + "element").Where(e => e.Parent?.Name == Xs + "sequence"))
@@ -67,6 +70,41 @@ internal sealed partial class NativeDecimalSchema
             .ToDictionary(t => XName.Get(Name(t), targetNamespace));
         var named = new Dictionary<XName, NativeDecimalSchema>();
         var visiting = new HashSet<XName>();
+
+        var elementDefinitions = new Dictionary<XName, XElement>();
+        foreach (var declaration in declarations)
+        {
+            var key = XName.Get(Name(declaration), targetNamespace);
+            Require(elementDefinitions.TryAdd(key, declaration), "Duplicate root declaration.", NativeDecimalUnsupportedReason.DeclarationShape);
+        }
+        var roots = new Dictionary<XName, NativeDecimalSchema>();
+        var visitingElements = new HashSet<XName>();
+        NativeDecimalSchema ResolveElement(XName key)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (roots.TryGetValue(key, out var existing)) return existing;
+            Require(elementDefinitions.TryGetValue(key, out var element), "Unresolved closed global element.", NativeDecimalUnsupportedReason.DeclarationShape);
+            Require(visitingElements.Add(key), "Recursive global element graph is outside the finite profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+            Attributes(element!, "name", "type");
+            var name = Name(element!);
+            NativeDecimalSchema plan;
+            var scalarRoot = TryCompileSimpleRoot(element!, targetNamespace, decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits);
+            if (scalarRoot is not null) plan = scalarRoot;
+            else if (element!.Attribute("type") is not null)
+            {
+                Require(Elements(element).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
+                var shared = Resolve(ResolveTypeName(element));
+                plan = new NativeDecimalSchema(new NativeDeclaration(name, shared.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits)
+                    { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
+            }
+            else
+            {
+                var complex = Single(element!, "complexType"); Attributes(complex);
+                plan = Complex(complex, new NativeDeclaration(name, new NativeType(null, true), 1, 1, targetNamespace));
+            }
+            NestedBudget(plan, cancellationToken); visitingElements.Remove(key); roots.Add(key, plan); return plan;
+        }
+        schema.AddAnnotation(new NativeElementDeclarations(ResolveElement));
 
         NativeDecimalSchema Resolve(XName name)
         {
@@ -105,6 +143,11 @@ internal sealed partial class NativeDecimalSchema
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 Require(local.Name == Xs + "element", "Only local element particles are admitted.", NativeDecimalUnsupportedReason.DeclarationShape);
+                if (CompileElementReference(local, allowComplex: true) is { } reference)
+                {
+                    Require(names.Add(reference.ExpandedName), "Duplicate expanded sequence particle names are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+                    children.Add(reference); continue;
+                }
                 Attributes(local, "name", "type", "minOccurs", "maxOccurs", "form");
                 var name = Name(local);
                 var ns = Form(local, "form", defaultForm) == "qualified" ? targetNamespace : "";
@@ -145,34 +188,13 @@ internal sealed partial class NativeDecimalSchema
 
         // Eager resolution includes unused definitions and catches optional cycles.
         foreach (var name in definitions.Keys) Resolve(name);
-        var roots = ImmutableDictionary.CreateBuilder<XName, NativeDecimalSchema>();
         NativeDecimalSchema? first = null;
         foreach (var element in declarations)
         {
-            cancellationToken.ThrowIfCancellationRequested();
-            Attributes(element, "name", "type");
-            var name = Name(element);
-            var key = XName.Get(name, targetNamespace);
-            Require(!roots.ContainsKey(key), "Duplicate root declaration.", NativeDecimalUnsupportedReason.DeclarationShape);
-            NativeDecimalSchema plan;
-            var scalarRoot = TryCompileSimpleRoot(element, targetNamespace, decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits);
-            if (scalarRoot is not null) plan = scalarRoot;
-            else if (element.Attribute("type") is not null)
-            {
-                Require(Elements(element).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
-                var shared = Resolve(ResolveTypeName(element));
-                plan = new NativeDecimalSchema(new NativeDeclaration(name, shared.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits)
-                    { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
-            }
-            else
-            {
-                var complex = Single(element, "complexType"); Attributes(complex);
-                plan = Complex(complex, new NativeDeclaration(name, new NativeType(null, true), 1, 1, targetNamespace));
-            }
-            NestedBudget(plan, cancellationToken);
-            roots.Add(key, plan); first ??= plan;
+            var plan = ResolveElement(XName.Get(Name(element), targetNamespace));
+            first ??= plan;
         }
-        first!.roots = roots.ToImmutable();
+        first!.roots = roots.ToImmutableDictionary();
         first.NamedTypes = simple.Values.Concat(named.Values.Select(p => p.Root.Type)).ToImmutableArray();
         first.DecimalType = decimalType; first.StringType = stringType; first.BooleanType = booleanType; first.IntegerType = integerType;
         first.maxStringCharacters = maxStringCharacters;

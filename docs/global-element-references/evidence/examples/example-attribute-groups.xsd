@@ -1,0 +1,12 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Price"><xs:restriction base="xs:decimal">
+    <xs:enumeration value="1.23"/>
+  </xs:restriction></xs:simpleType>
+  <xs:attributeGroup name="OrderAttributes">
+    <xs:attribute name="price" type="Price" use="required"/>
+  </xs:attributeGroup>
+  <xs:element name="order"><xs:complexType>
+    <xs:sequence><xs:element name="amount" type="xs:decimal"/></xs:sequence>
+    <xs:attributeGroup ref="OrderAttributes"/>
+  </xs:complexType></xs:element>
+</xs:schema>

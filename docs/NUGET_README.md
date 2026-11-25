@@ -1555,3 +1555,22 @@ Both facades read exact price 1.23 and preserve original XML and amount indexing
 Limits are sixteen group definitions, sixteen raw attribute/group members and sixteen effective uses after union, with256UTF16name/ref source caps. Unused definitions are validated. Empty groups contribute no uses. Circular groups are permitted by XSD1.1, but fixed-point expansion is outside this bounded profile: cycles return Unsupported, never Invalid solely for circularity. Missing closed groups also return Unsupported. Wildcards, defaultAttributes, imports/redefine/override, annotations/default/fixed/prohibited metadata and previously excluded owner shapes remain separate. No external resolution, Core or public API change.
 
 Structural assertions combined with application attributes or attribute-group members remain Unsupported in the bounded nested profile, matching root/all/choice owner boundaries.
+
+### Global element references
+
+Closed global declarations can be referenced by bounded particles. This sequence admits one or two decimal items; each original node retains the shared global declaration and its own value. Recursive graphs, substitution groups and nillable/default/fixed metadata remain outside this profile.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="order"><xs:complexType><xs:sequence>
+    <xs:element ref="item" minOccurs="1" maxOccurs="2"/>
+  </xs:sequence></xs:complexType></xs:element>
+  <xs:element name="item" type="xs:decimal"/>
+</xs:schema>
+```
+
+```xml
+<order><item>1.2300</item><item>2.34</item></order>
+```
+
+Use `ReadScalar(0)` and `ReadScalar(1)`, or node-data `ReadElement([0])` and `ReadElement([1])`, to obtain exact Decimal values 1.23 and 2.34. Export preserves the supplied XML.

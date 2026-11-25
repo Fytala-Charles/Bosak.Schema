@@ -1,0 +1,7 @@
+# Batch slice 12: global element references
+
+25 November 2026. Batch slice 12 adds closed global element reference particles with canonical global declaration identity and independent occurrence bounds. Scalar references work in admitted sequence/all/choice shapes; admitted complex containers and simple-content terminals work in sequences. Forward references and eager globals preserve source-order root selection, original nodes and values. Recursive graphs and broader metadata remain Unsupported. All 7,966 previous tests retain their outcomes; 48 cases across both facades/three contexts plus six native identity controls bring source tests to 8,260. REQ-009 remains In Progress; public API and signed Core 1.81.17 payloads remain unchanged.
+
+[Contract](CONTRACT.md), [adoption](ADOPTION.json), [authored cases](CASE-PLAN.json), [admissions](ADMISSIONS.json), [review](REVIEW.json) and [qualification summary](SUMMARY.json).
+
+Qualification uses an unsigned local alpha.0.56 package, fresh-cache public consumers, native identity checks, exact packaged examples, API comparison, unchanged corpus requests and signed Core identity checks. Retained callers upgrade Schema, nine Core DLLs and dependency graphs: 124 pass; historical 23/33 catalogs retain their known old-Core assertion failures, with separate filtered 22/32 behavior passes. No full 23/33 success is claimed. HTML checks are programmatic; no visual acceptance or full XSD/PSVI/C45 claim. No publication, tag or release-controller change.

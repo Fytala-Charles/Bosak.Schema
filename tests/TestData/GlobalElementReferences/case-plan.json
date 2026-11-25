@@ -1,0 +1,802 @@
+{
+  "contract": "docs/global-element-references/CONTRACT.md",
+  "cases": [
+    {
+      "id": "scalar-forward",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "global-before-owner",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='item' type='xs:decimal'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "optional-missing",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='0' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [],
+      "hasRootScalar": false
+    },
+    {
+      "id": "required-missing",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [],
+      "hasRootScalar": false
+    },
+    {
+      "id": "repeat",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='2'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item><item>2.34</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        },
+        {
+          "kind": "Decimal",
+          "value": "2.34",
+          "path": [
+            1
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "repeat-overflow",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item><item>2.34</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        },
+        {
+          "kind": "Decimal",
+          "value": "2.34",
+          "path": [
+            1
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "direct-global-root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<item>1.23</item>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    {
+      "id": "owner-all",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:all></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "owner-choice",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:choice></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "all-optional",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element ref='item' minOccurs='0' maxOccurs='1'  /></xs:all></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [],
+      "hasRootScalar": false
+    },
+    {
+      "id": "all-repeat-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element ref='item' minOccurs='1' maxOccurs='2'  /></xs:all></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "choice-nullable-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element ref='item' minOccurs='0' maxOccurs='1'  /></xs:choice></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "qualified-global",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:elements' targetNamespace='urn:elements'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:elements'><t:item>1.23</t:item></t:r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "default-namespace-ref",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:elements' targetNamespace='urn:elements' xmlns='urn:elements'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:elements'><t:item>1.23</t:item></t:r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "wrong-local-form",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:elements' targetNamespace='urn:elements'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:elements'><item>1.23</item></t:r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "prefix-alias",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:elements' targetNamespace='urn:elements'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<p:r xmlns:p='urn:elements'><p:item>1.23</p:item></p:r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "string",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:string'/></xs:schema>",
+      "instance": "<r><item> word </item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": " word ",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:boolean'/></xs:schema>",
+      "instance": "<r><item>1</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Boolean",
+          "value": "true",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:integer'/></xs:schema>",
+      "instance": "<r><item>18446744073709551616</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Integer",
+          "value": "18446744073709551616",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:date'/></xs:schema>",
+      "instance": "<r><item>2000-01-02Z</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Date",
+          "value": "2000-01-02Z",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "named-enumeration",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='D'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "named-enumeration-reject",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='D'/></xs:schema>",
+      "instance": "<r><item>1.24</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Invalid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "complex-sequence",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item><v>1.23</v></item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0,
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "complex-all-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:all></xs:complexType></xs:element><xs:element name='item'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "complex-choice-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:choice></xs:complexType></xs:element><xs:element name='item'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "simple-content-terminal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item'><xs:complexType><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "date-content-terminal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item'><xs:complexType><xs:simpleContent><xs:extension base='xs:date'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item>2000-01-02Z</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Date",
+          "value": "2000-01-02Z",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "empty-complex",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item'><xs:complexType/></xs:element></xs:schema>",
+      "instance": "<r><item/></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [],
+      "hasRootScalar": false
+    },
+    {
+      "id": "missing",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='Missing' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "empty-ref",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "malformed-ref",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a:b:c' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "unbound-ref",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='unbound:item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "override-32",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1' name='x' /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "override-33",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1' type='xs:decimal' /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "override-34",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1' form='unqualified' /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Invalid",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "ref-cap",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='                                                                                                                                                                                                                                                                item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "min-two-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='2' maxOccurs='2'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "zero-particle-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='0' maxOccurs='0'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "recursive-graph-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='0'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "unused-unknown-global",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/><xs:element name='unused' type='Missing'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "root-cap-16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/><xs:element name='g0' type='xs:decimal'/><xs:element name='g1' type='xs:decimal'/><xs:element name='g2' type='xs:decimal'/><xs:element name='g3' type='xs:decimal'/><xs:element name='g4' type='xs:decimal'/><xs:element name='g5' type='xs:decimal'/><xs:element name='g6' type='xs:decimal'/><xs:element name='g7' type='xs:decimal'/><xs:element name='g8' type='xs:decimal'/><xs:element name='g9' type='xs:decimal'/><xs:element name='g10' type='xs:decimal'/><xs:element name='g11' type='xs:decimal'/><xs:element name='g12' type='xs:decimal'/><xs:element name='g13' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "root-cap-17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/><xs:element name='g0' type='xs:decimal'/><xs:element name='g1' type='xs:decimal'/><xs:element name='g2' type='xs:decimal'/><xs:element name='g3' type='xs:decimal'/><xs:element name='g4' type='xs:decimal'/><xs:element name='g5' type='xs:decimal'/><xs:element name='g6' type='xs:decimal'/><xs:element name='g7' type='xs:decimal'/><xs:element name='g8' type='xs:decimal'/><xs:element name='g9' type='xs:decimal'/><xs:element name='g10' type='xs:decimal'/><xs:element name='g11' type='xs:decimal'/><xs:element name='g12' type='xs:decimal'/><xs:element name='g13' type='xs:decimal'/><xs:element name='g14' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "duplicate-global-safe-refusal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "same-name-particles-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item'/><xs:element ref='item'/></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "expanded-depth-cap",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item'><xs:complexType><xs:sequence><xs:element ref='n1'/></xs:sequence></xs:complexType></xs:element><xs:element name='n1'><xs:complexType><xs:sequence><xs:element ref='n2'/></xs:sequence></xs:complexType></xs:element><xs:element name='n2'><xs:complexType><xs:sequence><xs:element ref='n3'/></xs:sequence></xs:complexType></xs:element><xs:element name='n3'><xs:complexType><xs:sequence><xs:element ref='n4'/></xs:sequence></xs:complexType></xs:element><xs:element name='n4' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "expanded-scalar-cap",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='16'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' maxOccurs='16'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "nil-metadata-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    {
+      "id": "substitution-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='item' minOccurs='1' maxOccurs='1'  /></xs:sequence></xs:complexType></xs:element><xs:element name='item' type='xs:decimal' substitutionGroup='other'/><xs:element name='other' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><item>1.23</item></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    }
+  ]
+}
