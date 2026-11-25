@@ -1,0 +1,10 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Price"><xs:restriction base="Prices">
+    <xs:enumeration value="1.2300"/>
+  </xs:restriction></xs:simpleType>
+  <xs:simpleType name="Prices"><xs:restriction base="xs:decimal">
+    <xs:enumeration value="1.23"/>
+    <xs:enumeration value="2.34"/>
+  </xs:restriction></xs:simpleType>
+  <xs:element name="price" type="Price"/>
+</xs:schema>

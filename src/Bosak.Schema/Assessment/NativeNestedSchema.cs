@@ -35,6 +35,7 @@
 //                      | Charles Korthout | 0.22   | 25-11-2026     | Recognize admitted attribute-group references before owner assertions |
 //                      | Charles Korthout | 0.23   | 25-11-2026     | Preserve nested structural assertion exclusion for attribute groups |
 //                      | Charles Korthout | 0.24   | 25-11-2026     | Resolve cached closed global elements with canonical particle uses and cycle budgets |
+//                      | Charles Korthout | 0.25   | 25-11-2026     | Share actual particles across closed named sequence groups |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -48,6 +49,7 @@ internal sealed partial class NativeDecimalSchema
 
     private static bool HasNestedDeclarations(XElement schema, XElement[] types, string targetNamespace)
     {
+        if (schema.Elements(Xs + "group").Any()) return true;
         if (schema.Descendants(Xs + "element").Any(e => e.Attribute("ref") is not null &&
             (e.Parent?.Name == Xs + "sequence" || e.Parent?.Name == Xs + "all" || e.Parent?.Name == Xs + "choice"))) return true;
         var names = types.Where(t => t.Name == Xs + "complexType")
@@ -71,6 +73,9 @@ internal sealed partial class NativeDecimalSchema
         var named = new Dictionary<XName, NativeDecimalSchema>();
         var visiting = new HashSet<XName>();
 
+        var modelGroups = CompileModelGroups(schema, targetNamespace, cancellationToken);
+        var particles = new Dictionary<XElement, NativeDeclaration>();
+        var compilingParticles = new HashSet<XElement>();
         var elementDefinitions = new Dictionary<XName, XElement>();
         foreach (var declaration in declarations)
         {
@@ -131,22 +136,38 @@ internal sealed partial class NativeDecimalSchema
             if (members.Count == 1 && members[0].Name == Xs + "simpleContent")
                 return CompileComplex(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
                     decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null, nestedContext: true, maxStringCharacters: maxStringCharacters, patternCompilation: patternCompilation);
-            Require(members.Count >= 1 && members[0].Name == Xs + "sequence" && members.Skip(1).TakeWhile(IsAttributeUseMember).Count() + members.Skip(1).SkipWhile(IsAttributeUseMember).Count(e => e.Name == Xs + "assert") == members.Count - 1,
+            Require(members.Count >= 1 && (members[0].Name == Xs + "sequence" || members[0].Name == Xs + "group") && members.Skip(1).TakeWhile(IsAttributeUseMember).Count() + members.Skip(1).SkipWhile(IsAttributeUseMember).Count(e => e.Name == Xs + "assert") == members.Count - 1,
                 "Expected an element-only sequence and root attributes.", NativeDecimalUnsupportedReason.DeclarationShape);
             var sequence = members[0];
-            Attributes(sequence);
-            var locals = Elements(sequence);
-            Require(locals.Count is >= 1 and <= 16, "Expected one to sixteen local declarations.", NativeDecimalUnsupportedReason.DeclarationShape);
+            var locals = modelGroups.Expand(sequence).ToArray();
+            var children = CompileParticles(locals);
+            Require(!members.Any(a => a.Name == Xs + "assert") || !members.Any(IsAttributeUseMember), "Structural assertions with application attributes are excluded.", NativeDecimalUnsupportedReason.Attributes);
+            var attributes = CompileAttributes(members.Skip(1).TakeWhile(IsAttributeUseMember).ToArray(), targetNamespace, attributeForm,
+                decimalType, stringType, booleanType, integerType, simple, cancellationToken);
+            var plan = new NativeDecimalSchema(root, children, [], limits) { AttributeUses = attributes, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(members.Skip(1).SkipWhile(IsAttributeUseMember), targetNamespace, assertionNamespace, cancellationToken) };
+            NestedBudget(plan, cancellationToken);
+            return plan;
+        }
+
+        ImmutableArray<NativeDeclaration> CompileParticles(XElement[] locals)
+        {
+            Require(locals.Length is >= 1 and <= 16, "Expected one to sixteen local declarations.", NativeDecimalUnsupportedReason.DeclarationShape);
             var children = ImmutableArray.CreateBuilder<NativeDeclaration>();
             var names = new HashSet<XName>();
             foreach (var local in locals)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 Require(local.Name == Xs + "element", "Only local element particles are admitted.", NativeDecimalUnsupportedReason.DeclarationShape);
+                if (particles.TryGetValue(local, out var sharedParticle))
+                {
+                    Require(names.Add(sharedParticle.ExpandedName), "Duplicate expanded sequence particle names are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+                    children.Add(sharedParticle); continue;
+                }
+                Require(compilingParticles.Add(local), "Recursive element graphs through model groups are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
                 if (CompileElementReference(local, allowComplex: true) is { } reference)
                 {
                     Require(names.Add(reference.ExpandedName), "Duplicate expanded sequence particle names are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-                    children.Add(reference); continue;
+                    compilingParticles.Remove(local); particles.Add(local, reference); children.Add(reference); continue;
                 }
                 Attributes(local, "name", "type", "minOccurs", "maxOccurs", "form");
                 var name = Name(local);
@@ -176,18 +197,15 @@ internal sealed partial class NativeDecimalSchema
                 }
                 Require(container?.AllMinimum is null, "Nested all containers are outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
                 Require(container?.ChoiceMinimum is null, "Nested choice containers are outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
-                children.Add(new NativeDeclaration(name, type, min, max, ns) { Container = container });
+                var particle = new NativeDeclaration(name, type, min, max, ns) { Container = container };
+                compilingParticles.Remove(local); particles.Add(local, particle); children.Add(particle);
             }
-            Require(!members.Any(a => a.Name == Xs + "assert") || !members.Any(IsAttributeUseMember), "Structural assertions with application attributes are excluded.", NativeDecimalUnsupportedReason.Attributes);
-            var attributes = CompileAttributes(members.Skip(1).TakeWhile(IsAttributeUseMember).ToArray(), targetNamespace, attributeForm,
-                decimalType, stringType, booleanType, integerType, simple, cancellationToken);
-            var plan = new NativeDecimalSchema(root, children.ToImmutable(), [], limits) { AttributeUses = attributes, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(members.Skip(1).SkipWhile(IsAttributeUseMember), targetNamespace, assertionNamespace, cancellationToken) };
-            NestedBudget(plan, cancellationToken);
-            return plan;
+            return children.ToImmutable();
         }
 
         // Eager resolution includes unused definitions and catches optional cycles.
         foreach (var name in definitions.Keys) Resolve(name);
+        foreach (var name in modelGroups.Names) CompileParticles(modelGroups.Resolve(name).ToArray());
         NativeDecimalSchema? first = null;
         foreach (var element in declarations)
         {

@@ -57,6 +57,7 @@
 //                      | Charles Korthout | 1.34   | 24-11-2026     | Assess Boolean lexical patterns before issuing typed facts |
 //                      | Charles Korthout | 1.35   | 25-11-2026     | Compile global attribute catalogs and owner-specific canonical reference uses |
 //                      | Charles Korthout | 1.36   | 25-11-2026     | Apply component-preserving attribute-group set union across admitted owners |
+//                      | Charles Korthout | 1.37   | 25-11-2026     | Admit bounded closed named sequence model groups |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -123,7 +124,7 @@ internal sealed partial class NativeDecimalSchema
             var defaultForm = Form(root, "elementFormDefault", "unqualified");
             var assertionNamespace = AssertionNamespace(root, targetNamespace, "");
             var globals = Elements(root);
-            Require(globals.All(e => e.Name == Xs + "element" || e.Name == Xs + "complexType" || e.Name == Xs + "simpleType" || mixedProfile && (e.Name == Xs + "attribute" || e.Name == Xs + "attributeGroup")),
+            Require(globals.All(e => e.Name == Xs + "element" || e.Name == Xs + "complexType" || e.Name == Xs + "simpleType" || mixedProfile && (e.Name == Xs + "attribute" || e.Name == Xs + "attributeGroup" || e.Name == Xs + "group")),
                 "Only global roots and named complex types are supported.", NativeDecimalUnsupportedReason.DeclarationShape);
             var types = globals.Where(e => e.Name == Xs + "complexType" || e.Name == Xs + "simpleType").ToArray();
             var declarations = globals.Where(e => e.Name == Xs + "element").ToArray();

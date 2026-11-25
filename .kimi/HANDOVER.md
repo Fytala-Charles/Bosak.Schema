@@ -1,5 +1,10 @@
 Last updated: 2026-11-25
 
+## Named sequence model groups - 25 November 2026
+
+Batch slice 13 adds closed named sequence groups at owner content roots and inside sequences, with exactly-one group occurrences. Forward/nested groups cache their original source particles; actual local declarations and anonymous types remain shared across owners. Circular model groups are Invalid under the REC; recursive element graphs through groups are separately Unsupported. Current scalar facets, attribute/assertion exclusions, namespaces and finite budgets remain. All 8,260 earlier outcomes are unchanged; 48 authored cases across both facades/three contexts and six native identity controls qualify the candidate. REQ-009 remains In Progress; API and Core 1.81.17 are unchanged. [Contract and qualification](../docs/model-groups/README.md).
+
+
 ## Global element references - 25 November 2026
 
 Batch slice 12 adds closed global element reference particles with canonical global declaration identity and independent occurrence bounds. Scalar references work in admitted sequence/all/choice shapes; admitted complex containers and simple-content terminals work in sequences. Forward references and eager globals preserve source-order root selection, original nodes and values. Recursive graphs and broader metadata remain Unsupported. All 7,966 previous tests retain their outcomes; 48 cases across both facades/three contexts plus six native identity controls bring source tests to 8,260. REQ-009 remains In Progress; public API and signed Core 1.81.17 payloads remain unchanged. [Contract and qualification](../docs/global-element-references/README.md).

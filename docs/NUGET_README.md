@@ -1574,3 +1574,22 @@ Closed global declarations can be referenced by bounded particles. This sequence
 ```
 
 Use `ReadScalar(0)` and `ReadScalar(1)`, or node-data `ReadElement([0])` and `ReadElement([1])`, to obtain exact Decimal values 1.23 and 2.34. Export preserves the supplied XML.
+
+### Named sequence model groups
+
+Closed named sequence groups reuse actual local declarations across owners. Group references currently require exactly one occurrence; element particles retain their admitted bounds. Other compositors, circular groups and recursive element graphs have explicit refusal outcomes.
+
+```xml
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="order"><xs:complexType><xs:group ref="Items"/></xs:complexType></xs:element>
+  <xs:group name="Items"><xs:sequence>
+    <xs:element name="item" type="xs:decimal" minOccurs="1" maxOccurs="2"/>
+  </xs:sequence></xs:group>
+</xs:schema>
+```
+
+```xml
+<order><item>1.2300</item><item>2.34</item></order>
+```
+
+Both facades read exact Decimal values 1.23 and 2.34 using scalar indexes or physical element paths. Original XML remains unchanged.
