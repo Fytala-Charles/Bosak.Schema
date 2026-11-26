@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Transport ordered compound items with original member provenance |
 //                      | Charles Korthout | 0.5   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
+//                      | Charles Korthout | 0.6   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Numerics;
@@ -23,7 +24,7 @@ using System.Xml.Linq;
 using Bosak.XPath.Core.Xdm;
 namespace Bosak.Schema;
 
-internal sealed record NativeValueConstraint(bool IsFixed,XdmExactDecimal? Decimal,string? Text,bool? Boolean,BigInteger? Integer,XPathDateTime? Date,XdmExactCalendarValue? Calendar,NativeInterchangeValue? Interchange,NativeElementState? Compound,string? Uri,NativeFloatingValue? Floating);
+internal sealed record NativeValueConstraint(bool IsFixed,XdmExactDecimal? Decimal,string? Text,bool? Boolean,BigInteger? Integer,XPathDateTime? Date,XdmExactCalendarValue? Calendar,NativeInterchangeValue? Interchange,NativeElementState? Compound,string? Uri,NativeFloatingValue? Floating,NativeDurationValue? Duration);
 internal sealed class NativeValueConstraintCompilation(NativeNumericLimits limits,int maxStringCharacters,CancellationToken token)
 {
  internal NativeNumericLimits Limits=>limits;
@@ -43,7 +44,7 @@ internal sealed partial class NativeDecimalSchema
   var context=NativeValueConstraintCompilation.For(source);Require(context is not null,"Value constraint compile context unavailable.",NativeDecimalUnsupportedReason.DeclarationShape);context!.Token.ThrowIfCancellationRequested();
   // This scratch declaration is only a pure literal parser input, never registered or issued as a component.
   var scratch=new NativeDeclaration("literal",type,1,1);var parser=new NativeDecimalSchema(scratch,[],[],context.Limits){maxStringCharacters=context.MaxStringCharacters};var value=parser.AssessScalar(text,scratch,context.PatternBudget,source);
-  return new(fixedValue is not null,value.TypedValue,value.StringValue,value.BooleanValue,value.IntegerValue,value.DateValue,value.CalendarValue,value.InterchangeValue,type.IsCompound?value:null,value.UriValue,value.FloatingValue);
+  return new(fixedValue is not null,value.TypedValue,value.StringValue,value.BooleanValue,value.IntegerValue,value.DateValue,value.CalendarValue,value.InterchangeValue,type.IsCompound?value:null,value.UriValue,value.FloatingValue,value.DurationValue);
  }
  private static void RequireProvidedElementValue(XElement element,NativeDeclaration declaration)
  {
@@ -52,6 +53,7 @@ internal sealed partial class NativeDecimalSchema
  }
  private static bool ConstraintEquals(NativeValueConstraint expected,NativeElementState actual)
  {
+  if(expected.Duration is { } duration && actual.DurationValue is { } otherDuration)return duration.SameValue(otherDuration);
   if(expected.Uri is { } uri && actual.UriValue is { } otherUri)return string.Equals(uri,otherUri,StringComparison.Ordinal);
   if(expected.Floating is { } floating && actual.FloatingValue is { } otherFloating)return floating.SameSchemaValue(otherFloating);
   if(expected.Compound is { } compound)return NativeCompoundEquality.Equal(compound,actual);

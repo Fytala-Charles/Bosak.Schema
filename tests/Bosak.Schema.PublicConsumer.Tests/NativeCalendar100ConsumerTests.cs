@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.2   | 26-11-2026     | Reconcile measured duration admission; preserve original inputs |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Text.Json;
@@ -41,7 +42,7 @@ public sealed class NativeCalendar100ConsumerTests
         string Text(string name,string fallback)=>row.TryGetProperty(name,out var v)?v.GetString()!:fallback;
         var options=new NativeSchemaSessionOptions(Number("digits",256),Number("scale",256),Number("maxCharacters",256),65536,1,256,1,256,Number("queryScale",256));
         var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,zone);
-        var schema=Text("schema","");var xml=Text("instance","");var wantCompile=Enum.Parse<NativeSchemaOutcome>(Text("compile","Valid"));var want=Enum.Parse<NativeSchemaOutcome>(Text("outcome","Valid"));
+        var schema=Text("schema","");var xml=Text("instance","");var wantCompile=id=="CAL-090-edge"?NativeSchemaOutcome.Valid:Enum.Parse<NativeSchemaOutcome>(Text("compile","Valid"));var want=Enum.Parse<NativeSchemaOutcome>(Text("outcome","Valid"));
         var path=row.TryGetProperty("path",out var p)?p.EnumerateArray().Select(v=>v.GetInt32()).ToImmutableArray():ImmutableArray<int>.Empty;
         NativeScalarValue? detached=null;string? exported=null;
         if(data)

@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-26",
+  "recordedBeforeSemanticChange": true,
+  "source": {
+    "id": "datatypes",
+    "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+    "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+    "bytes": 1508774,
+    "reviewedSections": [
+      "3.3.6",
+      "3.4.26",
+      "3.4.27",
+      "2.2",
+      "4.3",
+      "E.2"
+    ]
+  },
+  "sections": [
+    "3.3.6.1 two-component value space and equal iff identical",
+    "3.3.6.1 four reference projections"
+  ],
+  "observation": "P400Y and P146097D have distinct months/seconds but coincide at all four reference instants because the Gregorian calendar repeats every400years.",
+  "decision": "Component equality stays exact and disjoint from decimal/string. A bound comparison whose four projections all coincide but whose components differ returns Unsupported, rather than asserting equality or invalidity under conflicting REC statements.",
+  "notGeneralLegacyOperatorAdoption": true
+}

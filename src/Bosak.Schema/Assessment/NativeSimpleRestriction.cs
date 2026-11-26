@@ -40,6 +40,7 @@
 //                      | Charles Korthout | 0.27   | 25-11-2026     | Preserve bounded list/union types and ordered selected member facts |
 //                      | Charles Korthout | 0.28   | 26-11-2026     | Support bounded text datatypes and inherited normalization facets |
 //                      | Charles Korthout | 0.29   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
+//                      | Charles Korthout | 0.30   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -62,6 +63,8 @@ internal sealed partial class NativeDecimalSchema
         var baseName = ResolveTypeName(restriction, "base");
         if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var newBase))
         {
+            if (newBase.DurationKind is { } durationKind) return new NativeType(name, false, namespaceUri, durationKind: durationKind, baseName: baseName, derivationBase: newBase,
+                durationFacets: NativeDurationFacets.Compile(restriction, durationKind, limits, maxStringCharacters.Value, patternCompilation, newBase.DurationFacets));
             if (newBase.IsUri) return new NativeType(name, false, namespaceUri, isUri: true, textKind: NativeTextKind.Token, baseName: baseName, derivationBase: newBase,
                 textFacets: NativeTextFacets.Compile(restriction, newBase, maxStringCharacters.Value, patternCompilation));
             if (newBase.FloatingKind is { } kind) return new NativeType(name, false, namespaceUri, floatingKind: kind, baseName: baseName, derivationBase: newBase,

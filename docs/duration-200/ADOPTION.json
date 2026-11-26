@@ -1,0 +1,76 @@
+{
+  "recordedBeforeImplementation": true,
+  "date": "2026-11-26",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.3.4 element validity and actual type",
+        "3.4.4 complex type validation and typed assessment"
+      ]
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "3.3.6",
+        "3.4.26",
+        "3.4.27",
+        "2.2",
+        "4.3",
+        "E.2"
+      ]
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3.1.2 typed-value determination",
+        "6.2 element typed-value and type annotation"
+      ]
+    },
+    {
+      "id": "xml10",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/",
+      "sha256": "f58a4b9e1e5b8bac13fb55c4e5c7c8c5e2c176aa45ee68e2f1ab2498511927ec",
+      "bytes": 219926
+    },
+    {
+      "id": "namespaces10",
+      "url": "https://www.w3.org/TR/2009/REC-xml-names-20091208/",
+      "sha256": "b4a649e5fdab9852d68eca21442481599164949bcdee5549f2ec7e38fb3cd3a8",
+      "bytes": 51390
+    }
+  ],
+  "sections": [
+    "Datatypes3.3.6 duration two-component value space and lexical grammar",
+    "Datatypes3.4.26 yearMonthDuration and3.4.27 dayTimeDuration derived subsets",
+    "Datatypes2.2 identity/equality and singleton-list equality",
+    "Datatypes4.3 applicable enum/pattern/whiteSpace/order/fixed facets",
+    "DatatypesE.2 duration addition to four reference dates for partial order",
+    "Structures3.3.4/3.4.4 and3.16 typed assessment; XDM3.1 original member provenance"
+  ],
+  "implementationEvidence": [
+    "Core1.86.0 annotated XdmValue.FromDuration/DurationValue stores exact text; no legacy TimeSpan/operator qualification inferred",
+    "BigInteger months and exact finite decimal seconds; no conversion to DateTime/TimeSpan/System.Decimal",
+    "Four REC reference dates compared using arbitrary precision Gregorian day arithmetic"
+  ],
+  "deviations": [
+    "Supplied instance/facet duration lexical limit256UTF16 plus caller MaxStringCharacters before collapse",
+    "Total supplied numeric digits including leading zeros bounded by MaxNativeCoefficientDigits; supplied seconds scale by MaxNativeScale; aggregate months/seconds coefficients also checked before normalization",
+    "16enum/8patterns per derivation and existing graph/work/query/XML bounds",
+    "Incomparable local bound endpoint pairs Unsupported rather than inferred Invalid; runtime values incomparable to admitted bounds are Invalid",
+    "Enumeration/bounds over patterned ancestors Unsupported; inherited exact finite grammar/assertion/complex/augmentation exclusions remain",
+    "DurationValue returns collapsed original family-valid lexical text, not a claim of XSD canonical serialization; original XML unchanged",
+    "No general XPath/XQuery duration arithmetic, comparison promotion, map keys, full PSVI/C45/public query factory or registry publication; signed Core1.86.0 unchanged",
+    "Leading/trailing decimal-point seconds forms (PT.5S/PT1.S) Unsupported: dated REC formal duSecondFrag disagrees with its claimed equivalent regex; upstream QT3 CastAs688\u2013690 records the unresolved conflict. No Core/QT3 change inferred."
+  ],
+  "core": "1.86.0"
+}
