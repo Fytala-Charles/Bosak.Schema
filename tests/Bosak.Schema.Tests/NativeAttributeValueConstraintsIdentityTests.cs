@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Known-declaration controls retain explicit nullable preconditions.                        |
 // ===========================================================================================================================================================
 using Bosak.Schema;
 using Bosak.Schema.Tests.NodeData;
@@ -35,7 +36,7 @@ public sealed class NativeAttributeValueConstraintsIdentityTests
  /// <summary>A missing defaulted attribute never publishes earlier successful sibling attribute facts.</summary>
  [Fact]public void MissingHasNoFacts(){var schema=Schema.Replace("<xs:attribute name='a'", "<xs:attribute name='b' type='xs:decimal'/><xs:attribute name='a'");using var f=new Fixture(schema,"<r b='2'><v>1</v></r>");Assert.Equal(SchemaAssessmentStatus.Unsupported,f.Assessment.Status);Assert.True(f.Assessment.Facts.IsDefaultOrEmpty);Assert.Null(f.Assessment.Evidence);Assert.False(f.Input.IsAssessed);Assert.Null(f.Input.FactsFor((NativeSessionNode)f.Attribute([],"","b")));}
  /// <summary>Constraint-bearing attributes retain actual authority and issued lifetime.</summary>
- [Fact]public void AuthorityAndLifetime(){using var a=new Fixture(Schema,Xml);using var b=new Fixture(Schema,Xml);var x=a.Input.FactsFor((NativeSessionNode)a.Attribute([],"","a"))!;var y=b.Input.FactsFor((NativeSessionNode)b.Attribute([],"","a"))!;Assert.False(a.Provider.Owns(y.Declaration));Assert.Throws<ArgumentException>(()=>a.Provider.IsSameComponent(x.Declaration,y.Declaration,default));var detached=a.Read(x.Node).DecimalValue;a.Input.Dispose();Assert.Throws<ObjectDisposedException>(()=>x.ReadTypedValue(default));Assert.Equal("2.34",detached.ToInvariantString(256));}
+ [Fact]public void AuthorityAndLifetime(){using var a=new Fixture(Schema,Xml);using var b=new Fixture(Schema,Xml);var x=a.Input.FactsFor((NativeSessionNode)a.Attribute([],"","a"))!;var y=b.Input.FactsFor((NativeSessionNode)b.Attribute([],"","a"))!;Assert.False(a.Provider.Owns(y.Declaration!));Assert.Throws<ArgumentException>(()=>a.Provider.IsSameComponent(x.Declaration!,y.Declaration!,default));var detached=a.Read(x.Node).DecimalValue;a.Input.Dispose();Assert.Throws<ObjectDisposedException>(()=>x.ReadTypedValue(default));Assert.Equal("2.34",detached.ToInvariantString(256));}
  /// <summary>The legacy decimal profile still refuses attribute metadata on otherwise ordinary owners.</summary>
  [Fact]public void Legacy(){var result=NativeDecimalSession.Create(Schema,new(256,256,1,4,1,256,256));Assert.Equal(NativeDecimalOutcome.Unsupported,result.Outcome);Assert.Null(result.Value);var control=Schema.Replace("<xs:attribute name='a' type='xs:decimal' default='1.23'/>","");using var valid=NativeDecimalSession.Create(control,new(256,256,1,4,1,256,256)).Value!;}
 }

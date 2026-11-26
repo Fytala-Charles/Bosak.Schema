@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Known-declaration controls retain explicit nullable preconditions.                        |
 // ===========================================================================================================================================================
 using Bosak.Schema;
 using Bosak.Schema.Tests.NodeData;
@@ -34,7 +35,7 @@ public sealed class NativeElementValueConstraintsIdentityTests
  /// <summary>Invalid fixed membership cannot issue successful facts or evidence.</summary>
  [Fact]public void InvalidHasNoFacts(){using var f=new Fixture(Schema,"<r>1.24</r>");Assert.Equal(SchemaAssessmentStatus.Invalid,f.Assessment.Status);Assert.True(f.Assessment.Facts.IsDefaultOrEmpty);Assert.Null(f.Assessment.Evidence);}
  /// <summary>Constraint-bearing original facts retain independent authority and owned lifetime.</summary>
- [Fact]public void AuthorityAndLifetime(){using var a=new Fixture(Schema,"<r>1.23</r>");using var b=new Fixture(Schema,"<r>1.23</r>");var x=a.Input.FactsFor((NativeSessionNode)a.Element([]))!;var y=b.Input.FactsFor((NativeSessionNode)b.Element([]))!;Assert.False(a.Provider.Owns(y.Declaration));Assert.Throws<ArgumentException>(()=>a.Provider.IsSameComponent(x.Declaration,y.Declaration,default));var detached=a.Read(x.Node).DecimalValue;a.Input.Dispose();Assert.Throws<ObjectDisposedException>(()=>x.ReadTypedValue(default));Assert.Equal("1.23",detached.ToInvariantString(256));}
+ [Fact]public void AuthorityAndLifetime(){using var a=new Fixture(Schema,"<r>1.23</r>");using var b=new Fixture(Schema,"<r>1.23</r>");var x=a.Input.FactsFor((NativeSessionNode)a.Element([]))!;var y=b.Input.FactsFor((NativeSessionNode)b.Element([]))!;Assert.False(a.Provider.Owns(y.Declaration!));Assert.Throws<ArgumentException>(()=>a.Provider.IsSameComponent(x.Declaration!,y.Declaration!,default));var detached=a.Read(x.Node).DecimalValue;a.Input.Dispose();Assert.Throws<ObjectDisposedException>(()=>x.ReadTypedValue(default));Assert.Equal("1.23",detached.ToInvariantString(256));}
  /// <summary>Legacy valid decimal owner schemas still refuse default/fixed metadata.</summary>
  [Fact]public void Legacy(){foreach(var kind in new[]{"default","fixed"}){var schema="<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal' "+kind+"='1.23'/></xs:sequence></xs:complexType></xs:element></xs:schema>";var result=NativeDecimalSession.Create(schema,new(256,256,1,4,1,256,256));Assert.Equal(NativeDecimalOutcome.Unsupported,result.Outcome);Assert.Null(result.Value);}}
 }

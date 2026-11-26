@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Reconcile measured unknown-lax admissions; original stimuli retained.                     |
 using Bosak.Schema.Tests.NodeData;
 using Bosak.XPath.Core.Schema;
 using Bosak.XPath.Core.Xdm;
@@ -55,12 +56,12 @@ public sealed class NativeAnyTypeTerminalProofTests
     [Fact]
     public void WildcardFailurePublishesNothing()
     {
-        foreach(var xml in new[]{"<r><e>1</e></r>","<r a='1'/>"}){using var f=new Fixture(Schema(),xml);Assert.Equal(SchemaAssessmentStatus.Unsupported,f.Assessment.Status);Assert.False(f.Input.IsAssessed);Assert.Empty(f.Assessment.Facts);Assert.Null(f.Assessment.Evidence);Assert.Null(f.Snapshot);}
+        foreach(var xml in new[]{"<r><e>1</e></r>","<r a='1'/>"}){using var f=new Fixture(Schema(),xml);Assert.Equal(SchemaAssessmentStatus.Valid,f.Assessment.Status);Assert.True(f.Input.IsAssessed);Assert.NotEmpty(f.Assessment.Facts);Assert.NotNull(f.Snapshot);}
     }
     /// <summary>Wildcard refusal, cancellation and owner disposal preserve later admissions and detached reads.</summary>
     [Fact]
     public void RecoveryAndCancellation()
     {
-        using var s=NativeSchemaSession.Create(Schema(),new(256,256,1024,65536,2,256,1,256,256)).Value!;var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);using var a=s.Assess("<r>a</r>",context).Value!;var bad=s.Assess("<r><e/></r>",context);Assert.Equal(NativeSchemaOutcome.Unsupported,bad.Outcome);Assert.Null(bad.Value);using var b=s.Assess("<r>b</r>",context).Value!;Assert.Equal("a",a.ReadRootScalar().StringValue);Assert.Equal("b",b.ReadRootScalar().StringValue);using var c=new CancellationTokenSource();c.Cancel();Assert.Throws<OperationCanceledException>(()=>s.Assess("<r/>",context,c.Token));Assert.Throws<OperationCanceledException>(()=>b.ReadRootScalar(c.Token));
+        using var s=NativeSchemaSession.Create(Schema(),new(256,256,1024,65536,2,256,1,256,256)).Value!;var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);using var a=s.Assess("<r>a</r>",context).Value!;var bad=s.Assess("<r><e/></r>",context);Assert.Equal(NativeSchemaOutcome.Valid,bad.Outcome);bad.Value!.Dispose();using var b=s.Assess("<r>b</r>",context).Value!;Assert.Equal("a",a.ReadRootScalar().StringValue);Assert.Equal("b",b.ReadRootScalar().StringValue);using var c=new CancellationTokenSource();c.Cancel();Assert.Throws<OperationCanceledException>(()=>s.Assess("<r/>",context,c.Token));Assert.Throws<OperationCanceledException>(()=>b.ReadRootScalar(c.Token));
     }
 }

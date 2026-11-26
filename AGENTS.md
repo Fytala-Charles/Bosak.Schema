@@ -1,3 +1,7 @@
+## Declaration-absent lax content — 26 November 2026
+
+Development 0.21 qualifies declaration-absent lax elements and application attributes beneath uninterrupted anyType ancestor chains. All 22,426 source tests (1,711 internal / 20,715 public) and 20,715 overlapping fresh package consumers pass. All 22,346 prior names remain; 80 controls are added. Pilot 21 matches; structural 41 matches / 88 Unsupported; datatype 582 matches / 16 Unsupported; zero errors. API 55 types / 663 reflection rows and nine signed Core 1.86.0 payloads are unchanged. This candidate is unpublished; broader wildcards, partial-type projection and full XSD 1.1/PSVI/C45 remain separate. [Scope and evidence](docs/absent-lax/README.md). Earlier entries remain historical.
+
 ## Known-declaration anyType lax matches —26November2026
 
 Development0.20 qualifies bounded anyType lax matches against original known global element/attribute declarations. Source22,346/internal1,703/public20,643 and fresh package20,643 overlapping checks pass; all22,198 prior names remain with148 added. Pilot21matches; structural41matches/88Unsupported; datatype582matches/16Unsupported; zero errors. API55names/663rows and nine signed Core1.86.0 payloads are unchanged. Unknown/declaration-absent lax nodes remain Unsupported; no publication or fullXSD1.1/PSVI/C45 acceptance. [Contract, guide and evidence](docs/known-lax/README.md). Earlier dated entries remain historical.

@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 19-11-2026     | Qualify deliberate namespace and zero-assertion admissions                                 |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Known-declaration controls retain explicit nullable preconditions.                        |
 
 using System.Text;
 using System.Xml.Linq;
@@ -248,7 +249,7 @@ public sealed class NativeDecimalBackendTests
         Assert.Equal(NativeOutcome.Valid, result.Outcome);
         var state = Assert.Single(result.Value!.Elements);
         Assert.Null(state.TypedValue);
-        Assert.True(state.Declaration.Type.HasNoTypedValue);
+        Assert.True(state.Declaration!.Type.HasNoTypedValue);
     }
 
     /// <summary>Checks declaration, aggregate occurrence, assertion count and schema-node boundaries.</summary>

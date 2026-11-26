@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Known-declaration controls retain explicit nullable preconditions.                        |
 
 using System.Collections.Immutable;
 using System.Globalization;
@@ -53,7 +54,7 @@ public sealed class NativeInstanceTypeCoreTests
     {
         var payload=Payload(family,family=="string"?"A":"9");using var f=new Fixture(payload.Schema,payload.Xml);Assert.Equal(SchemaAssessmentStatus.Valid,f.Assessment.Status);var node=f.Element([0]);var fact=f.Input.FactsFor((NativeSessionNode)node)!;
         var declared=fact.NativeDeclaration.Type;var governing=fact.NativeType;Assert.NotSame(declared,governing);Assert.Equal(family,declared.Name);Assert.Equal(Xs,declared.NamespaceUri);Assert.Equal("Limited",governing.Name);Assert.Equal((Ns,"Limited"),node.SchemaTypeAnnotation!.Value);
-        var type=f.Provider.ResolveType(new(Ns,"Limited"),default);Assert.Equal(SchemaResultKind.Supported,type.Kind);Assert.Same(type.Value,fact.Type);Assert.True(f.Provider.Owns(fact.Declaration));Assert.True(f.Session.Advisor!.OwnsNode(node,fact,f.Input,f.Assessment.Origin));Assert.Same(fact,((ISchemaAnnotatedNode)node).OriginalSchemaFacts);
+        var type=f.Provider.ResolveType(new(Ns,"Limited"),default);Assert.Equal(SchemaResultKind.Supported,type.Kind);Assert.Same(type.Value,fact.Type);Assert.True(f.Provider.Owns(fact.Declaration!));Assert.True(f.Session.Advisor!.OwnsNode(node,fact,f.Input,f.Assessment.Origin));Assert.Same(fact,((ISchemaAnnotatedNode)node).OriginalSchemaFacts);
         f.Run(operation=>
         {
             var raw=fact.ReadTypedValue(default);Assert.Equal(SchemaResultKind.Supported,raw.Kind);Assert.Same(fact.Type,raw.Value.GoverningType);

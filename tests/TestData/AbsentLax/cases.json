@@ -1,0 +1,648 @@
+{
+  "cases": [
+    {
+      "id": "AL-001",
+      "contract": "unknown element original text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u></u></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-002",
+      "contract": "unknown element original text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u>  x  </u></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "  x  ",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "  x  "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-003",
+      "contract": "unknown element original text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u>αβ</u></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "αβ",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "αβ"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-004",
+      "contract": "unknown element original text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><v></v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-005",
+      "contract": "unknown element original text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><v>  x  </v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "  x  ",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "  x  "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-006",
+      "contract": "unknown element original text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><v>αβ</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "αβ",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "αβ"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-007",
+      "contract": "unknown element original text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><other></other></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-008",
+      "contract": "unknown element original text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><other>  x  </other></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "  x  ",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "  x  "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-009",
+      "contract": "unknown element original text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><other>αβ</other></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "αβ",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "αβ"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-010",
+      "contract": "unknown attribute original value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r u=''/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-011",
+      "contract": "unknown attribute original value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r u='  x  '/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            "  x  "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-012",
+      "contract": "unknown attribute original value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r u='001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            "001"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-013",
+      "contract": "unknown attribute original value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:unknown' p:u=''/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "urn:unknown",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-014",
+      "contract": "unknown attribute original value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:unknown' p:u='  x  '/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "urn:unknown",
+          "expected": [
+            "  x  "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-015",
+      "contract": "unknown attribute original value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:unknown' p:u='001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "urn:unknown",
+          "expected": [
+            "001"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-016",
+      "contract": "unknown child known valid descendant",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u><d>01.20</d></u></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "01.20",
+      "reads": []
+    },
+    {
+      "id": "AL-017",
+      "contract": "unknown child known invalid descendant",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u><d>bad</d></u></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-018",
+      "contract": "unknown child known valid attribute",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u a='001'/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-019",
+      "contract": "unknown child known invalid attribute",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u a='bad'/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-020",
+      "contract": "nested unknown attribute owner",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u z=' x '/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "z",
+          "namespace": "",
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "AL-021",
+      "contract": "unknown mixed original aggregate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r>pre<u>x<d>01.20</d>y</u>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "prex01.20ypost",
+      "reads": []
+    },
+    {
+      "id": "AL-022",
+      "contract": "unknown xsi request refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema'><u xsi:nil='true'/></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-023",
+      "contract": "unknown xsi request refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema'><u xsi:nil='false'/></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-024",
+      "contract": "unknown xsi request refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema'><u xsi:type='xs:string'/></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-025",
+      "contract": "special xml attribute refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u xml:lang='en'/></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-026",
+      "contract": "unknown id has no ID semantics",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r id='dup'><u id='dup'/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-027",
+      "contract": "depth boundary admitted",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u><v><w>x</w></v></u></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "x",
+      "reads": []
+    },
+    {
+      "id": "AL-028",
+      "contract": "depth boundary refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u><v><w><z>x</z></w></v></u></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-029",
+      "contract": "value boundary admitted",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-030",
+      "contract": "value boundary refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/><u/></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-031",
+      "contract": "owner attributes boundary admitted",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r a0='x' a1='x' a2='x' a3='x' a4='x' a5='x' a6='x' a7='x' a8='x' a9='x' a10='x' a11='x' a12='x' a13='x' a14='x' a15='x'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-032",
+      "contract": "owner attributes boundary refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r a0='x' a1='x' a2='x' a3='x' a4='x' a5='x' a6='x' a7='x' a8='x' a9='x' a10='x' a11='x' a12='x' a13='x' a14='x' a15='x' a16='x'/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-033",
+      "contract": "string boundary admitted",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u>1234</u></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 4,
+      "rootScalar": true,
+      "rootValue": "1234",
+      "reads": []
+    },
+    {
+      "id": "AL-034",
+      "contract": "string boundary refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/></xs:schema>",
+      "instance": "<r><u>12345</u></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 4,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-035",
+      "contract": "strict ancestor projection refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e><u/></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "AL-036",
+      "contract": "strict ancestor attribute projection refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e u='x'/></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    }
+  ]
+}

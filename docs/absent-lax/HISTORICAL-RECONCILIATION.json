@@ -1,0 +1,42 @@
+{
+  "publicChanged": 22,
+  "internalChanged": 3,
+  "records": [
+    {
+      "originalFile": "tests/TestData/AnyTypeTerminals/cases.json",
+      "originalFileSha256": "f309cad9fc205e48a04e910918365a10e42977d1a1030d55d4c91b289613dd3d",
+      "contracts": [
+        "AT-004",
+        "AT-005",
+        "AT-006",
+        "AT-022",
+        "AT-023",
+        "AT-024"
+      ],
+      "prior": "Unsupported",
+      "candidate": "Valid",
+      "facades": 2
+    },
+    {
+      "originalFile": "tests/TestData/KnownLax/cases.json",
+      "originalFileSha256": "2a833386c01392273f77809e817834ca12a379d07321b137df92901e1b371c60",
+      "contracts": [
+        "KL-032",
+        "KL-033",
+        "KL-034",
+        "KL-035",
+        "KL-036"
+      ],
+      "prior": "Unsupported",
+      "candidate": "Valid",
+      "facades": 2
+    }
+  ],
+  "internalTests": [
+    "WildcardFailurePublishesNothing",
+    "RecoveryAndCancellation",
+    "FailurePublishesNothing"
+  ],
+  "originalStimuliAndNamesRetained": true,
+  "harnessCorrection": "Previously Unsupported KL fixtures omit rootValue; derive the expected original aggregate from the unchanged parsed XML when absent. No XML, fixture outcome or test name is edited."
+}

@@ -2,7 +2,7 @@
 // AUTHOR               : Charles Korthout
 // CREATE DATE          : 26 November 2026
 // PURPOSE              : Assesses bounded anyType wildcard matches against original known global declarations.
-// SPECIAL NOTES        : Unknown lax declarations remain Unsupported; no declaration or validation evidence is fabricated.
+// SPECIAL NOTES        : Bounded known and declaration-absent lax facts; no declaration or validation evidence is fabricated.
 //
 // COPYRIGHT            : Fytala
 // LICENSE              : LICENSE.md (Apache-2.0)
@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -43,17 +44,24 @@ internal sealed partial class NativeDecimalSchema
         }
     }
 
-    private void AssessKnownLax(XElement element, NativeDeclaration declaration, NativeType type,
+    private void AssessKnownLax(XElement element, NativeDeclaration? declaration, NativeType type,
         ImmutableArray<NativeElementState>.Builder states, ImmutableArray<NativeElementState>.Builder attributes,
-        ImmutableArray<int> path, CancellationToken token, NativePatternBudget patternBudget)
+        ImmutableArray<int> path, CancellationToken token, NativePatternBudget patternBudget, bool allowDeclarationAbsent)
     {
         token.ThrowIfCancellationRequested();
         var ownerIndex = states.Count;
-        states.Add(ContainerValueState(element, declaration, type));
+        if (declaration is null)
+        {
+            Require(element.Value.Length <= maxStringCharacters!.Value, "Lax aggregate string capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            Require(element.Attributes().All(a => a.Name.NamespaceName != "http://www.w3.org/2001/XMLSchema-instance" || IsNamespaceOrLocationHint(a)), "Unknown lax xsi request awaits qualification.", NativeDecimalUnsupportedReason.Attributes);
+            states.Add(new NativeElementState(null, null, StringValue: element.Value) { EffectiveType = type, OriginalName = element.Name });
+        }
+        else states.Add(ContainerValueState(element, declaration, type));
         foreach (var attribute in element.Attributes().Where(a => !IsAdmittedInstanceAttribute(a)))
         {
             token.ThrowIfCancellationRequested();
-            Require(GlobalAttributeDeclarations.Any(d => d.ExpandedName == attribute.Name), "Unknown lax attribute declaration awaits provenance qualification.", NativeDecimalUnsupportedReason.Attributes);
+            Require(GlobalAttributeDeclarations.Any(d => d.ExpandedName == attribute.Name) || allowDeclarationAbsent, "Unknown lax attribute below strict ancestor awaits projection.", NativeDecimalUnsupportedReason.Attributes);
+            Require(attribute.Name.NamespaceName is not "http://www.w3.org/XML/1998/namespace" and not "http://www.w3.org/2001/XMLSchema-instance", "Special lax attribute is unsupported.", NativeDecimalUnsupportedReason.Attributes);
         }
         foreach (var global in GlobalAttributeDeclarations)
         {
@@ -61,14 +69,25 @@ internal sealed partial class NativeDecimalSchema
             if (element.Attribute(global.ExpandedName) is { } attribute)
                 attributes.Add(AssessAttributeValue(attribute.Value, global, patternBudget, element) with { OwnerElementPath = path, OwnerElementIndex = ownerIndex });
         }
+        foreach (var attribute in element.Attributes().Where(a => !IsAdmittedInstanceAttribute(a) && !GlobalAttributeDeclarations.Any(d => d.ExpandedName == a.Name)))
+        {
+            token.ThrowIfCancellationRequested();
+            Require(attribute.Value.Length <= maxStringCharacters!.Value, "Lax attribute string capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            attributes.Add(new NativeElementState(null, null, StringValue: attribute.Value) { EffectiveType = LaxAttributeType!, ActualAtomicType = UntypedAtomicType!, OriginalName = attribute.Name, OwnerElementPath = path, OwnerElementIndex = ownerIndex });
+        }
         var index = 0;
         foreach (var child in element.Elements())
         {
             token.ThrowIfCancellationRequested();
-            Require(roots.TryGetValue(child.Name, out var plan), "Unknown lax element declaration awaits provenance qualification.", NativeDecimalUnsupportedReason.DeclarationShape);
+            if (!roots.TryGetValue(child.Name, out var plan))
+            {
+                Require(allowDeclarationAbsent, "Unknown lax element below strict ancestor awaits projection.", NativeDecimalUnsupportedReason.DeclarationShape);
+                AssessKnownLax(child, null, type, states, attributes, path.Add(index++), token, patternBudget, true);
+                continue;
+            }
             Require(plan!.AllMinimum is null && plan.ChoiceMinimum is null, "Lax all/choice child plans await separate qualification.", NativeDecimalUnsupportedReason.DeclarationShape);
             var childPath = path.Add(index++);
-            if (plan.Root.Type.IsComplex) AssessContainer(child, plan.Root, plan, states, attributes, childPath, token, patternBudget);
+            if (plan.Root.Type.IsComplex) AssessContainer(child, plan.Root, plan, states, attributes, childPath, token, patternBudget, allowDeclarationAbsent: allowDeclarationAbsent);
             else
             {
                 InstanceAttributes(child);
