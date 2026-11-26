@@ -200,3 +200,7 @@ The next native datatype candidate adds bounded binary and QName values; list/un
 ## Native list and union candidate — 25 November 2026
 
 The native datatype candidate now includes bounded lists/unions with explicit immutable item reads. See the [datatype consumer guide](docs/datatypes-200/GUIDE.md) for scope, capacities and qualification status.
+
+## Native text datatype candidate — 26 November 2026
+
+Native text datatype coverage is being extended with normalized strings, tokens and XML name types. See the [text datatype candidate](docs/text-200/README.md) for its scope and qualification status.

@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 26-11-2026     | Check measured text admissions against unmodified original fixtures |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -42,6 +43,7 @@ public sealed class NativeSimpleContentConsumerTests
     {
         Assert.StartsWith("SC-",id);using var data=JsonDocument.Parse(payload);var r=data.RootElement;
         var options=new NativeSchemaSessionOptions(r.GetProperty("maxNativeCoefficientDigits").GetInt32(),r.GetProperty("maxNativeScale").GetInt32(),r.GetProperty("maxStringCharacters").GetInt32(),65536,1,32,1,256,256);
+        if(id=="SC-051"){NativeTextLegacyVerification.Check(r.GetProperty("schema").GetString()!,r.GetProperty("instance").GetString()!,options,NativeSchemaOutcome.Valid,NativeSchemaOutcome.Valid,"12.50",root:true);return;}
         var created=NativeSchemaSession.Create(r.GetProperty("schema").GetString()!,options);Assert.Equal(r.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid)
         {

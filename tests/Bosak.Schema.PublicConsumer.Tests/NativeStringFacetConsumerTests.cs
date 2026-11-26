@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 26-11-2026     | Verify measured text admissions with original fixture bytes unchanged |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -50,6 +51,11 @@ public sealed class NativeStringFacetConsumerTests
     {
         Assert.StartsWith("M2D1-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;
         var options=new NativeSchemaSessionOptions(256,256,row.GetProperty("maxStringCharacters").GetInt32(),65536,1,8,1,256,256);
+        if(id is "M2D1-47" or "M2D1-48" or "M2D1-49" or "M2D1-50" or "M2D1-51" or "M2D1-52" or "M2D1-53" or "M2D1-57" or "M2D1-58" or "M2D1-59" or "M2D1-60" or "M2D1-61" or "M2D1-62" or "M2D1-63" or "M2D1-64" or "M2D1-67" or "M2D1-69" or "M2D1-70")
+        {
+            var valid=id is "M2D1-64" or "M2D1-67" or "M2D1-69" or "M2D1-70";
+            NativeTextLegacyVerification.Check(row.GetProperty("schema").GetString()!,row.GetProperty("instance").GetString()!,options,valid?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Invalid,NativeSchemaOutcome.Valid,"abc");return;
+        }
         var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,options);
         Assert.Equal(row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid)

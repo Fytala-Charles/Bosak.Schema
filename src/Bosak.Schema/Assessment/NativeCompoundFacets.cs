@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 26-11-2026     | Support bounded text datatypes and inherited normalization facets |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -89,7 +90,8 @@ internal sealed class NativeCompoundFacets(NativeCompoundFacets? parent, int? le
     internal bool Accepts(NativeElementState value,string text,NativePatternBudget budget)
     {
         budget.CompoundAttempt();
-        var lexical=value.IsListValue || !(value.ActualAtomicType??value.GoverningType).IsString ? NativeCalendarParser.Collapse(text):text;
+        var actual=value.ActualAtomicType??value.GoverningType;
+        var lexical=value.IsListValue || !actual.IsString ? NativeCalendarParser.Collapse(text):NativeTextRules.Normalize(text, actual.TextWhitespace);
         return (parent?.Accepts(value,text,budget)??true) &&
             (length is null || value.Items.Length==length) && (minimum is null || value.Items.Length>=minimum) &&
             (maximum is null || value.Items.Length<=maximum) &&

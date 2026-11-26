@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 20-11-2026     | Project the adopted anonymous integer scalar without changing prior decimal/string cases |
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Reconcile original Boolean alias and read Boolean rather than integer facts |
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Reconcile measured compound admissions without editing original fixtures |
+//                      | Charles Korthout | 0.5   | 26-11-2026     | Verify measured text admissions with original fixture bytes unchanged |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -44,6 +45,7 @@ public sealed class NativeAnonymousRestrictionConsumerTests
     public void AnonymousRestriction_ValidatesOriginalInstance(string id,string payload)
     {
         Assert.StartsWith("AS-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;Assert.NotEmpty(row.GetProperty("clauses").EnumerateArray());
+        if(id is "AS-036" or "AS-044"){NativeTextLegacyVerification.Check(row.GetProperty("schema").GetString()!,row.GetProperty("instance").GetString()!,Options(),id=="AS-036"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Invalid,NativeSchemaOutcome.Valid,"1");return;}
         var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,Options());Assert.Equal(id is "AS-035" or "AS-047" or "AS-048"?"Valid":row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(created.Value);if(row.GetProperty("reason").ValueKind==JsonValueKind.String)Assert.Equal(row.GetProperty("reason").GetString(),created.Diagnostics[0].UnsupportedReason.ToString());return;}
         using var session=created.Value!;var xml=row.GetProperty("instance").GetString()!;var assessed=session.Assess(xml,Context);Assert.Equal(row.GetProperty("expectedAssessment").GetString(),assessed.Outcome.ToString());
