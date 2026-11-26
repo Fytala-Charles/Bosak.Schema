@@ -38,3 +38,7 @@ Development0.18 qualifies bounded integer/decimal pattern facets on original col
 ## anyType terminals and wildcard boundaries
 
 Development0.19 qualifies text-only implicit/explicit anyType at roots and sequence/global-reference terminals with original anyType/untypedAtomic facts. See [scope and limits](docs/anytype-terminals/GUIDE.md). Next is a separately adopted lax wildcard/provenance contract; known declarations, namespace constraints, child/attribute facts and PSVI must not be silently ignored. Broader anyType substitution/nillability/constraints, explicit wildcard grammar and public Core integration remain separate.
+
+## Known lax matches and declaration-absent provenance
+
+Development0.20 qualifies known global element/attribute matches through builtin anyType lax wildcards, with actual validation and original components. See [scope and limits](docs/known-lax/GUIDE.md). Unknown nodes remain Unsupported. Next is a separate declaration-absent/untyped provenance contract and feasibility review before unknown lax content or general wildcard grammar is admitted. Namespace/notQName/UPA, skip/strict modes, complete PSVI and public Core integration remain separate.

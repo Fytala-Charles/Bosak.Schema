@@ -76,6 +76,7 @@
 //                      | Charles Korthout | 1.50 | 26-11-2026     | Admit existing declared attributes on bounded empty complex owners |
 //                      | Charles Korthout | 1.51 | 26-11-2026     | Check original collapsed integer and decimal lexical patterns before issuing facts |
 //                      | Charles Korthout | 1.52 | 26-11-2026     | Carry actual bounded anyType identity separately from ordinary mixed complex types |
+//                      | Charles Korthout | 1.53 | 26-11-2026     | Bound actual anyType input and defer wildcard attributes to original owner assessment |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -531,11 +532,13 @@ internal sealed partial class NativeDecimalSchema
         {
             var patternBudget = new NativePatternBudget(cancellationToken);
             var document = Parse(instance, 65536, cancellationToken);
+            if (NamedTypes.Any(t => t.IsAnyType)) CheckKnownLaxInput(document, cancellationToken);
             var root = document.Root!;
             var found = roots.TryGetValue(root.Name, out var selected);
             var rootType = found ? ResolveInstanceType(root, selected!.Root.Type) : null;
             var attributeStates = ImmutableArray.CreateBuilder<NativeElementState>();
-            if (found && (selected!.AttributeUses.Length != 0 || selected.Root.Type.ContentType?.IsDate == true))
+            if (found && rootType!.IsAnyType) { /* Actual global wildcard attributes are assessed with the anyType owner below. */ }
+            else if (found && (selected!.AttributeUses.Length != 0 || selected.Root.Type.ContentType?.IsDate == true))
             {
                 Require(root.Attributes().All(a => IsAdmittedInstanceAttribute(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
                     "Special attribute requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);

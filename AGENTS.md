@@ -1,3 +1,7 @@
+## Known-declaration anyType lax matches —26November2026
+
+Development0.20 qualifies bounded anyType lax matches against original known global element/attribute declarations. Source22,346/internal1,703/public20,643 and fresh package20,643 overlapping checks pass; all22,198 prior names remain with148 added. Pilot21matches; structural41matches/88Unsupported; datatype582matches/16Unsupported; zero errors. API55names/663rows and nine signed Core1.86.0 payloads are unchanged. Unknown/declaration-absent lax nodes remain Unsupported; no publication or fullXSD1.1/PSVI/C45 acceptance. [Contract, guide and evidence](docs/known-lax/README.md). Earlier dated entries remain historical.
+
 ## Text-only anyType terminals —26November2026
 
 Development0.19 qualifies text-only implicit/explicit anyType terminals with canonical anyType governing and actual untypedAtomic components. Source22,198/internal1,695/public20,503 and fresh package20,503 overlapping tests pass; all22,030 prior names remain with168 added. Pilot21matches; structural41matches/88Unsupported; datatype582matches/16Unsupported; zero errors. API55names/663rows and nine signed Core1.86.0 payloads are unchanged. Wildcard child/application-attribute assessment remains Unsupported; no publication or fullXSD1.1/PSVI/C45 acceptance. [Guide and evidence](docs/anytype-terminals/README.md). Earlier dated entries remain historical.

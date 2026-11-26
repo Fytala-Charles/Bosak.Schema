@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-26",
+  "recordedBeforeImplementation": true,
+  "base": "5bbeca896bdc7de9f09628e3da7a864adba93527",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.4.7 anyType mixed content and namespace-any lax wildcards",
+        "3.10.4.1 Item Valid (Wildcard)",
+        "3.3.4.6 Schema-Validity Assessment (Element): governing global declarations and child/attribute assessment",
+        "3.2.4.3 Schema-Validity Assessment (Attribute)",
+        "3.3.5 and3.17 original declaration/type evidence; document identity table"
+      ]
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "2.3 lexical space/mapping; prelexical collapse before pattern",
+        "3.3.3 decimal and3.4.13 integer lexical spaces",
+        "4.3.4 pattern: same-step OR and inherited AND",
+        "4.3.5 whiteSpace and fixed collapse",
+        "4.3.7 enumeration versus lexical representations",
+        "G regular expressions: Nd category and digit escape"
+      ]
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3.1.2 and6.2/6.3 original typed values, mixed aggregate text and declaration/member provenance",
+        "2.7.2 untyped versus anyType/untypedAtomic; do not fabricate governing declarations for unknown nodes"
+      ]
+    },
+    {
+      "id": "xml10",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/",
+      "sha256": "f58a4b9e1e5b8bac13fb55c4e5c7c8c5e2c176aa45ee68e2f1ab2498511927ec",
+      "bytes": 219926
+    },
+    {
+      "id": "namespaces10",
+      "url": "https://www.w3.org/TR/2009/REC-xml-names-20091208/",
+      "sha256": "b4a649e5fdab9852d68eca21442481599164949bcdee5549f2ec7e38fb3cd3a8",
+      "bytes": 51390
+    }
+  ],
+  "scope": [
+    "Bounded anyType namespace-any lax wildcard route only when every encountered element/application attribute has a supported original global declaration in the closed catalog",
+    "Known children are assessed with their actual global plans; known application attributes with their actual global declarations and value constraints; invalid known values return Invalid",
+    "Reuse original facts/component handles without creating wildcard-use declarations, mutating XML, replacing original aggregates with normalized child values or augmenting missing global attributes",
+    "Unknown names return Unsupported, not Invalid or Valid; profile excludes the undeclared-lax path until declaration-absent/untyped provenance is separately adopted"
+  ],
+  "deviations": [
+    "Existing explicit wildcard grammar, namespace/notQName/UPA combinations, skip/strict wildcard modes and unknown-node lax assessment remain Unsupported",
+    "Known complex children use existing sequence/mixed/empty/simple-content plans; all/choice roots encountered under anyType remain Unsupported; non-self anyType xsi:type, complex nil/constraints/derivation remain excluded",
+    "AnyType-containing schemas preflight actual document limits64elements/depth4/64application attributes/16application attributes per owner; post-assessment16value-bearing element states including anyType mixed aggregates; excess Unsupported before fact publication",
+    "Global attribute declarations are optional wildcard matches, not required uses; missing global default/fixed declarations do not augment anyType; provided values obey existing fixed/value rules",
+    "Legacy grammar, public API and signed Core1.86.0 unchanged; no publication or fullXSD1.1/PSVI/C45 acceptance"
+  ],
+  "qualification": [
+    "Both owned facades and actual Core identity/authority/expiry checks",
+    "Original frozen21/129/598 samples and unchanged public invoice",
+    "Explicit reconciliation of measured historical outcomes, original stimulus bytes retained"
+  ]
+}
