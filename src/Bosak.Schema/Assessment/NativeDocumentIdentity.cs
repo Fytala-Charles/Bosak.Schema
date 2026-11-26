@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2 | 26-11-2026     | Enforce dynamic lax value-state limits before original facts and ID bindings are published |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -35,6 +36,7 @@ internal sealed partial class NativeDecimalSchema
         if(result.Outcome!=NativeOutcome.Valid || result.Value is null)return result;
         try
         {
+            if (NamedTypes.Any(t => t.IsAnyType)) CheckKnownLaxValues(result.Value, cancellationToken);
             result.Value.CheckIdentity(cancellationToken);
             return result;
         }

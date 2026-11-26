@@ -1,0 +1,9 @@
+# Beta readiness: known-declaration lax subset
+
+Development0.20 qualifies bounded anyType lax matches against original known global element/attribute declarations. Source22,346/internal1,703/public20,643 and fresh package20,643 overlapping checks pass; all22,198 prior names remain with148 added. Pilot21matches; structural41matches/88Unsupported; datatype582matches/16Unsupported; zero errors. API55names/663rows and nine signed Core1.86.0 payloads are unchanged. Unknown/declaration-absent lax nodes remain Unsupported; no publication or fullXSD1.1/PSVI/C45 acceptance.
+
+Known anyType child/attribute matches reuse actual global components and existing validity, value, nil/list/union and ID rules. Mixed aggregates preserve original child lexical text independently from normalized child values. Missing global default/fixed metadata does not create required uses or augmented attributes.70contracts through both facades plus8native proofs pass; the original invoice workflow remains representative evidence, not production-user acceptance.
+
+Actual document guards enforce64elements/depth4/64application attributes/16attributes-owner and16value-bearing element states including mixed aggregates, plus existing caller/XML/value limits. Invalid/Unsupported results publish no partial facts or document. Native proofs retain actual global declarations, typed members, authority, owner paths, cancellation/recovery and expiry. Source attribute order is retained independently from hash lookup.
+
+Unknown/declaration-absent lax content needs a separate provenance representation; current facts require a governing declaration. Explicit wildcard grammar/modes/namespace/notQName/UPA, all/choice plans under anyType, broader substitution/nil/augmentation and complete type closure remain excluded. Reviewed passing merge and exact-main CI are external delivery gates. Publication and generalXSD1.1/PSVI/C45 acceptance remain separate.

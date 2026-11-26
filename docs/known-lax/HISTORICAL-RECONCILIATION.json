@@ -1,0 +1,82 @@
+{
+  "base": "5bbeca896bdc7de9f09628e3da7a864adba93527",
+  "measuredInitialSourcePublicFailures": 8,
+  "measuredInitialInternalFailures": 0,
+  "records": [
+    {
+      "originalFile": "tests/TestData/AnyTypeTerminals/cases.json",
+      "originalFileSha256": "f309cad9fc205e48a04e910918365a10e42977d1a1030d55d4c91b289613dd3d",
+      "original": {
+        "id": "AT-017",
+        "contract": "element wildcard excluded explicit=False place=global",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r><e><e>1</e></e></r>",
+        "compile": "Valid",
+        "outcome": "Unsupported",
+        "placement": "global",
+        "maxString": 1024,
+        "read": true
+      },
+      "contexts": 2,
+      "currentCompile": "Valid",
+      "currentAssessment": "Valid"
+    },
+    {
+      "originalFile": "tests/TestData/AnyTypeTerminals/cases.json",
+      "originalFileSha256": "f309cad9fc205e48a04e910918365a10e42977d1a1030d55d4c91b289613dd3d",
+      "original": {
+        "id": "AT-035",
+        "contract": "element wildcard excluded explicit=True place=global",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e' type='xs:anyType'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r><e><e>1</e></e></r>",
+        "compile": "Valid",
+        "outcome": "Unsupported",
+        "placement": "global",
+        "maxString": 1024,
+        "read": true
+      },
+      "contexts": 2,
+      "currentCompile": "Valid",
+      "currentAssessment": "Valid"
+    },
+    {
+      "originalFile": "tests/TestData/AnyTypeTerminals/cases.json",
+      "originalFileSha256": "f309cad9fc205e48a04e910918365a10e42977d1a1030d55d4c91b289613dd3d",
+      "original": {
+        "id": "AT-062",
+        "contract": "known global attribute not silently ignored",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+        "instance": "<r a='not-an-integer'></r>",
+        "compile": "Valid",
+        "outcome": "Unsupported",
+        "placement": "root",
+        "maxString": 1024,
+        "read": true
+      },
+      "contexts": 2,
+      "currentCompile": "Valid",
+      "currentAssessment": "Invalid"
+    },
+    {
+      "originalFile": "tests/TestData/AnyTypeTerminals/cases.json",
+      "originalFileSha256": "f309cad9fc205e48a04e910918365a10e42977d1a1030d55d4c91b289613dd3d",
+      "original": {
+        "id": "AT-063",
+        "contract": "known global child not silently ignored",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+        "instance": "<r><e>not-an-integer</e></r>",
+        "compile": "Valid",
+        "outcome": "Unsupported",
+        "placement": "root",
+        "maxString": 1024,
+        "read": true
+      },
+      "contexts": 2,
+      "currentCompile": "Valid",
+      "currentAssessment": "Invalid"
+    }
+  ],
+  "originalInputsAndTestNamesUnchanged": true,
+  "archive": "HISTORICAL-TEST-SOURCE.zip",
+  "allCurrentExpectedOutcomesVerified": true
+}

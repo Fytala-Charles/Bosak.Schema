@@ -1,0 +1,1363 @@
+{
+  "cases": [
+    {
+      "id": "KL-001",
+      "contract": "known child actual decimal explicit=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:decimal'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r>pre<d>01.20</d>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Decimal",
+          "expected": [
+            "1.2"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pre01.20post"
+    },
+    {
+      "id": "KL-002",
+      "contract": "known child invalid decimal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:decimal'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><d>bad</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-003",
+      "contract": "known child actual decimal explicit=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:decimal'/><xs:element name='r' type='xs:anyType'/></xs:schema>",
+      "instance": "<r>pre<d>01.20</d>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Decimal",
+          "expected": [
+            "1.2"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pre01.20post"
+    },
+    {
+      "id": "KL-004",
+      "contract": "known child invalid decimal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:decimal'/><xs:element name='r' type='xs:anyType'/></xs:schema>",
+      "instance": "<r><d>bad</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-005",
+      "contract": "known child actual integer explicit=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r>pre<d>001</d>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Integer",
+          "expected": [
+            "1"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pre001post"
+    },
+    {
+      "id": "KL-006",
+      "contract": "known child invalid integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><d>1.0</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-007",
+      "contract": "known child actual integer explicit=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:integer'/><xs:element name='r' type='xs:anyType'/></xs:schema>",
+      "instance": "<r>pre<d>001</d>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Integer",
+          "expected": [
+            "1"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pre001post"
+    },
+    {
+      "id": "KL-008",
+      "contract": "known child invalid integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:integer'/><xs:element name='r' type='xs:anyType'/></xs:schema>",
+      "instance": "<r><d>1.0</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-009",
+      "contract": "known child actual boolean explicit=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:boolean'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r>pre<d>true</d>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Boolean",
+          "expected": [
+            "true"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pretruepost"
+    },
+    {
+      "id": "KL-010",
+      "contract": "known child invalid boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:boolean'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><d>yes</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-011",
+      "contract": "known child actual boolean explicit=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:boolean'/><xs:element name='r' type='xs:anyType'/></xs:schema>",
+      "instance": "<r>pre<d>true</d>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Boolean",
+          "expected": [
+            "true"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pretruepost"
+    },
+    {
+      "id": "KL-012",
+      "contract": "known child invalid boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:boolean'/><xs:element name='r' type='xs:anyType'/></xs:schema>",
+      "instance": "<r><d>yes</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-013",
+      "contract": "known child actual token explicit=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:token'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r>pre<d> a  b </d>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "String",
+          "expected": [
+            "a b"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pre a  b post"
+    },
+    {
+      "id": "KL-014",
+      "contract": "known child actual token explicit=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:token'/><xs:element name='r' type='xs:anyType'/></xs:schema>",
+      "instance": "<r>pre<d> a  b </d>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "String",
+          "expected": [
+            "a b"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pre a  b post"
+    },
+    {
+      "id": "KL-015",
+      "contract": "known child actual date explicit=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:date'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r>pre<d>2000-02-29Z</d>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Date",
+          "expected": [
+            "2000-02-29Z"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pre2000-02-29Zpost"
+    },
+    {
+      "id": "KL-016",
+      "contract": "known child invalid date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:date'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><d>2001-02-29</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-017",
+      "contract": "known child actual date explicit=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:date'/><xs:element name='r' type='xs:anyType'/></xs:schema>",
+      "instance": "<r>pre<d>2000-02-29Z</d>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Date",
+          "expected": [
+            "2000-02-29Z"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pre2000-02-29Zpost"
+    },
+    {
+      "id": "KL-018",
+      "contract": "known child invalid date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:date'/><xs:element name='r' type='xs:anyType'/></xs:schema>",
+      "instance": "<r><d>2001-02-29</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-019",
+      "contract": "known child actual hexBinary explicit=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:hexBinary'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r>pre<d>0a0B</d>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "HexBinary",
+          "expected": [
+            "0A0B"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pre0a0Bpost"
+    },
+    {
+      "id": "KL-020",
+      "contract": "known child invalid hexBinary",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:hexBinary'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><d>0x</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-021",
+      "contract": "known child actual hexBinary explicit=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:hexBinary'/><xs:element name='r' type='xs:anyType'/></xs:schema>",
+      "instance": "<r>pre<d>0a0B</d>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "HexBinary",
+          "expected": [
+            "0A0B"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pre0a0Bpost"
+    },
+    {
+      "id": "KL-022",
+      "contract": "known child invalid hexBinary",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:hexBinary'/><xs:element name='r' type='xs:anyType'/></xs:schema>",
+      "instance": "<r><d>0x</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-023",
+      "contract": "known global attribute decimal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:decimal'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r a='01.20'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "index": 0,
+          "namespace": "",
+          "name": "a",
+          "kind": "Decimal",
+          "expected": [
+            "1.2"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "",
+      "attributeCount": 1
+    },
+    {
+      "id": "KL-024",
+      "contract": "known global attribute invalid decimal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:decimal'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r a='bad'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-025",
+      "contract": "known global attribute integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r a='001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "index": 0,
+          "namespace": "",
+          "name": "a",
+          "kind": "Integer",
+          "expected": [
+            "1"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "",
+      "attributeCount": 1
+    },
+    {
+      "id": "KL-026",
+      "contract": "known global attribute invalid integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r a='1.0'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-027",
+      "contract": "known global attribute token",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:token'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r a=' a  b '/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "index": 0,
+          "namespace": "",
+          "name": "a",
+          "kind": "String",
+          "expected": [
+            "a b"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "",
+      "attributeCount": 1
+    },
+    {
+      "id": "KL-028",
+      "contract": "known global attribute boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:boolean'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r a='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "index": 0,
+          "namespace": "",
+          "name": "a",
+          "kind": "Boolean",
+          "expected": [
+            "false"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "",
+      "attributeCount": 1
+    },
+    {
+      "id": "KL-029",
+      "contract": "known global attribute invalid boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:boolean'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r a='yes'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-030",
+      "contract": "order and repeated global matches are wildcard occurrences",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:decimal'/><xs:element name='b' type='xs:boolean'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><b>true</b><d>01.20</d><d>2</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Boolean",
+          "expected": [
+            "true"
+          ]
+        },
+        {
+          "target": "element",
+          "path": [
+            1
+          ],
+          "index": 1,
+          "kind": "Decimal",
+          "expected": [
+            "1.2"
+          ]
+        },
+        {
+          "target": "element",
+          "path": [
+            2
+          ],
+          "index": 2,
+          "kind": "Decimal",
+          "expected": [
+            "2"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "true01.202"
+    },
+    {
+      "id": "KL-031",
+      "contract": "attribute projection keeps declaration order, XML keeps physical order",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:token'/><xs:attribute name='b' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r b='02' a=' x '/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "index": 0,
+          "namespace": "",
+          "name": "a",
+          "kind": "String",
+          "expected": [
+            "x"
+          ]
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "index": 1,
+          "namespace": "",
+          "name": "b",
+          "kind": "Integer",
+          "expected": [
+            "2"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "",
+      "attributeCount": 2
+    },
+    {
+      "id": "KL-032",
+      "contract": "unknown element never fabricated",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><missing/></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-033",
+      "contract": "unknown element never fabricated",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><d>1</d><missing/></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-034",
+      "contract": "unknown attribute never fabricated",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r a='1' unknown='x'/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-035",
+      "contract": "same local element in wrong namespace is unknown",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><d xmlns='urn:other'>1</d></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-036",
+      "contract": "same local attribute in wrong namespace is unknown",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:other' p:a='1'/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-037",
+      "contract": "expanded names resolve qualified global catalogs",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:k' targetNamespace='urn:k'><xs:element name='d' type='xs:integer'/><xs:attribute name='a' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:k' t:a='02'><t:d>001</t:d></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "index": 0,
+          "namespace": "urn:k",
+          "name": "a",
+          "kind": "Integer",
+          "expected": [
+            "2"
+          ]
+        },
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Integer",
+          "expected": [
+            "1"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "001"
+    },
+    {
+      "id": "KL-038",
+      "contract": "nested known anyType retains owner path and mixed aggregate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'/><xs:element name='d' type='xs:decimal'/><xs:attribute name='a' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e a='02'>pre<d>01.20</d>post</e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "String",
+          "expected": [
+            "pre01.20post"
+          ]
+        },
+        {
+          "target": "element",
+          "path": [
+            0,
+            0
+          ],
+          "index": 1,
+          "kind": "Decimal",
+          "expected": [
+            "1.2"
+          ]
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "namespace": "",
+          "name": "a",
+          "kind": "Integer",
+          "expected": [
+            "2"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "pre01.20post",
+      "attributeCount": 1
+    },
+    {
+      "id": "KL-039",
+      "contract": "anyType wildcard under existing strict sequence",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:integer'/><xs:element name='host'><xs:complexType><xs:sequence><xs:element ref='r'/></xs:sequence></xs:complexType></xs:element><xs:element name='r'/></xs:schema>",
+      "instance": "<host><r><d>001</d></r></host>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "String",
+          "expected": [
+            "001"
+          ]
+        },
+        {
+          "target": "element",
+          "path": [
+            0,
+            0
+          ],
+          "index": 1,
+          "kind": "Integer",
+          "expected": [
+            "1"
+          ]
+        }
+      ],
+      "rootScalar": false,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-040",
+      "contract": "known complex sequence preserves local attributes and values",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'><xs:complexType><xs:sequence><xs:element name='v' type='xs:integer'/></xs:sequence><xs:attribute name='a' type='xs:token' use='required'/></xs:complexType></xs:element><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e a=' x '><v>001</v></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0,
+            0
+          ],
+          "index": 0,
+          "kind": "Integer",
+          "expected": [
+            "1"
+          ]
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "namespace": "",
+          "name": "a",
+          "kind": "String",
+          "expected": [
+            "x"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "001",
+      "attributeCount": 1
+    },
+    {
+      "id": "KL-041",
+      "contract": "known complex required attribute is enforced",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'><xs:complexType><xs:sequence><xs:element name='v' type='xs:integer'/></xs:sequence><xs:attribute name='a' type='xs:token' use='required'/></xs:complexType></xs:element><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e><v>1</v></e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-042",
+      "contract": "known empty complex keeps zero atomic value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'><xs:complexType><xs:attribute name='a' type='xs:integer'/></xs:complexType></xs:element><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e a='02'/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": null,
+          "expected": [],
+          "nodeDataOnly": true
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "namespace": "",
+          "name": "a",
+          "kind": "Integer",
+          "expected": [
+            "2"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": ""
+    },
+    {
+      "id": "KL-043",
+      "contract": "known simple-content actual governing and atomic values",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'><xs:complexType><xs:simpleContent><xs:extension base='xs:decimal'><xs:attribute name='a' type='xs:token'/></xs:extension></xs:simpleContent></xs:complexType></xs:element><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e a=' x '>01.20</e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Decimal",
+          "expected": [
+            "1.2"
+          ]
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "namespace": "",
+          "name": "a",
+          "kind": "String",
+          "expected": [
+            "x"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "01.20"
+    },
+    {
+      "id": "KL-044",
+      "contract": "global declaration chosen rather than unrelated same-name local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:integer'/><xs:element name='other'><xs:complexType><xs:sequence><xs:element name='d' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:element name='r'/></xs:schema>",
+      "instance": "<r><d>not-an-integer</d></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-045",
+      "contract": "missing global constraint does not imply wildcard attribute use",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer' default='1' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "",
+      "attributeCount": 0
+    },
+    {
+      "id": "KL-046",
+      "contract": "provided global constraint original value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer' default='1' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r a='01'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "index": 0,
+          "namespace": "",
+          "name": "a",
+          "kind": "Integer",
+          "expected": [
+            "1"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "",
+      "attributeCount": 1
+    },
+    {
+      "id": "KL-047",
+      "contract": "missing global constraint does not imply wildcard attribute use",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer' fixed='1' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "",
+      "attributeCount": 0
+    },
+    {
+      "id": "KL-048",
+      "contract": "provided global constraint original value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer' fixed='1' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r a='01'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "index": 0,
+          "namespace": "",
+          "name": "a",
+          "kind": "Integer",
+          "expected": [
+            "1"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "",
+      "attributeCount": 1
+    },
+    {
+      "id": "KL-049",
+      "contract": "provided fixed global constraint mismatch",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer' fixed='1' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r a='2'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-050",
+      "contract": "IDREFS global attributes and forward known child binding",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='id' type='xs:ID'/><xs:attribute name='refs' type='xs:IDREFS'/><xs:element name='e'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r refs='v v'><e id='v'/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "index": 0,
+          "namespace": "",
+          "name": "refs",
+          "kind": "String",
+          "expected": [
+            "v",
+            "v"
+          ]
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "namespace": "",
+          "name": "id",
+          "kind": "String",
+          "expected": [
+            "v"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "",
+      "attributeCount": 2
+    },
+    {
+      "id": "KL-051",
+      "contract": "known global identity failure prevents all facts",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='id' type='xs:ID'/><xs:attribute name='refs' type='xs:IDREFS'/><xs:element name='e'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r refs='missing'><e id='v'/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-052",
+      "contract": "same ID on different known wildcard owners invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='id' type='xs:ID'/><xs:attribute name='refs' type='xs:IDREFS'/><xs:element name='e'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r id='v'><e id='v'/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-053",
+      "contract": "global ID child binds its anyType parent",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='id' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r ref='v'><id>v</id></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "String",
+          "expected": [
+            "v"
+          ]
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "index": 0,
+          "namespace": "",
+          "name": "ref",
+          "kind": "String",
+          "expected": [
+            "v"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "v"
+    },
+    {
+      "id": "KL-054",
+      "contract": "actual ordered union member retains type and value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='U'><xs:union memberTypes='xs:integer xs:string'/></xs:simpleType><xs:element name='e' type='U'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e>001</e><e>x</e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Integer",
+          "expected": [
+            "1"
+          ]
+        },
+        {
+          "target": "element",
+          "path": [
+            1
+          ],
+          "index": 1,
+          "kind": "String",
+          "expected": [
+            "x"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "001x"
+    },
+    {
+      "id": "KL-055",
+      "contract": "actual list members retain all values",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='L'><xs:list itemType='xs:integer'/></xs:simpleType><xs:element name='e' type='L'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e>001 02</e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Integer",
+          "expected": [
+            "1",
+            "2"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "001 02"
+    },
+    {
+      "id": "KL-056",
+      "contract": "known simple nil retains empty typed sequence",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e' type='xs:integer' nillable='true'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><e xsi:nil='true'/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": null,
+          "expected": []
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": ""
+    },
+    {
+      "id": "KL-057",
+      "contract": "known all child plan remains excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'><xs:complexType><xs:all><xs:element name='v' type='xs:string'/></xs:all></xs:complexType></xs:element><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e><v>x</v></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-058",
+      "contract": "known choice child plan remains excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'><xs:complexType><xs:choice><xs:element name='v' type='xs:string'/></xs:choice></xs:complexType></xs:element><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e><v>x</v></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-059",
+      "contract": "dynamic value-state capacity 16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "index": 0,
+          "kind": "Integer",
+          "expected": [
+            "1"
+          ]
+        }
+      ],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "111111111111111"
+    },
+    {
+      "id": "KL-060",
+      "contract": "dynamic value-state capacity 17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='d' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d><d>1</d></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-061",
+      "contract": "dynamic depth capacity 4",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e><e><e>x</e></e></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "x"
+    },
+    {
+      "id": "KL-062",
+      "contract": "dynamic depth capacity 5",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e><e><e><e>x</e></e></e></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-063",
+      "contract": "dynamic element-node capacity 64",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'><xs:complexType/></xs:element><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": ""
+    },
+    {
+      "id": "KL-064",
+      "contract": "dynamic element-node capacity 65",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'><xs:complexType/></xs:element><xs:element name='r'/></xs:schema>",
+      "instance": "<r><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/><e/></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-065",
+      "contract": "dynamic total attribute capacity 64",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a0' type='xs:integer'/><xs:attribute name='a1' type='xs:integer'/><xs:attribute name='a2' type='xs:integer'/><xs:attribute name='a3' type='xs:integer'/><xs:attribute name='a4' type='xs:integer'/><xs:attribute name='a5' type='xs:integer'/><xs:attribute name='a6' type='xs:integer'/><xs:attribute name='a7' type='xs:integer'/><xs:attribute name='a8' type='xs:integer'/><xs:attribute name='a9' type='xs:integer'/><xs:attribute name='a10' type='xs:integer'/><xs:attribute name='a11' type='xs:integer'/><xs:attribute name='a12' type='xs:integer'/><xs:attribute name='a13' type='xs:integer'/><xs:attribute name='a14' type='xs:integer'/><xs:attribute name='a15' type='xs:integer'/><xs:element name='e'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r a0='1' a1='1' a2='1' a3='1' a4='1' a5='1' a6='1' a7='1' a8='1' a9='1' a10='1' a11='1' a12='1' a13='1' a14='1' a15='1'><e a0='1' a1='1' a2='1' a3='1' a4='1' a5='1' a6='1' a7='1' a8='1' a9='1' a10='1' a11='1' a12='1' a13='1' a14='1' a15='1'/><e a0='1' a1='1' a2='1' a3='1' a4='1' a5='1' a6='1' a7='1' a8='1' a9='1' a10='1' a11='1' a12='1' a13='1' a14='1' a15='1'/><e a0='1' a1='1' a2='1' a3='1' a4='1' a5='1' a6='1' a7='1' a8='1' a9='1' a10='1' a11='1' a12='1' a13='1' a14='1' a15='1'/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096,
+      "rootValue": "",
+      "attributeCount": 64
+    },
+    {
+      "id": "KL-066",
+      "contract": "dynamic total attribute capacity 80",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a0' type='xs:integer'/><xs:attribute name='a1' type='xs:integer'/><xs:attribute name='a2' type='xs:integer'/><xs:attribute name='a3' type='xs:integer'/><xs:attribute name='a4' type='xs:integer'/><xs:attribute name='a5' type='xs:integer'/><xs:attribute name='a6' type='xs:integer'/><xs:attribute name='a7' type='xs:integer'/><xs:attribute name='a8' type='xs:integer'/><xs:attribute name='a9' type='xs:integer'/><xs:attribute name='a10' type='xs:integer'/><xs:attribute name='a11' type='xs:integer'/><xs:attribute name='a12' type='xs:integer'/><xs:attribute name='a13' type='xs:integer'/><xs:attribute name='a14' type='xs:integer'/><xs:attribute name='a15' type='xs:integer'/><xs:element name='e'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r a0='1' a1='1' a2='1' a3='1' a4='1' a5='1' a6='1' a7='1' a8='1' a9='1' a10='1' a11='1' a12='1' a13='1' a14='1' a15='1'><e a0='1' a1='1' a2='1' a3='1' a4='1' a5='1' a6='1' a7='1' a8='1' a9='1' a10='1' a11='1' a12='1' a13='1' a14='1' a15='1'/><e a0='1' a1='1' a2='1' a3='1' a4='1' a5='1' a6='1' a7='1' a8='1' a9='1' a10='1' a11='1' a12='1' a13='1' a14='1' a15='1'/><e a0='1' a1='1' a2='1' a3='1' a4='1' a5='1' a6='1' a7='1' a8='1' a9='1' a10='1' a11='1' a12='1' a13='1' a14='1' a15='1'/><e a0='1' a1='1' a2='1' a3='1' a4='1' a5='1' a6='1' a7='1' a8='1' a9='1' a10='1' a11='1' a12='1' a13='1' a14='1' a15='1'/></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096,
+      "attributeCount": 80
+    },
+    {
+      "id": "KL-067",
+      "contract": "dynamic per-owner attribute capacity",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a0' type='xs:integer'/><xs:attribute name='a1' type='xs:integer'/><xs:attribute name='a2' type='xs:integer'/><xs:attribute name='a3' type='xs:integer'/><xs:attribute name='a4' type='xs:integer'/><xs:attribute name='a5' type='xs:integer'/><xs:attribute name='a6' type='xs:integer'/><xs:attribute name='a7' type='xs:integer'/><xs:attribute name='a8' type='xs:integer'/><xs:attribute name='a9' type='xs:integer'/><xs:attribute name='a10' type='xs:integer'/><xs:attribute name='a11' type='xs:integer'/><xs:attribute name='a12' type='xs:integer'/><xs:attribute name='a13' type='xs:integer'/><xs:attribute name='a14' type='xs:integer'/><xs:attribute name='a15' type='xs:integer'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r a0='1' a1='1' a2='1' a3='1' a4='1' a5='1' a6='1' a7='1' a8='1' a9='1' a10='1' a11='1' a12='1' a13='1' a14='1' a15='1' a16='1'/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-068",
+      "contract": "mixed aggregate capacity counts original child text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='s' type='xs:string'/><xs:element name='r'/></xs:schema>",
+      "instance": "<r><s>ab</s><s>cd</s></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 3
+    },
+    {
+      "id": "KL-069",
+      "contract": "explicit wildcard grammar remains excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:any processContents='lax'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    },
+    {
+      "id": "KL-070",
+      "contract": "non-self anyType xsi:type remains excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'/></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='xs:string'>x</r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "rootScalar": true,
+      "maxString": 4096
+    }
+  ]
+}

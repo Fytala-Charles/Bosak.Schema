@@ -1,0 +1,8 @@
+{
+  "date": "2026-11-26",
+  "review": "Public attribute indices remain in source declaration order; XSD attribute validity itself is unordered",
+  "initialFinding": "ImmutableDictionary.Values iteration changed with process string hashes; reversed XML attributes exposed nondeterministic index selection",
+  "correction": "Retain immutable source-order global declaration array separately from expanded-name lookup; reuse the same declaration objects",
+  "outsideWildcardBehavior": "Existing explicit attribute uses retain their own source-order arrays; no new normative XSD validity rule or public API member",
+  "qualification": "Reversed XML/schema order contract plus native declaration-order proof and full regressions"
+}

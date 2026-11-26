@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Validate provided effective attribute constraints and fixed override identity |
 //                      | Charles Korthout | 0.3 | 26-11-2026     | Admit bounded empty groups and original anonymous attribute types |
+//                      | Charles Korthout | 0.4 | 26-11-2026     | Retain source declaration order independently from hashed attribute lookup |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -21,10 +22,10 @@ using System.Xml;
 using System.Xml.Linq;
 namespace Bosak.Schema;
 
-internal sealed class NativeAttributeDeclarations(ImmutableDictionary<XName, NativeDeclaration> declarations)
+internal sealed class NativeAttributeDeclarations(ImmutableDictionary<XName, NativeDeclaration> declarations, ImmutableArray<NativeDeclaration> sourceOrder)
 {
  internal ImmutableDictionary<XName, NativeDeclaration> Declarations { get; } = declarations;
- internal ImmutableArray<NativeDeclaration> Values => Declarations.Values.ToImmutableArray();
+ internal ImmutableArray<NativeDeclaration> Values { get; } = sourceOrder;
  internal static NativeAttributeDeclarations? For(XElement source) => source.AncestorsAndSelf()
   .Select(e => e.Annotation<NativeAttributeDeclarations>()).FirstOrDefault(c => c is not null);
 }
@@ -38,6 +39,7 @@ internal sealed partial class NativeDecimalSchema
   var definitions=Elements(schema).Where(e=>e.Name==Xs+"attribute").ToArray();
   Require(definitions.Length<=16,"Global attribute declaration capacity exceeded.",NativeDecimalUnsupportedReason.RepresentationCapacity);
   var declarations=ImmutableDictionary.CreateBuilder<XName,NativeDeclaration>();
+  var ordered=ImmutableArray.CreateBuilder<NativeDeclaration>();
   foreach(var definition in definitions)
   {
    token.ThrowIfCancellationRequested();Attributes(definition,"name","type","default","fixed");
@@ -48,9 +50,10 @@ internal sealed partial class NativeDecimalSchema
     "Reserved global attribute declaration.",NativeDecimalUnsupportedReason.Attributes);
    var key=XName.Get(name,targetNamespace);Check(!declarations.ContainsKey(key),"Duplicate global attribute declaration.");
    var type=ResolveScalarType(definition,decimalType,stringType,booleanType,integerType,simple);
-   declarations.Add(key,new NativeDeclaration(name,type,0,1,targetNamespace,isAttribute:true){ValueConstraint=CompileAttributeConstraint(definition,type)});
+   var declaration=new NativeDeclaration(name,type,0,1,targetNamespace,isAttribute:true){ValueConstraint=CompileAttributeConstraint(definition,type)};
+   declarations.Add(key,declaration);ordered.Add(declaration);
   }
-  var context=new NativeAttributeDeclarations(declarations.ToImmutable());schema.AddAnnotation(context);return context;
+  var context=new NativeAttributeDeclarations(declarations.ToImmutable(),ordered.ToImmutable());schema.AddAnnotation(context);return context;
  }
  private static XName AttributeReferenceName(XElement reference)
  {

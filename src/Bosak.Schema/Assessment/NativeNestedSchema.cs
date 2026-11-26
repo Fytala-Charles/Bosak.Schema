@@ -45,6 +45,7 @@
 //                      | Charles Korthout | 0.32 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
 //                      | Charles Korthout | 0.33 | 26-11-2026     | Preserve attribute facts on admitted nested empty complex owners |
 //                      | Charles Korthout | 0.34 | 26-11-2026     | Admit text-only anyType sequence terminals and refuse unqualified wildcard content |
+//                      | Charles Korthout | 0.35 | 26-11-2026     | Assess known global declarations beneath anyType without inventing wildcard-use components |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -278,8 +279,12 @@ internal sealed partial class NativeDecimalSchema
     {
         cancellationToken.ThrowIfCancellationRequested();
         var effectiveType = ResolveInstanceType(element, declaration.Type);
-        Require(!effectiveType.IsAnyType || !element.HasElements, "AnyType element wildcards await lax assessment qualification.", NativeDecimalUnsupportedReason.DeclarationShape);
         _ = NilledState(element, declaration, effectiveType);
+        if (effectiveType.IsAnyType)
+        {
+            AssessKnownLax(element, declaration, effectiveType, states, attributes, ownerPath, cancellationToken, patternBudget);
+            return;
+        }
         if (!isRoot)
         {
             if (plan.AttributeUses.IsEmpty && plan.Root.Type.ContentType?.IsDate != true) InstanceAttributes(element);

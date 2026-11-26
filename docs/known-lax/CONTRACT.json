@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-26",
+  "recordedBeforeImplementation": true,
+  "scope": "Closed known-declaration subset of anyType lax wildcards",
+  "namespaceConstraint": "Builtin anyType namespace-any only; expanded names resolve against original closed global catalogs",
+  "rules": {
+    "knownElement": "Validate using actual global declaration/type/plan; preserve canonical handle",
+    "knownAttribute": "Validate actual global declaration/type/provided fixed value; retain owner path",
+    "unknownElementOrAttribute": "Unsupported; no governing declaration is fabricated",
+    "missingGlobalAttribute": "No attribute use exists on anyType: no required/default augmentation",
+    "unknownUntypedFacts": "Not implemented; current provider indexes every state declaration in its owned component ring"
+  },
+  "provenancePrerequisite": {
+    "source": "src/Bosak.Schema/Assessment/NativeSchemaProvider.cs",
+    "finding": "Facts publication uses provider.components[state.Declaration] for every element and attribute",
+    "consequence": "The known-declaration subset fits existing authority; unknown/declaration-absent lax nodes require a separate representation contract"
+  },
+  "guards": [
+    "actual document depth/nodes/attributes bounded before recursive assessment",
+    "all local validation and ID tables before fact publication",
+    "known invalid data cannot be skipped or treated as an untyped string",
+    "source declaration components are reused, never invented for wildcard occurrences"
+  ]
+}
