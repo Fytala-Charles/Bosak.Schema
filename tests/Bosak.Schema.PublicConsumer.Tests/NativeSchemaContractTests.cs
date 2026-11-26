@@ -128,8 +128,12 @@ public sealed class NativeSchemaContractTests
         var gregorian=NativeSchemaSession.Create(Schema.Replace("type='xs:string'","type='xs:gYear'"),Options());Assert.Equal(NativeSchemaOutcome.Valid,gregorian.Outcome);
         using(var owner=gregorian.Value!){using var document=owner.Assess(Xml.Replace(" kept ","2000",StringComparison.Ordinal),Context).Value!;Assert.Equal(2000L,document.ReadScalar(0).GregorianYear);}
         var result=NativeSchemaSession.Create(Schema.Replace("type='xs:string'","type='xs:ID'"),Options());
-        Assert.Equal(NativeSchemaOutcome.Unsupported,result.Outcome);Assert.Null(result.Value);Assert.False(result.DiagnosticsTruncated);
-        var diagnostic=Assert.Single(result.Diagnostics);Assert.Equal(NativeSchemaUnsupportedReason.ValueType,diagnostic.UnsupportedReason);
+        Assert.Equal(NativeSchemaOutcome.Valid,result.Outcome);Assert.Empty(result.Diagnostics);
+        using(var owner=result.Value!){var a=owner.Assess(Xml,Context);Assert.Equal(NativeSchemaOutcome.Valid,a.Outcome);using var document=a.Value!;Assert.Equal("kept",document.ReadScalar(0).StringValue);Assert.Equal("12.5",document.ReadScalar(1).DecimalValue.ToInvariantString(256));}
+        // A separate still-excluded type keeps the original fixed/redacted diagnostic controls meaningful.
+        var excluded=NativeSchemaSession.Create(Schema.Replace("type='xs:string'","type='xs:ENTITY'"),Options());
+        Assert.Equal(NativeSchemaOutcome.Unsupported,excluded.Outcome);Assert.Null(excluded.Value);Assert.False(excluded.DiagnosticsTruncated);
+        var diagnostic=Assert.Single(excluded.Diagnostics);Assert.Equal(NativeSchemaUnsupportedReason.ValueType,diagnostic.UnsupportedReason);
         Assert.Equal("The input or representation is outside the supported native scalar profile.",diagnostic.Message);Assert.True(diagnostic.Message.Length<=160);
         using var s=NativeSchemaSession.Create(Schema,Options()).Value!;
         var refused=s.Assess(Xml.Replace("<r>","<r secret='PRIVATE-MARKER'>"),Context);

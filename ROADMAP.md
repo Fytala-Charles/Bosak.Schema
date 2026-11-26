@@ -22,3 +22,7 @@ Use smaller reviewed implementation checkpoints. A behavioral-contract ceiling i
 No overall conformance percentage is claimed without an exhaustive normative denominator. Selected W3C samples, authored tests, package consumers and repeated lanes must remain distinguishable. Keep historical adoption evidence and sealed receipts intact; record changed expectations separately. See [development history](docs/DEVELOPMENT_HISTORY.md) for earlier checkpoints.
 
 *Last updated: 2026-11-26*
+
+## Document identity and remaining specification work
+
+Bounded ID/IDREF/IDREFS validation is qualified in development 0.16; see [scope and limits](docs/identity-coverage/GUIDE.md). Next, rank remaining original facet/regex and structural application refusals before a separately adopted implementation. General key/keyref/unique, augmentation, wildcards/open content, type alternatives, assertion breadth and public Core integration remain separate work.

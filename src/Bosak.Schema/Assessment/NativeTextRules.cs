@@ -12,12 +12,13 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2 | 26-11-2026     | Register bounded ID and reference text/list types with original derivation |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Xml.Linq;
 namespace Bosak.Schema;
 
-internal enum NativeTextKind { String, NormalizedString, Token, Language, Name, NCName, NMTOKEN }
+internal enum NativeTextKind { String, NormalizedString, Token, Language, Name, NCName, NMTOKEN, ID, IDREF }
 internal static class NativeTextRules
 {
     internal static string Normalize(string text, int mode) => mode == 0 ? text : mode == 1 ? text.Replace('\t',' ').Replace('\r',' ').Replace('\n',' ') : NativeCalendarParser.Collapse(text);
@@ -25,7 +26,7 @@ internal static class NativeTextRules
     {
         NativeTextKind.Language => Language(text),
         NativeTextKind.Name => NativeInterchangeParser.IsXmlName(text, true),
-        NativeTextKind.NCName => NativeInterchangeParser.IsXmlName(text),
+        NativeTextKind.NCName or NativeTextKind.ID or NativeTextKind.IDREF => NativeInterchangeParser.IsXmlName(text),
         NativeTextKind.NMTOKEN => NativeInterchangeParser.IsXmlName(text, true, true),
         _ => true
     };
@@ -48,7 +49,11 @@ internal sealed partial class NativeDecimalSchema
         var token=Add("token",NativeTextKind.Token,normalized);
         Add("language",NativeTextKind.Language,token);
         var name=Add("Name",NativeTextKind.Name,token);
-        Add("NCName",NativeTextKind.NCName,name);
+        var ncname=Add("NCName",NativeTextKind.NCName,name);
+        Add("ID",NativeTextKind.ID,ncname);
+        var idref=Add("IDREF",NativeTextKind.IDREF,ncname);
+        simple.Add(Xs+"IDREFS",new NativeType("IDREFS",false,Xs.NamespaceName,listItemType:idref,
+            compoundFacets:new NativeCompoundFacets(null,null,1,null,[],[])));
         var nmtoken=Add("NMTOKEN",NativeTextKind.NMTOKEN,token);
         simple.Add(Xs+"NMTOKENS",new NativeType("NMTOKENS",false,Xs.NamespaceName,listItemType:nmtoken,
             compoundFacets:new NativeCompoundFacets(null,null,1,null,[],[])));

@@ -72,6 +72,7 @@
 //                      | Charles Korthout | 1.46   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
 //                      | Charles Korthout | 1.47 | 26-11-2026     | Admit bounded empty groups and original anonymous attribute types |
 //                      | Charles Korthout | 1.48 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
+//                      | Charles Korthout | 1.49 | 26-11-2026     | Validate identity bindings before returning successful native assessment |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -515,7 +516,7 @@ internal sealed partial class NativeDecimalSchema
         return XName.Get(parts[^1], ns!);
     }
 
-    internal NativeResult<NativeAssessedDocument> Assess(string instance, CancellationToken cancellationToken = default)
+    private NativeResult<NativeAssessedDocument> AssessCore(string instance, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(instance);
         cancellationToken.ThrowIfCancellationRequested();
@@ -680,6 +681,7 @@ internal sealed partial class NativeDecimalSchema
         else if (declaration.Type.IsString)
         {
             Require(text.Length <= maxStringCharacters!.Value, "String capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            Require(!IsIdentityAtomic(declaration.Type) || text.Length <= 256, "Identity lexical capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
             var normalized = NativeTextRules.Normalize(text, declaration.Type.TextWhitespace);
             Check(NativeTextRules.Accepts(normalized, declaration.Type.TextKind), "Invalid text datatype lexical value.");
             Check(declaration.Type.TextFacets?.Accepts(normalized, patternBudget) ?? true, "Text facet violation.");
@@ -976,6 +978,7 @@ internal sealed class NativeAssessedDocument(XDocument document, ImmutableArray<
     private readonly XDocument document = document;
     internal ImmutableArray<NativeElementState> Elements { get; } = elements;
     internal ImmutableArray<NativeElementState> Attributes { get; } = attributes.IsDefault ? [] : attributes;
+    internal void CheckIdentity(CancellationToken token) => NativeDecimalSchema.CheckIdentity(document, Elements, Attributes, token);
     internal XDocument CreateDocumentCopy() => new(document);
 }
 internal sealed class NativeProfileException(NativeOutcome outcome, string message,

@@ -1,3 +1,7 @@
+## Bounded document identity coverage — 26 November 2026
+
+Development 0.16 qualifies bounded ID/IDREF/IDREFS validation: owner-aware ID bindings, forward references, actual union/list members and assessment-local resolution. Source 21,730 and fresh package 20,059 overlapping tests pass; all 21,544 prior names remain. The frozen datatype sample improves to 558 matches / 40 Unsupported (+21 admissions), with zero errors. Pilot21 and structural39/90 remain unchanged. Public API55 types/663 rows and signed Core1.86.0 are unchanged. No publication or full XSD1.1/C45 acceptance. [Scope and qualification](identity-coverage/README.md). Earlier dated entries below remain historical.
+
 ## Original markup and annotation coverage — 26 November 2026
 
 Development0.15 adds original instance comment/PI support and bounded opaque schema annotations before declaration scans/closed assembly. [Guide](markup-coverage/GUIDE.md); [readiness](markup-coverage/BETA-READINESS.md). Source21,544/package19,881overlapping pass; API55names/663rows and signed Core1.86.0 unchanged. Frozen21matches; structural39/90; datatype537/61; zeroerrors. Original invoice workflow passes. Earlier dated entries are historical; publication/fullXSD/C45 remain separate.

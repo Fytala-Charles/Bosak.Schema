@@ -18,6 +18,7 @@
 //                      | Charles Korthout | 0.5   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      | Charles Korthout | 0.6   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
 //                      | Charles Korthout | 0.7   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
+//                      | Charles Korthout | 0.8 | 26-11-2026     | Keep identity value constraints outside the admitted provided-value profile |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Numerics;
@@ -41,6 +42,7 @@ internal sealed partial class NativeDecimalSchema
  private static NativeValueConstraint? CompileValueConstraint(XElement source,NativeType type)
  {
   var fixedValue=source.Attribute("fixed");var defaultValue=source.Attribute("default");Check(fixedValue is null || defaultValue is null,"Default and fixed are mutually exclusive.");if(fixedValue is null && defaultValue is null)return null;
+  Require(!ContainsIdentityType(type),"Identity-containing value constraints await separate adoption.",NativeDecimalUnsupportedReason.ValueType);
   Require(!type.IsComplex,"Complex value constraints are outside the provided-content profile.",NativeDecimalUnsupportedReason.DeclarationShape);var text=(fixedValue??defaultValue)!.Value;Require(text.Length<=256,"Value constraint literal capacity exceeded.",NativeDecimalUnsupportedReason.RepresentationCapacity);
   var context=NativeValueConstraintCompilation.For(source);Require(context is not null,"Value constraint compile context unavailable.",NativeDecimalUnsupportedReason.DeclarationShape);context!.Token.ThrowIfCancellationRequested();
   // This scratch declaration is only a pure literal parser input, never registered or issued as a component.

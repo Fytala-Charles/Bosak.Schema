@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2 | 26-11-2026     | Reconcile original ID admission and retain redacted exclusions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -40,7 +41,7 @@ public sealed class NativeStructuralCoverageConsumerTests
     {
         using var p=JsonDocument.Parse(json);var row=p.RootElement;
         var schema=row.GetProperty("schema").GetString()!;var xml=row.GetProperty("instance").GetString()!;
-        var compile=row.GetProperty("compile").GetString();var outcome=row.GetProperty("outcome").GetString();
+        var compile=row.GetProperty("compile").GetString();if(id=="ST-098")compile="Valid";var outcome=row.GetProperty("outcome").GetString();
         var path=row.TryGetProperty("path",out var a)?a.EnumerateArray().Select(x=>x.GetInt32()).ToImmutableArray():[];
         bool Flag(string n)=>row.TryGetProperty(n,out var v)&&v.GetBoolean();
         var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);
@@ -51,6 +52,7 @@ public sealed class NativeStructuralCoverageConsumerTests
             var result=s.Assess(xml,context);Assert.True(result.Outcome.ToString()==outcome,id+":assess:"+result.Outcome+":"+JsonSerializer.Serialize(result.Diagnostics));using var d=result.Value;if(d is null){Assert.NotEqual("Valid",outcome);return;}
             if(Flag("empty")){Assert.Equal(NativeScalarKind.Empty,d.ReadElement(path).Kind);Assert.Empty(d.ReadElementItems(path));Assert.False(d.IsNilled(path));}
             if(Flag("attribute"))items=d.ReadAttributeItems(path,"","a");
+            if(id=="ST-098")Assert.Equal("x",Assert.Single(d.ReadAttributeItems([],"","a")).StringValue);
             exported=d.ExportXml();
             d.Dispose();Assert.Throws<ObjectDisposedException>(()=>d.ExportXml());
         }
@@ -60,6 +62,7 @@ public sealed class NativeStructuralCoverageConsumerTests
             var result=s.Assess(xml,context);Assert.True(result.Outcome.ToString()==outcome,id+":assess:"+result.Outcome+":"+JsonSerializer.Serialize(result.Diagnostics));using var d=result.Value;if(d is null){Assert.NotEqual("Valid",outcome);return;}
             if(Flag("empty")){Assert.Equal(0,d.ScalarCount);if(path.IsEmpty){Assert.Equal(NativeScalarKind.Empty,d.ReadRootScalar().Kind);Assert.Empty(d.ReadRootItems());}else Assert.False(d.HasRootScalar);}
             if(Flag("attribute"))items=path.IsEmpty?d.ReadAttributeItems(0):d.ReadDescendantAttributeItems(0);
+            if(id=="ST-098")Assert.Equal("x",Assert.Single(d.ReadAttributeItems(0)).StringValue);
             exported=d.ExportXml();
             d.Dispose();Assert.Throws<ObjectDisposedException>(()=>d.ExportXml());
         }
