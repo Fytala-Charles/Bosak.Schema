@@ -83,6 +83,7 @@
 
 //                      | Charles Korthout | 1.54  | 26-11-2026     | Add bounded strict attribute wildcards on empty complex owners.                           |
 //                      | Charles Korthout | 1.55  | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
+//                      | Charles Korthout | 1.56  | 26-11-2026     | Retain strict wildcard plans on bounded all/choice roots.                                 |
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Numerics;
@@ -122,8 +123,9 @@ internal sealed partial class NativeDecimalSchema
     internal NativeType? UntypedAtomicType { get; private set; }
     internal NativeType? LaxAttributeType { get; private set; }
     internal bool HasStrictAttributeWildcards { get; private set; }
-    internal NativeStrictAttributeWildcard? SequenceAttributeWildcard { get; init; }
-    internal NativeStrictAttributeWildcard? AttributeWildcard => SequenceAttributeWildcard ?? Root.Type.AttributeWildcard;
+    internal NativeStrictAttributeWildcard? CompiledAttributeWildcard { get; init; }
+    internal NativeStrictAttributeWildcard? SequenceAttributeWildcard => CompiledAttributeWildcard;
+    internal NativeStrictAttributeWildcard? AttributeWildcard => CompiledAttributeWildcard ?? Root.Type.AttributeWildcard;
     private int? maxStringCharacters;
     internal NativeDeclaration Root { get; }
     internal ImmutableArray<NativeDeclaration> Children { get; }
@@ -277,7 +279,7 @@ internal sealed partial class NativeDecimalSchema
                 {
                     Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                     Require(named.TryGetValue(ResolveTypeName(declaration), out var shared), "Unresolved root complex type.", NativeDecimalUnsupportedReason.ValueType);
-                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses, SequenceAttributeWildcard = shared.SequenceAttributeWildcard, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
+                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses, CompiledAttributeWildcard = shared.CompiledAttributeWildcard, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
                 }
                 else
                 {
@@ -347,7 +349,7 @@ internal sealed partial class NativeDecimalSchema
             decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } choice) return choice;
         if (stringType is not null && members.Count == 1 && members[0].Name == Xs + "simpleContent")
             return CompileSimpleContent(members[0], root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, complexResolver, assertionNamespace, nestedContext, maxStringCharacters, patternCompilation);
-        var tail = CompileSequenceWildcardTail(complex, targetNamespace);
+        var tail = CompileContentWildcardTail(complex, targetNamespace);
         Require(tail.Wildcard is null || stringType is not null, "Sequence wildcard requires the opt-in native profile.", NativeDecimalUnsupportedReason.DeclarationShape);
         var attributeMembers = tail.Uses;
         var assertionMembers = tail.Assertions;
@@ -412,7 +414,7 @@ internal sealed partial class NativeDecimalSchema
                 name => ResolveAssertionName(assertion, name, defaultNamespace, assertionNames), stringNames));
         }
 
-        return new NativeDecimalSchema(root, children.ToImmutable(), plans.ToImmutable(), limits) { AttributeUses = attributeUses, SequenceAttributeWildcard = tail.Wildcard, structuralAssertions = structuralPlans };
+        return new NativeDecimalSchema(root, children.ToImmutable(), plans.ToImmutable(), limits) { AttributeUses = attributeUses, CompiledAttributeWildcard = tail.Wildcard, structuralAssertions = structuralPlans };
     }
 
     private static ImmutableArray<NativeDeclaration> CompileAttributes(IReadOnlyList<XElement> attributeMembers,

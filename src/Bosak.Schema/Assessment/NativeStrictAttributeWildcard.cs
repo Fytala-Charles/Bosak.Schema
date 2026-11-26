@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 26-11-2026     | Enforce bounded namespace/QName exclusions and schema consistency.                         |
 //                      | Charles Korthout | 0.3   | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
+//                      | Charles Korthout | 0.4   | 26-11-2026     | Retain strict wildcard plans on bounded all/choice roots.                                 |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -31,7 +32,7 @@ internal sealed record NativeStrictAttributeWildcard(string Mode, string TargetN
 
 internal sealed partial class NativeDecimalSchema
 {
-    private static (XElement[] Uses, NativeStrictAttributeWildcard? Wildcard, XElement[] Assertions) CompileSequenceWildcardTail(XElement complex, string targetNamespace)
+    private static (XElement[] Uses, NativeStrictAttributeWildcard? Wildcard, XElement[] Assertions) CompileContentWildcardTail(XElement complex, string targetNamespace)
     {
         var members = Elements(complex);
         var uses = members.Skip(1).TakeWhile(IsAttributeUseMember).ToArray();
@@ -39,8 +40,8 @@ internal sealed partial class NativeDecimalSchema
         var source = rest.FirstOrDefault()?.Name == Xs + "anyAttribute" ? rest[0] : null;
         var assertions = rest.Skip(source is null ? 0 : 1).ToArray();
         if (source is not null)
-            Require(members[0].Name == Xs + "sequence" && Elements(members[0]).Count != 0 && !ReadMixedContent(complex) && assertions.Length == 0,
-                "Sequence wildcard requires direct nonempty element-only sequence without assertions.", NativeDecimalUnsupportedReason.DeclarationShape);
+            Require((members[0].Name == Xs + "sequence" || members[0].Name == Xs + "all" || members[0].Name == Xs + "choice") && Elements(members[0]).Count != 0 && !ReadMixedContent(complex) && assertions.Length == 0,
+                "Wildcard requires a direct nonempty element-only compositor without assertions.", NativeDecimalUnsupportedReason.DeclarationShape);
         return (uses, source is null ? null : CompileStrictAttributeWildcard(source, targetNamespace), assertions);
     }
 
