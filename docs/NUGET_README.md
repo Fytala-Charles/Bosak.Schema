@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.21 development candidate requires Bosak Core 1.86.0 or later.
+The 0.22 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1801,3 +1801,7 @@ AnyType can now assess supported known global child/attribute declarations, pres
 ## Declaration-absent lax content (development 0.21)
 
 Unknown elements and application attributes can be assessed beneath uninterrupted anyType ancestor chains. Their governing declaration stays absent; node annotations are anyType for elements and anySimpleType for attributes, with original untypedAtomic values. Known descendants still validate against actual global declarations. Unknown content below a strict complex ancestor, unknown xsi:type/nil and special XML attributes remain Unsupported. Existing document/value/string limits apply. See the [scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/absent-lax/README.md). This source candidate is unpublished.
+
+## Strict attribute wildcards (development 0.22)
+
+Empty complex owners admit one direct default/explicit strict anyAttribute with bounded namespace-any/other/target/local or absolute-URI list constraints. Explicit uses take precedence; other attributes must match and resolve to an original global declaration, then validate its actual type/value constraints. Missing globals do not augment XML. Lax/skip, negative constraints, inheritance, nonempty/mixed owners and assertion combinations remain excluded. See the [guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/strict-attributes/GUIDE.md). This development candidate is unpublished.

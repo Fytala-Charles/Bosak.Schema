@@ -49,6 +49,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 // ===========================================================================================================================================================
+//                      | Charles Korthout | 0.36  | 26-11-2026     | Add bounded strict attribute wildcards on empty complex owners.                           |
 using System.Collections.Immutable;
 using System.Xml.Linq;
 
@@ -288,7 +289,7 @@ internal sealed partial class NativeDecimalSchema
         }
         if (!isRoot)
         {
-            if (plan.AttributeUses.IsEmpty && plan.Root.Type.ContentType?.IsDate != true) InstanceAttributes(element);
+            if (plan.AttributeUses.IsEmpty && plan.Root.Type.ContentType?.IsDate != true && plan.Root.Type.AttributeWildcard is null) InstanceAttributes(element);
             else
             {
                 Require(element.Attributes().All(a => IsAdmittedInstanceAttribute(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
@@ -301,7 +302,7 @@ internal sealed partial class NativeDecimalSchema
                     if (attribute is not null) attributes.Add(AssessAttributeValue(attribute.Value, use, patternBudget, element) with { OwnerElementPath = ownerPath, OwnerElementIndex = states.Count });
                     else RequireUnconstrainedAttributeAbsence(use);
                 }
-                Check(element.Attributes().All(a => IsAdmittedInstanceAttribute(a) || plan.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared descendant attribute.");
+                AssessStrictAttributeExtras(element, plan, attributes, ownerPath, states.Count, cancellationToken, patternBudget);
             }
         }
         if (plan.Root.Type.ContentType is { } contentType)
