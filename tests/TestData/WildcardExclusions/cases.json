@@ -1,0 +1,900 @@
+{
+  "cases": [
+    {
+      "id": "WX-001",
+      "contract": "permitted actual integer notNamespace root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='urn:other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "WX-002",
+      "contract": "permitted declaration still validates notNamespace root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='urn:other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-003",
+      "contract": "permitted actual integer notQName root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "WX-004",
+      "contract": "permitted declaration still validates notQName root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-005",
+      "contract": "permitted actual integer notNamespace named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute notNamespace='urn:other'/></xs:complexType><xs:element name='r' type='T'/></xs:schema>",
+      "instance": "<r a='001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "WX-006",
+      "contract": "permitted declaration still validates notNamespace named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute notNamespace='urn:other'/></xs:complexType><xs:element name='r' type='T'/></xs:schema>",
+      "instance": "<r a='bad'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-007",
+      "contract": "permitted actual integer notQName named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute notQName='b'/></xs:complexType><xs:element name='r' type='T'/></xs:schema>",
+      "instance": "<r a='001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "WX-008",
+      "contract": "permitted declaration still validates notQName named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute notQName='b'/></xs:complexType><xs:element name='r' type='T'/></xs:schema>",
+      "instance": "<r a='bad'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-009",
+      "contract": "permitted actual integer notNamespace nested",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute notNamespace='urn:other'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "WX-010",
+      "contract": "permitted declaration still validates notNamespace nested",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute notNamespace='urn:other'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-011",
+      "contract": "permitted actual integer notQName nested",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute notQName='b'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "WX-012",
+      "contract": "permitted declaration still validates notQName nested",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute notQName='b'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-013",
+      "contract": "permitted actual integer notNamespace reference",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute notNamespace='urn:other'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "WX-014",
+      "contract": "permitted declaration still validates notNamespace reference",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute notNamespace='urn:other'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-015",
+      "contract": "permitted actual integer notQName reference",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute notQName='b'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "WX-016",
+      "contract": "permitted declaration still validates notQName reference",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute notQName='b'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-017",
+      "contract": "namespace complement ##local target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='##local'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-018",
+      "contract": "namespace complement ##local target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='##local'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='1'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-019",
+      "contract": "namespace complement ##targetNamespace target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='##targetNamespace'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-020",
+      "contract": "namespace complement ##targetNamespace target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='##targetNamespace'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-021",
+      "contract": "namespace complement urn:t target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='urn:t'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-022",
+      "contract": "namespace complement urn:t target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='urn:t'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-023",
+      "contract": "namespace complement ##local urn:t target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='##local urn:t'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-024",
+      "contract": "namespace complement ##local urn:t target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='##local urn:t'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-025",
+      "contract": "namespace complement urn:other target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='urn:other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-026",
+      "contract": "namespace complement urn:other target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='urn:other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='1'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-027",
+      "contract": "expanded QName exclusion a target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='a'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-028",
+      "contract": "expanded QName exclusion p:a target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='p:a'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' xmlns:otherPrefix='urn:t' otherPrefix:a='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-029",
+      "contract": "expanded QName exclusion a target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='a' xmlns='urn:t'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' xmlns:otherPrefix='urn:t' otherPrefix:a='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-030",
+      "contract": "expanded QName exclusion a target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='a'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' xmlns:otherPrefix='urn:t' otherPrefix:a='1'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-031",
+      "contract": "expanded QName exclusion b target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-032",
+      "contract": "combined namespace and QName exclusions",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='urn:other' notQName='b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "WX-033",
+      "contract": "combined QName rejection",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='urn:other' notQName='b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r b='x'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-034",
+      "contract": "defined excludes global",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-035",
+      "contract": "defined does not make unknown strict valid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r unknown='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-036",
+      "contract": "defined absent wildcard optional",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-037",
+      "contract": "explicit local use precedence",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:integer'/><xs:anyAttribute notQName='a ##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "WX-038",
+      "contract": "explicit global reference precedence",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:attribute ref='a'/><xs:anyAttribute notQName='a ##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "WX-039",
+      "contract": "explicit required use remains required",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:attribute name='required' type='xs:integer' use='required'/><xs:anyAttribute notQName='##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-040",
+      "contract": "empty QName set",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName=''/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "WX-041",
+      "contract": "duplicate QName exclusions do not alter matching",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='a a'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-042",
+      "contract": "unknown namespace strict still Invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='##local'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:o='urn:other' o:a='1'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-043",
+      "contract": "missing default never augmented",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer' default='1'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-044",
+      "contract": "schema consistency namespace='##any' notNamespace='urn:other'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute namespace='##any' notNamespace='urn:other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-045",
+      "contract": "schema consistency notNamespace=''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace=''/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-046",
+      "contract": "schema consistency notQName='q:a' namespace='##local'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='q:a' namespace='##local'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-047",
+      "contract": "schema consistency notQName='a' notNamespace='##local'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='a' notNamespace='##local'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-048",
+      "contract": "schema consistency notQName='##definedSibling'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='##definedSibling'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-049",
+      "contract": "schema consistency notQName='unbound:a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='unbound:a'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-050",
+      "contract": "schema consistency notQName='a:b:c'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='a:b:c'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-051",
+      "contract": "schema consistency notQName='1bad'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='1bad'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-052",
+      "contract": "eight token capacity notNamespace",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='urn:other urn:other urn:other urn:other urn:other urn:other urn:other urn:other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-053",
+      "contract": "nine token refusal notNamespace",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='urn:other urn:other urn:other urn:other urn:other urn:other urn:other urn:other urn:other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-054",
+      "contract": "eight token capacity notQName",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='b b b b b b b b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-055",
+      "contract": "nine token refusal notQName",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='b b b b b b b b b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-056",
+      "contract": "retained boundary notNamespace='relative'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='relative'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-057",
+      "contract": "retained boundary notQName='b' processContents='lax'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='b' processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-058",
+      "contract": "retained boundary notQName='b' processContents='skip'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='b' processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-059",
+      "contract": "special XML request remains Unsupported",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xml:lang='en'/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-060",
+      "contract": "strict fixed mismatch still Invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='a' type='xs:integer' fixed='1'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='2'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-061",
+      "contract": "strict ID graph remains",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='id' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:element name='r'><xs:complexType><xs:anyAttribute notQName='b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='v' ref='v'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "WX-062",
+      "contract": "strict unresolved IDREF remains Invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:q='urn:other'><xs:attribute name='ref' type='xs:IDREF'/><xs:element name='r'><xs:complexType><xs:anyAttribute notNamespace='urn:other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='missing'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    }
+  ]
+}
