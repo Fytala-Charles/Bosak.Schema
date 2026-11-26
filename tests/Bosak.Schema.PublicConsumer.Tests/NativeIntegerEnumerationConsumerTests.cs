@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Reconcile IE-093 decimal enumeration with actual decimal reads |
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Reconcile IE-105 complex decimal enumeration with actual Decimal reads |
 //                      | Charles Korthout | 0.5 | 26-11-2026     | Reconcile original markup admissions; preserve source payloads |
+//                      | Charles Korthout | 0.6 | 26-11-2026     | Reconcile original empty-owner admission without changing input or test name |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -51,7 +52,7 @@ public sealed class NativeIntegerEnumerationConsumerTests
     public void OriginalAttributeOnlyRefusal(bool data)
     {
         using var d=JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"TestData","IntegerEnumeration","original-contract.json")));var r=d.RootElement.GetProperty("cases").EnumerateArray().Single(x=>x.GetProperty("id").GetString()=="IE-073");var schema=r.GetProperty("schema").GetString()!;
-        if(data){var c=NativeSchemaNodeDataSession.Create(schema,Options(r));Assert.Equal(NativeSchemaOutcome.Unsupported,c.Outcome);Assert.Null(c.Value);}else{var c=NativeSchemaSession.Create(schema,Options(r));Assert.Equal(NativeSchemaOutcome.Unsupported,c.Outcome);Assert.Null(c.Value);}
+        var xml=r.GetProperty("instance").GetString()!;if(data){var c=NativeSchemaNodeDataSession.Create(schema,Options(r));Assert.Equal(NativeSchemaOutcome.Valid,c.Outcome);using var s=c.Value!;var a=s.Assess(xml,Context);Assert.Equal(NativeSchemaOutcome.Valid,a.Outcome);using var document=a.Value!;Assert.Equal(NativeScalarKind.Empty,document.ReadElement([]).Kind);Assert.Equal("1",document.ReadAttribute([],"","a").IntegerValue.ToString(CultureInfo.InvariantCulture));}else{var c=NativeSchemaSession.Create(schema,Options(r));Assert.Equal(NativeSchemaOutcome.Valid,c.Outcome);using var s=c.Value!;var a=s.Assess(xml,Context);Assert.Equal(NativeSchemaOutcome.Valid,a.Outcome);using var document=a.Value!;Assert.Equal(NativeScalarKind.Empty,document.ReadRootScalar().Kind);Assert.Equal("1",document.ReadAttribute(0).Value.IntegerValue.ToString(CultureInfo.InvariantCulture));}
     }
 
 }

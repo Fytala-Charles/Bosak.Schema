@@ -1,0 +1,7 @@
+# Beta readiness: bounded empty-owner attributes
+
+Development0.17 qualifies declared attributes on bounded empty complex owners, with original empty typed values and independent attribute/member provenance. Source21,870/internal1,679/public20,191 and fresh package20,191 overlapping tests pass; all21,730 prior names remain with140 added. Pilot21matches; structural39matches/90Unsupported; datatype568matches/30Unsupported; zero errors. API55names/663rows and nine signed Core1.86.0 payloads are unchanged. No publication or fullXSD1.1/PSVI/C45 acceptance.
+
+Empty owners retain empty typed sequences; enclosing element-only containers retain absent typed value/FOTY0012. Attributes use existing validity, list/member identity and ID-graph rules. Invalid/Unsupported results publish no partial document/facts.66contracts through both facades plus8native cases and the original invoice workflow pass. The invoice is representative evidence, not production-user acceptance.
+
+Existing16attributes/owner,64expanded attributes,64nodes/depth4 and caller/value/XML capacities remain. Text including whitespace is Invalid; comments/PIs are preserved. Mixed-empty content, attribute+structural assertions, complex inheritance/nillability, wildcards/open content, implicit anyType and augmentation remain excluded. Publication, complete PSVI/C45 and general schema-aware query acceptance require separate work. Reviewed PR and exact-main CI are external delivery gates.

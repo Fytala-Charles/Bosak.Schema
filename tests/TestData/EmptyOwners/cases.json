@@ -1,0 +1,650 @@
+{
+  "cases": [
+    {
+      "id": "EO-001",
+      "contract": "original empty owner attributes nested=False named=False group=",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-002",
+      "contract": "original empty owner attributes nested=False named=False group=<xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence/><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-003",
+      "contract": "original empty owner attributes nested=False named=False group=<xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:all/><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-004",
+      "contract": "original empty owner attributes nested=False named=False group=<xs:choice minOccurs=\"0\"/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:choice minOccurs=\"0\"/><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-005",
+      "contract": "original empty owner attributes nested=False named=True group=",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:complexType name=\"E\"><xs:attribute name='a' type='xs:string'/></xs:complexType><xs:element name='r' type='E'/></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-006",
+      "contract": "original empty owner attributes nested=False named=True group=<xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:complexType name=\"E\"><xs:sequence/><xs:attribute name='a' type='xs:string'/></xs:complexType><xs:element name='r' type='E'/></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-007",
+      "contract": "original empty owner attributes nested=False named=True group=<xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:complexType name=\"E\"><xs:all/><xs:attribute name='a' type='xs:string'/></xs:complexType><xs:element name='r' type='E'/></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-008",
+      "contract": "original empty owner attributes nested=False named=True group=<xs:choice minOccurs=\"0\"/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:complexType name=\"E\"><xs:choice minOccurs=\"0\"/><xs:attribute name='a' type='xs:string'/></xs:complexType><xs:element name='r' type='E'/></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-009",
+      "contract": "original empty owner attributes nested=True named=False group=",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-010",
+      "contract": "original empty owner attributes nested=True named=False group=<xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:sequence/><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-011",
+      "contract": "original empty owner attributes nested=True named=False group=<xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:all/><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-012",
+      "contract": "original empty owner attributes nested=True named=False group=<xs:choice minOccurs=\"0\"/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:choice minOccurs=\"0\"/><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-013",
+      "contract": "original empty owner attributes nested=True named=True group=",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:complexType name=\"E\"><xs:attribute name='a' type='xs:string'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='E'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-014",
+      "contract": "original empty owner attributes nested=True named=True group=<xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:complexType name=\"E\"><xs:sequence/><xs:attribute name='a' type='xs:string'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='E'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-015",
+      "contract": "original empty owner attributes nested=True named=True group=<xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:complexType name=\"E\"><xs:all/><xs:attribute name='a' type='xs:string'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='E'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-016",
+      "contract": "original empty owner attributes nested=True named=True group=<xs:choice minOccurs=\"0\"/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:complexType name=\"E\"><xs:choice minOccurs=\"0\"/><xs:attribute name='a' type='xs:string'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='E'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-017",
+      "contract": "empty owner rejects character/element child ' '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    },
+    {
+      "id": "EO-018",
+      "contract": "empty owner rejects character/element child '\\n'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '>\n</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    },
+    {
+      "id": "EO-019",
+      "contract": "empty owner rejects character/element child 'x'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '>x</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    },
+    {
+      "id": "EO-020",
+      "contract": "empty owner rejects character/element child '<![CDATA[ ]]>'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '><![CDATA[ ]]></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    },
+    {
+      "id": "EO-021",
+      "contract": "empty owner rejects character/element child '<other/>'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '><other/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    },
+    {
+      "id": "EO-022",
+      "contract": "comments and PI do not contribute content",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '><!--original--><?keep value?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-023",
+      "contract": "required attribute missing",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string' use='required'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    },
+    {
+      "id": "EO-024",
+      "contract": "optional attribute absent",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-025",
+      "contract": "undeclared ordinary attribute invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r b='x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    },
+    {
+      "id": "EO-026",
+      "contract": "ID and forward reference on same empty owner",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='id' type='xs:ID'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='v' id='v'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "ref",
+      "expected": "v"
+    },
+    {
+      "id": "EO-027",
+      "contract": "unresolved IDREF no partial facts",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='ref' type='xs:IDREF'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='v'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    },
+    {
+      "id": "EO-028",
+      "contract": "IDREFS repeated original ordered items",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='refs' type='xs:IDREFS'/><xs:attribute name='id' type='xs:ID'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r refs='v v' id='v'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "refs",
+      "expected": "v|v"
+    },
+    {
+      "id": "EO-029",
+      "contract": "empty owner rejects character/element child ' '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '> </e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": true
+    },
+    {
+      "id": "EO-030",
+      "contract": "empty owner rejects character/element child '\\n'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '>\n</e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": true
+    },
+    {
+      "id": "EO-031",
+      "contract": "empty owner rejects character/element child 'x'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '>x</e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": true
+    },
+    {
+      "id": "EO-032",
+      "contract": "empty owner rejects character/element child '<![CDATA[ ]]>'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '><![CDATA[ ]]></e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": true
+    },
+    {
+      "id": "EO-033",
+      "contract": "empty owner rejects character/element child '<other/>'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '><other/></e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": true
+    },
+    {
+      "id": "EO-034",
+      "contract": "comments and PI do not contribute content",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a=' x '><!--original--><?keep value?></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true,
+      "read": "a",
+      "expected": " x "
+    },
+    {
+      "id": "EO-035",
+      "contract": "required attribute missing",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='a' type='xs:string' use='required'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e></e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": true
+    },
+    {
+      "id": "EO-036",
+      "contract": "optional attribute absent",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true
+    },
+    {
+      "id": "EO-037",
+      "contract": "undeclared ordinary attribute invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e b='x'></e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": true
+    },
+    {
+      "id": "EO-038",
+      "contract": "ID and forward reference on same empty owner",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='id' type='xs:ID'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e ref='v' id='v'></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true,
+      "read": "ref",
+      "expected": "v"
+    },
+    {
+      "id": "EO-039",
+      "contract": "unresolved IDREF no partial facts",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='ref' type='xs:IDREF'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e ref='v'></e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": true
+    },
+    {
+      "id": "EO-040",
+      "contract": "IDREFS repeated original ordered items",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:attribute name='refs' type='xs:IDREFS'/><xs:attribute name='id' type='xs:ID'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e refs='v v' id='v'></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true,
+      "read": "refs",
+      "expected": "v|v"
+    },
+    {
+      "id": "EO-041",
+      "contract": "empty attribute existing datatype xs:boolean true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:boolean'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' a='true'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-042",
+      "contract": "empty attribute existing datatype xs:boolean yes",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:boolean'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' a='yes'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    },
+    {
+      "id": "EO-043",
+      "contract": "empty attribute existing datatype xs:integer 123456789012345678901",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:integer'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' a='123456789012345678901'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-044",
+      "contract": "empty attribute existing datatype xs:date 2000-02-29Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:date'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' a='2000-02-29Z'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-045",
+      "contract": "empty attribute existing datatype xs:date 2001-02-29",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:date'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' a='2001-02-29'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    },
+    {
+      "id": "EO-046",
+      "contract": "empty attribute existing datatype xs:decimal 12.50",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:decimal'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' a='12.50'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-047",
+      "contract": "empty attribute existing datatype xs:QName xs:integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:QName'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' a='xs:integer'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-048",
+      "contract": "empty attribute existing datatype xs:IDREFS ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' a=''></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    },
+    {
+      "id": "EO-049",
+      "contract": "global reference optional",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:attribute name='g' type='xs:token'/><xs:element name='r'><xs:complexType><xs:attribute ref='g' use='optional'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r g=' a  b '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "g",
+      "expected": "a b"
+    },
+    {
+      "id": "EO-050",
+      "contract": "global reference required",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:attribute name='g' type='xs:token'/><xs:element name='r'><xs:complexType><xs:attribute ref='g' use='required'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r g=' a  b '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "g",
+      "expected": "a b"
+    },
+    {
+      "id": "EO-051",
+      "contract": "shared attribute group deduplicates",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:attributeGroup name='G'><xs:attribute name='a' type='xs:token'/></xs:attributeGroup><xs:element name='r'><xs:complexType><xs:attributeGroup ref='G'/><xs:attributeGroup ref='G'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "a",
+      "expected": "x"
+    },
+    {
+      "id": "EO-052",
+      "contract": "anonymous attribute finite restriction",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a'><xs:simpleType><xs:restriction base='xs:token'><xs:enumeration value='x'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false,
+      "read": "a",
+      "expected": "x"
+    },
+    {
+      "id": "EO-053",
+      "contract": "provided fixed versus absence 'x'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:token' fixed='x'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-054",
+      "contract": "provided fixed versus absence 'y'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:token' fixed='x'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='y'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    },
+    {
+      "id": "EO-055",
+      "contract": "provided fixed versus absence ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:token' fixed='x'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "nested": false
+    },
+    {
+      "id": "EO-056",
+      "contract": "structural assertions with application attributes excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string'/><xs:assert test='count(*) eq 0'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-057",
+      "contract": "empty mixed content excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType mixed='true'><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-058",
+      "contract": "wildcard excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string'/><xs:anyAttribute/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-059",
+      "contract": "prohibited use excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string' use='prohibited'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' x '></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-060",
+      "contract": "effective attribute ceiling 16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a0' type='xs:token'/><xs:attribute name='a1' type='xs:token'/><xs:attribute name='a2' type='xs:token'/><xs:attribute name='a3' type='xs:token'/><xs:attribute name='a4' type='xs:token'/><xs:attribute name='a5' type='xs:token'/><xs:attribute name='a6' type='xs:token'/><xs:attribute name='a7' type='xs:token'/><xs:attribute name='a8' type='xs:token'/><xs:attribute name='a9' type='xs:token'/><xs:attribute name='a10' type='xs:token'/><xs:attribute name='a11' type='xs:token'/><xs:attribute name='a12' type='xs:token'/><xs:attribute name='a13' type='xs:token'/><xs:attribute name='a14' type='xs:token'/><xs:attribute name='a15' type='xs:token'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a0='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-061",
+      "contract": "effective attribute ceiling 17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><xs:element name='r'><xs:complexType><xs:attribute name='a0' type='xs:token'/><xs:attribute name='a1' type='xs:token'/><xs:attribute name='a2' type='xs:token'/><xs:attribute name='a3' type='xs:token'/><xs:attribute name='a4' type='xs:token'/><xs:attribute name='a5' type='xs:token'/><xs:attribute name='a6' type='xs:token'/><xs:attribute name='a7' type='xs:token'/><xs:attribute name='a8' type='xs:token'/><xs:attribute name='a9' type='xs:token'/><xs:attribute name='a10' type='xs:token'/><xs:attribute name='a11' type='xs:token'/><xs:attribute name='a12' type='xs:token'/><xs:attribute name='a13' type='xs:token'/><xs:attribute name='a14' type='xs:token'/><xs:attribute name='a15' type='xs:token'/><xs:attribute name='a16' type='xs:token'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a0='x'></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-062",
+      "contract": "expanded attribute budget 64",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' minOccurs='0' maxOccurs='4'><xs:complexType><xs:attribute name='a0' type='xs:string'/><xs:attribute name='a1' type='xs:string'/><xs:attribute name='a2' type='xs:string'/><xs:attribute name='a3' type='xs:string'/><xs:attribute name='a4' type='xs:string'/><xs:attribute name='a5' type='xs:string'/><xs:attribute name='a6' type='xs:string'/><xs:attribute name='a7' type='xs:string'/><xs:attribute name='a8' type='xs:string'/><xs:attribute name='a9' type='xs:string'/><xs:attribute name='a10' type='xs:string'/><xs:attribute name='a11' type='xs:string'/><xs:attribute name='a12' type='xs:string'/><xs:attribute name='a13' type='xs:string'/><xs:attribute name='a14' type='xs:string'/><xs:attribute name='a15' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a0=\"x\"/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true
+    },
+    {
+      "id": "EO-063",
+      "contract": "expanded attribute budget 80",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' minOccurs='0' maxOccurs='5'><xs:complexType><xs:attribute name='a0' type='xs:string'/><xs:attribute name='a1' type='xs:string'/><xs:attribute name='a2' type='xs:string'/><xs:attribute name='a3' type='xs:string'/><xs:attribute name='a4' type='xs:string'/><xs:attribute name='a5' type='xs:string'/><xs:attribute name='a6' type='xs:string'/><xs:attribute name='a7' type='xs:string'/><xs:attribute name='a8' type='xs:string'/><xs:attribute name='a9' type='xs:string'/><xs:attribute name='a10' type='xs:string'/><xs:attribute name='a11' type='xs:string'/><xs:attribute name='a12' type='xs:string'/><xs:attribute name='a13' type='xs:string'/><xs:attribute name='a14' type='xs:string'/><xs:attribute name='a15' type='xs:string'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a0=\"x\"/></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "nested": true
+    },
+    {
+      "id": "EO-064",
+      "contract": "original global element reference to empty owner",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='e'><xs:complexType><xs:attribute name='id' type='xs:ID'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e id='v' refs='v v'/></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "nested": true
+    },
+    {
+      "id": "EO-065",
+      "contract": "complex nillability excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' nillable='true'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "nested": false
+    },
+    {
+      "id": "EO-066",
+      "contract": "any xsi:nil on nonnillable empty owner invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:string'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "nested": false
+    }
+  ]
+}

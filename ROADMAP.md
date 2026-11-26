@@ -26,3 +26,7 @@ No overall conformance percentage is claimed without an exhaustive normative den
 ## Document identity and remaining specification work
 
 Bounded ID/IDREF/IDREFS validation is qualified in development 0.16; see [scope and limits](docs/identity-coverage/GUIDE.md). Next, rank remaining original facet/regex and structural application refusals before a separately adopted implementation. General key/keyref/unique, augmentation, wildcards/open content, type alternatives, assertion breadth and public Core integration remain separate work.
+
+## Empty owners and next specification priorities
+
+Development0.17 qualifies declared attributes on bounded empty complex owners. See [scope and limits](docs/empty-owners/GUIDE.md). Next, rank remaining original regex/facet and structural application gaps before adopting the next bounded contract. Wildcards/open content, complex inheritance, general identity constraints, augmentation and public Core integration remain separate.

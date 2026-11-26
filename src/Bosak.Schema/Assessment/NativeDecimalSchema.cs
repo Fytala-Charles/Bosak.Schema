@@ -73,6 +73,7 @@
 //                      | Charles Korthout | 1.47 | 26-11-2026     | Admit bounded empty groups and original anonymous attribute types |
 //                      | Charles Korthout | 1.48 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
 //                      | Charles Korthout | 1.49 | 26-11-2026     | Validate identity bindings before returning successful native assessment |
+//                      | Charles Korthout | 1.50 | 26-11-2026     | Admit existing declared attributes on bounded empty complex owners |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -294,12 +295,14 @@ internal sealed partial class NativeDecimalSchema
         }
     }
 
-    private static NativeDecimalSchema? TryCompileEmpty(XElement complex, NativeDeclaration root, NativeNumericLimits limits, string targetNamespace, string assertionNamespace, CancellationToken cancellationToken)
+    private static NativeDecimalSchema? TryCompileEmpty(XElement complex, NativeDeclaration root, NativeNumericLimits limits, string targetNamespace, string assertionNamespace, CancellationToken cancellationToken, string attributeForm, NativeType decimalType, NativeType stringType, NativeType? booleanType, NativeType? integerType, Dictionary<XName, NativeType> simple)
     {
         var members = Elements(complex);
         var hasGroup = members.Count != 0 && (members[0].Name == Xs + "sequence" || members[0].Name == Xs + "all" || members[0].Name == Xs + "choice");
         if (hasGroup && Elements(members[0]).Count != 0) return null;
-        var assertions = members.Skip(hasGroup ? 1 : 0).ToArray();
+        var remaining = members.Skip(hasGroup ? 1 : 0).ToArray();
+        var attributeMembers = remaining.TakeWhile(IsAttributeUseMember).ToArray();
+        var assertions = remaining.Skip(attributeMembers.Length).ToArray();
         if (assertions.Any(a => a.Name != Xs + "assert")) return null;
         if (hasGroup)
         {
@@ -310,8 +313,10 @@ internal sealed partial class NativeDecimalSchema
             Require(minimum is "0" or "1" && maximum == "1", "Empty group occurrence bounds are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
             Require(group.Name != Xs + "choice" || minimum == "0", "Required empty choice is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
         }
+        Require(attributeMembers.Length == 0 || assertions.Length == 0, "Empty-owner attributes with structural assertions are excluded.", NativeDecimalUnsupportedReason.Attributes);
+        var uses = CompileAttributes(attributeMembers, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
         var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri) { EmptyContent = true };
-        return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { NestedProfile = true, structuralAssertions = CompileStructuralAssertions(assertions, targetNamespace, assertionNamespace, cancellationToken) };
+        return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { AttributeUses = uses, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(assertions, targetNamespace, assertionNamespace, cancellationToken) };
     }
 
     private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
@@ -319,7 +324,7 @@ internal sealed partial class NativeDecimalSchema
         Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null, bool nestedContext = false, int? maxStringCharacters = null, NativePatternCompilation? patternCompilation = null)
     {
         var members = Elements(complex);
-        if (stringType is not null && TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken) is { } empty) return empty;
+        if (stringType is not null && TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken, attributeForm, decimalType, stringType, booleanType, integerType, simple) is { } empty) return empty;
         if (stringType is not null && TryCompileAll(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
             decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } all) return all;
         if (stringType is not null && TryCompileChoice(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
