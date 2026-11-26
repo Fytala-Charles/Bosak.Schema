@@ -50,6 +50,7 @@
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.36  | 26-11-2026     | Add bounded strict attribute wildcards on empty complex owners.                           |
+//                      | Charles Korthout | 0.37  | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
 using System.Collections.Immutable;
 using System.Xml.Linq;
 
@@ -116,7 +117,7 @@ internal sealed partial class NativeDecimalSchema
                 Require(Elements(element).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                 var shared = Resolve(ResolveTypeName(element));
                 plan = new NativeDecimalSchema(new NativeDeclaration(name, shared.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits)
-                    { AttributeUses = shared.AttributeUses, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
+                    { AttributeUses = shared.AttributeUses, SequenceAttributeWildcard = shared.SequenceAttributeWildcard, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
             }
             else
             {
@@ -157,15 +158,16 @@ internal sealed partial class NativeDecimalSchema
             if (members.Count == 1 && members[0].Name == Xs + "simpleContent")
                 return CompileComplex(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
                     decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null, nestedContext: true, maxStringCharacters: maxStringCharacters, patternCompilation: patternCompilation);
-            Require(members.Count >= 1 && (members[0].Name == Xs + "sequence" || members[0].Name == Xs + "group") && members.Skip(1).TakeWhile(IsAttributeUseMember).Count() + members.Skip(1).SkipWhile(IsAttributeUseMember).Count(e => e.Name == Xs + "assert") == members.Count - 1,
+            var tail = CompileSequenceWildcardTail(complex, targetNamespace);
+            Require(members.Count >= 1 && (members[0].Name == Xs + "sequence" || members[0].Name == Xs + "group") && tail.Uses.Length + (tail.Wildcard is null ? 0 : 1) + tail.Assertions.Count(e => e.Name == Xs + "assert") == members.Count - 1,
                 "Expected an element-only sequence and root attributes.", NativeDecimalUnsupportedReason.DeclarationShape);
             var sequence = members[0];
             var locals = modelGroups.Expand(sequence).ToArray();
             var children = CompileParticles(locals);
             Require(!members.Any(a => a.Name == Xs + "assert") || !members.Any(IsAttributeUseMember), "Structural assertions with application attributes are excluded.", NativeDecimalUnsupportedReason.Attributes);
-            var attributes = CompileAttributes(members.Skip(1).TakeWhile(IsAttributeUseMember).ToArray(), targetNamespace, attributeForm,
+            var attributes = CompileAttributes(tail.Uses, targetNamespace, attributeForm,
                 decimalType, stringType, booleanType, integerType, simple, cancellationToken);
-            var plan = new NativeDecimalSchema(root, children, [], limits) { AttributeUses = attributes, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(members.Skip(1).SkipWhile(IsAttributeUseMember), targetNamespace, assertionNamespace, cancellationToken) };
+            var plan = new NativeDecimalSchema(root, children, [], limits) { AttributeUses = attributes, SequenceAttributeWildcard = tail.Wildcard, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(tail.Assertions, targetNamespace, assertionNamespace, cancellationToken) };
             NestedBudget(plan, cancellationToken);
             return plan;
         }
@@ -289,7 +291,7 @@ internal sealed partial class NativeDecimalSchema
         }
         if (!isRoot)
         {
-            if (plan.AttributeUses.IsEmpty && plan.Root.Type.ContentType?.IsDate != true && plan.Root.Type.AttributeWildcard is null) InstanceAttributes(element);
+            if (plan.AttributeUses.IsEmpty && plan.Root.Type.ContentType?.IsDate != true && plan.AttributeWildcard is null) InstanceAttributes(element);
             else
             {
                 Require(element.Attributes().All(a => IsAdmittedInstanceAttribute(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),

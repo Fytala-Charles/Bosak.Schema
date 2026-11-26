@@ -1,7 +1,7 @@
 // ===========================================================================================================================================================
 // AUTHOR               : Charles Korthout
 // CREATE DATE          : 26 November 2026
-// PURPOSE              : Compiles and validates bounded strict attribute wildcards on empty complex owners.
+// PURPOSE              : Compiles and validates bounded strict attribute wildcard constraints.
 // SPECIAL NOTES        : Internal bounded strict-only wildcard profile; original global declarations retain authority.
 //
 // COPYRIGHT            : Fytala
@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 26-11-2026     | Enforce bounded namespace/QName exclusions and schema consistency.                         |
+//                      | Charles Korthout | 0.3   | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -30,6 +31,19 @@ internal sealed record NativeStrictAttributeWildcard(string Mode, string TargetN
 
 internal sealed partial class NativeDecimalSchema
 {
+    private static (XElement[] Uses, NativeStrictAttributeWildcard? Wildcard, XElement[] Assertions) CompileSequenceWildcardTail(XElement complex, string targetNamespace)
+    {
+        var members = Elements(complex);
+        var uses = members.Skip(1).TakeWhile(IsAttributeUseMember).ToArray();
+        var rest = members.Skip(1 + uses.Length).ToArray();
+        var source = rest.FirstOrDefault()?.Name == Xs + "anyAttribute" ? rest[0] : null;
+        var assertions = rest.Skip(source is null ? 0 : 1).ToArray();
+        if (source is not null)
+            Require(members[0].Name == Xs + "sequence" && Elements(members[0]).Count != 0 && !ReadMixedContent(complex) && assertions.Length == 0,
+                "Sequence wildcard requires direct nonempty element-only sequence without assertions.", NativeDecimalUnsupportedReason.DeclarationShape);
+        return (uses, source is null ? null : CompileStrictAttributeWildcard(source, targetNamespace), assertions);
+    }
+
     private static NativeStrictAttributeWildcard CompileStrictAttributeWildcard(XElement source, string targetNamespace)
     {
         Attributes(source, "namespace", "notNamespace", "notQName", "processContents");
@@ -86,7 +100,7 @@ internal sealed partial class NativeDecimalSchema
         {
             token.ThrowIfCancellationRequested();
             var defined = GlobalAttributeDeclarations.Any(d => d.ExpandedName == attribute.Name);
-            Check(plan.Root.Type.AttributeWildcard is { } wildcard && wildcard.AllowsName(attribute.Name, defined), "Attribute does not match the strict wildcard.");
+            Check(plan.AttributeWildcard is { } wildcard && wildcard.AllowsName(attribute.Name, defined), "Attribute does not match the strict wildcard.");
             Check(defined, "Strict wildcard attribute has no global declaration.");
         }
         foreach (var declaration in GlobalAttributeDeclarations)

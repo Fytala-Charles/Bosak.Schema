@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.23 development candidate requires Bosak Core 1.86.0 or later.
+The 0.24 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1809,3 +1809,7 @@ Empty complex owners admit one direct default/explicit strict anyAttribute with 
 ## Strict wildcard exclusions (development0.23)
 
 The bounded empty-owner strict attribute profile supports notNamespace and notQName, including ##defined. QName exclusions use original schema namespace bindings; explicit uses retain precedence. Invalid schema combinations and excluded QName namespaces are checked before assessment. Namespace/QName lists have at most eight256UTF16 tokens. Relative URI constraints, lax/skip and broader owner/composition profiles remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/wildcard-exclusions/GUIDE.md). Unpublished development source.
+
+## Strict sequence-owner attribute wildcards (development0.24)
+
+Direct finite nonempty element-only sequence owners now admit the qualified strict attribute wildcard profile, including namespace/QName exclusions. Root/named/nested/global-reference owners retain original type/declaration identity and no-typed-value behavior; child validation remains independent. Mixed/simple-content/all/choice owners, top-level group shorthand, assertion combinations and lax/skip remain excluded. Existing document/constraint/value budgets apply. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/sequence-wildcards/GUIDE.md). Unpublished development source.

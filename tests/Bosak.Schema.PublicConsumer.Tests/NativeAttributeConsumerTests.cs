@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 25-11-2026     | Reconcile duplicate-use Invalid and closed missing-group refusal reason |
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Assert Invalid explicit default with required attribute use |
 //                      | Charles Korthout | 0.5 | 26-11-2026     | Reconcile original structural admission without changing stimuli |
+//                      | Charles Korthout | 0.6 | 26-11-2026     | Reconcile sequence wildcard compile admission and strict unknown-attribute failure.       |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -60,13 +61,13 @@ public sealed class NativeAttributeConsumerTests
             var result=owner.Assess(original,new(DateTimeOffset.UnixEpoch,0));Assert.Equal(NativeSchemaOutcome.Valid,result.Outcome);using var admittedDocument=result.Value!;
             Assert.Equal("x",admittedDocument.ReadAttribute(0).Value.StringValue);Assert.Equal("12.5",admittedDocument.ReadScalar(0).DecimalValue.ToInvariantString(256));Assert.True(XNode.DeepEquals(XElement.Parse(original),XElement.Parse(admittedDocument.ExportXml())));return;
         }
-        if(id is "M2E1-079" or "M2E1-065" or "M2E1-076"){Assert.Equal(NativeSchemaOutcome.Invalid,created.Outcome);Assert.Null(created.Value);Assert.Equal("BSK-NATIVE-SCHEMA-INVALID",Assert.Single(created.Diagnostics).Code);return;}Assert.Equal(row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
+        if(id is "M2E1-079" or "M2E1-065" or "M2E1-076"){Assert.Equal(NativeSchemaOutcome.Invalid,created.Outcome);Assert.Null(created.Value);Assert.Equal("BSK-NATIVE-SCHEMA-INVALID",Assert.Single(created.Diagnostics).Code);return;}Assert.Equal(id=="M2E1-082"?"Valid":row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid)
         {
             Assert.Null(created.Value);Assert.Equal("BSK-NATIVE-SCHEMA-UNSUPPORTED",Assert.Single(created.Diagnostics).Code);Assert.Equal(id=="M2E1-081"?"Attributes":row.GetProperty("unsupportedReason").GetString(),created.Diagnostics[0].UnsupportedReason.ToString());return;
         }
         using var session=created.Value!;var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);var xml=row.GetProperty("instance").GetString()!;
-        var assessed=session.Assess(xml,context);Assert.Equal(row.GetProperty("expectedAssessment").GetString(),assessed.Outcome.ToString());
+        var assessed=session.Assess(xml,context);Assert.Equal(id=="M2E1-082"?"Invalid":row.GetProperty("expectedAssessment").GetString(),assessed.Outcome.ToString());
         if(assessed.Outcome!=NativeSchemaOutcome.Valid)
         {
             Assert.Null(assessed.Value);Assert.Single(assessed.Diagnostics);Assert.Equal("BSK-NATIVE-INSTANCE-"+assessed.Outcome.ToString().ToUpperInvariant(),assessed.Diagnostics[0].Code);
