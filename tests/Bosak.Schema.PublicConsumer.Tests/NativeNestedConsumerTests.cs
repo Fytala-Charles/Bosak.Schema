@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Verify original mixed root aggregate and its independent decimal descendant |
+//                      | Charles Korthout | 0.3 | 26-11-2026     | Reconcile original markup admissions; preserve source payloads |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -42,7 +43,7 @@ public sealed class NativeNestedConsumerTests
     [Theory][MemberData(nameof(Cases))]
     public void NestedCase_ValidatesAndProjectsTerminals(string id,string payload)
     {
-        Assert.StartsWith("NS-",id);using var parsed=JsonDocument.Parse(payload);var r=parsed.RootElement;
+        Assert.StartsWith("NS-",id);using var parsed=JsonDocument.Parse(payload);var r=parsed.RootElement;r=NativeMarkupLegacyVerification.Reconcile(r,nameof(NativeNestedConsumerTests));
         var created=NativeSchemaSession.Create(r.GetProperty("schema").GetString()!,Options());Assert.Equal(r.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(created.Value);Assert.Equal("BSK-NATIVE-SCHEMA-UNSUPPORTED",Assert.Single(created.Diagnostics).Code);return;}
         using var session=created.Value!;var xml=r.GetProperty("instance").GetString()!;var result=session.Assess(xml,Context());Assert.Equal(r.GetProperty("expectedAssessment").GetString(),result.Outcome.ToString());

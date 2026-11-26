@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 24-11-2026     | Reconcile measured direct Boolean aliases without changing original payloads |
+//                      | Charles Korthout | 0.3 | 26-11-2026     | Reconcile original markup admissions; preserve source payloads |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -46,7 +47,7 @@ public sealed class NativeBooleanConsumerTests
     [Theory][MemberData(nameof(Cases))]
     public void BooleanAssessment_SeparatesValueValidityAndProfileRefusal(string id,string payload)
     {
-        Assert.StartsWith("M2C2-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;
+        Assert.StartsWith("M2C2-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;row=NativeMarkupLegacyVerification.Reconcile(row,nameof(NativeBooleanConsumerTests));
         var options=new NativeSchemaSessionOptions(256,256,row.GetProperty("maxStringCharacters").GetInt32(),65536,1,8,1,256,256);
         var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,options);
         Assert.Equal(id is "M2C2-45" or "M2C2-46"?"Valid":row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());

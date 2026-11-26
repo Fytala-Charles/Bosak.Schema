@@ -1,0 +1,1042 @@
+{
+  "date": "2026-11-26",
+  "cases": [
+    {
+      "id": "MK-001",
+      "contract": "sequence original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:int'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--><v>1<!--note--></v><!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-002",
+      "contract": "sequence original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:int'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--><v>b<!--note-->ad</v><!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-003",
+      "contract": "choice original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:int'/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--><v>1<!--note--></v><!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-004",
+      "contract": "choice original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:int'/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--><v>b<!--note-->ad</v><!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-005",
+      "contract": "all original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:int'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--><v>1<!--note--></v><!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-006",
+      "contract": "all original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:int'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--><v>b<!--note-->ad</v><!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-007",
+      "contract": "empty content ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-008",
+      "contract": "empty content ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-009",
+      "contract": "empty content ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--><v/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-010",
+      "contract": "empty content <xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-011",
+      "contract": "empty content <xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-012",
+      "contract": "empty content <xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--><v/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-013",
+      "contract": "empty content <xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-014",
+      "contract": "empty content <xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-015",
+      "contract": "empty content <xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--><v/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-016",
+      "contract": "empty content <xs:choice minOccurs='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice minOccurs='0'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-017",
+      "contract": "empty content <xs:choice minOccurs='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice minOccurs='0'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-018",
+      "contract": "empty content <xs:choice minOccurs='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice minOccurs='0'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--><v/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-019",
+      "contract": "simple root split text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:int'/></xs:schema>",
+      "instance": "<r>1<!--note-->2</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "root": true,
+      "kind": "Integer",
+      "expected": "12"
+    },
+    {
+      "id": "MK-020",
+      "contract": "nil original markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:int' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'><!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "root": true,
+      "nil": true,
+      "empty": true
+    },
+    {
+      "id": "MK-021",
+      "contract": "nil original markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:int' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'><!--note--> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "root": true,
+      "nil": true,
+      "empty": true
+    },
+    {
+      "id": "MK-022",
+      "contract": "nested simple content and owner path",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:simpleContent><xs:extension base='xs:string'><xs:attribute name='a' type='xs:int'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--note--><e a='2'>a<!--note-->b</e><!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "String",
+      "expected": "ab",
+      "attribute": true
+    },
+    {
+      "id": "MK-023",
+      "contract": "mixed aggregate excludes markup text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:int'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>a<!--note--><v>1</v>b<!--note--></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "root": true,
+      "kind": "String",
+      "expected": "a1b"
+    },
+    {
+      "id": "MK-024",
+      "contract": "sequence original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:int'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?><v>1<?note value?></v><?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-025",
+      "contract": "sequence original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:int'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?><v>b<?note value?>ad</v><?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-026",
+      "contract": "choice original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:int'/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?><v>1<?note value?></v><?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-027",
+      "contract": "choice original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:int'/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?><v>b<?note value?>ad</v><?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-028",
+      "contract": "all original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:int'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?><v>1<?note value?></v><?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-029",
+      "contract": "all original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:int'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?><v>b<?note value?>ad</v><?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-030",
+      "contract": "empty content ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-031",
+      "contract": "empty content ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-032",
+      "contract": "empty content ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?><v/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-033",
+      "contract": "empty content <xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-034",
+      "contract": "empty content <xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-035",
+      "contract": "empty content <xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?><v/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-036",
+      "contract": "empty content <xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-037",
+      "contract": "empty content <xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-038",
+      "contract": "empty content <xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?><v/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-039",
+      "contract": "empty content <xs:choice minOccurs='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice minOccurs='0'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-040",
+      "contract": "empty content <xs:choice minOccurs='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice minOccurs='0'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-041",
+      "contract": "empty content <xs:choice minOccurs='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice minOccurs='0'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?><v/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-042",
+      "contract": "simple root split text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:int'/></xs:schema>",
+      "instance": "<r>1<?note value?>2</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "root": true,
+      "kind": "Integer",
+      "expected": "12"
+    },
+    {
+      "id": "MK-043",
+      "contract": "nil original markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:int' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'><?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "root": true,
+      "nil": true,
+      "empty": true
+    },
+    {
+      "id": "MK-044",
+      "contract": "nil original markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:int' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'><?note value?> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "root": true,
+      "nil": true,
+      "empty": true
+    },
+    {
+      "id": "MK-045",
+      "contract": "nested simple content and owner path",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:simpleContent><xs:extension base='xs:string'><xs:attribute name='a' type='xs:int'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><?note value?><e a='2'>a<?note value?>b</e><?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "String",
+      "expected": "ab",
+      "attribute": true
+    },
+    {
+      "id": "MK-046",
+      "contract": "mixed aggregate excludes markup text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:int'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>a<?note value?><v>1</v>b<?note value?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "root": true,
+      "kind": "String",
+      "expected": "a1b"
+    },
+    {
+      "id": "MK-047",
+      "contract": "sequence original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:int'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?><v>1<!--one--><?note two?></v><!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-048",
+      "contract": "sequence original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:int'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?><v>b<!--one--><?note two?>ad</v><!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-049",
+      "contract": "choice original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:int'/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?><v>1<!--one--><?note two?></v><!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-050",
+      "contract": "choice original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:int'/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?><v>b<!--one--><?note two?>ad</v><!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-051",
+      "contract": "all original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:int'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?><v>1<!--one--><?note two?></v><!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-052",
+      "contract": "all original interleaved markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:int'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?><v>b<!--one--><?note two?>ad</v><!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [
+        0
+      ],
+      "expected": "1",
+      "kind": "Integer"
+    },
+    {
+      "id": "MK-053",
+      "contract": "empty content ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-054",
+      "contract": "empty content ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-055",
+      "contract": "empty content ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?><v/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-056",
+      "contract": "empty content <xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-057",
+      "contract": "empty content <xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-058",
+      "contract": "empty content <xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?><v/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-059",
+      "contract": "empty content <xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-060",
+      "contract": "empty content <xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-061",
+      "contract": "empty content <xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?><v/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-062",
+      "contract": "empty content <xs:choice minOccurs='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice minOccurs='0'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-063",
+      "contract": "empty content <xs:choice minOccurs='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice minOccurs='0'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-064",
+      "contract": "empty content <xs:choice minOccurs='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice minOccurs='0'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?><v/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-065",
+      "contract": "simple root split text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:int'/></xs:schema>",
+      "instance": "<r>1<!--one--><?note two?>2</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "root": true,
+      "kind": "Integer",
+      "expected": "12"
+    },
+    {
+      "id": "MK-066",
+      "contract": "nil original markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:int' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'><!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "root": true,
+      "nil": true,
+      "empty": true
+    },
+    {
+      "id": "MK-067",
+      "contract": "nil original markup",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:int' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'><!--one--><?note two?> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "path": [],
+      "root": true,
+      "nil": true,
+      "empty": true
+    },
+    {
+      "id": "MK-068",
+      "contract": "nested simple content and owner path",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:simpleContent><xs:extension base='xs:string'><xs:attribute name='a' type='xs:int'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><!--one--><?note two?><e a='2'>a<!--one--><?note two?>b</e><!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "String",
+      "expected": "ab",
+      "attribute": true
+    },
+    {
+      "id": "MK-069",
+      "contract": "mixed aggregate excludes markup text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:int'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>a<!--one--><?note two?><v>1</v>b<!--one--><?note two?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "root": true,
+      "kind": "String",
+      "expected": "a1b"
+    },
+    {
+      "id": "MK-070",
+      "contract": "opaque leading annotation on schema",
+      "schema": "<xs:schema xmlns:ns1=\"urn:doc\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:annotation><xs:documentation source=\"relative/doc\">human <ns1:b>text</ns1:b></xs:documentation><xs:appinfo><xs:simpleType name=\"Bogus\"><xs:restriction base=\"unbound:bad\" /></xs:simpleType><xs:element name=\"fake\" nillable=\"true\" /><xs:complexType mixed=\"true\" /></xs:appinfo></xs:annotation><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"><xs:simpleType><xs:restriction base=\"xs:int\"><xs:minInclusive value=\"1\" /></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-071",
+      "contract": "opaque leading annotation on element",
+      "schema": "<xs:schema xmlns:ns1=\"urn:doc\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:annotation><xs:documentation source=\"relative/doc\">human <ns1:b>text</ns1:b></xs:documentation><xs:appinfo><xs:simpleType name=\"Bogus\"><xs:restriction base=\"unbound:bad\" /></xs:simpleType><xs:element name=\"fake\" nillable=\"true\" /><xs:complexType mixed=\"true\" /></xs:appinfo></xs:annotation><xs:complexType><xs:sequence><xs:element name=\"v\"><xs:simpleType><xs:restriction base=\"xs:int\"><xs:minInclusive value=\"1\" /></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-072",
+      "contract": "opaque leading annotation on complexType",
+      "schema": "<xs:schema xmlns:ns1=\"urn:doc\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:annotation><xs:documentation source=\"relative/doc\">human <ns1:b>text</ns1:b></xs:documentation><xs:appinfo><xs:simpleType name=\"Bogus\"><xs:restriction base=\"unbound:bad\" /></xs:simpleType><xs:element name=\"fake\" nillable=\"true\" /><xs:complexType mixed=\"true\" /></xs:appinfo></xs:annotation><xs:sequence><xs:element name=\"v\"><xs:simpleType><xs:restriction base=\"xs:int\"><xs:minInclusive value=\"1\" /></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-073",
+      "contract": "opaque leading annotation on sequence",
+      "schema": "<xs:schema xmlns:ns1=\"urn:doc\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:annotation><xs:documentation source=\"relative/doc\">human <ns1:b>text</ns1:b></xs:documentation><xs:appinfo><xs:simpleType name=\"Bogus\"><xs:restriction base=\"unbound:bad\" /></xs:simpleType><xs:element name=\"fake\" nillable=\"true\" /><xs:complexType mixed=\"true\" /></xs:appinfo></xs:annotation><xs:element name=\"v\"><xs:simpleType><xs:restriction base=\"xs:int\"><xs:minInclusive value=\"1\" /></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-074",
+      "contract": "opaque leading annotation on simpleType",
+      "schema": "<xs:schema xmlns:ns1=\"urn:doc\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"><xs:simpleType><xs:annotation><xs:documentation source=\"relative/doc\">human <ns1:b>text</ns1:b></xs:documentation><xs:appinfo><xs:simpleType name=\"Bogus\"><xs:restriction base=\"unbound:bad\" /></xs:simpleType><xs:element name=\"fake\" nillable=\"true\" /><xs:complexType mixed=\"true\" /></xs:appinfo></xs:annotation><xs:restriction base=\"xs:int\"><xs:minInclusive value=\"1\" /></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-075",
+      "contract": "opaque leading annotation on restriction",
+      "schema": "<xs:schema xmlns:ns1=\"urn:doc\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"><xs:simpleType><xs:restriction base=\"xs:int\"><xs:annotation><xs:documentation source=\"relative/doc\">human <ns1:b>text</ns1:b></xs:documentation><xs:appinfo><xs:simpleType name=\"Bogus\"><xs:restriction base=\"unbound:bad\" /></xs:simpleType><xs:element name=\"fake\" nillable=\"true\" /><xs:complexType mixed=\"true\" /></xs:appinfo></xs:annotation><xs:minInclusive value=\"1\" /></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-076",
+      "contract": "opaque leading annotation on minInclusive",
+      "schema": "<xs:schema xmlns:ns1=\"urn:doc\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"><xs:simpleType><xs:restriction base=\"xs:int\"><xs:minInclusive value=\"1\"><xs:annotation><xs:documentation source=\"relative/doc\">human <ns1:b>text</ns1:b></xs:documentation><xs:appinfo><xs:simpleType name=\"Bogus\"><xs:restriction base=\"unbound:bad\" /></xs:simpleType><xs:element name=\"fake\" nillable=\"true\" /><xs:complexType mixed=\"true\" /></xs:appinfo></xs:annotation></xs:minInclusive></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-077",
+      "contract": "annotation grammar empty",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:int'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-078",
+      "contract": "annotation grammar repeated root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:annotation/><xs:annotation/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:int'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-079",
+      "contract": "annotation grammar bad wrapper text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:annotation>x</xs:annotation><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:int'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-080",
+      "contract": "annotation grammar bad child",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:annotation><xs:element name=\"x\"/></xs:annotation><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:int'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-081",
+      "contract": "annotation grammar bad ID",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:annotation id=\"not an ID\"/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:int'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-082",
+      "contract": "annotation grammar duplicate ID",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:annotation id=\"a\"/><xs:annotation id=\"a\"/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:int'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-083",
+      "contract": "annotation grammar foreign attribute",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:annotation xmlns:q=\"urn:q\" q:a=\"v\"/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:int'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-084",
+      "contract": "annotation grammar language bounded exclusion",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:annotation><xs:documentation xml:lang=\"en\">text</xs:documentation></xs:annotation><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:int'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-085",
+      "contract": "component annotation position",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:annotation/><xs:annotation/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "MK-086",
+      "contract": "component annotation position",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence/><xs:annotation/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "MK-087",
+      "contract": "annotation count bound 16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:int'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-088",
+      "contract": "annotation count bound 17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:annotation/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:int'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "path": [
+        0
+      ],
+      "kind": "Integer",
+      "expected": "1"
+    },
+    {
+      "id": "MK-089",
+      "contract": "original XML node budget",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType/></xs:element></xs:schema>",
+      "instance": "<r><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "path": [],
+      "empty": true
+    },
+    {
+      "id": "MK-090",
+      "contract": "original XML node budget",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType/></xs:element></xs:schema>",
+      "instance": "<r><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--><!--a--></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "path": [],
+      "empty": true
+    }
+  ]
+}

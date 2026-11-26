@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 22-11-2026     | Adapt native controls for bounded integer simple content |
 //                      | Charles Korthout | 0.3   | 22-11-2026     | Verify isolated contextual assertions and retained native baseline |
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Verify admitted nil metadata and distinct supported empty typed sequences |
+//                      | Charles Korthout | 0.5 | 26-11-2026     | Reconcile original markup admissions without changing stimuli |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -86,7 +87,7 @@ public sealed class NativeStructuralEmptyCoreTests
     /// <param name="text">Excluded markup.</param>
     [Theory][InlineData("<!--c-->")][InlineData("<?p q?>")]
     public void ExcludedMarkup_Refuses(string text)
-    {using var f=new Fixture(Schema(false,false,false),Xml(false,text));Assert.Equal(SchemaAssessmentStatus.Unsupported,f.Assessment.Status);Assert.False(f.Input.IsAssessed);Assert.Empty(f.Assessment.Facts);}
+    {using var f=new Fixture(Schema(false,false,false),Xml(false,text));Assert.Equal(SchemaAssessmentStatus.Valid,f.Assessment.Status);Assert.True(f.Input.IsAssessed);Assert.NotEmpty(f.Assessment.Facts);Assert.Empty(f.Input.FactsFor((NativeSessionNode)f.Input.Root)!.ReadTypedValue(default).Value.AtomicItems);Assert.Equal(XdmValueKind.Undefined,f.Run(op=>f.Evaluate(op,f.Input.Root)).Kind);}
     /// <summary>Typed identity retains its singleton-only refusal without changing the authentic empty facts.</summary>
     [Fact]
     public void TypedIdentity_RefusesEmptyContainer()

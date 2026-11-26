@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2 | 26-11-2026     | Reconcile original markup admissions without changing stimuli |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -68,6 +69,6 @@ public sealed class NativeNestedSimpleContentCoreTests
     [Theory][InlineData("bad")][InlineData("<v/>")][InlineData("1<!--x-->")]
     public void DeepContentFailure_PublishesNoFacts(string lexical)
     {
-        var p=Provider();using var s=Session(p);using var input=NativeSchemaInput.Capture("<r><a><price currency='EUR'>"+lexical+"</price></a></r>").Value!;var r=Assess(s,input);Assert.NotEqual(SchemaAssessmentStatus.Valid,r.Status);Assert.False(input.IsAssessed);Assert.Null(r.Evidence);Assert.Empty(r.Facts);
+        var p=Provider();using var s=Session(p);using var input=NativeSchemaInput.Capture("<r><a><price currency='EUR'>"+lexical+"</price></a></r>").Value!;var r=Assess(s,input);if(lexical=="1<!--x-->"){Assert.Equal(SchemaAssessmentStatus.Valid,r.Status);Assert.True(input.IsAssessed);var fact=Assert.Single(r.ScalarFacts);Assert.Equal("1",input.ElementNodes[2].StringValue);Assert.Equal(SchemaResultKind.Supported,fact.ReadTypedValue(default).Kind);return;}Assert.NotEqual(SchemaAssessmentStatus.Valid,r.Status);Assert.False(input.IsAssessed);Assert.Null(r.Evidence);Assert.Empty(r.Facts);
     }
 }

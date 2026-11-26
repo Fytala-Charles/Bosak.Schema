@@ -1,0 +1,935 @@
+[
+  {
+    "owner": "NativeSimpleTypeImportsConsumerTests",
+    "id": "import-annotation",
+    "originalFile": "tests/TestData/SimpleTypeImports/case-plan.json",
+    "originalFileSha256": "6c2600467d4f782110007fcafa4741390c41234326c131b058a909af470c3233",
+    "original": {
+      "id": "import-annotation",
+      "rootUri": "https://catalog.test/root.xsd",
+      "documents": {
+        "https://catalog.test/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:f='urn:lib'><xs:import namespace='urn:lib' schemaLocation='lib.xsd'><xs:annotation/></xs:import><xs:element name='r' type='f:D'/></xs:schema>",
+        "https://catalog.test/lib.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:lib' xmlns:f='urn:lib'><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    "changes": {
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeDateEnumerationConsumerTests",
+    "id": "facet-child",
+    "originalFile": "tests/TestData/DateEnumeration/case-plan.json",
+    "originalFileSha256": "830c25e97be3a901d3d96de1c00406780217b9169325b9c8a813945a89f6d6ff",
+    "original": {
+      "id": "facet-child",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"D\"><xs:restriction base=\"xs:date\"><xs:enumeration value=\"1999-05-31\"><xs:annotation/></xs:enumeration></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"D\"/></xs:schema>",
+      "instance": "<r>1999-05-31</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": "NotRun",
+      "executed": false,
+      "site": "root",
+      "note": ""
+    },
+    "changes": {
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeClosedIncludesConsumerTests",
+    "id": "include-annotation",
+    "originalFile": "tests/TestData/ClosedIncludes/case-plan.json",
+    "originalFileSha256": "097bcb1fd36da9b377fbed22150104fad577a14cc70e6928471885b6d0e15eb0",
+    "original": {
+      "id": "include-annotation",
+      "rootUri": "https://catalog.test/s/root.xsd",
+      "documents": {
+        "https://catalog.test/s/root.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:include schemaLocation='types.xsd'><xs:annotation/></xs:include><xs:element name='r' type='D'/></xs:schema>",
+        "https://catalog.test/s/types.xsd": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='D'><xs:restriction base='xs:decimal'><xs:enumeration value='1.23'/></xs:restriction></xs:simpleType></xs:schema>"
+      },
+      "instance": "<r>1.2300</r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": []
+        }
+      ],
+      "hasRootScalar": true
+    },
+    "changes": {
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeMixedSequencesConsumerTests",
+    "id": "comments-separate",
+    "originalFile": "tests/TestData/MixedSequences/case-plan.json",
+    "originalFileSha256": "2e05f0d8753d93e398d39b36ea1302351248b821f1828f688748d08b825abc37",
+    "original": {
+      "id": "comments-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<!--c--><v>1</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    "changes": {
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ]
+    }
+  },
+  {
+    "owner": "NativeMixedSequencesConsumerTests",
+    "id": "pi-separate",
+    "originalFile": "tests/TestData/MixedSequences/case-plan.json",
+    "originalFileSha256": "2e05f0d8753d93e398d39b36ea1302351248b821f1828f688748d08b825abc37",
+    "original": {
+      "id": "pi-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r>pre<?p x?><v>1</v>post</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1.2300post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "hasRootScalar": true,
+      "isRootNilled": false,
+      "scalarCount": 1
+    },
+    "changes": {
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "pre1post",
+          "path": [],
+          "nilled": false
+        },
+        {
+          "kind": "Decimal",
+          "value": "1",
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ]
+    }
+  },
+  {
+    "owner": "NativeSimpleNillabilityConsumerTests",
+    "id": "comment-content",
+    "originalFile": "tests/TestData/SimpleNillability/case-plan.json",
+    "originalFileSha256": "e064a9bf2e46a758f66ff9cf396966b909150173e17b0b89a54d8c2f1f2c5153",
+    "original": {
+      "id": "comment-content",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ><!--c--></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    "changes": {
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeSimpleNillabilityConsumerTests",
+    "id": "pi-content",
+    "originalFile": "tests/TestData/SimpleNillability/case-plan.json",
+    "originalFileSha256": "e064a9bf2e46a758f66ff9cf396966b909150173e17b0b89a54d8c2f1f2c5153",
+    "original": {
+      "id": "pi-content",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r' type='xs:decimal' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true' ><?p x?></r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "values": [
+        {
+          "kind": "Empty",
+          "value": "()",
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "hasRootScalar": false,
+      "isRootNilled": true,
+      "scalarCount": 0
+    },
+    "changes": {
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeSimpleContentConsumerTests",
+    "id": "SC-044",
+    "originalFile": "tests/TestData/SimpleContent/cases.json",
+    "originalFileSha256": "216540fb0e030815e80e5e53792c4987662e13b11db4b51b0b746a154595fd75",
+    "original": {
+      "id": "SC-044",
+      "description": "Simple root comments excluded",
+      "sections": [
+        "Structures3.4.2.2/3.4.4",
+        "Datatypes3.3.3/4.3.6",
+        "XDM3.3.1.2/6.2"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+      "instance": "<price xmlns='urn:price' currency='EUR'>12<!--x-->.50</price>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "expectedRoot": "12.5",
+      "maxNativeCoefficientDigits": 256,
+      "maxNativeScale": 256,
+      "maxStringCharacters": 256,
+      "attributes": [
+        {
+          "namespaceUri": "",
+          "localName": "currency",
+          "kind": "String",
+          "value": "EUR"
+        }
+      ],
+      "unsupportedReason": "Unspecified"
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeSimpleContentConsumerTests",
+    "id": "SC-045",
+    "originalFile": "tests/TestData/SimpleContent/cases.json",
+    "originalFileSha256": "216540fb0e030815e80e5e53792c4987662e13b11db4b51b0b746a154595fd75",
+    "original": {
+      "id": "SC-045",
+      "description": "Simple root PI excluded",
+      "sections": [
+        "Structures3.4.2.2/3.4.4",
+        "Datatypes3.3.3/4.3.6",
+        "XDM3.3.1.2/6.2"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:decimal' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+      "instance": "<price xmlns='urn:price' currency='EUR'>12<?p x?>.50</price>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "expectedRoot": "12.5",
+      "maxNativeCoefficientDigits": 256,
+      "maxNativeScale": 256,
+      "maxStringCharacters": 256,
+      "attributes": [
+        {
+          "namespaceUri": "",
+          "localName": "currency",
+          "kind": "String",
+          "value": "EUR"
+        }
+      ],
+      "unsupportedReason": "Unspecified"
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeAttributeGroupsConsumerTests",
+    "id": "annotation-separate",
+    "originalFile": "tests/TestData/AttributeGroups/case-plan.json",
+    "originalFileSha256": "9b104d4cee6869afe1b64ba3bce772c694e04cd52722839f40bcc0f07404648c",
+    "original": {
+      "id": "annotation-separate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attributeGroup name='G'><xs:annotation/></xs:attributeGroup><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attributeGroup ref='G'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1.23'><v>1</v></r>",
+      "owner": "sequence",
+      "path": [],
+      "namespace": "",
+      "name": "a",
+      "expectedKind": "Decimal",
+      "expectedValue": "1.23",
+      "expectAttribute": true,
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null
+    },
+    "changes": {
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported"
+    }
+  },
+  {
+    "owner": "NativeBooleanConsumerTests",
+    "id": "M2C2-35",
+    "originalFile": "tests/TestData/Booleans/m2c2-cases.json",
+    "originalFileSha256": "13488768e185216f5ca139a91c177f41447fefdf391a45b408876d749ffb5f1e",
+    "original": {
+      "id": "M2C2-35",
+      "label": "Boolean comments refuse",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='paid' type='xs:boolean' minOccurs='0' maxOccurs='2'/><xs:element name='amount' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<o:order xmlns:o='urn:orders'><o:paid>tr<!--x-->ue</o:paid><o:amount>1</o:amount></o:order>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "unsupportedReason": "Unspecified",
+      "maxStringCharacters": 256,
+      "values": [
+        {
+          "kind": "Boolean",
+          "value": true
+        },
+        {
+          "kind": "Decimal",
+          "value": "1"
+        }
+      ],
+      "sections": [
+        "Datatypes3.3.2.1-3.3.2.3/4.3.6",
+        "Structures3.3.4"
+      ],
+      "officialW3cCase": false
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeNestedSimpleContentConsumerTests",
+    "id": "NC-025",
+    "originalFile": "tests/TestData/NestedSimpleContent/cases.json",
+    "originalFileSha256": "14fa5e8e83b9aeda700b53da508ad9c05029aeec1c052d26ad4d2ef55464b90d",
+    "original": {
+      "id": "NC-025",
+      "label": "comment refused",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+      "instance": "<r><price currency=\"EUR\">1<!--x--></price></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "values": [
+        "ABC-0001",
+        "2",
+        "12.5",
+        "XYZ-0002",
+        "1",
+        "3.75",
+        "false"
+      ],
+      "attributes": [
+        {
+          "path": [
+            0,
+            2
+          ],
+          "name": "currency",
+          "namespace": "",
+          "value": "EUR"
+        },
+        {
+          "path": [
+            1,
+            2
+          ],
+          "name": "currency",
+          "namespace": "",
+          "value": "USD"
+        }
+      ],
+      "rootAttributes": 0
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "values": [
+        "1"
+      ],
+      "attributes": [
+        {
+          "path": [
+            0
+          ],
+          "name": "currency",
+          "namespace": "",
+          "value": "EUR"
+        }
+      ]
+    }
+  },
+  {
+    "owner": "NativeNestedSimpleContentConsumerTests",
+    "id": "NC-026",
+    "originalFile": "tests/TestData/NestedSimpleContent/cases.json",
+    "originalFileSha256": "14fa5e8e83b9aeda700b53da508ad9c05029aeec1c052d26ad4d2ef55464b90d",
+    "original": {
+      "id": "NC-026",
+      "label": "PI refused",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:decimal\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+      "instance": "<r><price currency=\"EUR\">1<?x y?></price></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "values": [
+        "ABC-0001",
+        "2",
+        "12.5",
+        "XYZ-0002",
+        "1",
+        "3.75",
+        "false"
+      ],
+      "attributes": [
+        {
+          "path": [
+            0,
+            2
+          ],
+          "name": "currency",
+          "namespace": "",
+          "value": "EUR"
+        },
+        {
+          "path": [
+            1,
+            2
+          ],
+          "name": "currency",
+          "namespace": "",
+          "value": "USD"
+        }
+      ],
+      "rootAttributes": 0
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "values": [
+        "1"
+      ],
+      "attributes": [
+        {
+          "path": [
+            0
+          ],
+          "name": "currency",
+          "namespace": "",
+          "value": "EUR"
+        }
+      ]
+    }
+  },
+  {
+    "owner": "NativeModelGroupsConsumerTests",
+    "id": "group-annotation",
+    "originalFile": "tests/TestData/ModelGroups/case-plan.json",
+    "originalFileSha256": "99833acd41a74c868cb5ed763a52d5bc32caa3361cb3051cd6b5d33a56bc7252",
+    "original": {
+      "id": "group-annotation",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='r'><xs:complexType><xs:group ref='G'/></xs:complexType></xs:element><xs:group name='G'><xs:annotation/><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence></xs:group></xs:schema>",
+      "instance": "<r><v>1.23</v></r>",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "values": [
+        {
+          "kind": "Decimal",
+          "value": "1.23",
+          "path": [
+            0
+          ]
+        }
+      ],
+      "hasRootScalar": false
+    },
+    "changes": {
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeStructuralAssertionConsumerTests",
+    "id": "SA-025",
+    "originalFile": "tests/TestData/StructuralAssertions/cases.json",
+    "originalFileSha256": "24f76a83c333786d30f77d234ea56429023863e191e5347798fab802022d1ea2",
+    "original": {
+      "id": "SA-025",
+      "purpose": "Comments remain profile exclusion",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"><!--c--></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported"
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeStructuralAssertionConsumerTests",
+    "id": "SA-026",
+    "originalFile": "tests/TestData/StructuralAssertions/cases.json",
+    "originalFileSha256": "24f76a83c333786d30f77d234ea56429023863e191e5347798fab802022d1ea2",
+    "original": {
+      "id": "SA-026",
+      "purpose": "PI remains profile exclusion",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:f=\"http://www.w3.org/2005/xpath-functions\" targetNamespace=\"urn:instance\" elementFormDefault=\"qualified\" ><xs:element name=\"r\"><xs:complexType></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns=\"urn:instance\"><?p q?></r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported"
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeDateSimpleContentConsumerTests",
+    "id": "DSC-035",
+    "originalFile": "tests/TestData/DateSimpleContent/case-plan.json",
+    "originalFileSha256": "8632da4fcc01e2bca0866a1fef764baf82b5edada568da69cc7413d7fb8602bb",
+    "original": {
+      "id": "DSC-035",
+      "purpose": "comment is outside profile",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02<!--x-->-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false
+    },
+    "changes": {
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeDateSimpleContentConsumerTests",
+    "id": "DSC-036",
+    "originalFile": "tests/TestData/DateSimpleContent/case-plan.json",
+    "originalFileSha256": "8632da4fcc01e2bca0866a1fef764baf82b5edada568da69cc7413d7fb8602bb",
+    "original": {
+      "id": "DSC-036",
+      "purpose": "processing instruction is outside profile",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='C'><xs:simpleContent><xs:extension base='xs:date'></xs:extension></xs:simpleContent></xs:complexType><xs:element name='r' type='C'/></xs:schema>",
+      "instance": "<r>0000-02<?p x?>-29</r>",
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Unsupported",
+      "executed": false
+    },
+    "changes": {
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeDecimalChainsConsumerTests",
+    "id": "annotation-outside",
+    "originalFile": "tests/TestData/DecimalChains/case-plan.json",
+    "originalFileSha256": "70be088a169a17c2f70bb04baf6cc9df720d16b043533c6ea8b41ed7fca10a42",
+    "original": {
+      "id": "annotation-outside",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:decimal'></xs:restriction></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'><xs:maxInclusive value='2'><xs:annotation/></xs:maxInclusive></xs:restriction></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+      "instance": "<r>1.23</r>",
+      "site": "root",
+      "proposedCompile": "Unsupported",
+      "proposedAssessment": null,
+      "expectedDecimal": "1.23"
+    },
+    "changes": {
+      "proposedCompile": "Valid",
+      "proposedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeSimpleRootConsumerTests",
+    "id": "SR-032",
+    "originalFile": "tests/TestData/SimpleRoots/cases.json",
+    "originalFileSha256": "a6da91f454dbed9a95c19a14562246adadbec978379a1cba4ee5f0397b4ccde2",
+    "original": {
+      "id": "SR-032",
+      "purpose": "Comments remain outside text-only scalar profile",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\" type=\"xs:string\"/></xs:schema>",
+      "instance": "<r>a<!--c-->b</r>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "scalarFamily": "string",
+      "placement": "builtin",
+      "selectedValue": null
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeIntegerRestrictionConsumerTests",
+    "id": "IR-074",
+    "originalFile": "tests/TestData/IntegerRestrictions/cases.json",
+    "originalFileSha256": "ce44870de823e703c8eb78a9bdc56c8dc61456d707144d28e0023d3cf08b1654",
+    "original": {
+      "id": "IR-074",
+      "label": "schema refusal 73",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"Count\"><xs:restriction base=\"xs:integer\"><xs:maxInclusive value=\"1\"><xs:annotation/></xs:maxInclusive></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\"  type=\"Count\"/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><v>1</v></r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Valid",
+      "values": [],
+      "reason": "DeclarationShape",
+      "digits": 256,
+      "attributes": [],
+      "descendantAttributes": [],
+      "clauses": [
+        "Datatypes3.4.13.1-3",
+        "Datatypes4.3.6-4.3.12",
+        "Structures3.16.1-4"
+      ]
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "values": [
+        "1"
+      ]
+    }
+  },
+  {
+    "owner": "NativeNestedConsumerTests",
+    "id": "NS-036",
+    "originalFile": "tests/TestData/NestedSequences/cases.json",
+    "originalFileSha256": "e1f87cde02a05778a4e5e818fed7deee0520bd30494b2343650989e3f8454990",
+    "original": {
+      "id": "NS-036",
+      "label": "container comment",
+      "schema": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:bosak:nested-plan\"\n targetNamespace=\"urn:bosak:nested-plan\" elementFormDefault=\"qualified\">\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"line\" type=\"t:LineType\" minOccurs=\"1\" maxOccurs=\"2\"/>\n      <xs:element name=\"approved\" type=\"xs:boolean\" minOccurs=\"0\"/>\n    </xs:sequence>\n    <xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/>\n  </xs:complexType>\n  <xs:complexType name=\"LineType\">\n    <xs:sequence>\n      <xs:element name=\"sku\" type=\"xs:string\"/>\n      <xs:element name=\"quantity\" type=\"xs:integer\"/>\n      <xs:element name=\"amount\" type=\"xs:decimal\"/>\n    </xs:sequence>\n  </xs:complexType>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
+      "instance": "<order xmlns=\"urn:bosak:nested-plan\" id=\"ORDER-1\">\n  <line><!--x--><sku>ABC-0001</sku><quantity>2</quantity><amount>12.50</amount></line>\n  <line><sku>XYZ-0002</sku><quantity>1</quantity><amount>3.75</amount></line>\n  <approved>false</approved>\n</order>\n",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "values": [
+        "ABC-0001",
+        "2",
+        "12.5",
+        "XYZ-0002",
+        "1",
+        "3.75",
+        "false"
+      ],
+      "attributes": 1
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeNestedConsumerTests",
+    "id": "NS-037",
+    "originalFile": "tests/TestData/NestedSequences/cases.json",
+    "originalFileSha256": "e1f87cde02a05778a4e5e818fed7deee0520bd30494b2343650989e3f8454990",
+    "original": {
+      "id": "NS-037",
+      "label": "container PI",
+      "schema": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:bosak:nested-plan\"\n targetNamespace=\"urn:bosak:nested-plan\" elementFormDefault=\"qualified\">\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"line\" type=\"t:LineType\" minOccurs=\"1\" maxOccurs=\"2\"/>\n      <xs:element name=\"approved\" type=\"xs:boolean\" minOccurs=\"0\"/>\n    </xs:sequence>\n    <xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/>\n  </xs:complexType>\n  <xs:complexType name=\"LineType\">\n    <xs:sequence>\n      <xs:element name=\"sku\" type=\"xs:string\"/>\n      <xs:element name=\"quantity\" type=\"xs:integer\"/>\n      <xs:element name=\"amount\" type=\"xs:decimal\"/>\n    </xs:sequence>\n  </xs:complexType>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
+      "instance": "<order xmlns=\"urn:bosak:nested-plan\" id=\"ORDER-1\">\n  <line><?x y?><sku>ABC-0001</sku><quantity>2</quantity><amount>12.50</amount></line>\n  <line><sku>XYZ-0002</sku><quantity>1</quantity><amount>3.75</amount></line>\n  <approved>false</approved>\n</order>\n",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "values": [
+        "ABC-0001",
+        "2",
+        "12.5",
+        "XYZ-0002",
+        "1",
+        "3.75",
+        "false"
+      ],
+      "attributes": 1
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid"
+    }
+  },
+  {
+    "owner": "NativeNestedConsumerTests",
+    "id": "NS-038",
+    "originalFile": "tests/TestData/NestedSequences/cases.json",
+    "originalFileSha256": "e1f87cde02a05778a4e5e818fed7deee0520bd30494b2343650989e3f8454990",
+    "original": {
+      "id": "NS-038",
+      "label": "scalar comment",
+      "schema": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:t=\"urn:bosak:nested-plan\"\n targetNamespace=\"urn:bosak:nested-plan\" elementFormDefault=\"qualified\">\n  <xs:complexType name=\"OrderType\">\n    <xs:sequence>\n      <xs:element name=\"line\" type=\"t:LineType\" minOccurs=\"1\" maxOccurs=\"2\"/>\n      <xs:element name=\"approved\" type=\"xs:boolean\" minOccurs=\"0\"/>\n    </xs:sequence>\n    <xs:attribute name=\"id\" type=\"xs:string\" use=\"required\"/>\n  </xs:complexType>\n  <xs:complexType name=\"LineType\">\n    <xs:sequence>\n      <xs:element name=\"sku\" type=\"xs:string\"/>\n      <xs:element name=\"quantity\" type=\"xs:integer\"/>\n      <xs:element name=\"amount\" type=\"xs:decimal\"/>\n    </xs:sequence>\n  </xs:complexType>\n  <xs:element name=\"order\" type=\"t:OrderType\"/>\n</xs:schema>\n",
+      "instance": "<order xmlns=\"urn:bosak:nested-plan\" id=\"ORDER-1\">\n  <line><sku>A<!--x-->B</sku><quantity>2</quantity><amount>12.50</amount></line>\n  <line><sku>XYZ-0002</sku><quantity>1</quantity><amount>3.75</amount></line>\n  <approved>false</approved>\n</order>\n",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "values": [
+        "ABC-0001",
+        "2",
+        "12.5",
+        "XYZ-0002",
+        "1",
+        "3.75",
+        "false"
+      ],
+      "attributes": 1
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "values": [
+        "AB",
+        "2",
+        "12.5",
+        "XYZ-0002",
+        "1",
+        "3.75",
+        "false"
+      ]
+    }
+  },
+  {
+    "owner": "NativeIntegerEnumerationConsumerTests",
+    "id": "IE-092",
+    "originalFile": "tests/TestData/IntegerEnumeration/case-plan.json",
+    "originalFileSha256": "c85e5169c2e0b4e780d236e2a770c5b683da85cda235a61d8b12e8d0c52462d3",
+    "original": {
+      "id": "IE-092",
+      "purpose": "Excluded facet syntax or breadth remains Unsupported",
+      "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"N\"><xs:restriction base=\"xs:integer\"><xs:enumeration value=\"1\"/><xs:enumeration value=\"1\"><xs:annotation/></xs:enumeration></xs:restriction></xs:simpleType><xs:element name=\"r\" type=\"N\"/></xs:schema>",
+      "instance": "<r>1</r>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "NotRun",
+      "expectedValue": null,
+      "status": "Proposed unexecuted; no native acceptance claim"
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "expectedValue": "1"
+    }
+  },
+  {
+    "owner": "NativeIntegerConsumerTests",
+    "id": "M2C3-54",
+    "originalFile": "tests/TestData/Integers/m2c3-cases.json",
+    "originalFileSha256": "50978da805730d3b4fb76c4366e2df5e5fd8804ebc3a8877081c30a6cb946cb4",
+    "original": {
+      "id": "M2C3-54",
+      "description": "Comment inside simple leaf",
+      "sections": [
+        "Datatypes3.4.13.1-3",
+        "Datatypes4.3.6",
+        "Structures3.3.4"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='n' type='xs:integer'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><n>1<!--x--></n></r>",
+      "maxNativeCoefficientDigits": 256,
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "values": [],
+      "unsupportedReason": "Unspecified"
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "Integer",
+          "value": "1"
+        }
+      ]
+    }
+  },
+  {
+    "owner": "NativeStringConsumerTests",
+    "id": "M2C1-18",
+    "originalFile": "tests/TestData/Strings/m2c1-cases.json",
+    "originalFileSha256": "34a106451f3d5c38d2997b23b116983804a439832ac57d82ed42b10844edc4bb",
+    "original": {
+      "id": "M2C1-18",
+      "label": "string comments refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:string'/><xs:element name='amount' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<o:order xmlns:o='urn:orders'><o:id>a<!--x-->b</o:id><o:amount>12.50</o:amount></o:order>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "unsupportedReason": "Unspecified",
+      "maxStringCharacters": 256,
+      "values": [
+        {
+          "kind": "String",
+          "value": " INV-001 "
+        },
+        {
+          "kind": "Decimal",
+          "value": "12.5"
+        }
+      ],
+      "sections": [
+        "Datatypes3.3.1/4.3.6",
+        "Structures3.3.4",
+        "XML1.0 2.11/4.1"
+      ],
+      "officialW3cCase": false
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "ab"
+        },
+        {
+          "kind": "Decimal",
+          "value": "12.5"
+        }
+      ]
+    }
+  },
+  {
+    "owner": "NativeStringConsumerTests",
+    "id": "M2C1-19",
+    "originalFile": "tests/TestData/Strings/m2c1-cases.json",
+    "originalFileSha256": "34a106451f3d5c38d2997b23b116983804a439832ac57d82ed42b10844edc4bb",
+    "original": {
+      "id": "M2C1-19",
+      "label": "string PI refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:string'/><xs:element name='amount' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<o:order xmlns:o='urn:orders'><o:id>a<?x y?>b</o:id><o:amount>12.50</o:amount></o:order>",
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Unsupported",
+      "unsupportedReason": "Unspecified",
+      "maxStringCharacters": 256,
+      "values": [
+        {
+          "kind": "String",
+          "value": " INV-001 "
+        },
+        {
+          "kind": "Decimal",
+          "value": "12.5"
+        }
+      ],
+      "sections": [
+        "Datatypes3.3.1/4.3.6",
+        "Structures3.3.4",
+        "XML1.0 2.11/4.1"
+      ],
+      "officialW3cCase": false
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "ab"
+        },
+        {
+          "kind": "Decimal",
+          "value": "12.5"
+        }
+      ]
+    }
+  },
+  {
+    "owner": "NativeStringFacetConsumerTests",
+    "id": "M2D1-65",
+    "originalFile": "tests/TestData/StringFacets/m2d1-cases.json",
+    "originalFileSha256": "9eb310583f3d827a4172b431a009723d0a4bdfd66345661d53ddddc650ec2e9e",
+    "original": {
+      "id": "M2D1-65",
+      "description": "Facet annotations excluded",
+      "sections": [
+        "Datatypes3.3.1",
+        "Datatypes4.3.1-3/4.3.5-6",
+        "Structures3.3.4"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='3'><xs:annotation/></xs:length></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+      "maxStringCharacters": 256,
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Unsupported",
+      "values": [],
+      "unsupportedReason": "DeclarationShape"
+    },
+    "changes": {
+      "expectedCompile": "Valid",
+      "expectedAssessment": "Valid",
+      "values": [
+        {
+          "kind": "String",
+          "value": "abc"
+        }
+      ]
+    }
+  }
+]

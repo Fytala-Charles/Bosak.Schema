@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 24-11-2026     | Reconcile measured direct Boolean aliases without changing original payloads |
 //                      | Charles Korthout | 0.3   | 26-11-2026     | Check measured text admissions against unmodified original fixtures |
+//                      | Charles Korthout | 0.4 | 26-11-2026     | Reconcile original markup admissions; preserve source payloads |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -40,7 +41,7 @@ public sealed class NativeStringConsumerTests
     [Theory][MemberData(nameof(Cases))]
     public void MixedAssessment_MapsCompleteOutcomeAndDetachedValues(string id,string payload)
     {
-        Assert.StartsWith("M2C1-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;
+        Assert.StartsWith("M2C1-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;row=NativeMarkupLegacyVerification.Reconcile(row,nameof(NativeStringConsumerTests));
         var options=new NativeSchemaSessionOptions(256,256,row.GetProperty("maxStringCharacters").GetInt32(),524288,1,8,1,256,256);
         if(id is "M2C1-39" or "M2C1-40"){NativeTextLegacyVerification.Check(row.GetProperty("schema").GetString()!,row.GetProperty("instance").GetString()!,options,NativeSchemaOutcome.Valid,NativeSchemaOutcome.Valid,id=="M2C1-39"?" INV-001 ":"INV-001");return;}
         var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,options);

@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 25-11-2026     | Admit closed scalar global references with existing compositor occurrence limits |
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.5   | 25-11-2026     | Validate scalar element constraints against provided original values |
+//                      | Charles Korthout | 0.6 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -80,7 +81,7 @@ internal sealed partial class NativeDecimalSchema
         NativePatternBudget budget, CancellationToken token)
     {
         foreach(var text in owner.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only choice contains non-whitespace text.");
-        Require(owner.Nodes().All(n => n is XElement or XText), "Choice container comments or processing instructions are excluded.");
+        Require(owner.Nodes().All(n => n is XElement or XText or XComment or XProcessingInstruction), "Choice container comments or processing instructions are excluded.");
         var nodes = owner.Elements().ToArray();
         if (nodes.Length == 0) { Check(plan.ChoiceMinimum == 0, "Required choice is empty.");return; }
         var selected = plan.Children.FirstOrDefault(c => c.ExpandedName == nodes[0].Name);
@@ -90,7 +91,7 @@ internal sealed partial class NativeDecimalSchema
         {
             token.ThrowIfCancellationRequested();Check(node.Name == selected.ExpandedName, "Choice mixes alternatives.");
             InstanceAttributes(node);Check(!node.HasElements, "Scalar choice alternative contains elements.");
-            Require(node.Nodes().All(n => n is XText), "Scalar choice comments or processing instructions are excluded.");
+            Require(node.Nodes().All(n => n is XText or XComment or XProcessingInstruction), "Scalar choice comments or processing instructions are excluded.");
             states.Add(AssessElementScalar(node, selected, budget));
         }
     }

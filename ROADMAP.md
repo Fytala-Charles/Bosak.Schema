@@ -10,12 +10,12 @@ Develop broad, explicit XSD 1.1 coverage shared with Bosak while retaining actua
 
 ## 2. Next Work
 
-1. Qualify validation-neutral instance comments and processing instructions through original-node capture, paths, typed facts and export; preserve original upstream bytes.
-2. Adopt schema annotation handling, including opaque appinfo/documentation, without compiling annotation payloads as schema declarations.
-3. Rank remaining application blockers before broader anyType, schema assembly, derivation, wildcard/open-content, assertion, identity-constraint and type-alternative work.
+1. Re-rank remaining unchanged upstream refusals after original comment/PI and bounded annotation admission.
+2. Qualify additional annotation metadata attributes where original examples justify them; retain opaque payloads and original source budgets.
+3. Select the next application-relevant structural contract across implicit anyType, schema assembly, derivation, wildcards/open content, assertions, identities and type alternatives.
 4. Re-run representative consumers and assess a precisely bounded beta release. Exact-package review and publication are separate decisions.
 
-Use smaller reviewed implementation checkpoints. A behavioral-contract ceiling is a limit, not a target to fill with repetitive tests. The [structural checkpoint](docs/structural-coverage/README.md) and [readiness assessment](docs/structural-coverage/BETA-READINESS.md) record the current evidence.
+Use smaller reviewed implementation checkpoints. A behavioral-contract ceiling is a limit, not a target to fill with repetitive tests. The [structural checkpoint](docs/markup-coverage/README.md) and [readiness assessment](docs/markup-coverage/BETA-READINESS.md) record the current evidence.
 
 ## 3. Acceptance Boundaries
 
