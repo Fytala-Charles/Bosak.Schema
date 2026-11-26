@@ -29,6 +29,7 @@
 //                      | Charles Korthout | 0.16   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      | Charles Korthout | 0.17   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
 //                      | Charles Korthout | 0.18   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
+//                      | Charles Korthout | 0.19 | 26-11-2026     | Preserve numeric complex-pattern refusal including inherited lexical constraints |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -170,6 +171,7 @@ internal sealed partial class NativeDecimalSchema
                 derivationBase: baseType, isComplexRestriction: true);
             return new NativeDecimalSchema(new NativeDeclaration(root.Name, dateGoverning, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
         }
+        Require(content.NumericPatterns is null, "Numeric complex restriction over lexical patterns is outside this slice.", NativeDecimalUnsupportedReason.ValueType);
         Require(!children.Any(e => e.Name == Xs + "pattern"), "Numeric complex patterns are outside this date slice.", NativeDecimalUnsupportedReason.ValueType);
         Require(content!.IsInteger || localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty,
             "Contextual assertions on noninteger content are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);

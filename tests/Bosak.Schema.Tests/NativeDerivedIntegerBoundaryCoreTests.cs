@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 22-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 24-11-2026     | Adopt measured enumeration expectations and upstream validity |
+//                      | Charles Korthout | 0.3 | 26-11-2026     | Reconcile measured original numeric pattern outcomes without changing inputs |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -78,7 +79,7 @@ public sealed class NativeDerivedIntegerBoundaryCoreTests
     /// <param name="attributes">The attributes control input.</param>
     [Theory][InlineData("enumeration","value='1'")][InlineData("pattern","value='.*'")][InlineData("whiteSpace","value='preserve'")][InlineData("fractionDigits","value='0' fixed='true'")]
     public void ExcludedFacetGrammar(string facet,string attributes)
-    {var schema=S($"<xs:simpleType name='N'><xs:restriction base='xs:int'><xs:{facet} {attributes}/></xs:restriction></xs:simpleType>"+Root());var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(facet=="enumeration"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Unsupported,c.Outcome);if(facet=="enumeration")Assert.NotNull(c.Value);else Assert.Null(c.Value);c.Value?.Dispose();}
+    {var schema=S($"<xs:simpleType name='N'><xs:restriction base='xs:int'><xs:{facet} {attributes}/></xs:restriction></xs:simpleType>"+Root());var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(facet is "enumeration" or "pattern"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Unsupported,c.Outcome);if(facet is "enumeration" or "pattern")Assert.NotNull(c.Value);else Assert.Null(c.Value);c.Value?.Dispose();}
     /// <summary>User Chains Stay Excluded.</summary>
     [Fact]
     public void UserChainsStayExcluded()

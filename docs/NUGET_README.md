@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.17 development candidate requires Bosak Core 1.86.0 or later.
+The 0.18 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1785,3 +1785,7 @@ Both owned native facades admit normalizedString, token, language, Name, NCName,
 ## Empty complex owners with attributes (development0.17)
 
 Declared attributes now work on bounded empty complex owners. Empty elements retain an empty typed sequence and reject all text, including whitespace; attribute facts retain their original types and owner paths. See the [consumer guide](empty-owners/GUIDE.md) for supported placements, capacities and exclusions.
+
+## Numeric lexical patterns (development0.18)
+
+Bounded integer and decimal pattern facets validate collapsed original spelling before exact numeric normalization. Same-step alternatives and inherited decimal conjunctions retain original values, components and lifetime. See the [consumer guide](numeric-patterns/GUIDE.md) for the finite grammar, capacities and explicit value-space/inheritance exclusions.
