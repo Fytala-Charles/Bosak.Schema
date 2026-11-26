@@ -1,0 +1,15 @@
+# Bounded integer and decimal lexical patterns
+
+26November2026. Development Schema0.18 on signed Core1.86.0.
+
+Both owned facades admit finite pattern facets on direct decimal and builtin integer-family restrictions in existing root, leaf, attribute, simple-content-extension and list/union placements. Named decimal chains inherit patterns. This adds lexical checks, not a replacement numeric parser: primitive integer/decimal spelling, exact value facets and caller digit/scale capacities must all pass before any original facts or owned document are published.
+
+Patterns match the collapsed original lexical spelling, before BigInteger or coefficient/scale normalization. A three-digit integer pattern can accept `001` and reject `1`, although both denote the same integer. A decimal pattern can accept `01.20` and reject `1.2`, while detached exact values remain normalized. XML export preserves original spelling and whitespace. Same-step patterns are alternatives; inherited decimal steps are conjunctive. Same-step bounds/enumerations intersect independently with lexical patterns at instance validation.
+
+For example, restrict xs:integer with `<xs:pattern value="[0-9]{3}"/>`; `<r> 001 </r>` validates and reads exact integer1. `<r>1</r>` is Invalid. A pattern-valid string does not bypass primitive validity: non-ASCII digits or exponent decimal notation remain Invalid. Numeric-only `\d` and `\p{Nd}` escapes denote ASCII0..9 after successful numeric lexical validation. This domain restriction does not expand Unicode regex behavior on text, date or other routes. Other category and negative-digit escapes remain Unsupported.
+
+Use explicit item reads for lists. Actual ordered union/list member types, original governing/derivation handles, authority, failure isolation, cancellation and owner expiry remain intact. Failed or over-capacity patterns cannot silently fall through a union to hide an Unsupported result.
+
+Limits remain256raw UTF16 numeric characters, caller digit/scale/value/XML limits,8patterns per restriction,256UTF16 per expression,128states per automaton,1024states per schema and4194304matching-work ticks per assessment. The existing finite regex grammar supports literal/range/group/alternative/repetition forms with its existing nesting, range and bounded-repeat ceilings. Excess is Unsupported without truncation; malformed admitted syntax is Invalid. Native and public diagnostics retain existing redaction boundaries.
+
+New enumeration or value bounds over a patterned numeric base remain Unsupported pending a value-space membership contract. Existing named integer restriction chains and numeric complex restriction with local/inherited patterns remain Unsupported; simple-content extensions preserve the existing selected numeric type. General regex/Unicode-category expansion, fixed facet metadata, numeric whiteSpace facet syntax, implicit anyType, augmentation, complete PSVI/C45 and general schema-aware query integration remain outside this batch. Legacy decimal-only grammar, public API and Core pin are unchanged. No registry publication is implied.

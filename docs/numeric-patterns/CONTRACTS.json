@@ -1,0 +1,463 @@
+{
+  "count": 76,
+  "behavioralContractsNotFeatures": true,
+  "stimuli": "../../tests/TestData/NumericPatterns/cases.json",
+  "contracts": [
+    {
+      "id": "NP-001",
+      "contract": "integer Nd pattern 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-002",
+      "contract": "integer Nd pattern 1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-003",
+      "contract": "int Nd pattern 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-004",
+      "contract": "int Nd pattern 1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-005",
+      "contract": "long Nd pattern 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-006",
+      "contract": "long Nd pattern 1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-007",
+      "contract": "short Nd pattern 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-008",
+      "contract": "short Nd pattern 1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-009",
+      "contract": "byte Nd pattern 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-010",
+      "contract": "byte Nd pattern 1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-011",
+      "contract": "nonNegativeInteger Nd pattern 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-012",
+      "contract": "nonNegativeInteger Nd pattern 1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-013",
+      "contract": "positiveInteger Nd pattern 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-014",
+      "contract": "positiveInteger Nd pattern 1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-015",
+      "contract": "nonPositiveInteger Nd pattern -12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-016",
+      "contract": "nonPositiveInteger Nd pattern -1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-017",
+      "contract": "negativeInteger Nd pattern -12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-018",
+      "contract": "negativeInteger Nd pattern -1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-019",
+      "contract": "unsignedLong Nd pattern 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-020",
+      "contract": "unsignedLong Nd pattern 1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-021",
+      "contract": "unsignedInt Nd pattern 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-022",
+      "contract": "unsignedInt Nd pattern 1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-023",
+      "contract": "unsignedShort Nd pattern 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-024",
+      "contract": "unsignedShort Nd pattern 1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-025",
+      "contract": "unsignedByte Nd pattern 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-026",
+      "contract": "unsignedByte Nd pattern 1234",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-027",
+      "contract": "collapsed original numeric spelling \\d{3} 001",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-028",
+      "contract": "collapsed original numeric spelling \\d{3} 1",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-029",
+      "contract": "collapsed original numeric spelling \\d{3} \u0661\u0662\u0663",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-030",
+      "contract": "collapsed original numeric spelling [+]0[0-9] +01",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-031",
+      "contract": "collapsed original numeric spelling [+]0[0-9] 1",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-032",
+      "contract": "collapsed original numeric spelling -[0-9] -0",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-033",
+      "contract": "collapsed original numeric spelling [0-9] +1",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-034",
+      "contract": "collapsed original numeric spelling [0-9]{2}  12 ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-035",
+      "contract": "collapsed original numeric spelling [0-9]{2} 1 2",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-036",
+      "contract": "collapsed original numeric spelling [0-9]{2}\\.[0-9]{2} 01.20",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-037",
+      "contract": "collapsed original numeric spelling [0-9]{2}\\.[0-9]{2} 1.2",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-038",
+      "contract": "collapsed original numeric spelling [+]0[0-9][.][0-9]{2} +01.20",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-039",
+      "contract": "collapsed original numeric spelling [0-9][.] 1.",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-040",
+      "contract": "collapsed original numeric spelling [.][0-9] .5",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-041",
+      "contract": "collapsed original numeric spelling [0-9] 1e0",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-042",
+      "contract": "actual integer typed value root",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-043",
+      "contract": "actual decimal typed value root",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-044",
+      "contract": "actual integer typed value leaf",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-045",
+      "contract": "actual decimal typed value leaf",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-046",
+      "contract": "actual integer typed value attribute",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-047",
+      "contract": "actual decimal typed value attribute",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-048",
+      "contract": "actual integer typed value extension",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-049",
+      "contract": "actual decimal typed value extension",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-050",
+      "contract": "same-step alternatives 1",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-051",
+      "contract": "same-step alternatives 22",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-052",
+      "contract": "same-step alternatives 333",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-053",
+      "contract": "inherited decimal conjunction 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-054",
+      "contract": "inherited decimal conjunction 1",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-055",
+      "contract": "inherited decimal conjunction 123",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-056",
+      "contract": "value facets over patterned decimal remain excluded",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-057",
+      "contract": "value facets over patterned decimal remain excluded",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-058",
+      "contract": "value facets over patterned decimal remain excluded",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-059",
+      "contract": "same-step enum exact value with lexical pattern 01",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-060",
+      "contract": "same-step enum exact value with lexical pattern 1",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-061",
+      "contract": "same-step enum exact value with lexical pattern 02",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-062",
+      "contract": "same-step bound plus lexical pattern 09",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-063",
+      "contract": "same-step bound plus lexical pattern 10",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-064",
+      "contract": "same-step bound plus lexical pattern 9",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "NP-065",
+      "contract": "malformed/excluded/capacity pattern [",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-066",
+      "contract": "malformed/excluded/capacity pattern \\p{L}",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-067",
+      "contract": "malformed/excluded/capacity pattern \\D",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-068",
+      "contract": "malformed/excluded/capacity pattern aaaaaaaaaaaaaaaaaaaa",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-069",
+      "contract": "pattern count 8",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-070",
+      "contract": "pattern count 9",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-071",
+      "contract": "raw numeric lexical capacity 256",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-072",
+      "contract": "raw numeric lexical capacity 257",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "NP-073",
+      "contract": "actual patterned list member values",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-074",
+      "contract": "ordered union actual member 001",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-075",
+      "contract": "ordered union actual member 1234",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "NP-076",
+      "contract": "numeric named integer chains remain excluded",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    }
+  ]
+}

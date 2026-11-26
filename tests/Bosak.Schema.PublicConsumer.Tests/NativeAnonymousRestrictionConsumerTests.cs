@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Reconcile measured compound admissions without editing original fixtures |
 //                      | Charles Korthout | 0.5   | 26-11-2026     | Verify measured text admissions with original fixture bytes unchanged |
 //                      | Charles Korthout | 0.6 | 26-11-2026     | Reconcile original structural admission without changing stimuli |
+//                      | Charles Korthout | 0.7 | 26-11-2026     | Reconcile measured original numeric pattern outcomes without changing inputs |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -45,7 +46,7 @@ public sealed class NativeAnonymousRestrictionConsumerTests
     [Theory][MemberData(nameof(Cases))]
     public void AnonymousRestriction_ValidatesOriginalInstance(string id,string payload)
     {
-        Assert.StartsWith("AS-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;Assert.NotEmpty(row.GetProperty("clauses").EnumerateArray());
+        Assert.StartsWith("AS-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;row=NativeNumericLegacyVerification.Reconcile(row,nameof(NativeAnonymousRestrictionConsumerTests));Assert.NotEmpty(row.GetProperty("clauses").EnumerateArray());
         if(id is "AS-036" or "AS-044"){NativeTextLegacyVerification.Check(row.GetProperty("schema").GetString()!,row.GetProperty("instance").GetString()!,Options(),id=="AS-036"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Invalid,NativeSchemaOutcome.Valid,"1");return;}
         if(id=="AS-051")
         {

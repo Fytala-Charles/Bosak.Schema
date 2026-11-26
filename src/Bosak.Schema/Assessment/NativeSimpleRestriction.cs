@@ -43,6 +43,7 @@
 //                      | Charles Korthout | 0.30   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
 //                      | Charles Korthout | 0.31   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
 //                      | Charles Korthout | 0.32 | 26-11-2026     | Admit bounded empty groups and original anonymous attribute types |
+//                      | Charles Korthout | 0.33 | 26-11-2026     | Compile opt-in numeric lexical patterns without changing legacy numeric facets |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -63,6 +64,10 @@ internal sealed partial class NativeDecimalSchema
         var restriction = Single(definition, "restriction");
         Attributes(restriction, "base");
         var baseName = ResolveTypeName(restriction, "base");
+        if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var numericBase) &&
+            (baseName == Xs + "decimal" || numericBase.IsInteger || numericBase.Facets is not null) &&
+            (numericBase.NumericPatterns is not null || Elements(restriction).Any(f => f.Name == Xs + "pattern")))
+            return CompileNumericPatternRestriction(restriction, name, namespaceUri, baseName, numericBase, limits, patternCompilation);
         if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var newBase))
         {
             if (newBase.GregorianKind is { } gregorianKind) return new NativeType(name, false, namespaceUri, gregorianKind: gregorianKind, baseName: baseName, derivationBase: newBase,

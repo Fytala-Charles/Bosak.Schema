@@ -1,3 +1,7 @@
+## Bounded numeric lexical patterns —26November2026
+
+Development0.18 qualifies bounded integer/decimal lexical pattern facets independently from exact numeric normalization. Source22,030/internal1,687/public20,343 and fresh package20,343 overlapping tests pass; all21,870 prior names remain with160 added. Pilot21matches; structural39matches/90Unsupported; datatype582matches/16Unsupported; zero errors. API55names/663rows and nine signed Core1.86.0 payloads are unchanged. No publication or fullXSD1.1/PSVI/C45 acceptance. [Guide and evidence](numeric-patterns/README.md). Earlier dated entries remain historical.
+
 ## Empty complex owners with attributes — 26 November 2026
 
 Development0.17 qualifies declared attributes on bounded empty complex owners, with original empty typed values and independent attribute/member provenance. Source21,870/internal1,679/public20,191 and fresh package20,191 overlapping tests pass; all21,730 prior names remain with140 added. Pilot21matches; structural39matches/90Unsupported; datatype568matches/30Unsupported; zero errors. API55names/663rows and nine signed Core1.86.0 payloads are unchanged. No publication or fullXSD1.1/PSVI/C45 acceptance. [Guide and evidence](empty-owners/README.md). Earlier dated entries remain historical.

@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 22-11-2026     | Adopt qualified bounded native string patterns |
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Share schema base-literal pattern work and cancellation across date types |
 //                      | Charles Korthout | 0.5   | 25-11-2026     | Preserve bounded list/union types and ordered selected member facts |
+//                      | Charles Korthout | 0.6 | 26-11-2026     | Admit digit escapes only for already validated numeric lexical alphabets |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -84,10 +85,10 @@ internal sealed class NativePattern
     private readonly int start;
     internal int StateCount => states.Length;
     private NativePattern(ImmutableArray<State> states, int start) { this.states = states; this.start = start; }
-    internal static NativePattern Compile(string expression, NativePatternCompilation compilation)
+    internal static NativePattern Compile(string expression, NativePatternCompilation compilation, bool numericAlphabet = false)
     {
         compilation.Check(); Capacity(expression.Length <= 256);
-        var parser = new Parser(expression, compilation); var tree = parser.Parse();
+        var parser = new Parser(expression, compilation, numericAlphabet); var tree = parser.Parse();
         var states = new List<State>(128) { new(null, -1) }; // State0 is the sole accept state.
         int Emit(State state) { compilation.Check(); Capacity(states.Count < 128); states.Add(state); return states.Count - 1; }
         int Build(Tree node, int next)
@@ -149,7 +150,7 @@ internal sealed class NativePattern
         }
         return active[0];
     }
-    private sealed class Parser(string text, NativePatternCompilation compilation)
+    private sealed class Parser(string text, NativePatternCompilation compilation, bool numericAlphabet)
     {
         private int index, atoms, depth;
         private char Current => index < text.Length ? text[index] : '\0';
@@ -202,6 +203,8 @@ internal sealed class NativePattern
             if (Take('\\'))
             {
                 Valid(index < text.Length); char code = text[index++];
+                if (numericAlphabet && code == 'd') return new(new(0x30, 0x39));
+                if (numericAlphabet && code == 'p' && text.AsSpan(index).StartsWith("{Nd}", StringComparison.Ordinal)) { index += 4; return new(new(0x30, 0x39)); }
                 if (code is 'd' or 'D' or 'w' or 'W' or 'i' or 'I' or 'c' or 'C' or 'p' or 'P') Unsupported();
                 if (code is 's' or 'S') return new(new(0, 0, code == 's' ? 1 : 2));
                 int value = code switch { 'n' => 10, 'r' => 13, 't' => 9, _ => code };

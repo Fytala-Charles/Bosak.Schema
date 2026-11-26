@@ -30,3 +30,7 @@ Bounded ID/IDREF/IDREFS validation is qualified in development 0.16; see [scope 
 ## Empty owners and next specification priorities
 
 Development0.17 qualifies declared attributes on bounded empty complex owners. See [scope and limits](docs/empty-owners/GUIDE.md). Next, rank remaining original regex/facet and structural application gaps before adopting the next bounded contract. Wildcards/open content, complex inheritance, general identity constraints, augmentation and public Core integration remain separate.
+
+## Numeric lexical patterns and next priorities
+
+Development0.18 qualifies bounded integer/decimal pattern facets on original collapsed spelling. See [scope and limits](docs/numeric-patterns/GUIDE.md). Next, rank remaining original datatype/structural refusals against application needs before adopting another bounded contract. Broader regex/facets, complex inheritance, wildcard/open content, augmentation and public Core integration remain separate.
