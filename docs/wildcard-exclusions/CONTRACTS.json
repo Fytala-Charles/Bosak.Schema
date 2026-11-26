@@ -1,0 +1,379 @@
+{
+  "count": 62,
+  "behavioralContractsNotFeatures": true,
+  "stimuli": "../../tests/TestData/WildcardExclusions/cases.json",
+  "contracts": [
+    {
+      "id": "WX-001",
+      "contract": "permitted actual integer notNamespace root",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-002",
+      "contract": "permitted declaration still validates notNamespace root",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-003",
+      "contract": "permitted actual integer notQName root",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-004",
+      "contract": "permitted declaration still validates notQName root",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-005",
+      "contract": "permitted actual integer notNamespace named",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-006",
+      "contract": "permitted declaration still validates notNamespace named",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-007",
+      "contract": "permitted actual integer notQName named",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-008",
+      "contract": "permitted declaration still validates notQName named",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-009",
+      "contract": "permitted actual integer notNamespace nested",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-010",
+      "contract": "permitted declaration still validates notNamespace nested",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-011",
+      "contract": "permitted actual integer notQName nested",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-012",
+      "contract": "permitted declaration still validates notQName nested",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-013",
+      "contract": "permitted actual integer notNamespace reference",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-014",
+      "contract": "permitted declaration still validates notNamespace reference",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-015",
+      "contract": "permitted actual integer notQName reference",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-016",
+      "contract": "permitted declaration still validates notQName reference",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-017",
+      "contract": "namespace complement ##local target ",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-018",
+      "contract": "namespace complement ##local target urn:t",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-019",
+      "contract": "namespace complement ##targetNamespace target ",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-020",
+      "contract": "namespace complement ##targetNamespace target urn:t",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-021",
+      "contract": "namespace complement urn:t target ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-022",
+      "contract": "namespace complement urn:t target urn:t",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-023",
+      "contract": "namespace complement ##local urn:t target ",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-024",
+      "contract": "namespace complement ##local urn:t target urn:t",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-025",
+      "contract": "namespace complement urn:other target ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-026",
+      "contract": "namespace complement urn:other target urn:t",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-027",
+      "contract": "expanded QName exclusion a target ",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-028",
+      "contract": "expanded QName exclusion p:a target urn:t",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-029",
+      "contract": "expanded QName exclusion a target urn:t",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-030",
+      "contract": "expanded QName exclusion a target urn:t",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-031",
+      "contract": "expanded QName exclusion b target ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-032",
+      "contract": "combined namespace and QName exclusions",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-033",
+      "contract": "combined QName rejection",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-034",
+      "contract": "defined excludes global",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-035",
+      "contract": "defined does not make unknown strict valid",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-036",
+      "contract": "defined absent wildcard optional",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-037",
+      "contract": "explicit local use precedence",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-038",
+      "contract": "explicit global reference precedence",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-039",
+      "contract": "explicit required use remains required",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-040",
+      "contract": "empty QName set",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-041",
+      "contract": "duplicate QName exclusions do not alter matching",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-042",
+      "contract": "unknown namespace strict still Invalid",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-043",
+      "contract": "missing default never augmented",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-044",
+      "contract": "schema consistency namespace='##any' notNamespace='urn:other'",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-045",
+      "contract": "schema consistency notNamespace=''",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-046",
+      "contract": "schema consistency notQName='q:a' namespace='##local'",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-047",
+      "contract": "schema consistency notQName='a' notNamespace='##local'",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-048",
+      "contract": "schema consistency notQName='##definedSibling'",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-049",
+      "contract": "schema consistency notQName='unbound:a'",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-050",
+      "contract": "schema consistency notQName='a:b:c'",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-051",
+      "contract": "schema consistency notQName='1bad'",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-052",
+      "contract": "eight token capacity notNamespace",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-053",
+      "contract": "nine token refusal notNamespace",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-054",
+      "contract": "eight token capacity notQName",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-055",
+      "contract": "nine token refusal notQName",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-056",
+      "contract": "retained boundary notNamespace='relative'",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-057",
+      "contract": "retained boundary notQName='b' processContents='lax'",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-058",
+      "contract": "retained boundary notQName='b' processContents='skip'",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-059",
+      "contract": "special XML request remains Unsupported",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "WX-060",
+      "contract": "strict fixed mismatch still Invalid",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "WX-061",
+      "contract": "strict ID graph remains",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "WX-062",
+      "contract": "strict unresolved IDREF remains Invalid",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    }
+  ]
+}

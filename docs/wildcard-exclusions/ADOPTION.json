@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-26",
+  "recordedBeforeImplementation": true,
+  "base": "8aa76553fb338be40d8e8b109c98f561d15738d6",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.10.2.2 notNamespace/notQName mapping and source QName values",
+        "3.10.3 mutually exclusive namespace/notNamespace",
+        "3.10.4.1 ##defined and original declaration lookup",
+        "3.10.4.2-3 expanded-name and namespace matching",
+        "3.10.6.1 namespace/QName consistency and no sibling on attribute wildcards",
+        "3.4.4 explicit attribute-use precedence",
+        "A basicNamespaceList/qnameListA lexical representation"
+      ]
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "2.3 lexical space/mapping; prelexical collapse before pattern",
+        "3.3.3 decimal and3.4.13 integer lexical spaces",
+        "4.3.4 pattern: same-step OR and inherited AND",
+        "4.3.5 whiteSpace and fixed collapse",
+        "4.3.7 enumeration versus lexical representations",
+        "G regular expressions: Nd category and digit escape"
+      ]
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3.1.1 and3.3.1.2 fully validated original types and values",
+        "6.2/6.3 original node and declaration provenance"
+      ]
+    },
+    {
+      "id": "xml10",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/",
+      "sha256": "f58a4b9e1e5b8bac13fb55c4e5c7c8c5e2c176aa45ee68e2f1ab2498511927ec",
+      "bytes": 219926
+    },
+    {
+      "id": "namespaces10",
+      "url": "https://www.w3.org/TR/2009/REC-xml-names-20091208/",
+      "sha256": "b4a649e5fdab9852d68eca21442481599164949bcdee5549f2ec7e38fb3cd3a8",
+      "bytes": 51390
+    }
+  ],
+  "scope": [
+    "Bounded notNamespace and notQName on existing strict/default-strict empty-owner attribute wildcards",
+    "Namespace complement using absolute URI/target/local tokens; QName exclusion using original source namespace bindings; ##defined against the actual closed global catalog",
+    "Explicit uses take precedence; admitted wildcard attributes retain actual global authority/types/values",
+    "Invalid schema for namespace+notNamespace, empty notNamespace, invalid or unbound QName, QName outside allowed namespaces, and attribute ##definedSibling"
+  ],
+  "deviations": [
+    "Existing owner/strict-only/absolute-URI profile and dynamic document bounds remain",
+    "Each namespace or QName list at most8 lexical tokens, each at most256UTF16; duplicate tokens do not evade token accounting",
+    "Empty notQName is an empty exclusion set; existing empty namespace-enumeration profile remains unchanged",
+    "No element wildcards, lax/skip, nonempty/mixed owners, wildcard composition/inheritance, augmentation or full PSVI/C45 acceptance"
+  ],
+  "qualification": [
+    "Both native facades and owned Core facts, original declarations, ID graphs, cancellation/foreign ownership/expiry",
+    "Full source/fresh package, API/signed Core identities, frozen samples/original invoice and documentation/release controls"
+  ],
+  "status": "Recorded before implementation; candidate qualification pending"
+}
