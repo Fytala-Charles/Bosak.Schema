@@ -1,0 +1,766 @@
+{
+  "date": "2026-11-26",
+  "cases": [
+    {
+      "id": "ID-001",
+      "contract": "ID lexical and owner binding 'a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "read": "attribute",
+      "name": "id",
+      "index": 0,
+      "expected": "a"
+    },
+    {
+      "id": "ID-002",
+      "contract": "ID lexical and owner binding '_a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='_a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "read": "attribute",
+      "name": "id",
+      "index": 0,
+      "expected": "_a"
+    },
+    {
+      "id": "ID-003",
+      "contract": "ID lexical and owner binding 'A-1'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='A-1'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "read": "attribute",
+      "name": "id",
+      "index": 0,
+      "expected": "A-1"
+    },
+    {
+      "id": "ID-004",
+      "contract": "ID lexical and owner binding '\u00e9'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='\u00e9'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "read": "attribute",
+      "name": "id",
+      "index": 0,
+      "expected": "\u00e9"
+    },
+    {
+      "id": "ID-005",
+      "contract": "ID lexical and owner binding 'a\u0301'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a\u0301'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "read": "attribute",
+      "name": "id",
+      "index": 0,
+      "expected": "a\u0301"
+    },
+    {
+      "id": "ID-006",
+      "contract": "ID lexical and owner binding ' a '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id=' a '><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "read": "attribute",
+      "name": "id",
+      "index": 0,
+      "expected": "a"
+    },
+    {
+      "id": "ID-007",
+      "contract": "ID lexical and owner binding 'a:b'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a:b'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-008",
+      "contract": "ID lexical and owner binding '1a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='1a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-009",
+      "contract": "ID lexical and owner binding ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id=''><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-010",
+      "contract": "ID lexical and owner binding 'a b'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a b'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-011",
+      "contract": "Actual document ID/ref graph id='a' ref='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' ref='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-012",
+      "contract": "Actual document ID/ref graph ref='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-013",
+      "contract": "Actual document ID/ref graph id='a' ref='b'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' ref='b'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-014",
+      "contract": "Actual document ID/ref graph id='A' ref='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='A' ref='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-015",
+      "contract": "Actual document ID/ref graph id='\u00e1' ref='a\u0301'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='\u00e1' ref='a\u0301'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-016",
+      "contract": "Actual document ID/ref graph id='a' alias='a' ref='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' alias='a' ref='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-017",
+      "contract": "Actual document ID/ref graph id='a' alias='b' refs='a b a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' alias='b' refs='a b a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-018",
+      "contract": "Actual document ID/ref graph id='a' refs=' a  a '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' refs=' a  a '><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-019",
+      "contract": "Actual document ID/ref graph id='a' refs=''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' refs=''><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-020",
+      "contract": "Actual document ID/ref graph id='a' refs='a bad:name'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' refs='a bad:name'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-021",
+      "contract": "Actual document ID/ref graph id='a' refs='a b'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' refs='a b'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-022",
+      "contract": "Actual document ID/ref graph ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-023",
+      "contract": "Nonempty reference list detached items",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' alias='b' refs=' a  b a '><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "read": "attribute",
+      "name": "refs",
+      "index": 2,
+      "expected": "a|b|a",
+      "list": true
+    },
+    {
+      "id": "ID-024",
+      "contract": "Standalone ID creates no outside binding: a",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:ID'/></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-025",
+      "contract": "Standalone ID creates no outside binding: a b",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:ID'/></xs:schema>",
+      "instance": "<r>a b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-026",
+      "contract": "Standalone ID creates no outside binding: bad:name",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:ID'/></xs:schema>",
+      "instance": "<r>bad:name</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-027",
+      "contract": "Standalone ID creates no outside binding: ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:ID'/></xs:schema>",
+      "instance": "<r></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-028",
+      "contract": "Nilled ID has no identity actual value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:ID' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "empty": true,
+      "root": true
+    },
+    {
+      "id": "ID-029",
+      "contract": "Standalone IDREF creates no outside binding: a",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:IDREF'/></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-030",
+      "contract": "Standalone IDREF creates no outside binding: a b",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:IDREF'/></xs:schema>",
+      "instance": "<r>a b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-031",
+      "contract": "Standalone IDREF creates no outside binding: bad:name",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:IDREF'/></xs:schema>",
+      "instance": "<r>bad:name</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-032",
+      "contract": "Standalone IDREF creates no outside binding: ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:IDREF'/></xs:schema>",
+      "instance": "<r></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-033",
+      "contract": "Nilled IDREF has no identity actual value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:IDREF' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "empty": true,
+      "root": true
+    },
+    {
+      "id": "ID-034",
+      "contract": "Standalone IDREFS creates no outside binding: a",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:IDREFS'/></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-035",
+      "contract": "Standalone IDREFS creates no outside binding: a b",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:IDREFS'/></xs:schema>",
+      "instance": "<r>a b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-036",
+      "contract": "Standalone IDREFS creates no outside binding: bad:name",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:IDREFS'/></xs:schema>",
+      "instance": "<r>bad:name</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-037",
+      "contract": "Standalone IDREFS creates no outside binding: ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:IDREFS'/></xs:schema>",
+      "instance": "<r></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-038",
+      "contract": "Nilled IDREFS has no identity actual value",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:IDREFS' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "empty": true,
+      "root": true,
+      "list": true
+    },
+    {
+      "id": "ID-039",
+      "contract": "ID child identifies parent <id>a</id>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='id' type='xs:ID' minOccurs='0' maxOccurs='2' nillable='true'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='a'><id>a</id></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-040",
+      "contract": "ID child identifies parent <id>a</id><id>a</id>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='id' type='xs:ID' minOccurs='0' maxOccurs='2' nillable='true'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='a'><id>a</id><id>a</id></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-041",
+      "contract": "ID child identifies parent <id>a</id>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='id' type='xs:ID' minOccurs='0' maxOccurs='2' nillable='true'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' ref='a'><id>a</id></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-042",
+      "contract": "ID child identifies parent <id>a</id><id>b</id>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='id' type='xs:ID' minOccurs='0' maxOccurs='2' nillable='true'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='b'><id>a</id><id>b</id></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-043",
+      "contract": "ID child identifies parent <id>a</id><id>b</id>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='id' type='xs:ID' minOccurs='0' maxOccurs='2' nillable='true'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='c'><id>a</id><id>b</id></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-044",
+      "contract": "ID child identifies parent <id xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='id' type='xs:ID' minOccurs='0' maxOccurs='2' nillable='true'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='a'><id xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-045",
+      "contract": "Child ID lexical read",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='id' type='xs:ID' minOccurs='0' maxOccurs='2' nillable='true'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='a'><id> a </id></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "read": "element",
+      "path": [
+        0
+      ],
+      "expected": "a"
+    },
+    {
+      "id": "ID-046",
+      "contract": "Separate owners and forward refs id='a' ref='b' / id='b' ref='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='item' minOccurs='0' maxOccurs='2'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item id='a' ref='b'><v>x</v></item><item id='b' ref='a'><v>y</v></item></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-047",
+      "contract": "Separate owners and forward refs id='a' / id='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='item' minOccurs='0' maxOccurs='2'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item id='a'><v>x</v></item><item id='a'><v>y</v></item></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-048",
+      "contract": "Separate owners and forward refs id='a' ref='a' / id='b' ref='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='item' minOccurs='0' maxOccurs='2'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item id='a' ref='a'><v>x</v></item><item id='b' ref='a'><v>y</v></item></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-049",
+      "contract": "Separate owners and forward refs ref='missing' / id='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='item' minOccurs='0' maxOccurs='2'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item ref='missing'><v>x</v></item><item id='a'><v>y</v></item></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-050",
+      "contract": "Separate owners and forward refs id='a' alias='a' / id='b' alias='b'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='item' minOccurs='0' maxOccurs='2'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item id='a' alias='a'><v>x</v></item><item id='b' alias='b'><v>y</v></item></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-051",
+      "contract": "Child IDs bind different parents",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='item' maxOccurs='2'><xs:complexType><xs:sequence><xs:element name='id' type='xs:ID'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item><id>a</id></item><item><id>a</id></item></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-052",
+      "contract": "Child IDs bind different parents",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='item' maxOccurs='2'><xs:complexType><xs:sequence><xs:element name='id' type='xs:ID'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><item><id>a</id></item><item><id>b</id></item></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-053",
+      "contract": "Ordinary string does not supply an ID",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:string'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' ref='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-054",
+      "contract": "Ordinary NCName does not supply an ID",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:NCName'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' ref='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-055",
+      "contract": "Ordinary NMTOKEN does not supply an ID",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:NMTOKEN'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' ref='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-056",
+      "contract": "Actual selected union member IdFirst",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='U'><xs:union memberTypes='xs:ID xs:string'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='U'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r alias='a' ref='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-057",
+      "contract": "Actual selected union member StringFirst",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='U'><xs:union memberTypes='xs:string xs:ID'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='U'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r alias='a' ref='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-058",
+      "contract": "Actual selected union member RefFirst",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='U'><xs:union memberTypes='xs:IDREF xs:string'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='U'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a' alias='a' ref='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-059",
+      "contract": "Actual selected union member RefMissing",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='U'><xs:union memberTypes='xs:IDREF xs:string'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='U'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r alias='a' ref='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-060",
+      "contract": "Constructed list of ID ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='L'><xs:list itemType='xs:ID'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='L'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r alias=''><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-061",
+      "contract": "Constructed list of ID a a",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='L'><xs:list itemType='xs:ID'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='L'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r alias='a a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-062",
+      "contract": "Constructed list of IDREF ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='L'><xs:list itemType='xs:IDREF'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='L'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r alias=''><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-063",
+      "contract": "Constructed list of IDREF a a",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='L'><xs:list itemType='xs:IDREF'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='L'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r alias='a a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-064",
+      "contract": "Derived ID facets <xs:enumeration value='a'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='I'><xs:restriction base='xs:ID'><xs:enumeration value='a'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='I'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-065",
+      "contract": "Derived ID facets <xs:enumeration value='a'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='I'><xs:restriction base='xs:ID'><xs:enumeration value='a'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='I'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='b'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-066",
+      "contract": "Derived ID facets <xs:minLength value='2'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='I'><xs:restriction base='xs:ID'><xs:minLength value='2'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='I'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-067",
+      "contract": "Derived ID facets <xs:minLength value='2'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='I'><xs:restriction base='xs:ID'><xs:minLength value='2'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='I'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='aa'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-068",
+      "contract": "Derived ID facets <xs:pattern value='a+'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='I'><xs:restriction base='xs:ID'><xs:pattern value='a+'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='I'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='aaa'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-069",
+      "contract": "Simple content ID uses actual value/parent binding",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:ID'><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "root": true,
+      "read": "element",
+      "path": [],
+      "expected": "a"
+    },
+    {
+      "id": "ID-070",
+      "contract": "Simple content ID uses actual value/parent binding",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:ID'><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='b'>a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-071",
+      "contract": "Simple content IDREF uses actual value/parent binding",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:IDREF'><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "root": true,
+      "read": "element",
+      "path": [],
+      "expected": "a"
+    },
+    {
+      "id": "ID-072",
+      "contract": "Simple content IDREF uses actual value/parent binding",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:IDREF'><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='b'>a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-073",
+      "contract": "Identity value constraint excluded IDdefault='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID' default='a'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'><v>x</v></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-074",
+      "contract": "Identity value constraint excluded IDfixed='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID' fixed='a'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'><v>x</v></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-075",
+      "contract": "Identity value constraint excluded IDREFdefault='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:IDREF' default='a'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'><v>x</v></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-076",
+      "contract": "Identity value constraint excluded IDREFfixed='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:IDREF' fixed='a'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'><v>x</v></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-077",
+      "contract": "Identity value constraint excluded IDREFSdefault='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:IDREFS' default='a'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'><v>x</v></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-078",
+      "contract": "Identity value constraint excluded IDREFSfixed='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:IDREFS' fixed='a'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'><v>x</v></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-079",
+      "contract": "Identity raw lexical bound 256",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-080",
+      "contract": "Identity raw lexical bound 257",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='alias' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:attribute name='refs' type='xs:IDREFS'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "ID-081",
+      "contract": "Distinct identity string bound 128",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='L'><xs:list itemType='xs:ID'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='a0' type='L'/><xs:attribute name='a1' type='L'/><xs:attribute name='a2' type='L'/><xs:attribute name='a3' type='L'/><xs:attribute name='a4' type='L'/><xs:attribute name='a5' type='L'/><xs:attribute name='a6' type='L'/><xs:attribute name='a7' type='L'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a0='x000 x001 x002 x003 x004 x005 x006 x007 x008 x009 x010 x011 x012 x013 x014 x015' a1='x016 x017 x018 x019 x020 x021 x022 x023 x024 x025 x026 x027 x028 x029 x030 x031' a2='x032 x033 x034 x035 x036 x037 x038 x039 x040 x041 x042 x043 x044 x045 x046 x047' a3='x048 x049 x050 x051 x052 x053 x054 x055 x056 x057 x058 x059 x060 x061 x062 x063' a4='x064 x065 x066 x067 x068 x069 x070 x071 x072 x073 x074 x075 x076 x077 x078 x079' a5='x080 x081 x082 x083 x084 x085 x086 x087 x088 x089 x090 x091 x092 x093 x094 x095' a6='x096 x097 x098 x099 x100 x101 x102 x103 x104 x105 x106 x107 x108 x109 x110 x111' a7='x112 x113 x114 x115 x116 x117 x118 x119 x120 x121 x122 x123 x124 x125 x126 x127'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-082",
+      "contract": "Distinct identity string bound 129",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='L'><xs:list itemType='xs:ID'/></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='a0' type='L'/><xs:attribute name='a1' type='L'/><xs:attribute name='a2' type='L'/><xs:attribute name='a3' type='L'/><xs:attribute name='a4' type='L'/><xs:attribute name='a5' type='L'/><xs:attribute name='a6' type='L'/><xs:attribute name='a7' type='L'/><xs:attribute name='a8' type='L'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a0='x000 x001 x002 x003 x004 x005 x006 x007 x008 x009 x010 x011 x012 x013 x014 x015' a1='x016 x017 x018 x019 x020 x021 x022 x023 x024 x025 x026 x027 x028 x029 x030 x031' a2='x032 x033 x034 x035 x036 x037 x038 x039 x040 x041 x042 x043 x044 x045 x046 x047' a3='x048 x049 x050 x051 x052 x053 x054 x055 x056 x057 x058 x059 x060 x061 x062 x063' a4='x064 x065 x066 x067 x068 x069 x070 x071 x072 x073 x074 x075 x076 x077 x078 x079' a5='x080 x081 x082 x083 x084 x085 x086 x087 x088 x089 x090 x091 x092 x093 x094 x095' a6='x096 x097 x098 x099 x100 x101 x102 x103 x104 x105 x106 x107 x108 x109 x110 x111' a7='x112 x113 x114 x115 x116 x117 x118 x119 x120 x121 x122 x123 x124 x125 x126 x127' a8='x128'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "ID-083",
+      "contract": "Identity occurrence bound 256",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' maxOccurs='2'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='a0' type='xs:IDREFS'/><xs:attribute name='a1' type='xs:IDREFS'/><xs:attribute name='a2' type='xs:IDREFS'/><xs:attribute name='a3' type='xs:IDREFS'/><xs:attribute name='a4' type='xs:IDREFS'/><xs:attribute name='a5' type='xs:IDREFS'/><xs:attribute name='a6' type='xs:IDREFS'/><xs:attribute name='a7' type='xs:IDREFS'/></xs:complexType></xs:element></xs:sequence><xs:attribute name='id' type='xs:ID'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'><e a0='a a a a a a a a a a a a a a a a' a1='a a a a a a a a a a a a a a a a' a2='a a a a a a a a a a a a a a a a' a3='a a a a a a a a a a a a a a a a' a4='a a a a a a a a a a a a a a a a' a5='a a a a a a a a a a a a a a a a' a6='a a a a a a a a a a a a a a a a' a7='a a a a a a a a a a a a a a a a'><v>x</v></e><e a0='a a a a a a a a a a a a a a a a' a1='a a a a a a a a a a a a a a a a' a2='a a a a a a a a a a a a a a a a' a3='a a a a a a a a a a a a a a a a' a4='a a a a a a a a a a a a a a a a' a5='a a a a a a a a a a a a a a a a' a6='a a a a a a a a a a a a a a a a' a7='a a a a a a a a a a a a a a a'><v>x</v></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-084",
+      "contract": "Identity occurrence bound 257",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' maxOccurs='2'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='a0' type='xs:IDREFS'/><xs:attribute name='a1' type='xs:IDREFS'/><xs:attribute name='a2' type='xs:IDREFS'/><xs:attribute name='a3' type='xs:IDREFS'/><xs:attribute name='a4' type='xs:IDREFS'/><xs:attribute name='a5' type='xs:IDREFS'/><xs:attribute name='a6' type='xs:IDREFS'/><xs:attribute name='a7' type='xs:IDREFS'/></xs:complexType></xs:element></xs:sequence><xs:attribute name='id' type='xs:ID'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='a'><e a0='a a a a a a a a a a a a a a a a' a1='a a a a a a a a a a a a a a a a' a2='a a a a a a a a a a a a a a a a' a3='a a a a a a a a a a a a a a a a' a4='a a a a a a a a a a a a a a a a' a5='a a a a a a a a a a a a a a a a' a6='a a a a a a a a a a a a a a a a' a7='a a a a a a a a a a a a a a a a'><v>x</v></e><e a0='a a a a a a a a a a a a a a a a' a1='a a a a a a a a a a a a a a a a' a2='a a a a a a a a a a a a a a a a' a3='a a a a a a a a a a a a a a a a' a4='a a a a a a a a a a a a a a a a' a5='a a a a a a a a a a a a a a a a' a6='a a a a a a a a a a a a a a a a' a7='a a a a a a a a a a a a a a a a'><v>x</v></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "ID-085",
+      "contract": "instance-selected child ID binds parent",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' ref='a'><v i:type='xs:ID'> a </v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-086",
+      "contract": "ordinary child string is not ID",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='a'><v>a</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-087",
+      "contract": "instance-selected child IDREF resolves",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' id='a'><v i:type='xs:IDREF'>a</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-088",
+      "contract": "instance-selected child IDREF missing",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attribute name='id' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:i='http://www.w3.org/2001/XMLSchema-instance'><v i:type='xs:IDREF'>a</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-089",
+      "contract": "Instance-selected root ID cannot bind an outside parent",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:string'/></xs:schema>",
+      "instance": "<r xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:type='xs:ID'>a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    }
+  ]
+}

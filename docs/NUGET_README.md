@@ -2,7 +2,11 @@
 
 # Bosak.Schema
 
-The 0.15 development candidate requires Bosak Core 1.86.0 or later.
+The 0.16 development candidate requires Bosak Core 1.86.0 or later.
+
+## IDs and references (0.16 source)
+
+Both owned native facades admit bounded ID/IDREF/IDREFS values and assessment-local reference checks before document/fact publication. ID attributes identify their owners; ID-valued child elements identify their parents. Same-owner repetition is allowed; conflicting owners and unresolved bindings are Invalid. Actual union/list members determine participation, and values retain original provenance/lifetime. Raw identity text256UTF16,128distinct strings and256identity atoms plus existing limits apply. Identity value constraints, ENTITY/NOTATION, xml:id special processing, public ID-table/PSVI and general fn:id/idref remain excluded. [Guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/identity-coverage/GUIDE.md).
 
 ## Original markup and annotations (0.15 source)
 

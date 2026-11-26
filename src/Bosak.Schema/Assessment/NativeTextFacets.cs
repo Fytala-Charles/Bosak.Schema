@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2 | 26-11-2026     | Bound identity facet literals without applying document graph checks |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -65,6 +66,7 @@ internal sealed class NativeTextFacets(NativeTextFacets? parent,int whitespace,b
             else if(name=="enumeration")
             {
                 NativeDecimalSchema.Require(++enumCount<=16,"Text enumeration capacity exceeded.",NativeDecimalUnsupportedReason.RepresentationCapacity);
+                NativeDecimalSchema.Require(!NativeDecimalSchema.IsIdentityAtomic(baseType) || supplied.Length<=256,"Identity enumeration literal capacity exceeded.",NativeDecimalUnsupportedReason.RepresentationCapacity);
                 var value=NativeTextRules.Normalize(supplied,white);
                 if(!NativeTextRules.Accepts(value,baseType.TextKind))Invalid("Enumeration outside lexical family.");
                 NativeDecimalSchema.Require(parent is null || !parent.HasPatterns,"Enumeration over patterned text ancestors awaits qualification.",NativeDecimalUnsupportedReason.ValueType);

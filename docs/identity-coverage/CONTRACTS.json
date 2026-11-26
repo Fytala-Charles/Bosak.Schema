@@ -1,0 +1,541 @@
+{
+  "count": 89,
+  "behavioralContractsNotFeatures": true,
+  "stimuli": "../../tests/TestData/IdentityCoverage/cases.json",
+  "contracts": [
+    {
+      "id": "ID-001",
+      "contract": "ID lexical and owner binding 'a'",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-002",
+      "contract": "ID lexical and owner binding '_a'",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-003",
+      "contract": "ID lexical and owner binding 'A-1'",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-004",
+      "contract": "ID lexical and owner binding '\u00e9'",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-005",
+      "contract": "ID lexical and owner binding 'a\u0301'",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-006",
+      "contract": "ID lexical and owner binding ' a '",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-007",
+      "contract": "ID lexical and owner binding 'a:b'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-008",
+      "contract": "ID lexical and owner binding '1a'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-009",
+      "contract": "ID lexical and owner binding ''",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-010",
+      "contract": "ID lexical and owner binding 'a b'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-011",
+      "contract": "Actual document ID/ref graph id='a' ref='a'",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-012",
+      "contract": "Actual document ID/ref graph ref='a'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-013",
+      "contract": "Actual document ID/ref graph id='a' ref='b'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-014",
+      "contract": "Actual document ID/ref graph id='A' ref='a'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-015",
+      "contract": "Actual document ID/ref graph id='\u00e1' ref='a\u0301'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-016",
+      "contract": "Actual document ID/ref graph id='a' alias='a' ref='a'",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-017",
+      "contract": "Actual document ID/ref graph id='a' alias='b' refs='a b a'",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-018",
+      "contract": "Actual document ID/ref graph id='a' refs=' a  a '",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-019",
+      "contract": "Actual document ID/ref graph id='a' refs=''",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-020",
+      "contract": "Actual document ID/ref graph id='a' refs='a bad:name'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-021",
+      "contract": "Actual document ID/ref graph id='a' refs='a b'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-022",
+      "contract": "Actual document ID/ref graph ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-023",
+      "contract": "Nonempty reference list detached items",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-024",
+      "contract": "Standalone ID creates no outside binding: a",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-025",
+      "contract": "Standalone ID creates no outside binding: a b",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-026",
+      "contract": "Standalone ID creates no outside binding: bad:name",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-027",
+      "contract": "Standalone ID creates no outside binding: ",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-028",
+      "contract": "Nilled ID has no identity actual value",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-029",
+      "contract": "Standalone IDREF creates no outside binding: a",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-030",
+      "contract": "Standalone IDREF creates no outside binding: a b",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-031",
+      "contract": "Standalone IDREF creates no outside binding: bad:name",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-032",
+      "contract": "Standalone IDREF creates no outside binding: ",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-033",
+      "contract": "Nilled IDREF has no identity actual value",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-034",
+      "contract": "Standalone IDREFS creates no outside binding: a",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-035",
+      "contract": "Standalone IDREFS creates no outside binding: a b",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-036",
+      "contract": "Standalone IDREFS creates no outside binding: bad:name",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-037",
+      "contract": "Standalone IDREFS creates no outside binding: ",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-038",
+      "contract": "Nilled IDREFS has no identity actual value",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-039",
+      "contract": "ID child identifies parent <id>a</id>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-040",
+      "contract": "ID child identifies parent <id>a</id><id>a</id>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-041",
+      "contract": "ID child identifies parent <id>a</id>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-042",
+      "contract": "ID child identifies parent <id>a</id><id>b</id>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-043",
+      "contract": "ID child identifies parent <id>a</id><id>b</id>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-044",
+      "contract": "ID child identifies parent <id xmlns:i='http://www.w3.org/2001/XMLSchema-instance' i:nil='true'/>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-045",
+      "contract": "Child ID lexical read",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-046",
+      "contract": "Separate owners and forward refs id='a' ref='b' / id='b' ref='a'",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-047",
+      "contract": "Separate owners and forward refs id='a' / id='a'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-048",
+      "contract": "Separate owners and forward refs id='a' ref='a' / id='b' ref='a'",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-049",
+      "contract": "Separate owners and forward refs ref='missing' / id='a'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-050",
+      "contract": "Separate owners and forward refs id='a' alias='a' / id='b' alias='b'",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-051",
+      "contract": "Child IDs bind different parents",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-052",
+      "contract": "Child IDs bind different parents",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-053",
+      "contract": "Ordinary string does not supply an ID",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-054",
+      "contract": "Ordinary NCName does not supply an ID",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-055",
+      "contract": "Ordinary NMTOKEN does not supply an ID",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-056",
+      "contract": "Actual selected union member IdFirst",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-057",
+      "contract": "Actual selected union member StringFirst",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-058",
+      "contract": "Actual selected union member RefFirst",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-059",
+      "contract": "Actual selected union member RefMissing",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-060",
+      "contract": "Constructed list of ID ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-061",
+      "contract": "Constructed list of ID a a",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-062",
+      "contract": "Constructed list of IDREF ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-063",
+      "contract": "Constructed list of IDREF a a",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-064",
+      "contract": "Derived ID facets <xs:enumeration value='a'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-065",
+      "contract": "Derived ID facets <xs:enumeration value='a'/>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-066",
+      "contract": "Derived ID facets <xs:minLength value='2'/>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-067",
+      "contract": "Derived ID facets <xs:minLength value='2'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-068",
+      "contract": "Derived ID facets <xs:pattern value='a+'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-069",
+      "contract": "Simple content ID uses actual value/parent binding",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-070",
+      "contract": "Simple content ID uses actual value/parent binding",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-071",
+      "contract": "Simple content IDREF uses actual value/parent binding",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-072",
+      "contract": "Simple content IDREF uses actual value/parent binding",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-073",
+      "contract": "Identity value constraint excluded IDdefault='a'",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-074",
+      "contract": "Identity value constraint excluded IDfixed='a'",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-075",
+      "contract": "Identity value constraint excluded IDREFdefault='a'",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-076",
+      "contract": "Identity value constraint excluded IDREFfixed='a'",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-077",
+      "contract": "Identity value constraint excluded IDREFSdefault='a'",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-078",
+      "contract": "Identity value constraint excluded IDREFSfixed='a'",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-079",
+      "contract": "Identity raw lexical bound 256",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-080",
+      "contract": "Identity raw lexical bound 257",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "ID-081",
+      "contract": "Distinct identity string bound 128",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-082",
+      "contract": "Distinct identity string bound 129",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "ID-083",
+      "contract": "Identity occurrence bound 256",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-084",
+      "contract": "Identity occurrence bound 257",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "ID-085",
+      "contract": "instance-selected child ID binds parent",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-086",
+      "contract": "ordinary child string is not ID",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-087",
+      "contract": "instance-selected child IDREF resolves",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ID-088",
+      "contract": "instance-selected child IDREF missing",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ID-089",
+      "contract": "Instance-selected root ID cannot bind an outside parent",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    }
+  ]
+}
