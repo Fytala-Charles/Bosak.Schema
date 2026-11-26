@@ -2,7 +2,11 @@
 
 # Bosak.Schema
 
-The 0.11 development candidate requires Bosak Core 1.86.0 or later.
+The 0.12 development candidate requires Bosak Core 1.86.0 or later.
+
+## Exact duration values (0.12 source)
+
+Both owned native facades admit bounded duration, yearMonthDuration and dayTimeDuration. NativeScalarValue exposes exact BigInteger DurationMonths, Core exact-decimal DurationSeconds and collapsed original DurationValue text without TimeSpan/decimal precision loss. Applicable finite facets, partial ordering, selected-member and lifetime rules are qualified within the [duration guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/duration-200/GUIDE.md). Raw text is capped at256 UTF-16 units and caller capacity; supplied and aggregate digit/scale limits apply before normalization. Ambiguous decimal-point seconds syntax, incomparable local endpoints and conflicting coincident Gregorian projections remain Unsupported. This source candidate is separate from registry publication and complete XSD1.1/general duration-operator acceptance.
 
 ## URI and IEEE values (0.11 source)
 

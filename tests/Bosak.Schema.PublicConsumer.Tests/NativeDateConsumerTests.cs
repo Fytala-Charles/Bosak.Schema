@@ -22,6 +22,7 @@
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Reconcile measured date pattern admission without changing original schema |
 //                      | Charles Korthout | 0.9   | 25-11-2026     | Reconcile measured native calendar outcomes with original stimuli |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.10   | 26-11-2026     | Reconcile measured duration admission; preserve original inputs |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Text.Json;
@@ -91,7 +92,7 @@ public sealed class NativeDateConsumerTests
  /// <summary>Excluded calendar types and complex date content remain refused.</summary>
  [Fact]public void DeferredTypes()
  {
-  foreach(var name in new[]{"time","dateTime","dateTimeStamp","gYear","duration"})foreach(bool data in new[]{false,true}){var schema=Simple.Replace("xs:date'","xs:"+name+"'",StringComparison.Ordinal);if(name is "time" or "dateTime" or "dateTimeStamp"){if(data){var compiled=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(NativeSchemaOutcome.Valid,compiled.Outcome);compiled.Value!.Dispose();}else{var compiled=NativeSchemaSession.Create(schema,Options);Assert.Equal(NativeSchemaOutcome.Valid,compiled.Outcome);compiled.Value!.Dispose();}}else Assert.Equal(NativeSchemaOutcome.Unsupported,data?NativeSchemaNodeDataSession.Create(schema,Options).Outcome:NativeSchemaSession.Create(schema,Options).Outcome);}
+  foreach(var name in new[]{"time","dateTime","dateTimeStamp","gYear","duration"})foreach(bool data in new[]{false,true}){var schema=Simple.Replace("xs:date'","xs:"+name+"'",StringComparison.Ordinal);if(name is "time" or "dateTime" or "dateTimeStamp" or "duration"){if(data){var compiled=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(NativeSchemaOutcome.Valid,compiled.Outcome);compiled.Value!.Dispose();}else{var compiled=NativeSchemaSession.Create(schema,Options);Assert.Equal(NativeSchemaOutcome.Valid,compiled.Outcome);compiled.Value!.Dispose();}}else Assert.Equal(NativeSchemaOutcome.Unsupported,data?NativeSchemaNodeDataSession.Create(schema,Options).Outcome:NativeSchemaSession.Create(schema,Options).Outcome);}
   var complex=Start+"<xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:date'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>";var admitted=NativeSchemaSession.Create(complex,Options);Assert.Equal(NativeSchemaOutcome.Valid,admitted.Outcome);admitted.Value?.Dispose();
  }
 

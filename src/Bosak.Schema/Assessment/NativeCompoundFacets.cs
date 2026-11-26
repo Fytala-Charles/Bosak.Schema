@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 26-11-2026     | Support bounded text datatypes and inherited normalization facets |
 //                      | Charles Korthout | 0.3   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
+//                      | Charles Korthout | 0.4   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -112,6 +113,7 @@ internal static class NativeCompoundEquality
             if(!b.IsListValue)return a.Items.Length==1&&Equal(a.Items[0],b);
             return a.Items.Length==b.Items.Length&&a.Items.Zip(b.Items).All(pair=>Equal(pair.First,pair.Second));
         }
+        if(a.DurationValue is { } duration && b.DurationValue is { } otherDuration)return duration.SameValue(otherDuration);
         if(a.FloatingValue is { } floating && b.FloatingValue is { } otherFloating)return floating.SameSchemaValue(otherFloating);
         if(a.UriValue is { } uri && b.UriValue is { } otherUri)return string.Equals(uri,otherUri,StringComparison.Ordinal);
         if((a.IntegerValue is not null||a.TypedValue is not null)&&(b.IntegerValue is not null||b.TypedValue is not null))

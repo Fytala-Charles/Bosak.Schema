@@ -4,6 +4,10 @@
   <p>Apache-2.0 schema integration and staged XSD 1.1 services for .NET.</p>
 </div>
 
+## Exact native duration candidate — 26 November 2026
+
+The 0.12 development candidate adds bounded duration, yearMonthDuration and dayTimeDuration with exact independent months/seconds, finite facets and original selected-member facts on signed Core 1.86.0. Immutable DurationMonths, DurationSeconds and collapsed DurationValue reads retain owner/lifetime and XML boundaries. DU-701–DU-900 track 200 behavioral contracts. Partial-order and lexical ambiguity exclusions remain explicit; general legacy duration operators, full XSD1.1/C45 and publication remain separate. [Scope, capacities and example](docs/duration-200/GUIDE.md).
+
 ## Native URI and IEEE candidate — 26 November 2026
 
 The 0.11 development candidate adds bounded anyURI, float and double validation and immutable typed reads on signed Core1.86.0. URI collapse/ordinal equality and IEEE signed-zero/NaN/rounding semantics retain original nodes, member provenance and owner lifetime. NU-501–NU-700 track 200 behavioral contracts, not 200 new specification features. Full XSD1.1, general PSVI/C45, augmentation and publication remain separate. [Scope, bounds and example](docs/numeric-uri-200/GUIDE.md).
