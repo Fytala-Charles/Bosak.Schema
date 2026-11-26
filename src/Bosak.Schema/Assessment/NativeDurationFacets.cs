@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 26-11-2026     | Correct equal exclusive endpoints as an admitted empty value space |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -73,7 +74,7 @@ internal sealed class NativeDurationFacets
         {
             var compared=lo.Compare(hi);
             NativeDecimalSchema.Require(compared is not null,"Incomparable local duration endpoints await qualification.",NativeDecimalUnsupportedReason.ValueType);
-            if(compared>0||compared==0&&(result.lowerExclusive||result.upperExclusive))Invalid("Inconsistent duration endpoints.");
+            if(compared>0||compared==0&&result.lowerExclusive!=result.upperExclusive)Invalid("Inconsistent duration endpoints.");
         }
         result.patterns=patterns.ToImmutable();return result;
     }

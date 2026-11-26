@@ -1,0 +1,43 @@
+{
+  "utc": "2026-11-26T08:20:47.455544+00:00",
+  "blockingFindings": [],
+  "sourceCases": 21147,
+  "sourceInternal": 1650,
+  "sourcePublic": 19497,
+  "packageCases": 19497,
+  "newSourceCases": 3281,
+  "countsOverlap": true,
+  "apiAdded": [
+    "Bosak.Schema.NativeScalarKind|Field|Bosak.Schema.NativeScalarKind GDay=23",
+    "Bosak.Schema.NativeScalarKind|Field|Bosak.Schema.NativeScalarKind GMonth=21",
+    "Bosak.Schema.NativeScalarKind|Field|Bosak.Schema.NativeScalarKind GMonthDay=22",
+    "Bosak.Schema.NativeScalarKind|Field|Bosak.Schema.NativeScalarKind GYear=19",
+    "Bosak.Schema.NativeScalarKind|Field|Bosak.Schema.NativeScalarKind GYearMonth=20",
+    "Bosak.Schema.NativeScalarValue|Method|System.Nullable`1[System.Int32] get_GregorianDay()",
+    "Bosak.Schema.NativeScalarValue|Method|System.Nullable`1[System.Int32] get_GregorianMonth()",
+    "Bosak.Schema.NativeScalarValue|Method|System.Nullable`1[System.Int32] get_GregorianTimezoneOffsetMinutes()",
+    "Bosak.Schema.NativeScalarValue|Method|System.Nullable`1[System.Int64] get_GregorianYear()",
+    "Bosak.Schema.NativeScalarValue|Method|System.String get_GregorianValue()",
+    "Bosak.Schema.NativeScalarValue|Property|System.Nullable`1[System.Int32] GregorianDay",
+    "Bosak.Schema.NativeScalarValue|Property|System.Nullable`1[System.Int32] GregorianMonth",
+    "Bosak.Schema.NativeScalarValue|Property|System.Nullable`1[System.Int32] GregorianTimezoneOffsetMinutes",
+    "Bosak.Schema.NativeScalarValue|Property|System.Nullable`1[System.Int64] GregorianYear",
+    "Bosak.Schema.NativeScalarValue|Property|System.String GregorianValue"
+  ],
+  "apiRemoved": [],
+  "scope": "Five bounded Gregorian fragment primitives, absent component fidelity, REC timezone-aware completion/order, finite facets, original typed/member facts and lifetime",
+  "reviewCorrections": [
+    "Use exact REC1972-12-31/month-last-day completion rather than invented year2000/day1",
+    "Preserve primitive value equality versus identity for global attribute fixed overrides",
+    "Correct float/double and duration local equal-exclusive bound schema rejection under pre-implementation adoption",
+    "Reconcile two measured historical gYear-refusal contexts with original input/source records preserved"
+  ],
+  "limitations": [
+    "Raw256/caller bounds; signed year interval excludes long.MinValue",
+    "Incomparable local endpoint pairs and enum/bounds over patterned ancestors Unsupported",
+    "Existing finite complex/assertion/augmentation grammar exclusions remain",
+    "No general Gregorian operators, identity graph, arbitrary regex, full PSVI/C45, public query factory or registry publication"
+  ],
+  "deliveryStatus": "Qualified for commit/push/PR review; passing merge and exact-main CI remain external delivery gates",
+  "newRegistryPublication": false
+}

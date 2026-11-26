@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Transport ordered compound items with original member provenance |
 //                      | Charles Korthout | 0.5   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      | Charles Korthout | 0.6   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
+//                      | Charles Korthout | 0.7   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Xml.Linq;
@@ -35,6 +36,7 @@ internal sealed partial class NativeDecimalSchema
  }
  private static bool ConstraintIdentical(NativeValueConstraint expected,NativeValueConstraint other)
  {
+  if(expected.Gregorian is { } gregorian && other.Gregorian is { } otherGregorian)return gregorian.IdenticalValue(otherGregorian);
   if(expected.Duration is { } duration && other.Duration is { } otherDuration)return duration.SameValue(otherDuration);
   if(expected.Uri is { } uri && other.Uri is { } otherUri)return string.Equals(uri,otherUri,StringComparison.Ordinal);
   if(expected.Floating is { } floating && other.Floating is { } otherFloating)return floating.SameSchemaValue(otherFloating);

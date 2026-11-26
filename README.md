@@ -4,6 +4,10 @@
   <p>Apache-2.0 schema integration and staged XSD 1.1 services for .NET.</p>
 </div>
 
+## Native Gregorian fragment candidate — 26 November 2026
+
+The 0.13 development candidate adds bounded gYear/gYearMonth/gMonth/gMonthDay/gDay with exact nullable components, REC timezone-aware comparisons, finite facets and original typed/member facts on signed Core1.86.0. GR-901–GR-1300 track400 behavioral contracts, including the shared equal-exclusive-endpoint schema correction. Existing lifetime/XML and explicit Unsupported boundaries remain. General legacy operators, ID graphs, full XSD1.1/C45 and publication remain separate. [Scope, bounds and example](docs/gregorian-400/GUIDE.md).
+
 ## Exact native duration candidate — 26 November 2026
 
 The 0.12 development candidate adds bounded duration, yearMonthDuration and dayTimeDuration with exact independent months/seconds, finite facets and original selected-member facts on signed Core 1.86.0. Immutable DurationMonths, DurationSeconds and collapsed DurationValue reads retain owner/lifetime and XML boundaries. DU-701–DU-900 track 200 behavioral contracts. Partial-order and lexical ambiguity exclusions remain explicit; general legacy duration operators, full XSD1.1/C45 and publication remain separate. [Scope, capacities and example](docs/duration-200/GUIDE.md).

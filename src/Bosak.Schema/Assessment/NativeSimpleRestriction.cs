@@ -41,6 +41,7 @@
 //                      | Charles Korthout | 0.28   | 26-11-2026     | Support bounded text datatypes and inherited normalization facets |
 //                      | Charles Korthout | 0.29   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      | Charles Korthout | 0.30   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
+//                      | Charles Korthout | 0.31   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -63,6 +64,8 @@ internal sealed partial class NativeDecimalSchema
         var baseName = ResolveTypeName(restriction, "base");
         if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var newBase))
         {
+            if (newBase.GregorianKind is { } gregorianKind) return new NativeType(name, false, namespaceUri, gregorianKind: gregorianKind, baseName: baseName, derivationBase: newBase,
+                gregorianFacets: NativeGregorianFacets.Compile(restriction, gregorianKind, maxStringCharacters.Value, patternCompilation, newBase.GregorianFacets));
             if (newBase.DurationKind is { } durationKind) return new NativeType(name, false, namespaceUri, durationKind: durationKind, baseName: baseName, derivationBase: newBase,
                 durationFacets: NativeDurationFacets.Compile(restriction, durationKind, limits, maxStringCharacters.Value, patternCompilation, newBase.DurationFacets));
             if (newBase.IsUri) return new NativeType(name, false, namespaceUri, isUri: true, textKind: NativeTextKind.Token, baseName: baseName, derivationBase: newBase,

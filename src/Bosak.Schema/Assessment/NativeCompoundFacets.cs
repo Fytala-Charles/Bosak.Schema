@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 26-11-2026     | Support bounded text datatypes and inherited normalization facets |
 //                      | Charles Korthout | 0.3   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      | Charles Korthout | 0.4   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
+//                      | Charles Korthout | 0.5   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -113,6 +114,7 @@ internal static class NativeCompoundEquality
             if(!b.IsListValue)return a.Items.Length==1&&Equal(a.Items[0],b);
             return a.Items.Length==b.Items.Length&&a.Items.Zip(b.Items).All(pair=>Equal(pair.First,pair.Second));
         }
+        if(a.GregorianValue is { } gregorian && b.GregorianValue is { } otherGregorian)return gregorian.SameValue(otherGregorian);
         if(a.DurationValue is { } duration && b.DurationValue is { } otherDuration)return duration.SameValue(otherDuration);
         if(a.FloatingValue is { } floating && b.FloatingValue is { } otherFloating)return floating.SameSchemaValue(otherFloating);
         if(a.UriValue is { } uri && b.UriValue is { } otherUri)return string.Equals(uri,otherUri,StringComparison.Ordinal);

@@ -2,7 +2,11 @@
 
 # Bosak.Schema
 
-The 0.12 development candidate requires Bosak Core 1.86.0 or later.
+The 0.13 development candidate requires Bosak Core 1.86.0 or later.
+
+## Gregorian fragment values (0.13 source)
+
+Both owned facades admit bounded gYear, gYearMonth, gMonth, gMonthDay and gDay. Distinct scalar kinds expose nullable GregorianYear/Month/Day/TimezoneOffsetMinutes and collapsed original GregorianValue text. Missing fields stay absent; REC1972-12-31/month-last-day completion is private to exact comparison. Extended signed years, timezone presence, finite facets and original member/lifetime facts follow the [guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/gregorian-400/GUIDE.md). Raw input is bounded to256 UTF-16 units and caller capacity; years exclude long.MinValue. The earlier float/duration equal-exclusive-bound schema rejection is corrected. Source qualification does not imply a new registry publication, general legacy Gregorian operators or full XSD1.1/C45.
 
 ## Exact duration values (0.12 source)
 
