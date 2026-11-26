@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-26",
+  "recordedBeforeImplementation": true,
+  "base": "07fe5cd9a4121d30fe0d42550ca3a0be5d498218",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.3.4.3 nil has no character/element children",
+        "3.4.4.2 clauses1.1-1.4 content validity excludes comment/PI contributions",
+        "3.15.2 annotation/appinfo/documentation grammar and placement",
+        "Admitted declaration, particle, facet and composition XML representation summaries with leading optional annotation"
+      ]
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3.1.2 typed values",
+        "6.2 element string-value excludes comments/PI",
+        "6.5/6.6 processing instruction and comment nodes: parent/order/string typed values"
+      ]
+    }
+  ],
+  "scope": [
+    "Ignore instance comment/PI nodes for already admitted simple/complex/empty/mixed/nil validation; preserve actual original-node wrappers, paths, order, typed facts, export and lifetime",
+    "Validate and omit schema annotations from compiler-owned parsed trees before all descendant scans and closed assembly; appinfo/documentation content is opaque and is never compiled as declarations"
+  ],
+  "deviations": [
+    "Existing finite XML byte/node, component, typed-value and lifetime capacities remain and count original markup before normalization",
+    "At most16 annotation wrappers per schema source; optional id is checked as NCName with duplicate IDs rejected within that source",
+    "Only id on annotation and source on appinfo/documentation; xml:lang and foreign attributes remain Unsupported pending separate adoption",
+    "Only known already-admitted XSD parent grammar positions; one leading annotation except repeatable anywhere at schema root",
+    "No public annotation PSVI projection, implicit anyType, new datatype, augmentation, Core API/pin or registry publication"
+  ],
+  "qualification": [
+    "Both facades, native original-node authority/path/expiry tests",
+    "Preserve old authored payloads and reconcile only measured refusal changes",
+    "Frozen21/129/598 corpora and unchanged original invoice; no conformance percentage"
+  ]
+}

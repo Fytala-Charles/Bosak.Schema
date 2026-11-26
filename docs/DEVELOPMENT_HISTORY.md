@@ -1,3 +1,7 @@
+## Original markup and annotation coverage — 26 November 2026
+
+Development0.15 adds original instance comment/PI support and bounded opaque schema annotations before declaration scans/closed assembly. [Guide](markup-coverage/GUIDE.md); [readiness](markup-coverage/BETA-READINESS.md). Source21,544/package19,881overlapping pass; API55names/663rows and signed Core1.86.0 unchanged. Frozen21matches; structural39/90; datatype537/61; zeroerrors. Original invoice workflow passes. Earlier dated entries are historical; publication/fullXSD/C45 remain separate.
+
 ## Product documentation reconciliation — 26 November 2026
 
 README and ROADMAP now describe product use and current direction. Exact prior files, including historical checkpoint entries, are retained with source identity in [the historical snapshot](history/2026-11-26-product-docs/SOURCE.json). Their relative links retain the original repository-root context.

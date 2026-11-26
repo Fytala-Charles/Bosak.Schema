@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 25-11-2026     | Admit closed scalar global references with existing compositor occurrence limits |
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.5   | 25-11-2026     | Validate scalar element constraints against provided original values |
+//                      | Charles Korthout | 0.6 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -79,7 +80,7 @@ internal sealed partial class NativeDecimalSchema
         NativePatternBudget budget, CancellationToken token)
     {
         foreach(var text in owner.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only all contains non-whitespace text.");
-        Require(owner.Nodes().All(n => n is XElement or XText), "All container comments or processing instructions are excluded.");
+        Require(owner.Nodes().All(n => n is XElement or XText or XComment or XProcessingInstruction), "All container comments or processing instructions are excluded.");
         var nodes = owner.Elements().ToArray();
         if (nodes.Length == 0 && plan.AllMinimum == 0) return;
         var seen = new HashSet<XName>();
@@ -91,7 +92,7 @@ internal sealed partial class NativeDecimalSchema
             Check(seen.Add(node.Name), "All member occurs more than once.");
             InstanceAttributes(node);
             Check(!node.HasElements, "Scalar all member contains elements.");
-            Require(node.Nodes().All(n => n is XText), "Scalar all comments or processing instructions are excluded.");
+            Require(node.Nodes().All(n => n is XText or XComment or XProcessingInstruction), "Scalar all comments or processing instructions are excluded.");
             states.Add(AssessElementScalar(node, selected!, budget));
         }
         foreach (var member in plan.Children)

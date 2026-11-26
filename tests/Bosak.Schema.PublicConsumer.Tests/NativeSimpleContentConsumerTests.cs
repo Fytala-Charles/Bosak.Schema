@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 26-11-2026     | Check measured text admissions against unmodified original fixtures |
 //                      | Charles Korthout | 0.3   | 26-11-2026     | Reconcile measured SC-054 double extension admission; preserve fixture |
+//                      | Charles Korthout | 0.4 | 26-11-2026     | Reconcile original markup admissions; preserve source payloads |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -42,7 +43,7 @@ public sealed class NativeSimpleContentConsumerTests
     [Theory][MemberData(nameof(Cases))]
     public void SimpleContent_SeparatesRootAndExistingIndexes(string id,string payload)
     {
-        Assert.StartsWith("SC-",id);using var data=JsonDocument.Parse(payload);var r=data.RootElement;
+        Assert.StartsWith("SC-",id);using var data=JsonDocument.Parse(payload);var r=data.RootElement;r=NativeMarkupLegacyVerification.Reconcile(r,nameof(NativeSimpleContentConsumerTests));
         var options=new NativeSchemaSessionOptions(r.GetProperty("maxNativeCoefficientDigits").GetInt32(),r.GetProperty("maxNativeScale").GetInt32(),r.GetProperty("maxStringCharacters").GetInt32(),65536,1,32,1,256,256);
         if(id=="SC-051"){NativeTextLegacyVerification.Check(r.GetProperty("schema").GetString()!,r.GetProperty("instance").GetString()!,options,NativeSchemaOutcome.Valid,NativeSchemaOutcome.Valid,"12.50",root:true);return;}
         if(id=="SC-054")

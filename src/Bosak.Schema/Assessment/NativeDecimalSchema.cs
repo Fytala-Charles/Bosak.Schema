@@ -71,6 +71,7 @@
 //                      | Charles Korthout | 1.45   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
 //                      | Charles Korthout | 1.46   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
 //                      | Charles Korthout | 1.47 | 26-11-2026     | Admit bounded empty groups and original anonymous attribute types |
+//                      | Charles Korthout | 1.48 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -130,6 +131,7 @@ internal sealed partial class NativeDecimalSchema
             var root = document.Root!;
             Require(root.Name == Xs + "schema", "Schema root or namespace is unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
             var mixedProfile = maxStringCharacters is not null;
+            if (mixedProfile) PrepareSchemaAnnotations(root, cancellationToken);
             if (mixedProfile) root.AddAnnotation(new NativeValueConstraintCompilation(limits, maxStringCharacters!.Value, cancellationToken));
             if (mixedProfile) Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault", "attributeFormDefault");
             else Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault");
@@ -546,7 +548,7 @@ internal sealed partial class NativeDecimalSchema
             if (!selected!.Root.Type.IsComplex)
             {
                 Check(!root.HasElements, "Simple root cannot contain child elements.");
-                Require(root.Nodes().All(n => n is XText), "Simple-root comments or processing instructions are unsupported.");
+                Require(root.Nodes().All(n => n is XText or XComment or XProcessingInstruction), "Simple-root comments or processing instructions are unsupported.");
                 var scalar = AssessElementScalar(root, selected.Root, patternBudget);
                 scalar = scalar with { NormalizedStringValue = NormalizedScalarText(scalar, root.Value) };
                 cancellationToken.ThrowIfCancellationRequested();
@@ -555,7 +557,7 @@ internal sealed partial class NativeDecimalSchema
             if (selected.Root.Type.ContentType is { } contentType)
             {
                 Check(!root.HasElements, "Simple-content root cannot contain child elements.");
-                Require(root.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
+                Require(root.Nodes().All(n => n is XText || maxStringCharacters is not null && (n is XComment or XProcessingInstruction)), "Simple-content XML node is outside the profile.");
                 var scalarDeclaration = new NativeDeclaration(selected.Root.Name, contentType, 1, 1, selected.Root.NamespaceUri);
                 var state = AssessScalar(root.Value, scalarDeclaration, patternBudget, root) with { Declaration = selected.Root, EffectiveType = rootType };
                 state = state with { NormalizedStringValue = NormalizedScalarText(state, root.Value) };
@@ -606,7 +608,7 @@ internal sealed partial class NativeDecimalSchema
                     var leaf = nodes[index++];
                     InstanceAttributes(leaf);
                     Check(!leaf.HasElements, "Decimal leaf contains nested elements.");
-                    Require(leaf.Nodes().All(n => n is XText), "Decimal leaf comments or processing instructions are unsupported.");
+                    Require(leaf.Nodes().All(n => n is XText || maxStringCharacters is not null && (n is XComment or XProcessingInstruction)), "Scalar XML node is outside the profile.");
                     var state = AssessElementScalar(leaf, declaration, patternBudget);
                     if (state.TypedValue is { } numeric) present.Add(numeric);
                     if (state.StringValue is { } textValue) textValues.Add(textValue);

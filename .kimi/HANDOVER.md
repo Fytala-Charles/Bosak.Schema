@@ -1,3 +1,7 @@
+## Original markup and annotation coverage — 26 November 2026
+
+Development0.15 adds original instance comment/PI support and bounded opaque schema annotations before declaration scans/closed assembly. [Guide](../docs/markup-coverage/GUIDE.md); [readiness](../docs/markup-coverage/BETA-READINESS.md). Source21,544/package19,881overlapping pass; API55names/663rows and signed Core1.86.0 unchanged. Frozen21matches; structural39/90; datatype537/61; zeroerrors. Original invoice workflow passes. Earlier dated entries are historical; publication/fullXSD/C45 remain separate.
+
 ## Bounded structural coverage â€” 26 November 2026
 
 Development 0.14 adds empty all/optional empty choice and original anonymous attribute simple types on admitted owners. The [guide](../docs/structural-coverage/GUIDE.md) records capacities and exclusions; [beta readiness](../docs/structural-coverage/BETA-READINESS.md) separates bounded qualification from general XSD1.1/C45 acceptance. All21,358 source/19,701 overlapping package tests pass; API55names/663rows and signed Core1.86.0 are unchanged. Structural sample improves32â†’38 matches; datatype454matches remains co-blocked. Original invoice workflow passes. Earlier dated entries are historical; publication remains separate.

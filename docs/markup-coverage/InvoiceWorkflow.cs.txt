@@ -1,0 +1,43 @@
+// ===========================================================================================================================================================
+// AUTHOR               : Charles Korthout
+// CREATE DATE          : 26 November 2026
+// PURPOSE              : Verifies evidence-selected empty groups and anonymous attribute type contracts.
+// SPECIAL NOTES        : Unit tests verifying correctness of the underlying implementation.
+//
+// COPYRIGHT            : Fytala
+// LICENSE              : LICENSE.md (Apache-2.0)
+// SPDX-License-Identifier: Apache-2.0
+// ===========================================================================================================================================================
+// Change History:      |==================|=======|================|=========================================================================================
+//                      |     Author       |Version|  Date          | Notes                                                                                    |
+//                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
+//                      |==================|=======|================|=========================================================================================
+// ===========================================================================================================================================================
+using Bosak.Schema;
+using System.Xml.Linq;
+using System.Text.Json;
+internal static class Program
+{
+    private static void Check(bool condition,string text){if(!condition)throw new InvalidOperationException(text);}
+    private static int Main(string[] args)
+    {
+        try
+        {
+            var schema=File.ReadAllText(Path.Combine(args[0],"invoice.xsd"));var xml=File.ReadAllText(Path.Combine(args[0],"invoice.xml"));
+            var options=new NativeSchemaSessionOptions(256,256,1024,65536,1,256,16,256,256);var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);
+            var c=NativeSchemaSession.Create(schema,options);Check(c.Outcome==NativeSchemaOutcome.Valid,"compile:"+c.Outcome);using var session=c.Value!;
+            var a=session.Assess(xml,context);Check(a.Outcome==NativeSchemaOutcome.Valid,"assess:"+a.Outcome);using var document=a.Value!;
+            Check(document.ScalarCount==2,"two leaves");var first=document.ReadScalar(0).DecimalValue;var second=document.ReadScalar(1).DecimalValue;Check(first.ToInvariantString(256)=="10"&&second.ToInvariantString(256)=="5","values");
+            var exported=document.ExportXml();Check(XNode.DeepEquals(XElement.Parse(xml,LoadOptions.PreserveWhitespace),XElement.Parse(exported,LoadOptions.PreserveWhitespace)),"export");
+            bool capacity=false;try{using var excess=session.Assess(xml,context).Value;}catch(InvalidOperationException){capacity=true;}Check(capacity,"one-document capacity");
+            document.Dispose();bool expired=false;try{document.ReadScalar(0);}catch(ObjectDisposedException){expired=true;}Check(expired,"expiry");
+            using(var token=new CancellationTokenSource()){token.Cancel();bool cancelled=false;try{session.Assess(xml,context,token.Token);}catch(OperationCanceledException){cancelled=true;}Check(cancelled,"cancellation");}
+            using var reopened=session.Assess(exported,context).Value!;Check(reopened.ReadScalar(0).DecimalValue.ToInvariantString(256)=="10","reopen");
+            var n=NativeSchemaNodeDataSession.Create(schema,options);Check(n.Outcome==NativeSchemaOutcome.Valid,"node compile");using var nodeSession=n.Value!;var assessed=nodeSession.Assess(xml,context);Check(assessed.Outcome==NativeSchemaOutcome.Valid,"node assess");using var nodes=assessed.Value!;
+            Check(nodes.ReadElement([0]).DecimalValue.ToInvariantString(256)=="10"&&nodes.ReadElement([1]).DecimalValue.ToInvariantString(256)=="5","node values");Check(XNode.DeepEquals(XElement.Parse(xml,LoadOptions.PreserveWhitespace),XElement.Parse(nodes.ExportXml(),LoadOptions.PreserveWhitespace)),"node export");
+            Console.WriteLine(JsonSerializer.Serialize(new{originalInvoice=true,bothFacades=true,exactValues=new[]{first.ToInvariantString(256),second.ToInvariantString(256)},originalXml=true,capacityRecovery=true,cancellationRecovery=true,expiredReadsRefused=true,detachedValuesRetained=true}));return 0;
+        }
+        catch(Exception error){Console.Error.WriteLine("Caught invoice workflow diagnostic: "+error);return 1;}
+    }
+}

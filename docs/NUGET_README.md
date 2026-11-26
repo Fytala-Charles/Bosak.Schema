@@ -2,11 +2,15 @@
 
 # Bosak.Schema
 
-The 0.14 development candidate requires Bosak Core 1.86.0 or later.
+The 0.15 development candidate requires Bosak Core 1.86.0 or later.
+
+## Original markup and annotations (0.15 source)
+
+Both owned native facades preserve instance comments/PI while ignoring their text for schema validation and element string values. Original paths, typed facts, XML export, budgets and owner lifetime remain. Empty/nil content still rejects character and element children. Bounded schema annotations are checked before declaration scans; appinfo/documentation payloads stay opaque.16wrappers/source and original XML budgets apply; xml:lang/foreign wrapper attributes and public annotation PSVI remain excluded. [Guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/markup-coverage/GUIDE.md).
 
 ## Structural coverage (0.14 source)
 
-Both owned facades admit bounded empty all/optional empty choice and anonymous attribute simple types on existing owners. Empty content yields zero typed items; attribute references/groups retain original anonymous identities. The shared16site budget and existing source/value/lifetime limits apply. Required empty choice, empty-owner attributes, nested instance comments/PI, schema annotations, augmentation and general XSD1.1/C45 remain excluded. See the [structural guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/structural-coverage/GUIDE.md).
+Both owned facades admit bounded empty all/optional empty choice and anonymous attribute simple types on existing owners. Empty content yields zero typed items; attribute references/groups retain original anonymous identities. The shared16site budget and existing source/value/lifetime limits apply. Required empty choice, empty-owner attributes, annotation xml:lang/foreign attributes, augmentation and general XSD1.1/C45 remain excluded. See the [structural guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/structural-coverage/GUIDE.md).
 
 ## Gregorian fragment values (0.13 source)
 
@@ -447,7 +451,7 @@ var schema = """
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:simpleType name="Label"><xs:restriction base="xs:string">
     <xs:length value="2"/>
-    <xs:enumeration value="😀A"/>
+    <xs:enumeration value="ðŸ˜€A"/>
   </xs:restriction></xs:simpleType>
   <xs:element name="r"><xs:complexType><xs:sequence>
     <xs:element name="label" type="Label"/>
@@ -462,7 +466,7 @@ if (created.Outcome != NativeSchemaOutcome.Valid)
     return;
 }
 using var session = created.Value!;
-var assessed = session.Assess("<r><label>😀A</label></r>",
+var assessed = session.Assess("<r><label>ðŸ˜€A</label></r>",
     new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch, 0));
 if (assessed.Outcome != NativeSchemaOutcome.Valid)
 {

@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2 | 26-11-2026     | Reconcile original markup admissions; preserve source payloads |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -48,7 +49,7 @@ public sealed class NativeIntegerConsumerTests
     [Theory][MemberData(nameof(Cases))]
     public void IntegerAssessment_SeparatesValidityCapacityAndProfile(string id,string payload)
     {
-        Assert.StartsWith("M2C3-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;
+        Assert.StartsWith("M2C3-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;row=NativeMarkupLegacyVerification.Reconcile(row,nameof(NativeIntegerConsumerTests));
         var options=new NativeSchemaSessionOptions(row.GetProperty("maxNativeCoefficientDigits").GetInt32(),256,256,65536,1,8,1,256,256);
         var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,options);
         Assert.Equal(row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());

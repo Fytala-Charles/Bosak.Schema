@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 26-11-2026     | Check measured text admissions against unmodified original fixtures |
+//                      | Charles Korthout | 0.3 | 26-11-2026     | Reconcile original markup admissions; preserve source payloads |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -42,7 +43,7 @@ public sealed class NativeNestedSimpleContentConsumerTests
     [Theory][MemberData(nameof(Cases))]
     public void NestedSimpleContent_AssessOriginalOwnersAndPreserveIndexes(string id,string payload)
     {
-        Assert.StartsWith("NC-",id);using var parsed=JsonDocument.Parse(payload);var r=parsed.RootElement;if(id=="NC-033"){NativeTextLegacyVerification.Check(r.GetProperty("schema").GetString()!,r.GetProperty("instance").GetString()!,Options(),NativeSchemaOutcome.Valid,NativeSchemaOutcome.Invalid);return;}var created=NativeSchemaSession.Create(r.GetProperty("schema").GetString()!,Options());Assert.Equal(r.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
+        Assert.StartsWith("NC-",id);using var parsed=JsonDocument.Parse(payload);var r=parsed.RootElement;r=NativeMarkupLegacyVerification.Reconcile(r,nameof(NativeNestedSimpleContentConsumerTests));if(id=="NC-033"){NativeTextLegacyVerification.Check(r.GetProperty("schema").GetString()!,r.GetProperty("instance").GetString()!,Options(),NativeSchemaOutcome.Valid,NativeSchemaOutcome.Invalid);return;}var created=NativeSchemaSession.Create(r.GetProperty("schema").GetString()!,Options());Assert.Equal(r.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(created.Value);Assert.Equal("BSK-NATIVE-SCHEMA-UNSUPPORTED",Assert.Single(created.Diagnostics).Code);return;}
         using var s=created.Value!;var xml=r.GetProperty("instance").GetString()!;var assessed=s.Assess(xml,Context());Assert.Equal(r.GetProperty("expectedAssessment").GetString(),assessed.Outcome.ToString());
         if(assessed.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(assessed.Value);Assert.Equal("BSK-NATIVE-INSTANCE-"+assessed.Outcome.ToString().ToUpperInvariant(),Assert.Single(assessed.Diagnostics).Code);return;}

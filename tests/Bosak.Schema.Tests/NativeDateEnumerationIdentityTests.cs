@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 24-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 24-11-2026     | Adopt qualified date enumeration controls |
+//                      | Charles Korthout | 0.3 | 26-11-2026     | Reconcile original markup admissions without changing stimuli |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Text.Json;
@@ -68,8 +69,8 @@ public sealed class NativeDateEnumerationIdentityTests
  [Theory][InlineData(false)][InlineData(true)]public void LeafComments(bool data)
  {
   const string xml="<r><!--kept-->1999-12-31-11:00</r>";
-  if(data){using var s=NativeSchemaNodeDataSession.Create(Schema,Options).Value!;Assert.Equal(NativeSchemaOutcome.Unsupported,s.Assess(xml,new(DateTimeOffset.UnixEpoch,0)).Outcome);}
-  else{using var s=NativeSchemaSession.Create(Schema,Options).Value!;Assert.Equal(NativeSchemaOutcome.Unsupported,s.Assess(xml,new(DateTimeOffset.UnixEpoch,0)).Outcome);}
+  if(data){using var s=NativeSchemaNodeDataSession.Create(Schema,Options).Value!;var a=s.Assess(xml,new(DateTimeOffset.UnixEpoch,0));Assert.Equal(NativeSchemaOutcome.Valid,a.Outcome);using var d=a.Value!;Assert.Equal(1999,d.ReadElement([]).DateValue.Year);Assert.True(System.Xml.Linq.XNode.DeepEquals(System.Xml.Linq.XElement.Parse(xml),System.Xml.Linq.XElement.Parse(d.ExportXml())));}
+  else{using var s=NativeSchemaSession.Create(Schema,Options).Value!;var a=s.Assess(xml,new(DateTimeOffset.UnixEpoch,0));Assert.Equal(NativeSchemaOutcome.Valid,a.Outcome);using var d=a.Value!;Assert.Equal(1999,d.ReadRootScalar().DateValue.Year);Assert.True(System.Xml.Linq.XNode.DeepEquals(System.Xml.Linq.XElement.Parse(xml),System.Xml.Linq.XElement.Parse(d.ExportXml())));}
  }
 
  /// <summary>Schema formatting whitespace does not become unsupported facet markup.</summary>

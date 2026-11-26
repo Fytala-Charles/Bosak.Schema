@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 23-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 23-11-2026     | Verify absent root typed-value diagnostic and caught FOTY0012 |
 //                      | Charles Korthout | 0.3   | 23-11-2026     | Align test responsibility header with its primary type |
+//                      | Charles Korthout | 0.4 | 26-11-2026     | Reconcile original markup admissions without changing stimuli |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -83,7 +84,7 @@ public sealed class NativeAllAdditionalTests
     [Theory][InlineData("<!--comment-->")][InlineData("<?p value?>")]
     public void ExcludedNodes(string content)
     {
-        using var f=new Fixture(Schema("<xs:all minOccurs='0'><xs:element name='a' type='xs:string' minOccurs='0'/></xs:all>"),"<r>"+content+"</r>");Assert.Equal(SchemaAssessmentStatus.Unsupported,f.Assessment.Status);Assert.False(f.Input.IsAssessed);Assert.Empty(f.Assessment.Facts);
+        using var f=new Fixture(Schema("<xs:all minOccurs='0'><xs:element name='a' type='xs:string' minOccurs='0'/></xs:all>"),"<r>"+content+"</r>");Assert.Equal(SchemaAssessmentStatus.Valid,f.Assessment.Status);Assert.True(f.Input.IsAssessed);Assert.NotEmpty(f.Assessment.Facts);Assert.True(f.Input.FactsFor((NativeSessionNode)f.Input.Root)!.HasNoTypedValue);
     }
     /// <summary>Patterns on omitted anonymous members are compiled eagerly.</summary>
     /// <param name="pattern">Pattern source.</param><param name="expected">Expected compile outcome.</param>

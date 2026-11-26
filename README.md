@@ -11,7 +11,7 @@ Bosak.Schema provides Apache-2.0 schema services and bounded native XSD assessme
 | Availability | Scope |
 |---|---|
 | Published `0.5.0-beta.1` | Historical bounded decimal beta; use its release and integration guides |
-| Development `0.14`, signed Core `1.86.0` | Broader bounded datatype families, finite structural models, anonymous attribute types and empty content groups; unpublished |
+| Development `0.15`, signed Core `1.86.0` | Broader bounded datatype families, finite structural models, anonymous attribute types, empty groups, original comments/PI and bounded annotations; unpublished |
 
 The [current coverage guide](docs/SPECIFICATION_COVERAGE.md) distinguishes native implementation from legacy descriptor helpers and remaining specification gaps. General XSD 1.1 conformance, arbitrary schema-aware query integration and full PSVI/C45 acceptance remain incomplete.
 
@@ -33,7 +33,7 @@ Select XSD 1.0 or XSD 1.1 explicitly with `SchemaCompileOptions.Default(XsdLangu
 
 The `SchemaAwareXslt` helper explicitly enables the existing schema-aware compiler path. Ordinary Bosak compiler defaults remain unchanged. Full examples and limitations are in [integration](docs/INTEGRATION.md).
 
-The factory helpers above are separate from native-profile admission. For owned native assess/read/export workflows, choose the [development structural guide](docs/structural-coverage/GUIDE.md) and [consumer integration guide](docs/INTEGRATION.md); development APIs and scope are not a promise about the published beta.
+The factory helpers above are separate from native-profile admission. For owned native assess/read/export workflows, choose the [development structural guide](docs/markup-coverage/GUIDE.md) and [consumer integration guide](docs/INTEGRATION.md); development APIs and scope are not a promise about the published beta.
 
 ## 3. Build and Test
 
@@ -49,7 +49,7 @@ The public solution needs the .NET 10 SDK; it has no Azure, payment-service, key
 
 - [Architecture](docs/ARCHITECTURE.md) and [integration](docs/INTEGRATION.md)
 - [XSD coverage](docs/SPECIFICATION_COVERAGE.md), [roadmap](ROADMAP.md) and [feature registry](docs/FEATURE_REQUESTS.md)
-- [Datatype and structural guides](docs/structural-coverage/README.md) and [beta readiness](docs/structural-coverage/BETA-READINESS.md)
+- [Datatype and structural guides](docs/markup-coverage/README.md) and [beta readiness](docs/markup-coverage/BETA-READINESS.md)
 - [Development history](docs/DEVELOPMENT_HISTORY.md) for dated engineering checkpoints
 
 Bosak.Schema is the public schema engine. Bosak.Licensing and Bosak.Folio are separate products; private credentials, issuance and billing implementations are outside this repository.

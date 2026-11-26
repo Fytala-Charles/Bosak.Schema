@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 24-11-2026     | Reconcile original Boolean alias and read Boolean rather than integer facts |
+//                      | Charles Korthout | 0.3 | 26-11-2026     | Reconcile original markup admissions; preserve source payloads |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -44,7 +45,7 @@ public sealed class NativeIntegerRestrictionConsumerTests
     [Theory][MemberData(nameof(Cases))]
     public void IntegerRestrictions_ValidateExactOriginalValues(string id,string payload)
     {
-        Assert.StartsWith("IR-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;
+        Assert.StartsWith("IR-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;row=NativeMarkupLegacyVerification.Reconcile(row,nameof(NativeIntegerRestrictionConsumerTests));
         var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,Options(row.GetProperty("digits").GetInt32()));Assert.Equal(id=="IR-098"?"Valid":row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(created.Value);if(row.GetProperty("reason").ValueKind==JsonValueKind.String)Assert.Equal(row.GetProperty("reason").GetString(),created.Diagnostics[0].UnsupportedReason.ToString());return;}
         using var session=created.Value!;var xml=row.GetProperty("instance").GetString()!;var result=session.Assess(xml,Context);Assert.Equal(row.GetProperty("expectedAssessment").GetString(),result.Outcome.ToString());

@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Preserve imported named simple-type namespaces in private assembly metadata |
+//                      | Charles Korthout | 0.3 | 26-11-2026     | Prepare opaque annotations before closed schema assembly |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -51,7 +52,7 @@ internal sealed partial class NativeDecimalSchema
    {
     token.ThrowIfCancellationRequested();if(!parsed.TryGetValue(id,out var source))
     {
-     Require(catalog.TryGetValue(id,out var text),"Schema document is absent from the closed catalog.",NativeDecimalUnsupportedReason.DeclarationShape);source=Parse(text!,32768,token).Root!;Require(source.Name==Xs+"schema","Schema root namespace is unsupported.",NativeDecimalUnsupportedReason.DeclarationShape);Attributes(source,"version","xpathDefaultNamespace","targetNamespace","elementFormDefault","attributeFormDefault");Require(source.Attribute("version") is null || (string?)source.Attribute("version")=="1.1","Only schema version1.1 is admitted.",NativeDecimalUnsupportedReason.DeclarationShape);parsed.Add(id,source);
+     Require(catalog.TryGetValue(id,out var text),"Schema document is absent from the closed catalog.",NativeDecimalUnsupportedReason.DeclarationShape);source=Parse(text!,32768,token).Root!;PrepareSchemaAnnotations(source,token);Require(source.Name==Xs+"schema","Schema root namespace is unsupported.",NativeDecimalUnsupportedReason.DeclarationShape);Attributes(source,"version","xpathDefaultNamespace","targetNamespace","elementFormDefault","attributeFormDefault");Require(source.Attribute("version") is null || (string?)source.Attribute("version")=="1.1","Only schema version1.1 is admitted.",NativeDecimalUnsupportedReason.DeclarationShape);parsed.Add(id,source);
     }
     var ns=TargetNamespace(source,true);var ef=Form(source,"elementFormDefault","unqualified");var af=Form(source,"attributeFormDefault","unqualified");var ax=AssertionNamespace(source,ns,"");
     if(expectedNamespace is not null){if(!importReference)Require(ns.Length!=0 || expectedNamespace.Length==0,"Chameleon include conversion is outside this profile.",NativeDecimalUnsupportedReason.DeclarationShape);Check(ns==expectedNamespace,"Catalog source targetNamespace differs from its reference.");}

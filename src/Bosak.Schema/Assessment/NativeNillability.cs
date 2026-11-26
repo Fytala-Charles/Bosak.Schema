@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Validate scalar element constraints against provided original values |
+//                      | Charles Korthout | 0.3 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Xml.Linq;
@@ -35,6 +36,6 @@ internal sealed partial class NativeDecimalSchema
   Check(declaration.CanonicalDeclaration.IsNillable,"Any xsi:nil attribute requires a nillable declaration.");if(!NilBoolean(request.Value))return null;
   Check(declaration.CanonicalDeclaration.ValueConstraint?.IsFixed != true,"A fixed-value element cannot be nilled.");
   Require(!selected.IsComplex,"Complex nillability is outside the simple-valued profile.",NativeDecimalUnsupportedReason.DeclarationShape);
-  Require(element.Nodes().All(n=>n is XText or XElement),"Nilled comments or processing instructions are outside the profile.",NativeDecimalUnsupportedReason.DeclarationShape);Check(!element.Nodes().Any(),"Nilled elements cannot contain text or element children.");return new NativeElementState(declaration,null){EffectiveType=selected,IsNilled=true};
+  Require(element.Nodes().All(n=>n is XText or XElement or XComment or XProcessingInstruction),"Nilled comments or processing instructions are outside the profile.",NativeDecimalUnsupportedReason.DeclarationShape);Check(!element.Nodes().Any(n => n is XText or XElement),"Nilled elements cannot contain text or element children.");return new NativeElementState(declaration,null){EffectiveType=selected,IsNilled=true};
  }
 }

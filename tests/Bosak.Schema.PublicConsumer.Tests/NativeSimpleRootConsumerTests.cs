@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 22-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 24-11-2026     | Read original Boolean root values after measured admission |
+//                      | Charles Korthout | 0.3 | 26-11-2026     | Reconcile original markup admissions; preserve source payloads |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -39,7 +40,7 @@ public sealed class NativeSimpleRootConsumerTests
     [Theory][MemberData(nameof(Cases))]
     public void PlannedPayloads(string id,string json,bool data)
     {
-        using var plan=JsonDocument.Parse(json);var r=plan.RootElement;var schema=r.GetProperty("schema").GetString()!;var xml=r.GetProperty("instance").GetString()!;
+        using var plan=JsonDocument.Parse(json);var r=plan.RootElement;r=NativeMarkupLegacyVerification.Reconcile(r,nameof(NativeSimpleRootConsumerTests));var schema=r.GetProperty("schema").GetString()!;var xml=r.GetProperty("instance").GetString()!;
         var compile=id is "SR-008" or "SR-009"?"Valid":r.GetProperty("expectedCompile").GetString();var assessment=id is "SR-008" or "SR-009"?"Valid":r.GetProperty("expectedAssessment").GetString();
         var root=XElement.Parse(xml);var family=root.Name.LocalName=="other"?"integer":r.GetProperty("scalarFamily").GetString()!;
         if(data)

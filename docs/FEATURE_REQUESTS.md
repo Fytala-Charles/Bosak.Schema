@@ -1,8 +1,16 @@
-## Bounded structural coverage — 26 November 2026
+## Original markup and annotation coverage — 26 November 2026
 
-Development 0.14 adds empty all/optional empty choice and original anonymous attribute simple types on admitted owners. The [guide](structural-coverage/GUIDE.md) records capacities and exclusions; [beta readiness](structural-coverage/BETA-READINESS.md) separates bounded qualification from general XSD1.1/C45 acceptance. All21,358 source/19,701 overlapping package tests pass; API55names/663rows and signed Core1.86.0 are unchanged. Structural sample improves32→38 matches; datatype454matches remains co-blocked. Original invoice workflow passes. Earlier dated entries are historical; publication remains separate.
+Development0.15 adds original instance comment/PI support and bounded opaque schema annotations before declaration scans/closed assembly. [Guide](markup-coverage/GUIDE.md); [readiness](markup-coverage/BETA-READINESS.md). Source21,544/package19,881overlapping pass; API55names/663rows and signed Core1.86.0 unchanged. Frozen21matches; structural39/90; datatype537/61; zeroerrors. Original invoice workflow passes. Earlier dated entries are historical; publication/fullXSD/C45 remain separate.
 
-## Evidence-driven coverage checkpoint — 26 November 2026
+## Original markup and annotation coverage — 26 November 2026
+
+Development0.15 adds original instance comment/PI support and bounded opaque schema annotations before declaration scans/closed assembly. [Guide](markup-coverage/GUIDE.md); [readiness](markup-coverage/BETA-READINESS.md). Source21,544/package19,881overlapping pass; API55names/663rows and signed Core1.86.0 unchanged. Frozen21matches; structural39/90; datatype537/61; zeroerrors. Original invoice workflow passes. Earlier dated entries are historical; publication/fullXSD/C45 remain separate.
+
+## Bounded structural coverage â€” 26 November 2026
+
+Development 0.14 adds empty all/optional empty choice and original anonymous attribute simple types on admitted owners. The [guide](structural-coverage/GUIDE.md) records capacities and exclusions; [beta readiness](structural-coverage/BETA-READINESS.md) separates bounded qualification from general XSD1.1/C45 acceptance. All21,358 source/19,701 overlapping package tests pass; API55names/663rows and signed Core1.86.0 are unchanged. Structural sample improves32â†’38 matches; datatype454matches remains co-blocked. Original invoice workflow passes. Earlier dated entries are historical; publication remains separate.
+
+## Evidence-driven coverage checkpoint â€” 26 November 2026
 
 The [current coverage guide](SPECIFICATION_COVERAGE.md) reconciles development 0.13 / signed Core 1.86.0 with historical audits. A separately frozen 598-case datatype sample has 454 matches / 144 Unsupported / zero errors; the structural sample remains 32 / 97. Next are adopted structural fixes and consumer trials within an up-to-400-contract ceiling. Published beta.1 remains narrower; no publication or full-conformance claim. Earlier dated entries below are historical.
 
@@ -12,17 +20,17 @@ The [current coverage guide](SPECIFICATION_COVERAGE.md) reconciles development 0
   <p>Current public schema scope, status and acceptance boundaries.</p>
 </div>
 
-## Native Gregorian fragment candidate — 26 November 2026
+## Native Gregorian fragment candidate â€” 26 November 2026
 
-REQ-009 remains In Progress with development target0.13. The 0.13 development candidate adds bounded gYear/gYearMonth/gMonth/gMonthDay/gDay with exact nullable components, REC timezone-aware comparisons, finite facets and original typed/member facts on signed Core1.86.0. GR-901–GR-1300 track400 behavioral contracts, including the shared equal-exclusive-endpoint schema correction. Qualification passes21,147 source/19,497 overlapping package tests; API55types/663rows adds15 without removals. Frozen21 and expanded32matches/97Unsupported retain zero errors. Existing lifetime/XML and explicit Unsupported boundaries remain. General legacy operators, ID graphs, full XSD1.1/C45 and publication remain separate. [Scope, bounds and example](gregorian-400/GUIDE.md).
+REQ-009 remains In Progress with development target0.13. The 0.13 development candidate adds bounded gYear/gYearMonth/gMonth/gMonthDay/gDay with exact nullable components, REC timezone-aware comparisons, finite facets and original typed/member facts on signed Core1.86.0. GR-901â€“GR-1300 track400 behavioral contracts, including the shared equal-exclusive-endpoint schema correction. Qualification passes21,147 source/19,497 overlapping package tests; API55types/663rows adds15 without removals. Frozen21 and expanded32matches/97Unsupported retain zero errors. Existing lifetime/XML and explicit Unsupported boundaries remain. General legacy operators, ID graphs, full XSD1.1/C45 and publication remain separate. [Scope, bounds and example](gregorian-400/GUIDE.md).
 
-## Exact native duration candidate — 26 November 2026
+## Exact native duration candidate â€” 26 November 2026
 
-REQ-009 remains In Progress, with development target0.12. The 0.12 development candidate adds bounded duration, yearMonthDuration and dayTimeDuration with exact independent months/seconds, finite facets and original selected-member facts on signed Core 1.86.0. Immutable DurationMonths, DurationSeconds and collapsed DurationValue reads retain owner/lifetime and XML boundaries. DU-701–DU-900 track 200 behavioral contracts. Qualification passes17,866 source tests and16,249 overlapping package tests; API55 type names/648 rows adds9 without removals. Frozen21 and expanded32matches/97Unsupported retain zero errors. Partial-order and lexical ambiguity exclusions remain explicit; general legacy duration operators, full XSD1.1/C45 and publication remain separate. [Scope, capacities and example](duration-200/GUIDE.md).
+REQ-009 remains In Progress, with development target0.12. The 0.12 development candidate adds bounded duration, yearMonthDuration and dayTimeDuration with exact independent months/seconds, finite facets and original selected-member facts on signed Core 1.86.0. Immutable DurationMonths, DurationSeconds and collapsed DurationValue reads retain owner/lifetime and XML boundaries. DU-701â€“DU-900 track 200 behavioral contracts. Qualification passes17,866 source tests and16,249 overlapping package tests; API55 type names/648 rows adds9 without removals. Frozen21 and expanded32matches/97Unsupported retain zero errors. Partial-order and lexical ambiguity exclusions remain explicit; general legacy duration operators, full XSD1.1/C45 and publication remain separate. [Scope, capacities and example](duration-200/GUIDE.md).
 
-## Native URI and IEEE candidate — 26 November 2026
+## Native URI and IEEE candidate â€” 26 November 2026
 
-The 0.11 development candidate adds bounded anyURI, float and double validation and immutable typed reads on signed Core1.86.0. URI collapse/ordinal equality and IEEE signed-zero/NaN/rounding semantics retain original nodes, member provenance and owner lifetime. NU-501–NU-700 track 200 behavioral contracts, not 200 new specification features. Qualification passes 16,196 source tests and 14,611 overlapping fresh package tests; API adds nine rows with no removals. Frozen 21 and expanded 32 matches / 97 Unsupported have zero errors. All nine signed Core dependencies verify. Reviewed green PR merge and exact-main CI remain delivery gates. Full XSD1.1, general PSVI/C45, augmentation and publication remain separate. [Scope, bounds and example](numeric-uri-200/GUIDE.md).
+The 0.11 development candidate adds bounded anyURI, float and double validation and immutable typed reads on signed Core1.86.0. URI collapse/ordinal equality and IEEE signed-zero/NaN/rounding semantics retain original nodes, member provenance and owner lifetime. NU-501â€“NU-700 track 200 behavioral contracts, not 200 new specification features. Qualification passes 16,196 source tests and 14,611 overlapping fresh package tests; API adds nine rows with no removals. Frozen 21 and expanded 32 matches / 97 Unsupported have zero errors. All nine signed Core dependencies verify. Reviewed green PR merge and exact-main CI remain delivery gates. Full XSD1.1, general PSVI/C45, augmentation and publication remain separate. [Scope, bounds and example](numeric-uri-200/GUIDE.md).
 
 ## Exact native calendars - 25 November 2026
 
@@ -173,7 +181,7 @@ A public-example beta.2 gap assessment finds no confirmed new beta.1 defect. Nam
 
 ## 1. Registry
 
-**Current release — 18 November 2026:** [Bosak.Schema 0.5.0-beta.1](https://www.nuget.org/packages/Bosak.Schema/0.5.0-beta.1) is published and independently verified. [GitHub prerelease](https://github.com/Fytala-Charles/Bosak.Schema/releases/tag/v0.5.0-beta.1), [scope and publication receipt](BETA1_RELEASE.md).
+**Current release â€” 18 November 2026:** [Bosak.Schema 0.5.0-beta.1](https://www.nuget.org/packages/Bosak.Schema/0.5.0-beta.1) is published and independently verified. [GitHub prerelease](https://github.com/Fytala-Charles/Bosak.Schema/releases/tag/v0.5.0-beta.1), [scope and publication receipt](BETA1_RELEASE.md).
 
 The published **0.5.0-beta.1** provides owned `NativeDecimalSession` and `NativeDecimalDocument` APIs with explicit capacities/context, exact decimal reads and detached XML export. ADR009/010 are accepted for this bounded Schema application scope. Qualification passed 345 source cases (312 implementation/33 public),33 package-only cases and retained 124/23 binary lanes using Core 1.81.2. These catalogs overlap. [Release, exclusions and receipt](BETA1_RELEASE.md). Full XSD 1.1, general Core C45/ADR006 and production SLA acceptance remain separate.
 
@@ -220,9 +228,9 @@ The public tests cover XSD version selection, schema components, explicit resolu
 
 Historical 15 November follow-up after adapter commit `939ba9a`: eight additional adapter controls plus eight facade cases bring the suite to 243. Default lookup names now reject with ArgumentException instead of NullReferenceException. The owned prototype cleans unsuccessful admissions and returns detached values/XML; the [public proposal](NATIVE-DECIMAL-PUBLIC-API-PROPOSAL.md) is reviewable but unimplemented publicly. Release build with network-enabled NuGet audit and the official PowerShell 7 documentation check pass. REQ-009/global acceptance remains In Progress; no release/tag or historical Core-lane requalification.
 
-Latest 15 November checkpoint: backend/profile work committed as `aba6967`; the next internal Core adapter step delivers 20 cases and 227 total standalone passes. [Adapter qualification map](NATIVE-SESSION-ADAPTER.md) distinguishes executed controls from remaining group acceptance, external consumer/API review and broader coverage. No P01–P12/global sign-off, version/tag/release or historical Core-lane requalification is implied. REQ-009 remains In Progress on the unchanged 0.4 development line.
+Latest 15 November checkpoint: backend/profile work committed as `aba6967`; the next internal Core adapter step delivers 20 cases and 227 total standalone passes. [Adapter qualification map](NATIVE-SESSION-ADAPTER.md) distinguishes executed controls from remaining group acceptance, external consumer/API review and broader coverage. No P01â€“P12/global sign-off, version/tag/release or historical Core-lane requalification is implied. REQ-009 remains In Progress on the unchanged 0.4 development line.
 
-Native backend delivery on 15 November: [grammar](NATIVE-DECIMAL-GRAMMAR.md) finalized, internal structural/assertion assessor implemented, 76 backend cases and 207 total standalone cases pass. Backend controls cover bounded portions of P01/P02/P05/P08 plus independent snapshot/concurrency observations; engine-root atomization, full adapter identity/environment/lifetime and overall P01–P12 acceptance remain pending. REQ-009 stays In Progress. Schema's 0.4 development line and all published Core pins remain unchanged; no tag or release is implied.
+Native backend delivery on 15 November: [grammar](NATIVE-DECIMAL-GRAMMAR.md) finalized, internal structural/assertion assessor implemented, 76 backend cases and 207 total standalone cases pass. Backend controls cover bounded portions of P01/P02/P05/P08 plus independent snapshot/concurrency observations; engine-root atomization, full adapter identity/environment/lifetime and overall P01â€“P12 acceptance remain pending. REQ-009 stays In Progress. Schema's 0.4 development line and all published Core pins remain unchanged; no tag or release is implied.
 
 Earlier scalar-only checkpoint on 15 November: the [published-package scalar probe](native-session-probe/2026-11-15/README.md) passed seven cases, with 131 standalone cases then (124 retained plus seven). The [specification adoption record](NATIVE-DECIMAL-SPECIFICATION-ADOPTION.md) pinned six downloaded W3C publication bodies. Subsequent backend delivery above supersedes its implementation status and standalone count; its receipts remain historical. REQ-009 stays In Progress; no release/version change or general provider acceptance.
 
@@ -402,7 +410,7 @@ original budgets and zero public API delta remain. Signed Core feasibility and
 adoption precede implementation; compatibility/retained/API evidence is separate.
 No Core pin/controller/publication change; REQ-009/generalAPI/C45 stay In Progress.
 
-## Upstream conformance pilot — 20 November 2026
+## Upstream conformance pilot â€” 20 November 2026
 
 20 November 2026: the unchanged PR28 engine was measured against a frozen,
 clause-mapped upstream XSD 1.1 pilot (21 cases / 15 groups / 42 original files).
@@ -414,7 +422,7 @@ Next: adopt a scoped schema-location hint policy under an explicitly supplied
 schema, keeping xsi:type separate, then assess anonymous decimal/string restrictions.
 [Pilot and gap evidence](conformance-pilot/README.md). REQ-009 remains In Progress.
 
-## Explicit-schema location hints — 20 November 2026
+## Explicit-schema location hints â€” 20 November 2026
 
 The opt-in NativeSchemaSession preserves exact xsi location-hint attributes
 without fetching them or changing the explicitly supplied schema. Legacy decimal
@@ -438,7 +446,7 @@ no implementation or new upstream matches yet. NS-051 and six original upstream
 eligibility targets are pinned, preserving integer and other profile exclusions.
 [Adoption and qualification plan](anonymous-simple-restrictions/README.md). REQ-009 remains In Progress.
 
-## Anonymous restriction feasibility — 20 November 2026
+## Anonymous restriction feasibility â€” 20 November 2026
 
 Before-code public Core feasibility passes90controls per separately restored
 signed1.81.2/1.81.17lane(13newanonymous/77inherited), with18package signatures
@@ -449,7 +457,7 @@ anonymous types still refuse. No production/API/pin/package or upstream outcome
 change. Native implementation and source/package/retained qualification remain.
 [Before-code evidence](anonymous-simple-restrictions/FEASIBILITY.md). REQ-009 remains In Progress.
 
-## Anonymous restriction implementation — 20 November 2026
+## Anonymous restriction implementation â€” 20 November 2026
 
 Anonymous local decimal/string restrictions are locally implemented under the
 original adoption: shared facets, original unnamed identities and combined16local
@@ -473,7 +481,7 @@ proposed only: no adoption, engine change or new outcomes. GeneralCoreC45/query
 acceptance remains separate; published beta.1 and all Core pins remain unchanged.
 [Ranked gaps and next contract](specification-next/README.md). REQ-009 remains In Progress.
 
-## Integer restriction implementation — 20 November 2026
+## Integer restriction implementation â€” 20 November 2026
 
 Bounded direct named/anonymous xs:integer restrictions are locally qualified:
 exact BigInteger bounds/totalDigits/fixedfractionDigits0, including named root
@@ -499,7 +507,7 @@ Frozenpilot9matches/12Unsupported unchanged. No production/API/Corepin or
 published beta.1/tag/controller change, and no new generalC45/PSVI acceptance.
 [Contract, proposed API and qualification](typed-node-contract/README.md). REQ-009 remains In Progress.
 
-## Actual native node-data feasibility — 20 November 2026
+## Actual native node-data feasibility â€” 20 November 2026
 
 Actual native original-node data feasibility passes73controls per signed
 Core1.81.2/1.81.17lane and eight before-code controls. The isolated two-file
@@ -1195,7 +1203,7 @@ semantic adoption. Product source remains unchanged in this contract step.
 [Contract and next feasibility gates](particles/README.md).
 
 
-### 23 November 2026 — merged integer support; isolated choice feasibility
+### 23 November 2026 â€” merged integer support; isolated choice feasibility
 
 PR #42 merged as `aa07e801ad5f2d89ebccd7299a4f539800e20df1`; main CI `45139587221` passed 3,620 source tests. The [bounded choice experiment](particles/CHOICE-FEASIBILITY.md) passes 119 controls per Core pin and all 3,620 unchanged source tests, with zero public API delta. Production inputs and published packages remain unchanged. Choice production adoption and full qualification are next; `xs:all` remains a separate deferred phase. Earlier pre-merge contract receipts remain historical evidence.
 
@@ -1279,14 +1287,14 @@ The [isolated date extension candidate](date-simple-content-feasibility/README.m
 
 The [date extension implementation](date-simple-content-implementation/README.md) passes 4,442 source tests (1,345 internal / 3,097 public), 3,097 package consumers per Core pin, 37 packaged identity controls and retained124/23/33. All4,246 prior source names/stimuli remain;196 controls are added, and the single measured factory refusal is explicitly reconciled. Actual complex G versus atomic date A, scoped closed attributes including zero uses and date-restriction fallback refusal are qualified. API55types/408rows has zero delta;18signed Core identities and published beta.1 verify. Frozen stays21matches; expanded now14matches/115Unsupported/zeroerrors, with exactlytwo original date-extension admissions per pin and no other row changes. Five exact packaged examples pass after a stale README exclusion was corrected without changing the DLL. Local unsigned alpha.0.43 only;65earlier packets intact. No publication/Corepin/controller change. Next: explicit Git delivery/review and merge verification, then separate date-enumeration/equality work.
 
-## Datatype composition candidate — 25 November 2026
+## Datatype composition candidate â€” 25 November 2026
 
-The 0.8 development candidate qualifies DT-101–DT-180: bounded hexBinary/base64Binary/QName values through both native facades, finite facets, original namespace contexts, actual owned Core provenance and detached immutable reads. All 11,848 source tests and 10,308 overlapping fresh package-only tests pass; all nine Core1.86.0 signed archives/DLLs match publication. API review preserves 55 exported type names and all existing members, adding seven reflection rows. The frozen pilot remains 21 matches; expanded samples now have20matches/109Unsupported/zero errors. Lists/unions (DT-181–DT-300) remain planned. No Schema publication, public query factory or full-XSD/C45 acceptance. [Scope and evidence](datatypes-200/README.md).
+The 0.8 development candidate qualifies DT-101â€“DT-180: bounded hexBinary/base64Binary/QName values through both native facades, finite facets, original namespace contexts, actual owned Core provenance and detached immutable reads. All 11,848 source tests and 10,308 overlapping fresh package-only tests pass; all nine Core1.86.0 signed archives/DLLs match publication. API review preserves 55 exported type names and all existing members, adding seven reflection rows. The frozen pilot remains 21 matches; expanded samples now have20matches/109Unsupported/zero errors. Lists/unions (DT-181â€“DT-300) remain planned. No Schema publication, public query factory or full-XSD/C45 acceptance. [Scope and evidence](datatypes-200/README.md).
 
-## Native list and union candidate — 25 November 2026
+## Native list and union candidate â€” 25 November 2026
 
-All 200 datatype contracts (DT-101–DT-300) are qualified in the 0.9 development candidate: binary/QName values plus bounded lists/unions, original member provenance and six immutable item-read methods. All 12,907 source tests (1,551 internal / 11,356 public) and 11,356 overlapping fresh package-only public tests pass; all nine signed Core 1.86.0 archives/DLLs match publication. API review preserves 55 exported type names and all earlier members, adding six item-read methods in this phase. The frozen pilot remains 21 matches; the expanded 129 cases now have 25 matches / 104 Unsupported / zero errors. Prior atomic/calendar packets and original upstream fixtures remain unchanged. These are behavioral contracts; they do not represent 200 new XSD features or complete specification coverage. No registry publication, public query factory or full-XSD/C45 acceptance. [Scope and sealed evidence](datatypes-200/README.md).
+All 200 datatype contracts (DT-101â€“DT-300) are qualified in the 0.9 development candidate: binary/QName values plus bounded lists/unions, original member provenance and six immutable item-read methods. All 12,907 source tests (1,551 internal / 11,356 public) and 11,356 overlapping fresh package-only public tests pass; all nine signed Core 1.86.0 archives/DLLs match publication. API review preserves 55 exported type names and all earlier members, adding six item-read methods in this phase. The frozen pilot remains 21 matches; the expanded 129 cases now have 25 matches / 104 Unsupported / zero errors. Prior atomic/calendar packets and original upstream fixtures remain unchanged. These are behavioral contracts; they do not represent 200 new XSD features or complete specification coverage. No registry publication, public query factory or full-XSD/C45 acceptance. [Scope and sealed evidence](datatypes-200/README.md).
 
-## Native text datatype candidate — 26 November 2026
+## Native text datatype candidate â€” 26 November 2026
 
-The 0.10 development candidate qualifies all 200 text contracts, TX-301–TX-500: normalizedString, token, language, XML Name/NCName/NMTOKEN, nonempty NMTOKENS and inherited finite string facets. All 14,548 source tests (1,567 internal / 12,981 public) and 12,981 overlapping fresh package-only public tests pass. Sixteen actual Core proof controls and 25 lifecycle/context controls supplement the 1,600 catalog checks. The public API remains 55 exported type names / 630 reflection rows, with zero additions or removals. All nine Core1.86.0 signed archives/DLLs match publication. Frozen21 and expanded25matches/104Unsupported retain zero mismatches or harness errors. Thirty historical contexts are reconciled with original fixture bytes unchanged. This is bounded behavioral coverage; no full-XSD/C45, public query factory or registry publication. [Scope and evidence](text-200/README.md).
+The 0.10 development candidate qualifies all 200 text contracts, TX-301â€“TX-500: normalizedString, token, language, XML Name/NCName/NMTOKEN, nonempty NMTOKENS and inherited finite string facets. All 14,548 source tests (1,567 internal / 12,981 public) and 12,981 overlapping fresh package-only public tests pass. Sixteen actual Core proof controls and 25 lifecycle/context controls supplement the 1,600 catalog checks. The public API remains 55 exported type names / 630 reflection rows, with zero additions or removals. All nine Core1.86.0 signed archives/DLLs match publication. Frozen21 and expanded25matches/104Unsupported retain zero mismatches or harness errors. Thirty historical contexts are reconciled with original fixture bytes unchanged. This is bounded behavioral coverage; no full-XSD/C45, public query factory or registry publication. [Scope and evidence](text-200/README.md).

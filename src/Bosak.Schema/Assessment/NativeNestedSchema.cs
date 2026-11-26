@@ -42,6 +42,7 @@
 //                      | Charles Korthout | 0.29   | 25-11-2026     | Preserve mixed sequence content and actual untypedAtomic provenance |
 //                      | Charles Korthout | 0.30   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      | Charles Korthout | 0.31   | 25-11-2026     | Preserve compound selected-member text and original typed reads |
+//                      | Charles Korthout | 0.32 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -291,7 +292,7 @@ internal sealed partial class NativeDecimalSchema
         if (plan.Root.Type.ContentType is { } contentType)
         {
             Check(!element.HasElements, "Simple-content terminal cannot contain child elements.");
-            Require(element.Nodes().All(n => n is XText), "Simple-content comments or processing instructions are unsupported.");
+            Require(element.Nodes().All(n => n is XText or XComment or XProcessingInstruction), "Simple-content comments or processing instructions are unsupported.");
             var atomicDeclaration = new NativeDeclaration(declaration.Name, contentType, 1, 1, declaration.NamespaceUri);
             var scalarState = AssessScalar(element.Value, atomicDeclaration, patternBudget, element) with { Declaration = declaration, EffectiveType = effectiveType };
             scalarState = scalarState with { NormalizedStringValue = NormalizedScalarText(scalarState, element.Value) };
@@ -302,15 +303,15 @@ internal sealed partial class NativeDecimalSchema
         }
         if (effectiveType.EmptyContent)
         {
-            Require(element.Nodes().All(n => n is XElement or XText), "Empty-content comments or processing instructions are unsupported.");
-            Check(!element.Nodes().Any(), "Empty content cannot contain character or element children.");
+            Require(element.Nodes().All(n => n is XElement or XText or XComment or XProcessingInstruction), "Empty-content comments or processing instructions are unsupported.");
+            Check(!element.Nodes().Any(n => n is XText or XElement), "Empty content cannot contain character or element children.");
             plan.AssessStructuralAssertions(element, cancellationToken);
             states.Add(new NativeElementState(declaration, null) { EffectiveType = effectiveType });
             cancellationToken.ThrowIfCancellationRequested();
             return;
         }
         if (!effectiveType.MixedContent) foreach (var text in element.Nodes().OfType<XText>()) Check(IsWhitespace(text.Value), "Element-only container contains non-whitespace text.");
-        Require(element.Nodes().All(n => n is XElement or XText), "Container comments or processing instructions are unsupported.");
+        Require(element.Nodes().All(n => n is XElement or XText or XComment or XProcessingInstruction), "Container comments or processing instructions are unsupported.");
         states.Add(ContainerValueState(element, declaration, effectiveType));
         var nodes = element.Elements().ToArray(); var index = 0;
         foreach (var child in plan.Children)
@@ -326,7 +327,7 @@ internal sealed partial class NativeDecimalSchema
                 {
                     InstanceAttributes(node);
                     Check(!node.HasElements, "Scalar leaf contains nested elements.");
-                    Require(node.Nodes().All(n => n is XText), "Scalar comments or processing instructions are unsupported.");
+                    Require(node.Nodes().All(n => n is XText or XComment or XProcessingInstruction), "Scalar comments or processing instructions are unsupported.");
                     states.Add(AssessElementScalar(node, child, patternBudget));
                 }
                 Check(++count <= child.MaxOccurs, "Maximum occurrence exceeded.");
