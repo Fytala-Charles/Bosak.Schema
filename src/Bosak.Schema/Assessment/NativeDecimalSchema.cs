@@ -70,6 +70,7 @@
 //                      | Charles Korthout | 1.44   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      | Charles Korthout | 1.45   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
 //                      | Charles Korthout | 1.46   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
+//                      | Charles Korthout | 1.47 | 26-11-2026     | Admit bounded empty groups and original anonymous attribute types |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -293,11 +294,19 @@ internal sealed partial class NativeDecimalSchema
     private static NativeDecimalSchema? TryCompileEmpty(XElement complex, NativeDeclaration root, NativeNumericLimits limits, string targetNamespace, string assertionNamespace, CancellationToken cancellationToken)
     {
         var members = Elements(complex);
-        var hasSequence = members.Count != 0 && members[0].Name == Xs + "sequence";
-        if (hasSequence && Elements(members[0]).Count != 0) return null;
-        var assertions = members.Skip(hasSequence ? 1 : 0).ToArray();
+        var hasGroup = members.Count != 0 && (members[0].Name == Xs + "sequence" || members[0].Name == Xs + "all" || members[0].Name == Xs + "choice");
+        if (hasGroup && Elements(members[0]).Count != 0) return null;
+        var assertions = members.Skip(hasGroup ? 1 : 0).ToArray();
         if (assertions.Any(a => a.Name != Xs + "assert")) return null;
-        if (hasSequence) Attributes(members[0]);
+        if (hasGroup)
+        {
+            var group = members[0];
+            Attributes(group, "minOccurs", "maxOccurs");
+            var minimum = Collapse((string?)group.Attribute("minOccurs") ?? "1");
+            var maximum = Collapse((string?)group.Attribute("maxOccurs") ?? "1");
+            Require(minimum is "0" or "1" && maximum == "1", "Empty group occurrence bounds are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+            Require(group.Name != Xs + "choice" || minimum == "0", "Required empty choice is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+        }
         var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri) { EmptyContent = true };
         return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { NestedProfile = true, structuralAssertions = CompileStructuralAssertions(assertions, targetNamespace, assertionNamespace, cancellationToken) };
     }
@@ -430,7 +439,7 @@ internal sealed partial class NativeDecimalSchema
             }
             Attributes(attribute, "name", "type", "use", "form", "default", "fixed");
             AttributeConstraintRepresentation(attribute);
-            Require(Elements(attribute).Count == 0, "Attribute children are unsupported.", NativeDecimalUnsupportedReason.DeclarationShape);
+            Require(Elements(attribute).Count == 0 || attribute.Attribute("type") is null && Elements(attribute).Count == 1 && Elements(attribute)[0].Name == Xs + "simpleType", "Attribute children are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
             var name = Name(attribute, NativeDecimalUnsupportedReason.DeclarationShape);
             var ns = Form(attribute, "form", attributeForm) == "qualified" ? targetNamespace : "";
             Require(name != "xmlns" && ns is not "http://www.w3.org/2000/xmlns/" and not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace",
@@ -477,6 +486,12 @@ internal sealed partial class NativeDecimalSchema
     private static NativeType ResolveScalarType(XElement declaration, NativeType decimalType, NativeType? stringType,
         NativeType? booleanType, NativeType? integerType, Dictionary<XName, NativeType> simple)
     {
+        if (declaration.Name == Xs + "attribute" && declaration.Attribute("type") is null && Elements(declaration) is { Count: 1 } members && members[0].Name == Xs + "simpleType")
+        {
+            var anonymous = members[0].Annotation<NativeType>();
+            Require(anonymous is not null, "Anonymous attribute type was not compiled.", NativeDecimalUnsupportedReason.ValueType);
+            return anonymous!;
+        }
         if (IsDecimalType(declaration)) return decimalType;
         var name = ResolveTypeName(declaration);
         if (stringType is not null && name == Xs + "string") return stringType;

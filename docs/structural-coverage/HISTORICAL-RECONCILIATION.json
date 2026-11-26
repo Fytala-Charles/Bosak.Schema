@@ -1,0 +1,184 @@
+{
+  "date": "2026-11-26",
+  "measuredAfterInitialFullRun": true,
+  "cases": [
+    {
+      "id": "AS-051",
+      "originalFile": "tests/TestData/AnonymousSimpleRestrictions/cases.json",
+      "originalFileSha256": "4dc2f9005c6ec030914af253a78536a9dcacec43cb07dc38fb1676bf6ef86519",
+      "original": {
+        "id": "AS-051",
+        "label": "attribute anonymous type excluded",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:decimal\"></xs:restriction></xs:simpleType></xs:element></xs:sequence><xs:attribute name=\"a\"><xs:simpleType><xs:restriction base=\"xs:decimal\"/></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r a=\"1\"><v>1</v></r>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "values": [],
+        "reason": null,
+        "clauses": [
+          "Structures3.3.2-3.3.4",
+          "Structures3.16.2.1-2",
+          "Datatypes4.1-4.3"
+        ]
+      },
+      "currentCompile": "Valid",
+      "currentAssessment": "Valid",
+      "stimuliUnchanged": true
+    },
+    {
+      "id": "M2E1-080",
+      "originalFile": "tests/TestData/Attributes/m2e1-cases.json",
+      "originalFileSha256": "4ea3fdcf331ad6bb08f6fb2e0292c476b185c36a0930e95564a66aaeda1ac913",
+      "original": {
+        "id": "M2E1-080",
+        "description": "Inline attribute simple type",
+        "sections": [
+          "Structures3.2/3.4/3.5",
+          "XML1.0 3.3.3",
+          "Existing datatype adoptions"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:a' targetNamespace='urn:a' elementFormDefault='qualified' ><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='amount' type='xs:decimal'/></xs:sequence><xs:attribute name='code'><xs:simpleType><xs:restriction base='xs:string'/></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:a' code='x'><amount>12.50</amount></r>",
+        "maxStringCharacters": 256,
+        "maxNativeCoefficientDigits": 256,
+        "maxNativeScale": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "attributes": [],
+        "leaves": [
+          {
+            "kind": "Decimal",
+            "value": "12.5"
+          }
+        ],
+        "unsupportedReason": "DeclarationShape"
+      },
+      "currentCompile": "Valid",
+      "currentAssessment": "Valid",
+      "stimuliUnchanged": true
+    },
+    {
+      "id": "global-inline-separate",
+      "originalFile": "tests/TestData/GlobalAttributeReferences/case-plan.json",
+      "originalFileSha256": "d60236c8c118005a72b59b92b5b6662e21346eb435093a24ae0d9317eec5bc60",
+      "original": {
+        "id": "global-inline-separate",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' attributeFormDefault='unqualified' ><xs:attribute name='a'><xs:simpleType><xs:restriction base='xs:decimal'/></xs:simpleType></xs:attribute><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute ref='a' use='required'/></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r a='1.23'><v>1</v></r>",
+        "owner": "sequence",
+        "path": [],
+        "namespace": "",
+        "name": "a",
+        "expectedKind": "Decimal",
+        "expectedValue": "1.23",
+        "expectAttribute": true,
+        "proposedCompile": "Unsupported",
+        "proposedAssessment": null
+      },
+      "currentCompile": "Valid",
+      "currentAssessment": "Valid",
+      "stimuliUnchanged": true
+    },
+    {
+      "id": "PT-029",
+      "originalFile": "tests/TestData/Particles/case-plan.json",
+      "originalFileSha256": "08483880f4f832fe9905aebc3a376c3ddf0ce93795421f282024836af9a9d2d0",
+      "original": {
+        "id": "PT-029",
+        "phase": "all-second",
+        "purpose": "Empty declared model group excluded; not an empty complex admission",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all></xs:all></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r/>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "NotRun",
+        "status": "Proposed unexecuted; no native acceptance claim"
+      },
+      "currentCompile": "Valid",
+      "currentAssessment": "Valid",
+      "stimuliUnchanged": true
+    },
+    {
+      "id": "NA-049",
+      "originalFile": "tests/TestData/NestedAttributes/cases.json",
+      "originalFileSha256": "603cdbdcafa55f0b7fec854573a215ae67c4108f28a5d29c8d709c6994b8ca16",
+      "original": {
+        "id": "NA-049",
+        "label": "anonymous attribute type",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" ><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"a\" ><xs:complexType><xs:sequence><xs:element name=\"v\" type=\"xs:decimal\"/></xs:sequence><xs:attribute name=\"code\"><xs:simpleType><xs:restriction base=\"xs:string\"/></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r/>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "scalars": [
+          "ABC-0001",
+          "2",
+          "12.5",
+          "XYZ-0002",
+          "1",
+          "3.75",
+          "false"
+        ],
+        "rootAttributes": 0,
+        "descendants": [
+          {
+            "path": [
+              0
+            ],
+            "namespace": "",
+            "name": "currency",
+            "kind": "String",
+            "value": "EUR"
+          },
+          {
+            "path": [
+              0
+            ],
+            "namespace": "",
+            "name": "paid",
+            "kind": "Boolean",
+            "value": "false"
+          },
+          {
+            "path": [
+              1
+            ],
+            "namespace": "",
+            "name": "currency",
+            "kind": "String",
+            "value": "USD"
+          }
+        ]
+      },
+      "currentCompile": "Valid",
+      "currentAssessment": "Invalid",
+      "stimuliUnchanged": true
+    },
+    {
+      "id": "PT-029",
+      "originalFile": "tests/TestData/AllParticles/case-plan.json",
+      "originalFileSha256": "70a568049dd1dea5316dc81a9665ce25047268f80380073ccff02a0c7924b0be",
+      "original": {
+        "id": "PT-029",
+        "phase": "all-second",
+        "purpose": "Empty declared model group excluded; not an empty complex admission",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:all></xs:all></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r/>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "NotRun",
+        "status": "Proposed unexecuted all phase; prior schema-refusal controls are not all semantic acceptance",
+        "sourcePacket": "docs/particles/CASE-PLAN.json",
+        "sourcePhase": "all-second"
+      },
+      "currentCompile": "Valid",
+      "currentAssessment": "Valid",
+      "stimuliUnchanged": true
+    }
+  ],
+  "otherHistoricalExpectationChanges": [],
+  "initialRun": {
+    "sourceCases": 21358,
+    "passed": 21346,
+    "failed": 12,
+    "failuresAreRecordedHistoricalAdmissions": true,
+    "distinctOriginalIds": 5
+  }
+}

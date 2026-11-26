@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Reconcile original Boolean alias and read Boolean rather than integer facts |
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Reconcile measured compound admissions without editing original fixtures |
 //                      | Charles Korthout | 0.5   | 26-11-2026     | Verify measured text admissions with original fixture bytes unchanged |
+//                      | Charles Korthout | 0.6 | 26-11-2026     | Reconcile original structural admission without changing stimuli |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -46,6 +47,12 @@ public sealed class NativeAnonymousRestrictionConsumerTests
     {
         Assert.StartsWith("AS-",id);using var data=JsonDocument.Parse(payload);var row=data.RootElement;Assert.NotEmpty(row.GetProperty("clauses").EnumerateArray());
         if(id is "AS-036" or "AS-044"){NativeTextLegacyVerification.Check(row.GetProperty("schema").GetString()!,row.GetProperty("instance").GetString()!,Options(),id=="AS-036"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Invalid,NativeSchemaOutcome.Valid,"1");return;}
+        if(id=="AS-051")
+        {
+            var admitted=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,Options());Assert.Equal(NativeSchemaOutcome.Valid,admitted.Outcome);using var owner=admitted.Value!;
+            var original=row.GetProperty("instance").GetString()!;var result=owner.Assess(original,Context);Assert.Equal(NativeSchemaOutcome.Valid,result.Outcome);using var admittedDocument=result.Value!;
+            Assert.Equal("1",admittedDocument.ReadAttribute(0).Value.DecimalValue.ToInvariantString(256));Assert.Equal("1",admittedDocument.ReadScalar(0).DecimalValue.ToInvariantString(256));Assert.True(XNode.DeepEquals(XElement.Parse(original),XElement.Parse(admittedDocument.ExportXml())));return;
+        }
         var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,Options());Assert.Equal(id is "AS-035" or "AS-047" or "AS-048"?"Valid":row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(created.Value);if(row.GetProperty("reason").ValueKind==JsonValueKind.String)Assert.Equal(row.GetProperty("reason").GetString(),created.Diagnostics[0].UnsupportedReason.ToString());return;}
         using var session=created.Value!;var xml=row.GetProperty("instance").GetString()!;var assessed=session.Assess(xml,Context);Assert.Equal(row.GetProperty("expectedAssessment").GetString(),assessed.Outcome.ToString());

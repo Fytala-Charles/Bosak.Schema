@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 20-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Reconcile original nested duplicate attribute uses as Invalid |
 //                      | Charles Korthout | 0.3   | 25-11-2026     | Assert Invalid explicit default with required attribute use |
+//                      | Charles Korthout | 0.4 | 26-11-2026     | Reconcile original structural admission without changing stimuli |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -43,7 +44,7 @@ public sealed class NativeNestedAttributeConsumerTests
     [Theory][MemberData(nameof(Cases))]
     public void NestedAttributes_AssessOriginalOwnersAndPreserveIndexes(string id,string payload)
     {
-        Assert.StartsWith("NA-",id);using var parsed=JsonDocument.Parse(payload);var r=parsed.RootElement;var created=NativeSchemaSession.Create(r.GetProperty("schema").GetString()!,Options());if(id is "NA-044" or "NA-039"){Assert.Equal(NativeSchemaOutcome.Invalid,created.Outcome);Assert.Null(created.Value);Assert.Equal("BSK-NATIVE-SCHEMA-INVALID",Assert.Single(created.Diagnostics).Code);return;}Assert.Equal(r.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
+        Assert.StartsWith("NA-",id);using var parsed=JsonDocument.Parse(payload);var r=parsed.RootElement;var created=NativeSchemaSession.Create(r.GetProperty("schema").GetString()!,Options());if(id=="NA-049"){Assert.Equal(NativeSchemaOutcome.Valid,created.Outcome);using var owner=created.Value!;var invalid=owner.Assess(r.GetProperty("instance").GetString()!,Context());Assert.Equal(NativeSchemaOutcome.Invalid,invalid.Outcome);Assert.Null(invalid.Value);return;}if(id is "NA-044" or "NA-039"){Assert.Equal(NativeSchemaOutcome.Invalid,created.Outcome);Assert.Null(created.Value);Assert.Equal("BSK-NATIVE-SCHEMA-INVALID",Assert.Single(created.Diagnostics).Code);return;}Assert.Equal(r.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(created.Value);Assert.Equal("BSK-NATIVE-SCHEMA-UNSUPPORTED",Assert.Single(created.Diagnostics).Code);return;}
         using var s=created.Value!;var xml=r.GetProperty("instance").GetString()!;var assessed=s.Assess(xml,Context());Assert.Equal(r.GetProperty("expectedAssessment").GetString(),assessed.Outcome.ToString());
         if(assessed.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(assessed.Value);Assert.Equal("BSK-NATIVE-INSTANCE-"+assessed.Outcome.ToString().ToUpperInvariant(),Assert.Single(assessed.Diagnostics).Code);return;}
