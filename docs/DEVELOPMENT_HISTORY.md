@@ -1,3 +1,7 @@
+## Evidence-driven coverage checkpoint — 26 November 2026
+
+The [current coverage guide](SPECIFICATION_COVERAGE.md) reconciles development 0.13 / signed Core 1.86.0 with historical audits. A separately frozen 598-case datatype sample has 454 matches / 144 Unsupported / zero errors; the structural sample remains 32 / 97. Next are adopted structural fixes and consumer trials within an up-to-400-contract ceiling. Published beta.1 remains narrower; no publication or full-conformance claim. Earlier dated entries below are historical.
+
 # Bosak.Schema development history
 
 ## 9 November 2026: documentation synchronization
