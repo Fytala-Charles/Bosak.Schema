@@ -25,6 +25,7 @@
 //                      | Charles Korthout | 0.12   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      | Charles Korthout | 0.13   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      | Charles Korthout | 0.14   | 25-11-2026     | Preserve compound simple-content enumeration and member identity |
+//                      | Charles Korthout | 0.15   | 26-11-2026     | Support bounded text datatypes and inherited normalization facets |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -79,8 +80,18 @@ internal sealed partial class NativeDecimalSchema
         Require(basePlan.AttributeUses.IsEmpty, "Base attribute uses are outside the restriction profile.", NativeDecimalUnsupportedReason.Attributes);
         Require(basePlan.assertions.IsEmpty, "Base assertions are outside the restriction profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
         var content = baseType.ContentType;
-        Require(content is not null && !content.IsComplex && !content.IsString && !content.IsBoolean,
+        Require(content is not null && !content.IsComplex && !content.IsBoolean,
             "Complex base content is outside the decimal profile.", NativeDecimalUnsupportedReason.ValueType);
+        if (content!.IsString)
+        {
+            Require(localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty, "Text assertions outside profile.", NativeDecimalUnsupportedReason.AssertionGrammar);
+            var characters = maxStringCharacters ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Text context required.", NativeDecimalUnsupportedReason.ValueType);
+            var compilation = patternCompilation ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Pattern context required.", NativeDecimalUnsupportedReason.ValueType);
+            var textAtomic = new NativeType(null, false, targetNamespace, isString: true, textKind: content.TextKind,
+                textFacets: NativeTextFacets.Compile(restriction, content, characters, compilation), derivationBase: content);
+            var textGoverning = new NativeType(root.Type.Name, false, targetNamespace, contentType: textAtomic, derivationBase: baseType, isComplexRestriction: true);
+            return new NativeDecimalSchema(new NativeDeclaration(root.Name, textGoverning, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
+        }
         if (content!.IsCompound)
         {
             Require(localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty, "Compound assertions are outside the profile.", NativeDecimalUnsupportedReason.AssertionGrammar);

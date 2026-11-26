@@ -1,0 +1,554 @@
+{
+  "originalFiles": {
+    "tests\\TestData\\AnonymousSimpleRestrictions\\cases.json": "4dc2f9005c6ec030914af253a78536a9dcacec43cb07dc38fb1676bf6ef86519",
+    "tests\\TestData\\BooleanChains\\case-plan.json": "f0fe7bba1ae93a729e64efe00285cfa688c6b1e665052d136e3dc5bb6ce47cba",
+    "tests\\TestData\\NestedSimpleContent\\cases.json": "14fa5e8e83b9aeda700b53da508ad9c05029aeec1c052d26ad4d2ef55464b90d",
+    "tests\\TestData\\SimpleContent\\cases.json": "216540fb0e030815e80e5e53792c4987662e13b11db4b51b0b746a154595fd75",
+    "tests\\TestData\\StringFacets\\m2d1-cases.json": "9eb310583f3d827a4172b431a009723d0a4bdfd66345661d53ddddc650ec2e9e",
+    "tests\\TestData\\Strings\\m2c1-cases.json": "34a106451f3d5c38d2997b23b116983804a439832ac57d82ed42b10844edc4bb"
+  },
+  "measuredContexts": 30,
+  "originalRows": [
+    {
+      "path": "tests\\TestData\\AnonymousSimpleRestrictions\\cases.json",
+      "row": {
+        "id": "AS-036",
+        "label": "excluded base token",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:token\"></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r><v>1</v></r>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "values": [],
+        "reason": "ValueType",
+        "clauses": [
+          "Structures3.3.2-3.3.4",
+          "Structures3.16.2.1-2",
+          "Datatypes4.1-4.3"
+        ]
+      }
+    },
+    {
+      "path": "tests\\TestData\\AnonymousSimpleRestrictions\\cases.json",
+      "row": {
+        "id": "AS-044",
+        "label": "inconsistent string length facets",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"v\" ><xs:simpleType ><xs:restriction base=\"xs:string\"><xs:length value=\"1\"/><xs:minLength value=\"1\"/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r><v>x</v></r>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "values": [],
+        "reason": "ValueType",
+        "clauses": [
+          "Structures3.3.2-3.3.4",
+          "Structures3.16.2.1-2",
+          "Datatypes4.1-4.3"
+        ]
+      }
+    },
+    {
+      "path": "tests\\TestData\\BooleanChains\\case-plan.json",
+      "row": {
+        "id": "string-chain-separate",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='A'><xs:restriction base='xs:string'/></xs:simpleType><xs:simpleType name='D'><xs:restriction base='A'/></xs:simpleType><xs:element name='r' type='D'/></xs:schema>",
+        "instance": "<r>true</r>",
+        "site": "root",
+        "proposedCompile": "Unsupported",
+        "proposedAssessment": null,
+        "expectedBoolean": true
+      }
+    },
+    {
+      "path": "tests\\TestData\\NestedSimpleContent\\cases.json",
+      "row": {
+        "id": "NC-033",
+        "label": "other simple-content family string refused",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:complexType name=\"Price\"><xs:simpleContent><xs:extension base=\"xs:string\"><xs:attribute name=\"currency\" type=\"xs:string\" use=\"required\"/></xs:extension></xs:simpleContent></xs:complexType><xs:element name=\"r\"><xs:complexType><xs:sequence><xs:element name=\"price\" type=\"Price\" /></xs:sequence></xs:complexType></xs:element><xs:element name=\"price\" type=\"Price\"/></xs:schema>",
+        "instance": "<r/>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "values": [
+          "ABC-0001",
+          "2",
+          "12.5",
+          "XYZ-0002",
+          "1",
+          "3.75",
+          "false"
+        ],
+        "attributes": [
+          {
+            "path": [
+              0,
+              2
+            ],
+            "name": "currency",
+            "namespace": "",
+            "value": "EUR"
+          },
+          {
+            "path": [
+              1,
+              2
+            ],
+            "name": "currency",
+            "namespace": "",
+            "value": "USD"
+          }
+        ],
+        "rootAttributes": 0
+      }
+    },
+    {
+      "path": "tests\\TestData\\SimpleContent\\cases.json",
+      "row": {
+        "id": "SC-051",
+        "description": "Excluded or unresolved base xs:string",
+        "sections": [
+          "Structures3.4.2.2/3.4.4",
+          "Datatypes3.3.3/4.3.6",
+          "XDM3.3.1.2/6.2"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:string' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+        "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "expectedRoot": "12.5",
+        "maxNativeCoefficientDigits": 256,
+        "maxNativeScale": 256,
+        "maxStringCharacters": 256,
+        "attributes": [
+          {
+            "namespaceUri": "",
+            "localName": "currency",
+            "kind": "String",
+            "value": "EUR"
+          }
+        ],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-47",
+        "description": "Invalid length facet '-1'",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='-1'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-48",
+        "description": "Invalid length facet '1.0'",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1.0'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-49",
+        "description": "Invalid length facet '1e1'",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1e1'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-50",
+        "description": "Invalid length facet ''",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value=''/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-51",
+        "description": "Invalid length facet '+'",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='+'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-52",
+        "description": "Invalid length facet '\uff11\uff12'",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='\uff11\uff12'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-53",
+        "description": "Invalid length facet '1 2'",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='1 2'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-57",
+        "description": "Duplicate length",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='3'/><xs:length value='3'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "DeclarationShape"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-58",
+        "description": "Duplicate minLength",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:minLength value='1'/><xs:minLength value='1'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "DeclarationShape"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-59",
+        "description": "Duplicate maxLength",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:maxLength value='3'/><xs:maxLength value='3'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "DeclarationShape"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-60",
+        "description": "Inconsistent min/max",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:minLength value='4'/><xs:maxLength value='3'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-61",
+        "description": "Direct length and minLength conflict",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='3'/><xs:minLength value='1'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-62",
+        "description": "Direct length and maxLength conflict",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='3'/><xs:maxLength value='5'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-63",
+        "description": "Missing facet value",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-64",
+        "description": "Fixed flag excluded",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:length value='3' fixed='true'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "Attributes"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-67",
+        "description": "Whitespace preserve override excluded",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:string'><xs:whiteSpace value='preserve'/></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-69",
+        "description": "Derived string base excluded",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Label'><xs:restriction base='xs:token'></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\StringFacets\\m2d1-cases.json",
+      "row": {
+        "id": "M2D1-70",
+        "description": "Restriction chain excluded",
+        "sections": [
+          "Datatypes3.3.1",
+          "Datatypes4.3.1-3/4.3.5-6",
+          "Structures3.3.4"
+        ],
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:s' targetNamespace='urn:s' elementFormDefault='qualified'><xs:simpleType name='Base'><xs:restriction base='xs:string'/></xs:simpleType><xs:simpleType name='Label'><xs:restriction base='t:Base'></xs:restriction></xs:simpleType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='s' type='t:Label'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r xmlns='urn:s'><s>abc</s></r>",
+        "maxStringCharacters": 256,
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Unsupported",
+        "values": [],
+        "unsupportedReason": "ValueType"
+      }
+    },
+    {
+      "path": "tests\\TestData\\Strings\\m2c1-cases.json",
+      "row": {
+        "id": "M2C1-39",
+        "label": "excluded leaf xs:normalizedString",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:normalizedString'/><xs:element name='amount' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "unsupportedReason": "ValueType",
+        "maxStringCharacters": 256,
+        "values": [
+          {
+            "kind": "String",
+            "value": " INV-001 "
+          },
+          {
+            "kind": "Decimal",
+            "value": "12.5"
+          }
+        ],
+        "sections": [
+          "Datatypes3.3.1/4.3.6",
+          "Structures3.3.4",
+          "XML1.0 2.11/4.1"
+        ],
+        "officialW3cCase": false
+      }
+    },
+    {
+      "path": "tests\\TestData\\Strings\\m2c1-cases.json",
+      "row": {
+        "id": "M2C1-40",
+        "label": "excluded leaf xs:token",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:orders' targetNamespace='urn:orders' elementFormDefault='qualified'><xs:element name='order'><xs:complexType><xs:sequence><xs:element name='id' type='xs:token'/><xs:element name='amount' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+        "instance": "<o:order xmlns:o='urn:orders'><o:id> INV-001 </o:id><o:amount>12.50</o:amount></o:order>",
+        "expectedCompile": "Unsupported",
+        "expectedAssessment": "Valid",
+        "unsupportedReason": "ValueType",
+        "maxStringCharacters": 256,
+        "values": [
+          {
+            "kind": "String",
+            "value": " INV-001 "
+          },
+          {
+            "kind": "Decimal",
+            "value": "12.5"
+          }
+        ],
+        "sections": [
+          "Datatypes3.3.1/4.3.6",
+          "Structures3.3.4",
+          "XML1.0 2.11/4.1"
+        ],
+        "officialW3cCase": false
+      }
+    }
+  ],
+  "validFacet": [
+    "M2D1-64",
+    "M2D1-67",
+    "M2D1-69",
+    "M2D1-70"
+  ],
+  "invalidFacet": [
+    "M2D1-47",
+    "M2D1-48",
+    "M2D1-49",
+    "M2D1-50",
+    "M2D1-51",
+    "M2D1-52",
+    "M2D1-53",
+    "M2D1-57",
+    "M2D1-58",
+    "M2D1-59",
+    "M2D1-60",
+    "M2D1-61",
+    "M2D1-62",
+    "M2D1-63"
+  ],
+  "originalFixturesUnchanged": true
+}

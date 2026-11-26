@@ -38,6 +38,7 @@
 //                      | Charles Korthout | 0.25   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      | Charles Korthout | 0.26   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      | Charles Korthout | 0.27   | 25-11-2026     | Preserve bounded list/union types and ordered selected member facts |
+//                      | Charles Korthout | 0.28   | 26-11-2026     | Support bounded text datatypes and inherited normalization facets |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -96,9 +97,9 @@ internal sealed partial class NativeDecimalSchema
                 facets: NativeDecimalFacets.CompileDerived(restriction, decimalBase.Facets, limits, nativeDerivation: true),
                 baseName: baseName, derivationBase: decimalBase);
         }
-        if (maxStringCharacters is not null && baseName == Xs + "string")
-            return new NativeType(name, false, namespaceUri, isString: true,
-                stringFacets: NativeStringFacets.Compile(restriction, maxStringCharacters.Value, patternCompilation), baseName: baseName);
+        if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var textBase) && textBase.IsString)
+            return new NativeType(name, false, namespaceUri, isString: true, textKind: textBase.TextKind,
+                textFacets: NativeTextFacets.Compile(restriction, textBase, maxStringCharacters.Value, patternCompilation), baseName: baseName, derivationBase: textBase);
         if (maxStringCharacters is not null && baseName == Xs + "integer")
             return new NativeType(name, false, namespaceUri, isInteger: true,
                 integerFacets: NativeIntegerFacets.Compile(restriction, limits), baseName: baseName);

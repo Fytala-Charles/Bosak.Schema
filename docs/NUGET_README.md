@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.9 development candidate requires Bosak Core 1.86.0 or later.
+The 0.10 development candidate requires Bosak Core 1.86.0 or later.
 
 ## Binary and QName values (0.8 source)
 
@@ -1753,3 +1753,7 @@ An empty mixed aggregate is an empty string atom, not an empty typed sequence or
 Both native facades admit bounded lists and ordered unions over the existing admitted member families. NativeSchemaDocument adds ReadRootItems, ReadScalarItems, ReadAttributeItems and ReadDescendantAttributeItems; NativeSchemaNodeDataDocument adds ReadElementItems and ReadAttributeItems. Each returns an immutable array of detached NativeScalarValue items under the existing Core operation/lifetime gate. Atomic values become one item; nil and empty lists become zero items, distinguished by existing nil facts. Scalar accessors refuse list values, including empty/singleton lists and unions selecting lists. HasRootScalar is false for lists.
 
 Lists have at most16items; unions have at most8directmembers. Raw compound values are limited to256UTF16units and caller string capacity. Inline member definitions are limited to16source sites/depth4; shared compound attempts are limited to4096 per document or schema-literal budget. Unsupported/capacity results stop union assessment and cannot fall through to a later member. Members are checked eagerly, even in unused definitions. Existing finite facets apply; general assertions, recursion, identity graphs, enumeration over patterned compound ancestors and direct union-member xsi:type override remain excluded. Named compound restriction selection is supported. See the [datatype guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/datatypes-200/GUIDE.md) for the precise grammar and current delivery status. No registry publication or complete XSD1.1 claim is implied.
+
+## Native text datatypes (0.10 source)
+
+Both owned native facades admit normalizedString, token, language, Name, NCName, NMTOKEN and nonempty NMTOKENS, plus named string restriction chains. Text whitespace is normalized before intrinsic lexical and finite facet checks; original parsed XML remains available for export. Detached text uses the existing String kind/getter. NMTOKENS uses explicit ordered item reads and preserves actual member provenance. String simple-content extensions and the earlier bounded restriction grammar are supported. The [text datatype guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/text-200/GUIDE.md) contains a runnable example, exact inheritance rules and capacities. Identity graphs, arbitrary regex/assertions, augmentation, general PSVI/C45 and a public schema query factory remain excluded. This is an unpublished source candidate.

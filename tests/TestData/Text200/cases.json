@@ -1,0 +1,4638 @@
+{
+  "cases": [
+    {
+      "id": "TX-301-good",
+      "contract": "TX-301",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='preserve'/><xs:enumeration value=' a&#9; b '/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a\t b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String: a\t b "
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-301-edge",
+      "contract": "TX-301",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='preserve'/><xs:enumeration value=' a&#9; b '/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>not-enumerated</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-302-good",
+      "contract": "TX-302",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='replace'/><xs:enumeration value=' a  b '/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a\t b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String: a  b "
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-302-edge",
+      "contract": "TX-302",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='replace'/><xs:enumeration value=' a  b '/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>not-enumerated</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-303-good",
+      "contract": "TX-303",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a\t b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-303-edge",
+      "contract": "TX-303",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>not-enumerated</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-304-good",
+      "contract": "TX-304",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-304-edge",
+      "contract": "TX-304",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>not-enumerated</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-305-good",
+      "contract": "TX-305",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:enumeration value=''/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-305-edge",
+      "contract": "TX-305",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:enumeration value=''/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>not-enumerated</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-306-good",
+      "contract": "TX-306",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-306-edge",
+      "contract": "TX-306",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>not-enumerated</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-307-good",
+      "contract": "TX-307",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a  b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-307-edge",
+      "contract": "TX-307",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>not-enumerated</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-308-good",
+      "contract": "TX-308",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='replace'/><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a\nb</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-308-edge",
+      "contract": "TX-308",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='replace'/><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>not-enumerated</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-309-good",
+      "contract": "TX-309",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-309-edge",
+      "contract": "TX-309",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>not-enumerated</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-310-good",
+      "contract": "TX-310",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='preserve'/><xs:enumeration value='a&#10;b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a\r\nb</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a\nb"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-310-edge",
+      "contract": "TX-310",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='preserve'/><xs:enumeration value='a&#10;b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>not-enumerated</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-311-good",
+      "contract": "TX-311",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-311-edge",
+      "contract": "TX-311",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-312-good",
+      "contract": "TX-312",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a\tb</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-312-edge",
+      "contract": "TX-312",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-313-good",
+      "contract": "TX-313",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a\nb</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-313-edge",
+      "contract": "TX-313",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-314-good",
+      "contract": "TX-314",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a\rb</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-314-edge",
+      "contract": "TX-314",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-315-good",
+      "contract": "TX-315",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a  b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String: a  b "
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-315-edge",
+      "contract": "TX-315",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-316-good",
+      "contract": "TX-316",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-316-edge",
+      "contract": "TX-316",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-317-good",
+      "contract": "TX-317",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>root</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:root"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-317-edge",
+      "contract": "TX-317",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:normalizedString' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-318-good",
+      "contract": "TX-318",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:normalizedString' use='required'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' a&#9;b '><v>0</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String: a b "
+      ],
+      "listValue": false,
+      "target": "attribute"
+    },
+    {
+      "id": "TX-318-edge",
+      "contract": "TX-318",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:normalizedString' use='required'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='x'><v>0</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false,
+      "target": "attribute"
+    },
+    {
+      "id": "TX-319-good",
+      "contract": "TX-319",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:list itemType='xs:normalizedString'/></xs:simpleType></xs:schema>",
+      "instance": "<r>a b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a",
+        "String:b"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-319-edge",
+      "contract": "TX-319",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:list itemType='xs:normalizedString'/></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-320-good",
+      "contract": "TX-320",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:union memberTypes='xs:normalizedString xs:integer'/></xs:simpleType></xs:schema>",
+      "instance": "<r> a&#9;b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String: a b "
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-320-edge",
+      "contract": "TX-320",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:union memberTypes='xs:normalizedString xs:integer'/></xs:simpleType></xs:schema>",
+      "instance": "<r>1</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:1"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-321-good",
+      "contract": "TX-321",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-321-edge",
+      "contract": "TX-321",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-322-good",
+      "contract": "TX-322",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-322-edge",
+      "contract": "TX-322",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-323-good",
+      "contract": "TX-323",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a\t  b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-323-edge",
+      "contract": "TX-323",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-324-good",
+      "contract": "TX-324",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-324-edge",
+      "contract": "TX-324",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-325-good",
+      "contract": "TX-325",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a\nb</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-325-edge",
+      "contract": "TX-325",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-326-good",
+      "contract": "TX-326",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>root</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:root"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-326-edge",
+      "contract": "TX-326",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-327-good",
+      "contract": "TX-327",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:token' use='required'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' a&#9;b '><v>0</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false,
+      "target": "attribute"
+    },
+    {
+      "id": "TX-327-edge",
+      "contract": "TX-327",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:token' use='required'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='x'><v>0</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false,
+      "target": "attribute"
+    },
+    {
+      "id": "TX-328-good",
+      "contract": "TX-328",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:token'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><c><v> a </v></c></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false,
+      "path": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "TX-328-edge",
+      "contract": "TX-328",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:token'/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><c><v>x</v></c></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false,
+      "path": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "TX-329-good",
+      "contract": "TX-329",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:list itemType='xs:token'/></xs:simpleType></xs:schema>",
+      "instance": "<r>a b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a",
+        "String:b"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-329-edge",
+      "contract": "TX-329",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:list itemType='xs:token'/></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-330-good",
+      "contract": "TX-330",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:union memberTypes='xs:token xs:integer'/></xs:simpleType></xs:schema>",
+      "instance": "<r> a&#9;b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-330-edge",
+      "contract": "TX-330",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:union memberTypes='xs:token xs:integer'/></xs:simpleType></xs:schema>",
+      "instance": "<r>1</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:1"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-331-good",
+      "contract": "TX-331",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>en</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:en"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-331-edge",
+      "contract": "TX-331",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-332-good",
+      "contract": "TX-332",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>abcdefgh</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:abcdefgh"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-332-edge",
+      "contract": "TX-332",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>abcdefghi</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-333-good",
+      "contract": "TX-333",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>en-123</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:en-123"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-333-edge",
+      "contract": "TX-333",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>1en</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-334-good",
+      "contract": "TX-334",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>zh-Hant-TW</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:zh-Hant-TW"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-334-edge",
+      "contract": "TX-334",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>en--US</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-335-good",
+      "contract": "TX-335",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>EN-us</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:EN-us"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-335-edge",
+      "contract": "TX-335",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>en_US</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-336-good",
+      "contract": "TX-336",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-336-edge",
+      "contract": "TX-336",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-337-good",
+      "contract": "TX-337",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>en-12345678</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:en-12345678"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-337-edge",
+      "contract": "TX-337",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>en-123456789</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-338-good",
+      "contract": "TX-338",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>en-US</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:en-US"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-338-edge",
+      "contract": "TX-338",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>-en</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-339-good",
+      "contract": "TX-339",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>en</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:en"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-339-edge",
+      "contract": "TX-339",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>é</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-340-good",
+      "contract": "TX-340",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> en-US </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:en-US"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-340-edge",
+      "contract": "TX-340",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:language' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>en-</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-341-good",
+      "contract": "TX-341",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>abc</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:abc"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-341-edge",
+      "contract": "TX-341",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>1abc</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-342-good",
+      "contract": "TX-342",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>:a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String::a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-342-edge",
+      "contract": "TX-342",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-343-good",
+      "contract": "TX-343",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a:b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a:b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-343-edge",
+      "contract": "TX-343",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-344-good",
+      "contract": "TX-344",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>_a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:_a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-344-edge",
+      "contract": "TX-344",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>-a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-345-good",
+      "contract": "TX-345",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>é名</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:é名"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-345-edge",
+      "contract": "TX-345",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>́a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-346-good",
+      "contract": "TX-346",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>𐀀a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:𐀀a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-346-edge",
+      "contract": "TX-346",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>󰀀a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-347-good",
+      "contract": "TX-347",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>á</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:á"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-347-edge",
+      "contract": "TX-347",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a/b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-348-good",
+      "contract": "TX-348",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>abc</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:abc"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-348-edge",
+      "contract": "TX-348",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>2abc</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-349-good",
+      "contract": "TX-349",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a.b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a.b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-349-edge",
+      "contract": "TX-349",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a?b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-350-good",
+      "contract": "TX-350",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-350-edge",
+      "contract": "TX-350",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:Name' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-351-good",
+      "contract": "TX-351",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>abc</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:abc"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-351-edge",
+      "contract": "TX-351",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a:b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-352-good",
+      "contract": "TX-352",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>_a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:_a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-352-edge",
+      "contract": "TX-352",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>:a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-353-good",
+      "contract": "TX-353",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>名</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:名"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-353-edge",
+      "contract": "TX-353",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a:b:c</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-354-good",
+      "contract": "TX-354",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>𐀀a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:𐀀a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-354-edge",
+      "contract": "TX-354",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>󰀀a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-355-good",
+      "contract": "TX-355",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>á</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:á"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-355-edge",
+      "contract": "TX-355",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>́a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-356-good",
+      "contract": "TX-356",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-356-edge",
+      "contract": "TX-356",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a:b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-357-good",
+      "contract": "TX-357",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-357-edge",
+      "contract": "TX-357",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>1a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-358-good",
+      "contract": "TX-358",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a.b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a.b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-358-edge",
+      "contract": "TX-358",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a/b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-359-good",
+      "contract": "TX-359",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-359-edge",
+      "contract": "TX-359",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-360-good",
+      "contract": "TX-360",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>‌a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:‌a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-360-edge",
+      "contract": "TX-360",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>;a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-361-good",
+      "contract": "TX-361",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>1a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:1a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-361-edge",
+      "contract": "TX-361",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-362-good",
+      "contract": "TX-362",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a-b.c</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a-b.c"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-362-edge",
+      "contract": "TX-362",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-363-good",
+      "contract": "TX-363",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>:a:</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String::a:"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-363-edge",
+      "contract": "TX-363",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a/b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-364-good",
+      "contract": "TX-364",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>名</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:名"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-364-edge",
+      "contract": "TX-364",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a?</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-365-good",
+      "contract": "TX-365",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>𐀀a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:𐀀a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-365-edge",
+      "contract": "TX-365",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>󰀀a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-366-good",
+      "contract": "TX-366",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-366-edge",
+      "contract": "TX-366",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-367-good",
+      "contract": "TX-367",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>abc</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:abc"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-367-edge",
+      "contract": "TX-367",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-368-good",
+      "contract": "TX-368",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>-a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:-a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-368-edge",
+      "contract": "TX-368",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-369-good",
+      "contract": "TX-369",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>.a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:.a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-369-edge",
+      "contract": "TX-369",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a@</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-370-good",
+      "contract": "TX-370",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>́a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:́a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-370-edge",
+      "contract": "TX-370",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKEN' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a#</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-371-good",
+      "contract": "TX-371",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-371-edge",
+      "contract": "TX-371",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": true
+    },
+    {
+      "id": "TX-372-good",
+      "contract": "TX-372",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a",
+        "String:b"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-372-edge",
+      "contract": "TX-372",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": true
+    },
+    {
+      "id": "TX-373-good",
+      "contract": "TX-373",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a\tb\nc </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a",
+        "String:b",
+        "String:c"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-373-edge",
+      "contract": "TX-373",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": true
+    },
+    {
+      "id": "TX-374-good",
+      "contract": "TX-374",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-374-edge",
+      "contract": "TX-374",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": true
+    },
+    {
+      "id": "TX-375-good",
+      "contract": "TX-375",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>b a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:b",
+        "String:a"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-375-edge",
+      "contract": "TX-375",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": true
+    },
+    {
+      "id": "TX-376-good",
+      "contract": "TX-376",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a 1</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a",
+        "String:1"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-376-edge",
+      "contract": "TX-376",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": true
+    },
+    {
+      "id": "TX-377-good",
+      "contract": "TX-377",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-377-edge",
+      "contract": "TX-377",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": true
+    },
+    {
+      "id": "TX-378-good",
+      "contract": "TX-378",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a a a a a a a a a a a a a a a a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a",
+        "String:a"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-378-edge",
+      "contract": "TX-378",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a a a a a a a a a a a a a a a a a</r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "expected": [],
+      "listValue": true
+    },
+    {
+      "id": "TX-379-good",
+      "contract": "TX-379",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a",
+        "String:b"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-379-edge",
+      "contract": "TX-379",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": true
+    },
+    {
+      "id": "TX-380-good",
+      "contract": "TX-380",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a",
+        "String:b"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-380-edge",
+      "contract": "TX-380",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NMTOKENS' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": true
+    },
+    {
+      "id": "TX-381-good",
+      "contract": "TX-381",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-381-edge",
+      "contract": "TX-381",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-382-good",
+      "contract": "TX-382",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:token'></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-382-edge",
+      "contract": "TX-382",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-383-good",
+      "contract": "TX-383",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='A'><xs:restriction base='xs:token'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='A'></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-383-edge",
+      "contract": "TX-383",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-384-good",
+      "contract": "TX-384",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-384-edge",
+      "contract": "TX-384",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-385-good",
+      "contract": "TX-385",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:simpleType><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-385-edge",
+      "contract": "TX-385",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:simpleType><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<r>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-386-good",
+      "contract": "TX-386",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-386-edge",
+      "contract": "TX-386",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:token'></xs:restriction></xs:simpleType><xs:simpleType name='Unused'><xs:restriction base='xs:NCName'><xs:enumeration value='1bad'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Invalid",
+      "outcome": "Invalid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-387-good",
+      "contract": "TX-387",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-387-edge",
+      "contract": "TX-387",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='T'></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Unsupported",
+      "outcome": "Invalid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-388-good",
+      "contract": "TX-388",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-388-edge",
+      "contract": "TX-388",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='Missing'></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Unsupported",
+      "outcome": "Invalid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-389-good",
+      "contract": "TX-389",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-389-edge",
+      "contract": "TX-389",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-390-good",
+      "contract": "TX-390",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-390-edge",
+      "contract": "TX-390",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-391-good",
+      "contract": "TX-391",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-391-edge",
+      "contract": "TX-391",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-392-good",
+      "contract": "TX-392",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='0'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-392-edge",
+      "contract": "TX-392",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='0'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-393-good",
+      "contract": "TX-393",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:ab"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-393-edge",
+      "contract": "TX-393",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-394-good",
+      "contract": "TX-394",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:minLength value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:ab"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-394-edge",
+      "contract": "TX-394",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:minLength value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-395-good",
+      "contract": "TX-395",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:maxLength value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:ab"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-395-edge",
+      "contract": "TX-395",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:maxLength value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>abc</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-396-good",
+      "contract": "TX-396",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>𐀀</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:𐀀"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-396-edge",
+      "contract": "TX-396",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-397-good",
+      "contract": "TX-397",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-397-edge",
+      "contract": "TX-397",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-398-good",
+      "contract": "TX-398",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:minLength value='1'/><xs:maxLength value='3'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:ab"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-398-edge",
+      "contract": "TX-398",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:minLength value='1'/><xs:maxLength value='3'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='4'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-399-good",
+      "contract": "TX-399",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:minLength value='1'/><xs:maxLength value='3'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:ab"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-399-edge",
+      "contract": "TX-399",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:minLength value='1'/><xs:maxLength value='3'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='4'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-400-good",
+      "contract": "TX-400",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:minLength value='1'/><xs:maxLength value='3'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:ab"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-400-edge",
+      "contract": "TX-400",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:minLength value='1'/><xs:maxLength value='3'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='4'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>ab</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-401-good",
+      "contract": "TX-401",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-401-edge",
+      "contract": "TX-401",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>wrong</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-402-good",
+      "contract": "TX-402",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:normalizedString'><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-402-edge",
+      "contract": "TX-402",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:normalizedString'><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>wrong</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-403-good",
+      "contract": "TX-403",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-403-edge",
+      "contract": "TX-403",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>wrong</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-404-good",
+      "contract": "TX-404",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:enumeration value='a'/><xs:enumeration value=' a '/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-404-edge",
+      "contract": "TX-404",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>wrong</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-405-good",
+      "contract": "TX-405",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/><xs:enumeration value='b'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-405-edge",
+      "contract": "TX-405",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>wrong</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-406-good",
+      "contract": "TX-406",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-406-edge",
+      "contract": "TX-406",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:enumeration value='c'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Invalid",
+      "outcome": "Invalid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-407-good",
+      "contract": "TX-407",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:enumeration value='a:b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a:b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a:b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-407-edge",
+      "contract": "TX-407",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:enumeration value='a:b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>wrong</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-408-good",
+      "contract": "TX-408",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:enumeration value='é'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>é</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:é"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-408-edge",
+      "contract": "TX-408",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:enumeration value='é'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>é</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-409-good",
+      "contract": "TX-409",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:list itemType='xs:token'/></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r> a  b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a",
+        "String:b"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-409-edge",
+      "contract": "TX-409",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:list itemType='xs:token'/></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:enumeration value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>b a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": true
+    },
+    {
+      "id": "TX-410-good",
+      "contract": "TX-410",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:union memberTypes='xs:token xs:string'/></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-410-edge",
+      "contract": "TX-410",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:union memberTypes='xs:token xs:string'/></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-411-good",
+      "contract": "TX-411",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='preserve'/><xs:pattern value=' a '/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String: a "
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-411-edge",
+      "contract": "TX-411",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='preserve'/><xs:pattern value=' a '/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>wrong</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-412-good",
+      "contract": "TX-412",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='replace'/><xs:pattern value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a\tb</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-412-edge",
+      "contract": "TX-412",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='replace'/><xs:pattern value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>wrong</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-413-good",
+      "contract": "TX-413",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:pattern value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a\tb</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-413-edge",
+      "contract": "TX-413",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:pattern value='a b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>wrong</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-414-good",
+      "contract": "TX-414",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:pattern value='a'/><xs:pattern value='b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>b</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-414-edge",
+      "contract": "TX-414",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:pattern value='a'/><xs:pattern value='b'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>x</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-415-good",
+      "contract": "TX-415",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:string'><xs:pattern value='[ab]'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:pattern value='[ac]'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-415-edge",
+      "contract": "TX-415",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:string'><xs:pattern value='[ab]'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:pattern value='[ac]'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [
+        "String:b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-416-good",
+      "contract": "TX-416",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='preserve'/><xs:pattern value=' a '/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String: a "
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-416-edge",
+      "contract": "TX-416",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='preserve'/><xs:pattern value=' a '/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>wrong</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-417-good",
+      "contract": "TX-417",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:pattern value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-417-edge",
+      "contract": "TX-417",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:pattern value='\\p{L}'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Unsupported",
+      "outcome": "Invalid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-418-good",
+      "contract": "TX-418",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:pattern value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-418-edge",
+      "contract": "TX-418",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/><xs:pattern value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Unsupported",
+      "outcome": "Invalid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-419-good",
+      "contract": "TX-419",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:pattern value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-419-edge",
+      "contract": "TX-419",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:pattern value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>wrong</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-420-good",
+      "contract": "TX-420",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:pattern value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-420-edge",
+      "contract": "TX-420",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/><xs:pattern value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>wrong</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-421-good",
+      "contract": "TX-421",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:length value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-421-edge",
+      "contract": "TX-421",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:length value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-422-good",
+      "contract": "TX-422",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:minLength value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-422-edge",
+      "contract": "TX-422",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:minLength value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-423-good",
+      "contract": "TX-423",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:maxLength value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-423-edge",
+      "contract": "TX-423",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:maxLength value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-424-good",
+      "contract": "TX-424",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:string'><xs:whiteSpace value='replace' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-424-edge",
+      "contract": "TX-424",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:string'><xs:whiteSpace value='replace' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-425-good",
+      "contract": "TX-425",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:minLength value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-425-edge",
+      "contract": "TX-425",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:minLength value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-426-good",
+      "contract": "TX-426",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:maxLength value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-426-edge",
+      "contract": "TX-426",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:maxLength value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='2'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-427-good",
+      "contract": "TX-427",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='1' fixed=' true '/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-427-edge",
+      "contract": "TX-427",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='1' fixed='maybe'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-428-good",
+      "contract": "TX-428",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:minLength value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-428-edge",
+      "contract": "TX-428",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:length value='1'/><xs:length value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-429-good",
+      "contract": "TX-429",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:maxLength value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-429-edge",
+      "contract": "TX-429",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:totalDigits value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-430-good",
+      "contract": "TX-430",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='B'><xs:restriction base='xs:token'><xs:length value='1' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-430-edge",
+      "contract": "TX-430",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-431-good",
+      "contract": "TX-431",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='replace'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-431-edge",
+      "contract": "TX-431",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='bad'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-432-good",
+      "contract": "TX-432",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-432-edge",
+      "contract": "TX-432",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='bad'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-433-good",
+      "contract": "TX-433",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:normalizedString'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-433-edge",
+      "contract": "TX-433",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:normalizedString'><xs:whiteSpace value='bad'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-434-good",
+      "contract": "TX-434",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:normalizedString'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-434-edge",
+      "contract": "TX-434",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:normalizedString'><xs:whiteSpace value='preserve'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-435-good",
+      "contract": "TX-435",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-435-edge",
+      "contract": "TX-435",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:whiteSpace value='replace'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-436-good",
+      "contract": "TX-436",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-436-edge",
+      "contract": "TX-436",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:whiteSpace value='preserve'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-437-good",
+      "contract": "TX-437",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-437-edge",
+      "contract": "TX-437",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:string'><xs:enumeration value=' a '/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-438-good",
+      "contract": "TX-438",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:string'><xs:whiteSpace value='replace' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-438-edge",
+      "contract": "TX-438",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:string'><xs:whiteSpace value='replace' fixed='true'/></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-439-good",
+      "contract": "TX-439",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:enumeration value=' a '/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-439-edge",
+      "contract": "TX-439",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='bad'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-440-good",
+      "contract": "TX-440",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:token'></xs:restriction></xs:simpleType><xs:simpleType name='T'><xs:restriction base='B'><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-440-edge",
+      "contract": "TX-440",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='T' /><xs:simpleType name='T'><xs:restriction base='xs:string'><xs:whiteSpace value='bad'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>a</r>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-441-good",
+      "contract": "TX-441",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a  b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-441-edge",
+      "contract": "TX-441",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-442-good",
+      "contract": "TX-442",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:token' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v> a  b </v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "path": [
+        0
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-442-edge",
+      "contract": "TX-442",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:token' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "path": [
+        0
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-443-good",
+      "contract": "TX-443",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:token' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v> a  b </v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "path": [
+        0
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-443-edge",
+      "contract": "TX-443",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='v' type='xs:token' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "path": [
+        0
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-444-good",
+      "contract": "TX-444",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:token' /></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v> a  b </v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "path": [
+        0
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-444-edge",
+      "contract": "TX-444",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:all><xs:element name='v' type='xs:token' /></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><v>x</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "path": [
+        0
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-445-good",
+      "contract": "TX-445",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:token' /></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><c><v> a  b </v></c></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "path": [
+        0,
+        0
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-445-edge",
+      "contract": "TX-445",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:token' /></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><c><v>x</v></c></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "path": [
+        0,
+        0
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-446-good",
+      "contract": "TX-446",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:token' use='required' /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x' a=\" a  b \"><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "target": "attribute",
+      "listValue": false
+    },
+    {
+      "id": "TX-446-edge",
+      "contract": "TX-446",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:token' use='required' /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x' a=\"x\"><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "target": "attribute",
+      "listValue": false
+    },
+    {
+      "id": "TX-447-good",
+      "contract": "TX-447",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:token' use='required' /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><c a=\" a  b \"><v>1</v></c></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "path": [
+        0
+      ],
+      "target": "attribute",
+      "listValue": false
+    },
+    {
+      "id": "TX-447-edge",
+      "contract": "TX-447",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:token' use='required' /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><c a=\"x\"><v>1</v></c></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "path": [
+        0
+      ],
+      "target": "attribute",
+      "listValue": false
+    },
+    {
+      "id": "TX-448-good",
+      "contract": "TX-448",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='g'/></xs:sequence></xs:complexType></xs:element><xs:element name='g' type='xs:token'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><g> a  b </g></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "path": [
+        0
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-448-edge",
+      "contract": "TX-448",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='g'/></xs:sequence></xs:complexType></xs:element><xs:element name='g' type='xs:token'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'><g>x</g></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "path": [
+        0
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-449-good",
+      "contract": "TX-449",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute ref='a' use='required'/></xs:complexType></xs:element><xs:attribute name='a' type='xs:token'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x' a=\" a  b \"><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "target": "attribute",
+      "listValue": false
+    },
+    {
+      "id": "TX-449-edge",
+      "contract": "TX-449",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute ref='a' use='required'/></xs:complexType></xs:element><xs:attribute name='a' type='xs:token'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x' a=\"x\"><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "target": "attribute",
+      "listValue": false
+    },
+    {
+      "id": "TX-450-good",
+      "contract": "TX-450",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attributeGroup ref='G'/></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='a' type='xs:token' use='required' /></xs:attributeGroup></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x' a=\" a  b \"><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "target": "attribute",
+      "listValue": false
+    },
+    {
+      "id": "TX-450-edge",
+      "contract": "TX-450",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attributeGroup ref='G'/></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='a' type='xs:token' use='required' /></xs:attributeGroup></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x' a=\"x\"><v>1</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "target": "attribute",
+      "listValue": false
+    },
+    {
+      "id": "TX-451-good",
+      "contract": "TX-451",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a  b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-451-edge",
+      "contract": "TX-451",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-452-good",
+      "contract": "TX-452",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='D'/><xs:simpleType name='T'><xs:restriction base='xs:token'></xs:restriction></xs:simpleType><xs:complexType name='B'><xs:simpleContent><xs:extension base='T'/></xs:simpleContent></xs:complexType><xs:complexType name='D'><xs:simpleContent><xs:restriction base='B'><xs:enumeration value='a'/></xs:restriction></xs:simpleContent></xs:complexType></xs:schema>",
+      "instance": "<r> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-452-edge",
+      "contract": "TX-452",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='D'/><xs:simpleType name='T'><xs:restriction base='xs:token'></xs:restriction></xs:simpleType><xs:complexType name='B'><xs:simpleContent><xs:extension base='T'/></xs:simpleContent></xs:complexType><xs:complexType name='D'><xs:simpleContent><xs:restriction base='B'><xs:enumeration value='a'/></xs:restriction></xs:simpleContent></xs:complexType></xs:schema>",
+      "instance": "<r>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-453-good",
+      "contract": "TX-453",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a  b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-453-edge",
+      "contract": "TX-453",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-454-good",
+      "contract": "TX-454",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a  b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-454-edge",
+      "contract": "TX-454",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-455-good",
+      "contract": "TX-455",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'><xs:attribute name='a' type='xs:token' use='required'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='USD'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-455-edge",
+      "contract": "TX-455",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'><xs:attribute name='a' type='xs:token' use='required'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='USD'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-456-good",
+      "contract": "TX-456",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a  b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-456-edge",
+      "contract": "TX-456",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-457-good",
+      "contract": "TX-457",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a  b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-457-edge",
+      "contract": "TX-457",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-458-good",
+      "contract": "TX-458",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'><xs:attribute name='a' type='xs:token' use='required'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='USD'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-458-edge",
+      "contract": "TX-458",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'><xs:attribute name='a' type='xs:token' use='required'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='USD'>x</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-459-good",
+      "contract": "TX-459",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a  b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-459-edge",
+      "contract": "TX-459",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' fixed='a'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-460-good",
+      "contract": "TX-460",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'/></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a  b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-460-edge",
+      "contract": "TX-460",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:simpleContent><xs:extension base='xs:token'><xs:assert test='true()'/></xs:extension></xs:simpleContent></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>x</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "expected": [
+        "String:x"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-461-good",
+      "contract": "TX-461",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:token' default='a'/></xs:schema>",
+      "instance": "<r> b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:b"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-461-edge",
+      "contract": "TX-461",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:token' default='a'/></xs:schema>",
+      "instance": "<r>c</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:c"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-462-good",
+      "contract": "TX-462",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' fixed='a'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-462-edge",
+      "contract": "TX-462",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' fixed='a'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-463-good",
+      "contract": "TX-463",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' fixed='a'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-463-edge",
+      "contract": "TX-463",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' fixed='a'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-464-good",
+      "contract": "TX-464",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' fixed='a'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-464-edge",
+      "contract": "TX-464",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' fixed='a'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>b</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-465-good",
+      "contract": "TX-465",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:token' fixed='a'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' a '><v>0</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false,
+      "target": "attribute"
+    },
+    {
+      "id": "TX-465-edge",
+      "contract": "TX-465",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:token' fixed='a'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='b'><v>0</v></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false,
+      "target": "attribute"
+    },
+    {
+      "id": "TX-466-good",
+      "contract": "TX-466",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:token' fixed=' a '/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute ref='a' fixed='a'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' a '><v>0</v></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false,
+      "target": "attribute"
+    },
+    {
+      "id": "TX-466-edge",
+      "contract": "TX-466",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:token' fixed=' a '/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='v' type='xs:decimal'/></xs:sequence><xs:attribute ref='a' fixed='b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' a '><v>0</v></r>",
+      "compile": "Invalid",
+      "outcome": "Invalid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false,
+      "target": "attribute"
+    },
+    {
+      "id": "TX-467-good",
+      "contract": "TX-467",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' fixed='a'/></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-467-edge",
+      "contract": "TX-467",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:token' default='a'/></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-468-good",
+      "contract": "TX-468",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-468-edge",
+      "contract": "TX-468",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'>a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-469-good",
+      "contract": "TX-469",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:token' nillable='true'/></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-469-edge",
+      "contract": "TX-469",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:token' nillable='true'/></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-470-good",
+      "contract": "TX-470",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:NMTOKENS' fixed='a b'/></xs:schema>",
+      "instance": "<r> a  b </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a",
+        "String:b"
+      ],
+      "listValue": true
+    },
+    {
+      "id": "TX-470-edge",
+      "contract": "TX-470",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:NMTOKENS' fixed='a b'/></xs:schema>",
+      "instance": "<r>b a</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": true
+    },
+    {
+      "id": "TX-471-good",
+      "contract": "TX-471",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-471-edge",
+      "contract": "TX-471",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-472-good",
+      "contract": "TX-472",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-472-edge",
+      "contract": "TX-472",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-473-good",
+      "contract": "TX-473",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-473-edge",
+      "contract": "TX-473",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-474-good",
+      "contract": "TX-474",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-474-edge",
+      "contract": "TX-474",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-475-good",
+      "contract": "TX-475",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-475-edge",
+      "contract": "TX-475",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-476-good",
+      "contract": "TX-476",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-476-edge",
+      "contract": "TX-476",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-477-good",
+      "contract": "TX-477",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-477-edge",
+      "contract": "TX-477",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-478-good",
+      "contract": "TX-478",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-478-edge",
+      "contract": "TX-478",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-479-good",
+      "contract": "TX-479",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-479-edge",
+      "contract": "TX-479",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-480-good",
+      "contract": "TX-480",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-480-edge",
+      "contract": "TX-480",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-481-good",
+      "contract": "TX-481",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-481-edge",
+      "contract": "TX-481",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-482-good",
+      "contract": "TX-482",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-482-edge",
+      "contract": "TX-482",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-483-good",
+      "contract": "TX-483",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-483-edge",
+      "contract": "TX-483",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-484-good",
+      "contract": "TX-484",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-484-edge",
+      "contract": "TX-484",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-485-good",
+      "contract": "TX-485",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-485-edge",
+      "contract": "TX-485",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-486-good",
+      "contract": "TX-486",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-486-edge",
+      "contract": "TX-486",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-487-good",
+      "contract": "TX-487",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-487-edge",
+      "contract": "TX-487",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-488-good",
+      "contract": "TX-488",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-488-edge",
+      "contract": "TX-488",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-489-good",
+      "contract": "TX-489",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-489-edge",
+      "contract": "TX-489",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-490-good",
+      "contract": "TX-490",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-490-edge",
+      "contract": "TX-490",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-491-good",
+      "contract": "TX-491",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:token'/></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false,
+      "maxCharacters": 1
+    },
+    {
+      "id": "TX-491-edge",
+      "contract": "TX-491",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='xs:token'/></xs:schema>",
+      "instance": "<r> a </r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false,
+      "maxCharacters": 1
+    },
+    {
+      "id": "TX-492-good",
+      "contract": "TX-492",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:enumeration value='a'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false,
+      "maxCharacters": 1
+    },
+    {
+      "id": "TX-492-edge",
+      "contract": "TX-492",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r' type='T'/><xs:simpleType name='T'><xs:restriction base='xs:token'><xs:enumeration value='aa'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<r>a</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false,
+      "maxCharacters": 1
+    },
+    {
+      "id": "TX-493-good",
+      "contract": "TX-493",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-493-edge",
+      "contract": "TX-493",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-494-good",
+      "contract": "TX-494",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-494-edge",
+      "contract": "TX-494",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-495-good",
+      "contract": "TX-495",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-495-edge",
+      "contract": "TX-495",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-496-good",
+      "contract": "TX-496",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-496-edge",
+      "contract": "TX-496",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-497-good",
+      "contract": "TX-497",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-497-edge",
+      "contract": "TX-497",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-498-good",
+      "contract": "TX-498",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-498-edge",
+      "contract": "TX-498",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-499-good",
+      "contract": "TX-499",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-499-edge",
+      "contract": "TX-499",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:NCName' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "expected": [],
+      "listValue": false
+    },
+    {
+      "id": "TX-500-good",
+      "contract": "TX-500",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'> a </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:a"
+      ],
+      "listValue": false
+    },
+    {
+      "id": "TX-500-edge",
+      "contract": "TX-500",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:x' xmlns:q='urn:x'><xs:element name='r' type='xs:token' /></xs:schema>",
+      "instance": "<r xmlns:p='urn:x' xmlns:q='urn:x'>!invalid!</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "expected": [
+        "String:!invalid!"
+      ],
+      "listValue": false
+    }
+  ]
+}
