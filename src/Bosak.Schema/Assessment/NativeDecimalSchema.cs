@@ -81,6 +81,7 @@
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 
+//                      | Charles Korthout | 1.54  | 26-11-2026     | Add bounded strict attribute wildcards on empty complex owners.                           |
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Numerics;
@@ -119,6 +120,7 @@ internal sealed partial class NativeDecimalSchema
     internal NativeType? IntegerType { get; private set; }
     internal NativeType? UntypedAtomicType { get; private set; }
     internal NativeType? LaxAttributeType { get; private set; }
+    internal bool HasStrictAttributeWildcards { get; private set; }
     private int? maxStringCharacters;
     internal NativeDeclaration Root { get; }
     internal ImmutableArray<NativeDeclaration> Children { get; }
@@ -229,6 +231,7 @@ internal sealed partial class NativeDecimalSchema
                     defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType!, integerType!, simple,
                     limits, maxStringCharacters!.Value, cancellationToken, anonymousSimple, patternCompilation);
                 nested.GlobalAttributeDeclarations = globalAttributes.Values;
+                nested.HasStrictAttributeWildcards = root.Descendants(Xs + "anyAttribute").Any();
                 return NativeResult<NativeDecimalSchema>.Valid(nested);
             }
             // Compile all complex types eagerly, including unused declarations.
@@ -285,6 +288,7 @@ internal sealed partial class NativeDecimalSchema
             }
             first!.roots = compiled.ToImmutable();
             first.GlobalAttributeDeclarations = globalAttributes.Values;
+            first.HasStrictAttributeWildcards = root.Descendants(Xs + "anyAttribute").Any();
             first.NamedTypes = simple.Values.Concat(named.Values.Select(p => p.Root.Type)).ToImmutableArray();
             first.DecimalType = decimalType;
             first.StringType = stringType;
@@ -307,7 +311,9 @@ internal sealed partial class NativeDecimalSchema
         if (hasGroup && Elements(members[0]).Count != 0) return null;
         var remaining = members.Skip(hasGroup ? 1 : 0).ToArray();
         var attributeMembers = remaining.TakeWhile(IsAttributeUseMember).ToArray();
-        var assertions = remaining.Skip(attributeMembers.Length).ToArray();
+        var tail = remaining.Skip(attributeMembers.Length).ToArray();
+        var wildcardSource = tail.FirstOrDefault()?.Name == Xs + "anyAttribute" ? tail[0] : null;
+        var assertions = tail.Skip(wildcardSource is null ? 0 : 1).ToArray();
         if (assertions.Any(a => a.Name != Xs + "assert")) return null;
         if (hasGroup)
         {
@@ -320,7 +326,9 @@ internal sealed partial class NativeDecimalSchema
         }
         Require(attributeMembers.Length == 0 || assertions.Length == 0, "Empty-owner attributes with structural assertions are excluded.", NativeDecimalUnsupportedReason.Attributes);
         var uses = CompileAttributes(attributeMembers, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
-        var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri) { EmptyContent = true };
+        Require(wildcardSource is null || assertions.Length == 0 && !ReadMixedContent(complex), "Strict attribute wildcard assertions/mixed content are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+        var wildcard = wildcardSource is null ? null : CompileStrictAttributeWildcard(wildcardSource, targetNamespace);
+        var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri) { EmptyContent = true, AttributeWildcard = wildcard };
         return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { AttributeUses = uses, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(assertions, targetNamespace, assertionNamespace, cancellationToken) };
     }
 
@@ -534,13 +542,13 @@ internal sealed partial class NativeDecimalSchema
         {
             var patternBudget = new NativePatternBudget(cancellationToken);
             var document = Parse(instance, 65536, cancellationToken);
-            if (NamedTypes.Any(t => t.IsAnyType)) CheckKnownLaxInput(document, cancellationToken);
+            if (HasStrictAttributeWildcards || NamedTypes.Any(t => t.IsAnyType)) CheckKnownLaxInput(document, cancellationToken);
             var root = document.Root!;
             var found = roots.TryGetValue(root.Name, out var selected);
             var rootType = found ? ResolveInstanceType(root, selected!.Root.Type) : null;
             var attributeStates = ImmutableArray.CreateBuilder<NativeElementState>();
             if (found && rootType!.IsAnyType) { /* Actual global wildcard attributes are assessed with the anyType owner below. */ }
-            else if (found && (selected!.AttributeUses.Length != 0 || selected.Root.Type.ContentType?.IsDate == true))
+            else if (found && (selected!.AttributeUses.Length != 0 || selected.Root.Type.ContentType?.IsDate == true || selected.Root.Type.AttributeWildcard is not null))
             {
                 Require(root.Attributes().All(a => IsAdmittedInstanceAttribute(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
                     "Special attribute requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);
@@ -552,7 +560,7 @@ internal sealed partial class NativeDecimalSchema
                     if (attribute is not null) attributeStates.Add(AssessAttributeValue(attribute.Value, use, patternBudget, root));
                     else RequireUnconstrainedAttributeAbsence(use);
                 }
-                Check(root.Attributes().All(a => IsAdmittedInstanceAttribute(a) || selected.AttributeUses.Any(u => u.ExpandedName == a.Name)), "Undeclared root attribute.");
+                AssessStrictAttributeExtras(root, selected, attributeStates, [], 0, cancellationToken, patternBudget);
             }
             else InstanceAttributes(root);
             Check(found, "Unexpected root element.");
@@ -947,6 +955,7 @@ internal sealed class NativeType(string? name, bool hasNoTypedValue, string name
     internal NativeNumericPatterns? NumericPatterns { get; } = numericPatterns;
     internal NativeType? ContentType { get; } = contentType;
     internal bool EmptyContent { get; init; }
+    internal NativeStrictAttributeWildcard? AttributeWildcard { get; init; }
     internal bool MixedContent { get; } = isMixed;
     internal bool IsAnyType { get; } = isAnyType;
     internal bool IsComplex => MixedContent || EmptyContent || HasNoTypedValue || ContentType is not null;
