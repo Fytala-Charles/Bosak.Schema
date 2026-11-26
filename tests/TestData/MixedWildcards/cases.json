@@ -1,0 +1,1222 @@
+{
+  "cases": [
+    {
+      "id": "MW-001",
+      "contract": "original aggregate and normalized values root target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "pre01.20post"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "MW-002",
+      "contract": "invalid known attribute root target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-003",
+      "contract": "invalid known child root target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='1'>pre<c>bad</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-004",
+      "contract": "original aggregate and normalized values root target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='001'>pre<c>01.20</c>post</t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "pre01.20post"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "MW-005",
+      "contract": "invalid known attribute root target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='bad'>pre<c>01.20</c>post</t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-006",
+      "contract": "invalid known child root target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='1'>pre<c>bad</c>post</t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-007",
+      "contract": "original aggregate and normalized values named target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T' mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType><xs:element name='r' type='T'/></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "pre01.20post"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "MW-008",
+      "contract": "invalid known attribute named target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T' mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType><xs:element name='r' type='T'/></xs:schema>",
+      "instance": "<r a='bad'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-009",
+      "contract": "invalid known child named target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T' mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType><xs:element name='r' type='T'/></xs:schema>",
+      "instance": "<r a='1'>pre<c>bad</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-010",
+      "contract": "original aggregate and normalized values named target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T' mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType><xs:element name='r' type='t:T'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='001'>pre<c>01.20</c>post</t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "pre01.20post"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "MW-011",
+      "contract": "invalid known attribute named target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T' mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType><xs:element name='r' type='t:T'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='bad'>pre<c>01.20</c>post</t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-012",
+      "contract": "invalid known child named target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T' mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType><xs:element name='r' type='t:T'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='1'>pre<c>bad</c>post</t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-013",
+      "contract": "original aggregate and normalized values nested target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'>pre<c>01.20</c>post</e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "pre01.20post",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "pre01.20post"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [
+            0,
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "id": "MW-014",
+      "contract": "invalid known attribute nested target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'>pre<c>01.20</c>post</e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-015",
+      "contract": "invalid known child nested target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='1'>pre<c>bad</c>post</e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-016",
+      "contract": "original aggregate and normalized values nested target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='001'>pre<c>01.20</c>post</e></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "pre01.20post",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "pre01.20post"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [
+            0,
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "id": "MW-017",
+      "contract": "invalid known attribute nested target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='bad'>pre<c>01.20</c>post</e></t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-018",
+      "contract": "invalid known child nested target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='1'>pre<c>bad</c>post</e></t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-019",
+      "contract": "original aggregate and normalized values nestedNamed target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T' mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'>pre<c>01.20</c>post</e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "pre01.20post",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "pre01.20post"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [
+            0,
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "id": "MW-020",
+      "contract": "invalid known attribute nestedNamed target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T' mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'>pre<c>01.20</c>post</e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-021",
+      "contract": "invalid known child nestedNamed target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T' mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='1'>pre<c>bad</c>post</e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-022",
+      "contract": "original aggregate and normalized values nestedNamed target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T' mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='t:T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='001'>pre<c>01.20</c>post</e></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "pre01.20post",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "pre01.20post"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [
+            0,
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "id": "MW-023",
+      "contract": "invalid known attribute nestedNamed target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T' mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='t:T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='bad'>pre<c>01.20</c>post</e></t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-024",
+      "contract": "invalid known child nestedNamed target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T' mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='t:T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='1'>pre<c>bad</c>post</e></t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-025",
+      "contract": "original aggregate and normalized values reference target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'>pre<c>01.20</c>post</e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "pre01.20post",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "pre01.20post"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [
+            0,
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "id": "MW-026",
+      "contract": "invalid known attribute reference target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'>pre<c>01.20</c>post</e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-027",
+      "contract": "invalid known child reference target ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='1'>pre<c>bad</c>post</e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-028",
+      "contract": "original aggregate and normalized values reference target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><t:e t:a='001'>pre<c>01.20</c>post</t:e></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "pre01.20post",
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "pre01.20post"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [
+            0,
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "id": "MW-029",
+      "contract": "invalid known attribute reference target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><t:e t:a='bad'>pre<c>01.20</c>post</t:e></t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-030",
+      "contract": "invalid known child reference target urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' xmlns:p='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><t:e t:a='1'>pre<c>bad</c>post</t:e></t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": false,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-031",
+      "contract": "original mixed text <c>01.20</c>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'><c>01.20</c></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "01.20",
+      "reads": []
+    },
+    {
+      "id": "MW-032",
+      "contract": "original mixed text   <c>01.20</c>  ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>  <c>01.20</c>  </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "  01.20  ",
+      "reads": []
+    },
+    {
+      "id": "MW-033",
+      "contract": "original mixed text α<c>01.20</c>Ω",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>α<c>01.20</c>Ω</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "α01.20Ω",
+      "reads": []
+    },
+    {
+      "id": "MW-034",
+      "contract": "original mixed text <![CDATA[A < ]]><c>01.20</c>&amp;B",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'><![CDATA[A < ]]><c>01.20</c>&amp;B</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "A < 01.20&B",
+      "reads": []
+    },
+    {
+      "id": "MW-035",
+      "contract": "original mixed text pre<!--ignored--><?p ignored?><c>01.20</c>post",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<!--ignored--><?p ignored?><c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    },
+    {
+      "id": "MW-036",
+      "contract": "optional absent child one string atom ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal' minOccurs='0'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-037",
+      "contract": "optional absent child one string atom  text only ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal' minOccurs='0'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'> text only </r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": " text only ",
+      "reads": []
+    },
+    {
+      "id": "MW-038",
+      "contract": "optional absent child one string atom <!--x--><?p x?>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal' minOccurs='0'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'><!--x--><?p x?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-039",
+      "contract": "required child remains required",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>text</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-040",
+      "contract": "unknown strict attribute remains Invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r unknown='x'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-041",
+      "contract": "qualified strict constraint namespace='##local'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute namespace='##local'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    },
+    {
+      "id": "MW-042",
+      "contract": "qualified strict constraint namespace='##other'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute namespace='##other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-043",
+      "contract": "qualified strict constraint notNamespace='urn:other'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute notNamespace='urn:other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    },
+    {
+      "id": "MW-044",
+      "contract": "qualified strict constraint notNamespace='##local'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute notNamespace='##local'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-045",
+      "contract": "qualified strict constraint notQName='b'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute notQName='b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    },
+    {
+      "id": "MW-046",
+      "contract": "qualified strict constraint notQName='a'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute notQName='a'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-047",
+      "contract": "qualified strict constraint notQName='##defined'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute notQName='##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-048",
+      "contract": "explicit use precedence",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:attribute name='a' type='xs:integer'/><xs:anyAttribute notQName='a ##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "MW-049",
+      "contract": "attribute text excluded from aggregate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r b='  x  '>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "b",
+          "namespace": "",
+          "expected": [
+            "x"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "id": "MW-050",
+      "contract": "fixed mismatch still Invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer' fixed='1'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='2'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-051",
+      "contract": "missing global default not augmented",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer' default='1'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r >pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    },
+    {
+      "id": "MW-052",
+      "contract": "identity graph independent of mixed aggregate",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='id' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='v' ref='v'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    },
+    {
+      "id": "MW-053",
+      "contract": "unresolved reference remains Invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='id' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='missing'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-054",
+      "contract": "aggregate boundary admitted",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>x<c>01.20</c>y</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 7,
+      "rootScalar": true,
+      "rootValue": "x01.20y",
+      "reads": []
+    },
+    {
+      "id": "MW-055",
+      "contract": "aggregate boundary refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>x<c>01.20</c>y</r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 6,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-056",
+      "contract": "UTF16 aggregate boundary admitted",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>😀<c>01</c>😀</r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 6,
+      "rootScalar": true,
+      "rootValue": "😀01😀",
+      "reads": []
+    },
+    {
+      "id": "MW-057",
+      "contract": "UTF16 aggregate boundary refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>😀<c>01</c>😀</r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 5,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-058",
+      "contract": "mixed scalar budget admitted",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal' maxOccurs='15'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'><c>1</c><c>1</c><c>1</c><c>1</c><c>1</c><c>1</c><c>1</c><c>1</c><c>1</c><c>1</c><c>1</c><c>1</c><c>1</c><c>1</c><c>1</c></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "111111111111111",
+      "reads": []
+    },
+    {
+      "id": "MW-059",
+      "contract": "mixed scalar budget refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal' maxOccurs='16'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    },
+    {
+      "id": "MW-060",
+      "contract": "special XML request refused",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xml:lang='en'>pre<c>01.20</c>post</r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "",
+      "reads": []
+    },
+    {
+      "id": "MW-061",
+      "contract": "mode excluded lax",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    },
+    {
+      "id": "MW-062",
+      "contract": "mode excluded skip",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    },
+    {
+      "id": "MW-063",
+      "contract": "mixed group owner excluded all",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:all><xs:element name='c' type='xs:decimal'/></xs:all><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    },
+    {
+      "id": "MW-064",
+      "contract": "mixed group owner excluded choice",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:choice><xs:element name='c' type='xs:decimal'/></xs:choice><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    },
+    {
+      "id": "MW-065",
+      "contract": "empty mixed model excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence></xs:sequence><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>text</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "text",
+      "reads": []
+    },
+    {
+      "id": "MW-066",
+      "contract": "assertion combination excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /><xs:assert test='true()'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    },
+    {
+      "id": "MW-067",
+      "contract": "duplicate wildcard excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType mixed='true'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute /><xs:anyAttribute/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'>pre<c>01.20</c>post</r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "maxString": 1024,
+      "rootScalar": true,
+      "rootValue": "pre01.20post",
+      "reads": []
+    }
+  ]
+}

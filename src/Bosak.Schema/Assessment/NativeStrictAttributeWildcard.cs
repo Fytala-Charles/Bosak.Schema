@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 26-11-2026     | Enforce bounded namespace/QName exclusions and schema consistency.                         |
 //                      | Charles Korthout | 0.3   | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
 //                      | Charles Korthout | 0.4   | 26-11-2026     | Retain strict wildcard plans on bounded all/choice roots.                                 |
+//                      | Charles Korthout | 0.5   | 26-11-2026     | Admit strict wildcard attributes on qualified finite mixed sequence owners.               |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -40,8 +41,8 @@ internal sealed partial class NativeDecimalSchema
         var source = rest.FirstOrDefault()?.Name == Xs + "anyAttribute" ? rest[0] : null;
         var assertions = rest.Skip(source is null ? 0 : 1).ToArray();
         if (source is not null)
-            Require((members[0].Name == Xs + "sequence" || members[0].Name == Xs + "all" || members[0].Name == Xs + "choice") && Elements(members[0]).Count != 0 && !ReadMixedContent(complex) && assertions.Length == 0,
-                "Wildcard requires a direct nonempty element-only compositor without assertions.", NativeDecimalUnsupportedReason.DeclarationShape);
+            Require((members[0].Name == Xs + "sequence" || members[0].Name == Xs + "all" || members[0].Name == Xs + "choice") && Elements(members[0]).Count != 0 && (!ReadMixedContent(complex) || members[0].Name == Xs + "sequence") && assertions.Length == 0,
+                "Wildcard requires a supported direct nonempty compositor without assertions.", NativeDecimalUnsupportedReason.DeclarationShape);
         return (uses, source is null ? null : CompileStrictAttributeWildcard(source, targetNamespace), assertions);
     }
 
