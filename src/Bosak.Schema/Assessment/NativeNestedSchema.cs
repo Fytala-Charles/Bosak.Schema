@@ -47,6 +47,7 @@
 //                      | Charles Korthout | 0.34 | 26-11-2026     | Admit text-only anyType sequence terminals and refuse unqualified wildcard content |
 //                      | Charles Korthout | 0.35 | 26-11-2026     | Assess known global declarations beneath anyType without inventing wildcard-use components |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -275,14 +276,14 @@ internal sealed partial class NativeDecimalSchema
 
     private void AssessContainer(XElement element, NativeDeclaration declaration, NativeDecimalSchema plan,
         ImmutableArray<NativeElementState>.Builder states, ImmutableArray<NativeElementState>.Builder attributes,
-        ImmutableArray<int> ownerPath, CancellationToken cancellationToken, NativePatternBudget patternBudget, bool isRoot = false)
+        ImmutableArray<int> ownerPath, CancellationToken cancellationToken, NativePatternBudget patternBudget, bool isRoot = false, bool allowDeclarationAbsent = true)
     {
         cancellationToken.ThrowIfCancellationRequested();
         var effectiveType = ResolveInstanceType(element, declaration.Type);
         _ = NilledState(element, declaration, effectiveType);
         if (effectiveType.IsAnyType)
         {
-            AssessKnownLax(element, declaration, effectiveType, states, attributes, ownerPath, cancellationToken, patternBudget);
+            AssessKnownLax(element, declaration, effectiveType, states, attributes, ownerPath, cancellationToken, patternBudget, allowDeclarationAbsent);
             return;
         }
         if (!isRoot)
@@ -336,7 +337,7 @@ internal sealed partial class NativeDecimalSchema
                 cancellationToken.ThrowIfCancellationRequested();
                 var childPath = ownerPath.Add(index);
                 var node = nodes[index++];
-                if (child.Container is { } nested) AssessContainer(node, child, nested, states, attributes, childPath, cancellationToken, patternBudget);
+                if (child.Container is { } nested) AssessContainer(node, child, nested, states, attributes, childPath, cancellationToken, patternBudget, allowDeclarationAbsent: false);
                 else
                 {
                     InstanceAttributes(node);

@@ -2,7 +2,7 @@
 // AUTHOR               : Charles Korthout
 // CREATE DATE          : 26 November 2026
 // PURPOSE              : Preserves canonical anyType identity and original text-only mixed terminal values.
-// SPECIAL NOTES        : Internal text-only subset; lax element and attribute wildcards remain unqualified.
+// SPECIAL NOTES        : Canonical anyType and anySimpleType components for bounded lax assessment.
 //
 // COPYRIGHT            : Fytala
 // LICENSE              : LICENSE.md (Apache-2.0)
@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 // ===========================================================================================================================================================
 using System.Xml.Linq;
 namespace Bosak.Schema;
@@ -47,7 +48,9 @@ internal sealed partial class NativeDecimalSchema
         if (schema.Annotation<NativeAnyTypeCompilation>()?.Type is not { } type) return;
         Require(!NamedTypes.Any(t => t.Name == "anyType" && t.NamespaceUri == Xs.NamespaceName),
             "Reserved anyType component redeclaration is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-        NamedTypes = NamedTypes.Add(type);
+        Require(!NamedTypes.Any(t => t.Name == "anySimpleType" && t.NamespaceUri == Xs.NamespaceName), "Reserved anySimpleType component redeclaration.", NativeDecimalUnsupportedReason.DeclarationShape);
+        LaxAttributeType = new NativeType("anySimpleType", false, Xs.NamespaceName, isString: true);
+        NamedTypes = NamedTypes.Add(type).Add(LaxAttributeType);
         UntypedAtomicType ??= new NativeType("untypedAtomic", false, Xs.NamespaceName, isString: true);
     }
 }

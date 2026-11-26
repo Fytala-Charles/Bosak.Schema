@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Known-declaration controls retain explicit nullable preconditions.                        |
 // ===========================================================================================================================================================
 using Bosak.Schema;
 using Bosak.Schema.Tests.NodeData;
@@ -27,7 +28,7 @@ public sealed class NativeGlobalElementReferencesIdentityTests
  /// <summary>Particle bounds remain separate from the canonical global declaration.</summary>
  [Fact]public void Uses(){var c=NativeDecimalSchema.Compile(Schema,new(256,256),maxStringCharacters:1024).Value!;Assert.Equal("r",c.Root.Name);var use=Assert.Single(c.Children);Assert.Equal(0,use.MinOccurs);Assert.Equal(2,use.MaxOccurs);Assert.NotSame(use,use.CanonicalDeclaration);Assert.Equal(1,use.CanonicalDeclaration.MinOccurs);Assert.Equal(1,use.CanonicalDeclaration.MaxOccurs);}
  /// <summary>Repeated original nodes share the actual declaration and preserve separate values.</summary>
- [Fact]public void CanonicalFacts(){using var f=new Fixture(Schema,Xml);var a=f.Input.FactsFor((NativeSessionNode)f.Element([0]))!;var b=f.Input.FactsFor((NativeSessionNode)f.Element([1]))!;Assert.NotSame(a.Node,b.Node);Assert.Same(a.NativeDeclaration,b.NativeDeclaration);Assert.Same(a.Declaration,b.Declaration);Assert.Same(a.Declaration,f.Provider.ResolveElementDeclaration(new("","item"),default).Value);Assert.True(f.Provider.IsSameComponent(a.Declaration,b.Declaration,default).Value);Assert.Equal("1.23",f.Read(a.Node).DecimalValue.ToInvariantString(256));Assert.Equal("2.34",f.Read(b.Node).DecimalValue.ToInvariantString(256));}
+ [Fact]public void CanonicalFacts(){using var f=new Fixture(Schema,Xml);var a=f.Input.FactsFor((NativeSessionNode)f.Element([0]))!;var b=f.Input.FactsFor((NativeSessionNode)f.Element([1]))!;Assert.NotSame(a.Node,b.Node);Assert.Same(a.NativeDeclaration,b.NativeDeclaration);Assert.Same(a.Declaration!,b.Declaration!);Assert.Same(a.Declaration!,f.Provider.ResolveElementDeclaration(new("","item"),default).Value);Assert.True(f.Provider.IsSameComponent(a.Declaration!,b.Declaration!,default).Value);Assert.Equal("1.23",f.Read(a.Node).DecimalValue.ToInvariantString(256));Assert.Equal("2.34",f.Read(b.Node).DecimalValue.ToInvariantString(256));}
  /// <summary>Local and unused global declarations with the same name remain distinct components.</summary>
  [Fact]public void LocalIsDistinct(){using var f=new Fixture(Schema.Replace("ref='item' minOccurs='0' maxOccurs='2'","name='item' type='xs:decimal'"),"<r><item>1</item></r>");var fact=f.Input.FactsFor((NativeSessionNode)f.Element([0]))!;Assert.NotSame(fact.Declaration,f.Provider.ResolveElementDeclaration(new("","item"),default).Value);}
  /// <summary>A complex simple-content reference keeps its actual global and governing complex type.</summary>

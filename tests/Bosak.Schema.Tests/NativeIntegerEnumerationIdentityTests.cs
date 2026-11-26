@@ -16,6 +16,7 @@
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Known-declaration controls retain explicit nullable preconditions.                        |
 
 using System.Collections.Immutable;
 using System.Globalization;
@@ -41,7 +42,7 @@ public sealed class NativeIntegerEnumerationIdentityTests
     [Theory][MemberData(nameof(Identities))]
     public void OriginalIdentity(string id,string json,bool data)
     {
-        Assert.StartsWith("IE-",id);Assert.False(data);using var doc=JsonDocument.Parse(json);var r=doc.RootElement;var xml=r.GetProperty("instance").GetString()!;using var f=new Fixture(r.GetProperty("schema").GetString()!,xml);Assert.Equal(SchemaAssessmentStatus.Valid,f.Assessment.Status);var root=XElement.Parse(xml);bool attribute=r.TryGetProperty("placement",out var p)&&p.GetString()=="attribute";var node=attribute?f.Attribute([],"","a"):f.Element(root.HasElements?[0]:[]);var fact=f.Input.FactsFor((NativeSessionNode)node)!;Assert.False(fact.HasNoTypedValue);Assert.True(f.Session.Advisor!.OwnsNode(node,fact,f.Input,f.Assessment.Origin));Assert.True(f.Provider.Owns(fact.Declaration));
+        Assert.StartsWith("IE-",id);Assert.False(data);using var doc=JsonDocument.Parse(json);var r=doc.RootElement;var xml=r.GetProperty("instance").GetString()!;using var f=new Fixture(r.GetProperty("schema").GetString()!,xml);Assert.Equal(SchemaAssessmentStatus.Valid,f.Assessment.Status);var root=XElement.Parse(xml);bool attribute=r.TryGetProperty("placement",out var p)&&p.GetString()=="attribute";var node=attribute?f.Attribute([],"","a"):f.Element(root.HasElements?[0]:[]);var fact=f.Input.FactsFor((NativeSessionNode)node)!;Assert.False(fact.HasNoTypedValue);Assert.True(f.Session.Advisor!.OwnsNode(node,fact,f.Input,f.Assessment.Origin));Assert.True(f.Provider.Owns(fact.Declaration!));
         if(!attribute){var actual=root.HasElements?root.Elements().First():root;Assert.Equal(actual.Name.LocalName,fact.NativeDeclaration.Name);Assert.Equal(actual.Name.NamespaceName,fact.NativeDeclaration.NamespaceUri);if(actual.Attribute(XName.Get("type","http://www.w3.org/2001/XMLSchema-instance")) is not null){Assert.Equal("integer",fact.NativeDeclaration.Type.Name);Assert.Equal("N",fact.NativeType.Name);Assert.NotSame(fact.NativeDeclaration.Type,fact.NativeType);}}
         else Assert.True(fact.OwnerElementPath.IsEmpty);
         var raw=fact.ReadTypedValue(default).Value;Assert.False(raw.IsList);Assert.True(raw.TryGetSingleAtomic(out var atomic));Assert.Equal(XdmValueKind.Integer,atomic.Value.Kind);Assert.Same(fact.Type,raw.GoverningType);var atomicType=f.Provider.TypeComponent(fact.NativeType.ContentType??fact.NativeType);Assert.Same(atomicType,atomic.TypeEvidence.ActualType);

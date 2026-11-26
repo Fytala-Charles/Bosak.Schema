@@ -22,6 +22,7 @@
 //                      | Charles Korthout | 0.9   | 22-11-2026     | Adopt qualified bounded structural and empty-content semantics |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 
 using Bosak.XPath.Core.Xdm;
 using Bosak.XPath.Core.Schema;
@@ -70,9 +71,9 @@ internal sealed class NativeSessionNode(NativeSchemaInput input, XDocumentNode r
     public (string NamespaceUri, string LocalName)? SchemaTypeAnnotation =>
         Read<(string, string)?>(() => Facts?.NativeType is { Name: { } name } type ? (type.NamespaceUri, name) : null);
     public (string NamespaceUri, string LocalName)? SchemaElementDeclaration =>
-        Read<(string, string)?>(() => Facts?.NativeType.IsComplex == true && ReferenceEquals(this, input.Root) ? (raw.NamespaceUri, raw.LocalName) : null);
+        Read<(string, string)?>(() => Facts?.GoverningDeclaration is not null && Facts.NativeType.IsComplex && ReferenceEquals(this, input.Root) ? (raw.NamespaceUri, raw.LocalName) : null);
     public (string NamespaceUri, string LocalName)? SchemaAttributeDeclaration =>
-        Read<(string, string)?>(() => Facts?.NativeDeclaration is { IsAttribute: true } d ? (d.NamespaceUri, d.Name) : null);
+        Read<(string, string)?>(() => Facts?.GoverningDeclaration is { IsAttribute: true } d ? (d.NamespaceUri, d.Name) : null);
     public bool IsNilled => Read(() => false);
     public bool IsConstructedElement => Read(() => false);
     public IXdmNode? Parent => Read(() => raw.Parent is XDocumentNode parent ? input.Wrap(parent) : null);

@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.20 development candidate requires Bosak Core 1.86.0 or later.
+The 0.21 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1797,3 +1797,7 @@ Implicit and explicit xs:anyType now work for bounded text-only roots and sequen
 ## Known anyType lax declarations (development0.20)
 
 AnyType can now assess supported known global child/attribute declarations, preserving original components and typed values. Unknown lax content stays Unsupported; known invalid data is never silently skipped. See the [guide](known-lax/GUIDE.md) for actual-document capacities, attribute ordering and provenance boundaries.
+
+## Declaration-absent lax content (development 0.21)
+
+Unknown elements and application attributes can be assessed beneath uninterrupted anyType ancestor chains. Their governing declaration stays absent; node annotations are anyType for elements and anySimpleType for attributes, with original untypedAtomic values. Known descendants still validate against actual global declarations. Unknown content below a strict complex ancestor, unknown xsi:type/nil and special XML attributes remain Unsupported. Existing document/value/string limits apply. See the [scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/absent-lax/README.md). This source candidate is unpublished.

@@ -44,6 +44,7 @@
 //                      | Charles Korthout | 1.20   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 
 using System.Collections.Immutable;
 using Bosak.XPath.Api.Schema;
@@ -260,16 +261,16 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
                 return Assessment.Failure(result.Outcome == NativeOutcome.Invalid ? SchemaAssessmentStatus.Invalid : SchemaAssessmentStatus.Unsupported,
                     "BSK-NATIVE-" + result.Outcome.ToString().ToUpperInvariant(), result.Diagnostic!, request.Limits, result.UnsupportedReason);
             if (request.GoverningDeclaration is not null &&
-                !ReferenceEquals(request.GoverningDeclaration, provider.components[result.Value!.Elements[0].Declaration]))
+                !ReferenceEquals(request.GoverningDeclaration, provider.components[result.Value!.Elements[0].Declaration!]))
                 return Assessment.Failure(SchemaAssessmentStatus.Unsupported, "BSK-NATIVE-MODE", "Governing declaration does not match root.", request.Limits);
             var origin = new Origin(this, input, date, timezone);
             var states = result.Value!.Elements;
             var facts = states.Select((state, index) => new Facts(input, input.ElementNodes[index], origin,
-                provider.TypeComponent(state.GoverningType), provider.components[state.Declaration], state,
+                provider.TypeComponent(state.GoverningType), state.Declaration is { } declaration ? provider.components[declaration] : null, state,
                 provider.TypeComponent(state.GoverningType.MixedContent ? provider.schema.UntypedAtomicType! : state.GoverningType.ContentType ?? state.GoverningType))).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
-            var attributeFacts = result.Value.Attributes.Select(state => new Facts(input, input.ElementAttributeNode(state.OwnerElementIndex, state.OwnerElementPath, states[state.OwnerElementIndex].Declaration.ExpandedName, state.Declaration.ExpandedName), origin,
-                provider.TypeComponent(state.GoverningType), provider.components[state.Declaration], state,
+            var attributeFacts = result.Value.Attributes.Select(state => new Facts(input, input.ElementAttributeNode(state.OwnerElementIndex, state.OwnerElementPath, states[state.OwnerElementIndex].ExpandedName, state.ExpandedName), origin,
+                provider.TypeComponent(state.GoverningType), state.Declaration is { } declaration ? provider.components[declaration] : null, state,
                 provider.TypeComponent(state.GoverningType.MixedContent ? provider.schema.UntypedAtomicType! : state.GoverningType.ContentType ?? state.GoverningType))).ToImmutableArray();
             cancellationToken.ThrowIfCancellationRequested();
             if (!input.Publish(origin, facts.AddRange(attributeFacts)))
@@ -297,11 +298,11 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
     internal sealed class Facts : ISchemaNodeFacts
     {
         private readonly ISchemaComponentHandle type;
-        private readonly ISchemaComponentHandle declaration;
+        private readonly ISchemaComponentHandle? declaration;
         private readonly Origin origin;
         private readonly NativeElementState state;
         private readonly IssuedValue? value;
-        internal Facts(NativeSchemaInput input, NativeSessionNode node, Origin origin, Component type, Component declaration, NativeElementState state, Component? actualType = null)
+        internal Facts(NativeSchemaInput input, NativeSessionNode node, Origin origin, Component type, Component? declaration, NativeElementState state, Component? actualType = null)
         {
             Input = input; Node = node; this.origin = origin; this.type = type; this.declaration = declaration; this.state = state;
             if (state.ActualAtomicType is { } selected) actualType = type.Provider.TypeComponent(selected);
@@ -313,7 +314,7 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             else if (state.FloatingValue is { } floating) value = new IssuedValue(input, origin, type, floating.ToXdm(), actualType);
             else if (state.UriValue is { } uri) value = new IssuedValue(input, origin, type, XdmValue.FromString(uri, "anyURI"), actualType);
             else if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
-            else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, state.GoverningType.MixedContent ? XdmValue.FromString(text, "untypedAtomic") : XdmValue.FromString(text), actualType);
+            else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, state.GoverningType.MixedContent || state.Declaration is null ? XdmValue.FromString(text, "untypedAtomic") : XdmValue.FromString(text), actualType);
             else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical), actualType);
             else if (state.InterchangeValue is { } interchange) value = new IssuedValue(input, origin, type,
                 interchange.Kind == NativeInterchangeKind.QName ? XdmValue.FromQName(interchange.Name) : XdmValue.FromString(interchange.Canonical, NativeDecimalSchema.InterchangeName(interchange.Kind)), actualType);
@@ -326,10 +327,12 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
         internal NativeSessionNode Node { get; }
         internal string? NormalizedStringValue { get { Input.Check(); return state.NormalizedStringValue; } }
         internal ImmutableArray<int> OwnerElementPath { get { Input.Check(); return state.OwnerElementPath; } }
-        internal NativeDeclaration NativeDeclaration { get { Input.Check(); return state.Declaration.CanonicalDeclaration; } }
+        internal NativeDeclaration NativeDeclaration { get { Input.Check(); return state.Declaration?.CanonicalDeclaration ?? throw new NotSupportedException("No governing declaration."); } }
         internal NativeType NativeType { get { Input.Check(); return state.GoverningType; } }
         public ISchemaComponentHandle Type { get { Input.Check(); return type; } }
-        public ISchemaComponentHandle Declaration { get { Input.Check(); return declaration; } }
+        internal NativeDeclaration? GoverningDeclaration { get { Input.Check(); return state.Declaration?.CanonicalDeclaration; } }
+        internal System.Xml.Linq.XName ExpandedName { get { Input.Check(); return state.ExpandedName; } }
+        public ISchemaComponentHandle? Declaration { get { Input.Check(); return declaration; } }
         public ISchemaAssessmentOrigin Origin => origin;
         public bool HasNoTypedValue { get { Input.Check(); return state.GoverningType.HasNoTypedValue; } }
         public bool IsNilled { get { Input.Check(); return state.IsNilled; } }

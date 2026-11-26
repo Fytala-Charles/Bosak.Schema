@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Reconcile measured unknown-lax admissions; original stimuli retained.                     |
 using Bosak.Schema.Tests.NodeData;
 using Bosak.XPath.Core.Schema;
 using Xunit;
@@ -43,7 +44,7 @@ public sealed class NativeKnownLaxProofTests
     [Fact]
     public void FailurePublishesNothing()
     {
-        foreach(var (xml,status) in new[]{("<r><d>1</d><d>bad</d></r>",SchemaAssessmentStatus.Invalid),("<r a='bad'/>",SchemaAssessmentStatus.Invalid),("<r><d>1</d><missing/></r>",SchemaAssessmentStatus.Unsupported),("<r unknown='x'/>",SchemaAssessmentStatus.Unsupported)}){using var f=new Fixture(Schema(),xml);Assert.Equal(status,f.Assessment.Status);Assert.False(f.Input.IsAssessed);Assert.Empty(f.Assessment.Facts);Assert.Null(f.Assessment.Evidence);}
+        foreach(var (xml,status) in new[]{("<r><d>1</d><d>bad</d></r>",SchemaAssessmentStatus.Invalid),("<r a='bad'/>",SchemaAssessmentStatus.Invalid),("<r><d>1</d><missing/></r>",SchemaAssessmentStatus.Unsupported),("<r unknown='x'/>",SchemaAssessmentStatus.Unsupported)}){using var f=new Fixture(Schema(),xml);var expected=status==SchemaAssessmentStatus.Unsupported?SchemaAssessmentStatus.Valid:status;Assert.Equal(expected,f.Assessment.Status);if(expected==SchemaAssessmentStatus.Valid){Assert.True(f.Input.IsAssessed);Assert.NotEmpty(f.Assessment.Facts);}else{Assert.False(f.Input.IsAssessed);Assert.Empty(f.Assessment.Facts);Assert.Null(f.Assessment.Evidence);}}
         using var s=NativeSchemaSession.Create(Schema(),new(256,256,1024,65536,2,256,1,256,256)).Value!;var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);Assert.Equal(NativeSchemaOutcome.Invalid,s.Assess("<r><d>bad</d></r>",context).Outcome);using var d=s.Assess("<r><d>01.20</d></r>",context).Value!;Assert.Equal("1.2",d.ReadScalar(0).DecimalValue.ToInvariantString(256));using var c=new CancellationTokenSource();c.Cancel();Assert.Throws<OperationCanceledException>(()=>s.Assess("<r/>",context,c.Token));Assert.Throws<OperationCanceledException>(()=>d.ReadScalar(0,c.Token));
     }
     /// <summary>Dynamic known wildcard paths remain within actual depth and value-state capacities.</summary>

@@ -42,3 +42,7 @@ Development0.19 qualifies text-only implicit/explicit anyType at roots and seque
 ## Known lax matches and declaration-absent provenance
 
 Development0.20 qualifies known global element/attribute matches through builtin anyType lax wildcards, with actual validation and original components. See [scope and limits](docs/known-lax/GUIDE.md). Unknown nodes remain Unsupported. Next is a separate declaration-absent/untyped provenance contract and feasibility review before unknown lax content or general wildcard grammar is admitted. Namespace/notQName/UPA, skip/strict modes, complete PSVI and public Core integration remain separate.
+
+## Declaration-absent lax checkpoint
+
+Development 0.21 qualifies declaration-absent lax elements and application attributes beneath uninterrupted anyType ancestor chains. All 22,426 source tests (1,711 internal / 20,715 public) and 20,715 overlapping fresh package consumers pass. All 22,346 prior names remain; 80 controls are added. Pilot 21 matches; structural 41 matches / 88 Unsupported; datatype 582 matches / 16 Unsupported; zero errors. API 55 types / 663 reflection rows and nine signed Core 1.86.0 payloads are unchanged. This candidate is unpublished; broader wildcards, partial-type projection and full XSD 1.1/PSVI/C45 remain separate. Next: evidence-based review of explicit wildcard modes and strict-ancestor partial-assessment type projection; select one coherent contract before implementation. [Current scope](docs/absent-lax/GUIDE.md).

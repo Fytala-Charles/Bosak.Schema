@@ -27,6 +27,7 @@
 //                      | Charles Korthout | 0.14   | 25-11-2026     | Add gated immutable item reads and refuse implicit list flattening |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 
 using Bosak.XPath.Api.Schema;
 using Bosak.XPath.Core.Schema;
@@ -174,7 +175,7 @@ internal sealed class NativeDecimalSessionCore : IDisposable
             throw new ArgumentOutOfRangeException(nameof(attributeIndex));
         var fact = document.Assessment.AttributeFacts[attributeIndex];
         var value = ReadFact(document, fact, NativeScalarValue.FromValue, cancellationToken);
-        return new NativeAttributeValue(fact.NativeDeclaration.NamespaceUri, fact.NativeDeclaration.Name, value, fact.OwnerElementPath);
+        return new NativeAttributeValue(fact.ExpandedName.NamespaceName, fact.ExpandedName.LocalName, value, fact.OwnerElementPath);
     }, cancellationToken);
 
     private int DescendantAttributeCount(Document document) => Work(() =>
@@ -190,7 +191,7 @@ internal sealed class NativeDecimalSessionCore : IDisposable
             throw new ArgumentOutOfRangeException(nameof(attributeIndex));
         var fact = document.Assessment.DescendantAttributeFacts[attributeIndex];
         var value = ReadFact(document, fact, NativeScalarValue.FromValue, cancellationToken);
-        return new NativeAttributeValue(fact.NativeDeclaration.NamespaceUri, fact.NativeDeclaration.Name, value, fact.OwnerElementPath);
+        return new NativeAttributeValue(fact.ExpandedName.NamespaceName, fact.ExpandedName.LocalName, value, fact.OwnerElementPath);
     }, cancellationToken);
 
     private string Export(Document document, CancellationToken cancellationToken) => Work(() =>

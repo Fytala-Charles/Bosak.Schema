@@ -79,6 +79,7 @@
 //                      | Charles Korthout | 1.53 | 26-11-2026     | Bound actual anyType input and defer wildcard attributes to original owner assessment |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 
 using System.Collections.Immutable;
 using System.Globalization;
@@ -117,6 +118,7 @@ internal sealed partial class NativeDecimalSchema
     internal NativeType? BooleanType { get; private set; }
     internal NativeType? IntegerType { get; private set; }
     internal NativeType? UntypedAtomicType { get; private set; }
+    internal NativeType? LaxAttributeType { get; private set; }
     private int? maxStringCharacters;
     internal NativeDeclaration Root { get; }
     internal ImmutableArray<NativeDeclaration> Children { get; }
@@ -976,13 +978,15 @@ internal sealed class NativeDeclaration(string name, NativeType type, int minOcc
     internal int MinOccurs { get; } = minOccurs;
     internal int MaxOccurs { get; } = maxOccurs;
 }
-internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null, XPathDateTime? DateValue = null, XdmExactCalendarValue? CalendarValue = null, NativeInterchangeValue? InterchangeValue = null, string? UriValue = null, NativeFloatingValue? FloatingValue = null, NativeDurationValue? DurationValue = null, NativeGregorianValue? GregorianValue = null)
+internal sealed record NativeElementState(NativeDeclaration? Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null, XPathDateTime? DateValue = null, XdmExactCalendarValue? CalendarValue = null, NativeInterchangeValue? InterchangeValue = null, string? UriValue = null, NativeFloatingValue? FloatingValue = null, NativeDurationValue? DurationValue = null, NativeGregorianValue? GregorianValue = null)
 {
     internal NativeType? ActualAtomicType { get; init; }
     internal ImmutableArray<NativeElementState> Items { get; init; }
     internal bool IsListValue => !Items.IsDefault;
     internal NativeType? EffectiveType { get; init; }
-    internal NativeType GoverningType => EffectiveType ?? Declaration.Type;
+    internal NativeType GoverningType => EffectiveType ?? Declaration!.Type;
+    internal XName? OriginalName { get; init; }
+    internal XName ExpandedName => OriginalName ?? Declaration!.ExpandedName;
     internal ImmutableArray<int> OwnerElementPath { get; init; } = [];
     internal int OwnerElementIndex { get; init; }
     internal bool IsNilled { get; init; }

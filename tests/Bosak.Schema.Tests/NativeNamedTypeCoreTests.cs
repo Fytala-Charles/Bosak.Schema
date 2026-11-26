@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 19-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
+//                      | Charles Korthout | 0.21  | 26-11-2026     | Known-declaration controls retain explicit nullable preconditions.                        |
 
 using Bosak.XPath.Api.Schema;
 using Bosak.XPath.Core.Schema;
@@ -54,7 +55,7 @@ public sealed class NativeNamedTypeCoreTests
         Assert.Equal(("urn:orders","OrderType"),b.ValidatedRoot!.SchemaTypeAnnotation!.Value);
         Assert.Equal(("urn:orders","quote"),b.ValidatedRoot.SchemaElementDeclaration!.Value);
         Assert.True(provider.IsSameComponent(a.Facts[0].Type,b.Facts[0].Type,default).Value);
-        Assert.False(provider.IsSameComponent(a.Facts[0].Type,a.Facts[0].Declaration,default).Value);
+        Assert.False(provider.IsSameComponent(a.Facts[0].Type,a.Facts[0].Declaration!,default).Value);
     }
 
     /// <summary>Named type lookup uses expanded names and preserves unused components.</summary>

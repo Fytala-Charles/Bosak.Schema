@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-26",
+  "recordedBeforeImplementation": true,
+  "base": "a6adb688c55861d466955c44208e24b9f1617c18",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.3.4.6: lax recursive assessment with known governing declaration/type preference",
+        "3.2.4.3: attribute assessment",
+        "3.4.7: anyType mixed content and lax wildcards",
+        "3.3.5: validation attempted/validity and declaration properties"
+      ]
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "2.3 lexical space/mapping; prelexical collapse before pattern",
+        "3.3.3 decimal and3.4.13 integer lexical spaces",
+        "4.3.4 pattern: same-step OR and inherited AND",
+        "4.3.5 whiteSpace and fixed collapse",
+        "4.3.7 enumeration versus lexical representations",
+        "G regular expressions: Nd category and digit escape"
+      ]
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3.1.1: notKnown and partial map to element anyType / attribute anySimpleType; absence of PSVI properties is a different case",
+        "3.3.1.2: anySimpleType and mixed anyType typed values are untypedAtomic",
+        "6.2 and 6.3: original element/attribute names, values and declaration properties"
+      ]
+    },
+    {
+      "id": "xml10",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/",
+      "sha256": "f58a4b9e1e5b8bac13fb55c4e5c7c8c5e2c176aa45ee68e2f1ab2498511927ec",
+      "bytes": 219926
+    },
+    {
+      "id": "namespaces10",
+      "url": "https://www.w3.org/TR/2009/REC-xml-names-20091208/",
+      "sha256": "b4a649e5fdab9852d68eca21442481599164949bcdee5549f2ec7e38fb3cd3a8",
+      "bytes": 51390
+    }
+  ],
+  "scope": [
+    "Unknown lax elements and application attributes under an uninterrupted anyType ancestor chain",
+    "Absent declaration remains null; no synthetic global or wildcard-use declaration",
+    "Known descendants and attributes are still assessed against original global declarations"
+  ],
+  "deviations": [
+    "Strict root declaration remains required",
+    "Unknown xsi:type/nil and special xml attributes remain Unsupported",
+    "Unknown content below a non-anyType complex ancestor remains Unsupported pending partial-assessment type projection",
+    "Explicit wildcard grammar/modes, augmentation and general PSVI remain excluded"
+  ],
+  "qualification": [
+    "Pending: isolated native facts, both facades, full regression and exact package qualification; no newly passing result is claimed"
+  ],
+  "status": "Production candidate adoption before full qualification; not yet released"
+}
