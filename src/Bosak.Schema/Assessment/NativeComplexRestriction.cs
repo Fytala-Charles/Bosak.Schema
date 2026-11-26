@@ -26,6 +26,7 @@
 //                      | Charles Korthout | 0.13   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      | Charles Korthout | 0.14   | 25-11-2026     | Preserve compound simple-content enumeration and member identity |
 //                      | Charles Korthout | 0.15   | 26-11-2026     | Support bounded text datatypes and inherited normalization facets |
+//                      | Charles Korthout | 0.16   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -82,6 +83,17 @@ internal sealed partial class NativeDecimalSchema
         var content = baseType.ContentType;
         Require(content is not null && !content.IsComplex && !content.IsBoolean,
             "Complex base content is outside the decimal profile.", NativeDecimalUnsupportedReason.ValueType);
+        if (content!.IsUri || content.FloatingKind is not null)
+        {
+            Require(localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty, "URI/floating assertions excluded.", NativeDecimalUnsupportedReason.AssertionGrammar);
+            var characters = maxStringCharacters ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Character context required.", NativeDecimalUnsupportedReason.ValueType);
+            var compilation = patternCompilation ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Pattern context required.", NativeDecimalUnsupportedReason.ValueType);
+            var newAtomic = new NativeType(null, false, targetNamespace, isUri: content.IsUri, textKind: NativeTextKind.Token, floatingKind: content.FloatingKind, derivationBase: content,
+                textFacets: content.IsUri ? NativeTextFacets.Compile(restriction, content, characters, compilation) : null,
+                floatingFacets: content.FloatingKind is { } kind ? NativeFloatingFacets.Compile(restriction, kind, characters, compilation, content.FloatingFacets) : null);
+            var newGoverning = new NativeType(root.Type.Name, false, targetNamespace, contentType: newAtomic, derivationBase: baseType, isComplexRestriction: true);
+            return new NativeDecimalSchema(new NativeDeclaration(root.Name, newGoverning, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
+        }
         if (content!.IsString)
         {
             Require(localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty, "Text assertions outside profile.", NativeDecimalUnsupportedReason.AssertionGrammar);

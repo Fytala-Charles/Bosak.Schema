@@ -1,0 +1,36 @@
+{
+  "utc": "2026-11-26T06:12:18.069600+00:00",
+  "blockingFindings": [],
+  "sourceCases": 16196,
+  "sourceInternal": 1585,
+  "sourcePublic": 14611,
+  "packageCases": 14611,
+  "newSourceCases": 1648,
+  "countsOverlap": true,
+  "apiAdded": [
+    "Bosak.Schema.NativeScalarKind|Field|Bosak.Schema.NativeScalarKind AnyUri=15",
+    "Bosak.Schema.NativeScalarKind|Field|Bosak.Schema.NativeScalarKind Double=14",
+    "Bosak.Schema.NativeScalarKind|Field|Bosak.Schema.NativeScalarKind Float=13",
+    "Bosak.Schema.NativeScalarValue|Method|Double get_DoubleValue()",
+    "Bosak.Schema.NativeScalarValue|Method|Single get_FloatValue()",
+    "Bosak.Schema.NativeScalarValue|Method|System.String get_UriValue()",
+    "Bosak.Schema.NativeScalarValue|Property|Double DoubleValue",
+    "Bosak.Schema.NativeScalarValue|Property|Single FloatValue",
+    "Bosak.Schema.NativeScalarValue|Property|System.String UriValue"
+  ],
+  "apiRemoved": [],
+  "scope": "Bounded anyURI and IEEE32/64 lexical/value mapping, finite facets, original member facts, detached values and lifetime",
+  "reviewCorrections": [
+    "Inherited opposite exclusive endpoints require strict order, with four regression tests",
+    "Apply numeric facet raw lexical limit before collapse",
+    "Reconcile measured SC-054 double simple-content admission without changing original fixture bytes"
+  ],
+  "limitations": [
+    "NaN bound endpoints Unsupported",
+    "Enumeration/bounds over patterned ancestors Unsupported",
+    "Existing complex restriction/assertion/attribute exclusions remain",
+    "No arbitrary regex, identity graph, augmentation, general PSVI/C45, public query factory or registry publication"
+  ],
+  "deliveryStatus": "Qualified for commit/push/PR review; merge and exact-main CI remain mandatory external delivery gates",
+  "newRegistryPublication": false
+}

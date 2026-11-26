@@ -4,6 +4,10 @@
   <p>Apache-2.0 schema integration and staged XSD 1.1 services for .NET.</p>
 </div>
 
+## Native URI and IEEE candidate — 26 November 2026
+
+The 0.11 development candidate adds bounded anyURI, float and double validation and immutable typed reads on signed Core1.86.0. URI collapse/ordinal equality and IEEE signed-zero/NaN/rounding semantics retain original nodes, member provenance and owner lifetime. NU-501–NU-700 track 200 behavioral contracts, not 200 new specification features. Full XSD1.1, general PSVI/C45, augmentation and publication remain separate. [Scope, bounds and example](docs/numeric-uri-200/GUIDE.md).
+
 The development source supports bounded exact `dateTime`, `time` and `dateTimeStamp` validation and scalar reads on Core 1.86.0. See the [calendar guide](docs/calendar-100/GUIDE.md) for capacities, supported facets and examples. Published Schema beta.1 retains its historical scope.
 
 See the [current XSD 1.1 coverage audit](docs/specification-coverage-current/README.md) for implemented profiles, remaining gaps and release availability.

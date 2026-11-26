@@ -39,6 +39,7 @@
 //                      | Charles Korthout | 1.17   | 25-11-2026     | Prove owned calendar derivation and bind an exact guarded comparison fingerprint |
 //                      | Charles Korthout | 0.10   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      | Charles Korthout | 0.11   | 25-11-2026     | Transport ordered compound items with original member provenance |
+//                      | Charles Korthout | 1.18   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -305,6 +306,8 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
             if (state.IsNilled || state.GoverningType.EmptyContent) value = new IssuedValue(input, origin, type, [], (state.GoverningType.ContentType ?? state.GoverningType).ListItemType is not null);
             else if (state.IsListValue) value = new IssuedValue(input, origin, type,
                 state.Items.Select(item => (PlainAtomic(item), type.Provider.TypeComponent(item.ActualAtomicType ?? item.GoverningType))).ToImmutableArray(), true);
+            else if (state.FloatingValue is { } floating) value = new IssuedValue(input, origin, type, floating.ToXdm(), actualType);
+            else if (state.UriValue is { } uri) value = new IssuedValue(input, origin, type, XdmValue.FromString(uri, "anyURI"), actualType);
             else if (state.TypedValue is { } scalar) value = new IssuedValue(input, origin, type, XdmValue.FromDecimal(scalar), actualType);
             else if (state.StringValue is { } text) value = new IssuedValue(input, origin, type, state.GoverningType.MixedContent ? XdmValue.FromString(text, "untypedAtomic") : XdmValue.FromString(text), actualType);
             else if (state.BooleanValue is { } logical) value = new IssuedValue(input, origin, type, XdmValue.FromBoolean(logical), actualType);
@@ -336,6 +339,8 @@ internal sealed class NativeSchemaProvider : ISchemaAssessor, ISchemaAuthority
 
     private static XdmValue PlainAtomic(NativeElementState state)
     {
+        if (state.FloatingValue is { } floating) return floating.ToXdm();
+        if (state.UriValue is { } uri) return XdmValue.FromString(uri, "anyURI");
         if (state.TypedValue is { } number) return XdmValue.FromDecimal(number);
         if (state.IntegerValue is { } integer) return XdmValue.FromInteger(integer);
         if (state.StringValue is { } text) return XdmValue.FromString(text);

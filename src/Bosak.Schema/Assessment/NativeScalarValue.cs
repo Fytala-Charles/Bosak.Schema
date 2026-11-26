@@ -20,6 +20,7 @@
 //                      | Charles Korthout | 0.7   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      | Charles Korthout | 0.8   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      | Charles Korthout | 0.9   | 25-11-2026     | Transport ordered compound items with original member provenance |
+//                      | Charles Korthout | 0.10   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -56,12 +57,31 @@ public enum NativeScalarKind
     /// <summary>An immutable base64 binary value without schema authority.</summary>
     Base64Binary = 11,
     /// <summary>An expanded QName without schema authority.</summary>
-    QName = 12
+    QName = 12,
+    /// <summary>An IEEE binary32 value without schema authority.</summary>
+    Float = 13,
+    /// <summary>An IEEE binary64 value without schema authority.</summary>
+    Double = 14,
+    /// <summary>A collapsed URI primitive value without schema authority.</summary>
+    AnyUri = 15
 }
 
 /// <summary>Contains a detached immutable scalar with no transferable schema authority.</summary>
 public sealed class NativeScalarValue
 {
+    private readonly double floating;
+    private NativeScalarValue(float value) { floating = value; Kind = NativeScalarKind.Float; }
+    private NativeScalarValue(double value) { floating = value; Kind = NativeScalarKind.Double; }
+    private NativeScalarValue(string value, NativeScalarKind kind) { text = value; Kind = kind; }
+    /// <summary>Gets a detached IEEE binary32 value, preserving signed zero.</summary>
+    /// <exception cref="InvalidOperationException">The scalar is not a float.</exception>
+    public float FloatValue => Kind == NativeScalarKind.Float ? (float)floating : throw new InvalidOperationException("The scalar is not a float.");
+    /// <summary>Gets a detached IEEE binary64 value, preserving signed zero.</summary>
+    /// <exception cref="InvalidOperationException">The scalar is not a double.</exception>
+    public double DoubleValue => Kind == NativeScalarKind.Double ? floating : throw new InvalidOperationException("The scalar is not a double.");
+    /// <summary>Gets collapsed URI text without resolution, escaping or network access.</summary>
+    /// <exception cref="InvalidOperationException">The scalar is not an anyURI.</exception>
+    public string UriValue => Kind == NativeScalarKind.AnyUri ? text! : throw new InvalidOperationException("The scalar is not an anyURI.");
     private readonly ImmutableArray<byte> binary;
     private readonly XsQName qname;
     private NativeScalarValue(XsQName value) { qname = value; Kind = NativeScalarKind.QName; }
@@ -122,6 +142,9 @@ public sealed class NativeScalarValue
     internal static NativeScalarValue FromValue(XdmValue value) => value.IsExactCalendar ? new NativeScalarValue(value.ExactCalendarValue) : value.Kind switch
     {
         XdmValueKind.Undefined => new NativeScalarValue(),
+        XdmValueKind.Float => new NativeScalarValue((float)value.DoubleValue),
+        XdmValueKind.Double => new NativeScalarValue(value.DoubleValue),
+        XdmValueKind.String when value.SchemaTypeName == "anyURI" => new NativeScalarValue(value.StringValue, NativeScalarKind.AnyUri),
         XdmValueKind.QName => new NativeScalarValue(value.QNameValue),
         XdmValueKind.String when value.SchemaTypeName is "hexBinary" or "base64Binary" => new NativeScalarValue(value.StringValue, value.SchemaTypeName == "base64Binary"),
         XdmValueKind.String => new NativeScalarValue(value.StringValue),

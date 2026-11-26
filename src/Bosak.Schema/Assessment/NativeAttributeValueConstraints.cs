@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      | Charles Korthout | 0.3   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Transport ordered compound items with original member provenance |
+//                      | Charles Korthout | 0.5   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Xml.Linq;
@@ -33,6 +34,8 @@ internal sealed partial class NativeDecimalSchema
  }
  private static bool ConstraintIdentical(NativeValueConstraint expected,NativeValueConstraint other)
  {
+  if(expected.Uri is { } uri && other.Uri is { } otherUri)return string.Equals(uri,otherUri,StringComparison.Ordinal);
+  if(expected.Floating is { } floating && other.Floating is { } otherFloating)return floating.SameSchemaValue(otherFloating);
   if(expected.Compound is { } compound && other.Compound is { } otherCompound)return NativeCompoundEquality.Equal(compound,otherCompound);
   if(expected.Interchange is { } interchange && other.Interchange is { } otherInterchange)return interchange.ValueEquals(otherInterchange);
   if(expected.Calendar is { } calendar && other.Calendar is { } otherCalendar)return calendar.Equals(otherCalendar);
