@@ -12,6 +12,7 @@
 //                      |     Author       |Version|  Date          | Notes                                                                                    |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
+//                      | Charles Korthout | 0.2   | 26-11-2026     | Correct equal exclusive endpoints as an admitted empty value space |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -70,7 +71,7 @@ internal sealed class NativeFloatingFacets
             else{result.upper=value;result.upperExclusive=name=="maxExclusive";}
         }
         if(seen.Contains("minInclusive")&&seen.Contains("minExclusive")||seen.Contains("maxInclusive")&&seen.Contains("maxExclusive"))Invalid("Conflicting floating bound kinds.");
-        if(result.lower is {} lo&&result.upper is {} hi&&(lo.Number>hi.Number||lo.Number==hi.Number&&(result.lowerExclusive||result.upperExclusive)))Invalid("Inconsistent floating endpoints.");
+        if(result.lower is {} lo&&result.upper is {} hi&&(lo.Number>hi.Number||lo.Number==hi.Number&&result.lowerExclusive!=result.upperExclusive))Invalid("Inconsistent floating endpoints.");
         result.patterns=patterns.ToImmutable();return result;
     }
     internal bool Accepts(NativeFloatingValue value,string lexical,NativePatternBudget budget)=>ValuesAccept(value)&&PatternsAccept(lexical,budget);

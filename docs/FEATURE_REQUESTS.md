@@ -4,6 +4,10 @@
   <p>Current public schema scope, status and acceptance boundaries.</p>
 </div>
 
+## Native Gregorian fragment candidate — 26 November 2026
+
+REQ-009 remains In Progress with development target0.13. The 0.13 development candidate adds bounded gYear/gYearMonth/gMonth/gMonthDay/gDay with exact nullable components, REC timezone-aware comparisons, finite facets and original typed/member facts on signed Core1.86.0. GR-901–GR-1300 track400 behavioral contracts, including the shared equal-exclusive-endpoint schema correction. Qualification passes21,147 source/19,497 overlapping package tests; API55types/663rows adds15 without removals. Frozen21 and expanded32matches/97Unsupported retain zero errors. Existing lifetime/XML and explicit Unsupported boundaries remain. General legacy operators, ID graphs, full XSD1.1/C45 and publication remain separate. [Scope, bounds and example](gregorian-400/GUIDE.md).
+
 ## Exact native duration candidate — 26 November 2026
 
 REQ-009 remains In Progress, with development target0.12. The 0.12 development candidate adds bounded duration, yearMonthDuration and dayTimeDuration with exact independent months/seconds, finite facets and original selected-member facts on signed Core 1.86.0. Immutable DurationMonths, DurationSeconds and collapsed DurationValue reads retain owner/lifetime and XML boundaries. DU-701–DU-900 track 200 behavioral contracts. Qualification passes17,866 source tests and16,249 overlapping package tests; API55 type names/648 rows adds9 without removals. Frozen21 and expanded32matches/97Unsupported retain zero errors. Partial-order and lexical ambiguity exclusions remain explicit; general legacy duration operators, full XSD1.1/C45 and publication remain separate. [Scope, capacities and example](duration-200/GUIDE.md).

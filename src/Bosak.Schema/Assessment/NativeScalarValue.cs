@@ -22,6 +22,7 @@
 //                      | Charles Korthout | 0.9   | 25-11-2026     | Transport ordered compound items with original member provenance |
 //                      | Charles Korthout | 0.10   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      | Charles Korthout | 0.11   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
+//                      | Charles Korthout | 0.12   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -70,12 +71,39 @@ public enum NativeScalarKind
     /// <summary>A year-month duration, without schema authority.</summary>
     YearMonthDuration = 17,
     /// <summary>A day-time duration, without schema authority.</summary>
-    DayTimeDuration = 18
+    DayTimeDuration = 18,
+    /// <summary>A bounded Gregorian year without schema authority.</summary>
+    GYear = 19,
+    /// <summary>A bounded Gregorian year-month without schema authority.</summary>
+    GYearMonth = 20,
+    /// <summary>A Gregorian month without schema authority.</summary>
+    GMonth = 21,
+    /// <summary>A Gregorian month-day without schema authority.</summary>
+    GMonthDay = 22,
+    /// <summary>A Gregorian day without schema authority.</summary>
+    GDay = 23
 }
 
 /// <summary>Contains a detached immutable scalar with no transferable schema authority.</summary>
 public sealed class NativeScalarValue
 {
+    private readonly NativeGregorianValue? gregorian;
+    private NativeScalarValue(NativeGregorianValue value) { gregorian=value; Kind=value.Kind switch { NativeGregorianKind.GYear=>NativeScalarKind.GYear,NativeGregorianKind.GYearMonth=>NativeScalarKind.GYearMonth,NativeGregorianKind.GMonth=>NativeScalarKind.GMonth,NativeGregorianKind.GMonthDay=>NativeScalarKind.GMonthDay,_=>NativeScalarKind.GDay }; }
+    /// <summary>Gets the supplied year, or null when the Gregorian family has no year.</summary>
+    /// <exception cref="InvalidOperationException">The scalar is not a Gregorian fragment family.</exception>
+    public long? GregorianYear => gregorian.HasValue ? gregorian.Value.Year : throw new InvalidOperationException("The scalar is not a Gregorian fragment family.");
+    /// <summary>Gets the supplied month, or null when the Gregorian family has no month.</summary>
+    /// <exception cref="InvalidOperationException">The scalar is not a Gregorian fragment family.</exception>
+    public int? GregorianMonth => gregorian.HasValue ? gregorian.Value.Month : throw new InvalidOperationException("The scalar is not a Gregorian fragment family.");
+    /// <summary>Gets the supplied day, or null when the Gregorian family has no day.</summary>
+    /// <exception cref="InvalidOperationException">The scalar is not a Gregorian fragment family.</exception>
+    public int? GregorianDay => gregorian.HasValue ? gregorian.Value.Day : throw new InvalidOperationException("The scalar is not a Gregorian fragment family.");
+    /// <summary>Gets supplied timezone minutes, or null when no timezone was supplied.</summary>
+    /// <exception cref="InvalidOperationException">The scalar is not a Gregorian fragment family.</exception>
+    public int? GregorianTimezoneOffsetMinutes => gregorian.HasValue ? gregorian.Value.Timezone : throw new InvalidOperationException("The scalar is not a Gregorian fragment family.");
+    /// <summary>Gets collapsed original Gregorian text without canonical serialization.</summary>
+    /// <exception cref="InvalidOperationException">The scalar is not a Gregorian fragment family.</exception>
+    public string GregorianValue => gregorian.HasValue ? gregorian.Value.Lexical : throw new InvalidOperationException("The scalar is not a Gregorian fragment family.");
     private readonly NativeDurationValue? duration;
     private NativeScalarValue(NativeDurationValue value) { duration=value; Kind=value.Kind switch { NativeDurationKind.YearMonthDuration=>NativeScalarKind.YearMonthDuration, NativeDurationKind.DayTimeDuration=>NativeScalarKind.DayTimeDuration, _=>NativeScalarKind.Duration }; }
     /// <summary>Gets exact duration months, independently of seconds.</summary>
@@ -160,6 +188,7 @@ public sealed class NativeScalarValue
     internal static NativeScalarValue FromValue(XdmValue value) => value.IsExactCalendar ? new NativeScalarValue(value.ExactCalendarValue) : value.Kind switch
     {
         XdmValueKind.Undefined => new NativeScalarValue(),
+        XdmValueKind.String when value.SchemaTypeName is "gYear" or "gYearMonth" or "gMonth" or "gMonthDay" or "gDay" => new NativeScalarValue(NativeGregorianValue.Parse(value.StringValue,NativeGregorianValue.KindFor(value.SchemaTypeName),256)),
         XdmValueKind.Duration => new NativeScalarValue(NativeDurationValue.Parse(value.DurationValue, value.SchemaTypeName == "yearMonthDuration" ? NativeDurationKind.YearMonthDuration : value.SchemaTypeName == "dayTimeDuration" ? NativeDurationKind.DayTimeDuration : NativeDurationKind.Duration, new(512,256),256)),
         XdmValueKind.Float => new NativeScalarValue((float)value.DoubleValue),
         XdmValueKind.Double => new NativeScalarValue(value.DoubleValue),

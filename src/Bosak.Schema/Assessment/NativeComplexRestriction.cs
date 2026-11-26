@@ -28,6 +28,7 @@
 //                      | Charles Korthout | 0.15   | 26-11-2026     | Support bounded text datatypes and inherited normalization facets |
 //                      | Charles Korthout | 0.16   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      | Charles Korthout | 0.17   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
+//                      | Charles Korthout | 0.18   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -84,6 +85,16 @@ internal sealed partial class NativeDecimalSchema
         var content = baseType.ContentType;
         Require(content is not null && !content.IsComplex && !content.IsBoolean,
             "Complex base content is outside the decimal profile.", NativeDecimalUnsupportedReason.ValueType);
+        if (content!.GregorianKind is { } gregorianKind)
+        {
+            Require(localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty, "Gregorian assertions excluded.", NativeDecimalUnsupportedReason.AssertionGrammar);
+            var characters = maxStringCharacters ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Character context required.", NativeDecimalUnsupportedReason.ValueType);
+            var compilation = patternCompilation ?? throw new NativeProfileException(NativeOutcome.Unsupported, "Pattern context required.", NativeDecimalUnsupportedReason.ValueType);
+            var atom = new NativeType(null, false, targetNamespace, gregorianKind: gregorianKind, derivationBase: content,
+                gregorianFacets: NativeGregorianFacets.Compile(restriction, gregorianKind, characters, compilation, content.GregorianFacets));
+            var gregorianGoverning = new NativeType(root.Type.Name, false, targetNamespace, contentType: atom, derivationBase: baseType, isComplexRestriction: true);
+            return new NativeDecimalSchema(new NativeDeclaration(root.Name, gregorianGoverning, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits);
+        }
         if (content!.DurationKind is { } durationKind)
         {
             Require(localAssertions.Length == 0 && basePlan.integerAssertions.IsEmpty, "Duration assertions excluded.", NativeDecimalUnsupportedReason.AssertionGrammar);
