@@ -51,6 +51,7 @@
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.36  | 26-11-2026     | Add bounded strict attribute wildcards on empty complex owners.                           |
 //                      | Charles Korthout | 0.37  | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
+//                      | Charles Korthout | 0.38  | 26-11-2026     | Retain strict wildcard plans on bounded all/choice roots.                                 |
 using System.Collections.Immutable;
 using System.Xml.Linq;
 
@@ -117,7 +118,7 @@ internal sealed partial class NativeDecimalSchema
                 Require(Elements(element).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                 var shared = Resolve(ResolveTypeName(element));
                 plan = new NativeDecimalSchema(new NativeDeclaration(name, shared.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits)
-                    { AttributeUses = shared.AttributeUses, SequenceAttributeWildcard = shared.SequenceAttributeWildcard, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
+                    { AttributeUses = shared.AttributeUses, CompiledAttributeWildcard = shared.CompiledAttributeWildcard, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
             }
             else
             {
@@ -158,7 +159,7 @@ internal sealed partial class NativeDecimalSchema
             if (members.Count == 1 && members[0].Name == Xs + "simpleContent")
                 return CompileComplex(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
                     decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => definitions.ContainsKey(requested) ? Resolve(requested) : null, nestedContext: true, maxStringCharacters: maxStringCharacters, patternCompilation: patternCompilation);
-            var tail = CompileSequenceWildcardTail(complex, targetNamespace);
+            var tail = CompileContentWildcardTail(complex, targetNamespace);
             Require(members.Count >= 1 && (members[0].Name == Xs + "sequence" || members[0].Name == Xs + "group") && tail.Uses.Length + (tail.Wildcard is null ? 0 : 1) + tail.Assertions.Count(e => e.Name == Xs + "assert") == members.Count - 1,
                 "Expected an element-only sequence and root attributes.", NativeDecimalUnsupportedReason.DeclarationShape);
             var sequence = members[0];
@@ -167,7 +168,7 @@ internal sealed partial class NativeDecimalSchema
             Require(!members.Any(a => a.Name == Xs + "assert") || !members.Any(IsAttributeUseMember), "Structural assertions with application attributes are excluded.", NativeDecimalUnsupportedReason.Attributes);
             var attributes = CompileAttributes(tail.Uses, targetNamespace, attributeForm,
                 decimalType, stringType, booleanType, integerType, simple, cancellationToken);
-            var plan = new NativeDecimalSchema(root, children, [], limits) { AttributeUses = attributes, SequenceAttributeWildcard = tail.Wildcard, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(tail.Assertions, targetNamespace, assertionNamespace, cancellationToken) };
+            var plan = new NativeDecimalSchema(root, children, [], limits) { AttributeUses = attributes, CompiledAttributeWildcard = tail.Wildcard, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(tail.Assertions, targetNamespace, assertionNamespace, cancellationToken) };
             NestedBudget(plan, cancellationToken);
             return plan;
         }

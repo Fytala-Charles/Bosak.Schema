@@ -1,0 +1,7 @@
+# Bounded all/choice root attribute wildcards
+
+Both owned native facades admit one direct strict/default-strict anyAttribute on existing nonempty all/choice root models and named-root aliases. Qualified namespace/QName exclusions apply, including ##defined; explicit uses take precedence and other attributes require actual supported global declarations. Type/fixed/ID rules and original attribute order remain. Missing global defaults do not augment XML.
+
+Content validation remains unchanged: all members match without declaration-order requirements; choice selects one alternative and enforces its original occurrence range. Scalar projection follows physical XML child order, independently from attribute facts. Element-only owners retain no typed value, including optional groups with no actual children; they do not become empty-content types. Actual declaration/type/member handles, XML and failure-before-publication are preserved.
+
+Nested all/choice and complex reference containers remain Unsupported, including beneath anyType. Mixed/simple-content owners, wildcard+assertion combinations, inheritance/composition and lax/skip stay outside this extension. Existing empty/sequence support and legacy decimal grammar are unchanged. Prior group/member budgets, actual document64nodes/depth4/64application attributes/16per owner, eight256UTF16 constraint tokens and string/identity/fact limits remain. Cancellation, foreign ownership, disposal and special XML/XSI boundaries remain enforced.

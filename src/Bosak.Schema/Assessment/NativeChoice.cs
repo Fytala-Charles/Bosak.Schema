@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.4   | 25-11-2026     | Preserve simple nillability and actual typed-empty values |
 //                      | Charles Korthout | 0.5   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      | Charles Korthout | 0.6 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
+//                      | Charles Korthout | 0.7   | 26-11-2026     | Retain strict wildcard plans on bounded all/choice roots.                                 |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -65,14 +66,16 @@ internal sealed partial class NativeDecimalSchema
             }
             children.Add(ElementDeclaration(declaration, name, type, min, max, ns));
         }
-        var attributes = members.Skip(1).TakeWhile(IsAttributeUseMember).ToArray();
-        var assertions = members.Skip(1 + attributes.Length).ToArray();
+        var tail = CompileContentWildcardTail(complex, targetNamespace);
+        var attributes = tail.Uses;
+        var assertions = tail.Assertions;
         Require(assertions.All(e => e.Name == Xs + "assert" && IsStructuralAssertion(e)), "Choice child-value assertion grammar is excluded.", NativeDecimalUnsupportedReason.AssertionGrammar);
         Require(assertions.Length <= 8, "Choice assertion capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         Require(assertions.Length == 0 || attributes.Length == 0, "Structural assertions with application attributes are excluded.", NativeDecimalUnsupportedReason.Attributes);
         return new NativeDecimalSchema(root, children.ToImmutable(), [], limits)
         {
             ChoiceMinimum = minimum,
+            CompiledAttributeWildcard = tail.Wildcard,
             AttributeUses = CompileAttributes(attributes, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, token),
             structuralAssertions = CompileStructuralAssertions(assertions, targetNamespace, assertionNamespace, token)
         };
