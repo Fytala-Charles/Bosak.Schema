@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.18 development candidate requires Bosak Core 1.86.0 or later.
+The 0.19 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1789,3 +1789,7 @@ Declared attributes now work on bounded empty complex owners. Empty elements ret
 ## Numeric lexical patterns (development0.18)
 
 Bounded integer and decimal pattern facets validate collapsed original spelling before exact numeric normalization. Same-step alternatives and inherited decimal conjunctions retain original values, components and lifetime. See the [consumer guide](numeric-patterns/GUIDE.md) for the finite grammar, capacities and explicit value-space/inheritance exclusions.
+
+## Text-only anyType terminals (development0.19)
+
+Implicit and explicit xs:anyType now work for bounded text-only roots and sequence/global-reference terminals, with real anyType/untypedAtomic components and original string values. Child and application-attribute wildcards remain Unsupported. See the [guide](anytype-terminals/GUIDE.md) for supported positions, capacities and exclusions.

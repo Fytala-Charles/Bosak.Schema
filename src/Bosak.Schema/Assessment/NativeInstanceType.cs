@@ -25,6 +25,7 @@
 //                      | Charles Korthout | 0.12   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      | Charles Korthout | 0.13   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
 //                      | Charles Korthout | 0.14   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
+//                      | Charles Korthout | 0.15 | 26-11-2026     | Refuse non-self anyType instance selection without false derivation failures |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -101,6 +102,11 @@ internal sealed partial class NativeDecimalSchema
         { throw new NativeProfileException(NativeOutcome.Invalid, "Invalid instance type QName."); }
         var ns = parts.Length == 1 ? element.GetDefaultNamespace().NamespaceName : element.GetNamespaceOfPrefix(parts[0])?.NamespaceName;
         Check(ns is not null, "Instance type prefix is unbound.");
+        if (declared.IsAnyType)
+        {
+            Require(ns == Xs.NamespaceName && parts[^1] == "anyType", "AnyType instance type selection awaits separate qualification.", NativeDecimalUnsupportedReason.ValueType);
+            return declared;
+        }
         if (!instanceTypes.TryGetValue(XName.Get(parts[^1], ns!), out var selected))
         {
             if (ns == Xs.NamespaceName && KnownBuiltinNames.Contains(parts[^1]))

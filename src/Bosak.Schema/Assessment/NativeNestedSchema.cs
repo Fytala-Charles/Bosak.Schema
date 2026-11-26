@@ -44,6 +44,7 @@
 //                      | Charles Korthout | 0.31   | 25-11-2026     | Preserve compound selected-member text and original typed reads |
 //                      | Charles Korthout | 0.32 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
 //                      | Charles Korthout | 0.33 | 26-11-2026     | Preserve attribute facts on admitted nested empty complex owners |
+//                      | Charles Korthout | 0.34 | 26-11-2026     | Admit text-only anyType sequence terminals and refuse unqualified wildcard content |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -57,6 +58,7 @@ internal sealed partial class NativeDecimalSchema
 
     private static bool HasNestedDeclarations(XElement schema, XElement[] types, string targetNamespace)
     {
+        if (schema.Descendants(Xs + "element").Any(IsAnyTypeElement)) return true;
         if (schema.Descendants(Xs + "complexType").Any(t => t.Attribute("mixed") is not null)) return true;
         if (schema.Elements(Xs + "group").Any()) return true;
         if (schema.Descendants(Xs + "element").Any(e => e.Attribute("ref") is not null &&
@@ -195,7 +197,11 @@ internal sealed partial class NativeDecimalSchema
                 var inline = Elements(local);
                 NativeDecimalSchema? container = null;
                 NativeType type;
-                if (local.Attribute("type") is not null)
+                if (IsAnyTypeElement(local))
+                {
+                    container = CompileAnyTypeTerminal(local, name, 1, 1, ns, limits); type = container.Root.Type;
+                }
+                else if (local.Attribute("type") is not null)
                 {
                     Require(inline.Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                     var typeName = ResolveTypeName(local);
@@ -233,6 +239,7 @@ internal sealed partial class NativeDecimalSchema
         first.DecimalType = decimalType; first.StringType = stringType; first.BooleanType = booleanType; first.IntegerType = integerType;
         first.maxStringCharacters = maxStringCharacters;
         if (schema.Descendants(Xs + "complexType").Any(ReadMixedContent)) first.UntypedAtomicType = new NativeType("untypedAtomic", false, Xs.NamespaceName, isString: true);
+        first.CompleteAnyTypeMetadata(schema);
         first.PrepareInstanceTypes();
         return first;
     }
@@ -271,6 +278,7 @@ internal sealed partial class NativeDecimalSchema
     {
         cancellationToken.ThrowIfCancellationRequested();
         var effectiveType = ResolveInstanceType(element, declaration.Type);
+        Require(!effectiveType.IsAnyType || !element.HasElements, "AnyType element wildcards await lax assessment qualification.", NativeDecimalUnsupportedReason.DeclarationShape);
         _ = NilledState(element, declaration, effectiveType);
         if (!isRoot)
         {

@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-26",
+  "recordedBeforeImplementation": true,
+  "base": "a3a27329d5391846e58b472b300a0aa825c60c67",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.3.2 element default type when type/inline definition absent",
+        "3.4.7 built-in anyType mixed content and lax element/attribute wildcards",
+        "3.4.4.2 local complex validity and attribute assessment",
+        "3.3.4 instance type/nillability and value constraints boundaries"
+      ]
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "2.3 lexical space/mapping; prelexical collapse before pattern",
+        "3.3.3 decimal and3.4.13 integer lexical spaces",
+        "4.3.4 pattern: same-step OR and inherited AND",
+        "4.3.5 whiteSpace and fixed collapse",
+        "4.3.7 enumeration versus lexical representations",
+        "G regular expressions: Nd category and digit escape"
+      ]
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "2.7.2 xs:anyType versus xs:untyped and xs:untypedAtomic",
+        "3.3.1.2/6.2 mixed complex typed value is one untypedAtomic string, even when empty",
+        "6.2 original element name/value/namespace/child properties and original attribute boundaries"
+      ]
+    },
+    {
+      "id": "xml10",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/",
+      "sha256": "f58a4b9e1e5b8bac13fb55c4e5c7c8c5e2c176aa45ee68e2f1ab2498511927ec",
+      "bytes": 219926
+    },
+    {
+      "id": "namespaces10",
+      "url": "https://www.w3.org/TR/2009/REC-xml-names-20091208/",
+      "sha256": "b4a649e5fdab9852d68eca21442481599164949bcdee5549f2ec7e38fb3cd3a8",
+      "bytes": 51390
+    }
+  ],
+  "scope": [
+    "Opt-in implicit or explicit xs:anyType on text-only root, local sequence and closed global-reference terminals; canonical per-compiled-schema anyType component with actual untypedAtomic atomic component",
+    "Reuse original mixed-value transport: concatenate original text/CDATA only, preserve whitespace/comments/PIs/XML and actual declaration/owner authority",
+    "One empty untypedAtomic string for an empty anyType terminal, distinct from empty-complex zero-atomic value and element-only absent typed value",
+    "Non-self xsi:type requests, child elements and application attributes are Unsupported before fact publication; they require a separate lax wildcard/provenance contract"
+  ],
+  "deviations": [
+    "Text-only subset of anyType, not complete wildcard support: no application attributes or element wildcard matching, no ignored known declarations, no fabricated facts",
+    "Existing caller string/XML/node/scalar/depth/occurrence capacities apply; schema representation counts anyType terminals as value-bearing mixed terminals",
+    "Complex nillability, default/fixed augmentation, type alternatives, derivation from anyType, all/choice anyType positions and complete type-component closure remain Unsupported",
+    "Explicit xsi:type=xs:anyType is supported; other selections are Unsupported after QName lexical checking, avoiding incorrect non-derivation Invalid results",
+    "Legacy decimal-only grammar, public API, signed Core1.86.0 and publication/controllers remain unchanged; no fullXSD1.1/PSVI/C45 acceptance"
+  ],
+  "qualification": [
+    "Both owned facades and actual Core identity/authority/expiry checks",
+    "Original frozen21/129/598 samples and unchanged public invoice",
+    "Explicit reconciliation of measured historical outcomes, original stimulus bytes retained"
+  ]
+}

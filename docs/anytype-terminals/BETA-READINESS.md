@@ -1,0 +1,9 @@
+# Beta readiness: text-only anyType terminals
+
+Development0.19 qualifies text-only implicit/explicit anyType terminals with canonical anyType governing and actual untypedAtomic components. Source22,198/internal1,695/public20,503 and fresh package20,503 overlapping tests pass; all22,030 prior names remain with168 added. Pilot21matches; structural41matches/88Unsupported; datatype582matches/16Unsupported; zero errors. API55names/663rows and nine signed Core1.86.0 payloads are unchanged. Wildcard child/application-attribute assessment remains Unsupported; no publication or fullXSD1.1/PSVI/C45 acceptance.
+
+Implicit/explicit anyType terminals preserve original mixed text as one untypedAtomic atom, including an empty string for an empty element. A per-schema canonical governing component is shared across uses; actual atomic components and owner lifetime remain original.80contracts through both facades plus8native controls pass. The original invoice workflow remains representative evidence, not production-user acceptance.
+
+Children/application attributes and non-self xsi:type remain Unsupported; known declarations are never silently ignored. Complex nillability, constraints/augmentation, all/choice positions, scalar/list/union/attribute-registry use and full component closure remain excluded. Existing string UTF16,16scalar/64node/depth4/occurrence/XML/caller limits remain. No partial document/facts escape failure or capacity refusal.
+
+A separate lax wildcard contract must address validation attempts, known/unknown declarations, expanded namespace constraints, child/attribute facts and provenance before broader adoption. Reviewed passing merge and exact-main CI are external delivery gates. Publication and generalXSD1.1/PSVI/C45/schema-aware query acceptance remain separate.
