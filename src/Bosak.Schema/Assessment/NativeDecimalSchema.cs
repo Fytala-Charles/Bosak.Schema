@@ -67,6 +67,7 @@
 //                      | Charles Korthout | 0.10   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      | Charles Korthout | 0.11   | 25-11-2026     | Preserve bounded list/union types and ordered selected member facts |
 //                      | Charles Korthout | 0.12   | 26-11-2026     | Support bounded text datatypes and inherited normalization facets |
+//                      | Charles Korthout | 1.44   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -165,6 +166,9 @@ internal sealed partial class NativeDecimalSchema
                 simple.Add(Xs + "decimal", decimalType); simple.Add(Xs + "string", stringType!); simple.Add(Xs + "boolean", booleanType!); simple.Add(Xs + "integer", integerType!);
                 Require(root.Descendants(Xs + "simpleType").Count(e => e.Parent?.Name == Xs + "list" || e.Parent?.Name == Xs + "union") <= 16, "Inline compound type capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
                 RegisterTextBuiltins(simple, stringType!);
+                simple.Add(Xs + "anyURI", new NativeType("anyURI", false, Xs.NamespaceName, isUri: true, textKind: NativeTextKind.Token));
+                simple.Add(Xs + "float", new NativeType("float", false, Xs.NamespaceName, floatingKind: NativeFloatingKind.Float));
+                simple.Add(Xs + "double", new NativeType("double", false, Xs.NamespaceName, floatingKind: NativeFloatingKind.Double));
                 foreach (var kind in Enum.GetValues<NativeInterchangeKind>())
                     simple.Add(Xs + InterchangeName(kind), new NativeType(InterchangeName(kind), false, Xs.NamespaceName, interchangeKind: kind));
                 simple.Add(Xs + "date", new NativeType("date", false, Xs.NamespaceName, isDate: true));
@@ -350,7 +354,7 @@ internal sealed partial class NativeDecimalSchema
 
         var attributeUses = CompileAttributes(attributeMembers, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
 
-        var assertionNames = children.Where(c => !c.Type.IsBoolean && !c.Type.IsInteger && !c.Type.IsDate && c.Type.CalendarKind is null && c.Type.InterchangeKind is null && !c.Type.IsCompound).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
+        var assertionNames = children.Where(c => !c.Type.IsBoolean && !c.Type.IsInteger && !c.Type.IsDate && c.Type.CalendarKind is null && c.Type.InterchangeKind is null && !c.Type.IsCompound && !c.Type.IsUri && c.Type.FloatingKind is null).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var stringNames = stringType is null ? null : children.Where(c => c.Type.IsString).Select(c => c.ExpandedName.ToString()).ToHashSet(StringComparer.Ordinal);
         var structuralPlans = CompileStructuralAssertions(assertionMembers.Where(IsStructuralAssertion), targetNamespace, assertionNamespace, cancellationToken);
         var plans = ImmutableArray.CreateBuilder<NativeDecimalAssertion>();
@@ -618,6 +622,19 @@ internal sealed partial class NativeDecimalSchema
     private NativeElementState AssessScalar(string text, NativeDeclaration declaration, NativePatternBudget patternBudget, XElement? scope = null)
     {
         if (declaration.Type.IsCompound) return AssessCompound(text, declaration, patternBudget, scope);
+        if (declaration.Type.FloatingKind is { } floatingKind)
+        {
+            var number = NativeFloatingValue.Parse(text, floatingKind, maxStringCharacters!.Value);
+            Check(declaration.Type.FloatingFacets?.Accepts(number, Collapse(text), patternBudget) ?? true, "Floating facet violation.");
+            return new NativeElementState(declaration, null, FloatingValue: number);
+        }
+        if (declaration.Type.IsUri)
+        {
+            Require(text.Length <= maxStringCharacters!.Value, "URI capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            var uri = Collapse(text);
+            Check(declaration.Type.TextFacets?.Accepts(uri, patternBudget) ?? true, "URI facet violation.");
+            return new NativeElementState(declaration, null, UriValue: uri, NormalizedStringValue: uri);
+        }
         if (declaration.Type.InterchangeKind is { } interchangeKind)
         {
             var value = NativeInterchangeParser.Parse(text, interchangeKind, maxStringCharacters!.Value, scope);
@@ -852,8 +869,11 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null, bool isMixed = false, XdmExactCalendarKind? calendarKind = null, NativeCalendarFacets? calendarFacets = null, NativeInterchangeKind? interchangeKind = null, NativeInterchangeFacets? interchangeFacets = null, NativeType? listItemType = null, ImmutableArray<NativeType> unionMembers = default, NativeCompoundFacets? compoundFacets = null, NativeTextKind textKind = NativeTextKind.String, NativeTextFacets? textFacets = null)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null, bool isMixed = false, XdmExactCalendarKind? calendarKind = null, NativeCalendarFacets? calendarFacets = null, NativeInterchangeKind? interchangeKind = null, NativeInterchangeFacets? interchangeFacets = null, NativeType? listItemType = null, ImmutableArray<NativeType> unionMembers = default, NativeCompoundFacets? compoundFacets = null, NativeTextKind textKind = NativeTextKind.String, NativeTextFacets? textFacets = null, bool isUri = false, NativeFloatingKind? floatingKind = null, NativeFloatingFacets? floatingFacets = null)
 {
+    internal bool IsUri { get; } = isUri;
+    internal NativeFloatingKind? FloatingKind { get; } = floatingKind;
+    internal NativeFloatingFacets? FloatingFacets { get; } = floatingFacets;
     internal NativeTextKind TextKind { get; } = textKind;
     internal NativeTextFacets? TextFacets { get; } = textFacets;
     internal int TextWhitespace => TextFacets?.Whitespace ?? (TextKind == NativeTextKind.String ? 0 : TextKind == NativeTextKind.NormalizedString ? 1 : 2);
@@ -900,7 +920,7 @@ internal sealed class NativeDeclaration(string name, NativeType type, int minOcc
     internal int MinOccurs { get; } = minOccurs;
     internal int MaxOccurs { get; } = maxOccurs;
 }
-internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null, XPathDateTime? DateValue = null, XdmExactCalendarValue? CalendarValue = null, NativeInterchangeValue? InterchangeValue = null)
+internal sealed record NativeElementState(NativeDeclaration Declaration, XdmExactDecimal? TypedValue, string? StringValue = null, bool? BooleanValue = null, BigInteger? IntegerValue = null, string? NormalizedStringValue = null, XPathDateTime? DateValue = null, XdmExactCalendarValue? CalendarValue = null, NativeInterchangeValue? InterchangeValue = null, string? UriValue = null, NativeFloatingValue? FloatingValue = null)
 {
     internal NativeType? ActualAtomicType { get; init; }
     internal ImmutableArray<NativeElementState> Items { get; init; }

@@ -1,0 +1,72 @@
+{
+  "recordedBeforeImplementation": true,
+  "date": "2026-11-26",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.3.4 element validity and actual type",
+        "3.4.4 complex type validation and typed assessment"
+      ]
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "3.3.7 dateTime value and lexical spaces",
+        "3.3.8 time value and lexical spaces",
+        "3.4.28 dateTimeStamp",
+        "D.2 date/time operations"
+      ]
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3.1.2 typed-value determination",
+        "6.2 element typed-value and type annotation"
+      ]
+    },
+    {
+      "id": "xml10",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/",
+      "sha256": "f58a4b9e1e5b8bac13fb55c4e5c7c8c5e2c176aa45ee68e2f1ab2498511927ec",
+      "bytes": 219926
+    },
+    {
+      "id": "namespaces10",
+      "url": "https://www.w3.org/TR/2009/REC-xml-names-20091208/",
+      "sha256": "b4a649e5fdab9852d68eca21442481599164949bcdee5549f2ec7e38fb3cd3a8",
+      "bytes": 51390
+    }
+  ],
+  "sections": [
+    "Datatypes2.2 identity/equality, primitive disjointness and singleton-list equality",
+    "Datatypes3.3.4 float and3.3.5 double, lexical/value mappings, IEEE rounding and special values",
+    "Datatypes3.3.17 anyURI: all finite XML character strings, collapse whitespace; no URI parser acceptance constraint",
+    "Datatypes4.3 applicable enumeration/pattern/whiteSpace and floating order bounds; URI lengths",
+    "Structures3.16 simple types and3.3.4/3.4.4 assessment",
+    "XDM3.1 original atomic values and selected-member provenance"
+  ],
+  "implementationEvidence": [
+    "Core1.86.0 FromFloat/FromDouble and annotated FromString(anyURI) already present",
+    "NET10 Single/Double invariant parsing only after exact XSD lexical validation; verify bit-sensitive boundary controls"
+  ],
+  "deviations": [
+    "Float/double supplied raw lexical limit256UTF16 and caller MaxStringCharacters",
+    "URI uses caller parsed string bound, without added standalone256limit; existing document/input limits apply",
+    "16enum/8pattern declarations per restriction and existing graph/work/query limits",
+    "NaN bound endpoints Unsupported pending dedicated schema-validity qualification; NaN values excluded by every admitted numeric bound",
+    "Enumeration/bounds over patterned ancestors Unsupported; no arbitrary assertions/regex or general numeric arithmetic/map changes",
+    "Existing finite simple-content grammar/exclusions remain; no augmentation/general PSVI/C45/public query factory",
+    "Signed Core1.86.0 unchanged; no registry publication"
+  ],
+  "core": "1.86.0"
+}

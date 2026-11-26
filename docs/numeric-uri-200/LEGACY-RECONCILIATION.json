@@ -1,0 +1,45 @@
+{
+  "originalFiles": {
+    "tests/TestData/SimpleContent/cases.json": "216540fb0e030815e80e5e53792c4987662e13b11db4b51b0b746a154595fd75"
+  },
+  "originalRows": [
+    {
+      "id": "SC-054",
+      "description": "Excluded or unresolved base xs:double",
+      "sections": [
+        "Structures3.4.2.2/3.4.4",
+        "Datatypes3.3.3/4.3.6",
+        "XDM3.3.1.2/6.2"
+      ],
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:t='urn:price' targetNamespace='urn:price' ><xs:complexType name='PriceType'><xs:simpleContent><xs:extension base='xs:double' ><xs:attribute name='currency' type='xs:string' use='required'/></xs:extension></xs:simpleContent></xs:complexType><xs:element name='price' type='t:PriceType'/><xs:element name='quote' type='t:PriceType'/></xs:schema>",
+      "instance": "<price xmlns='urn:price' currency='EUR'>12.50</price>",
+      "expectedCompile": "Unsupported",
+      "expectedAssessment": "Unsupported",
+      "expectedRoot": "12.5",
+      "maxNativeCoefficientDigits": 256,
+      "maxNativeScale": 256,
+      "maxStringCharacters": 256,
+      "attributes": [
+        {
+          "namespaceUri": "",
+          "localName": "currency",
+          "kind": "String",
+          "value": "EUR"
+        }
+      ],
+      "unsupportedReason": "ValueType"
+    }
+  ],
+  "changes": [
+    {
+      "id": "SC-054",
+      "oldCompile": "Unsupported",
+      "newCompile": "Valid",
+      "newAssessment": "Valid",
+      "newKind": "Double",
+      "newValue": 12.5,
+      "measured": "initial-results",
+      "originalBytesPreserved": true
+    }
+  ]
+}

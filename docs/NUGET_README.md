@@ -2,7 +2,11 @@
 
 # Bosak.Schema
 
-The 0.10 development candidate requires Bosak Core 1.86.0 or later.
+The 0.11 development candidate requires Bosak Core 1.86.0 or later.
+
+## URI and IEEE values (0.11 source)
+
+Both owned native facades now admit bounded anyURI, float and double. Detached NativeScalarValue exposes AnyUri/UriValue, Float/FloatValue and Double/DoubleValue. URI XML whitespace collapse preserves ordinal text without URI resolution or decoding. IEEE values preserve signed zero, NaN, infinities and 32/64-bit rounding. Floating supplied text is bounded to256 UTF-16 units and caller string capacity; URI uses caller capacity. Applicable finite facets and original-node/member/lifetime rules remain. NaN bound endpoints and bounds/enumeration over patterned ancestors remain Unsupported. See the [guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/numeric-uri-200/GUIDE.md). This development candidate is not a new registry publication or full XSD1.1 implementation.
 
 ## Binary and QName values (0.8 source)
 

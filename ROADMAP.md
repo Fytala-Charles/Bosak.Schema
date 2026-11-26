@@ -22,6 +22,10 @@ Batch slice 12 adds closed global element reference particles with canonical glo
   <p>An open schema foundation with staged validation and integration.</p>
 </div>
 
+## Native URI and IEEE candidate — 26 November 2026
+
+The 0.11 development candidate adds bounded anyURI, float and double validation and immutable typed reads on signed Core1.86.0. URI collapse/ordinal equality and IEEE signed-zero/NaN/rounding semantics retain original nodes, member provenance and owner lifetime. NU-501–NU-700 track 200 behavioral contracts, not 200 new specification features. Full XSD1.1, general PSVI/C45, augmentation and publication remain separate. [Scope, bounds and example](docs/numeric-uri-200/GUIDE.md).
+
 The [calendar transport prerequisite assessment](docs/calendar-transport-prerequisites/README.md) completes item 20 of the approved batch. Its 48 handled observations confirm current millisecond precision loss and native dateTime/time/dateTimeStamp refusals against the qualified package. Next is a separately adopted additive exact fractional-second Core contract. No production source/API/pin or publication changes occur; slice 19 qualification is reused without a new execution claim. The batch stops at 20.
 
 

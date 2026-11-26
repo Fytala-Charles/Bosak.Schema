@@ -22,6 +22,7 @@
 //                      | Charles Korthout | 0.9   | 25-11-2026     | Admit bounded exact native calendar values and original typed transport |
 //                      | Charles Korthout | 0.10   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      | Charles Korthout | 0.11   | 25-11-2026     | Preserve bounded list/union types and ordered selected member facts |
+//                      | Charles Korthout | 0.12   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -120,6 +121,7 @@ internal sealed partial class NativeDecimalSchema
         Require(!selected.IsComplex && !declared.IsComplex && selected.IsString == declared.IsString &&
             (selected.CalendarKind == declared.CalendarKind || selected.CalendarKind == Bosak.XPath.Core.Xdm.XdmExactCalendarKind.DateTimeStamp && declared.CalendarKind == Bosak.XPath.Core.Xdm.XdmExactCalendarKind.DateTime) && selected.IsDate == declared.IsDate && selected.IsBoolean == declared.IsBoolean && selected.IsInteger == declared.IsInteger,
             "Valid type derivation changes the admitted scalar representation.", NativeDecimalUnsupportedReason.ValueType);
+        Require(selected.IsUri == declared.IsUri && selected.FloatingKind == declared.FloatingKind, "Instance type changes URI/floating representation.", NativeDecimalUnsupportedReason.ValueType);
         Require(selected.IsCompound == declared.IsCompound, "Instance type changes compound variety.", NativeDecimalUnsupportedReason.ValueType);
         Require(selected.InterchangeKind == declared.InterchangeKind, "Instance type changes interchange representation.", NativeDecimalUnsupportedReason.ValueType);
         return selected;

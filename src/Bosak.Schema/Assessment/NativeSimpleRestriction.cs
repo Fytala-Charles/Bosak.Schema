@@ -39,6 +39,7 @@
 //                      | Charles Korthout | 0.26   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      | Charles Korthout | 0.27   | 25-11-2026     | Preserve bounded list/union types and ordered selected member facts |
 //                      | Charles Korthout | 0.28   | 26-11-2026     | Support bounded text datatypes and inherited normalization facets |
+//                      | Charles Korthout | 0.29   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -59,6 +60,13 @@ internal sealed partial class NativeDecimalSchema
         var restriction = Single(definition, "restriction");
         Attributes(restriction, "base");
         var baseName = ResolveTypeName(restriction, "base");
+        if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var newBase))
+        {
+            if (newBase.IsUri) return new NativeType(name, false, namespaceUri, isUri: true, textKind: NativeTextKind.Token, baseName: baseName, derivationBase: newBase,
+                textFacets: NativeTextFacets.Compile(restriction, newBase, maxStringCharacters.Value, patternCompilation));
+            if (newBase.FloatingKind is { } kind) return new NativeType(name, false, namespaceUri, floatingKind: kind, baseName: baseName, derivationBase: newBase,
+                floatingFacets: NativeFloatingFacets.Compile(restriction, kind, maxStringCharacters.Value, patternCompilation, newBase.FloatingFacets));
+        }
         if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var compoundBase) && compoundBase.IsCompound)
             return new NativeType(name, false, namespaceUri, baseName: baseName, derivationBase: compoundBase, listItemType: compoundBase.ListItemType, unionMembers: compoundBase.UnionMembers,
                 compoundFacets: NativeCompoundFacets.Compile(restriction, compoundBase, limits, maxStringCharacters.Value, patternCompilation));
