@@ -1,3 +1,7 @@
+## Text-only anyType terminals —26November2026
+
+Development0.19 qualifies text-only implicit/explicit anyType terminals with canonical anyType governing and actual untypedAtomic components. Source22,198/internal1,695/public20,503 and fresh package20,503 overlapping tests pass; all22,030 prior names remain with168 added. Pilot21matches; structural41matches/88Unsupported; datatype582matches/16Unsupported; zero errors. API55names/663rows and nine signed Core1.86.0 payloads are unchanged. Wildcard child/application-attribute assessment remains Unsupported; no publication or fullXSD1.1/PSVI/C45 acceptance. [Guide and evidence](../docs/anytype-terminals/README.md). Earlier dated entries remain historical.
+
 ## Bounded numeric lexical patterns —26November2026
 
 Development0.18 qualifies bounded integer/decimal lexical pattern facets independently from exact numeric normalization. Source22,030/internal1,687/public20,343 and fresh package20,343 overlapping tests pass; all21,870 prior names remain with160 added. Pilot21matches; structural39matches/90Unsupported; datatype582matches/16Unsupported; zero errors. API55names/663rows and nine signed Core1.86.0 payloads are unchanged. No publication or fullXSD1.1/PSVI/C45 acceptance. [Guide and evidence](../docs/numeric-patterns/README.md). Earlier dated entries remain historical.

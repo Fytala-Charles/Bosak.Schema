@@ -44,6 +44,7 @@
 //                      | Charles Korthout | 0.31   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
 //                      | Charles Korthout | 0.32 | 26-11-2026     | Admit bounded empty groups and original anonymous attribute types |
 //                      | Charles Korthout | 0.33 | 26-11-2026     | Compile opt-in numeric lexical patterns without changing legacy numeric facets |
+//                      | Charles Korthout | 0.34 | 26-11-2026     | Compile implicit and explicit anyType roots with actual mixed terminal facts |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -165,6 +166,7 @@ internal sealed partial class NativeDecimalSchema
         Dictionary<XName, NativeType> simple, Dictionary<XElement, NativeType> anonymousSimple, NativeNumericLimits limits)
     {
         if (stringType is null) return null; // Preserve the legacy facade grammar.
+        if (IsAnyTypeElement(declaration)) return CompileAnyTypeTerminal(declaration, Name(declaration), 1, 1, targetNamespace, limits);
         NativeType? type = null;
         if (declaration.Attribute("type") is not null)
         {

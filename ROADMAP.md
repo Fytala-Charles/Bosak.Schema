@@ -34,3 +34,7 @@ Development0.17 qualifies declared attributes on bounded empty complex owners. S
 ## Numeric lexical patterns and next priorities
 
 Development0.18 qualifies bounded integer/decimal pattern facets on original collapsed spelling. See [scope and limits](docs/numeric-patterns/GUIDE.md). Next, rank remaining original datatype/structural refusals against application needs before adopting another bounded contract. Broader regex/facets, complex inheritance, wildcard/open content, augmentation and public Core integration remain separate.
+
+## anyType terminals and wildcard boundaries
+
+Development0.19 qualifies text-only implicit/explicit anyType at roots and sequence/global-reference terminals with original anyType/untypedAtomic facts. See [scope and limits](docs/anytype-terminals/GUIDE.md). Next is a separately adopted lax wildcard/provenance contract; known declarations, namespace constraints, child/attribute facts and PSVI must not be silently ignored. Broader anyType substitution/nillability/constraints, explicit wildcard grammar and public Core integration remain separate.

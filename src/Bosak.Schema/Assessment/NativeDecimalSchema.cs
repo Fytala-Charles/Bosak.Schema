@@ -75,6 +75,7 @@
 //                      | Charles Korthout | 1.49 | 26-11-2026     | Validate identity bindings before returning successful native assessment |
 //                      | Charles Korthout | 1.50 | 26-11-2026     | Admit existing declared attributes on bounded empty complex owners |
 //                      | Charles Korthout | 1.51 | 26-11-2026     | Check original collapsed integer and decimal lexical patterns before issuing facts |
+//                      | Charles Korthout | 1.52 | 26-11-2026     | Carry actual bounded anyType identity separately from ordinary mixed complex types |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -915,7 +916,7 @@ internal sealed record NativeResult<T>(NativeOutcome Outcome, T? Value, string? 
 }
 
 // Identity is deliberate: independently compiled equal schemas do not share components.
-internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null, bool isMixed = false, XdmExactCalendarKind? calendarKind = null, NativeCalendarFacets? calendarFacets = null, NativeInterchangeKind? interchangeKind = null, NativeInterchangeFacets? interchangeFacets = null, NativeType? listItemType = null, ImmutableArray<NativeType> unionMembers = default, NativeCompoundFacets? compoundFacets = null, NativeTextKind textKind = NativeTextKind.String, NativeTextFacets? textFacets = null, bool isUri = false, NativeFloatingKind? floatingKind = null, NativeFloatingFacets? floatingFacets = null, NativeDurationKind? durationKind = null, NativeDurationFacets? durationFacets = null, NativeGregorianKind? gregorianKind = null, NativeGregorianFacets? gregorianFacets = null, NativeNumericPatterns? numericPatterns = null)
+internal sealed class NativeType(string? name, bool hasNoTypedValue, string namespaceUri = "", NativeDecimalFacets? facets = null, bool isString = false, bool isBoolean = false, bool isInteger = false, NativeStringFacets? stringFacets = null, NativeType? contentType = null, NativeIntegerFacets? integerFacets = null, XName? baseName = null, NativeType? derivationBase = null, bool isComplexRestriction = false, bool isDate = false, NativeDateFacets? dateFacets = null, NativeBooleanFacets? booleanFacets = null, bool isMixed = false, XdmExactCalendarKind? calendarKind = null, NativeCalendarFacets? calendarFacets = null, NativeInterchangeKind? interchangeKind = null, NativeInterchangeFacets? interchangeFacets = null, NativeType? listItemType = null, ImmutableArray<NativeType> unionMembers = default, NativeCompoundFacets? compoundFacets = null, NativeTextKind textKind = NativeTextKind.String, NativeTextFacets? textFacets = null, bool isUri = false, NativeFloatingKind? floatingKind = null, NativeFloatingFacets? floatingFacets = null, NativeDurationKind? durationKind = null, NativeDurationFacets? durationFacets = null, NativeGregorianKind? gregorianKind = null, NativeGregorianFacets? gregorianFacets = null, NativeNumericPatterns? numericPatterns = null, bool isAnyType = false)
 {
     internal bool IsUri { get; } = isUri;
     internal NativeGregorianKind? GregorianKind { get; } = gregorianKind;
@@ -942,6 +943,7 @@ internal sealed class NativeType(string? name, bool hasNoTypedValue, string name
     internal NativeType? ContentType { get; } = contentType;
     internal bool EmptyContent { get; init; }
     internal bool MixedContent { get; } = isMixed;
+    internal bool IsAnyType { get; } = isAnyType;
     internal bool IsComplex => MixedContent || EmptyContent || HasNoTypedValue || ContentType is not null;
     internal NativeStringFacets? StringFacets { get; } = stringFacets;
     internal bool IsDate { get; } = isDate;

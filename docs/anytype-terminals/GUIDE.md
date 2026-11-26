@@ -1,0 +1,15 @@
+# Text-only anyType terminals
+
+26November2026. Development Schema0.19 on signed Core1.86.0.
+
+Both owned facades admit text-only terminals whose element declarations omit a type and inline definition, or explicitly use xs:anyType. Supported positions are roots, finite local sequences and closed global element references. The governing component is the canonical builtin xs:anyType within that compiled schema; it is not replaced with xs:string or an invented anonymous type. The actual atom is xs:untypedAtomic using existing original mixed-value transport.
+
+For example, `<xs:element name="r"/>` admits `<r> 01.20 </r>`. A read returns the original string ` 01.20 `, not a decimal. `<r/>` returns one empty string atom, distinct from the zero-atomic value of an empty complex type and the absent typed value/FOTY0012 of an element-only container. Comments/PIs are preserved without contributing to the value; text/CDATA concatenate with XML whitespace intact. An enclosing ordinary sequence retains its own element-only facts. Original namespace/name/path/component authority and owner lifetime remain intact.
+
+This is a text-only subset, not complete anyType. The REC defines mixed content plus lax element and attribute wildcards. Child elements or application attributes therefore return Unsupported before fact publication, even if their declarations are known: no declaration or wildcard work is silently ignored. Explicit wildcard grammar, lax/strict/skip assessment, wildcard namespace/notQName/UPA rules, wildcard-derived child/attribute provenance and subtree type projection require separate qualification.
+
+Explicit xsi:type=xs:anyType is supported. Other selections return Unsupported after lexical QName checking rather than a false Invalid non-derivation result. Malformed/unbound QName requests remain Invalid. Complex nillable=true and default/fixed constraints remain Unsupported. Any xsi:nil on a nonnillable declaration is Invalid, including false. Location hints remain original and unfetched. all/choice anyType positions, derivation from anyType and use in simple/list/union/attribute type registries remain outside this batch.
+
+Existing caller string capacity (UTF16), XML/export limits, scalar count16, expanded nodes64, depth4, occurrence and component budgets apply. Text-only anyType terminals count as value-bearing mixed terminals. Capacity excess is Unsupported without truncation. Cancellation, failed assessments, parallel compiled-schema use and owner disposal retain existing session/fact boundaries; no partial document/facts are published.
+
+Use ReadRootScalar/ReadRootItems for a root, existing scalar indices for value-bearing descendants, or node-data ReadElement/ReadElementItems at physical paths. Detached public values remain String; original native Core evidence distinguishes the anyType governing component from the actual untypedAtomic component. Complete type-component closure, general PSVI/C45/schema-aware queries, public ID-table projection and registry publication remain separate. Legacy decimal-only grammar, public API and signed Core pin are unchanged.

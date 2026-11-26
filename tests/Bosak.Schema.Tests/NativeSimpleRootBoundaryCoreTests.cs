@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Adopt qualified bounded native date transport |
 //                      | Charles Korthout | 0.5   | 25-11-2026     | Verify admitted nil metadata and distinct supported empty typed sequences |
 //                      | Charles Korthout | 0.6   | 25-11-2026     | Verify provided default/fixed values and empty augmentation refusal |
+//                      | Charles Korthout | 0.7 | 26-11-2026     | Reconcile original explicit anyType admission and verify a supplemental text read |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -87,7 +88,7 @@ public sealed class NativeSimpleRootBoundaryCoreTests
     /// <param name="type">The type control input.</param>
     [Theory][InlineData("int")][InlineData("date")][InlineData("anyType")]
     public void OtherBuiltinTypesStayExcluded(string type)
-    {var result=NativeSchemaSession.Create(S($"<xs:element name='r' type='xs:{type}'/>"),Options);Assert.Equal(type is "int" or "date"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Unsupported,result.Outcome);result.Value?.Dispose();}
+    {var result=NativeSchemaSession.Create(S($"<xs:element name='r' type='xs:{type}'/>"),Options);Assert.Equal(NativeSchemaOutcome.Valid,result.Outcome);using var owner=result.Value!;if(type=="anyType"){using var document=owner.Assess("<r>kept</r>",Context).Value!;Assert.True(document.HasRootScalar);Assert.Equal(NativeScalarKind.String,document.ReadRootScalar().Kind);Assert.Equal("kept",document.ReadRootScalar().StringValue);}}
     /// <summary>Eager Unused Pattern.</summary>
     /// <param name="pattern">The pattern control input.</param>
     /// <param name="expected">The expected control input.</param>
