@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-26",
+  "recordedBeforeImplementation": true,
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.2.2 attribute type definition mapping and inline simpleType",
+        "3.2.3 attribute representation constraints",
+        "3.4.2.3.3 explicit/effective empty content: clauses 2.1.2, 2.1.3, 3.1.2, 4.1.1",
+        "3.4.4.2 empty complex content validity",
+        "3.16 anonymous simple type identity"
+      ]
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3.1.2 typed-value determination",
+        "6.2 element typed-value: empty content yields empty sequence",
+        "6.3 attribute type annotation and typed value"
+      ]
+    }
+  ],
+  "scope": [
+    "Empty direct all and sequence with minOccurs 0 or 1 / maxOccurs 1; direct empty choice only minOccurs 0 / maxOccurs 1; root and admitted nested owners, named/anonymous types",
+    "Anonymous local/global attribute simple types reused by references/groups on already admitted owners; original anonymous type identity, facets, compound values and effective constraints"
+  ],
+  "deviations": [
+    "Finite existing XML/component/particle/typed-value budgets remain; combine attribute anonymous sites with existing 16 source-site budget, including unused sites",
+    "Required empty choice, maxOccurs zero/general occurrence breadth, annotations, empty-owner attributes, mixed empty models and broad derivation remain Unsupported",
+    "Only existing supported simple type grammar and builtins; no ID/IDREF/ENTITY/NOTATION admission, no augmentation or new public Core acceptance",
+    "Scalar and original-node facades only; no public API additions or signed dependency changes"
+  ],
+  "evidenceSelection": "../coverage-driven-400/README.md",
+  "contractCeiling": 400,
+  "publication": false
+}

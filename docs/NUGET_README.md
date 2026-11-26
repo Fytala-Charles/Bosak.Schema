@@ -2,7 +2,11 @@
 
 # Bosak.Schema
 
-The 0.13 development candidate requires Bosak Core 1.86.0 or later.
+The 0.14 development candidate requires Bosak Core 1.86.0 or later.
+
+## Structural coverage (0.14 source)
+
+Both owned facades admit bounded empty all/optional empty choice and anonymous attribute simple types on existing owners. Empty content yields zero typed items; attribute references/groups retain original anonymous identities. The shared16site budget and existing source/value/lifetime limits apply. Required empty choice, empty-owner attributes, nested instance comments/PI, schema annotations, augmentation and general XSD1.1/C45 remain excluded. See the [structural guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/structural-coverage/GUIDE.md).
 
 ## Gregorian fragment values (0.13 source)
 

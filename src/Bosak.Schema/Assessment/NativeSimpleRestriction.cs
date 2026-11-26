@@ -42,6 +42,7 @@
 //                      | Charles Korthout | 0.29   | 26-11-2026     | Preserve native URI and IEEE floating-point datatype values |
 //                      | Charles Korthout | 0.30   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
 //                      | Charles Korthout | 0.31   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
+//                      | Charles Korthout | 0.32 | 26-11-2026     | Admit bounded empty groups and original anonymous attribute types |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -139,14 +140,18 @@ internal sealed partial class NativeDecimalSchema
         var result = new Dictionary<XElement, NativeType>();
         if (maxStringCharacters is null) return result;
         // Count source sites, including unused named definitions; shared references do not consume the budget twice.
-        var definitions = schema.Descendants().Where(e => (e.Name == Xs + "simpleType" || e.Name == Xs + "complexType") &&
+        var definitions = schema.Descendants().Where(e =>
+            e.Name == Xs + "simpleType" && e.Parent?.Name == Xs + "attribute" ||
+            (e.Name == Xs + "simpleType" || e.Name == Xs + "complexType") &&
             e.Parent?.Name == Xs + "element" && (e.Parent.Parent?.Name == Xs + "sequence" || e.Parent.Parent?.Name == Xs + "choice" || e.Parent.Parent?.Name == Xs + "all" || e.Name == Xs + "simpleType" && e.Parent.Parent?.Name == Xs + "schema")).ToArray();
         Require(definitions.Length <= 16, "Local anonymous type ceiling exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         foreach (var definition in definitions.Where(e => e.Name == Xs + "simpleType"))
         {
             cancellationToken.ThrowIfCancellationRequested();
             Require(definition.Parent!.Attribute("type") is null, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
-            result.Add(definition, CompileRestriction(definition, null, "", limits, maxStringCharacters, patternCompilation, simple));
+            var type = CompileRestriction(definition, null, "", limits, maxStringCharacters, patternCompilation, simple);
+            result.Add(definition, type);
+            if (definition.Parent.Name == Xs + "attribute") definition.AddAnnotation(type);
         }
         return result;
     }

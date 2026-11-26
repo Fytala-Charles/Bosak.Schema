@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Validate provided effective attribute constraints and fixed override identity |
+//                      | Charles Korthout | 0.3 | 26-11-2026     | Admit bounded empty groups and original anonymous attribute types |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -40,7 +41,7 @@ internal sealed partial class NativeDecimalSchema
   foreach(var definition in definitions)
   {
    token.ThrowIfCancellationRequested();Attributes(definition,"name","type","default","fixed");
-   Require(Elements(definition).Count==0,"Global attribute children are outside the profile.",NativeDecimalUnsupportedReason.DeclarationShape);
+   Require(Elements(definition).Count==0 || definition.Attribute("type") is null && Elements(definition).Count==1 && Elements(definition)[0].Name==Xs+"simpleType","Global attribute children are outside the profile.",NativeDecimalUnsupportedReason.DeclarationShape);
    var name=Name(definition,NativeDecimalUnsupportedReason.DeclarationShape);
    Require(name.Length<=256,"Global attribute name capacity exceeded.",NativeDecimalUnsupportedReason.RepresentationCapacity);
    Require(name!="xmlns" && targetNamespace is not "http://www.w3.org/2000/xmlns/" and not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace",

@@ -1,3 +1,7 @@
+## Bounded structural coverage — 26 November 2026
+
+Development 0.14 adds empty all/optional empty choice and original anonymous attribute simple types on admitted owners. The [guide](docs/structural-coverage/GUIDE.md) records capacities and exclusions; [beta readiness](docs/structural-coverage/BETA-READINESS.md) separates bounded qualification from general XSD1.1/C45 acceptance. All21,358 source/19,701 overlapping package tests pass; API55names/663rows and signed Core1.86.0 are unchanged. Structural sample improves32→38 matches; datatype454matches remains co-blocked. Original invoice workflow passes. Earlier dated entries are historical; publication remains separate.
+
 ## Evidence-driven coverage checkpoint — 26 November 2026
 
 The [current coverage guide](docs/SPECIFICATION_COVERAGE.md) reconciles development 0.13 / signed Core 1.86.0 with historical audits. A separately frozen 598-case datatype sample has 454 matches / 144 Unsupported / zero errors; the structural sample remains 32 / 97. Next are adopted structural fixes and consumer trials within an up-to-400-contract ceiling. Published beta.1 remains narrower; no publication or full-conformance claim. Earlier dated entries below are historical.
