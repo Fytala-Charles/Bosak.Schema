@@ -1,11 +1,11 @@
-# XSD 1.1 implementation coverage
+# XSD1.1 implementation coverage
 
-Updated 26 November 2026. The [current matrix](identity-coverage/CURRENT-MATRIX.json) carries explicit identity-boundary overrides; its inherited records and earlier sealed matrices remain historical evidence.
+Updated26November2026. The [current matrix](empty-owners/CURRENT-MATRIX.json) records the empty-owner boundary update; earlier matrices and sealed feature dossiers remain historical.
 
-Development Schema0.16 uses signed Core1.86.0. The last verified published Schema remains0.5.0-beta.1, with narrower scope. Development 0.16 qualifies bounded ID/IDREF/IDREFS validation: owner-aware ID bindings, forward references, actual union/list members and assessment-local resolution. Source 21,730 and fresh package 20,059 overlapping tests pass; all 21,544 prior names remain. The frozen datatype sample improves to 558 matches / 40 Unsupported (+21 admissions), with zero errors. Pilot21 and structural39/90 remain unchanged. Public API55 types/663 rows and signed Core1.86.0 are unchanged. No publication or full XSD1.1/C45 acceptance.
+Development0.17 qualifies declared attributes on bounded empty complex owners, with original empty typed values and independent attribute/member provenance. Source21,870/internal1,679/public20,191 and fresh package20,191 overlapping tests pass; all21,730 prior names remain with140 added. Pilot21matches; structural39matches/90Unsupported; datatype568matches/30Unsupported; zero errors. API55names/663rows and nine signed Core1.86.0 payloads are unchanged. No publication or fullXSD1.1/PSVI/C45 acceptance.
 
-The 598-case datatype cohort is independently frozen across43 family/variety buckets and valid/invalid facet strata; it is not an exhaustive specification denominator. No overall conformance percentage is justified. The structural sample has129 cases and the pilot21; these are separate samples.
+The frozen598-case datatype sample spans43family/variety buckets and valid/invalid facet strata. It is not an exhaustive specification denominator; no overall conformance percentage is justified. Pilot21 and structural129 are separate samples. Last verified published Schema remains0.5.0-beta.1 with narrower scope.
 
-The latest checkpoint adds bounded actual ID/IDREF/IDREFS document semantics. General key/keyref/unique remains unsupported. Broader gaps include facet/regex breadth, implicit anyType, schema assembly, wildcards/open content, type alternatives, general assertions, augmentation, complete PSVI and public Core integration. Co-features may keep individual ID-family fixtures Unsupported.
+Empty complex owners now support already-admitted attribute declarations/groups/references and original typed/member facts. They reject all text, including whitespace, and preserve comments/PIs. Broader gaps include regex/facet breadth, complex inheritance, implicit anyType, wildcards/open content, type alternatives, general assertions, augmentation, key/keyref/unique, complete PSVI and public Core integration.
 
-Next: rank the remaining40 datatype refusals and90 structural refusals against representative application needs, then adopt a bounded contract before implementation. The earlier400-contract ceiling is a ceiling, not a quota. Publication needs a separate exact-package decision.
+Next: rank remaining original datatype/structural refusals and representative application needs before a separate bounded adoption. Contract ceilings are ceilings, not quotas. Publication requires a separate exact-package decision.

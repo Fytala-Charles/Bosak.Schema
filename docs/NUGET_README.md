@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.16 development candidate requires Bosak Core 1.86.0 or later.
+The 0.17 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1781,3 +1781,7 @@ Lists have at most16items; unions have at most8directmembers. Raw compound value
 ## Native text datatypes (0.10 source)
 
 Both owned native facades admit normalizedString, token, language, Name, NCName, NMTOKEN and nonempty NMTOKENS, plus named string restriction chains. Text whitespace is normalized before intrinsic lexical and finite facet checks; original parsed XML remains available for export. Detached text uses the existing String kind/getter. NMTOKENS uses explicit ordered item reads and preserves actual member provenance. String simple-content extensions and the earlier bounded restriction grammar are supported. The [text datatype guide](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/text-200/GUIDE.md) contains a runnable example, exact inheritance rules and capacities. Identity graphs, arbitrary regex/assertions, augmentation, general PSVI/C45 and a public schema query factory remain excluded. This is an unpublished source candidate.
+
+## Empty complex owners with attributes (development0.17)
+
+Declared attributes now work on bounded empty complex owners. Empty elements retain an empty typed sequence and reject all text, including whitespace; attribute facts retain their original types and owner paths. See the [consumer guide](empty-owners/GUIDE.md) for supported placements, capacities and exclusions.

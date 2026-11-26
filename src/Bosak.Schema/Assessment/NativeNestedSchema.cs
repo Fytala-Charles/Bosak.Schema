@@ -43,6 +43,7 @@
 //                      | Charles Korthout | 0.30   | 25-11-2026     | Add bounded binary and namespace-sensitive QName transport |
 //                      | Charles Korthout | 0.31   | 25-11-2026     | Preserve compound selected-member text and original typed reads |
 //                      | Charles Korthout | 0.32 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
+//                      | Charles Korthout | 0.33 | 26-11-2026     | Preserve attribute facts on admitted nested empty complex owners |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -142,7 +143,7 @@ internal sealed partial class NativeDecimalSchema
                 var mixedMembers = Elements(complex);
                 Require(mixedMembers.Count > 0 && (mixedMembers[0].Name == Xs + "sequence" && Elements(mixedMembers[0]).Count > 0 || mixedMembers[0].Name == Xs + "group"), "Only finite sequence mixed content is admitted.", NativeDecimalUnsupportedReason.DeclarationShape);
             }
-            if (TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken) is { } empty) return empty;
+            if (TryCompileEmpty(complex, root, limits, targetNamespace, assertionNamespace, cancellationToken, attributeForm, decimalType, stringType, booleanType, integerType, simple) is { } empty) return empty;
             if (TryCompileAll(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,
                 decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits, cancellationToken) is { } all) return all;
             if (TryCompileChoice(complex, root, targetNamespace, defaultForm, attributeForm, assertionNamespace,

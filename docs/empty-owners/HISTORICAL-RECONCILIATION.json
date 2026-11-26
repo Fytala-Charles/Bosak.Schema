@@ -1,0 +1,71 @@
+{
+  "base": "04375e40a748a9ab5cf52384a1f2a699df25170b",
+  "measuredInitialSourcePublicFailures": 14,
+  "records": [
+    {
+      "originalFile": "tests/TestData/AttributeGroups/case-plan.json",
+      "originalFileSha256": "9b104d4cee6869afe1b64ba3bce772c694e04cd52722839f40bcc0f07404648c",
+      "original": {
+        "id": "empty-owner-separate",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attributeGroup name='G'><xs:attribute name='a' type='xs:decimal' use='required'/></xs:attributeGroup><xs:element name='r'><xs:complexType><xs:attributeGroup ref='G'/></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r a='1.23'></r>",
+        "owner": "empty",
+        "path": [],
+        "namespace": "",
+        "name": "a",
+        "expectedKind": "Decimal",
+        "expectedValue": "1.23",
+        "expectAttribute": true,
+        "proposedCompile": "Unsupported",
+        "proposedAssessment": null
+      },
+      "contexts": 6,
+      "currentCompile": "Valid",
+      "currentAssessment": "Valid",
+      "originalInputsAndTestNamesUnchanged": true
+    },
+    {
+      "originalFile": "tests/TestData/GlobalAttributeReferences/case-plan.json",
+      "originalFileSha256": "d60236c8c118005a72b59b92b5b6662e21346eb435093a24ae0d9317eec5bc60",
+      "original": {
+        "id": "empty-owner-separate",
+        "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' attributeFormDefault='unqualified' ><xs:attribute name='a' type='xs:decimal'/><xs:element name='r'><xs:complexType><xs:attribute ref='a' use='required'/></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r a='1.23'></r>",
+        "owner": "empty",
+        "path": [],
+        "namespace": "",
+        "name": "a",
+        "expectedKind": "Decimal",
+        "expectedValue": "1.23",
+        "expectAttribute": true,
+        "proposedCompile": "Unsupported",
+        "proposedAssessment": null
+      },
+      "contexts": 6,
+      "currentCompile": "Valid",
+      "currentAssessment": "Valid",
+      "originalInputsAndTestNamesUnchanged": true
+    },
+    {
+      "originalFile": "tests/TestData/IntegerEnumeration/original-contract.json",
+      "originalFileSha256": "937b8ff19d198d53cd00bdd4b5a5c115de81af692c4f853ece3db2471a0bf786",
+      "original": {
+        "id": "IE-073",
+        "purpose": "Existing placement attribute",
+        "schema": "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xs:simpleType name=\"N\"><xs:restriction base=\"xs:integer\"><xs:enumeration value=\"1\"/></xs:restriction></xs:simpleType><xs:element name=\"r\"><xs:complexType><xs:attribute name=\"a\" type=\"N\" use=\"required\"/></xs:complexType></xs:element></xs:schema>",
+        "instance": "<r a=\"1\"/>",
+        "expectedCompile": "Valid",
+        "expectedAssessment": "Valid",
+        "expectedValue": "1",
+        "status": "Proposed unexecuted; no native acceptance claim",
+        "placement": "attribute"
+      },
+      "contexts": 2,
+      "currentCompile": "Valid",
+      "currentAssessment": "Valid",
+      "originalInputsAndTestNamesUnchanged": true
+    }
+  ],
+  "archive": "HISTORICAL-TEST-SOURCE.zip",
+  "allCurrentExpectedOutcomesVerified": true
+}
