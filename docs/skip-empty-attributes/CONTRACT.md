@@ -1,0 +1,11 @@
+# Bounded skip attribute wildcards on empty owners
+
+27 November 2026. Recorded before implementation against PR93 merge93941a4808474d16fa79f281868a33907b2cd757 and signed Core1.86.0. [Exact immutable adoption](ADOPTION.json).
+
+Admit one processContents=skip wildcard on existing empty complex owners. Namespace/QName exclusions still match; explicit attribute uses take precedence and keep their validation. Every matched extra is skipped even when a global declaration exists. Its node carries no declaration, has xs:anySimpleType schema type and one actual xs:untypedAtomic value from original XML-normalized text. Do not apply global datatype/fixed/ID rules to skipped extras or manufacture declaration/ID evidence. Global declarations remain resolvable schema components and must still compile correctly. Missing values never augment XML.
+
+Any skipped extra at an empty root makes assessment partial: project the root to canonical xs:anyType and one empty untypedAtomic string atom. Retain the original root declaration and declared empty complex schema component. No extras keeps the original empty type and empty typed sequence. Empty-content validity runs before projection; character/element children remain Invalid, comments/PIs allowed. Shared aliases/plans must remain immutable across partial and known-only/no-extra episodes.
+
+Any skipped extra beneath a strict ancestor remains Unsupported before facts publish. No-extra nested owners remain admissible. Skip on nonempty/mixed/simple-content owners, wildcard assertions and broader ancestor projection/inheritance remain excluded. Prior strict/lax behavior, document64nodes/depth4/64attributes/16per owner, eight256UTF16 namespace/QName tokens, scalar/string/list/identity/fact bounds, XML export, cancellation, foreign authority and expiry remain unchanged. Legacy decimal-only grammar remains unchanged.
+
+Both facades and native evidence, global-versus-skipped behavior, explicit-use/ID precedence, bounds/failure/recovery and previous names/fixture hashes must qualify before commit/PR/green merge/main CI. Exact package/API/signed Core/samples/invoice/docs/release controls required. No publication, full XSD1.1, PSVI or C45 acceptance implied.

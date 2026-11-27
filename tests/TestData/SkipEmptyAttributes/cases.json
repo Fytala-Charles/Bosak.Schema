@@ -1,0 +1,1839 @@
+{
+  "cases": [
+    {
+      "id": "SEA-001",
+      "contract": "skipped extra roota001",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "001"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-002",
+      "contract": "skipped extra rootabad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "bad"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-003",
+      "contract": "skipped extra rootu raw ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u=' raw '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-004",
+      "contract": "no extras empty typed sequence root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-005",
+      "contract": "skipped extra rooturn:ta001",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='001'></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "001"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-006",
+      "contract": "skipped extra rooturn:tabad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='bad'></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "bad"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-007",
+      "contract": "skipped extra rooturn:tu raw ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:u=' raw '></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "urn:t",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-008",
+      "contract": "no extras empty typed sequence rooturn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' ></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-009",
+      "contract": "skipped extra nameda001",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r' type='T'/><xs:element name='s' type='T'/></xs:schema>",
+      "instance": "<r a='001'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "001"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-010",
+      "contract": "skipped extra namedabad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r' type='T'/><xs:element name='s' type='T'/></xs:schema>",
+      "instance": "<r a='bad'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "bad"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-011",
+      "contract": "skipped extra namedu raw ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r' type='T'/><xs:element name='s' type='T'/></xs:schema>",
+      "instance": "<r u=' raw '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-012",
+      "contract": "no extras empty typed sequence named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r' type='T'/><xs:element name='s' type='T'/></xs:schema>",
+      "instance": "<r ></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-013",
+      "contract": "skipped extra namedurn:ta001",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r' type='t:T'/><xs:element name='s' type='t:T'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='001'></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "001"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-014",
+      "contract": "skipped extra namedurn:tabad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r' type='t:T'/><xs:element name='s' type='t:T'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='bad'></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "bad"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-015",
+      "contract": "skipped extra namedurn:tu raw ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r' type='t:T'/><xs:element name='s' type='t:T'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:u=' raw '></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "urn:t",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-016",
+      "contract": "no extras empty typed sequence namedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r' type='t:T'/><xs:element name='s' type='t:T'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' ></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-017",
+      "contract": "skipped extra nesteda001",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "001"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-018",
+      "contract": "skipped extra nestedabad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "bad"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-019",
+      "contract": "skipped extra nestedu raw ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e u=' raw '></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-020",
+      "contract": "no extras empty typed sequence nested",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e ></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-021",
+      "contract": "skipped extra nestedurn:ta001",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='001'></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "001"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-022",
+      "contract": "skipped extra nestedurn:tabad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='bad'></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "bad"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-023",
+      "contract": "skipped extra nestedurn:tu raw ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:u=' raw '></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "u",
+          "namespace": "urn:t",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-024",
+      "contract": "no extras empty typed sequence nestedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e ></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-025",
+      "contract": "skipped extra nestedNameda001",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "001"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-026",
+      "contract": "skipped extra nestedNamedabad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "bad"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-027",
+      "contract": "skipped extra nestedNamedu raw ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e u=' raw '></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-028",
+      "contract": "no extras empty typed sequence nestedNamed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e ></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-029",
+      "contract": "skipped extra nestedNamedurn:ta001",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='t:T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='001'></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "001"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-030",
+      "contract": "skipped extra nestedNamedurn:tabad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='t:T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='bad'></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "bad"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-031",
+      "contract": "skipped extra nestedNamedurn:tu raw ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='t:T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:u=' raw '></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "u",
+          "namespace": "urn:t",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-032",
+      "contract": "no extras empty typed sequence nestedNamedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='skip'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='t:T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e ></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-033",
+      "contract": "skipped extra referencea001",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "001"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-034",
+      "contract": "skipped extra referenceabad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "bad"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-035",
+      "contract": "skipped extra referenceu raw ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e u=' raw '></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-036",
+      "contract": "no extras empty typed sequence reference",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e ></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-037",
+      "contract": "skipped extra referenceurn:ta001",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><t:e t:a='001'></t:e></t:r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "001"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-038",
+      "contract": "skipped extra referenceurn:tabad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><t:e t:a='bad'></t:e></t:r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "bad"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-039",
+      "contract": "skipped extra referenceurn:tu raw ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><t:e t:u=' raw '></t:e></t:r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "u",
+          "namespace": "urn:t",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-040",
+      "contract": "no extras empty typed sequence referenceurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><t:e ></t:e></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-041",
+      "contract": "skip matching namespace='##local'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip' namespace='##local'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-042",
+      "contract": "skip matching namespace='##other'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip' namespace='##other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-043",
+      "contract": "skip matching notNamespace='urn:other'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip' notNamespace='urn:other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-044",
+      "contract": "skip matching notNamespace='##local'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip' notNamespace='##local'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-045",
+      "contract": "skip matching notQName='b'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip' notQName='b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-046",
+      "contract": "skip matching notQName='u'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip' notQName='u'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-047",
+      "contract": "skip matching notQName='##defined'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip' notQName='##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-048",
+      "contract": "defined exclusion still uses global name set",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip' notQName='##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-049",
+      "contract": "explicit use overrides skip 001",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:integer'/><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-050",
+      "contract": "explicit use overrides skip bad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:integer'/><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-051",
+      "contract": "required explicit missing despite skip",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:attribute name='z' type='xs:string' use='required'/><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-052",
+      "contract": "known fixed deliberately not applied",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:attribute name='z' type='xs:integer' fixed='1'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r z='bad'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "z",
+          "namespace": "",
+          "expected": [
+            "bad"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-053",
+      "contract": "known identity constraints deliberately skipped",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:attribute name='id' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='bad id' ref='missing'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "id",
+          "namespace": "",
+          "expected": [
+            "bad id"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "ref",
+          "namespace": "",
+          "expected": [
+            "missing"
+          ],
+          "kind": "String",
+          "index": 1
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-054",
+      "contract": "explicit IDREF cannot resolve skipped ID",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:attribute name='id' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:element name='r'><xs:complexType><xs:attribute name='ref' type='xs:IDREF'/><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='v' ref='v'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-055",
+      "contract": "missing default never augmented",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:attribute name='z' type='xs:integer' default='1'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-056",
+      "contract": "original skipped lexical ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=''></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-057",
+      "contract": "original skipped lexical   x  ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='  x  '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "  x  "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-058",
+      "contract": "original skipped lexical  a&#x9;b ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a=' a&#x9;b '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            " a\tb "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-059",
+      "contract": "original skipped lexical a&amp;b",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='a&amp;b'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "a&b"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-060",
+      "contract": "original skipped lexical 😀",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='😀'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "😀"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-061",
+      "contract": "empty validity before skip projection  ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-062",
+      "contract": "empty validity before skip projection text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'>text</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-063",
+      "contract": "empty validity before skip projection <c/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'><c/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-064",
+      "contract": "comment and PI no text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'><!--x--><?p x?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-065",
+      "contract": "skipped UTF16 capacity 4",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='😀ab'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 4
+    },
+    {
+      "id": "SEA-066",
+      "contract": "skipped UTF16 capacity 3",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='😀ab'></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 3
+    },
+    {
+      "id": "SEA-067",
+      "contract": "owner attribute capacity 16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u0='x' u1='x' u2='x' u3='x' u4='x' u5='x' u6='x' u7='x' u8='x' u9='x' u10='x' u11='x' u12='x' u13='x' u14='x' u15='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-068",
+      "contract": "owner attribute capacity 17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u0='x' u1='x' u2='x' u3='x' u4='x' u5='x' u6='x' u7='x' u8='x' u9='x' u10='x' u11='x' u12='x' u13='x' u14='x' u15='x' u16='x'></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-069",
+      "contract": "special XML request unsupported",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xml:lang='en'></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-070",
+      "contract": "strict still invalid unknown",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-071",
+      "contract": "lax still validates known invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-072",
+      "contract": "nonempty skip sequence excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'><c>1</c></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-073",
+      "contract": "wildcard assertion excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/><xs:assert test='true()'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-074",
+      "contract": "existing empty compositor <xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence/><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-075",
+      "contract": "existing empty compositor <xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:all/><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "SEA-076",
+      "contract": "existing empty compositor <xs:choice minOccurs='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:choice minOccurs='0'/><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    }
+  ]
+}
