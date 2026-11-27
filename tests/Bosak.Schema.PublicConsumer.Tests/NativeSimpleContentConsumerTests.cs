@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 26-11-2026     | Check measured text admissions against unmodified original fixtures |
 //                      | Charles Korthout | 0.3   | 26-11-2026     | Reconcile measured SC-054 double extension admission; preserve fixture |
 //                      | Charles Korthout | 0.4 | 26-11-2026     | Reconcile original markup admissions; preserve source payloads |
+//                      | Charles Korthout | 0.5   | 27-11-2026     | Reconcile measured strict simple-content wildcard outcome; preserve original stimuli.     |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -51,6 +52,10 @@ public sealed class NativeSimpleContentConsumerTests
             using var admitted=NativeSchemaSession.Create(r.GetProperty("schema").GetString()!,options).Value!;
             using var value=admitted.Assess(r.GetProperty("instance").GetString()!,new(DateTimeOffset.UnixEpoch,0)).Value!;
             Assert.Equal(NativeScalarKind.Double,value.ReadRootScalar().Kind);Assert.Equal(12.5d,value.ReadRootScalar().DoubleValue);return;
+        }
+        if(id=="SC-062")
+        {
+            var candidate=NativeSchemaSession.Create(r.GetProperty("schema").GetString()!,options);Assert.Equal(NativeSchemaOutcome.Valid,candidate.Outcome);using var session=candidate.Value!;var result=session.Assess(r.GetProperty("instance").GetString()!,new(DateTimeOffset.UnixEpoch,0));Assert.Equal(NativeSchemaOutcome.Invalid,result.Outcome);Assert.Null(result.Value);return;
         }
         var created=NativeSchemaSession.Create(r.GetProperty("schema").GetString()!,options);Assert.Equal(r.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid)

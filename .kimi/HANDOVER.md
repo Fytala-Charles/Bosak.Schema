@@ -1,3 +1,7 @@
+## Simple-content strict attribute wildcards — 27 November 2026
+
+Development 0.27 qualifies strict attribute wildcards on existing noninteger simple-content extension owners. Original complex governing components and actual scalar values remain distinct, with independent global attribute validation. All 23,313 source tests (1,776 internal / 21,537 public) and 21,537 overlapping fresh package checks pass. All 23,171 prior test names remain; 142 checks are added. The frozen pilot has 21 matches; structural samples have 43 matches / 86 Unsupported; datatype samples have 582 matches / 16 Unsupported, with zero errors. API 55 types / 663 rows and nine signed Core 1.86.0 payloads are unchanged. Unpublished; full XSD 1.1, PSVI and C45 acceptance remain separate. [Scope and evidence](../docs/simple-content-wildcards/README.md). Earlier entries remain historical.
+
 ## Mixed-sequence strict attribute wildcards —26November2026
 
 Development0.26 qualifies strict attribute wildcards on existing finite mixed sequence owners, retaining original mixed types/declarations and raw untypedAtomic aggregates independently from normalized child/attribute values. All23,171source tests(1,764internal/21,407public) and21,407overlapping fresh package checks pass. All23,025prior names retained;146controls added. Pilot21matches; structural43matches/86Unsupported; datatype582matches/16Unsupported; zeroerrors. API55types/663rows and nine signed Core1.86.0 payloads unchanged. Unpublished; wider models/modes/composition and fullXSD1.1/PSVI/C45 remain separate. [Scope and evidence](../docs/mixed-wildcards/README.md). Earlier entries remain historical.
@@ -78,7 +82,7 @@ The 0.8 development candidate qualifies DT-101â€“DT-180: bounded hexBinary/
 
 The 0.7 development candidate admits bounded dateTime/time/dateTimeStamp on signed Core 1.86.0 through both native facades, with exact fractional seconds, applicable finite facets, original typed facts and preserved lifetime/capacity gates. All 100 [calendar contracts](../docs/calendar-100/README.md) are qualified: 11,024 source tests and 9,516 overlapping package-only public tests pass. API additions are three enum values and CalendarValue; existing exported type names and members are preserved. The frozen pilot is 21/21; the expanded sample remains 19 matches/110 Unsupported/zero errors. This supersedes earlier calendar-refusal/planned notices below. Published beta.1 and its controller remain historical; no Schema publication or general C45/full-XSD acceptance.
 
-Last updated: 2026-11-26
+Last updated: 2026-11-27
 
 
 The [calendar transport prerequisite assessment](../docs/calendar-transport-prerequisites/README.md) completes item 20 of the approved batch. Its 48 handled observations confirm current millisecond precision loss and native dateTime/time/dateTimeStamp refusals against the qualified package. Next is a separately adopted additive exact fractional-second Core contract. No production source/API/pin or publication changes occur; slice 19 qualification is reused without a new execution claim. The batch stops at 20.
