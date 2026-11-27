@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.38 development candidate requires Bosak Core 1.86.0 or later.
+The 0.39 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1869,3 +1869,7 @@ Existing simple-type placements admit inline anonymous list/union restriction ba
 ## Anonymous decimal and string restriction bases (development0.38)
 
 Existing inline restriction placements admit decimal and string/normalizedString/token bases using original NativeType objects and facet sources. Decimal value/numeric-pattern and text whitespace/length/enumeration/pattern ancestry remain bounded and independent. Other atomic/complex families stay excluded. The preceding empty-union guard is corrected: empty unions compile but accept no value. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-scalar-bases/GUIDE.md). Unpublished development source.
+
+## Anonymous integer and Boolean restriction bases (development 0.39)
+
+Existing inline restriction placements admit already compiled integer-family and Boolean bases using their actual unnamed type objects and original facet sources. Exact integer bounds/enumeration/digits, numeric patterns and Boolean fixed collapse whitespace/pattern ancestry retain existing limits. Other atomic/complex families, assertions and broader named-integer chains remain excluded. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-integral-bases/GUIDE.md). Unpublished development source.

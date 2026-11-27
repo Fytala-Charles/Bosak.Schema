@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 24-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 24-11-2026     | Apply inherited Boolean groups without recompiling parent automata |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.3 | 27-11-2026 | Preserve original anonymous Boolean base facet sources. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -22,9 +23,9 @@ namespace Bosak.Schema;
 internal sealed class NativeBooleanFacets(ImmutableArray<NativePattern> patterns, NativeBooleanFacets? parent = null)
 {
  internal static NativeBooleanFacets Compile(XElement restriction, NativePatternCompilation compilation) => CompileDerived(restriction, compilation, null);
- internal static NativeBooleanFacets CompileDerived(XElement restriction, NativePatternCompilation compilation, NativeBooleanFacets? parent)
+ internal static NativeBooleanFacets CompileDerived(XElement restriction, NativePatternCompilation compilation, NativeBooleanFacets? parent, XElement? inlineBase = null)
  {
-  var facets=NativeDecimalSchema.Elements(restriction);var patterns=ImmutableArray.CreateBuilder<NativePattern>();bool whitespace=false;
+  var facets=NativeDecimalSchema.Elements(restriction).Where(f=>!ReferenceEquals(f,inlineBase)).ToArray();var patterns=ImmutableArray.CreateBuilder<NativePattern>();bool whitespace=false;
   NativePattern.Capacity(facets.Count(e=>e.Name.LocalName=="pattern")<=8);
   foreach(var facet in facets)
   {
