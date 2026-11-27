@@ -48,6 +48,7 @@
 //                      | Charles Korthout | 0.35 | 26-11-2026     | Assess known global declarations beneath anyType without inventing wildcard-use components |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
+//                      | Charles Korthout | 0.42 | 27-11-2026     | Enforce abstract complex types after admitted type resolution.                           |
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.36  | 26-11-2026     | Add bounded strict attribute wildcards on empty complex owners.                           |
 //                      | Charles Korthout | 0.37  | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
@@ -138,7 +139,7 @@ internal sealed partial class NativeDecimalSchema
             if (named.TryGetValue(name, out var existing)) return existing;
             Require(definitions.TryGetValue(name, out var definition), "Unresolved complex type.", NativeDecimalUnsupportedReason.ValueType);
             Require(visiting.Add(name), "Recursive complex types are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-            Attributes(definition!, "name", "mixed");
+            Attributes(definition!, "name", "mixed", "abstract");
             var plan = Complex(definition!, new NativeDeclaration(name.LocalName, MixedComplexType(definition!, name.LocalName, targetNamespace), 1, 1, targetNamespace));
             named.Add(name, plan);
             visiting.Remove(name);

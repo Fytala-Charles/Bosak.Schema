@@ -79,6 +79,7 @@
 //                      | Charles Korthout | 1.53 | 26-11-2026     | Bound actual anyType input and defer wildcard attributes to original owner assessment |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 1.60 | 27-11-2026     | Enforce bounded simple-type final derivation controls.                                   |
+//                      | Charles Korthout | 1.61 | 27-11-2026     | Enforce abstract complex types after admitted type resolution.                           |
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 
@@ -243,6 +244,7 @@ internal sealed partial class NativeDecimalSchema
                 nested.GlobalAttributeDeclarations = globalAttributes.Values;
                 nested.HasStrictAttributeWildcards = root.Descendants(Xs + "anyAttribute").Any();
                 nested.CompleteAbstractMetadata(root, cancellationToken);
+                nested.CompleteAbstractComplexMetadata(root, cancellationToken);
                 return NativeResult<NativeDecimalSchema>.Valid(nested);
             }
             // Compile all complex types eagerly, including unused declarations.
@@ -255,7 +257,7 @@ internal sealed partial class NativeDecimalSchema
                 if (named.TryGetValue(key, out var known)) return known;
                 Require(resolvingComplex.Add(key), "Complex dependency cycle is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
                 var type = complexDefinitions[key];
-                Attributes(type, "name");
+                Attributes(type, mixedProfile ? ["name", "abstract"] : ["name"]);
                 var name = Name(type);
                 var identity = new NativeType(name, true, targetNamespace);
                 var plan = CompileComplex(type, new NativeDeclaration(name, identity, 1, 1, targetNamespace),
@@ -309,6 +311,7 @@ internal sealed partial class NativeDecimalSchema
             first.maxStringCharacters = maxStringCharacters;
             first.PrepareInstanceTypes();
             first.CompleteAbstractMetadata(root, cancellationToken);
+            if (mixedProfile) first.CompleteAbstractComplexMetadata(root, cancellationToken);
             return NativeResult<NativeDecimalSchema>.Valid(first);
         }
         catch (NativeProfileException ex)
