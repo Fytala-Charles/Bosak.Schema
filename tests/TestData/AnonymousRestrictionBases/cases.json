@@ -1,0 +1,2868 @@
+{
+  "cases": [
+    {
+      "id": "AB-001",
+      "contract": "original inline list named '01.20 2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-002",
+      "contract": "original inline list named ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-003",
+      "contract": "original inline list root '01.20 2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-004",
+      "contract": "original inline list root ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-005",
+      "contract": "original inline list local '01.20 2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a><v>01.20 2</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-006",
+      "contract": "original inline list local ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a><v></v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-007",
+      "contract": "original inline list globalAttr '01.20 2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a g='01.20 2'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-008",
+      "contract": "original inline list globalAttr ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a g=''/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-009",
+      "contract": "original inline list localAttr '01.20 2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a g='01.20 2'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-010",
+      "contract": "original inline list localAttr ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a g=''/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-011",
+      "contract": "original inline union named '01.20'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-012",
+      "contract": "original inline union named 'word'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>word</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "word"
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-013",
+      "contract": "original inline union root '01.20'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>01.20</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-014",
+      "contract": "original inline union root 'word'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>word</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "word"
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-015",
+      "contract": "original inline union local '01.20'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a><v>01.20</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-016",
+      "contract": "original inline union local 'word'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a><v>word</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "word"
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-017",
+      "contract": "original inline union globalAttr '01.20'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a g='01.20'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-018",
+      "contract": "original inline union globalAttr 'word'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a g='word'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "word"
+          ],
+          "kind": "String",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-019",
+      "contract": "original inline union localAttr '01.20'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a g='01.20'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-020",
+      "contract": "original inline union localAttr 'word'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a g='word'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "word"
+          ],
+          "kind": "String",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-021",
+      "contract": "list facet length named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:length value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-022",
+      "contract": "list facet rejects length named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:length value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-023",
+      "contract": "list facet length root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:length value='2'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>1.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-024",
+      "contract": "list facet rejects length root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:length value='2'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-025",
+      "contract": "list facet minimum named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:minLength value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1 2 3</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1",
+            "2",
+            "3"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-026",
+      "contract": "list facet rejects minimum named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:minLength value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-027",
+      "contract": "list facet minimum root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:minLength value='2'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>1 2 3</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1",
+            "2",
+            "3"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-028",
+      "contract": "list facet rejects minimum root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:minLength value='2'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-029",
+      "contract": "list facet maximum named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:maxLength value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-030",
+      "contract": "list facet rejects maximum named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:maxLength value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1 2 3</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-031",
+      "contract": "list facet maximum root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:maxLength value='2'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>1 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-032",
+      "contract": "list facet rejects maximum root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:maxLength value='2'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>1 2 3</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-033",
+      "contract": "list facet enumeration named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:enumeration value='+01.20 2.0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1.2 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-034",
+      "contract": "list facet rejects enumeration named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:enumeration value='+01.20 2.0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1 3</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-035",
+      "contract": "list facet enumeration root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:enumeration value='+01.20 2.0'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>1.2 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-036",
+      "contract": "list facet rejects enumeration root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:enumeration value='+01.20 2.0'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>1 3</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-037",
+      "contract": "list facet pattern named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:pattern value='1.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-038",
+      "contract": "list facet rejects pattern named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:pattern value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2 3</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-039",
+      "contract": "list facet pattern root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:pattern value='1.*'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>1 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-040",
+      "contract": "list facet rejects pattern root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:pattern value='1'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>2 3</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-041",
+      "contract": "list facet whitespace named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a> 1\t2 </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-042",
+      "contract": "list facet whitespace root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a> 1\t2 </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-043",
+      "contract": "invalid compound facet <xs:length value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-044",
+      "contract": "invalid compound facet <xs:whiteSpace value='preserve'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:whiteSpace value='preserve'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-045",
+      "contract": "invalid compound facet <xs:minLength value='-1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:minLength value='-1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-046",
+      "contract": "invalid compound facet <xs:length value='2'/><xs:length value='2'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:length value='2'/><xs:length value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-047",
+      "contract": "inherited minimum and outer <xs:maxLength value='3'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:minLength value='2'/></xs:restriction></xs:simpleType><xs:maxLength value='3'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-048",
+      "contract": "inherited minimum rejects outer <xs:maxLength value='3'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:minLength value='2'/></xs:restriction></xs:simpleType><xs:maxLength value='3'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-049",
+      "contract": "inherited minimum and outer <xs:length value='2'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:minLength value='2'/></xs:restriction></xs:simpleType><xs:length value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-050",
+      "contract": "inherited minimum rejects outer <xs:length value='2'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:minLength value='2'/></xs:restriction></xs:simpleType><xs:length value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-051",
+      "contract": "inherited widening invalid <xs:minLength value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:minLength value='2'/></xs:restriction></xs:simpleType><xs:minLength value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-052",
+      "contract": "inherited widening invalid <xs:length value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:minLength value='2'/></xs:restriction></xs:simpleType><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-053",
+      "contract": "fixed inherited length 2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:length value='2' fixed='true'/></xs:restriction></xs:simpleType><xs:length value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-054",
+      "contract": "fixed inherited length 3",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:length value='2' fixed='true'/></xs:restriction></xs:simpleType><xs:length value='3'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-055",
+      "contract": "inherited enumeration 1.2 2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:enumeration value='1.20 2.0'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1.2 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-056",
+      "contract": "inherited enumeration 1.2 3",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:enumeration value='1.20 2.0'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1.2 3</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-057",
+      "contract": "inherited pattern conjunction 12",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:pattern value='1.*'/></xs:restriction></xs:simpleType><xs:pattern value='.*2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>12</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "12"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-058",
+      "contract": "inherited pattern conjunction 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:pattern value='1.*'/></xs:restriction></xs:simpleType><xs:pattern value='.*2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "12"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-059",
+      "contract": "inherited pattern conjunction 2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:pattern value='1.*'/></xs:restriction></xs:simpleType><xs:pattern value='.*2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "12"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-060",
+      "contract": "enumeration over patterned compound remains excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:pattern value='1'/></xs:restriction></xs:simpleType><xs:enumeration value='1 2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-061",
+      "contract": "union enumeration 01.20",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType><xs:enumeration value='1.2'/><xs:enumeration value='word'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-062",
+      "contract": "union enumeration word",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType><xs:enumeration value='1.2'/><xs:enumeration value='word'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>word</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "word"
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-063",
+      "contract": "union enumeration rejects",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType><xs:enumeration value='1.2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>word</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-064",
+      "contract": "same-step pattern OR 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType><xs:pattern value='1'/><xs:pattern value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-065",
+      "contract": "same-step pattern OR 2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType><xs:pattern value='1'/><xs:pattern value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-066",
+      "contract": "same-step pattern OR 3",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType><xs:pattern value='1'/><xs:pattern value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>3</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "3"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-067",
+      "contract": "original QName facet scope urn:facet",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:wrong'><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:QName'/></xs:simpleType><xs:enumeration xmlns:p='urn:facet' value='p:one'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:q='urn:facet'>q:one</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:facet}one"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-068",
+      "contract": "original QName facet scope urn:wrong",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:wrong'><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:QName'/></xs:simpleType><xs:enumeration xmlns:p='urn:facet' value='p:one'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:q='urn:wrong'>q:one</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:facet}one"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-069",
+      "contract": "forward named compound dependency",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='B'><xs:minLength value='1'/></xs:restriction></xs:simpleType><xs:length value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:list itemType='xs:decimal'/></xs:simpleType></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-070",
+      "contract": "final prohibition inside anonymous base",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='B'><xs:minLength value='1'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B' final='restriction'><xs:list itemType='xs:decimal'/></xs:simpleType></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-071",
+      "contract": "final unrelated method permitted",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='B'><xs:minLength value='1'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B' final='union'><xs:list itemType='xs:decimal'/></xs:simpleType></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-072",
+      "contract": "inline recursion depth 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-073",
+      "contract": "inline recursion depth 3",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-074",
+      "contract": "inline recursion depth 4",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-075",
+      "contract": "inline recursion depth 5",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-076",
+      "contract": "combined inline sites 16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:union><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:union></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1.2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-077",
+      "contract": "combined inline sites 17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:union><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:union></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1.2</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-078",
+      "contract": "base attribute and inline child conflict",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:decimal'><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-079",
+      "contract": "duplicate inline bases",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-080",
+      "contract": "late inline base",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:pattern value=\"1\"/><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-081",
+      "contract": "anonymous atomic base stays excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-082",
+      "contract": "local final stays excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType final='restriction'><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-083",
+      "contract": "list of anonymous list stays invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:list><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:list></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-084",
+      "contract": "list item anonymous union restriction",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:list><xs:simpleType><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:boolean'/></xs:simpleType></xs:restriction></xs:simpleType></xs:list></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-085",
+      "contract": "union member anonymous list restriction",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:union><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:union></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-086",
+      "contract": "nilled anonymous restricted list",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a' nillable='true'><xs:simpleType><xs:restriction ><xs:simpleType><xs:list itemType='xs:decimal'/></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-087",
+      "contract": "unknown xsi type remains invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:decimal xs:string'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='Missing'>1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-088",
+      "contract": "original union invalid xsi type shape",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:union memberTypes='xs:integer xs:string'/></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='Missing'>1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AB-089",
+      "contract": "empty union in new anonymous base graph is invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a'><xs:simpleType><xs:restriction><xs:simpleType><xs:union/></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>01.20 2</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1.2",
+            "2"
+          ],
+          "kind": "Decimal",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    }
+  ]
+}

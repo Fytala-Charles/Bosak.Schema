@@ -1,0 +1,13 @@
+# Anonymous compound restriction bases
+
+Both owned native facades admit a simple-type restriction with one leading inline anonymous simpleType base of admitted list or union variety. The child may construct a compound, restrict a named compound, or restrict another inline compound. It must be the only inline base and precede facets; a simultaneous base attribute is Invalid. The old absent-both refusal remains unchanged. Anonymous atomic bases and complex simple-content inline bases remain Unsupported.
+
+The compiler keeps the actual unnamed base NativeType and links the derived type directly to it. It does not fabricate a QName, register the anonymous base globally, manufacture a declaration, clone a facet source or rewrite namespaces. The outer type is named only when the schema supplies its name. Derived lists retain the same original item-type object; derived unions retain the ordered member objects. Repeated references to one named outer type share its base, while separate identical anonymous source definitions remain distinct.
+
+Existing compound facets remain in force: inherited list length intervals, fixed lengths, enumeration equality, pattern behavior and member/value rules. Facet literals use their original source namespace context, including local QName bindings. Patterned-compound enumeration and other existing excluded facet combinations remain Unsupported. New anonymous base graphs reject empty unions as Invalid without changing the old direct compound route.
+
+Restriction/list/union inline source sites share a16-site ceiling, counted once from source rather than once per reference. Recursive inline depth remains4. Existing local anonymous, member, item, atom, digit, scale, string, pattern and schema-size budgets remain. Final prohibitions and named forward dependencies are checked through the original source edges. Other instance-type override and derivation boundaries remain.
+
+Complete assessment precedes facts. Original declaration/governing/actual primitive or member authority, list item order, nil behavior and original XML remain. Recovery, cancellation, foreign ownership and expiry retain their prior contracts. No public API addition, augmentation, general anonymous atomic/complex support or full XSD/PSVI/C45 acceptance is added.
+
+For example, a named type may restrict an unnamed decimal list to length2, and values such as "01.20 2" retain decimal items1.2 and2. A further anonymous restriction inherits that length and cannot widen a fixed constraint. A QName enumeration remains bound to the namespace declared on its original facet element.

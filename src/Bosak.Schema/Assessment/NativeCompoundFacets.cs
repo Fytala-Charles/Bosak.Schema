@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.4   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
 //                      | Charles Korthout | 0.5   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.6 | 27-11-2026     | Preserve original anonymous compound restriction bases and inherited facets.             |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Globalization;
@@ -35,14 +36,14 @@ internal sealed class NativeCompoundFacets(NativeCompoundFacets? parent, int? le
     private int Maximum => length ?? maximum ?? parent?.Maximum ?? int.MaxValue;
     private bool HasPatterns => !patterns.IsEmpty || parent?.HasPatterns == true;
     internal static NativeCompoundFacets Compile(XElement restriction, NativeType baseType, NativeNumericLimits limits,
-        int maxCharacters, NativePatternCompilation compilation)
+        int maxCharacters, NativePatternCompilation compilation, XElement? inlineBase = null)
     {
         int? length=null, minimum=null, maximum=null;
         var seen=new HashSet<string>(StringComparer.Ordinal);
         var fixedValues=new Dictionary<string,int>(StringComparer.Ordinal);
         var entries=ImmutableArray.CreateBuilder<NativeElementState>();
         var patterns=ImmutableArray.CreateBuilder<NativePattern>();
-        foreach(var facet in NativeDecimalSchema.Elements(restriction))
+        foreach(var facet in NativeDecimalSchema.Elements(restriction).Where(e => !ReferenceEquals(e, inlineBase)))
         {
             compilation.Check(); var name=facet.Name.LocalName;
             NativeDecimalSchema.Require(facet.Name.NamespaceName=="http://www.w3.org/2001/XMLSchema" && name is "length" or "minLength" or "maxLength" or "pattern" or "enumeration" or "whiteSpace", "Excluded compound facet.", NativeDecimalUnsupportedReason.ValueType);
