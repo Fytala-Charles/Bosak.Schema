@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 27-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.2 | 27-11-2026 | Admit original integer and Boolean base objects with facet ancestry. |
+//                      | Charles Korthout | 0.3 | 27-11-2026 | Admit original date base objects with bounded facet ancestry. |
 // ===========================================================================================================================================================
 using System.Xml.Linq;
 namespace Bosak.Schema;
@@ -24,6 +25,9 @@ internal sealed partial class NativeDecimalSchema
         string? name, string ns, NativeNumericLimits limits, int maxCharacters, NativePatternCompilation compilation)
     {
         compilation.Check();
+        if (baseType.IsDate)
+            return new NativeType(name, false, ns, isDate: true, derivationBase: baseType,
+                dateFacets: NativeDateFacets.CompileDerived(restriction, maxCharacters, baseType.DateFacets, compilation, inlineSource));
         if (baseType.IsInteger)
         {
             var values = Elements(restriction).Where(f => !ReferenceEquals(f, inlineSource) && f.Name != Xs + "pattern").ToArray();

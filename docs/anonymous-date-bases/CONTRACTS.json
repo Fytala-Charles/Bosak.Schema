@@ -1,0 +1,595 @@
+{
+  "count": 98,
+  "behavioralContractsNotFeatures": true,
+  "stimuli": "../../tests/TestData/AnonymousDateBases/cases.json",
+  "contracts": [
+    {
+      "id": "AD-001",
+      "contract": "inline date named 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-002",
+      "contract": "inline date named 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-003",
+      "contract": "inline date root 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-004",
+      "contract": "inline date root 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-005",
+      "contract": "inline date local 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-006",
+      "contract": "inline date local 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-007",
+      "contract": "inline date globalAttr 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-008",
+      "contract": "inline date globalAttr 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-009",
+      "contract": "inline date localAttr 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-010",
+      "contract": "inline date localAttr 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-011",
+      "contract": "date bound <xs:minInclusive value='2000-01-02Z'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-012",
+      "contract": "date bound rejects <xs:minInclusive value='2000-01-02Z'/>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-013",
+      "contract": "date bound <xs:minExclusive value='2000-01-01Z'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-014",
+      "contract": "date bound rejects <xs:minExclusive value='2000-01-01Z'/>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-015",
+      "contract": "date bound <xs:maxInclusive value='2000-01-02Z'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-016",
+      "contract": "date bound rejects <xs:maxInclusive value='2000-01-02Z'/>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-017",
+      "contract": "date bound <xs:maxExclusive value='2000-01-03Z'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-018",
+      "contract": "date bound rejects <xs:maxExclusive value='2000-01-03Z'/>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-019",
+      "contract": "zoned enumeration equality 2000-01-02+14:00",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-020",
+      "contract": "zoned enumeration equality 2000-01-01-10:00",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-021",
+      "contract": "zoned enumeration equality 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-022",
+      "contract": "zoned enumeration equality 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-023",
+      "contract": "absent zone enumeration 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-024",
+      "contract": "absent zone enumeration 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-025",
+      "contract": "inherited date enumeration 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-026",
+      "contract": "inherited date enumeration 2000-01-03Z",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-027",
+      "contract": "inherited date widening <xs:minInclusive value='2000-01-01Z'/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-028",
+      "contract": "inherited date widening <xs:maxInclusive value='2000-01-04Z'/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-029",
+      "contract": "inherited date widening <xs:enumeration value='2000-01-01Z'/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-030",
+      "contract": "exclusive endpoint <xs:minExclusive value='2000-01-01Z'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-031",
+      "contract": "exclusive endpoint <xs:minInclusive value='2000-01-01Z'/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-032",
+      "contract": "explicitTimezone required 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-033",
+      "contract": "explicitTimezone required 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-034",
+      "contract": "explicitTimezone prohibited 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-035",
+      "contract": "explicitTimezone prohibited 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-036",
+      "contract": "explicitTimezone optional 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-037",
+      "contract": "timezone widening requiredoptional",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-038",
+      "contract": "timezone widening prohibitedrequired",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-039",
+      "contract": "inherited required zone 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-040",
+      "contract": "inherited required zone 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-041",
+      "contract": "same step date pattern alternatives 2000-01-01Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-042",
+      "contract": "same step date pattern alternatives 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-043",
+      "contract": "same step date pattern alternatives 2000-01-03Z",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-044",
+      "contract": "date pattern ancestry 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-045",
+      "contract": "date pattern ancestry 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-046",
+      "contract": "date pattern ancestry 2001-01-02Z",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-047",
+      "contract": "bounds over patterned date stay excluded <xs:minInclusive value='2000-01-01Z'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-048",
+      "contract": "bounds over patterned date stay excluded <xs:maxExclusive value='2001-01-01Z'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-049",
+      "contract": "enumeration respects original pattern 2000-01-02Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-050",
+      "contract": "enumeration respects original pattern 2001-01-02Z",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-051",
+      "contract": "partial order versus zoned bound 2000-01-04",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-052",
+      "contract": "partial order versus zoned bound 2000-01-02",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-053",
+      "contract": "bounded date lexical 2000-02-29",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-054",
+      "contract": "bounded date lexical 0000-02-29",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-055",
+      "contract": "bounded date lexical -0004-02-29",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-056",
+      "contract": "bounded date lexical 10000-01-01",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-057",
+      "contract": "bounded date lexical 9223372036854775807-01-01",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-058",
+      "contract": "bounded date lexical -9223372036854775807-01-01",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-059",
+      "contract": "bounded date lexical 2000-01-02+14:00",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-060",
+      "contract": "bounded date lexical 2000-01-02-14:00",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-061",
+      "contract": "collapsed date lexical",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-062",
+      "contract": "invalid date lexical '1900-02-29'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-063",
+      "contract": "invalid date lexical '2001-02-29'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-064",
+      "contract": "invalid date lexical '2000-04-31'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-065",
+      "contract": "invalid date lexical '2000-00-01'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-066",
+      "contract": "invalid date lexical '2000-01-00'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-067",
+      "contract": "invalid date lexical '+2000-01-02'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-068",
+      "contract": "invalid date lexical '2000-1-02'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-069",
+      "contract": "invalid date lexical '2000-01-02+14:01'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-070",
+      "contract": "invalid date lexical '2000-01-02+15:00'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-071",
+      "contract": "invalid date lexical '2000-01-02T00:00:00Z'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-072",
+      "contract": "invalid date lexical ''",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AD-073",
+      "contract": "date year capacity 9223372036854775808-01-01",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "AD-074",
+      "contract": "date year capacity -9223372036854775808-01-01",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "AD-075",
+      "contract": "date depth 1",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-076",
+      "contract": "date depth 4",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-077",
+      "contract": "date depth 5",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-078",
+      "contract": "conflicting date base base='xs:date'",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-079",
+      "contract": "conflicting date base <xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-080",
+      "contract": "forward date final False",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-081",
+      "contract": "forward date final True",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-082",
+      "contract": "date list item",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-083",
+      "contract": "union actual date member",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-084",
+      "contract": "union actual fallback member",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-085",
+      "contract": "nilled date",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-086",
+      "contract": "excluded date facet syntax <xs:assertion test='true()'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-087",
+      "contract": "excluded date facet syntax <xs:whiteSpace value='collapse'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-088",
+      "contract": "excluded date facet syntax <xs:length value='10'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-089",
+      "contract": "excluded date facet syntax <xs:explicitTimezone value='optional' fixed='true'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-090",
+      "contract": "date enumeration capacity",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-091",
+      "contract": "date pattern capacity",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-092",
+      "contract": "other family excluded dateTime",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-093",
+      "contract": "other family excluded time",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-094",
+      "contract": "other family excluded gYear",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-095",
+      "contract": "other family excluded hexBinary",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-096",
+      "contract": "other family excluded QName",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-097",
+      "contract": "other family excluded anyURI",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AD-098",
+      "contract": "unknown xsi type remains invalid",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# Bounded anonymous date restriction bases
+
+27 November2026. Recorded before implementation at a589d755f3fc4fcdd795b2e13de6343db2c00fd8. ORIGINAL-ADOPTION.json preserves the pre-implementation receipt. ADOPTION.json pins the same immutable sources and affected sections with separately reviewed scope wording; ADOPTION-REVIEW.json records that correction.
+
+Admit a restriction whose one leading inline simpleType compiles to an existing xs:date NativeType. Keep the actual unnamed base as direct DerivationBase and compile original outer facet elements, skipping only the exact inline base object. Do not create aliases, synthetic QNames, declarations, global anonymous entries, source clones or namespace mutations. Repeated references share one base; separate source definitions remain distinct. Preserve named forward/final source checks and existing public actual/governing date authority.
+
+Reuse existing bounded date lexical/calendar validation, enumeration value equality, zoned/absent timezone distinction, exact timezone-offset equivalence, partial-order bounds, explicitTimezone restriction, lexical patterns and inherited group semantics. Preserve fixed collapse behavior through the existing parser. Bounds over patterned ancestors remain Unsupported. Explicit whitespace/fixed/other facet syntax and assertions retain existing exclusions/classifications; no new general date facet semantics are adopted.
+
+Preserve source sites16/depth4, year interval -long.MaxValue..long.MaxValue, lexical256, digit/string/regex/schema/atom/lifetime limits, nil/original XML, ownership, cancellation, recovery, detached values and export. Other calendar/interchange/URI/text/complex families and wider derivation/instance overrides remain separate. Prior decimal/string/integer/Boolean/compound and empty-union contracts remain unchanged.
+
+Qualify both public facades and native identities/values/facets, all prior names and original fixture bytes, exact fresh package/API/signed Core, frozen examples/invoice/docs/release/workload controls. Archive prior assertions for explicit now-admitted date-refusal reconciliation. Counts overlap between source and package. Complete authorized commit/push/PR review/green merge/exact-main CI. No publication/tag/controller/full XSD1.1/PSVI/C45 claim.

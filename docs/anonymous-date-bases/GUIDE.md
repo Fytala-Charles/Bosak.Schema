@@ -1,0 +1,11 @@
+# Anonymous date restriction bases
+
+Both owned native facades admit a simple-type restriction with one leading inline simpleType whose actual compiled type is xs:date. The compiler keeps that original unnamed NativeType as the direct DerivationBase. No alias, synthetic QName, declaration, global anonymous entry or source clone is created. References share one original base; separate source definitions remain distinct. Named forward references and final prohibitions retain original source authority.
+
+Outer facets compile from their original elements, skipping only the exact inline child. Existing date semantics remain: Gregorian lexical/calendar validation, collapsed whitespace, exact enumeration equality, zoned-versus-absent timezone distinction, partial-order bounds, explicitTimezone restriction and lexical pattern groups. Equal zoned date values can retain different original date/offset components; assessment does not normalize or augment XML. Same-step patterns are alternatives and inherited groups intersect. Bounds over patterned ancestors stay Unsupported. Explicit whitespace, fixed or other facet syntax and assertions retain the existing profile exclusions and outcome classifications.
+
+Shared inline source sites remain 16 and depth remains 4. Years are bounded to -long.MaxValue through long.MaxValue; long.MinValue stays excluded. Existing lexical256, string, digit, regex, schema, atom and lifetime limits remain. DateTime/time, other Gregorian types, duration, interchange, URI, other text families and complex anonymous bases need separate adoption. Broader public derivation and instance-type override rules are unchanged.
+
+Complete assessment precedes facts. Atomic scalar actual-type evidence remains its governing scalar component; the date carrier does not substitute another type component. Original declarations, component ownership, nil, original XML, recovery, cancellation, export, detached values and expiry retain their contracts.
+
+For example, a base enumeration of 2000-01-02+14:00 admits the equal value 2000-01-01-10:00 while preserving the latter's original day and offset. An absent timezone remains distinct. Inherited required timezone rejects unzoned values. Existing partial-order bounds reject values whose relationship to a bound is indeterminate.
