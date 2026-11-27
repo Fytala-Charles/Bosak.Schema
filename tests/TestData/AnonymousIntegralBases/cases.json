@@ -1,0 +1,3750 @@
+{
+  "cases": [
+    {
+      "id": "AI-001",
+      "contract": "inline integer named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-002",
+      "contract": "inline integer root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-003",
+      "contract": "inline integer local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a><v>+001</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-004",
+      "contract": "inline integer globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a g='+001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-005",
+      "contract": "inline integer localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a g='+001'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-006",
+      "contract": "inline boolean named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-007",
+      "contract": "inline boolean root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-008",
+      "contract": "inline boolean local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a><v>1</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-009",
+      "contract": "inline boolean globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a g='1'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-010",
+      "contract": "inline boolean localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a g='1'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-011",
+      "contract": "inherited builtin nonPositiveInteger",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:nonPositiveInteger'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>0</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-012",
+      "contract": "inherited builtin rejects nonPositiveInteger",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:nonPositiveInteger'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-013",
+      "contract": "inherited builtin negativeInteger",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:negativeInteger'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>-1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "-1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-014",
+      "contract": "inherited builtin rejects negativeInteger",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:negativeInteger'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>0</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-015",
+      "contract": "inherited builtin long",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:long'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>9223372036854775807</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "9223372036854775807"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-016",
+      "contract": "inherited builtin rejects long",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:long'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>9223372036854775808</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-017",
+      "contract": "inherited builtin int",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:int'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2147483647</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2147483647"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-018",
+      "contract": "inherited builtin rejects int",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:int'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2147483648</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-019",
+      "contract": "inherited builtin short",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:short'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>32767</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "32767"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-020",
+      "contract": "inherited builtin rejects short",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:short'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>32768</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-021",
+      "contract": "inherited builtin byte",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:byte'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>127</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "127"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-022",
+      "contract": "inherited builtin rejects byte",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:byte'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>128</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-023",
+      "contract": "inherited builtin nonNegativeInteger",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:nonNegativeInteger'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>0</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-024",
+      "contract": "inherited builtin rejects nonNegativeInteger",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:nonNegativeInteger'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>-1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-025",
+      "contract": "inherited builtin unsignedLong",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:unsignedLong'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>18446744073709551615</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "18446744073709551615"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-026",
+      "contract": "inherited builtin rejects unsignedLong",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:unsignedLong'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>18446744073709551616</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-027",
+      "contract": "inherited builtin unsignedInt",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:unsignedInt'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>4294967295</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "4294967295"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-028",
+      "contract": "inherited builtin rejects unsignedInt",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:unsignedInt'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>4294967296</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-029",
+      "contract": "inherited builtin unsignedShort",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:unsignedShort'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>65535</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "65535"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-030",
+      "contract": "inherited builtin rejects unsignedShort",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:unsignedShort'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>65536</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-031",
+      "contract": "inherited builtin unsignedByte",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:unsignedByte'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>255</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "255"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-032",
+      "contract": "inherited builtin rejects unsignedByte",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:unsignedByte'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>256</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-033",
+      "contract": "inherited builtin positiveInteger",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:positiveInteger'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-034",
+      "contract": "inherited builtin rejects positiveInteger",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:positiveInteger'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>0</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-035",
+      "contract": "integer facet <xs:minInclusive value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:minInclusive value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-036",
+      "contract": "integer facet rejects <xs:minInclusive value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:minInclusive value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>0</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-037",
+      "contract": "integer facet <xs:minExclusive value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:minExclusive value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-038",
+      "contract": "integer facet rejects <xs:minExclusive value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:minExclusive value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-039",
+      "contract": "integer facet <xs:maxInclusive value='2'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:maxInclusive value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-040",
+      "contract": "integer facet rejects <xs:maxInclusive value='2'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:maxInclusive value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>3</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-041",
+      "contract": "integer facet <xs:maxExclusive value='2'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:maxExclusive value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-042",
+      "contract": "integer facet rejects <xs:maxExclusive value='2'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:maxExclusive value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-043",
+      "contract": "integer facet <xs:totalDigits value='2'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:totalDigits value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>12</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "12"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-044",
+      "contract": "integer facet rejects <xs:totalDigits value='2'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:totalDigits value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>123</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-045",
+      "contract": "integer facet <xs:enumeration value='+001'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:enumeration value='+001'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-046",
+      "contract": "integer facet rejects <xs:enumeration value='+001'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:enumeration value='+001'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-047",
+      "contract": "integer lexical normalization '+0001'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+0001</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-048",
+      "contract": "integer lexical normalization '  1  '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>  1  </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-049",
+      "contract": "integer lexical normalization '1\\n'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1\n</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-050",
+      "contract": "invalid integer lexical '1.0'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1.0</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-051",
+      "contract": "invalid integer lexical '1.'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1.</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-052",
+      "contract": "invalid integer lexical 'true'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>true</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-053",
+      "contract": "invalid integer lexical '1 2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1 2</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-054",
+      "contract": "invalid integer lexical ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-055",
+      "contract": "inherited integer enumeration 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'><xs:enumeration value='01'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-056",
+      "contract": "inherited integer enumeration 2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'><xs:enumeration value='01'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-057",
+      "contract": "integer inherited widening <xs:minInclusive value='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'><xs:minInclusive value='1'/><xs:maxInclusive value='3'/><xs:totalDigits value='3'/></xs:restriction></xs:simpleType><xs:minInclusive value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-058",
+      "contract": "integer inherited widening <xs:maxInclusive value='4'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'><xs:minInclusive value='1'/><xs:maxInclusive value='3'/><xs:totalDigits value='3'/></xs:restriction></xs:simpleType><xs:maxInclusive value='4'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-059",
+      "contract": "integer inherited widening <xs:totalDigits value='4'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'><xs:minInclusive value='1'/><xs:maxInclusive value='3'/><xs:totalDigits value='3'/></xs:restriction></xs:simpleType><xs:totalDigits value='4'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-060",
+      "contract": "integer inherited widening <xs:enumeration value='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'><xs:minInclusive value='1'/><xs:maxInclusive value='3'/><xs:totalDigits value='3'/></xs:restriction></xs:simpleType><xs:enumeration value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-061",
+      "contract": "integer fixed fractionDigits 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:fractionDigits value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-062",
+      "contract": "integer fixed fractionDigits 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:fractionDigits value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-063",
+      "contract": "integer pattern ancestry 12",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'><xs:pattern value='1.*'/></xs:restriction></xs:simpleType><xs:pattern value='.*2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>12</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "12"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-064",
+      "contract": "integer pattern ancestry 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'><xs:pattern value='1.*'/></xs:restriction></xs:simpleType><xs:pattern value='.*2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "12"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-065",
+      "contract": "integer pattern ancestry 2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'><xs:pattern value='1.*'/></xs:restriction></xs:simpleType><xs:pattern value='.*2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "12"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-066",
+      "contract": "integer same step alternatives 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:pattern value='1'/><xs:pattern value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-067",
+      "contract": "integer same step alternatives 2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:pattern value='1'/><xs:pattern value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-068",
+      "contract": "integer same step alternatives 3",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:pattern value='1'/><xs:pattern value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>3</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "3"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-069",
+      "contract": "patterned integer value facets excluded <xs:minInclusive value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'><xs:pattern value='1.*'/></xs:restriction></xs:simpleType><xs:minInclusive value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-070",
+      "contract": "patterned integer value facets excluded <xs:enumeration value='12'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'><xs:pattern value='1.*'/></xs:restriction></xs:simpleType><xs:enumeration value='12'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-071",
+      "contract": "integer value facet then pattern",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'><xs:minInclusive value='1'/></xs:restriction></xs:simpleType><xs:pattern value='1.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>12</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "12"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-072",
+      "contract": "Boolean lexical true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>true</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-073",
+      "contract": "Boolean lexical 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-074",
+      "contract": "Boolean lexical false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>false</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-075",
+      "contract": "Boolean lexical 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>0</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-076",
+      "contract": "Boolean lexical   true  ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>  true  </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-077",
+      "contract": "Boolean invalid lexical 'True'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>True</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-078",
+      "contract": "Boolean invalid lexical 'TRUE'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>TRUE</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-079",
+      "contract": "Boolean invalid lexical '2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-080",
+      "contract": "Boolean invalid lexical '-0'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>-0</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-081",
+      "contract": "Boolean invalid lexical ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-082",
+      "contract": "Boolean same step alternatives true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:pattern value='true'/><xs:pattern value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>true</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-083",
+      "contract": "Boolean same step alternatives 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:pattern value='true'/><xs:pattern value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-084",
+      "contract": "Boolean same step alternatives false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:pattern value='true'/><xs:pattern value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>false</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-085",
+      "contract": "Boolean inherited pattern true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'><xs:pattern value='true'/><xs:pattern value='1'/></xs:restriction></xs:simpleType><xs:pattern value='t.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>true</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-086",
+      "contract": "Boolean inherited pattern 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'><xs:pattern value='true'/><xs:pattern value='1'/></xs:restriction></xs:simpleType><xs:pattern value='t.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-087",
+      "contract": "Boolean inherited pattern false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'><xs:pattern value='true'/><xs:pattern value='1'/></xs:restriction></xs:simpleType><xs:pattern value='t.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>false</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-088",
+      "contract": "Boolean fixed whitespace collapse",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-089",
+      "contract": "Boolean fixed whitespace preserve",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:whiteSpace value='preserve'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-090",
+      "contract": "Boolean fixed whitespace replace",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:whiteSpace value='replace'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-091",
+      "contract": "inapplicable Boolean facet <xs:enumeration value='true'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:enumeration value='true'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-092",
+      "contract": "inapplicable Boolean facet <xs:length value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-093",
+      "contract": "inapplicable Boolean facet <xs:minInclusive value='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:minInclusive value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-094",
+      "contract": "inapplicable Boolean facet <xs:totalDigits value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:totalDigits value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-095",
+      "contract": "assertion stays excluded integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:assertion test='true()'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-096",
+      "contract": "integer depth 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-097",
+      "contract": "integer depth 4",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-098",
+      "contract": "integer depth 5",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-099",
+      "contract": "integer conflicting base base='xs:integer'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:integer'><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-100",
+      "contract": "integer conflicting base <xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-101",
+      "contract": "list item integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:list><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:list></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1 0</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1",
+            "0"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-102",
+      "contract": "nilled integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a' nillable='true'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-103",
+      "contract": "assertion stays excluded boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:assertion test='true()'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-104",
+      "contract": "boolean depth 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-105",
+      "contract": "boolean depth 4",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-106",
+      "contract": "boolean depth 5",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-107",
+      "contract": "boolean conflicting base base='xs:boolean'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:boolean'><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-108",
+      "contract": "boolean conflicting base <xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-109",
+      "contract": "list item boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:list><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:list></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1 0</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true",
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-110",
+      "contract": "nilled boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a' nillable='true'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-111",
+      "contract": "union member Integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:union><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:union></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-112",
+      "contract": "union member Boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:union><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:integer'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:boolean'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:union></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>true</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-113",
+      "contract": "forward Boolean final False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='B'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:boolean'/></xs:simpleType></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-114",
+      "contract": "forward Boolean final True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='B'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B' final='restriction'><xs:restriction base='xs:boolean'/></xs:simpleType></xs:schema>",
+      "instance": "<a>1</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-115",
+      "contract": "other family excluded language",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:language'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-116",
+      "contract": "other family excluded Name",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:Name'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-117",
+      "contract": "other family excluded ID",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:ID'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-118",
+      "contract": "other family excluded anyURI",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:anyURI'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-119",
+      "contract": "other family excluded date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AI-120",
+      "contract": "other family excluded hexBinary",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:hexBinary'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+001</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    }
+  ]
+}

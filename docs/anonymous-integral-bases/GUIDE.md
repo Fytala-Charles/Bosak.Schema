@@ -1,0 +1,11 @@
+# Anonymous integer and Boolean restriction bases
+
+Both owned native facades admit already compiled integer-family and Boolean bases at existing inline simple-type restriction placements. Dispatch uses the actual NativeType object and retains it as the direct unnamed DerivationBase. No alias dictionary key, synthetic QName, declaration, global anonymous entry or source clone is created. References to a named outer type share its base; separate source definitions remain distinct.
+
+Integer restrictions preserve exact BigInteger values, inherited built-in bounds, enumeration, totalDigits and fixed fractionDigits zero. Numeric lexical patterns retain separate parent groups. Boolean restrictions preserve true/false and 1/0 mapping, fixed collapse whitespace, same-step pattern alternatives and inherited pattern intersections. Boolean enumeration and numeric/length facets are Invalid. Facets compile from their original elements, skipping only the exact inline base and numeric patterns handled separately.
+
+Existing exclusions remain: value facets over patterned numeric ancestors are Unsupported; assertion syntax stays outside this profile, retaining existing facet-compiler outcome classifications. General named-integer chains, other anonymous atomic/complex families, wider public derivation and instance overrides require separate adoption. This does not add explicit integer whiteSpace facet syntax. Existing decimal/string and empty-union behavior is unchanged.
+
+Require one leading inline child and no simultaneous base attribute. Shared inline source sites remain 16, depth remains 4, and existing digit/scale, value, atom, string, regex, schema and lifetime limits remain. Named forward Boolean dependencies and final prohibitions retain original source authority. Complete assessment precedes facts. Actual scalar provenance remains its governing scalar component; exact primitive value transport does not substitute a different type component. Nil, original XML, foreign ownership, cancellation, recovery, export and expiry retain their contracts.
+
+For example, an unnamed unsignedLong restriction can retain the exact value 18446744073709551615 and its inherited maximum. A further anonymous Boolean restriction may intersect a parent true-or-1 pattern group with t.* so true is accepted while the value-equivalent lexical 1 is rejected.

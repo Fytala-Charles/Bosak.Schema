@@ -17,6 +17,7 @@
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Keep invalid-value reporting inside the facet compiler |
 //                      | Charles Korthout | 0.5   | 24-11-2026     | Adopt qualified bounded integer enumeration |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.6 | 27-11-2026 | Preserve original anonymous integer base facet sources. |
 // ===========================================================================================================================================================
 
 using System.Collections.Immutable;
@@ -37,10 +38,10 @@ internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive
     internal int? TotalLimit => totalDigits ?? parent?.TotalLimit;
     internal int? FractionLimit => 0;
 
-    internal static NativeIntegerFacets CompileDerived(XElement restriction, NativeIntegerFacets? inherited, NativeNumericLimits limits)
+    internal static NativeIntegerFacets CompileDerived(XElement restriction, NativeIntegerFacets? inherited, NativeNumericLimits limits, XElement? inlineBase = null, bool omitPatterns = false)
     {
         NativeIntegerFacets own;
-        try { own = Compile(restriction, limits); }
+        try { own = Compile(restriction, limits, inlineBase, omitPatterns); }
         catch (NativeProfileException error) when (error.Outcome == NativeOutcome.Unsupported &&
             error.UnsupportedReason is NativeDecimalUnsupportedReason.ValueType or NativeDecimalUnsupportedReason.DeclarationShape)
         { throw new NativeProfileException(NativeOutcome.Invalid, "Invalid bounded integer restriction facets."); }
@@ -88,7 +89,7 @@ internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive
 
     private static int Compare(BigInteger a, BigInteger b) => a.CompareTo(b);
 
-    internal static NativeIntegerFacets Compile(XElement restriction, NativeNumericLimits limits)
+    internal static NativeIntegerFacets Compile(XElement restriction, NativeNumericLimits limits, XElement? inlineBase = null, bool omitPatterns = false)
     {
         BigInteger? lower=null,upper=null;
         bool lowerExclusive=false,upperExclusive=false;
@@ -96,7 +97,7 @@ internal sealed class NativeIntegerFacets(BigInteger? lower, bool lowerExclusive
         var entries=ImmutableHashSet.CreateBuilder<BigInteger>();
         var sourceEntries=0;
         var seen=new HashSet<string>(StringComparer.Ordinal);
-        foreach(var facet in NativeDecimalSchema.Elements(restriction))
+        foreach(var facet in NativeDecimalSchema.Elements(restriction).Where(f => !ReferenceEquals(f, inlineBase) && (!omitPatterns || f.Name != XName.Get("pattern", "http://www.w3.org/2001/XMLSchema"))))
         {
             NativeDecimalSchema.Require(facet.Name.NamespaceName=="http://www.w3.org/2001/XMLSchema" &&
                 facet.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits" or "enumeration",

@@ -1,7 +1,7 @@
 // ===========================================================================================================================================================
 // AUTHOR               : Charles Korthout
 // CREATE DATE          : 27 November 2026
-// PURPOSE              : Compiles anonymous decimal and text bases without synthetic names or source cloning.
+// PURPOSE              : Compiles admitted anonymous scalar bases without synthetic names or source cloning.
 // SPECIAL NOTES        : Original base identity and facet sources remain authoritative.
 //
 // COPYRIGHT            : Fytala
@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 27-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.2 | 27-11-2026 | Admit original integer and Boolean base objects with facet ancestry. |
 // ===========================================================================================================================================================
 using System.Xml.Linq;
 namespace Bosak.Schema;
@@ -23,6 +24,19 @@ internal sealed partial class NativeDecimalSchema
         string? name, string ns, NativeNumericLimits limits, int maxCharacters, NativePatternCompilation compilation)
     {
         compilation.Check();
+        if (baseType.IsInteger)
+        {
+            var values = Elements(restriction).Where(f => !ReferenceEquals(f, inlineSource) && f.Name != Xs + "pattern").ToArray();
+            var hasPatterns = baseType.NumericPatterns is not null || Elements(restriction).Any(f => f.Name == Xs + "pattern");
+            Require(baseType.NumericPatterns is null || !values.Any(f => f.Name.LocalName is "enumeration" or "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive"),
+                "Value facets over patterned numeric bases await separate adoption.", NativeDecimalUnsupportedReason.ValueType);
+            var patterns = hasPatterns ? NativeNumericPatterns.Compile(restriction, baseType.NumericPatterns, compilation) : null;
+            var facets = NativeIntegerFacets.CompileDerived(restriction, baseType.IntegerFacets, limits, inlineSource, hasPatterns);
+            return new NativeType(name, false, ns, isInteger: true, integerFacets: facets, derivationBase: baseType, numericPatterns: patterns);
+        }
+        if (baseType.IsBoolean)
+            return new NativeType(name, false, ns, isBoolean: true, derivationBase: baseType,
+                booleanFacets: NativeBooleanFacets.CompileDerived(restriction, compilation, baseType.BooleanFacets, inlineSource));
         if (!baseType.IsInteger && baseType.Facets is not null)
         {
             var values = Elements(restriction).Where(f => !ReferenceEquals(f, inlineSource) && f.Name != Xs + "pattern").ToArray();
