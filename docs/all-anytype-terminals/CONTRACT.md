@@ -1,0 +1,9 @@
+# Text-only anyType members in bounded all roots
+
+27 November 2026. Recorded before implementation against PR94 mergec07c2481541c96d7db6f3ff70a89541ced0cd258, signed Core1.86.0. [Immutable specification identities](ADOPTION.json).
+
+Admit direct local implicit/explicit xs:anyType members in existing bounded all-group roots, including named-root aliases. Reuse canonical anyType schema identity and preserve each original local element declaration. A text-only member yields one actual xs:untypedAtomic from original XML text, including an empty string atom for an empty element. Comments/PIs do not contribute; namespaces are allowed. The enclosing element-only root retains no typed value. Preserve expanded-name matching, order independence, physical-order scalar facts, optional/required membership, duplicate rejection and typed scalar siblings.
+
+Terminal application/special attributes, xsi requests and descendant elements remain Unsupported before facts publish. Complex nillability and value constraints remain excluded. Nested all/choice containers, complex global references, choice anyType members, broader wildcard/ancestor projection and inheritance remain separate. Existing structural assertions/declared root attributes/strict root wildcards keep their prior contracts. Legacy grammar remains unchanged.
+
+Retain source16members/scalar16, UTF16 string and document/node/depth/attribute/identity/fact bounds. Original XML, cancellation, foreign authority, aliases, failure recovery and expiry remain. Qualify both facades and actual native type/declaration/value evidence, physical order and absence, capacities and all previous names/fixtures. Full source/fresh exact package/API/signed Core/original samples/invoice/docs/release controls precede reviewed PR/green merge/main CI. No publication or fullXSD1.1/PSVI/C45 acceptance implied.

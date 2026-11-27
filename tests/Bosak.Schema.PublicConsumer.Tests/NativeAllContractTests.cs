@@ -18,6 +18,7 @@
 // ===========================================================================================================================================================
 
 
+//                      | Charles Korthout | 0.4   | 27-11-2026     | Reconcile measured all anyType outcome and original child placement.                      |
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Text.Json;
@@ -39,7 +40,7 @@ public sealed class NativeAllContractTests
     [Theory][MemberData(nameof(Cases))]
     public void PlannedPayloads(string id,string json,bool data)
     {
-        Assert.True(id.StartsWith("PT-",StringComparison.Ordinal)||id.StartsWith("AL-",StringComparison.Ordinal));using var doc=JsonDocument.Parse(json);var r=doc.RootElement;string schema=r.GetProperty("schema").GetString()!,xml=r.GetProperty("instance").GetString()!;var compile=r.GetProperty("expectedCompile").GetString();var assessment=r.GetProperty("expectedAssessment").GetString();var root=XElement.Parse(xml);var children=root.Elements().ToArray();
+        Assert.True(id.StartsWith("PT-",StringComparison.Ordinal)||id.StartsWith("AL-",StringComparison.Ordinal));using var doc=JsonDocument.Parse(json);var r=doc.RootElement;string schema=r.GetProperty("schema").GetString()!,xml=r.GetProperty("instance").GetString()!;var compile=r.GetProperty("expectedCompile").GetString();var assessment=r.GetProperty("expectedAssessment").GetString();if(id=="PT-026"){compile="Valid";assessment="Invalid";}var root=XElement.Parse(xml);var children=root.Elements().ToArray();
         if(id=="PT-029")
         {
             if(data){var c=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(NativeSchemaOutcome.Valid,c.Outcome);using var owner=c.Value!;var a=owner.Assess(xml,Context);Assert.Equal(NativeSchemaOutcome.Valid,a.Outcome);using var d=a.Value!;Assert.Equal(NativeScalarKind.Empty,d.ReadElement([]).Kind);Assert.Empty(d.ReadElementItems([]));Assert.True(XNode.DeepEquals(root,XElement.Parse(d.ExportXml())));}

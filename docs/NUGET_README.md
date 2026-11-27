@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.29 development candidate requires Bosak Core 1.86.0 or later.
+The 0.30 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1833,3 +1833,7 @@ Empty complex owners admit bounded lax attribute wildcards. Known attributes val
 ## Skip attribute wildcards on empty owners (development0.29)
 
 Matched extras are skipped even when globally declared: no node declaration, anySimpleType node type and raw untypedAtomic value. Empty roots with skipped extras project to canonical anyType with one empty string atom; no-extra roots retain original empty typing. Explicit uses retain validation and precedence. Original empty-content validity, namespace/QName exclusions, bounds and lifetime remain. Skipped extras beneath strict ancestors and broader skip owner models remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/skip-empty-attributes/GUIDE.md). Unpublished development source.
+
+## Text-only anyType members in all roots (development0.30)
+
+Existing bounded all-group roots admit direct implicit/explicit anyType local members. Original declarations and canonical anyType governing components remain; text-only values yield one original untypedAtomic atom, including an empty string. Order-independent matching retains physical-order facts and typed scalar siblings. Terminal attributes/descendants, complex nillability/value constraints, global complex references, nested all and choice composition remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/all-anytype-terminals/GUIDE.md). Unpublished development source.

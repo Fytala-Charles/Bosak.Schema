@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 23-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 23-11-2026     | Align test responsibility header with its primary type |
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Adopt measured enumeration expectations and upstream validity |
+//                      | Charles Korthout | 0.4   | 27-11-2026     | Reconcile measured all anyType admissions; preserve original stimuli and names.           |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -101,5 +102,5 @@ public sealed class NativeAllBoundaryTests
     /// <param name="id">Original upstream identity.</param><param name="file">Exact schema payload.</param><param name="data">Selects facade.</param>
     [Theory][MemberData(nameof(Originals))]
     public void OriginalCoBlocker(string id,string file,bool data)
-    {Assert.NotEmpty(id);var schema=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"TestData","AllParticles",file));if(data){var c=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(NativeSchemaOutcome.Unsupported,c.Outcome);Assert.Null(c.Value);}else{var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(NativeSchemaOutcome.Unsupported,c.Outcome);Assert.Null(c.Value);}}
+    {Assert.NotEmpty(id);var expected=id is "MS-ModelGroups2006-07-15/mgB006/mgB006.v" or "MS-Additional2006-07-15/addB084/addB084.v" or "MS-ModelGroups2006-07-15/mgA014/mgA014.v"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Unsupported;var schema=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"TestData","AllParticles",file));if(data){var c=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(expected,c.Outcome);if(expected==NativeSchemaOutcome.Valid)Assert.NotNull(c.Value);else Assert.Null(c.Value);c.Value?.Dispose();}else{var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(expected,c.Outcome);if(expected==NativeSchemaOutcome.Valid)Assert.NotNull(c.Value);else Assert.Null(c.Value);c.Value?.Dispose();}}
 }
