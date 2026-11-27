@@ -11,7 +11,7 @@ Bosak.Schema provides Apache-2.0 schema services and bounded native XSD assessme
 | Availability | Scope |
 |---|---|
 | Published `0.5.0-beta.1` | Historical bounded decimal beta; use its release and integration guides |
-| Development `0.42`, signed Core `1.86.0` | Broader bounded datatype families, finite structural models, anonymous attribute types, empty groups, original comments/PI, bounded annotations, ID/IDREF validation and declared attributes on empty complex owners, numeric lexical patterns, anyType terminals and bounded known global and declaration-absent lax matches and strict attribute wildcards with namespace/QName exclusions on empty, finite element-only/mixed sequence, bounded all/choice root and noninteger simple-content extension owners plus bounded empty-owner lax/skip projection and text-only anyType all/choice members, abstract global declarations, simple-type final controls, abstract complex types, bounded anyType nillability, documentation language metadata and anonymous compound, decimal, string, integer, Boolean, date, dateTime/time and dateTimeStamp restriction bases; unpublished |
+| Development `0.43`, signed Core `1.86.0` | Broader bounded datatype families, finite structural models, anonymous attribute types, empty groups, original comments/PI, bounded annotations, ID/IDREF validation and declared attributes on empty complex owners, numeric lexical patterns, anyType terminals and bounded known global and declaration-absent lax matches and strict attribute wildcards with namespace/QName exclusions on empty, finite element-only/mixed sequence, bounded all/choice root and noninteger simple-content extension owners plus bounded empty-owner lax/skip projection and text-only anyType all/choice members, abstract global declarations, simple-type final controls, abstract complex types, bounded anyType nillability, documentation language metadata and anonymous compound, decimal, string, integer, Boolean, date, dateTime/time, dateTimeStamp and Gregorian restriction bases; unpublished |
 
 The [current coverage guide](docs/SPECIFICATION_COVERAGE.md) distinguishes native implementation from legacy descriptor helpers and remaining specification gaps. General XSD 1.1 conformance, arbitrary schema-aware query integration and full PSVI/C45 acceptance remain incomplete.
 
@@ -33,7 +33,7 @@ Select XSD 1.0 or XSD 1.1 explicitly with `SchemaCompileOptions.Default(XsdLangu
 
 The `SchemaAwareXslt` helper explicitly enables the existing schema-aware compiler path. Ordinary Bosak compiler defaults remain unchanged. Full examples and limitations are in [integration](docs/INTEGRATION.md).
 
-The factory helpers above are separate from native-profile admission. For owned native assess/read/export workflows, choose the [development structural guide](docs/anonymous-stamp-bases/GUIDE.md) and [consumer integration guide](docs/INTEGRATION.md); development APIs and scope are not a promise about the published beta.
+The factory helpers above are separate from native-profile admission. For owned native assess/read/export workflows, choose the [development structural guide](docs/anonymous-gregorian-bases/GUIDE.md) and [consumer integration guide](docs/INTEGRATION.md); development APIs and scope are not a promise about the published beta.
 
 ## 3. Build and Test
 

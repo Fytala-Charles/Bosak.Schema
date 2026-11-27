@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.2 | 27-11-2026 | Preserve original anonymous Gregorian base and facet source elements. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -29,10 +30,10 @@ internal sealed class NativeGregorianFacets
     private readonly Dictionary<string,NativeGregorianValue> fixedBounds=new(StringComparer.Ordinal);
     private ImmutableArray<NativePattern> patterns=[];
     private bool HasPatterns=>!patterns.IsEmpty||parent?.HasPatterns==true;
-    internal static NativeGregorianFacets Compile(XElement restriction,NativeGregorianKind kind,int maxCharacters,NativePatternCompilation compilation,NativeGregorianFacets? parent)
+    internal static NativeGregorianFacets Compile(XElement restriction,NativeGregorianKind kind,int maxCharacters,NativePatternCompilation compilation,NativeGregorianFacets? parent,XElement? inlineBase=null)
     {
         var result=new NativeGregorianFacets{parent=parent};var seen=new HashSet<string>(StringComparer.Ordinal);var patterns=ImmutableArray.CreateBuilder<NativePattern>();
-        foreach(var facet in NativeDecimalSchema.Elements(restriction))
+        foreach(var facet in NativeDecimalSchema.Elements(restriction).Where(f=>!ReferenceEquals(f,inlineBase)))
         {
             compilation.Check();var name=facet.Name.LocalName;
             NativeDecimalSchema.Require(facet.Name.NamespaceName=="http://www.w3.org/2001/XMLSchema"&&name is "enumeration" or "pattern" or "whiteSpace" or "explicitTimezone" or "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive","Excluded Gregorian facet.",NativeDecimalUnsupportedReason.ValueType);
