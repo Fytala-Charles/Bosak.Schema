@@ -28,6 +28,7 @@
 //                      | Charles Korthout | 0.15 | 26-11-2026     | Refuse non-self anyType instance selection without false derivation failures |
 //                      | Charles Korthout | 0.16  | 27-11-2026     | Reject abstract canonical scalar declarations before xsi:type and nil selection.          |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.17 | 27-11-2026     | Enforce abstract complex types after admitted type resolution.                           |
 // ===========================================================================================================================================================
 
 using System.Collections.Immutable;
@@ -89,7 +90,7 @@ internal sealed partial class NativeDecimalSchema
     private bool IsAdmittedInstanceAttribute(XAttribute attribute) => IsNamespaceOrLocationHint(attribute) ||
         maxStringCharacters is not null && (attribute.Name == Xsi + "type" || attribute.Name == Xsi + "nil");
 
-    private NativeType ResolveInstanceType(XElement element, NativeType declared)
+    private NativeType ResolveInstanceTypeCore(XElement element, NativeType declared)
     {
         var request = element.Attribute(Xsi + "type");
         if (request is null) return declared;

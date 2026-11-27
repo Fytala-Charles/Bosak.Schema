@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.33 development candidate requires Bosak Core 1.86.0 or later.
+The 0.34 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1849,3 +1849,7 @@ Existing admitted global declarations accept bounded abstract Boolean flags. Dir
 ## Simple-type final controls (development 0.33)
 
 Explicit final on global named simple types blocks the selected restriction, list, union and simple-content extension methods. Empty sets and #all are supported within the 256-unit source bound. Unrelated methods and ordinary value use remain permitted. Source-bound QNames, forward and unused definitions are checked before schema publication. finalDefault, local simple-type final and complex-type final remain excluded. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/simple-type-final/GUIDE.md). Unpublished development source.
+
+## Abstract complex types (development0.34)
+
+Explicit abstract Boolean flags are admitted on existing supported global named complex types. Abstract actual governing types are Invalid after admitted instance-type resolution, while false/omitted flags retain existing behavior. Type identities remain separate from declarations and content atoms. Broader complex xsi:type overrides, complex nillability and local complex-type abstract remain excluded. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/abstract-complex-types/GUIDE.md). Unpublished development source.
