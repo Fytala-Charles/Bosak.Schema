@@ -1,0 +1,11 @@
+# Bounded anonymous dateTime and time restriction bases
+
+27 November2026. Recorded before implementation at b555eba78b292e4918ce975f299a7013e0625577. ADOPTION.json is a fresh scoped record of immutable specification sources, affected sections and intentional deviations; earlier adoption receipts remain historical.
+
+Admit a restriction with one leading inline simpleType whose actual compiled NativeType is xs:dateTime or xs:time. Keep that original unnamed object as direct DerivationBase and compile exact original facet elements, skipping only the inline base object. No aliases, synthetic QName/declaration, global anonymous entries, source/facet clones or namespace mutation. Shared references retain one actual base; separate source definitions stay distinct. Named forward/final source checks and scalar actual/governing authority remain.
+
+Reuse existing exact calendar carriers and semantics: fractional seconds, normalization, enumeration equality, zoned-versus-absent distinction, partial-order bounds, fixed facets, explicitTimezone, collapse whitespace and lexical pattern ancestry. Preserve same-step pattern alternatives and inherited intersections. Bounds over patterned ancestors stay Unsupported. Existing value-space constraints and fixed-value comparison remain. No new primitive equality/order/lexical behavior is adopted here.
+
+Keep shared16 inline sites/depth4, year interval -long.MaxValue..long.MaxValue, lexical256, pre-normalization seconds digit/scale, string/regex/schema/atom/value/lifetime limits, nil/original XML, ownership, cancellation, recovery, export and detached values. dateTimeStamp and other Gregorian/duration/interchange/URI/text/complex anonymous bases remain excluded. Assertions, wider derivation/instance overrides, full PSVI/C45 and publication remain separate.
+
+Qualify both public facades and native identities/values/facets, all prior names and original fixture bytes, exact fresh package/API/signed Core, frozen examples/invoice/docs/release/workload controls. Archive original assertions for explicit now-admitted refusal reconciliation. Counts overlap between source and package. Complete authorized commit/push/PR review/green merge/exact-main CI. No registry/tag/controller action.
