@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.2 | 27-11-2026 | Admit original integer and Boolean base objects with facet ancestry. |
 //                      | Charles Korthout | 0.3 | 27-11-2026 | Admit original date base objects with bounded facet ancestry. |
 //                      | Charles Korthout | 0.4 | 27-11-2026 | Admit original dateTime/time bases with exact calendar facet ancestry. |
+//                      | Charles Korthout | 0.5 | 27-11-2026 | Admit original dateTimeStamp bases with inherited required timezone. |
 // ===========================================================================================================================================================
 using System.Xml.Linq;
 using Bosak.XPath.Core.Xdm;
@@ -27,7 +28,7 @@ internal sealed partial class NativeDecimalSchema
         string? name, string ns, NativeNumericLimits limits, int maxCharacters, NativePatternCompilation compilation)
     {
         compilation.Check();
-        if (baseType.CalendarKind is { } calendarKind && calendarKind is XdmExactCalendarKind.DateTime or XdmExactCalendarKind.Time)
+        if (baseType.CalendarKind is { } calendarKind && calendarKind is XdmExactCalendarKind.DateTime or XdmExactCalendarKind.Time or XdmExactCalendarKind.DateTimeStamp)
             return new NativeType(name, false, ns, calendarKind: calendarKind, derivationBase: baseType,
                 calendarFacets: NativeCalendarFacets.Compile(restriction, calendarKind, limits, maxCharacters, compilation, baseType.CalendarFacets, inlineSource));
         if (baseType.IsDate)

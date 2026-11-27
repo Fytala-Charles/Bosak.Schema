@@ -1,0 +1,3147 @@
+{
+  "cases": [
+    {
+      "id": "ST-001",
+      "contract": "dateTimeStamp placement namedZ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-002",
+      "contract": "dateTimeStamp placement named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-003",
+      "contract": "dateTimeStamp placement rootZ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-004",
+      "contract": "dateTimeStamp placement root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-005",
+      "contract": "dateTimeStamp placement localZ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a><v>2000-01-02T12:00:00.123456789Z</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-006",
+      "contract": "dateTimeStamp placement local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a><v>2000-01-02T12:00:00.123456789</v></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "2000-01-02T12:00:00.123456789"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-007",
+      "contract": "dateTimeStamp placement globalAttrZ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a g='2000-01-02T12:00:00.123456789Z'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-008",
+      "contract": "dateTimeStamp placement globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a g='2000-01-02T12:00:00.123456789'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-009",
+      "contract": "dateTimeStamp placement localAttrZ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a g='2000-01-02T12:00:00.123456789Z'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-010",
+      "contract": "dateTimeStamp placement localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a g='2000-01-02T12:00:00.123456789'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-011",
+      "contract": "dateTimeStamp bound minInclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-012",
+      "contract": "dateTimeStamp bound rejects minInclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T11:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T11:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-013",
+      "contract": "dateTimeStamp bound minExclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:minExclusive value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T13:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T13:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-014",
+      "contract": "dateTimeStamp bound rejects minExclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:minExclusive value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-015",
+      "contract": "dateTimeStamp bound maxInclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:maxInclusive value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-016",
+      "contract": "dateTimeStamp bound rejects maxInclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:maxInclusive value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T13:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T13:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-017",
+      "contract": "dateTimeStamp bound maxExclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:maxExclusive value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T11:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T11:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-018",
+      "contract": "dateTimeStamp bound rejects maxExclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:maxExclusive value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-019",
+      "contract": "dateTimeStamp inherited widening minInclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:minInclusive value='2000-01-02T12:00:00Z'/><xs:maxInclusive value='2000-01-02T14:00:00Z'/></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-02T11:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-020",
+      "contract": "dateTimeStamp inherited widening maxInclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:minInclusive value='2000-01-02T12:00:00Z'/><xs:maxInclusive value='2000-01-02T14:00:00Z'/></xs:restriction></xs:simpleType><xs:maxInclusive value='2000-01-02T15:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-021",
+      "contract": "dateTimeStamp inherited widening enumeration",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:minInclusive value='2000-01-02T12:00:00Z'/><xs:maxInclusive value='2000-01-02T14:00:00Z'/></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02T11:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-022",
+      "contract": "dateTimeStamp enumeration equality 2000-01-02T12:00:00.1Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02T12:00:00.10Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.1Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.1Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-023",
+      "contract": "dateTimeStamp enumeration equality 2000-01-02T14:00:00.100+02:00",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02T12:00:00.10Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T14:00:00.100+02:00</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T14:00:00.1+02:00"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-024",
+      "contract": "dateTimeStamp enumeration equality 2000-01-02T12:00:00.1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02T12:00:00.10Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.1</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.1"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-025",
+      "contract": "dateTimeStamp enumeration equality 2000-01-02T12:00:00.2Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02T12:00:00.10Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.2Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.2Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-026",
+      "contract": "dateTimeStamp absent timezone enumeration 2000-01-02T12:00:00",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02T12:00:00'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-027",
+      "contract": "dateTimeStamp absent timezone enumeration 2000-01-02T12:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02T12:00:00'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00Z</a>",
+      "compile": "Invalid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-028",
+      "contract": "dateTimeStamp inherited enumeration 2000-01-02T12:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:enumeration value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-029",
+      "contract": "dateTimeStamp inherited enumeration 2000-01-02T13:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:enumeration value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T13:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T13:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-030",
+      "contract": "dateTimeStamp missing timezone before bound assessment",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-031",
+      "contract": "dateTimeStamp timezone requiredZ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:explicitTimezone value='required'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-032",
+      "contract": "dateTimeStamp timezone required",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:explicitTimezone value='required'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-033",
+      "contract": "dateTimeStamp timezone prohibited",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:explicitTimezone value='prohibited'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-034",
+      "contract": "dateTimeStamp timezone prohibitedZ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:explicitTimezone value='prohibited'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00Z</a>",
+      "compile": "Invalid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-035",
+      "contract": "dateTimeStamp timezone optional",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:explicitTimezone value='optional'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-036",
+      "contract": "dateTimeStamp timezone widening requiredoptional",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:explicitTimezone value='required'/></xs:restriction></xs:simpleType><xs:explicitTimezone value='optional'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-037",
+      "contract": "dateTimeStamp timezone widening prohibitedrequired",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:explicitTimezone value='prohibited'/></xs:restriction></xs:simpleType><xs:explicitTimezone value='required'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-038",
+      "contract": "dateTimeStamp fixed optional timezone",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:explicitTimezone value='optional' fixed='true'/></xs:restriction></xs:simpleType><xs:explicitTimezone value='required'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-039",
+      "contract": "dateTimeStamp fixed bound 14:00:00+02:00",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:minInclusive value='2000-01-02T12:00:00Z' fixed='true'/></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-02T14:00:00+02:00'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T15:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T15:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-040",
+      "contract": "dateTimeStamp fixed bound 13:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:minInclusive value='2000-01-02T12:00:00Z' fixed='true'/></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-02T13:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T15:00:00Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T15:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-041",
+      "contract": "dateTimeStamp whitespace collapse",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:whiteSpace value='collapse' fixed='true'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-042",
+      "contract": "dateTimeStamp whitespace preserve",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:whiteSpace value='preserve' fixed='true'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-043",
+      "contract": "dateTimeStamp pattern ancestry 2000-01-02T12:00:00.123456789Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:pattern value='2000.*'/></xs:restriction></xs:simpleType><xs:pattern value='.*Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-044",
+      "contract": "dateTimeStamp pattern ancestry 2000-01-02T12:00:00.123456789",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:pattern value='2000.*'/></xs:restriction></xs:simpleType><xs:pattern value='.*Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-045",
+      "contract": "dateTimeStamp pattern ancestry 2001-01-02T12:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:pattern value='2000.*'/></xs:restriction></xs:simpleType><xs:pattern value='.*Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2001-01-02T12:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2001-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-046",
+      "contract": "dateTimeStamp pattern alternatives 2000-01-02T12:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:pattern value='2000-01-02T12:00:00Z'/><xs:pattern value='2000-01-02T13:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-047",
+      "contract": "dateTimeStamp pattern alternatives 2000-01-02T13:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:pattern value='2000-01-02T12:00:00Z'/><xs:pattern value='2000-01-02T13:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T13:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T13:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-048",
+      "contract": "dateTimeStamp pattern alternatives 2000-01-02T14:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:pattern value='2000-01-02T12:00:00Z'/><xs:pattern value='2000-01-02T13:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T14:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T14:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-049",
+      "contract": "dateTimeStamp patterned ancestor bound minInclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:pattern value='.*Z'/></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-050",
+      "contract": "dateTimeStamp patterned ancestor bound maxExclusive",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:pattern value='.*Z'/></xs:restriction></xs:simpleType><xs:maxExclusive value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-051",
+      "contract": "dateTimeStamp enum respects pattern 2000-01-02T12:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:pattern value='.*Z'/></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02T12:00:00Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-052",
+      "contract": "dateTimeStamp enum respects pattern 2000-01-02T12:00:00",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'><xs:pattern value='.*Z'/></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02T12:00:00'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-053",
+      "contract": "dateTimeStamp exact trailing zeros",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.1200Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.12Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-054",
+      "contract": "dateTimeStamp collapsed lexical",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a> \t2000-01-02T12:00:00.123456789Z \n</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-055",
+      "contract": "dateTimeStamp invalid lexical '2000-01-02T25:00:00Z'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T25:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T25:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-056",
+      "contract": "dateTimeStamp invalid lexical '2000-01-02T12:60:00Z'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:60:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:60:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-057",
+      "contract": "dateTimeStamp invalid lexical '2000-01-02T12:00:60Z'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:60Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:60Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-058",
+      "contract": "dateTimeStamp invalid lexical '2000-01-02T24:00:00.001Z'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T24:00:00.001Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T24:00:00.001Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-059",
+      "contract": "dateTimeStamp invalid lexical '2000-01-02T12:00:00+14:01'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00+14:01</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00+14:01"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-060",
+      "contract": "dateTimeStamp invalid lexical '2000-01-02T12:00:00+15:00'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00+15:00</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00+15:00"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-061",
+      "contract": "dateTimeStamp invalid lexical ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-062",
+      "contract": "dateTimeStamp end of day normalization",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T24:00:00.000Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-03T00:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-063",
+      "contract": "dateTimeStamp seconds digit capacity before zero normalization",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.000Z</a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.000Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024,
+      "digits": 4
+    },
+    {
+      "id": "ST-064",
+      "contract": "dateTimeStamp seconds scale capacity before zero normalization",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.000Z</a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.000Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024,
+      "scale": 2
+    },
+    {
+      "id": "ST-065",
+      "contract": "dateTimeStamp depth 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-066",
+      "contract": "dateTimeStamp depth 4",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-067",
+      "contract": "dateTimeStamp depth 5",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-068",
+      "contract": "dateTimeStamp conflicting base base='xs:dateTime'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:dateTimeStamp'><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-069",
+      "contract": "dateTimeStamp conflicting base <xs:simpleType><xs:restriction base='xs:dateTime'></xs:restriction></xs:simpleType>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-070",
+      "contract": "dateTimeStamp forward final False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='B'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:dateTimeStamp'/></xs:simpleType></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-071",
+      "contract": "dateTimeStamp forward final True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='B'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B' final='restriction'><xs:restriction base='xs:dateTimeStamp'/></xs:simpleType></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-072",
+      "contract": "dateTimeStamp list item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:list><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:list></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z 2000-01-02T13:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z",
+            "2000-01-02T13:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-073",
+      "contract": "dateTimeStamp union actual calendar member",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:union><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction base='xs:string'/></xs:simpleType></xs:union></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-074",
+      "contract": "dateTimeStamp union fallback",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:union><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction base='xs:string'/></xs:simpleType></xs:union></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>word</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "word"
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-075",
+      "contract": "dateTimeStamp nilled",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a' nillable='true'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-076",
+      "contract": "dateTimeStamp excluded facet <xs:assertion test='true()'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:assertion test='true()'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-077",
+      "contract": "dateTimeStamp excluded facet <xs:length value='10'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:length value='10'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-078",
+      "contract": "dateTimeStamp enumeration source capacity",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/><xs:enumeration value='2000-01-02T12:00:00.123456789Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-079",
+      "contract": "dateTimeStamp pattern source capacity",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-080",
+      "contract": "dateTimeStamp year 0000-02-29T00:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>0000-02-29T00:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0000-02-29T00:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-081",
+      "contract": "dateTimeStamp year -0000-01-02T12:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>-0000-01-02T12:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0000-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-082",
+      "contract": "dateTimeStamp year 10000-01-02T12:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>10000-01-02T12:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "10000-01-02T12:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-083",
+      "contract": "dateTimeStamp year 9223372036854775807-01-01T00:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>9223372036854775807-01-01T00:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "9223372036854775807-01-01T00:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-084",
+      "contract": "dateTimeStamp year -9223372036854775807-01-01T00:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>-9223372036854775807-01-01T00:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "-9223372036854775807-01-01T00:00:00Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-085",
+      "contract": "dateTimeStamp year capacity 9223372036854775808-01-01T00:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>9223372036854775808-01-01T00:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-086",
+      "contract": "dateTimeStamp year capacity -9223372036854775808-01-01T00:00:00Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>-9223372036854775808-01-01T00:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-087",
+      "contract": "required timezone inherited at named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-088",
+      "contract": "required timezone inherited at root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-089",
+      "contract": "required timezone inherited at local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a><v>2000-01-02T12:00:00.123456789</v></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-090",
+      "contract": "required timezone inherited at globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a g='2000-01-02T12:00:00.123456789'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-091",
+      "contract": "required timezone inherited at localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a g='2000-01-02T12:00:00.123456789'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-092",
+      "contract": "explicit required timezone is legal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType><xs:explicitTimezone value='required' fixed='true'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-093",
+      "contract": "nested required timezone inheritance",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction><xs:simpleType><xs:restriction base='xs:dateTimeStamp'/></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-094",
+      "contract": "self instance type retains original stamp",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='T'>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-095",
+      "contract": "unknown instance type remains invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTimeStamp'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='Missing'>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTimeStamp",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-096",
+      "contract": "other family excluded gYear",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:gYear'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTime",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-097",
+      "contract": "other family excluded duration",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:duration'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTime",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-098",
+      "contract": "other family excluded hexBinary",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:hexBinary'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTime",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-099",
+      "contract": "other family excluded QName",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:QName'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTime",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "ST-100",
+      "contract": "other family excluded anyURI",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:anyURI'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T12:00:00.123456789Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02T12:00:00.123456789Z"
+          ],
+          "kind": "DateTime",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    }
+  ]
+}

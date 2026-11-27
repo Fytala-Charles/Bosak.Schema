@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.41 development candidate requires Bosak Core 1.86.0 or later.
+The 0.42 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1881,3 +1881,7 @@ Existing inline restriction placements admit xs:date bases using original unname
 ## Anonymous dateTime and time restriction bases (development0.41)
 
 Existing inline restriction placements admit xs:dateTime and xs:time bases using original unnamed type objects and facet sources. Existing exact fractional seconds, enumeration, partial-order bounds, fixed/timezone/whitespace facets and lexical pattern ancestry retain their semantics and limits. dateTimeStamp, other atomic/complex families and wider derivation remain separate. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-calendar-bases/GUIDE.md). Unpublished development source.
+
+## Anonymous dateTimeStamp restriction bases (development0.42)
+
+Existing inline restriction placements admit xs:dateTimeStamp bases using original unnamed type objects and original facet sources. Required timezone, exact calendar values and inherited fixed/bound/whitespace/pattern rules retain their existing semantics and limits. Other atomic/complex families and wider derivation remain separate. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-stamp-bases/GUIDE.md). Unpublished development source.
