@@ -1,0 +1,1635 @@
+{
+  "cases": [
+    {
+      "id": "AE-001",
+      "contract": "global decimal true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='true' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-002",
+      "contract": "global decimal false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='false' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-003",
+      "contract": "global decimal 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='1' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-004",
+      "contract": "global decimal 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='0' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-005",
+      "contract": "global string true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:string' abstract='true' /></xs:schema>",
+      "instance": "<a > raw </a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-006",
+      "contract": "global string false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:string' abstract='false' /></xs:schema>",
+      "instance": "<a > raw </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-007",
+      "contract": "global string 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:string' abstract='1' /></xs:schema>",
+      "instance": "<a > raw </a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-008",
+      "contract": "global string 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:string' abstract='0' /></xs:schema>",
+      "instance": "<a > raw </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-009",
+      "contract": "global anyType true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' abstract='true' /></xs:schema>",
+      "instance": "<a > raw </a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-010",
+      "contract": "global anyType false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' abstract='false' /></xs:schema>",
+      "instance": "<a > raw </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-011",
+      "contract": "global anyType 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' abstract='1' /></xs:schema>",
+      "instance": "<a > raw </a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-012",
+      "contract": "global anyType 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' abstract='0' /></xs:schema>",
+      "instance": "<a > raw </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-013",
+      "contract": "global simple true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='T'><xs:restriction base='xs:token'/></xs:simpleType><xs:element name='a' type='T' abstract='true' /></xs:schema>",
+      "instance": "<a > raw </a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "raw"
+          ],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-014",
+      "contract": "global simple false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='T'><xs:restriction base='xs:token'/></xs:simpleType><xs:element name='a' type='T' abstract='false' /></xs:schema>",
+      "instance": "<a > raw </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "raw"
+          ],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-015",
+      "contract": "global simple 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='T'><xs:restriction base='xs:token'/></xs:simpleType><xs:element name='a' type='T' abstract='1' /></xs:schema>",
+      "instance": "<a > raw </a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "raw"
+          ],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-016",
+      "contract": "global simple 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:simpleType name='T'><xs:restriction base='xs:token'/></xs:simpleType><xs:element name='a' type='T' abstract='0' /></xs:schema>",
+      "instance": "<a > raw </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "raw"
+          ],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-017",
+      "contract": "global empty true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'/><xs:element name='a' type='T' abstract='true' /></xs:schema>",
+      "instance": "<a ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-018",
+      "contract": "global empty false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'/><xs:element name='a' type='T' abstract='false' /></xs:schema>",
+      "instance": "<a ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-019",
+      "contract": "global empty 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'/><xs:element name='a' type='T' abstract='1' /></xs:schema>",
+      "instance": "<a ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-020",
+      "contract": "global empty 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'/><xs:element name='a' type='T' abstract='0' /></xs:schema>",
+      "instance": "<a ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-021",
+      "contract": "global sequence true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='a' type='T' abstract='true' /></xs:schema>",
+      "instance": "<a ><c>01.20</c></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-022",
+      "contract": "global sequence false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='a' type='T' abstract='false' /></xs:schema>",
+      "instance": "<a ><c>01.20</c></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-023",
+      "contract": "global sequence 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='a' type='T' abstract='1' /></xs:schema>",
+      "instance": "<a ><c>01.20</c></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-024",
+      "contract": "global sequence 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='a' type='T' abstract='0' /></xs:schema>",
+      "instance": "<a ><c>01.20</c></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-025",
+      "contract": "global simpleContent true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType><xs:element name='a' type='T' abstract='true' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-026",
+      "contract": "global simpleContent false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType><xs:element name='a' type='T' abstract='false' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-027",
+      "contract": "global simpleContent 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType><xs:element name='a' type='T' abstract='1' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-028",
+      "contract": "global simpleContent 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType><xs:element name='a' type='T' abstract='0' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-029",
+      "contract": "global all true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:all><xs:element name='c' type='xs:decimal'/></xs:all></xs:complexType><xs:element name='a' type='T' abstract='true' /></xs:schema>",
+      "instance": "<a ><c>01.20</c></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-030",
+      "contract": "global all false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:all><xs:element name='c' type='xs:decimal'/></xs:all></xs:complexType><xs:element name='a' type='T' abstract='false' /></xs:schema>",
+      "instance": "<a ><c>01.20</c></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-031",
+      "contract": "global all 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:all><xs:element name='c' type='xs:decimal'/></xs:all></xs:complexType><xs:element name='a' type='T' abstract='1' /></xs:schema>",
+      "instance": "<a ><c>01.20</c></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-032",
+      "contract": "global all 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:all><xs:element name='c' type='xs:decimal'/></xs:all></xs:complexType><xs:element name='a' type='T' abstract='0' /></xs:schema>",
+      "instance": "<a ><c>01.20</c></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-033",
+      "contract": "global choice true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:choice><xs:element name='c' type='xs:decimal'/></xs:choice></xs:complexType><xs:element name='a' type='T' abstract='true' /></xs:schema>",
+      "instance": "<a ><c>01.20</c></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-034",
+      "contract": "global choice false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:choice><xs:element name='c' type='xs:decimal'/></xs:choice></xs:complexType><xs:element name='a' type='T' abstract='false' /></xs:schema>",
+      "instance": "<a ><c>01.20</c></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-035",
+      "contract": "global choice 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:choice><xs:element name='c' type='xs:decimal'/></xs:choice></xs:complexType><xs:element name='a' type='T' abstract='1' /></xs:schema>",
+      "instance": "<a ><c>01.20</c></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-036",
+      "contract": "global choice 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:choice><xs:element name='c' type='xs:decimal'/></xs:choice></xs:complexType><xs:element name='a' type='T' abstract='0' /></xs:schema>",
+      "instance": "<a ><c>01.20</c></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-037",
+      "contract": "namespace urn:t true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' elementFormDefault='qualified'><xs:element name='a' type='xs:decimal' abstract='true' /></xs:schema>",
+      "instance": "<t:a xmlns:t='urn:t' >01.20</t:a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-038",
+      "contract": "namespace urn:t false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' elementFormDefault='qualified'><xs:element name='a' type='xs:decimal' abstract='false' /></xs:schema>",
+      "instance": "<t:a xmlns:t='urn:t' >01.20</t:a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-039",
+      "contract": "namespace relative/ns true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='relative/ns' xmlns:t='relative/ns' elementFormDefault='qualified'><xs:element name='a' type='xs:decimal' abstract='true' /></xs:schema>",
+      "instance": "<t:a xmlns:t='relative/ns' >01.20</t:a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-040",
+      "contract": "namespace relative/ns false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='relative/ns' xmlns:t='relative/ns' elementFormDefault='qualified'><xs:element name='a' type='xs:decimal' abstract='false' /></xs:schema>",
+      "instance": "<t:a xmlns:t='relative/ns' >01.20</t:a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-041",
+      "contract": "canonical reference sequence true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-042",
+      "contract": "canonical reference sequence false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='false' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-043",
+      "contract": "canonical reference all true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='true' /><xs:element name='r'><xs:complexType><xs:all><xs:element ref='a'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-044",
+      "contract": "canonical reference all false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='false' /><xs:element name='r'><xs:complexType><xs:all><xs:element ref='a'/></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-045",
+      "contract": "canonical reference choice true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='true' /><xs:element name='r'><xs:complexType><xs:choice><xs:element ref='a'/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-046",
+      "contract": "canonical reference choice false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='false' /><xs:element name='r'><xs:complexType><xs:choice><xs:element ref='a'/></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-047",
+      "contract": "complex reference empty true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'/><xs:element name='a' type='T' abstract='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a ></a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-048",
+      "contract": "complex reference empty false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'/><xs:element name='a' type='T' abstract='false' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-049",
+      "contract": "complex reference sequence true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='a' type='T' abstract='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a ><c>01.20</c></a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-050",
+      "contract": "complex reference sequence false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='a' type='T' abstract='false' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a ><c>01.20</c></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-051",
+      "contract": "complex reference simpleContent true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType><xs:element name='a' type='T' abstract='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-052",
+      "contract": "complex reference simpleContent false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType><xs:element name='a' type='T' abstract='false' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-053",
+      "contract": "complex reference anyType true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' abstract='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a > raw </a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-054",
+      "contract": "complex reference anyType false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' abstract='false' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a > raw </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-055",
+      "contract": "known lax decimal true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-056",
+      "contract": "known lax decimal false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='false' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-057",
+      "contract": "known lax anyType true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' abstract='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a > raw </a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-058",
+      "contract": "known lax anyType false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' abstract='false' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a > raw </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-059",
+      "contract": "known lax empty true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'/><xs:element name='a' type='T' abstract='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a ></a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-060",
+      "contract": "known lax empty false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'/><xs:element name='a' type='T' abstract='false' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-061",
+      "contract": "known lax sequence true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='a' type='T' abstract='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a ><c>01.20</c></a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-062",
+      "contract": "known lax sequence false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='a' type='T' abstract='false' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a ><c>01.20</c></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-063",
+      "contract": "known lax simpleContent true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType><xs:element name='a' type='T' abstract='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-064",
+      "contract": "known lax simpleContent false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType><xs:element name='a' type='T' abstract='false' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-065",
+      "contract": "known lax all true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:all><xs:element name='c' type='xs:decimal'/></xs:all></xs:complexType><xs:element name='a' type='T' abstract='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a ><c>01.20</c></a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-066",
+      "contract": "known lax all false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:all><xs:element name='c' type='xs:decimal'/></xs:all></xs:complexType><xs:element name='a' type='T' abstract='false' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a ><c>01.20</c></a></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-067",
+      "contract": "known lax choice true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:choice><xs:element name='c' type='xs:decimal'/></xs:choice></xs:complexType><xs:element name='a' type='T' abstract='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a ><c>01.20</c></a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-068",
+      "contract": "known lax choice false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:choice><xs:element name='c' type='xs:decimal'/></xs:choice></xs:complexType><xs:element name='a' type='T' abstract='false' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a ><c>01.20</c></a></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-069",
+      "contract": "concrete alias sharing type decimal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='true' /><xs:element name='b' type='xs:decimal'/></xs:schema>",
+      "instance": "<b >01.20</b>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-070",
+      "contract": "concrete alias sharing type empty",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'/><xs:element name='a' type='T' abstract='true' /><xs:element name='b' type='T'/></xs:schema>",
+      "instance": "<b ></b>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-071",
+      "contract": "concrete alias sharing type sequence",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence></xs:complexType><xs:element name='a' type='T' abstract='true' /><xs:element name='b' type='T'/></xs:schema>",
+      "instance": "<b ><c>01.20</c></b>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-072",
+      "contract": "concrete alias sharing type simpleContent",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T'><xs:simpleContent><xs:extension base='xs:decimal'/></xs:simpleContent></xs:complexType><xs:element name='a' type='T' abstract='true' /><xs:element name='b' type='T'/></xs:schema>",
+      "instance": "<b >01.20</b>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-073",
+      "contract": "local name collision remains concrete",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' type='xs:decimal'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-074",
+      "contract": "unused abstract reference optional",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a' minOccurs='0'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-075",
+      "contract": "collapsed Boolean ' true '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract=' true ' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-076",
+      "contract": "collapsed Boolean '\\t1\\n'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='\t1\n' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-077",
+      "contract": "collapsed Boolean ' false '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract=' false ' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-078",
+      "contract": "collapsed Boolean '\\t0\\n'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='\t0\n' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-079",
+      "contract": "invalid Boolean 'True'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='True' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-080",
+      "contract": "invalid Boolean 'yes'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='yes' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-081",
+      "contract": "invalid Boolean '2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='2' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-082",
+      "contract": "invalid Boolean ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-083",
+      "contract": "invalid Boolean 'false true'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='false true' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-084",
+      "contract": "Boolean UTF16 source capacity 256",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='                                                                                                                                                                                                                                                            true' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-085",
+      "contract": "Boolean UTF16 source capacity 257",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='                                                                                                                                                                                                                                                             true' /></xs:schema>",
+      "instance": "<a >01.20</a>",
+      "compile": "Unsupported",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-086",
+      "contract": "abstract blocks explicit type selection",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xsi:type='xs:decimal'>01.20</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-087",
+      "contract": "abstract blocks nil",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:string' abstract='true' nillable='true'/></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-088",
+      "contract": "local abstract attribute remains excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' type='xs:decimal' abstract='false'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a >01.20</a></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-089",
+      "contract": "abstract type definition excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:complexType name='T' abstract='true'/><xs:element name='a' type='T' abstract='false' /></xs:schema>",
+      "instance": "<a ></a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "AE-090",
+      "contract": "substitution group excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:decimal' abstract='true' /><xs:element name='b' type='xs:decimal' substitutionGroup='a'/></xs:schema>",
+      "instance": "<b>1</b>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    }
+  ]
+}

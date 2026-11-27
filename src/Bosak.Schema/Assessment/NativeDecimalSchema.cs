@@ -86,6 +86,7 @@
 //                      | Charles Korthout | 1.56  | 26-11-2026     | Retain strict wildcard plans on bounded all/choice roots.                                 |
 //                      | Charles Korthout | 1.57  | 27-11-2026     | Preserve strict wildcard plans on bounded noninteger simple-content extensions.           |
 //                      | Charles Korthout | 1.58  | 27-11-2026     | Admit lax attribute plans only on the qualified empty-owner path.                         |
+//                      | Charles Korthout | 1.59  | 27-11-2026     | Freeze abstract global declarations and reject direct root use before type selection.     |
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Numerics;
@@ -239,6 +240,7 @@ internal sealed partial class NativeDecimalSchema
                     limits, maxStringCharacters!.Value, cancellationToken, anonymousSimple, patternCompilation);
                 nested.GlobalAttributeDeclarations = globalAttributes.Values;
                 nested.HasStrictAttributeWildcards = root.Descendants(Xs + "anyAttribute").Any();
+                nested.CompleteAbstractMetadata(root, cancellationToken);
                 return NativeResult<NativeDecimalSchema>.Valid(nested);
             }
             // Compile all complex types eagerly, including unused declarations.
@@ -268,7 +270,7 @@ internal sealed partial class NativeDecimalSchema
             foreach (var declaration in declarations)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                if (mixedProfile) Attributes(declaration, "name", "type", "nillable", "default", "fixed"); else Attributes(declaration, "name", "type");
+                if (mixedProfile) Attributes(declaration, "name", "type", "nillable", "default", "fixed", "abstract"); else Attributes(declaration, "name", "type");
                 var name = Name(declaration);
                 var key = XName.Get(name, targetNamespace);
                 Require(!compiled.ContainsKey(key), "Duplicate root declaration.", NativeDecimalUnsupportedReason.DeclarationShape);
@@ -304,6 +306,7 @@ internal sealed partial class NativeDecimalSchema
             first.IntegerType = integerType;
             first.maxStringCharacters = maxStringCharacters;
             first.PrepareInstanceTypes();
+            first.CompleteAbstractMetadata(root, cancellationToken);
             return NativeResult<NativeDecimalSchema>.Valid(first);
         }
         catch (NativeProfileException ex)
@@ -559,6 +562,7 @@ internal sealed partial class NativeDecimalSchema
             if (HasStrictAttributeWildcards || NamedTypes.Any(t => t.IsAnyType)) CheckKnownLaxInput(document, cancellationToken);
             var root = document.Root!;
             var found = roots.TryGetValue(root.Name, out var selected);
+            if (found) CheckConcreteDeclaration(selected!.Root);
             var rootType = found ? ResolveInstanceType(root, selected!.Root.Type) : null;
             var attributeStates = ImmutableArray.CreateBuilder<NativeElementState>();
             if (found && rootType!.IsAnyType) { /* Actual global wildcard attributes are assessed with the anyType owner below. */ }

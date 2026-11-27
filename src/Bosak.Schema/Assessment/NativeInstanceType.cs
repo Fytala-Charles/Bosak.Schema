@@ -26,6 +26,7 @@
 //                      | Charles Korthout | 0.13   | 26-11-2026     | Preserve bounded exact native duration values and provenance |
 //                      | Charles Korthout | 0.14   | 26-11-2026     | Add bounded native Gregorian fragments with original typed provenance |
 //                      | Charles Korthout | 0.15 | 26-11-2026     | Refuse non-self anyType instance selection without false derivation failures |
+//                      | Charles Korthout | 0.16  | 27-11-2026     | Reject abstract canonical scalar declarations before xsi:type and nil selection.          |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -139,6 +140,7 @@ internal sealed partial class NativeDecimalSchema
 
     private NativeElementState AssessElementScalar(XElement element, NativeDeclaration declaration, NativePatternBudget patternBudget)
     {
+        CheckConcreteDeclaration(declaration);
         var selected = ResolveInstanceType(element, declaration.Type);
         if (NilledState(element, declaration, selected) is { } nilled) return nilled;
         RequireProvidedElementValue(element, declaration);
