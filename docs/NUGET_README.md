@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.31 development candidate requires Bosak Core 1.86.0 or later.
+The 0.32 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1841,3 +1841,7 @@ Existing bounded all-group roots admit direct implicit/explicit anyType local me
 ## Text-only anyType alternatives in choice roots (development0.31)
 
 Bounded choice roots admit direct implicit/explicit anyType alternatives. One selected expanded-name branch may repeat within existing occurrence bounds; mixed branches remain Invalid. Original declarations/canonical anyType and raw untypedAtomic values, including empty strings, retain physical order. Scalar alternatives and element-only root typing remain. Terminal attributes/descendants, complex constraints, global complex references, nullable alternatives, outer repetition and nested groups remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/choice-anytype-terminals/GUIDE.md). Unpublished development source.
+
+## Abstract global element declarations (development0.32)
+
+Existing admitted global declarations accept bounded abstract Boolean flags. Direct use of an abstract declaration is Invalid at roots, references and known-lax matches before xsi:type/nil handling. Abstractness belongs to immutable canonical declaration identities, never shared types or same-named locals. False/omitted flags retain ordinary behavior; unused abstract declarations do not poison concrete aliases. Substitution groups, local abstract attributes and abstract complex-type definitions remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/abstract-elements/GUIDE.md). Unpublished development source.

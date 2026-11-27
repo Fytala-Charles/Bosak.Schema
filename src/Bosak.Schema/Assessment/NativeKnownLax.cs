@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
+//                      | Charles Korthout | 0.22  | 27-11-2026     | Reject abstract known global matches before container dispatch.                           |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -85,7 +86,8 @@ internal sealed partial class NativeDecimalSchema
                 AssessKnownLax(child, null, type, states, attributes, path.Add(index++), token, patternBudget, true);
                 continue;
             }
-            Require(plan!.AllMinimum is null && plan.ChoiceMinimum is null, "Lax all/choice child plans await separate qualification.", NativeDecimalUnsupportedReason.DeclarationShape);
+            CheckConcreteDeclaration(plan!.Root);
+            Require(plan.AllMinimum is null && plan.ChoiceMinimum is null, "Lax all/choice child plans await separate qualification.", NativeDecimalUnsupportedReason.DeclarationShape);
             var childPath = path.Add(index++);
             if (plan.Root.Type.IsComplex) AssessContainer(child, plan.Root, plan, states, attributes, childPath, token, patternBudget, allowDeclarationAbsent: allowDeclarationAbsent);
             else

@@ -54,6 +54,7 @@
 //                      | Charles Korthout | 0.38  | 26-11-2026     | Retain strict wildcard plans on bounded all/choice roots.                                 |
 //                      | Charles Korthout | 0.39  | 27-11-2026     | Project partial empty roots without changing declared schema components.                  |
 //                      | Charles Korthout | 0.40  | 27-11-2026     | Project empty roots containing skipped extras while preserving declared components.       |
+//                      | Charles Korthout | 0.41  | 27-11-2026     | Preserve abstract global declaration enforcement through container references.             |
 using System.Collections.Immutable;
 using System.Xml.Linq;
 
@@ -108,7 +109,7 @@ internal sealed partial class NativeDecimalSchema
             if (roots.TryGetValue(key, out var existing)) return existing;
             Require(elementDefinitions.TryGetValue(key, out var element), "Unresolved closed global element.", NativeDecimalUnsupportedReason.DeclarationShape);
             Require(visitingElements.Add(key), "Recursive global element graph is outside the finite profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-            Attributes(element!, "name", "type", "nillable", "default", "fixed");
+            Attributes(element!, "name", "type", "nillable", "default", "fixed", "abstract");
             var name = Name(element!);
             NativeDecimalSchema plan;
             var scalarRoot = TryCompileSimpleRoot(element!, targetNamespace, decimalType, stringType, booleanType, integerType, simple, anonymousSimple, limits);
@@ -285,6 +286,7 @@ internal sealed partial class NativeDecimalSchema
         ImmutableArray<int> ownerPath, CancellationToken cancellationToken, NativePatternBudget patternBudget, bool isRoot = false, bool allowDeclarationAbsent = true)
     {
         cancellationToken.ThrowIfCancellationRequested();
+        CheckConcreteDeclaration(declaration);
         var effectiveType = ResolveInstanceType(element, declaration.Type);
         _ = NilledState(element, declaration, effectiveType);
         if (effectiveType.IsAnyType)
