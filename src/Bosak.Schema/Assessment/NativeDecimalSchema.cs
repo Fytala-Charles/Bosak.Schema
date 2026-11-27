@@ -78,6 +78,7 @@
 //                      | Charles Korthout | 1.52 | 26-11-2026     | Carry actual bounded anyType identity separately from ordinary mixed complex types |
 //                      | Charles Korthout | 1.53 | 26-11-2026     | Bound actual anyType input and defer wildcard attributes to original owner assessment |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 1.60 | 27-11-2026     | Enforce bounded simple-type final derivation controls.                                   |
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 
@@ -214,6 +215,7 @@ internal sealed partial class NativeDecimalSchema
             var simpleDefinitions = types.Where(t => t.Name == Xs + "simpleType")
                 .ToDictionary(t => XName.Get(Name(t), DefinitionNamespace(t, targetNamespace)));
             Require(!simpleDefinitions.Keys.Any(key => key.Namespace == Xs && KnownBuiltinNames.Contains(key.LocalName)), "Built-in type redeclaration is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+            if (mixedProfile) ValidateSimpleTypeFinal(root, targetNamespace, cancellationToken);
             var resolvingSimple = new HashSet<XName>();
             NativeType ResolveSimple(XName key)
             {
@@ -221,7 +223,7 @@ internal sealed partial class NativeDecimalSchema
                 if (simple.TryGetValue(key, out var known)) return known;
                 Require(resolvingSimple.Add(key), "Simple dependency cycle is outside the profile.", NativeDecimalUnsupportedReason.ValueType);
                 var type = simpleDefinitions[key];
-                Attributes(type, "name");
+                Attributes(type, maxStringCharacters is null ? ["name"] : ["name", "final"]);
                 foreach (var dependency in CompoundDependencies(type))
                     if (!simple.ContainsKey(dependency) && simpleDefinitions.ContainsKey(dependency)) ResolveSimple(dependency);
                 var restricted = CompileRestriction(type, Name(type), DefinitionNamespace(type, targetNamespace), limits, maxStringCharacters, patternCompilation, simple);

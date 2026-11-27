@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.2 | 27-11-2026     | Enforce bounded simple-type final derivation controls.                                   |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -44,7 +45,7 @@ internal sealed partial class NativeDecimalSchema
     private static NativeType CompileCompound(XElement definition, string? name, string ns, NativeNumericLimits limits,
         int maxCharacters, NativePatternCompilation compilation, Dictionary<XName, NativeType> simple, int depth)
     {
-        Attributes(definition, name is null ? [] : ["name"]);
+        Attributes(definition, name is null ? [] : ["name", "final"]);
         var construction = Elements(definition).Single();
         var list = construction.Name == Xs + "list";
         Attributes(construction, list ? ["itemType"] : ["memberTypes"]);

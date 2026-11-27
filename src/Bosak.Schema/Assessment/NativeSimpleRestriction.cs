@@ -46,6 +46,7 @@
 //                      | Charles Korthout | 0.33 | 26-11-2026     | Compile opt-in numeric lexical patterns without changing legacy numeric facets |
 //                      | Charles Korthout | 0.34 | 26-11-2026     | Compile implicit and explicit anyType roots with actual mixed terminal facts |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.35 | 27-11-2026     | Enforce bounded simple-type final derivation controls.                                   |
 // ===========================================================================================================================================================
 
 using System.Xml.Linq;
@@ -61,7 +62,7 @@ internal sealed partial class NativeDecimalSchema
         var members = Elements(definition);
         if (maxStringCharacters is not null && members.Count == 1 && members[0].Name is var variety && (variety == Xs + "list" || variety == Xs + "union"))
             return CompileCompound(definition, name, namespaceUri, limits, maxStringCharacters.Value, patternCompilation, simple, inlineDepth);
-        Attributes(definition, name is null ? [] : ["name"]);
+        Attributes(definition, name is null ? [] : maxStringCharacters is null ? ["name"] : ["name", "final"]);
         var restriction = Single(definition, "restriction");
         Attributes(restriction, "base");
         var baseName = ResolveTypeName(restriction, "base");

@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.32 development candidate requires Bosak Core 1.86.0 or later.
+The 0.33 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1845,3 +1845,7 @@ Bounded choice roots admit direct implicit/explicit anyType alternatives. One se
 ## Abstract global element declarations (development0.32)
 
 Existing admitted global declarations accept bounded abstract Boolean flags. Direct use of an abstract declaration is Invalid at roots, references and known-lax matches before xsi:type/nil handling. Abstractness belongs to immutable canonical declaration identities, never shared types or same-named locals. False/omitted flags retain ordinary behavior; unused abstract declarations do not poison concrete aliases. Substitution groups, local abstract attributes and abstract complex-type definitions remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/abstract-elements/GUIDE.md). Unpublished development source.
+
+## Simple-type final controls (development 0.33)
+
+Explicit final on global named simple types blocks the selected restriction, list, union and simple-content extension methods. Empty sets and #all are supported within the 256-unit source bound. Unrelated methods and ordinary value use remain permitted. Source-bound QNames, forward and unused definitions are checked before schema publication. finalDefault, local simple-type final and complex-type final remain excluded. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/simple-type-final/GUIDE.md). Unpublished development source.
