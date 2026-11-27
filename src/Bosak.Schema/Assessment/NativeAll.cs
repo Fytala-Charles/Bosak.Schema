@@ -18,6 +18,7 @@
 //                      | Charles Korthout | 0.5   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      | Charles Korthout | 0.6 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
 //                      | Charles Korthout | 0.7   | 26-11-2026     | Retain strict wildcard plans on bounded all/choice roots.                                 |
+//                      | Charles Korthout | 0.8   | 27-11-2026     | Admit direct text-only anyType members with original physical-order facts.                |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -55,6 +56,12 @@ internal sealed partial class NativeDecimalSchema
             Check(names.Add(XName.Get(name, ns)), "Competing direct all element particles.");
             var min = Occurs(declaration, "minOccurs", 1);var max = Occurs(declaration, "maxOccurs", 1);
             Require(min is 0 or 1 && max == 1, "All member occurrence is outside the first phase.", NativeDecimalUnsupportedReason.DeclarationShape);
+            if (IsAnyTypeElement(declaration))
+            {
+                Require(!ReadNillable(declaration) && !HasValueConstraint(declaration), "AnyType member nillability/value constraints are outside this profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+                children.Add(CompileAnyTypeTerminal(declaration, name, min, max, ns, limits).Root);
+                continue;
+            }
             var inline = Elements(declaration);NativeType type;
             if (inline.Count == 0) type = ResolveScalarType(declaration, decimalType, stringType, booleanType, integerType, simple);
             else
@@ -93,6 +100,14 @@ internal sealed partial class NativeDecimalSchema
             var selected = plan.Children.FirstOrDefault(c => c.ExpandedName == node.Name);
             Check(selected is not null, "No all member matches the original expanded name.");
             Check(seen.Add(node.Name), "All member occurs more than once.");
+            if (selected!.Type.IsAnyType)
+            {
+                Require(node.Attributes().All(a => a.IsNamespaceDeclaration), "All anyType terminal attributes await separate qualification.", NativeDecimalUnsupportedReason.Attributes);
+                Require(!node.HasElements, "All anyType terminal descendants await separate qualification.", NativeDecimalUnsupportedReason.DeclarationShape);
+                Require(node.Nodes().All(n => n is XText or XComment or XProcessingInstruction), "AnyType terminal XML node is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
+                states.Add(ContainerValueState(node, selected, selected.Type));
+                continue;
+            }
             InstanceAttributes(node);
             Check(!node.HasElements, "Scalar all member contains elements.");
             Require(node.Nodes().All(n => n is XText or XComment or XProcessingInstruction), "Scalar all comments or processing instructions are excluded.");
