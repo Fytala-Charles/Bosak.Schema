@@ -47,6 +47,7 @@
 //                      | Charles Korthout | 0.34 | 26-11-2026     | Compile implicit and explicit anyType roots with actual mixed terminal facts |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.35 | 27-11-2026     | Enforce bounded simple-type final derivation controls.                                   |
+//                      | Charles Korthout | 0.36 | 27-11-2026     | Preserve original anonymous compound restriction bases and inherited facets.             |
 // ===========================================================================================================================================================
 
 using System.Xml.Linq;
@@ -65,6 +66,28 @@ internal sealed partial class NativeDecimalSchema
         Attributes(definition, name is null ? [] : maxStringCharacters is null ? ["name"] : ["name", "final"]);
         var restriction = Single(definition, "restriction");
         Attributes(restriction, "base");
+        var inlineBases = Elements(restriction).Where(e => e.Name == Xs + "simpleType").ToArray();
+        if (inlineBases.Length != 0)
+        {
+            Require(maxStringCharacters is not null, "Inline restriction bases require the opt-in compound profile.", NativeDecimalUnsupportedReason.ValueType);
+            Check(restriction.Attribute("base") is null && inlineBases.Length == 1 && ReferenceEquals(Elements(restriction)[0], inlineBases[0]),
+                "Restriction requires one leading inline base or a base attribute, not both.");
+            var inlineBase = CompileRestriction(inlineBases[0], null, "", limits, maxStringCharacters, patternCompilation, simple, inlineDepth + 1);
+            Require(inlineBase.IsCompound, "Anonymous atomic restriction bases await separate qualification.", NativeDecimalUnsupportedReason.ValueType);
+            var visited = new HashSet<NativeType>(ReferenceEqualityComparer.Instance);
+            void CheckMembers(NativeType type)
+            {
+                patternCompilation.Check();
+                if (!visited.Add(type)) return;
+                Check(!type.IsUnion || !type.UnionMembers.IsEmpty, "Anonymous compound base contains an empty union.");
+                if (type.ListItemType is { } item) CheckMembers(item);
+                if (type.IsUnion) foreach (var member in type.UnionMembers) CheckMembers(member);
+            }
+            CheckMembers(inlineBase);
+            return new NativeType(name, false, namespaceUri, derivationBase: inlineBase,
+                listItemType: inlineBase.ListItemType, unionMembers: inlineBase.UnionMembers,
+                compoundFacets: NativeCompoundFacets.Compile(restriction, inlineBase, limits, maxStringCharacters!.Value, patternCompilation, inlineBases[0]));
+        }
         var baseName = ResolveTypeName(restriction, "base");
         if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var numericBase) &&
             (baseName == Xs + "decimal" || numericBase.IsInteger || numericBase.Facets is not null) &&

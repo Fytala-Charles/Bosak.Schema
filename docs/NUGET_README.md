@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.36 development candidate requires Bosak Core 1.86.0 or later.
+The 0.37 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1861,3 +1861,7 @@ Existing implicit/explicit anyType roots, sequence particles/references and admi
 ## Documentation annotation language (development0.36)
 
 Existing xs:documentation wrappers admit bounded xml:lang values under the XML namespace schema union: collapsed valid xs:language or an exact empty undeclaration. Whitespace-only is Invalid. Payloads stay opaque and instance validity, component authority and values remain unchanged. Other wrapper attributes/locations, inherited metadata and annotation PSVI remain excluded. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/annotation-language/GUIDE.md). Unpublished development source.
+
+## Anonymous compound restriction bases (development0.37)
+
+Existing simple-type placements admit inline anonymous list/union restriction bases with direct original base objects, inherited facets and original item/member authority. No synthetic type names or declarations are created. The shared inline restriction/list/union source-site bound is16 and recursive inline depth remains4. Anonymous atomic and complex inline bases remain excluded. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-restriction-bases/GUIDE.md). Unpublished development source.

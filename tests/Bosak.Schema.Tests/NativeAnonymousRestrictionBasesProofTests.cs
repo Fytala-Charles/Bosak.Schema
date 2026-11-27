@@ -1,0 +1,85 @@
+// ===========================================================================================================================================================
+// AUTHOR               : Charles Korthout
+// CREATE DATE          : 27 November 2026
+// PURPOSE              : Proves original unnamed compound bases, inherited facets and actual member authority.
+// SPECIAL NOTES        : Unit tests verifying correctness of the underlying implementation.
+//
+// COPYRIGHT            : Fytala
+// LICENSE              : LICENSE.md (Apache-2.0)
+// SPDX-License-Identifier: Apache-2.0
+// ===========================================================================================================================================================
+// Change History:      |==================|=======|================|=========================================================================================
+//                      |     Author       |Version|  Date          | Notes                                                                                    |
+//                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.1   | 27-11-2026     | Creation                                                                                 |
+//                      |==================|=======|================|=========================================================================================
+// ===========================================================================================================================================================
+using Bosak.Schema.Tests.NodeData;
+using Bosak.XPath.Core.Schema;
+using Xunit;
+namespace Bosak.Schema.Tests.AnonymousRestrictionBases;
+/// <summary>Checks original anonymous base objects and unchanged typed-value authority.</summary>
+public sealed class NativeAnonymousRestrictionBasesProofTests
+{
+    private const string X="http://www.w3.org/2001/XMLSchema";
+    private static string Base(bool union=false)=>"<xs:simpleType>"+(union?"<xs:union memberTypes='xs:decimal xs:string'/>":"<xs:list itemType='xs:decimal'/>")+"</xs:simpleType>";
+    private static string Restrict(string source,string facets="")=>"<xs:simpleType><xs:restriction>"+source+facets+"</xs:restriction></xs:simpleType>";
+    private static string Schema(string definition,bool named=false,string extra="")=>"<xs:schema xmlns:xs='"+X+"'>"+(named?"<xs:simpleType name='T'>"+definition["<xs:simpleType>".Length..]:"")+"<xs:element name='a'"+(named?" type='T'/>":">"+definition+"</xs:element>")+extra+"</xs:schema>";
+    /// <summary>Named and anonymous derived compounds retain unnamed base objects and actual primitive evidence.</summary>
+    /// <param name="named">Outer name selector.</param><param name="union">Union variety selector.</param>
+    [Theory][InlineData(false,false)][InlineData(true,false)][InlineData(false,true)][InlineData(true,true)]
+    public void TypeAuthority(bool named,bool union)
+    {
+        using var f=new Fixture(Schema(Restrict(Base(union)),named),union?"<a>01.20</a>":"<a>01.20 2</a>",atoms:16);Assert.Equal(SchemaAssessmentStatus.Valid,f.Assessment.Status);var fact=f.Input.FactsFor((NativeSessionNode)f.Element([]))!;var derived=fact.NativeType;var original=derived.DerivationBase!;Assert.NotNull(original);Assert.Null(original.Name);Assert.Equal("",original.NamespaceUri);Assert.Null(derived.BaseName);Assert.Equal(named?"T":null,derived.Name);Assert.NotSame(derived,original);Assert.True(f.Provider.Owns(f.Provider.TypeComponent(original)));Assert.NotSame(fact.Type,f.Provider.TypeComponent(original));Assert.Same(f.Provider.ResolveElementDeclaration(new("","a"),default).Value,fact.Declaration);if(union)Assert.Equal(original.UnionMembers,derived.UnionMembers);else Assert.Same(original.ListItemType,derived.ListItemType);var typed=fact.ReadTypedValue(default).Value;Assert.Equal(!union,typed.IsList);Assert.Same(fact.Type,typed.GoverningType);var atoms=typed.AtomicItems.ToArray();Assert.Equal(union?1:2,atoms.Length);foreach(var atom in atoms){Assert.Same(fact.Type,atom.TypeEvidence.DeclaredType);Assert.Same(f.Provider.ResolveType(new(X,"decimal"),default).Value,atom.TypeEvidence.ActualType);Assert.Same(f.Assessment.Origin,atom.TypeEvidence.OriginalAssessment);}Assert.Equal("1.2",atoms[0].Value.ExactDecimalValue.ToInvariantString(256));
+    }
+    /// <summary>Recursive restriction chains retain original unnamed base links and inherited facet behavior.</summary>
+    [Fact]public void BaseChain()
+    {
+        var definition=Restrict(Restrict(Base(),"<xs:minLength value='2'/>"),"<xs:maxLength value='2'/>");var c=NativeDecimalSchema.Compile(Schema(definition),new(256,256),maxStringCharacters:1024).Value!;var outer=c.Root.Type;Assert.Null(outer.Name);Assert.NotNull(outer.DerivationBase);Assert.NotNull(outer.DerivationBase!.DerivationBase);Assert.NotSame(outer.DerivationBase,outer.DerivationBase.DerivationBase);Assert.Equal(NativeOutcome.Valid,c.Assess("<a>1 2</a>").Outcome);Assert.Equal(NativeOutcome.Invalid,c.Assess("<a>1</a>").Outcome);Assert.Equal(NativeOutcome.Invalid,c.Assess("<a>1 2 3</a>").Outcome);
+    }
+    /// <summary>References to one named outer type share the original anonymous base rather than recompiling it.</summary>
+    [Fact]public void SharedReferences()
+    {
+        var c=NativeDecimalSchema.Compile(Schema(Restrict(Base()),true,"<xs:element name='b' type='T'/>"),new(256,256),maxStringCharacters:1024).Value!;var a=c.Roots.Single(p=>p.Root.Name=="a").Root;var b=c.Roots.Single(p=>p.Root.Name=="b").Root;Assert.Same(a.Type,b.Type);Assert.Same(a.Type.DerivationBase,b.Type.DerivationBase);Assert.NotSame(a,b);Assert.Equal(NativeOutcome.Valid,c.Assess("<b>1 2</b>").Outcome);
+    }
+    /// <summary>Separate identical anonymous source definitions keep separate type and base identities.</summary>
+    [Fact]public void DistinctDefinitions()
+    {
+        var definition=Restrict(Base());var c=NativeDecimalSchema.Compile(Schema(definition,false,"<xs:element name='b'>"+definition+"</xs:element>"),new(256,256),maxStringCharacters:1024).Value!;var a=c.Roots.Single(p=>p.Root.Name=="a").Root.Type;var b=c.Roots.Single(p=>p.Root.Name=="b").Root.Type;Assert.NotSame(a,b);Assert.NotSame(a.DerivationBase,b.DerivationBase);Assert.Same(a.ListItemType,b.ListItemType);Assert.Null(a.Name);Assert.Null(b.Name);Assert.DoesNotContain(c.NamedTypes,t=>ReferenceEquals(t,a.DerivationBase)||ReferenceEquals(t,b.DerivationBase));
+    }
+    /// <summary>Fixed, enumeration and pattern ancestry retain the existing compound facet semantics.</summary>
+    [Fact]public void InheritedFacets()
+    {
+        var fixedBase=Restrict(Base(),"<xs:length value='2' fixed='true'/>");Assert.Equal(NativeOutcome.Invalid,NativeDecimalSchema.Compile(Schema(Restrict(fixedBase,"<xs:length value='3'/>")),new(256,256),maxStringCharacters:1024).Outcome);var c=NativeDecimalSchema.Compile(Schema(Restrict(Restrict(Base(),"<xs:enumeration value='1.20 2.0'/>"))),new(256,256),maxStringCharacters:1024).Value!;Assert.Equal(NativeOutcome.Valid,c.Assess("<a>1.2 2</a>").Outcome);Assert.Equal(NativeOutcome.Invalid,c.Assess("<a>1.2 3</a>").Outcome);var patterned=Restrict(Restrict(Base(),"<xs:pattern value='1.*'/>"),"<xs:pattern value='.*2'/>");var p=NativeDecimalSchema.Compile(Schema(patterned),new(256,256),maxStringCharacters:1024).Value!;Assert.Equal(NativeOutcome.Valid,p.Assess("<a>12</a>").Outcome);Assert.Equal(NativeOutcome.Invalid,p.Assess("<a>1</a>").Outcome);
+    }
+    /// <summary>Enumeration QNames use their actual facet source namespace context.</summary>
+    [Fact]public void QNameScope()
+    {
+        var definition=Restrict(Base().Replace("xs:decimal","xs:QName"),"<xs:enumeration xmlns:p='urn:facet' value='p:one'/>");var source=Schema(definition).Replace("xmlns:xs='"+X+"'","xmlns:xs='"+X+"' xmlns:p='urn:wrong'");using var good=new Fixture(source,"<a xmlns:q='urn:facet'>q:one</a>",atoms:16);Assert.Equal(SchemaAssessmentStatus.Valid,good.Assessment.Status);var fact=good.Input.FactsFor((NativeSessionNode)good.Element([]))!;var atom=Assert.Single(fact.ReadTypedValue(default).Value.AtomicItems);Assert.Equal("urn:facet",atom.Value.QNameValue.NamespaceUri);Assert.Equal("one",atom.Value.QNameValue.LocalName);Assert.Same(good.Provider.ResolveType(new(X,"QName"),default).Value,atom.TypeEvidence.ActualType);using var bad=new Fixture(source,"<a xmlns:q='urn:wrong'>q:one</a>",atoms:16);Assert.Equal(SchemaAssessmentStatus.Invalid,bad.Assessment.Status);Assert.False(bad.Input.IsAssessed);
+    }
+    /// <summary>Forward named dependencies and final restrictions remain source-bound through anonymous bases.</summary>
+    [Fact]public void ForwardAndFinal()
+    {
+        var inner="<xs:simpleType><xs:restriction base='B'/></xs:simpleType>";var b="<xs:simpleType name='B'><xs:list itemType='xs:decimal'/></xs:simpleType>";var source=Schema(Restrict(inner),true,b);var c=NativeDecimalSchema.Compile(source,new(256,256),maxStringCharacters:1024).Value!;Assert.Same(c.NamedTypes.Single(t=>t.Name=="B"),c.Root.Type.DerivationBase!.DerivationBase);Assert.Null(c.Root.Type.DerivationBase.Name);Assert.Equal(NativeOutcome.Invalid,NativeDecimalSchema.Compile(source.Replace("name='B'","name='B' final='restriction'"),new(256,256),maxStringCharacters:1024).Outcome);
+    }
+    /// <summary>Inline depth and shared restriction/member source sites retain explicit finite ceilings.</summary>
+    [Fact]public void Budgets()
+    {
+        var definition=Base();for(var i=0;i<4;i++)definition=Restrict(definition);Assert.Equal(NativeOutcome.Valid,NativeDecimalSchema.Compile(Schema(definition),new(256,256),maxStringCharacters:1024).Outcome);Assert.Equal(NativeOutcome.Unsupported,NativeDecimalSchema.Compile(Schema(Restrict(definition)),new(256,256),maxStringCharacters:1024).Outcome);var members=Enumerable.Repeat(Restrict(Base()),8).ToArray();string Union()=>"<xs:simpleType><xs:union>"+string.Concat(members)+"</xs:union></xs:simpleType>";Assert.Equal(NativeOutcome.Valid,NativeDecimalSchema.Compile(Schema(Union()),new(256,256),maxStringCharacters:1024).Outcome);members[0]=Restrict(members[0]);Assert.Equal(NativeOutcome.Unsupported,NativeDecimalSchema.Compile(Schema(Union()),new(256,256),maxStringCharacters:1024).Outcome);
+    }
+    /// <summary>Invalid assessment recovers and detached values survive expiry without mutating base authority.</summary>
+    [Fact]public void RecoveryAndLifetime()
+    {
+        using var s=NativeSchemaSession.Create(Schema(Restrict(Base(),"<xs:length value='2'/>")),new(256,256,1024,65536,2,256,16,256,1024)).Value!;var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);var bad=s.Assess("<a>1</a>",context);Assert.Equal(NativeSchemaOutcome.Invalid,bad.Outcome);Assert.Null(bad.Value);using var d=s.Assess("<a>01.20 2</a>",context).Value!;var values=d.ReadRootItems();Assert.Equal(2,values.Length);d.Dispose();Assert.Throws<ObjectDisposedException>(()=>d.ReadRootItems());Assert.Equal("1.2",values[0].DecimalValue.ToInvariantString(256));Assert.Equal(NativeSchemaOutcome.Invalid,s.Assess("<a>1 2 3</a>",context).Outcome);
+    }
+    /// <summary>Anonymous base components preserve provider ownership, cancellation and expiry.</summary>
+    [Fact]public void Ownership()
+    {
+        using var f=new Fixture(Schema(Restrict(Base())),"<a>1 2</a>",atoms:16);using var other=new Fixture(Schema(Restrict(Base())),"<a>1 2</a>",atoms:16);var local=f.Input.FactsFor((NativeSessionNode)f.Element([]))!;var foreign=other.Input.FactsFor((NativeSessionNode)other.Element([]))!;var baseHandle=f.Provider.TypeComponent(local.NativeType.DerivationBase!);Assert.True(f.Provider.Owns(baseHandle));Assert.False(other.Provider.Owns(baseHandle));Assert.Throws<ArgumentException>(()=>f.Provider.IsSameComponent(local.Type,foreign.Type,default));using var c=new CancellationTokenSource();c.Cancel();Assert.Throws<OperationCanceledException>(()=>local.ReadTypedValue(c.Token));f.Input.Dispose();Assert.Throws<ObjectDisposedException>(()=>local.Declaration);
+    }
+    /// <summary>Legacy grammar and anonymous atomic bases remain outside the newly admitted form.</summary>
+    [Fact]public void LegacyAndCancellation()
+    {
+        var source=Schema(Restrict(Base()));Assert.Equal(NativeOutcome.Unsupported,NativeDecimalSchema.Compile(source,new(256,256)).Outcome);Assert.Equal(NativeOutcome.Unsupported,NativeDecimalSchema.Compile(Schema(Restrict("<xs:simpleType><xs:restriction base='xs:decimal'/></xs:simpleType>")),new(256,256),maxStringCharacters:1024).Outcome);using var c=new CancellationTokenSource();c.Cancel();Assert.Throws<OperationCanceledException>(()=>NativeDecimalSchema.Compile(source,new(256,256),c.Token,1024));
+    }
+}

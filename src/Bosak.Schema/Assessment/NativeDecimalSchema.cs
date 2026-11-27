@@ -81,6 +81,7 @@
 //                      | Charles Korthout | 1.60 | 27-11-2026     | Enforce bounded simple-type final derivation controls.                                   |
 //                      | Charles Korthout | 1.61 | 27-11-2026     | Enforce abstract complex types after admitted type resolution.                           |
 //                      | Charles Korthout | 1.62 | 27-11-2026     | Preserve bounded anyType nil states and independent wildcard attributes.                |
+//                      | Charles Korthout | 1.63 | 27-11-2026     | Preserve original anonymous compound restriction bases and inherited facets.             |
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 
@@ -189,7 +190,7 @@ internal sealed partial class NativeDecimalSchema
             if (maxStringCharacters is not null)
             {
                 simple.Add(Xs + "decimal", decimalType); simple.Add(Xs + "string", stringType!); simple.Add(Xs + "boolean", booleanType!); simple.Add(Xs + "integer", integerType!);
-                Require(root.Descendants(Xs + "simpleType").Count(e => e.Parent?.Name == Xs + "list" || e.Parent?.Name == Xs + "union") <= 16, "Inline compound type capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+                Require(root.Descendants(Xs + "simpleType").Count(e => e.Parent?.Name == Xs + "list" || e.Parent?.Name == Xs + "union" || e.Parent?.Name == Xs + "restriction") <= 16, "Inline compound/base type capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
                 RegisterTextBuiltins(simple, stringType!);
                 simple.Add(Xs + "anyURI", new NativeType("anyURI", false, Xs.NamespaceName, isUri: true, textKind: NativeTextKind.Token));
                 foreach (var kind in Enum.GetValues<NativeGregorianKind>()) simple.Add(Xs + NativeGregorianValue.TypeNameFor(kind), new NativeType(NativeGregorianValue.TypeNameFor(kind), false, Xs.NamespaceName, gregorianKind: kind));
