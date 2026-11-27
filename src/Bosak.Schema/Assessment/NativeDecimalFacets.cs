@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 24-11-2026     | Admit bounded opt-in decimal enumeration with exact normalized value keys |
 //                      | Charles Korthout | 0.4   | 24-11-2026     | Validate native named decimal base values and preserve local enumeration sets |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.5 | 27-11-2026     | Preserve anonymous decimal/text bases and original facet source identities.              |
 // ===========================================================================================================================================================
 
 using System.Collections.Immutable;
@@ -40,10 +41,10 @@ internal sealed class NativeDecimalFacets(
     internal int? TotalLimit => totalDigits ?? parent?.TotalLimit;
     internal int? FractionLimit => fractionDigits ?? parent?.FractionLimit;
 
-    internal static NativeDecimalFacets CompileDerived(XElement restriction, NativeDecimalFacets? inherited, NativeNumericLimits limits, bool nativeDerivation = false)
+    internal static NativeDecimalFacets CompileDerived(XElement restriction, NativeDecimalFacets? inherited, NativeNumericLimits limits, bool nativeDerivation = false, XElement? inlineBase = null, bool omitPatterns = false)
     {
         NativeDecimalFacets own;
-        try { own = Compile(restriction, limits, allowEnumeration: nativeDerivation); }
+        try { own = Compile(restriction, limits, allowEnumeration: nativeDerivation, inlineBase: inlineBase, omitPatterns: omitPatterns); }
         catch (NativeProfileException error) when (error.Outcome == NativeOutcome.Unsupported &&
             error.UnsupportedReason is NativeDecimalUnsupportedReason.ValueType or NativeDecimalUnsupportedReason.DeclarationShape)
         { throw new NativeProfileException(NativeOutcome.Invalid, "Invalid bounded decimal restriction facets."); }
@@ -99,7 +100,7 @@ internal sealed class NativeDecimalFacets(
             own.TotalLimit, own.FractionLimit, inherited, own.Enumeration);
     }
 
-    internal static NativeDecimalFacets Compile(XElement restriction, NativeNumericLimits limits, bool allowEnumeration = false)
+    internal static NativeDecimalFacets Compile(XElement restriction, NativeNumericLimits limits, bool allowEnumeration = false, XElement? inlineBase = null, bool omitPatterns = false)
     {
         XdmExactDecimal? lower=null, upper=null;
         bool lowerExclusive=false, upperExclusive=false;
@@ -107,7 +108,7 @@ internal sealed class NativeDecimalFacets(
         var seen=new HashSet<string>(StringComparer.Ordinal);
         var entries = ImmutableHashSet.CreateBuilder<(BigInteger Coefficient, int Scale)>();
         int sourceEntries = 0;
-        foreach(var facet in NativeDecimalSchema.Elements(restriction))
+        foreach(var facet in NativeDecimalSchema.Elements(restriction).Where(f => !ReferenceEquals(f, inlineBase) && (!omitPatterns || f.Name != XName.Get("pattern", "http://www.w3.org/2001/XMLSchema"))))
         {
             NativeDecimalSchema.Require(facet.Name.NamespaceName=="http://www.w3.org/2001/XMLSchema" &&
                 (facet.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive" or "totalDigits" or "fractionDigits" || allowEnumeration && facet.Name.LocalName == "enumeration"),

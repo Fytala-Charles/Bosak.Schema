@@ -19,6 +19,7 @@
 //                      | Charles Korthout | 0.6 | 26-11-2026     | Reconcile original structural admission without changing stimuli |
 //                      | Charles Korthout | 0.7 | 26-11-2026     | Reconcile measured original numeric pattern outcomes without changing inputs |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.8 | 27-11-2026 | Reconcile admitted inline decimal base with original AS-049 input retained |
 // ===========================================================================================================================================================
 
 using System.Text.Json;
@@ -54,7 +55,7 @@ public sealed class NativeAnonymousRestrictionConsumerTests
             var original=row.GetProperty("instance").GetString()!;var result=owner.Assess(original,Context);Assert.Equal(NativeSchemaOutcome.Valid,result.Outcome);using var admittedDocument=result.Value!;
             Assert.Equal("1",admittedDocument.ReadAttribute(0).Value.DecimalValue.ToInvariantString(256));Assert.Equal("1",admittedDocument.ReadScalar(0).DecimalValue.ToInvariantString(256));Assert.True(XNode.DeepEquals(XElement.Parse(original),XElement.Parse(admittedDocument.ExportXml())));return;
         }
-        var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,Options());Assert.Equal(id is "AS-035" or "AS-047" or "AS-048"?"Valid":row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
+        var created=NativeSchemaSession.Create(row.GetProperty("schema").GetString()!,Options());Assert.Equal(id is "AS-035" or "AS-047" or "AS-048" or "AS-049"?"Valid":row.GetProperty("expectedCompile").GetString(),created.Outcome.ToString());
         if(created.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(created.Value);if(row.GetProperty("reason").ValueKind==JsonValueKind.String)Assert.Equal(row.GetProperty("reason").GetString(),created.Diagnostics[0].UnsupportedReason.ToString());return;}
         using var session=created.Value!;var xml=row.GetProperty("instance").GetString()!;var assessed=session.Assess(xml,Context);Assert.Equal(row.GetProperty("expectedAssessment").GetString(),assessed.Outcome.ToString());
         if(assessed.Outcome!=NativeSchemaOutcome.Valid){Assert.Null(assessed.Value);return;}
@@ -66,6 +67,7 @@ public sealed class NativeAnonymousRestrictionConsumerTests
             else Assert.Equal("1",compound.ReadScalar(0).DecimalValue.ToInvariantString(256));
             Assert.True(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(compound.ExportXml())));return;
         }
+        if(id=="AS-049"){using var admitted=assessed.Value!;Assert.Equal("1",admitted.ReadScalar(0).DecimalValue.ToInvariantString(256));Assert.True(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(admitted.ExportXml())));return;}
         using var document=assessed.Value!;var expected=row.GetProperty("values").EnumerateArray().Select(v=>v.GetString()).ToArray();Assert.Equal(expected.Length,document.ScalarCount);
         for(var i=0;i<expected.Length;i++){var value=document.ReadScalar(i);Assert.Equal(expected[i],value.Kind==NativeScalarKind.String?value.StringValue:value.Kind==NativeScalarKind.Integer?value.IntegerValue.ToString(System.Globalization.CultureInfo.InvariantCulture):value.DecimalValue.ToInvariantString(256));}
         Assert.True(XNode.DeepEquals(XElement.Parse(xml),XElement.Parse(document.ExportXml())));

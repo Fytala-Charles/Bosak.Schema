@@ -1,0 +1,11 @@
+# Bounded anonymous decimal and string bases
+
+27 November2026. Recorded before implementation at c6aa7e20601cc4a4c68ad9e2c00d95381bd2ca94. ADOPTION.json pins exact immutable specification sources; CORRECTIONS.md separately corrects the preceding empty-union guard.
+
+Extend the existing inline simpleType restriction form to decimal and xs:string/normalizedString/token-derived bases. Dispatch by the actual NativeType object, preserve its unnamed identity and direct derivation link, and inherit existing decimal/text/numeric-pattern facet objects. Do not invent alias dictionary keys, QNames, declarations or global anonymous entries. Other atomic/complex families remain Unsupported.
+
+Compile outer facets from their exact original source elements, skipping only the inline base and (in the numeric value compiler) lexical pattern facets handled separately. No source/facet cloning or namespace mutation. Preserve decimal value/enumeration/digit/bound inheritance and lexical numeric pattern ancestry separately. Preserve text whitespace, Unicode length, fixed facets, enumeration and pattern ancestry. Existing exclusions on value facets over patterned numeric bases, text enumeration over patterned ancestors and whitespace strengthening over lexical ancestors remain Unsupported. Existing invalid facet widening stays Invalid.
+
+Keep one leading inline child/no simultaneous base attribute, source-scope final/forward dependencies,16 shared inline sites, depth4, scalar/local/type/value/regex/digit/scale/schema limits, nil, original XML, cancellation, recovery, foreign ownership and expiry. Structurally identical source definitions remain distinct; repeated references share one type/base. Empty unions are valid types with no valid values, as corrected separately. Legacy grammar and wider atomic/complex/override/PSVI/C45 rules remain separate. No public API or full XSD claim.
+
+Qualify both facades/native exact values and provenance, inherited facets/patterns/whitespace/budgets, empty-union correction, original unchanged samples, full source/exact fresh package/API/signed Core/invoice/docs/release controls. Retain prior names/input bytes and original assertion evidence; explicitly reconcile the now-supported decimal exclusion and empty-union expectation. Reviewed commit/push/PR/green merge/main CI precede completion. No publication included.
