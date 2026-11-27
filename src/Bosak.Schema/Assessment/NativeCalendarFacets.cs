@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.2 | 27-11-2026 | Preserve original anonymous calendar base and facet source elements. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -31,12 +32,12 @@ internal sealed class NativeCalendarFacets
     private bool HasPatterns => !patterns.IsEmpty || parent?.HasPatterns == true;
 
     internal static NativeCalendarFacets Compile(XElement restriction, XdmExactCalendarKind kind, NativeNumericLimits limits,
-        int maxCharacters, NativePatternCompilation compilation, NativeCalendarFacets? parent)
+        int maxCharacters, NativePatternCompilation compilation, NativeCalendarFacets? parent, XElement? inlineBase = null)
     {
         var result = new NativeCalendarFacets { parent = parent, timezone = parent?.timezone ?? (kind == XdmExactCalendarKind.DateTimeStamp ? "required" : "optional") };
         var seen = new HashSet<string>(StringComparer.Ordinal);
         var patternBuilder = ImmutableArray.CreateBuilder<NativePattern>();
-        var facets = NativeDecimalSchema.Elements(restriction);
+        var facets = NativeDecimalSchema.Elements(restriction).Where(f => !ReferenceEquals(f, inlineBase)).ToArray();
         NativeDecimalSchema.Require(facets.Count(f => f.Name.LocalName == "enumeration") <= 16, "Calendar enumeration capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         NativePattern.Capacity(facets.Count(f => f.Name.LocalName == "pattern") <= 8);
         foreach (var facet in facets)
