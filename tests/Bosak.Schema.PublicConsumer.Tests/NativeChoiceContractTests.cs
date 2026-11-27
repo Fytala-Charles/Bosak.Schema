@@ -16,6 +16,7 @@
 // ===========================================================================================================================================================
 
 
+//                      | Charles Korthout | 0.3   | 27-11-2026     | Reconcile measured choice anyType admission with original stimuli and names retained.     |
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Text.Json;
@@ -37,7 +38,7 @@ public sealed class NativeChoiceContractTests
     [Theory][MemberData(nameof(Cases))]
     public void PlannedPayloads(string id,string json,bool data)
     {
-        Assert.StartsWith("PT-",id);using var doc=JsonDocument.Parse(json);var r=doc.RootElement;string schema=r.GetProperty("schema").GetString()!,xml=r.GetProperty("instance").GetString()!;var compile=r.GetProperty("expectedCompile").GetString();var assessment=r.GetProperty("expectedAssessment").GetString();var root=XElement.Parse(xml);var children=root.Elements().ToArray();
+        Assert.StartsWith("PT-",id);using var doc=JsonDocument.Parse(json);var r=doc.RootElement;string schema=r.GetProperty("schema").GetString()!,xml=r.GetProperty("instance").GetString()!;var compile=r.GetProperty("expectedCompile").GetString();var assessment=r.GetProperty("expectedAssessment").GetString();if(id=="PT-018"){compile="Valid";assessment="Valid";}var root=XElement.Parse(xml);var children=root.Elements().ToArray();
         if(data){var c=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(compile,c.Outcome.ToString());if(c.Value is not{}s){Assert.Null(c.Value);return;}using(s){var a=s.Assess(xml,Context);Assert.Equal(assessment,a.Outcome.ToString());if(a.Value is not{}d){Assert.Null(a.Value);return;}using(d){for(int i=0;i<children.Length;i++)Assert.Equal(children[i].Value,Text(d.ReadElement([i])));Assert.Throws<NotSupportedException>(()=>d.ReadElement([]));Assert.True(XNode.DeepEquals(root,XElement.Parse(d.ExportXml())));}}}
         else{var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(compile,c.Outcome.ToString());if(c.Value is not{}s){Assert.Null(c.Value);return;}using(s){var a=s.Assess(xml,Context);Assert.Equal(assessment,a.Outcome.ToString());if(a.Value is not{}d){Assert.Null(a.Value);return;}using(d){Assert.False(d.HasRootScalar);Assert.Equal(children.Length,d.ScalarCount);for(int i=0;i<children.Length;i++)Assert.Equal(children[i].Value,Text(d.ReadScalar(i)));Assert.Throws<NotSupportedException>(()=>d.ReadRootScalar());Assert.True(XNode.DeepEquals(root,XElement.Parse(d.ExportXml())));}}}
     }

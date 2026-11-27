@@ -1,0 +1,9 @@
+# Text-only anyType alternatives in bounded choice roots
+
+27 November 2026. Recorded before implementation against PR95 merge199353f216d5fc46b6ad9a7654ff33db05fe124f and signed Core1.86.0. [Immutable adoption](ADOPTION.json).
+
+Admit direct implicit/explicit xs:anyType local alternatives in existing bounded choice roots and named aliases. Select one expanded-name branch; repeat only that branch within the existing minimum1/maximum16 member bounds. Preserve no-mixing and unknown-branch rejection. Repeated facts follow physical XML order and share their original declaration and canonical anyType governing component. Actual values are one original untypedAtomic text atom per present element, including empty strings; comments/PIs do not contribute. Scalar alternatives keep their actual types, and the enclosing element-only root retains no typed value. Optional outer choice absence produces no child facts.
+
+Keep nullable alternatives, repeated outer choices, complex nillability/value constraints, terminal application/special attributes/XSI requests and descendants Unsupported. Nested all/choice containers, global complex references, broader wildcard/ancestor projection and inheritance remain separate. Existing root attributes/strict root wildcards and admitted structural assertions remain unchanged. Legacy decimal-only grammar remains unchanged.
+
+Retain source16alternatives/max16selected occurrences, UTF16 string and document/node/depth/attribute/identity/fact bounds. Original XML, immutable aliases, failure recovery, ownership/cancellation/expiry remain. Both facades/native evidence, original fixture bytes and previous names, full source/fresh exact package/API/signed Core/original samples/invoice/docs/release controls precede reviewed PR/green merge/main CI. No publication/fullXSD1.1/PSVI/C45 acceptance implied.

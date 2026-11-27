@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.30 development candidate requires Bosak Core 1.86.0 or later.
+The 0.31 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1837,3 +1837,7 @@ Matched extras are skipped even when globally declared: no node declaration, any
 ## Text-only anyType members in all roots (development0.30)
 
 Existing bounded all-group roots admit direct implicit/explicit anyType local members. Original declarations and canonical anyType governing components remain; text-only values yield one original untypedAtomic atom, including an empty string. Order-independent matching retains physical-order facts and typed scalar siblings. Terminal attributes/descendants, complex nillability/value constraints, global complex references, nested all and choice composition remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/all-anytype-terminals/GUIDE.md). Unpublished development source.
+
+## Text-only anyType alternatives in choice roots (development0.31)
+
+Bounded choice roots admit direct implicit/explicit anyType alternatives. One selected expanded-name branch may repeat within existing occurrence bounds; mixed branches remain Invalid. Original declarations/canonical anyType and raw untypedAtomic values, including empty strings, retain physical order. Scalar alternatives and element-only root typing remain. Terminal attributes/descendants, complex constraints, global complex references, nullable alternatives, outer repetition and nested groups remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/choice-anytype-terminals/GUIDE.md). Unpublished development source.
