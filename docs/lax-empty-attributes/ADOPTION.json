@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-26",
+  "recordedBeforeImplementation": true,
+  "base": "979eabedb7d42d99a63ffef412cd514b479857b5",
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.2.4/3.2.5 attribute assessment, absent declaration and notKnown outcome",
+        "3.4.4.2/3.4.5 empty content and aggregate validation attempted",
+        "3.10.4 wildcard namespace/QName matching and lax declaration lookup"
+      ]
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "2.3 lexical space/mapping; prelexical collapse before pattern",
+        "3.3.3 decimal and3.4.13 integer lexical spaces",
+        "4.3.4 pattern: same-step OR and inherited AND",
+        "4.3.5 whiteSpace and fixed collapse",
+        "4.3.7 enumeration versus lexical representations",
+        "G regular expressions: Nd category and digit escape"
+      ]
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3.1.1 partial/notKnown projection to anyType/anySimpleType",
+        "3.3.1.2 anySimpleType actual untypedAtomic",
+        "6.2.4 anyType mixed typed value",
+        "6.3.4 attribute PSVI construction"
+      ]
+    },
+    {
+      "id": "xml10",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/",
+      "sha256": "f58a4b9e1e5b8bac13fb55c4e5c7c8c5e2c176aa45ee68e2f1ab2498511927ec",
+      "bytes": 219926
+    },
+    {
+      "id": "namespaces10",
+      "url": "https://www.w3.org/TR/2009/REC-xml-names-20091208/",
+      "sha256": "b4a649e5fdab9852d68eca21442481599164949bcdee5549f2ec7e38fb3cd3a8",
+      "bytes": 51390
+    }
+  ],
+  "scope": [
+    "One processContents=lax attribute wildcard on existing empty complex owners",
+    "Known extras use original global declaration/type/fixed/ID facts; unknown extras have no declaration, xs:anySimpleType node type and actual xs:untypedAtomic value",
+    "Unknown lax attributes at an empty root project the assessed root type to canonical xs:anyType with one untypedAtomic empty string; original root declaration and declared empty type remain schema components",
+    "Known-only nested empty owners remain supported; unknown extras under strict ancestors remain Unsupported before facts publish"
+  ],
+  "deviations": [
+    "Skip, lax wildcards on nonempty/mixed/simple-content owners, wildcard assertions and broader ancestor projection remain excluded",
+    "Original empty-content validity applies before projection: character/element children remain Invalid",
+    "All scalar/document/node/depth/attribute/identity/fact and namespace/QName bounds retained"
+  ],
+  "qualification": [
+    "Both facades and native original declaration/declared type versus assessed anyType projection",
+    "Known-only empty sequence versus partial-root one empty string atom; absent attribute declaration and actual untypedAtomic evidence",
+    "Namespace/QName exclusions, declared-use precedence, fixed/ID and unknown lexical preservation",
+    "Alias propagation, failure recovery, cancellation, foreign authority, expiry, all prior names/bytes, exact package/API/Core/samples/invoice/docs"
+  ],
+  "status": "Recorded before implementation; qualification pending"
+}

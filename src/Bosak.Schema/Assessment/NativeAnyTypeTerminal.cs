@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
+//                      | Charles Korthout | 0.22  | 27-11-2026     | Register canonical projection components for empty-owner lax wildcards.                   |
 // ===========================================================================================================================================================
 using System.Xml.Linq;
 namespace Bosak.Schema;
@@ -45,6 +46,12 @@ internal sealed partial class NativeDecimalSchema
 
     private void CompleteAnyTypeMetadata(XElement schema)
     {
+        if (schema.Descendants(Xs + "anyAttribute").Any(e => Collapse((string?)e.Attribute("processContents") ?? "strict") == "lax"))
+        {
+            var context = schema.Annotation<NativeAnyTypeCompilation>();
+            if (context is null) { context = new NativeAnyTypeCompilation(); schema.AddAnnotation(context); }
+            context.Use();
+        }
         if (schema.Annotation<NativeAnyTypeCompilation>()?.Type is not { } type) return;
         Require(!NamedTypes.Any(t => t.Name == "anyType" && t.NamespaceUri == Xs.NamespaceName),
             "Reserved anyType component redeclaration is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);

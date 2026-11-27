@@ -1,0 +1,1659 @@
+{
+  "cases": [
+    {
+      "id": "LEA-001",
+      "contract": "known lax declaration root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-002",
+      "contract": "known lax invalid never skip root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='bad'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-003",
+      "contract": "undeclared root projection or strict ancestor boundary root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u=' 01.20 '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            " 01.20 "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-004",
+      "contract": "no attribute keeps empty typed sequence root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-005",
+      "contract": "known lax declaration rooturn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='001'></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-006",
+      "contract": "known lax invalid never skip rooturn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='bad'></t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-007",
+      "contract": "undeclared root projection or strict ancestor boundary rooturn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:u=' 01.20 '></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "urn:t",
+          "expected": [
+            " 01.20 "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-008",
+      "contract": "no attribute keeps empty typed sequence rooturn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' ></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-009",
+      "contract": "known lax declaration named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r' type='T'/><xs:element name='s' type='T'/></xs:schema>",
+      "instance": "<r a='001'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-010",
+      "contract": "known lax invalid never skip named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r' type='T'/><xs:element name='s' type='T'/></xs:schema>",
+      "instance": "<r a='bad'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-011",
+      "contract": "undeclared root projection or strict ancestor boundary named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r' type='T'/><xs:element name='s' type='T'/></xs:schema>",
+      "instance": "<r u=' 01.20 '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            " 01.20 "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-012",
+      "contract": "no attribute keeps empty typed sequence named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r' type='T'/><xs:element name='s' type='T'/></xs:schema>",
+      "instance": "<r ></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-013",
+      "contract": "known lax declaration namedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r' type='t:T'/><xs:element name='s' type='t:T'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='001'></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-014",
+      "contract": "known lax invalid never skip namedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r' type='t:T'/><xs:element name='s' type='t:T'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:a='bad'></t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-015",
+      "contract": "undeclared root projection or strict ancestor boundary namedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r' type='t:T'/><xs:element name='s' type='t:T'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' t:u=' 01.20 '></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "urn:t",
+          "expected": [
+            " 01.20 "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-016",
+      "contract": "no attribute keeps empty typed sequence namedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r' type='t:T'/><xs:element name='s' type='t:T'/></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t' ></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-017",
+      "contract": "known lax declaration nested",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-018",
+      "contract": "known lax invalid never skip nested",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'></e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-019",
+      "contract": "undeclared root projection or strict ancestor boundary nested",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e u=' 01.20 '></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            " 01.20 "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-020",
+      "contract": "no attribute keeps empty typed sequence nested",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e ></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-021",
+      "contract": "known lax declaration nestedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='001'></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-022",
+      "contract": "known lax invalid never skip nestedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='bad'></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-023",
+      "contract": "undeclared root projection or strict ancestor boundary nestedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:u=' 01.20 '></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "u",
+          "namespace": "urn:t",
+          "expected": [
+            " 01.20 "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-024",
+      "contract": "no attribute keeps empty typed sequence nestedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e ></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-025",
+      "contract": "known lax declaration nestedNamed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-026",
+      "contract": "known lax invalid never skip nestedNamed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'></e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-027",
+      "contract": "undeclared root projection or strict ancestor boundary nestedNamed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e u=' 01.20 '></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            " 01.20 "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-028",
+      "contract": "no attribute keeps empty typed sequence nestedNamed",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e ></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-029",
+      "contract": "known lax declaration nestedNamedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='t:T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='001'></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-030",
+      "contract": "known lax invalid never skip nestedNamedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='t:T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:a='bad'></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-031",
+      "contract": "undeclared root projection or strict ancestor boundary nestedNamedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='t:T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e t:u=' 01.20 '></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "u",
+          "namespace": "urn:t",
+          "expected": [
+            " 01.20 "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-032",
+      "contract": "no attribute keeps empty typed sequence nestedNamedurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:complexType name='T'><xs:anyAttribute processContents='lax'/></xs:complexType><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='e' type='t:T'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><e ></e></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-033",
+      "contract": "known lax declaration reference",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='001'></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-034",
+      "contract": "known lax invalid never skip reference",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e a='bad'></e></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-035",
+      "contract": "undeclared root projection or strict ancestor boundary reference",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e u=' 01.20 '></e></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            " 01.20 "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-036",
+      "contract": "no attribute keeps empty typed sequence reference",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><e ></e></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-037",
+      "contract": "known lax declaration referenceurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><t:e t:a='001'></t:e></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "a",
+          "namespace": "urn:t",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-038",
+      "contract": "known lax invalid never skip referenceurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><t:e t:a='bad'></t:e></t:r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-039",
+      "contract": "undeclared root projection or strict ancestor boundary referenceurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><t:e t:u=' 01.20 '></t:e></t:r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "name": "u",
+          "namespace": "urn:t",
+          "expected": [
+            " 01.20 "
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-040",
+      "contract": "no attribute keeps empty typed sequence referenceurn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='e'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='t:e'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<t:r xmlns:t='urn:t'><t:e ></t:e></t:r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "name": "",
+          "namespace": "",
+          "expected": [],
+          "kind": "String",
+          "index": 0,
+          "nodeDataOnly": true
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-041",
+      "contract": "unknown constraint namespace='##local'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax' namespace='##local'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-042",
+      "contract": "unknown constraint namespace='##other'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax' namespace='##other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-043",
+      "contract": "unknown constraint notNamespace='urn:other'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax' notNamespace='urn:other'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-044",
+      "contract": "unknown constraint notNamespace='##local'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax' notNamespace='##local'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-045",
+      "contract": "unknown constraint notQName='b'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax' notQName='b'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-046",
+      "contract": "unknown constraint notQName='u'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax' notQName='u'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-047",
+      "contract": "unknown constraint notQName='##defined'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax' notQName='##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-048",
+      "contract": "known excluded by defined",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax' notQName='##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-049",
+      "contract": "explicit use precedence over exclusion",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:attribute name='a' type='xs:integer'/><xs:anyAttribute processContents='lax' notQName='a ##defined'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-050",
+      "contract": "explicit use remains strict",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:attribute name='z' type='xs:integer'/><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r z='bad'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-051",
+      "contract": "required explicit missing",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:attribute name='z' type='xs:integer' use='required'/><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-052",
+      "contract": "original unknown lexical ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u=''></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-053",
+      "contract": "original unknown lexical   x  ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='  x  '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            "  x  "
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-054",
+      "contract": "original unknown lexical  a&#x9;b ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u=' a&#x9;b '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            " a\tb "
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-055",
+      "contract": "original unknown lexical a&amp;b",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='a&amp;b'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            "a&b"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-056",
+      "contract": "original unknown lexical 😀",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='😀'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            "😀"
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-057",
+      "contract": "known and unknown independent",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001' u=' raw '></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "u",
+          "namespace": "",
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "index": 0
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "a",
+          "namespace": "",
+          "expected": [
+            "1"
+          ],
+          "kind": "Integer",
+          "index": 1
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-058",
+      "contract": "known fixed 001",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:attribute name='z' type='xs:integer' fixed='1'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r z='001'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-059",
+      "contract": "known fixed 2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:attribute name='z' type='xs:integer' fixed='1'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r z='2'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-060",
+      "contract": "known ID graph with unknown id='v' ref='v' u='x'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:attribute name='id' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r id='v' ref='v' u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-061",
+      "contract": "known ID graph with unknown ref='missing' u='x'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:attribute name='id' type='xs:ID'/><xs:attribute name='ref' type='xs:IDREF'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='missing' u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-062",
+      "contract": "unknown ID-looking attribute not an IDREF",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ref='missing'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "name": "ref",
+          "namespace": "",
+          "expected": [
+            "missing"
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-063",
+      "contract": "missing defaults not augmented",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:attribute name='z' type='xs:integer' default='1'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r ></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-064",
+      "contract": "empty validity before partial projection  ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'> </r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-065",
+      "contract": "empty validity before partial projection text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'>text</r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-066",
+      "contract": "empty validity before partial projection <c/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'><c/></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-067",
+      "contract": "comments and PI no text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'><!--ignored--><?p ignored?></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "name": "",
+          "namespace": "",
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "index": 0
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-068",
+      "contract": "unknown UTF16 limit 4",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='😀ab'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 4
+    },
+    {
+      "id": "LEA-069",
+      "contract": "unknown UTF16 limit 3",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='😀ab'></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 3
+    },
+    {
+      "id": "LEA-070",
+      "contract": "actual owner attribute count 16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u0='x' u1='x' u2='x' u3='x' u4='x' u5='x' u6='x' u7='x' u8='x' u9='x' u10='x' u11='x' u12='x' u13='x' u14='x' u15='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-071",
+      "contract": "actual owner attribute count 17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u0='x' u1='x' u2='x' u3='x' u4='x' u5='x' u6='x' u7='x' u8='x' u9='x' u10='x' u11='x' u12='x' u13='x' u14='x' u15='x' u16='x'></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-072",
+      "contract": "special XML request remains Unsupported",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xml:lang='en'></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-073",
+      "contract": "strict unknown remains Invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute /></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-074",
+      "contract": "skip remains excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='skip'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-075",
+      "contract": "nonempty lax sequence remains excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='c' type='xs:decimal'/></xs:sequence><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'><c>1</c></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-076",
+      "contract": "assertion combination excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:anyAttribute processContents='lax'/><xs:assert test='true()'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r a='001'></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-077",
+      "contract": "existing empty compositor <xs:sequence/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:sequence/><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-078",
+      "contract": "existing empty compositor <xs:all/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:all/><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    },
+    {
+      "id": "LEA-079",
+      "contract": "existing empty compositor <xs:choice minOccurs='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:attribute name='a' type='xs:integer'/><xs:attribute name='b' type='xs:token'/><xs:element name='r'><xs:complexType><xs:choice minOccurs='0'/><xs:anyAttribute processContents='lax'/></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r u='x'></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "reads": [],
+      "maxString": 1024
+    }
+  ]
+}
