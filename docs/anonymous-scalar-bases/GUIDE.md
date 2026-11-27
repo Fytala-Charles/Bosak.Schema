@@ -1,0 +1,11 @@
+# Anonymous decimal and string restriction bases
+
+Both owned native facades admit an inline anonymous decimal or string-family base at existing simple-type placements. Supported text families are xs:string, xs:normalizedString and xs:token. The compiler retains the actual unnamed NativeType as the direct DerivationBase. It does not manufacture a QName, declaration or global anonymous entry. Repeated references share the actual base; separate source definitions remain distinct. Named forward references and final prohibitions continue through the original source edges.
+
+Decimal restrictions inherit existing exact bounds, enumeration, digit and scale facets. Numeric lexical patterns keep their separate ancestry. Text restrictions inherit normalization, Unicode length, fixed facets, enumeration and patterns. Outer facets compile from original source elements, skipping only the exact inline child and separately handled numeric patterns. Existing exclusions remain: value facets over patterned numeric parents, text enumeration over patterned ancestors and whitespace strengthening over lexical ancestors require separate adoption.
+
+One leading inline child is required; a simultaneous base attribute is Invalid. Shared inline source sites remain limited to 16 and depth to 4; existing scalar, atom, digit, scale, text, regex, schema and lifetime budgets remain. Integer, Boolean, language/Name/identity, URI, calendar, binary and complex anonymous bases remain Unsupported. This does not broaden public derivation or instance-type override contracts.
+
+For an atomic scalar, actual type evidence is its governing scalar type, retaining existing issued scalar semantics; the primitive XDM value carrier does not replace that component. Compound member/item selection retains its established actual-type authority. Complete assessment precedes facts. Original XML, declaration/type ownership, nil, recovery, cancellation and expiry remain intact.
+
+The previous batch incorrectly rejected empty union bases. XSD 1.1 Datatypes section 4.1.1 explicitly permits an empty member sequence. That guard is removed: the type compiles, every lexical value is Invalid, and a list of that type admits the empty list. See CORRECTIONS.md for fresh adoption and the historical reconciliation; earlier sealed evidence stays intact.

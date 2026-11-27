@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.37 development candidate requires Bosak Core 1.86.0 or later.
+The 0.38 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1865,3 +1865,7 @@ Existing xs:documentation wrappers admit bounded xml:lang values under the XML n
 ## Anonymous compound restriction bases (development0.37)
 
 Existing simple-type placements admit inline anonymous list/union restriction bases with direct original base objects, inherited facets and original item/member authority. No synthetic type names or declarations are created. The shared inline restriction/list/union source-site bound is16 and recursive inline depth remains4. Anonymous atomic and complex inline bases remain excluded. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-restriction-bases/GUIDE.md). Unpublished development source.
+
+## Anonymous decimal and string restriction bases (development0.38)
+
+Existing inline restriction placements admit decimal and string/normalizedString/token bases using original NativeType objects and facet sources. Decimal value/numeric-pattern and text whitespace/length/enumeration/pattern ancestry remain bounded and independent. Other atomic/complex families stay excluded. The preceding empty-union guard is corrected: empty unions compile but accept no value. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-scalar-bases/GUIDE.md). Unpublished development source.

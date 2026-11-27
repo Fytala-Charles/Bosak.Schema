@@ -1,0 +1,565 @@
+{
+  "count": 93,
+  "behavioralContractsNotFeatures": true,
+  "stimuli": "../../tests/TestData/AnonymousScalarBases/cases.json",
+  "contracts": [
+    {
+      "id": "AS-001",
+      "contract": "inline decimal named",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-002",
+      "contract": "inline decimal root",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-003",
+      "contract": "inline decimal local",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-004",
+      "contract": "inline decimal globalAttr",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-005",
+      "contract": "inline decimal localAttr",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-006",
+      "contract": "inline string named",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-007",
+      "contract": "inline string root",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-008",
+      "contract": "inline string local",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-009",
+      "contract": "inline string globalAttr",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-010",
+      "contract": "inline string localAttr",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-011",
+      "contract": "inline normalizedString named",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-012",
+      "contract": "inline normalizedString root",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-013",
+      "contract": "inline normalizedString local",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-014",
+      "contract": "inline normalizedString globalAttr",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-015",
+      "contract": "inline normalizedString localAttr",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-016",
+      "contract": "inline token named",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-017",
+      "contract": "inline token root",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-018",
+      "contract": "inline token local",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-019",
+      "contract": "inline token globalAttr",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-020",
+      "contract": "inline token localAttr",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-021",
+      "contract": "decimal facet minimum",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-022",
+      "contract": "decimal facet rejects minimum",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-023",
+      "contract": "decimal facet exclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-024",
+      "contract": "decimal facet rejects exclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-025",
+      "contract": "decimal facet maximum",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-026",
+      "contract": "decimal facet rejects maximum",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-027",
+      "contract": "decimal facet totalDigits",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-028",
+      "contract": "decimal facet rejects totalDigits",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-029",
+      "contract": "decimal facet fractionDigits",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-030",
+      "contract": "decimal facet rejects fractionDigits",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-031",
+      "contract": "decimal facet enumeration",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-032",
+      "contract": "decimal facet rejects enumeration",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-033",
+      "contract": "inherited decimal widening <xs:minInclusive value='0'/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-034",
+      "contract": "inherited decimal widening <xs:totalDigits value='4'/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-035",
+      "contract": "inherited decimal enum 1.2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-036",
+      "contract": "inherited decimal enum 2",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-037",
+      "contract": "value facets over patterned base stay excluded <xs:minInclusive value='1.1'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-038",
+      "contract": "value facets over patterned base stay excluded <xs:enumeration value='1.2'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-039",
+      "contract": "numeric pattern ancestry 12",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-040",
+      "contract": "numeric pattern ancestry 1",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-041",
+      "contract": "numeric pattern ancestry 2",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-042",
+      "contract": "numeric same-step OR 1",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-043",
+      "contract": "numeric same-step OR 2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-044",
+      "contract": "numeric same-step OR 3",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-045",
+      "contract": "numeric value facet before pattern ancestry",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-046",
+      "contract": "text facet <xs:length value='2'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-047",
+      "contract": "text facet rejects <xs:length value='2'/>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-048",
+      "contract": "text facet <xs:minLength value='2'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-049",
+      "contract": "text facet rejects <xs:minLength value='2'/>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-050",
+      "contract": "text facet <xs:maxLength value='2'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-051",
+      "contract": "text facet rejects <xs:maxLength value='2'/>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-052",
+      "contract": "text facet <xs:enumeration value='ab'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-053",
+      "contract": "text facet rejects <xs:enumeration value='ab'/>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-054",
+      "contract": "text facet <xs:pattern value='a.*'/>",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-055",
+      "contract": "text facet rejects <xs:pattern value='a.*'/>",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-056",
+      "contract": "text whitespace preserve",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-057",
+      "contract": "text whitespace replace",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-058",
+      "contract": "text whitespace collapse",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-059",
+      "contract": "inherited fixed whitespace",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-060",
+      "contract": "inherited fixed length",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-061",
+      "contract": "text bound widening",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-062",
+      "contract": "text whitespace strengthening over enum stays excluded",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-063",
+      "contract": "text enum over pattern stays excluded",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-064",
+      "contract": "text pattern ancestry ab",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-065",
+      "contract": "text pattern ancestry a",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-066",
+      "contract": "text pattern ancestry b",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-067",
+      "contract": "Unicode scalar text length",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-068",
+      "contract": "other anonymous family excluded integer",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-069",
+      "contract": "other anonymous family excluded boolean",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-070",
+      "contract": "other anonymous family excluded language",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-071",
+      "contract": "other anonymous family excluded Name",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-072",
+      "contract": "other anonymous family excluded ID",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-073",
+      "contract": "other anonymous family excluded anyURI",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-074",
+      "contract": "other anonymous family excluded date",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-075",
+      "contract": "other anonymous family excluded hexBinary",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-076",
+      "contract": "scalar inline depth 1",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-077",
+      "contract": "scalar inline depth 3",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-078",
+      "contract": "scalar inline depth 4",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-079",
+      "contract": "scalar inline depth 5",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-080",
+      "contract": "inline/base representation conflict base='xs:decimal'",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-081",
+      "contract": "inline/base representation conflict <xs:simpleType><xs:restriction base='xs:string'></xs:restriction></xs:simpleType>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-082",
+      "contract": "forward named scalar dependency",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-083",
+      "contract": "final prohibition inside anonymous scalar base",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-084",
+      "contract": "list item anonymous scalar",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-085",
+      "contract": "union member anonymous scalar",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-086",
+      "contract": "union active string member",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-087",
+      "contract": "empty union correction ''",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-088",
+      "contract": "empty union correction '1'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-089",
+      "contract": "empty union correction 'word'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-090",
+      "contract": "list of empty union accepts empty list",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-091",
+      "contract": "list of empty union rejects item",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "AS-092",
+      "contract": "nilled anonymous decimal",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "AS-093",
+      "contract": "unknown xsi type remains invalid",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    }
+  ]
+}

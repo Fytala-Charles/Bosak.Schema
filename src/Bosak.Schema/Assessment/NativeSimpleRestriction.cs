@@ -48,6 +48,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.35 | 27-11-2026     | Enforce bounded simple-type final derivation controls.                                   |
 //                      | Charles Korthout | 0.36 | 27-11-2026     | Preserve original anonymous compound restriction bases and inherited facets.             |
+//                      | Charles Korthout | 0.37 | 27-11-2026     | Preserve anonymous decimal/text bases and original facet source identities.              |
 // ===========================================================================================================================================================
 
 using System.Xml.Linq;
@@ -69,21 +70,17 @@ internal sealed partial class NativeDecimalSchema
         var inlineBases = Elements(restriction).Where(e => e.Name == Xs + "simpleType").ToArray();
         if (inlineBases.Length != 0)
         {
-            Require(maxStringCharacters is not null, "Inline restriction bases require the opt-in compound profile.", NativeDecimalUnsupportedReason.ValueType);
+            Require(maxStringCharacters is not null, "Inline restriction bases require the opt-in native profile.", NativeDecimalUnsupportedReason.ValueType);
             Check(restriction.Attribute("base") is null && inlineBases.Length == 1 && ReferenceEquals(Elements(restriction)[0], inlineBases[0]),
                 "Restriction requires one leading inline base or a base attribute, not both.");
             var inlineBase = CompileRestriction(inlineBases[0], null, "", limits, maxStringCharacters, patternCompilation, simple, inlineDepth + 1);
-            Require(inlineBase.IsCompound, "Anonymous atomic restriction bases await separate qualification.", NativeDecimalUnsupportedReason.ValueType);
-            var visited = new HashSet<NativeType>(ReferenceEqualityComparer.Instance);
-            void CheckMembers(NativeType type)
+            if (!inlineBase.IsCompound)
             {
-                patternCompilation.Check();
-                if (!visited.Add(type)) return;
-                Check(!type.IsUnion || !type.UnionMembers.IsEmpty, "Anonymous compound base contains an empty union.");
-                if (type.ListItemType is { } item) CheckMembers(item);
-                if (type.IsUnion) foreach (var member in type.UnionMembers) CheckMembers(member);
+                var scalar = CompileAnonymousScalarBase(restriction, inlineBases[0], inlineBase, name, namespaceUri,
+                    limits, maxStringCharacters!.Value, patternCompilation);
+                Require(scalar is not null, "Anonymous base family awaits separate qualification.", NativeDecimalUnsupportedReason.ValueType);
+                return scalar!;
             }
-            CheckMembers(inlineBase);
             return new NativeType(name, false, namespaceUri, derivationBase: inlineBase,
                 listItemType: inlineBase.ListItemType, unionMembers: inlineBase.UnionMembers,
                 compoundFacets: NativeCompoundFacets.Compile(restriction, inlineBase, limits, maxStringCharacters!.Value, patternCompilation, inlineBases[0]));

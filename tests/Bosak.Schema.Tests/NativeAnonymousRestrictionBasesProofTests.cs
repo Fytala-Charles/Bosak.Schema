@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 27-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.2   | 27-11-2026     | Reconcile decimal base admission and corrected empty-union semantics.                    |
 // ===========================================================================================================================================================
 using Bosak.Schema.Tests.NodeData;
 using Bosak.XPath.Core.Schema;
@@ -77,9 +78,9 @@ public sealed class NativeAnonymousRestrictionBasesProofTests
     {
         using var f=new Fixture(Schema(Restrict(Base())),"<a>1 2</a>",atoms:16);using var other=new Fixture(Schema(Restrict(Base())),"<a>1 2</a>",atoms:16);var local=f.Input.FactsFor((NativeSessionNode)f.Element([]))!;var foreign=other.Input.FactsFor((NativeSessionNode)other.Element([]))!;var baseHandle=f.Provider.TypeComponent(local.NativeType.DerivationBase!);Assert.True(f.Provider.Owns(baseHandle));Assert.False(other.Provider.Owns(baseHandle));Assert.Throws<ArgumentException>(()=>f.Provider.IsSameComponent(local.Type,foreign.Type,default));using var c=new CancellationTokenSource();c.Cancel();Assert.Throws<OperationCanceledException>(()=>local.ReadTypedValue(c.Token));f.Input.Dispose();Assert.Throws<ObjectDisposedException>(()=>local.Declaration);
     }
-    /// <summary>Legacy grammar and anonymous atomic bases remain outside the newly admitted form.</summary>
+    /// <summary>Legacy grammar stays closed while the newly admitted decimal inline base compiles.</summary>
     [Fact]public void LegacyAndCancellation()
     {
-        var source=Schema(Restrict(Base()));Assert.Equal(NativeOutcome.Unsupported,NativeDecimalSchema.Compile(source,new(256,256)).Outcome);Assert.Equal(NativeOutcome.Unsupported,NativeDecimalSchema.Compile(Schema(Restrict("<xs:simpleType><xs:restriction base='xs:decimal'/></xs:simpleType>")),new(256,256),maxStringCharacters:1024).Outcome);using var c=new CancellationTokenSource();c.Cancel();Assert.Throws<OperationCanceledException>(()=>NativeDecimalSchema.Compile(source,new(256,256),c.Token,1024));
+        var source=Schema(Restrict(Base()));Assert.Equal(NativeOutcome.Unsupported,NativeDecimalSchema.Compile(source,new(256,256)).Outcome);Assert.Equal(NativeOutcome.Valid,NativeDecimalSchema.Compile(Schema(Restrict("<xs:simpleType><xs:restriction base='xs:decimal'/></xs:simpleType>")),new(256,256),maxStringCharacters:1024).Outcome);using var c=new CancellationTokenSource();c.Cancel();Assert.Throws<OperationCanceledException>(()=>NativeDecimalSchema.Compile(source,new(256,256),c.Token,1024));
     }
 }

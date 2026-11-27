@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2 | 26-11-2026     | Bound identity facet literals without applying document graph checks |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.3 | 27-11-2026     | Preserve anonymous decimal/text bases and original facet source identities.              |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Globalization;
@@ -34,13 +35,13 @@ internal sealed class NativeTextFacets(NativeTextFacets? parent,int whitespace,b
     private int? MinFacet=>minimum??parent?.MinFacet;
     private int? MaxFacet=>maximum??parent?.MaxFacet;
     private ImmutableDictionary<string,int> FixedLengths=>fixedLengths;
-    internal static NativeTextFacets Compile(XElement restriction,NativeType baseType,int capacity,NativePatternCompilation compilation)
+    internal static NativeTextFacets Compile(XElement restriction,NativeType baseType,int capacity,NativePatternCompilation compilation,XElement? inlineBase=null)
     {
         var parent=baseType.TextFacets;var white=baseType.TextWhitespace;var fixedWhite=parent?.FixedWhitespace??false;
         int? length=null,minimum=null,maximum=null;
         var entries=ImmutableHashSet.CreateBuilder<string>(StringComparer.Ordinal);var enumCount=0;
         var patterns=ImmutableArray.CreateBuilder<NativePattern>();var fixedValues=ImmutableDictionary.CreateBuilder<string,int>(StringComparer.Ordinal);
-        var seen=new HashSet<string>(StringComparer.Ordinal);var facets=NativeDecimalSchema.Elements(restriction);
+        var seen=new HashSet<string>(StringComparer.Ordinal);var facets=NativeDecimalSchema.Elements(restriction).Where(f=>!ReferenceEquals(f,inlineBase)).ToArray();
         // Whitespace applies to every literal irrespective of facet source order.
         foreach(var facet in facets.Where(f=>f.Name.LocalName=="whiteSpace"))
         {
