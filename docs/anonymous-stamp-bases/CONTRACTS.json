@@ -1,0 +1,607 @@
+{
+  "count": 100,
+  "behavioralContractsNotFeatures": true,
+  "stimuli": "../../tests/TestData/AnonymousStampBases/cases.json",
+  "contracts": [
+    {
+      "id": "ST-001",
+      "contract": "dateTimeStamp placement namedZ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-002",
+      "contract": "dateTimeStamp placement named",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-003",
+      "contract": "dateTimeStamp placement rootZ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-004",
+      "contract": "dateTimeStamp placement root",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-005",
+      "contract": "dateTimeStamp placement localZ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-006",
+      "contract": "dateTimeStamp placement local",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-007",
+      "contract": "dateTimeStamp placement globalAttrZ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-008",
+      "contract": "dateTimeStamp placement globalAttr",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-009",
+      "contract": "dateTimeStamp placement localAttrZ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-010",
+      "contract": "dateTimeStamp placement localAttr",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-011",
+      "contract": "dateTimeStamp bound minInclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-012",
+      "contract": "dateTimeStamp bound rejects minInclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-013",
+      "contract": "dateTimeStamp bound minExclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-014",
+      "contract": "dateTimeStamp bound rejects minExclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-015",
+      "contract": "dateTimeStamp bound maxInclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-016",
+      "contract": "dateTimeStamp bound rejects maxInclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-017",
+      "contract": "dateTimeStamp bound maxExclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-018",
+      "contract": "dateTimeStamp bound rejects maxExclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-019",
+      "contract": "dateTimeStamp inherited widening minInclusive",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-020",
+      "contract": "dateTimeStamp inherited widening maxInclusive",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-021",
+      "contract": "dateTimeStamp inherited widening enumeration",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-022",
+      "contract": "dateTimeStamp enumeration equality 2000-01-02T12:00:00.1Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-023",
+      "contract": "dateTimeStamp enumeration equality 2000-01-02T14:00:00.100+02:00",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-024",
+      "contract": "dateTimeStamp enumeration equality 2000-01-02T12:00:00.1",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-025",
+      "contract": "dateTimeStamp enumeration equality 2000-01-02T12:00:00.2Z",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-026",
+      "contract": "dateTimeStamp absent timezone enumeration 2000-01-02T12:00:00",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-027",
+      "contract": "dateTimeStamp absent timezone enumeration 2000-01-02T12:00:00Z",
+      "compile": "Invalid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-028",
+      "contract": "dateTimeStamp inherited enumeration 2000-01-02T12:00:00Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-029",
+      "contract": "dateTimeStamp inherited enumeration 2000-01-02T13:00:00Z",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-030",
+      "contract": "dateTimeStamp missing timezone before bound assessment",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-031",
+      "contract": "dateTimeStamp timezone requiredZ",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-032",
+      "contract": "dateTimeStamp timezone required",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-033",
+      "contract": "dateTimeStamp timezone prohibited",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-034",
+      "contract": "dateTimeStamp timezone prohibitedZ",
+      "compile": "Invalid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-035",
+      "contract": "dateTimeStamp timezone optional",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-036",
+      "contract": "dateTimeStamp timezone widening requiredoptional",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-037",
+      "contract": "dateTimeStamp timezone widening prohibitedrequired",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-038",
+      "contract": "dateTimeStamp fixed optional timezone",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-039",
+      "contract": "dateTimeStamp fixed bound 14:00:00+02:00",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-040",
+      "contract": "dateTimeStamp fixed bound 13:00:00Z",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-041",
+      "contract": "dateTimeStamp whitespace collapse",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-042",
+      "contract": "dateTimeStamp whitespace preserve",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-043",
+      "contract": "dateTimeStamp pattern ancestry 2000-01-02T12:00:00.123456789Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-044",
+      "contract": "dateTimeStamp pattern ancestry 2000-01-02T12:00:00.123456789",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-045",
+      "contract": "dateTimeStamp pattern ancestry 2001-01-02T12:00:00Z",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-046",
+      "contract": "dateTimeStamp pattern alternatives 2000-01-02T12:00:00Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-047",
+      "contract": "dateTimeStamp pattern alternatives 2000-01-02T13:00:00Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-048",
+      "contract": "dateTimeStamp pattern alternatives 2000-01-02T14:00:00Z",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-049",
+      "contract": "dateTimeStamp patterned ancestor bound minInclusive",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-050",
+      "contract": "dateTimeStamp patterned ancestor bound maxExclusive",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-051",
+      "contract": "dateTimeStamp enum respects pattern 2000-01-02T12:00:00Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-052",
+      "contract": "dateTimeStamp enum respects pattern 2000-01-02T12:00:00",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-053",
+      "contract": "dateTimeStamp exact trailing zeros",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-054",
+      "contract": "dateTimeStamp collapsed lexical",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-055",
+      "contract": "dateTimeStamp invalid lexical '2000-01-02T25:00:00Z'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-056",
+      "contract": "dateTimeStamp invalid lexical '2000-01-02T12:60:00Z'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-057",
+      "contract": "dateTimeStamp invalid lexical '2000-01-02T12:00:60Z'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-058",
+      "contract": "dateTimeStamp invalid lexical '2000-01-02T24:00:00.001Z'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-059",
+      "contract": "dateTimeStamp invalid lexical '2000-01-02T12:00:00+14:01'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-060",
+      "contract": "dateTimeStamp invalid lexical '2000-01-02T12:00:00+15:00'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-061",
+      "contract": "dateTimeStamp invalid lexical ''",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-062",
+      "contract": "dateTimeStamp end of day normalization",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-063",
+      "contract": "dateTimeStamp seconds digit capacity before zero normalization",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "ST-064",
+      "contract": "dateTimeStamp seconds scale capacity before zero normalization",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "ST-065",
+      "contract": "dateTimeStamp depth 1",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-066",
+      "contract": "dateTimeStamp depth 4",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-067",
+      "contract": "dateTimeStamp depth 5",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-068",
+      "contract": "dateTimeStamp conflicting base base='xs:dateTime'",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-069",
+      "contract": "dateTimeStamp conflicting base <xs:simpleType><xs:restriction base='xs:dateTime'></xs:restriction></xs:simpleType>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-070",
+      "contract": "dateTimeStamp forward final False",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-071",
+      "contract": "dateTimeStamp forward final True",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-072",
+      "contract": "dateTimeStamp list item",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-073",
+      "contract": "dateTimeStamp union actual calendar member",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-074",
+      "contract": "dateTimeStamp union fallback",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-075",
+      "contract": "dateTimeStamp nilled",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-076",
+      "contract": "dateTimeStamp excluded facet <xs:assertion test='true()'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-077",
+      "contract": "dateTimeStamp excluded facet <xs:length value='10'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-078",
+      "contract": "dateTimeStamp enumeration source capacity",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-079",
+      "contract": "dateTimeStamp pattern source capacity",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-080",
+      "contract": "dateTimeStamp year 0000-02-29T00:00:00Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-081",
+      "contract": "dateTimeStamp year -0000-01-02T12:00:00Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-082",
+      "contract": "dateTimeStamp year 10000-01-02T12:00:00Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-083",
+      "contract": "dateTimeStamp year 9223372036854775807-01-01T00:00:00Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-084",
+      "contract": "dateTimeStamp year -9223372036854775807-01-01T00:00:00Z",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-085",
+      "contract": "dateTimeStamp year capacity 9223372036854775808-01-01T00:00:00Z",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "ST-086",
+      "contract": "dateTimeStamp year capacity -9223372036854775808-01-01T00:00:00Z",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "ST-087",
+      "contract": "required timezone inherited at named",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-088",
+      "contract": "required timezone inherited at root",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-089",
+      "contract": "required timezone inherited at local",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-090",
+      "contract": "required timezone inherited at globalAttr",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-091",
+      "contract": "required timezone inherited at localAttr",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-092",
+      "contract": "explicit required timezone is legal",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-093",
+      "contract": "nested required timezone inheritance",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-094",
+      "contract": "self instance type retains original stamp",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-095",
+      "contract": "unknown instance type remains invalid",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "ST-096",
+      "contract": "other family excluded gYear",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-097",
+      "contract": "other family excluded duration",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-098",
+      "contract": "other family excluded hexBinary",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-099",
+      "contract": "other family excluded QName",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "ST-100",
+      "contract": "other family excluded anyURI",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    }
+  ]
+}

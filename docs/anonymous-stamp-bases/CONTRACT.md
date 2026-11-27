@@ -1,0 +1,11 @@
+# Bounded anonymous dateTimeStamp restriction bases
+
+27 November2026. Recorded before implementation at d7a4a6aa2b0b5f25f597053b091f7b273e10306f. ADOPTION.json is a fresh scoped record of immutable specification sources, affected sections and intentional deviations.
+
+Extend existing anonymous calendar-base admission to actual xs:dateTimeStamp NativeType objects. Retain the original unnamed base as direct DerivationBase and compile original facet elements through the existing calendar compiler, skipping only the exact inline base object. No aliases, synthetic QName/declaration, global anonymous entry, source/facet clone or namespace mutation. References share one original base; independent definitions remain distinct. Named forward/final source checks and scalar actual/governing authority remain.
+
+Reuse existing exact calendar carriers, seconds, equality/ordering, normalization, enumeration, bound/fixed/timezone/whitespace and lexical pattern ancestry. Required timezone is inherited without an explicit outer facet; unzoned values are Invalid and optional/prohibited facets cannot weaken the base. Public detached kind and native exact calendar kind remain DateTimeStamp. Same-step pattern alternatives and inherited intersections remain; bounds over patterned ancestors stay Unsupported. No new primitive semantics are adopted.
+
+Retain source sites16/depth4, year interval -long.MaxValue..long.MaxValue, lexical256, raw seconds digit/scale before normalization, string/regex/schema/atom/value/lifetime limits, nil/original XML, ownership/cancellation/recovery/export/detached expiry contracts. Other atomic/complex families, broader derivation/instance overrides, assertions, full PSVI/C45 and registry/tag/controller actions remain separate.
+
+Qualify both public facades/native identities/values/facets and all prior names/input bytes, exact fresh package/API/signed Core/original samples/invoice/docs/release/workload controls. Archive original assertions and explicitly reconcile the previous anonymous-stamp refusal, including the newly observable DateTimeStamp detached kind while preserving original schema/XML. Package counts overlap source. Complete authorized commit/push/PR review/green merge/exact-main CI. No publication included.
