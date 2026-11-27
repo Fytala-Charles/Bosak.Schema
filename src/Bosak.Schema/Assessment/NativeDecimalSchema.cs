@@ -80,6 +80,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 1.60 | 27-11-2026     | Enforce bounded simple-type final derivation controls.                                   |
 //                      | Charles Korthout | 1.61 | 27-11-2026     | Enforce abstract complex types after admitted type resolution.                           |
+//                      | Charles Korthout | 1.62 | 27-11-2026     | Preserve bounded anyType nil states and independent wildcard attributes.                |
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 
@@ -588,7 +589,10 @@ internal sealed partial class NativeDecimalSchema
             else InstanceAttributes(root);
             Check(found, "Unexpected root element.");
             if (NilledState(root, selected!.Root, rootType!) is { } nilled)
+            {
+                if (rootType!.IsAnyType) AssessKnownLaxAttributes(root, attributeStates, [], 0, cancellationToken, patternBudget, true);
                 return NativeResult<NativeAssessedDocument>.Valid(new NativeAssessedDocument(document, [nilled], attributeStates.ToImmutable()));
+            }
             if (!selected!.Root.Type.IsComplex)
             {
                 Check(!root.HasElements, "Simple root cannot contain child elements.");

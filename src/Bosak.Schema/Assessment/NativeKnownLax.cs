@@ -15,6 +15,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 //                      | Charles Korthout | 0.22  | 27-11-2026     | Reject abstract known global matches before container dispatch.                           |
+//                      | Charles Korthout | 0.23 | 27-11-2026     | Preserve bounded anyType nil states and independent wildcard attributes.                |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -58,24 +59,7 @@ internal sealed partial class NativeDecimalSchema
             states.Add(new NativeElementState(null, null, StringValue: element.Value) { EffectiveType = type, OriginalName = element.Name });
         }
         else states.Add(ContainerValueState(element, declaration, type));
-        foreach (var attribute in element.Attributes().Where(a => !IsAdmittedInstanceAttribute(a)))
-        {
-            token.ThrowIfCancellationRequested();
-            Require(GlobalAttributeDeclarations.Any(d => d.ExpandedName == attribute.Name) || allowDeclarationAbsent, "Unknown lax attribute below strict ancestor awaits projection.", NativeDecimalUnsupportedReason.Attributes);
-            Require(attribute.Name.NamespaceName is not "http://www.w3.org/XML/1998/namespace" and not "http://www.w3.org/2001/XMLSchema-instance", "Special lax attribute is unsupported.", NativeDecimalUnsupportedReason.Attributes);
-        }
-        foreach (var global in GlobalAttributeDeclarations)
-        {
-            token.ThrowIfCancellationRequested();
-            if (element.Attribute(global.ExpandedName) is { } attribute)
-                attributes.Add(AssessAttributeValue(attribute.Value, global, patternBudget, element) with { OwnerElementPath = path, OwnerElementIndex = ownerIndex });
-        }
-        foreach (var attribute in element.Attributes().Where(a => !IsAdmittedInstanceAttribute(a) && !GlobalAttributeDeclarations.Any(d => d.ExpandedName == a.Name)))
-        {
-            token.ThrowIfCancellationRequested();
-            Require(attribute.Value.Length <= maxStringCharacters!.Value, "Lax attribute string capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
-            attributes.Add(new NativeElementState(null, null, StringValue: attribute.Value) { EffectiveType = LaxAttributeType!, ActualAtomicType = UntypedAtomicType!, OriginalName = attribute.Name, OwnerElementPath = path, OwnerElementIndex = ownerIndex });
-        }
+        AssessKnownLaxAttributes(element, attributes, path, ownerIndex, token, patternBudget, allowDeclarationAbsent);
         var index = 0;
         foreach (var child in element.Elements())
         {
@@ -100,4 +84,27 @@ internal sealed partial class NativeDecimalSchema
         }
         token.ThrowIfCancellationRequested();
     }
+    private void AssessKnownLaxAttributes(XElement element, ImmutableArray<NativeElementState>.Builder attributes,
+        ImmutableArray<int> path, int ownerIndex, CancellationToken token, NativePatternBudget patternBudget, bool allowDeclarationAbsent)
+    {
+        foreach (var attribute in element.Attributes().Where(a => !IsAdmittedInstanceAttribute(a)))
+        {
+            token.ThrowIfCancellationRequested();
+            Require(GlobalAttributeDeclarations.Any(d => d.ExpandedName == attribute.Name) || allowDeclarationAbsent, "Unknown lax attribute below strict ancestor awaits projection.", NativeDecimalUnsupportedReason.Attributes);
+            Require(attribute.Name.NamespaceName is not "http://www.w3.org/XML/1998/namespace" and not "http://www.w3.org/2001/XMLSchema-instance", "Special lax attribute is unsupported.", NativeDecimalUnsupportedReason.Attributes);
+        }
+        foreach (var global in GlobalAttributeDeclarations)
+        {
+            token.ThrowIfCancellationRequested();
+            if (element.Attribute(global.ExpandedName) is { } attribute)
+                attributes.Add(AssessAttributeValue(attribute.Value, global, patternBudget, element) with { OwnerElementPath = path, OwnerElementIndex = ownerIndex });
+        }
+        foreach (var attribute in element.Attributes().Where(a => !IsAdmittedInstanceAttribute(a) && !GlobalAttributeDeclarations.Any(d => d.ExpandedName == a.Name)))
+        {
+            token.ThrowIfCancellationRequested();
+            Require(attribute.Value.Length <= maxStringCharacters!.Value, "Lax attribute string capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+            attributes.Add(new NativeElementState(null, null, StringValue: attribute.Value) { EffectiveType = LaxAttributeType!, ActualAtomicType = UntypedAtomicType!, OriginalName = attribute.Name, OwnerElementPath = path, OwnerElementIndex = ownerIndex });
+        }
+    }
+
 }

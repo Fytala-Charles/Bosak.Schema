@@ -15,6 +15,7 @@
 //                      | Charles Korthout | 0.2   | 25-11-2026     | Validate scalar element constraints against provided original values |
 //                      | Charles Korthout | 0.3 | 26-11-2026     | Preserve original comment and PI nodes while validating content contributions |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.4 | 27-11-2026     | Preserve bounded anyType nil states and independent wildcard attributes.                |
 // ===========================================================================================================================================================
 using System.Xml.Linq;
 namespace Bosak.Schema;
@@ -28,14 +29,14 @@ internal sealed partial class NativeDecimalSchema
  private static bool ReadNillable(XElement source)=>source.Attribute("nillable") is { } flag && NilBoolean(flag.Value);
  private static NativeDeclaration ElementDeclaration(XElement source,string name,NativeType type,int min,int max,string ns,NativeDecimalSchema? container=null)
  {
-  var nil=ReadNillable(source);Require(!nil || !type.IsComplex,"Complex nillability is outside the simple-valued profile.",NativeDecimalUnsupportedReason.DeclarationShape);return new NativeDeclaration(name,type,min,max,ns){IsNillable=nil,Container=container,ValueConstraint=CompileValueConstraint(source,type)};
+  var nil=ReadNillable(source);Require(!nil || !type.IsComplex || type.IsAnyType,"Complex nillability is outside the simple-valued profile.",NativeDecimalUnsupportedReason.DeclarationShape);return new NativeDeclaration(name,type,min,max,ns){IsNillable=nil,Container=container,ValueConstraint=CompileValueConstraint(source,type)};
  }
  private static NativeElementState? NilledState(XElement element,NativeDeclaration declaration,NativeType selected)
  {
   if(element.Attribute(Xsi+"nil") is not { } request)return null;
   Check(declaration.CanonicalDeclaration.IsNillable,"Any xsi:nil attribute requires a nillable declaration.");if(!NilBoolean(request.Value))return null;
   Check(declaration.CanonicalDeclaration.ValueConstraint?.IsFixed != true,"A fixed-value element cannot be nilled.");
-  Require(!selected.IsComplex,"Complex nillability is outside the simple-valued profile.",NativeDecimalUnsupportedReason.DeclarationShape);
+  Require(!selected.IsComplex || selected.IsAnyType,"Complex nillability is outside the simple-valued profile.",NativeDecimalUnsupportedReason.DeclarationShape);
   Require(element.Nodes().All(n=>n is XText or XElement or XComment or XProcessingInstruction),"Nilled comments or processing instructions are outside the profile.",NativeDecimalUnsupportedReason.DeclarationShape);Check(!element.Nodes().Any(n => n is XText or XElement),"Nilled elements cannot contain text or element children.");return new NativeElementState(declaration,null){EffectiveType=selected,IsNilled=true};
  }
 }

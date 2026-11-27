@@ -1,0 +1,3655 @@
+{
+  "cases": [
+    {
+      "id": "AN-001",
+      "contract": "nil versus ordinary False root true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-002",
+      "contract": "nil versus ordinary False root 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='1' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-003",
+      "contract": "nil versus ordinary False root false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' > x </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-004",
+      "contract": "nil versus ordinary False root 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='0' > x </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-005",
+      "contract": "nil versus ordinary False root None",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' > x </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-006",
+      "contract": "nil versus ordinary False local true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-007",
+      "contract": "nil versus ordinary False local 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='1' ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-008",
+      "contract": "nil versus ordinary False local false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-009",
+      "contract": "nil versus ordinary False local 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='0' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-010",
+      "contract": "nil versus ordinary False local None",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-011",
+      "contract": "nil versus ordinary False ref true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-012",
+      "contract": "nil versus ordinary False ref 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='1' ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-013",
+      "contract": "nil versus ordinary False ref false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-014",
+      "contract": "nil versus ordinary False ref 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='0' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-015",
+      "contract": "nil versus ordinary False ref None",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-016",
+      "contract": "nil versus ordinary False lax true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-017",
+      "contract": "nil versus ordinary False lax 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='1' ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-018",
+      "contract": "nil versus ordinary False lax false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-019",
+      "contract": "nil versus ordinary False lax 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='0' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-020",
+      "contract": "nil versus ordinary False lax None",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-021",
+      "contract": "nil versus ordinary True root true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-022",
+      "contract": "nil versus ordinary True root 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='1' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-023",
+      "contract": "nil versus ordinary True root false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' > x </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-024",
+      "contract": "nil versus ordinary True root 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='0' > x </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-025",
+      "contract": "nil versus ordinary True root None",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' > x </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-026",
+      "contract": "nil versus ordinary True local true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' type='xs:anyType' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-027",
+      "contract": "nil versus ordinary True local 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' type='xs:anyType' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='1' ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-028",
+      "contract": "nil versus ordinary True local false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' type='xs:anyType' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-029",
+      "contract": "nil versus ordinary True local 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' type='xs:anyType' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='0' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-030",
+      "contract": "nil versus ordinary True local None",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' type='xs:anyType' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-031",
+      "contract": "nil versus ordinary True ref true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-032",
+      "contract": "nil versus ordinary True ref 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='1' ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-033",
+      "contract": "nil versus ordinary True ref false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-034",
+      "contract": "nil versus ordinary True ref 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='0' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-035",
+      "contract": "nil versus ordinary True ref None",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-036",
+      "contract": "nil versus ordinary True lax true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-037",
+      "contract": "nil versus ordinary True lax 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='1' ></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-038",
+      "contract": "nil versus ordinary True lax false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-039",
+      "contract": "nil versus ordinary True lax 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='0' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-040",
+      "contract": "nil versus ordinary True lax None",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' type='xs:anyType' nillable='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' > x </a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            " x "
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-041",
+      "contract": "nilled content root  ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' > </a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-042",
+      "contract": "nilled content local  ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' > </a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-043",
+      "contract": "nilled content root text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' >text</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-044",
+      "contract": "nilled content local text",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' >text</a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-045",
+      "contract": "nilled content root <b/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ><b/></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-046",
+      "contract": "nilled content local <b/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ><b/></a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-047",
+      "contract": "nilled content root <![CDATA[]]>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ><![CDATA[]]></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-048",
+      "contract": "nilled content local <![CDATA[]]>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ><![CDATA[]]></a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-049",
+      "contract": "nilled content root <![CDATA[ ]]>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ><![CDATA[ ]]></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-050",
+      "contract": "nilled content local <![CDATA[ ]]>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ><![CDATA[ ]]></a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-051",
+      "contract": "nilled content root <!--c-->",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ><!--c--></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-052",
+      "contract": "nilled content local <!--c-->",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ><!--c--></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-053",
+      "contract": "nilled content root <?p data?>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ><?p data?></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-054",
+      "contract": "nilled content local <?p data?>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ><?p data?></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-055",
+      "contract": "nilled content root <!--c--><?p data?>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ><!--c--><?p data?></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-056",
+      "contract": "nilled content local <!--c--><?p data?>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ><!--c--><?p data?></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-057",
+      "contract": "nillability admission None true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-058",
+      "contract": "nillability admission None false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-059",
+      "contract": "nillability admission None None",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-060",
+      "contract": "nillability admission false true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='false' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-061",
+      "contract": "nillability admission false false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='false' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-062",
+      "contract": "nillability admission false None",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='false' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-063",
+      "contract": "nillability admission 0 true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='0' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-064",
+      "contract": "nillability admission 0 false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='0' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='false' ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-065",
+      "contract": "nillability admission 0 None",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='0' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-066",
+      "contract": "nil Boolean ' true '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil=' true ' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-067",
+      "contract": "nil Boolean '\\t1\\n'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='\t1\n' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-068",
+      "contract": "nil Boolean ' false '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil=' false ' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-069",
+      "contract": "nil Boolean '\\t0\\n'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='\t0\n' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-070",
+      "contract": "nil Boolean 'True'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='True' ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-071",
+      "contract": "nil Boolean '2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='2' ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-072",
+      "contract": "nil Boolean ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='' ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-073",
+      "contract": "nil Boolean 'true false'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true false' ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-074",
+      "contract": "schema Boolean ' true '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable=' true ' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-075",
+      "contract": "schema Boolean '\\t1\\n'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='\t1\n' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-076",
+      "contract": "schema Boolean ' false '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable=' false ' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-077",
+      "contract": "schema Boolean 'bad'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='bad' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ></a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-078",
+      "contract": "schema Boolean '2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='2' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ></a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-079",
+      "contract": "schema Boolean ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ></a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-080",
+      "contract": "nil Boolean raw capacity 256",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='                                                                                                                                                                                                                                                            true' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-081",
+      "contract": "schema Boolean raw capacity 256",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='                                                                                                                                                                                                                                                            true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-082",
+      "contract": "nil Boolean raw capacity 257",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='                                                                                                                                                                                                                                                             true' ></a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-083",
+      "contract": "schema Boolean raw capacity 257",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='                                                                                                                                                                                                                                                             true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-084",
+      "contract": "known wildcard attribute root 01.20",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:attribute name='g' type='xs:decimal'/></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' g='01.20'></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-085",
+      "contract": "known wildcard attribute root bad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:attribute name='g' type='xs:decimal'/></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' g='bad'></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-086",
+      "contract": "unknown wildcard attribute root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' extra=' raw '></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "name": "extra",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-087",
+      "contract": "known wildcard attribute local 01.20",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element><xs:attribute name='g' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' g='01.20'></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-088",
+      "contract": "known wildcard attribute local bad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element><xs:attribute name='g' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' g='bad'></a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-089",
+      "contract": "unknown wildcard attribute local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' extra=' raw '></a></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "name": "extra",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-090",
+      "contract": "known wildcard attribute ref 01.20",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element><xs:attribute name='g' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' g='01.20'></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-091",
+      "contract": "known wildcard attribute ref bad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element><xs:attribute name='g' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' g='bad'></a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-092",
+      "contract": "unknown wildcard attribute ref",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' extra=' raw '></a></r>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "name": "extra",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-093",
+      "contract": "known wildcard attribute lax 01.20",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'/><xs:attribute name='g' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' g='01.20'></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-094",
+      "contract": "known wildcard attribute lax bad",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'/><xs:attribute name='g' type='xs:decimal'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' g='bad'></a></r>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "1.2"
+          ],
+          "kind": "Decimal",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-095",
+      "contract": "unknown wildcard attribute lax",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'/></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' extra=' raw '></a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            " raw "
+          ],
+          "kind": "String",
+          "name": "extra",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-096",
+      "contract": "independent type/special attributes xmlns:xs='http://www.w3.org/2001/XMLSchema' xsi:type='xs:anyType'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' xmlns:xs='http://www.w3.org/2001/XMLSchema' xsi:type='xs:anyType'></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-097",
+      "contract": "independent type/special attributes xmlns:xs='http://www.w3.org/2001/XMLSchema' xsi:type='xs:decimal'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' xmlns:xs='http://www.w3.org/2001/XMLSchema' xsi:type='xs:decimal'></a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-098",
+      "contract": "independent type/special attributes xsi:other='x'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' xsi:other='x'></a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-099",
+      "contract": "independent type/special attributes xml:lang='en'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' xml:lang='en'></a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-100",
+      "contract": "source-bound namespace urn:t",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='urn:t' xmlns:t='urn:t' elementFormDefault='qualified'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'  xmlns='urn:t'></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-101",
+      "contract": "source-bound namespace relative/ns",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' targetNamespace='relative/ns' xmlns:t='relative/ns' elementFormDefault='qualified'><xs:element name='a' nillable='true' /></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'  xmlns='relative/ns'></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-102",
+      "contract": "abstract declaration remains invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' abstract='true'/></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-103",
+      "contract": "anyType value constraints excluded default='x'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' default='x'/></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-104",
+      "contract": "anyType value constraints excluded fixed='x'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' fixed='x'/></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-105",
+      "contract": "all/choice nil members stay excluded all",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:all><xs:element name='a' nillable='true' /></xs:all></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-106",
+      "contract": "all/choice nil members stay excluded choice",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:choice><xs:element name='a' nillable='true' /></xs:choice></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r><a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a></r>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-107",
+      "contract": "general complex nil remains excluded",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true'><xs:complexType/></xs:element></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true' ></a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-108",
+      "contract": "repeated nil and ordinary local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='r'><xs:complexType><xs:sequence><xs:element name='a' maxOccurs='2' nillable='true' /></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><a xsi:nil='true'/><a>value</a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        },
+        {
+          "path": [
+            1
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "element",
+          "path": [
+            1
+          ],
+          "expected": [
+            "value"
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 1,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AN-109",
+      "contract": "repeated nil and ordinary ref",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='a' nillable='true' /><xs:element name='r'><xs:complexType><xs:sequence><xs:element ref='a' maxOccurs='2'/></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<r xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><a xsi:nil='true'/><a>value</a></r>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [
+            0
+          ],
+          "nilled": true
+        },
+        {
+          "path": [
+            1
+          ],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "element",
+          "path": [
+            1
+          ],
+          "expected": [
+            "value"
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 1,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    }
+  ]
+}
