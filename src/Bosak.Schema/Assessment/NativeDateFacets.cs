@@ -18,6 +18,7 @@
 //                      | Charles Korthout | 0.5   | 24-11-2026     | Validate inherited date facets and exclusive endpoint exceptions |
 //                      | Charles Korthout | 0.6   | 24-11-2026     | Compile date pattern groups with inherited lexical and value constraints |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.7 | 27-11-2026 | Preserve original anonymous date base and facet source elements. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Numerics;
@@ -43,9 +44,9 @@ internal sealed class NativeDateFacets(
     internal static NativeDateFacets? Compile(XElement restriction, int maxCharacters, NativePatternCompilation compilation) =>
         CompileDerived(restriction, maxCharacters, null, compilation);
 
-    internal static NativeDateFacets? CompileDerived(XElement restriction, int maxCharacters, NativeDateFacets? parent, NativePatternCompilation compilation)
+    internal static NativeDateFacets? CompileDerived(XElement restriction, int maxCharacters, NativeDateFacets? parent, NativePatternCompilation compilation, XElement? inlineBase = null)
     {
-        var facets = NativeDecimalSchema.Elements(restriction);
+        var facets = NativeDecimalSchema.Elements(restriction).Where(f => !ReferenceEquals(f, inlineBase)).ToArray();
         var seen = new HashSet<string>(StringComparer.Ordinal);
         foreach (var facet in facets)
         {
@@ -62,7 +63,7 @@ internal sealed class NativeDateFacets(
         NativeDecimalSchema.Require(facets.Count(f => f.Name.LocalName == "enumeration") <= 16,
             "Date enumeration source capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
         NativePattern.Capacity(facets.Count(f => f.Name.LocalName == "pattern") <= 8);
-        if (facets.Count == 0) return parent is null ? null : new(null, parent: parent);
+        if (facets.Length == 0) return parent is null ? null : new(null, parent: parent);
         NativeDecimalSchema.Require(parent?.HasPatterns != true || !facets.Any(f => f.Name.LocalName is "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive"),
             "Bounds over patterned date bases require separate value-space support.", NativeDecimalUnsupportedReason.ValueType);
         if (seen.Contains("minInclusive") && seen.Contains("minExclusive") ||

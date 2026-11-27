@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.39 development candidate requires Bosak Core 1.86.0 or later.
+The 0.40 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1873,3 +1873,7 @@ Existing inline restriction placements admit decimal and string/normalizedString
 ## Anonymous integer and Boolean restriction bases (development 0.39)
 
 Existing inline restriction placements admit already compiled integer-family and Boolean bases using their actual unnamed type objects and original facet sources. Exact integer bounds/enumeration/digits, numeric patterns and Boolean fixed collapse whitespace/pattern ancestry retain existing limits. Other atomic/complex families, assertions and broader named-integer chains remain excluded. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-integral-bases/GUIDE.md). Unpublished development source.
+
+## Anonymous date restriction bases (development0.40)
+
+Existing inline restriction placements admit xs:date bases using original unnamed type objects and original facet sources. Existing bounded date equality, enumeration, partial-order bounds, explicitTimezone and lexical pattern ancestry retain their semantics and limits. Other calendar/interchange/complex families and broader derivation remain separate. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-date-bases/GUIDE.md). Unpublished development source.

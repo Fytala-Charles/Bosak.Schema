@@ -1,0 +1,3069 @@
+{
+  "cases": [
+    {
+      "id": "AD-001",
+      "contract": "inline date named 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-002",
+      "contract": "inline date named 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-003",
+      "contract": "inline date root 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-004",
+      "contract": "inline date root 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a>2000-01-02</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-005",
+      "contract": "inline date local 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a><v>2000-01-02Z</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-006",
+      "contract": "inline date local 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a><v>2000-01-02</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "2000-01-02"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-007",
+      "contract": "inline date globalAttr 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a g='2000-01-02Z'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-008",
+      "contract": "inline date globalAttr 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a g='2000-01-02'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "2000-01-02"
+          ],
+          "kind": "Date",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-009",
+      "contract": "inline date localAttr 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a g='2000-01-02Z'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-010",
+      "contract": "inline date localAttr 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a g='2000-01-02'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "2000-01-02"
+          ],
+          "kind": "Date",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-011",
+      "contract": "date bound <xs:minInclusive value='2000-01-02Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-02Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-012",
+      "contract": "date bound rejects <xs:minInclusive value='2000-01-02Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-02Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-01Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-013",
+      "contract": "date bound <xs:minExclusive value='2000-01-01Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:minExclusive value='2000-01-01Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-014",
+      "contract": "date bound rejects <xs:minExclusive value='2000-01-01Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:minExclusive value='2000-01-01Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-01Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-015",
+      "contract": "date bound <xs:maxInclusive value='2000-01-02Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:maxInclusive value='2000-01-02Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-016",
+      "contract": "date bound rejects <xs:maxInclusive value='2000-01-02Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:maxInclusive value='2000-01-02Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-03Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-017",
+      "contract": "date bound <xs:maxExclusive value='2000-01-03Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:maxExclusive value='2000-01-03Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-018",
+      "contract": "date bound rejects <xs:maxExclusive value='2000-01-03Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:maxExclusive value='2000-01-03Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-03Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-019",
+      "contract": "zoned enumeration equality 2000-01-02+14:00",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02+14:00'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02+14:00</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02+14:00"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-020",
+      "contract": "zoned enumeration equality 2000-01-01-10:00",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02+14:00'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-01-10:00</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-01-10:00"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-021",
+      "contract": "zoned enumeration equality 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02+14:00'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-022",
+      "contract": "zoned enumeration equality 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02+14:00'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-023",
+      "contract": "absent zone enumeration 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-024",
+      "contract": "absent zone enumeration 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-025",
+      "contract": "inherited date enumeration 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:enumeration value='2000-01-02Z'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-026",
+      "contract": "inherited date enumeration 2000-01-03Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:enumeration value='2000-01-02Z'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-03Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-027",
+      "contract": "inherited date widening <xs:minInclusive value='2000-01-01Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:minInclusive value='2000-01-02Z'/><xs:maxInclusive value='2000-01-03Z'/></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-01Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-028",
+      "contract": "inherited date widening <xs:maxInclusive value='2000-01-04Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:minInclusive value='2000-01-02Z'/><xs:maxInclusive value='2000-01-03Z'/></xs:restriction></xs:simpleType><xs:maxInclusive value='2000-01-04Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-029",
+      "contract": "inherited date widening <xs:enumeration value='2000-01-01Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:minInclusive value='2000-01-02Z'/><xs:maxInclusive value='2000-01-03Z'/></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-01Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-030",
+      "contract": "exclusive endpoint <xs:minExclusive value='2000-01-01Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:minExclusive value='2000-01-01Z'/></xs:restriction></xs:simpleType><xs:minExclusive value='2000-01-01Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-031",
+      "contract": "exclusive endpoint <xs:minInclusive value='2000-01-01Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:minExclusive value='2000-01-01Z'/></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-01Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-032",
+      "contract": "explicitTimezone required 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:explicitTimezone value='required'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-033",
+      "contract": "explicitTimezone required 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:explicitTimezone value='required'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-034",
+      "contract": "explicitTimezone prohibited 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:explicitTimezone value='prohibited'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-035",
+      "contract": "explicitTimezone prohibited 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:explicitTimezone value='prohibited'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-036",
+      "contract": "explicitTimezone optional 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:explicitTimezone value='optional'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-037",
+      "contract": "timezone widening requiredoptional",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:explicitTimezone value='required'/></xs:restriction></xs:simpleType><xs:explicitTimezone value='optional'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-038",
+      "contract": "timezone widening prohibitedrequired",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:explicitTimezone value='prohibited'/></xs:restriction></xs:simpleType><xs:explicitTimezone value='required'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-039",
+      "contract": "inherited required zone 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:explicitTimezone value='required'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-040",
+      "contract": "inherited required zone 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:explicitTimezone value='required'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-041",
+      "contract": "same step date pattern alternatives 2000-01-01Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:pattern value='2000-01-01Z'/><xs:pattern value='2000-01-02Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-01Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-01Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-042",
+      "contract": "same step date pattern alternatives 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:pattern value='2000-01-01Z'/><xs:pattern value='2000-01-02Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-043",
+      "contract": "same step date pattern alternatives 2000-01-03Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:pattern value='2000-01-01Z'/><xs:pattern value='2000-01-02Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-03Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-03Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-044",
+      "contract": "date pattern ancestry 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:pattern value='2000.*'/></xs:restriction></xs:simpleType><xs:pattern value='.*Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-045",
+      "contract": "date pattern ancestry 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:pattern value='2000.*'/></xs:restriction></xs:simpleType><xs:pattern value='.*Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-046",
+      "contract": "date pattern ancestry 2001-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:pattern value='2000.*'/></xs:restriction></xs:simpleType><xs:pattern value='.*Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2001-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-047",
+      "contract": "bounds over patterned date stay excluded <xs:minInclusive value='2000-01-01Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:pattern value='2000.*'/></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-01Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-048",
+      "contract": "bounds over patterned date stay excluded <xs:maxExclusive value='2001-01-01Z'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:pattern value='2000.*'/></xs:restriction></xs:simpleType><xs:maxExclusive value='2001-01-01Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-049",
+      "contract": "enumeration respects original pattern 2000-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:pattern value='2000.*'/></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-050",
+      "contract": "enumeration respects original pattern 2001-01-02Z",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'><xs:pattern value='2000.*'/></xs:restriction></xs:simpleType><xs:enumeration value='2001-01-02Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-051",
+      "contract": "partial order versus zoned bound 2000-01-04",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-02Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-04</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-04"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-052",
+      "contract": "partial order versus zoned bound 2000-01-02",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:minInclusive value='2000-01-02Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-053",
+      "contract": "bounded date lexical 2000-02-29",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-02-29</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-02-29"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-054",
+      "contract": "bounded date lexical 0000-02-29",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>0000-02-29</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0000-02-29"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-055",
+      "contract": "bounded date lexical -0004-02-29",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>-0004-02-29</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "-0004-02-29"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-056",
+      "contract": "bounded date lexical 10000-01-01",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>10000-01-01</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "10000-01-01"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-057",
+      "contract": "bounded date lexical 9223372036854775807-01-01",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>9223372036854775807-01-01</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "9223372036854775807-01-01"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-058",
+      "contract": "bounded date lexical -9223372036854775807-01-01",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>-9223372036854775807-01-01</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "-9223372036854775807-01-01"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-059",
+      "contract": "bounded date lexical 2000-01-02+14:00",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02+14:00</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02+14:00"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-060",
+      "contract": "bounded date lexical 2000-01-02-14:00",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02-14:00</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02-14:00"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-061",
+      "contract": "collapsed date lexical",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>  2000-01-02Z  </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-062",
+      "contract": "invalid date lexical '1900-02-29'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>1900-02-29</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-063",
+      "contract": "invalid date lexical '2001-02-29'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2001-02-29</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-064",
+      "contract": "invalid date lexical '2000-04-31'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-04-31</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-065",
+      "contract": "invalid date lexical '2000-00-01'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-00-01</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-066",
+      "contract": "invalid date lexical '2000-01-00'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-00</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-067",
+      "contract": "invalid date lexical '+2000-01-02'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>+2000-01-02</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-068",
+      "contract": "invalid date lexical '2000-1-02'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-1-02</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-069",
+      "contract": "invalid date lexical '2000-01-02+14:01'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02+14:01</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-070",
+      "contract": "invalid date lexical '2000-01-02+15:00'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02+15:00</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-071",
+      "contract": "invalid date lexical '2000-01-02T00:00:00Z'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02T00:00:00Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-072",
+      "contract": "invalid date lexical ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-073",
+      "contract": "date year capacity 9223372036854775808-01-01",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>9223372036854775808-01-01</a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-074",
+      "contract": "date year capacity -9223372036854775808-01-01",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>-9223372036854775808-01-01</a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-075",
+      "contract": "date depth 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-076",
+      "contract": "date depth 4",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-077",
+      "contract": "date depth 5",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-078",
+      "contract": "conflicting date base base='xs:date'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:date'><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-079",
+      "contract": "conflicting date base <xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-080",
+      "contract": "forward date final False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='B'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:date'><xs:minInclusive value='2000-01-01Z'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-081",
+      "contract": "forward date final True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='B'/></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B' final='restriction'><xs:restriction base='xs:date'><xs:minInclusive value='2000-01-01Z'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-082",
+      "contract": "date list item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:list><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:list></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z 2000-01-03</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z",
+            "2000-01-03"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-083",
+      "contract": "union actual date member",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:union><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction base='xs:string'/></xs:simpleType></xs:union></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-084",
+      "contract": "union actual fallback member",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:union><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:simpleType><xs:restriction base='xs:string'/></xs:simpleType></xs:union></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>word</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "word"
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-085",
+      "contract": "nilled date",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a' nillable='true'><xs:simpleType><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:nil='true'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": true,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": true
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-086",
+      "contract": "excluded date facet syntax <xs:assertion test='true()'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:assertion test='true()'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-087",
+      "contract": "excluded date facet syntax <xs:whiteSpace value='collapse'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:whiteSpace value='collapse'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-088",
+      "contract": "excluded date facet syntax <xs:length value='10'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:length value='10'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-089",
+      "contract": "excluded date facet syntax <xs:explicitTimezone value='optional' fixed='true'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:explicitTimezone value='optional' fixed='true'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-090",
+      "contract": "date enumeration capacity",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/><xs:enumeration value='2000-01-02Z'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-091",
+      "contract": "date pattern capacity",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/><xs:pattern value='.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-092",
+      "contract": "other family excluded dateTime",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:dateTime'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-093",
+      "contract": "other family excluded time",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:time'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-094",
+      "contract": "other family excluded gYear",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:gYear'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-095",
+      "contract": "other family excluded hexBinary",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:hexBinary'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-096",
+      "contract": "other family excluded QName",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:QName'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-097",
+      "contract": "other family excluded anyURI",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:anyURI'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>2000-01-02Z</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "AD-098",
+      "contract": "unknown xsi type remains invalid",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:date'></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:type='Missing'>2000-01-02Z</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "2000-01-02Z"
+          ],
+          "kind": "Date",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    }
+  ]
+}
