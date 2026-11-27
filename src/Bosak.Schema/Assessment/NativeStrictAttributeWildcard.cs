@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.3   | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
 //                      | Charles Korthout | 0.4   | 26-11-2026     | Retain strict wildcard plans on bounded all/choice roots.                                 |
 //                      | Charles Korthout | 0.5   | 26-11-2026     | Admit strict wildcard attributes on qualified finite mixed sequence owners.               |
+//                      | Charles Korthout | 0.6   | 27-11-2026     | Admit bounded empty-owner lax attributes with root-only partial projection.                |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
@@ -27,6 +28,7 @@ internal sealed record NativeStrictAttributeWildcard(string Mode, string TargetN
 {
     internal ImmutableHashSet<XName> DisallowedNames { get; init; } = ImmutableHashSet<XName>.Empty;
     internal bool DisallowDefined { get; init; }
+    internal bool IsLax { get; init; }
     internal bool Allows(string ns) => Mode == "##any" || (Mode == "##other" ? ns.Length != 0 && ns != TargetNamespace : Mode == "not" ? !Namespaces.Contains(ns) : Namespaces.Contains(ns));
     internal bool AllowsName(XName name, bool defined) => Allows(name.NamespaceName) && !DisallowedNames.Contains(name) && !(DisallowDefined && defined);
 }
@@ -46,18 +48,19 @@ internal sealed partial class NativeDecimalSchema
         return (uses, source is null ? null : CompileStrictAttributeWildcard(source, targetNamespace), assertions);
     }
 
-    private static NativeStrictAttributeWildcard CompileStrictAttributeWildcard(XElement source, string targetNamespace)
+    private static NativeStrictAttributeWildcard CompileStrictAttributeWildcard(XElement source, string targetNamespace, bool allowLax = false)
     {
         Attributes(source, "namespace", "notNamespace", "notQName", "processContents");
         Require(Elements(source).Count == 0, "Wildcard children are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-        Require(Collapse((string?)source.Attribute("processContents") ?? "strict") == "strict", "Only strict attribute wildcards are admitted.", NativeDecimalUnsupportedReason.DeclarationShape);
+        var process = Collapse((string?)source.Attribute("processContents") ?? "strict");
+        Require(process == "strict" || allowLax && process == "lax", "Wildcard process mode is outside this owner profile.", NativeDecimalUnsupportedReason.DeclarationShape);
         Check(source.Attribute("namespace") is null || source.Attribute("notNamespace") is null, "namespace and notNamespace cannot coexist.");
         var negative = source.Attribute("notNamespace") is not null;
         var text = Collapse((string?)source.Attribute(negative ? "notNamespace" : "namespace") ?? "##any");
         var tokens = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         if (negative) Check(tokens.Length != 0, "A negative namespace set must not be empty.");
         Require(tokens.Length is >= 1 and <= 8 && tokens.All(t => t.Length <= 256), "Attribute wildcard namespace capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
-        if (!negative && (text is "##any" or "##other")) return CompleteStrictNameExclusions(source, new(text, targetNamespace, ImmutableHashSet<string>.Empty));
+        if (!negative && (text is "##any" or "##other")) return CompleteStrictNameExclusions(source, new(text, targetNamespace, ImmutableHashSet<string>.Empty) { IsLax = process == "lax" });
         var namespaces = ImmutableHashSet.CreateBuilder<string>(StringComparer.Ordinal);
         foreach (var token in tokens)
         {
@@ -69,7 +72,7 @@ internal sealed partial class NativeDecimalSchema
                 namespaces.Add(token);
             }
         }
-        return CompleteStrictNameExclusions(source, new(negative ? "not" : "enumeration", targetNamespace, namespaces.ToImmutable()));
+        return CompleteStrictNameExclusions(source, new(negative ? "not" : "enumeration", targetNamespace, namespaces.ToImmutable()) { IsLax = process == "lax" });
     }
 
     private static NativeStrictAttributeWildcard CompleteStrictNameExclusions(XElement source, NativeStrictAttributeWildcard wildcard)
@@ -103,7 +106,13 @@ internal sealed partial class NativeDecimalSchema
             token.ThrowIfCancellationRequested();
             var defined = GlobalAttributeDeclarations.Any(d => d.ExpandedName == attribute.Name);
             Check(plan.AttributeWildcard is { } wildcard && wildcard.AllowsName(attribute.Name, defined), "Attribute does not match the strict wildcard.");
-            Check(defined, "Strict wildcard attribute has no global declaration.");
+            if (!defined && plan.AttributeWildcard!.IsLax)
+            {
+                Require(path.IsEmpty && ownerIndex == 0, "Unknown lax attribute beneath a strict ancestor awaits projection.", NativeDecimalUnsupportedReason.DeclarationShape);
+                Require(attribute.Value.Length <= maxStringCharacters!.Value, "Lax attribute string capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+                attributes.Add(new NativeElementState(null, null, StringValue: attribute.Value) { EffectiveType = LaxAttributeType!, ActualAtomicType = UntypedAtomicType!, OriginalName = attribute.Name, OwnerElementPath = path, OwnerElementIndex = ownerIndex });
+            }
+            else Check(defined, "Strict wildcard attribute has no global declaration.");
         }
         foreach (var declaration in GlobalAttributeDeclarations)
         {

@@ -85,6 +85,7 @@
 //                      | Charles Korthout | 1.55  | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
 //                      | Charles Korthout | 1.56  | 26-11-2026     | Retain strict wildcard plans on bounded all/choice roots.                                 |
 //                      | Charles Korthout | 1.57  | 27-11-2026     | Preserve strict wildcard plans on bounded noninteger simple-content extensions.           |
+//                      | Charles Korthout | 1.58  | 27-11-2026     | Admit lax attribute plans only on the qualified empty-owner path.                         |
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Numerics;
@@ -296,6 +297,7 @@ internal sealed partial class NativeDecimalSchema
             first.GlobalAttributeDeclarations = globalAttributes.Values;
             first.HasStrictAttributeWildcards = root.Descendants(Xs + "anyAttribute").Any();
             first.NamedTypes = simple.Values.Concat(named.Values.Select(p => p.Root.Type)).ToImmutableArray();
+            first.CompleteAnyTypeMetadata(root);
             first.DecimalType = decimalType;
             first.StringType = stringType;
             first.BooleanType = booleanType;
@@ -333,7 +335,7 @@ internal sealed partial class NativeDecimalSchema
         Require(attributeMembers.Length == 0 || assertions.Length == 0, "Empty-owner attributes with structural assertions are excluded.", NativeDecimalUnsupportedReason.Attributes);
         var uses = CompileAttributes(attributeMembers, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
         Require(wildcardSource is null || assertions.Length == 0 && !ReadMixedContent(complex), "Strict attribute wildcard assertions/mixed content are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-        var wildcard = wildcardSource is null ? null : CompileStrictAttributeWildcard(wildcardSource, targetNamespace);
+        var wildcard = wildcardSource is null ? null : CompileStrictAttributeWildcard(wildcardSource, targetNamespace, allowLax: true);
         var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri) { EmptyContent = true, AttributeWildcard = wildcard };
         return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { AttributeUses = uses, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(assertions, targetNamespace, assertionNamespace, cancellationToken) };
     }

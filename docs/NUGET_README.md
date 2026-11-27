@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.27 development candidate requires Bosak Core 1.86.0 or later.
+The 0.28 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1825,3 +1825,7 @@ Existing finite mixed sequence owners admit qualified strict attribute wildcards
 ## Strict simple-content attribute wildcards (development0.27)
 
 Existing noninteger simple-content extension owners admit one trailing strict/default-strict anyAttribute after declared uses. Original complex governing components, actual scalar values and independent original global attribute types remain. Roots/named/nested/global-reference owners and aliases retain prior XML, capacity and lifetime behavior. Integer/Boolean extension attributes, restriction wildcards, assertions, complex-base inheritance and lax/skip remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/simple-content-wildcards/GUIDE.md). Unpublished development source.
+
+## Lax attribute wildcards on empty owners (development0.28)
+
+Empty complex owners admit bounded lax attribute wildcards. Known attributes validate against original globals. Unknown attributes at an empty root carry no declaration, have anySimpleType node type and untypedAtomic values, and project the assessed root to canonical anyType with one empty string atom; known-only roots retain their empty typed sequence. Original declared schema components remain. Unknown attributes beneath strict ancestors, broader lax owner models and skip remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/lax-empty-attributes/GUIDE.md). Unpublished development source.

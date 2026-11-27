@@ -52,6 +52,7 @@
 //                      | Charles Korthout | 0.36  | 26-11-2026     | Add bounded strict attribute wildcards on empty complex owners.                           |
 //                      | Charles Korthout | 0.37  | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
 //                      | Charles Korthout | 0.38  | 26-11-2026     | Retain strict wildcard plans on bounded all/choice roots.                                 |
+//                      | Charles Korthout | 0.39  | 27-11-2026     | Project partial empty roots without changing declared schema components.                  |
 using System.Collections.Immutable;
 using System.Xml.Linq;
 
@@ -325,7 +326,10 @@ internal sealed partial class NativeDecimalSchema
             Require(element.Nodes().All(n => n is XElement or XText or XComment or XProcessingInstruction), "Empty-content comments or processing instructions are unsupported.");
             Check(!element.Nodes().Any(n => n is XText or XElement), "Empty content cannot contain character or element children.");
             plan.AssessStructuralAssertions(element, cancellationToken);
-            states.Add(new NativeElementState(declaration, null) { EffectiveType = effectiveType });
+            var partial = isRoot && plan.AttributeWildcard?.IsLax == true && attributes.Any(a => a.Declaration is null && a.OwnerElementPath.IsEmpty);
+            states.Add(partial
+                ? new NativeElementState(declaration, null, StringValue: "") { EffectiveType = NamedTypes.Single(t => t.IsAnyType), ActualAtomicType = UntypedAtomicType! }
+                : new NativeElementState(declaration, null) { EffectiveType = effectiveType });
             cancellationToken.ThrowIfCancellationRequested();
             return;
         }
