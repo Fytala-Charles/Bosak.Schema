@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.2   | 27-11-2026     | Validate bounded xml:lang on documentation without traversing opaque payloads.             |
 // ===========================================================================================================================================================
 using System.Xml;
 using System.Xml.Linq;
@@ -56,7 +57,8 @@ internal sealed partial class NativeDecimalSchema
                 foreach (var payload in child.Elements())
                 {
                     Check(payload.Name == Xs + "appinfo" || payload.Name == Xs + "documentation", "Unexpected annotation payload wrapper.");
-                    Attributes(payload, "source");
+                    if (payload.Name == Xs + "documentation") DocumentationAttributes(payload);
+                    else Attributes(payload, "source");
                     // No traversal into payloads: even XSD-named content remains opaque application data.
                 }
                 child.Remove();
@@ -64,4 +66,16 @@ internal sealed partial class NativeDecimalSchema
         }
         Visit(schema);
     }
+    private static void DocumentationAttributes(XElement documentation)
+    {
+        var languageName = XNamespace.Xml + "lang";
+        Require(documentation.Attributes().All(a => a.IsNamespaceDeclaration || a.Name == languageName || a.Name.NamespaceName.Length == 0 && a.Name.LocalName == "source"),
+            "Unsupported documentation attribute.", NativeDecimalUnsupportedReason.Attributes);
+        if (documentation.Attribute(languageName) is not { } language) return;
+        Require(language.Value.Length <= 256, "Annotation language source capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
+        // Union whitespace is member-specific: language collapses; the empty string branch preserves.
+        Check(language.Value.Length == 0 || NativeTextRules.Accepts(Collapse(language.Value), NativeTextKind.Language),
+            "Invalid documentation language value.");
+    }
+
 }

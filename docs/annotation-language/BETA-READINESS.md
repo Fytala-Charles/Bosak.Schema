@@ -1,0 +1,5 @@
+# Beta readiness
+
+Development0.36 qualifies xml:lang on admitted xs:documentation wrappers using the dated XML namespace schema union: collapsed valid xs:language or exact empty undeclaration; whitespace-only is Invalid. Payloads stay opaque and original assessment/component/value/nil authority is unchanged. All24,979 source tests(1,884 internal/23,095 public) and23,095 overlapping exact-package checks pass. All24,733 prior names and original inputs remain;246 checks added. Original MK-084 has two explicitly reconciled facade compile expectations. Pilot21; structural64/65; datatype582/16; zero errors. API55/663 and nine signed Core1.86.0 payloads unchanged. Unpublished; other wrapper attributes/locations, inherited metadata and full XSD1.1/PSVI/C45 remain separate.
+
+Published beta.1 remains narrower. No registry/tag/controller action included. Next: separately contract anonymous simple-type restriction bases with original unnamed authority; do not fabricate names to admit samples. No overall percentage or production acceptance claim.

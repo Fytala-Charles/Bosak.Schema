@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.35 development candidate requires Bosak Core 1.86.0 or later.
+The 0.36 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1857,3 +1857,7 @@ Explicit abstract Boolean flags are admitted on existing supported global named 
 ## Bounded anyType nillability (development0.35)
 
 Existing implicit/explicit anyType roots, sequence particles/references and admitted known-lax matches accept declared nillability. True nil yields an original anyType-governed empty typed sequence while independently validating attributes; false/omitted nil retains ordinary untypedAtomic values. General complex nil, all/choice nil members, default/fixed constraints and broader type overrides remain excluded. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anytype-nillability/GUIDE.md). Unpublished development source.
+
+## Documentation annotation language (development0.36)
+
+Existing xs:documentation wrappers admit bounded xml:lang values under the XML namespace schema union: collapsed valid xs:language or an exact empty undeclaration. Whitespace-only is Invalid. Payloads stay opaque and instance validity, component authority and values remain unchanged. Other wrapper attributes/locations, inherited metadata and annotation PSVI remain excluded. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/annotation-language/GUIDE.md). Unpublished development source.

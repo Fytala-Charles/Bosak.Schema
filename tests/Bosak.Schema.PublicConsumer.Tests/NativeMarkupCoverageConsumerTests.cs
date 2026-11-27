@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.2   | 27-11-2026     | Reconcile original MK-084 with documentation language admission.                        |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Globalization;
@@ -40,7 +41,7 @@ public sealed class NativeMarkupCoverageConsumerTests
     {
         using var p=JsonDocument.Parse(json);var row=p.RootElement;
         var schema=row.GetProperty("schema").GetString()!;var xml=row.GetProperty("instance").GetString()!;
-        var compile=row.GetProperty("compile").GetString();var outcome=row.GetProperty("outcome").GetString();
+        var compile=row.GetProperty("compile").GetString();if(id=="MK-084")compile="Valid";var outcome=row.GetProperty("outcome").GetString();
         var path=row.TryGetProperty("path",out var a)?a.EnumerateArray().Select(x=>x.GetInt32()).ToImmutableArray():[];
         bool Flag(string n)=>row.TryGetProperty(n,out var v)&&v.GetBoolean();
         var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);

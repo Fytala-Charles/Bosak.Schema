@@ -1,0 +1,11 @@
+# Documentation annotation language
+
+Both owned native facades admit the XML namespace lang attribute on xs:documentation wrappers at existing supported annotation positions. Existing unqualified source and namespace declarations remain admitted. Other wrapper attributes or locations retain their Unsupported boundary; this does not broaden the common schema attribute grammar.
+
+The adopted dated XML namespace schema defines a union of xs:language and an exact empty-string undeclaration. The language branch collapses XML whitespace and checks ASCII tag groups: one to eight letters, followed by zero or more hyphen-separated groups of one to eight ASCII letters/digits. Padded tags such as " en-US " are accepted. The empty branch preserves its input: an exact empty value is valid, but whitespace-only is Invalid. Unknown-but-lexically-valid tags are accepted; no IANA/BCP47 registry lookup occurs. The pre-collapse parsed attribute-value bound is256UTF16 units; excess is Unsupported.
+
+Invalid admitted wrapper language values make compilation Invalid, including unused definitions. XSD leaves annotation-descendant invalidity effects implementation-defined; this profile records its strict wrapper policy. Documentation/appinfo contents remain opaque, including descendant xml:lang values, fake XSD declarations, nested annotations, IDs and nil flags. No source URI is fetched. Existing parent/leading-position/ID/count/schema-size limits remain.
+
+Language metadata does not create a component, change instance validity, select a datatype, normalize instance values or alter actual nil/declaration/member/type facts. Original instance XML and authority/lifetime rules remain. xml:lang on schema/annotation/appinfo or other wrappers, arbitrary foreign wrapper attributes, inherited language projection and public annotation PSVI remain outside this slice, even where broader XSD syntax permits them. Legacy grammar and all other bounded semantic/session/assembly rules remain. No full XSD/PSVI/C45 or production acceptance claim.
+
+For example, a decimal restriction or list definition may carry leading documentation with xml:lang="en" without changing its decimal values or selected list members. xml:lang="" explicitly undeclares a language; xml:lang=" " is invalid under the adopted union semantics.
