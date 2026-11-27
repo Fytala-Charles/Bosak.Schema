@@ -21,6 +21,7 @@
 
 
 
+//                      | Charles Korthout | 0.6   | 27-11-2026     | Reconcile measured choice anyType admissions while preserving original inputs/names.      |
 using System.Collections.Immutable;
 using System.Text.Json;
 using System.Xml.Linq;
@@ -113,5 +114,5 @@ public sealed class NativeChoiceBoundaryTests
     /// <param name="id">Original upstream identity.</param><param name="file">Exact schema payload.</param><param name="data">Selects facade.</param>
     [Theory][MemberData(nameof(Originals))]
     public void OriginalCoBlocker(string id,string file,bool data)
-    {Assert.NotEmpty(id);var expected=id is "MS-ModelGroups2006-07-15/mgB006/mgB006.v" or "MS-Additional2006-07-15/addB084/addB084.v" or "MS-ModelGroups2006-07-15/mgA014/mgA014.v"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Unsupported;var schema=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,file));if(data){var c=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(expected,c.Outcome);if(expected==NativeSchemaOutcome.Valid)Assert.NotNull(c.Value);else Assert.Null(c.Value);c.Value?.Dispose();}else{var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(expected,c.Outcome);if(expected==NativeSchemaOutcome.Valid)Assert.NotNull(c.Value);else Assert.Null(c.Value);c.Value?.Dispose();}}
+    {Assert.NotEmpty(id);var expected=id is "MS-ModelGroups2006-07-15/mgJ003/mgJ003.i" or "MS-ModelGroups2006-07-15/mgJ004/mgJ004.v" or "MS-ModelGroups2006-07-15/mgJ005/mgJ005.i" or "MS-ModelGroups2006-07-15/mgB006/mgB006.v" or "MS-Additional2006-07-15/addB084/addB084.v" or "MS-ModelGroups2006-07-15/mgA014/mgA014.v"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Unsupported;var schema=File.ReadAllText(Path.Combine(AppContext.BaseDirectory,file));if(data){var c=NativeSchemaNodeDataSession.Create(schema,Options);Assert.Equal(expected,c.Outcome);if(expected==NativeSchemaOutcome.Valid)Assert.NotNull(c.Value);else Assert.Null(c.Value);c.Value?.Dispose();}else{var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(expected,c.Outcome);if(expected==NativeSchemaOutcome.Valid)Assert.NotNull(c.Value);else Assert.Null(c.Value);c.Value?.Dispose();}}
 }
