@@ -49,6 +49,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 //                      | Charles Korthout | 0.42 | 27-11-2026     | Enforce abstract complex types after admitted type resolution.                           |
+//                      | Charles Korthout | 0.43 | 27-11-2026     | Preserve bounded anyType nil states and independent wildcard attributes.                |
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.36  | 26-11-2026     | Add bounded strict attribute wildcards on empty complex owners.                           |
 //                      | Charles Korthout | 0.37  | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
@@ -289,7 +290,13 @@ internal sealed partial class NativeDecimalSchema
         cancellationToken.ThrowIfCancellationRequested();
         CheckConcreteDeclaration(declaration);
         var effectiveType = ResolveInstanceType(element, declaration.Type);
-        _ = NilledState(element, declaration, effectiveType);
+        if (NilledState(element, declaration, effectiveType) is { } nilled)
+        {
+            var ownerIndex = states.Count;
+            states.Add(nilled);
+            if (effectiveType.IsAnyType) AssessKnownLaxAttributes(element, attributes, ownerPath, ownerIndex, cancellationToken, patternBudget, allowDeclarationAbsent);
+            return;
+        }
         if (effectiveType.IsAnyType)
         {
             AssessKnownLax(element, declaration, effectiveType, states, attributes, ownerPath, cancellationToken, patternBudget, allowDeclarationAbsent);

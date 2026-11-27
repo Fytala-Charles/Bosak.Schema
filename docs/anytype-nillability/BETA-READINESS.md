@@ -1,0 +1,5 @@
+# Beta readiness
+
+Development0.35 qualifies nillability on admitted implicit/explicit anyType roots, sequence particles/references and known-lax matches. True nil preserves original anyType/declaration authority with a typed-empty sequence and independent wildcard-attribute assessment; false/omitted nil retains ordinary untypedAtomic values. All24,733 source tests(1,872 internal/22,861 public) and22,861 overlapping exact-package checks pass. All24,501 prior names and original inputs remain;232 checks added. Original AT-055/056 have four explicitly reconciled facade compile expectations. Pilot21; structural63/66; datatype582/16; zero errors. API55/663 and nine signed Core1.86.0 payloads unchanged. Unpublished; general complex/all-choice nil, broader overrides and full XSD1.1/PSVI/C45 remain separate.
+
+Published beta.1 remains narrower. No registry/tag/controller action included. Next: rank remaining original specification gaps and separately contract the next bounded consumer-relevant slice. No overall percentage or production acceptance claim.

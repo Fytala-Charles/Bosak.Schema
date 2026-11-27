@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.34 development candidate requires Bosak Core 1.86.0 or later.
+The 0.35 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1853,3 +1853,7 @@ Explicit final on global named simple types blocks the selected restriction, lis
 ## Abstract complex types (development0.34)
 
 Explicit abstract Boolean flags are admitted on existing supported global named complex types. Abstract actual governing types are Invalid after admitted instance-type resolution, while false/omitted flags retain existing behavior. Type identities remain separate from declarations and content atoms. Broader complex xsi:type overrides, complex nillability and local complex-type abstract remain excluded. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/abstract-complex-types/GUIDE.md). Unpublished development source.
+
+## Bounded anyType nillability (development0.35)
+
+Existing implicit/explicit anyType roots, sequence particles/references and admitted known-lax matches accept declared nillability. True nil yields an original anyType-governed empty typed sequence while independently validating attributes; false/omitted nil retains ordinary untypedAtomic values. General complex nil, all/choice nil members, default/fixed constraints and broader type overrides remain excluded. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anytype-nillability/GUIDE.md). Unpublished development source.
