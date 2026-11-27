@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.26 development candidate requires Bosak Core 1.86.0 or later.
+The 0.27 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1821,3 +1821,7 @@ Supported nonempty all/choice root models and named-root aliases admit the quali
 ## Strict mixed-sequence attribute wildcards (development0.26)
 
 Existing finite mixed sequence owners admit qualified strict attribute wildcards and namespace/QName exclusions. Original mixed type/declaration identities remain; each owner yields one original untypedAtomic aggregate, independently from normalized child/attribute values. Optional absent children can yield an empty string atom, not no typed value. Mixed all/choice, empty mixed models, simple content, assertions and lax/skip remain excluded. Existing aggregate/scalar/document/lifetime bounds apply. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/mixed-wildcards/GUIDE.md). Unpublished development source.
+
+## Strict simple-content attribute wildcards (development0.27)
+
+Existing noninteger simple-content extension owners admit one trailing strict/default-strict anyAttribute after declared uses. Original complex governing components, actual scalar values and independent original global attribute types remain. Roots/named/nested/global-reference owners and aliases retain prior XML, capacity and lifetime behavior. Integer/Boolean extension attributes, restriction wildcards, assertions, complex-base inheritance and lax/skip remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/simple-content-wildcards/GUIDE.md). Unpublished development source.

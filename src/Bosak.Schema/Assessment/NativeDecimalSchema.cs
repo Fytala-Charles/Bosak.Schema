@@ -84,6 +84,7 @@
 //                      | Charles Korthout | 1.54  | 26-11-2026     | Add bounded strict attribute wildcards on empty complex owners.                           |
 //                      | Charles Korthout | 1.55  | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
 //                      | Charles Korthout | 1.56  | 26-11-2026     | Retain strict wildcard plans on bounded all/choice roots.                                 |
+//                      | Charles Korthout | 1.57  | 27-11-2026     | Preserve strict wildcard plans on bounded noninteger simple-content extensions.           |
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Numerics;
@@ -506,9 +507,13 @@ internal sealed partial class NativeDecimalSchema
             return new NativeDecimalSchema(new NativeDeclaration(root.Name, integerTypePlan, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits)
             { integerAssertions = CompileIntegerAssertions(children, targetNamespace, assertionNamespace, limits, cancellationToken) };
         }
-        var uses = CompileAttributes(Elements(extension), targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
+        var extensionMembers = Elements(extension);
+        var wildcardSource = extensionMembers.LastOrDefault()?.Name == Xs + "anyAttribute" ? extensionMembers[^1] : null;
+        var attributeMembers = wildcardSource is null ? extensionMembers.ToArray() : extensionMembers.Take(extensionMembers.Count - 1).ToArray();
+        var uses = CompileAttributes(attributeMembers, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
+        var wildcard = wildcardSource is null ? null : CompileStrictAttributeWildcard(wildcardSource, targetNamespace);
         var type = new NativeType(root.Type.Name, false, root.Type.NamespaceUri, contentType: baseType);
-        return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { AttributeUses = uses };
+        return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { AttributeUses = uses, CompiledAttributeWildcard = wildcard };
     }
 
     private static NativeType ResolveScalarType(XElement declaration, NativeType decimalType, NativeType? stringType,

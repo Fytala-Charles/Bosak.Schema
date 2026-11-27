@@ -1,0 +1,9 @@
+# Strict attribute wildcards on simple-content owners
+
+Both owned native facades admit one trailing strict/default-strict anyAttribute after existing declared attribute uses on an admitted noninteger simpleContent extension. Anonymous/named roots, nested terminals, global references and root aliases retain their original complex governing type and declaration. The actual content scalar keeps its own type, facets and normalization. Lists retain multiple root items rather than a single root scalar; unions retain selected actual member evidence. The enclosing element-only owner still has no typed value.
+
+Wildcard attributes use original global declarations and their actual type, fixed and identity constraints. Namespace/QName exclusions, explicit-use precedence and strict refusal of unknown globals remain. Attribute validation is independent of scalar content. Missing globals never augment XML; failure publishes no partial document or facts. XML export, source binding, cancellation, foreign authority and expiry retain their existing contracts.
+
+Integer/Boolean extension attributes, restriction wildcards, wildcard assertions, complex-base inheritance, lax/skip and wider projection remain excluded. Existing scalar and document limits apply: 64 nodes, depth 4, 64 application attributes, 16 per owner, eight namespace/QName tokens of at most 256 UTF16 characters and prior identity/fact limits. String and list budgets are unchanged. Legacy decimal-only grammar is unchanged.
+
+For example, a decimal extension with a strict wildcard can read original text `01.20` as decimal `1.2`, and a globally declared integer attribute `a="001"` as integer `1`. An undeclared attribute is Invalid even when its namespace matches the wildcard. No synthetic anyType or untypedAtomic governing type is introduced.

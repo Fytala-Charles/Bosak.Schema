@@ -1,0 +1,26 @@
+{
+  "records": [
+    {
+      "stage": "Initial new-contract run",
+      "passed": 124,
+      "failed": 2,
+      "total": 126,
+      "reason": "The new anyURI formatter used StringValue instead of UriValue; fixed only new harness",
+      "sourceSemanticChange": false
+    },
+    {
+      "stage": "Native test compilation",
+      "reason": "Materialize IEnumerable AtomicItems before counting; new test source only",
+      "sourceSemanticChange": false
+    },
+    {
+      "stage": "Expanded new-contract run",
+      "passed": 129,
+      "failed": 1,
+      "total": 130,
+      "reason": "A two-item list has no single root scalar; root item reads remain supported. Corrected only new fixture rootScalar expectation",
+      "sourceSemanticChange": false
+    }
+  ],
+  "priorNamesChanged": false
+}
