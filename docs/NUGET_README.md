@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.28 development candidate requires Bosak Core 1.86.0 or later.
+The 0.29 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1829,3 +1829,7 @@ Existing noninteger simple-content extension owners admit one trailing strict/de
 ## Lax attribute wildcards on empty owners (development0.28)
 
 Empty complex owners admit bounded lax attribute wildcards. Known attributes validate against original globals. Unknown attributes at an empty root carry no declaration, have anySimpleType node type and untypedAtomic values, and project the assessed root to canonical anyType with one empty string atom; known-only roots retain their empty typed sequence. Original declared schema components remain. Unknown attributes beneath strict ancestors, broader lax owner models and skip remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/lax-empty-attributes/GUIDE.md). Unpublished development source.
+
+## Skip attribute wildcards on empty owners (development0.29)
+
+Matched extras are skipped even when globally declared: no node declaration, anySimpleType node type and raw untypedAtomic value. Empty roots with skipped extras project to canonical anyType with one empty string atom; no-extra roots retain original empty typing. Explicit uses retain validation and precedence. Original empty-content validity, namespace/QName exclusions, bounds and lifetime remain. Skipped extras beneath strict ancestors and broader skip owner models remain excluded. [Scope and qualification](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/skip-empty-attributes/GUIDE.md). Unpublished development source.
