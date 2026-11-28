@@ -51,6 +51,7 @@
 //                      | Charles Korthout | 0.42 | 27-11-2026     | Enforce abstract complex types after admitted type resolution.                           |
 //                      | Charles Korthout | 0.43 | 27-11-2026     | Preserve bounded anyType nil states and independent wildcard attributes.                |
 //                      | Charles Korthout | 0.44 | 28-11-2026 | Apply independent default groups before nested effective-attribute budgets. |
+//                      | Charles Korthout | 0.45 | 28-11-2026 | Retain scoped opt-out closure on aliases and descendant assessment. |
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.36  | 26-11-2026     | Add bounded strict attribute wildcards on empty complex owners.                           |
 //                      | Charles Korthout | 0.37  | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
@@ -124,7 +125,7 @@ internal sealed partial class NativeDecimalSchema
                 Require(Elements(element).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                 var shared = Resolve(ResolveTypeName(element));
                 plan = new NativeDecimalSchema(new NativeDeclaration(name, shared.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits)
-                    { AttributeUses = shared.AttributeUses, CompiledAttributeWildcard = shared.CompiledAttributeWildcard, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
+                    { AttributeUses = shared.AttributeUses, CompiledAttributeWildcard = shared.CompiledAttributeWildcard, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum, ClosedDefaultAttributeOptOut = shared.ClosedDefaultAttributeOptOut };
             }
             else
             {
@@ -313,7 +314,7 @@ internal sealed partial class NativeDecimalSchema
         }
         if (!isRoot)
         {
-            if (plan.AttributeUses.IsEmpty && plan.Root.Type.ContentType?.IsDate != true && plan.AttributeWildcard is null) InstanceAttributes(element);
+            if (!plan.ClosedDefaultAttributeOptOut && plan.AttributeUses.IsEmpty && plan.Root.Type.ContentType?.IsDate != true && plan.AttributeWildcard is null) InstanceAttributes(element);
             else
             {
                 Require(element.Attributes().All(a => IsAdmittedInstanceAttribute(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),

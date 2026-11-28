@@ -1,0 +1,5 @@
+# Beta readiness
+
+Development 0.51 qualifies ordinary undeclared-attribute validity on existing empty/finite-sequence complex owners that explicitly opt out of schema defaults, declare no attribute uses and have no wildcard. All 30,798 source tests (2,187 internal / 28,611 public) and 28,611 overlapping exact-package checks pass. All 30,597 prior names and original fixture bytes remain. 96 authored contracts through both facades plus 9 native proofs add 201 checks. Historical reconciliations: 24 public / 1 internal assertions. Pilot: 21 matches; structural: 75 matches / 54 Unsupported; datatype: 584 matches / 14 Unsupported; zero errors. API 55/663 and nine signed Core 1.86.0 payloads are unchanged. Unpublished; full XSD 1.1, PSVI and C45 acceptance remain pending.
+
+Next in this authorized batch: separately adopt default groups on bounded all/choice owners, then existing simple-content extensions, followed by coverage and consumer/beta-readiness reassessment. No registry, tag or release-controller action. Published beta.1 is a separately scoped historical product; next prerelease scope/version requires separate preparation.

@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 28-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.2 | 28-11-2026 | Qualify scoped closed attributes on default-group opt-out owners. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml;
@@ -27,6 +28,8 @@ internal sealed class NativeDefaultAttributeUses(ImmutableArray<NativeDeclaratio
 
 internal sealed partial class NativeDecimalSchema
 {
+    private bool ClosedDefaultAttributeOptOut { get; set; }
+
     private static void PrepareDefaultAttributeGroup(XElement schema, CancellationToken token)
     {
         if (schema.Attribute("defaultAttributes") is not { } supplied) return;
@@ -56,10 +59,18 @@ internal sealed partial class NativeDecimalSchema
     private static NativeDecimalSchema ApplyDefaultAttributeUses(XElement complex, NativeDecimalSchema plan,
         bool apply, CancellationToken token)
     {
-        if (!apply) return plan;
         var context = complex.AncestorsAndSelf().Select(e => e.Annotation<NativeDefaultAttributeUses>()).FirstOrDefault(c => c is not null);
         if (context is null) return plan;
         var members = Elements(complex);
+        if (!apply)
+        {
+            plan.ClosedDefaultAttributeOptOut = plan.AttributeUses.IsEmpty && plan.AttributeWildcard is null &&
+                !plan.Root.Type.MixedContent && plan.Root.Type.ContentType is null &&
+                plan.AllMinimum is null && plan.ChoiceMinimum is null &&
+                !members.Any(e => e.Name == Xs + "assert" || e.Name == Xs + "simpleContent" || e.Name == Xs + "complexContent");
+            return plan;
+        }
+
         Require(!plan.Root.Type.MixedContent && plan.Root.Type.ContentType is null &&
             plan.AllMinimum is null && plan.ChoiceMinimum is null && plan.CompiledAttributeWildcard is null &&
             !members.Any(e => e.Name == Xs + "assert" || e.Name == Xs + "simpleContent" || e.Name == Xs + "complexContent"),

@@ -83,6 +83,7 @@
 //                      | Charles Korthout | 1.62 | 27-11-2026     | Preserve bounded anyType nil states and independent wildcard attributes.                |
 //                      | Charles Korthout | 1.63 | 27-11-2026     | Preserve original anonymous compound restriction bases and inherited facets.             |
 //                      | Charles Korthout | 1.64 | 28-11-2026 | Apply original schema default groups to bounded source complex owners. |
+//                      | Charles Korthout | 1.65 | 28-11-2026 | Route scoped zero-use opt-outs through closed attribute validation. |
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 
@@ -291,7 +292,7 @@ internal sealed partial class NativeDecimalSchema
                 {
                     Require(Elements(declaration).Count == 0, "Inline and named types cannot coexist.", NativeDecimalUnsupportedReason.DeclarationShape);
                     Require(named.TryGetValue(ResolveTypeName(declaration), out var shared), "Unresolved root complex type.", NativeDecimalUnsupportedReason.ValueType);
-                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses, CompiledAttributeWildcard = shared.CompiledAttributeWildcard, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum };
+                    plan = new NativeDecimalSchema(new NativeDeclaration(name, shared!.Root.Type, 1, 1, targetNamespace), shared.Children, shared.assertions, limits) { AttributeUses = shared.AttributeUses, CompiledAttributeWildcard = shared.CompiledAttributeWildcard, integerAssertions = shared.integerAssertions, structuralAssertions = shared.structuralAssertions, NestedProfile = shared.NestedProfile, ChoiceMinimum = shared.ChoiceMinimum, AllMinimum = shared.AllMinimum, ClosedDefaultAttributeOptOut = shared.ClosedDefaultAttributeOptOut };
                 }
                 else
                 {
@@ -575,7 +576,7 @@ internal sealed partial class NativeDecimalSchema
             var rootType = found ? ResolveInstanceType(root, selected!.Root.Type) : null;
             var attributeStates = ImmutableArray.CreateBuilder<NativeElementState>();
             if (found && rootType!.IsAnyType) { /* Actual global wildcard attributes are assessed with the anyType owner below. */ }
-            else if (found && (selected!.AttributeUses.Length != 0 || selected.Root.Type.ContentType?.IsDate == true || selected.AttributeWildcard is not null))
+            else if (found && (selected!.ClosedDefaultAttributeOptOut || selected.AttributeUses.Length != 0 || selected.Root.Type.ContentType?.IsDate == true || selected.AttributeWildcard is not null))
             {
                 Require(root.Attributes().All(a => IsAdmittedInstanceAttribute(a) || a.Name.NamespaceName is not "http://www.w3.org/2001/XMLSchema-instance" and not "http://www.w3.org/XML/1998/namespace"),
                     "Special attribute requests are unsupported.", NativeDecimalUnsupportedReason.Attributes);

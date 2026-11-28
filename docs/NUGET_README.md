@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.50 development candidate requires Bosak Core 1.86.0 or later.
+The 0.51 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1906,10 +1906,12 @@ Existing inline restriction placements admit anyURI, language, Name, NCName, NMT
 
 Existing inline restriction placements admit float and double using original unnamed types and facet sources. Existing IEEE family mapping/rounding, NaN/infinities/signed zero, inherited/fixed facets, patterned-ancestor refusals and limits remain. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-floating-bases/GUIDE.md). Unpublished development source.
 
-## Named-integer restriction bases (development0.50)
+## Named-integer restriction bases (development0.51)
 
 Existing integer placements admit ordinary named integer restriction chains and their bounded numeric-pattern route. Original named base objects/QNames, exact inherited facets, pattern exclusions, budgets and lifetime remain; integer pattern facets use original source elements. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/named-integer-bases/GUIDE.md). Unpublished development source; no broader fixed-facet syntax, API or Core pin change.
 
 QName restrictions support bounded length/minLength/maxLength schema components without measuring lexical prefix spelling. Inherited/fixed component consistency and existing QName lexical/enumeration/pattern rules remain. NOTATION is excluded. See the QName length-facet guide in the source repository.
 
 Existing empty and finite element-only sequence complex owners support schema defaultAttributes groups and independent defaultAttributesApply Boolean opt-out. Original uses/required values and limits remain. No instance attributes are inserted; missing default/fixed-valued attributes still require augmentation. Other owner/composition combinations remain separate.
+
+Empty and finite-sequence complex owners that explicitly opt out of a schema default group and declare no attribute uses reject ordinary extra attributes as Invalid. Existing special-attribute handling and other profile boundaries remain.
