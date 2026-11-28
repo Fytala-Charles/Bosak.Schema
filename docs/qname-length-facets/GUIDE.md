@@ -1,0 +1,9 @@
+# QName length-facet compatibility
+
+Both owned native facades accept bounded length, minLength and maxLength components on existing QName restriction types. XSD1.1 retains these deprecated facets, but every QName value is facet-valid regardless of their numeric values. No prefix spelling, namespace URI, local name, UTF16 length or binary octet count is measured. QName lexical validity, expanded-name enumeration equality and lexical patterns remain independent and enforced.
+
+Schema components still require nonnegative bounded numeric literals, inherited length equality, nondecreasing minLength, nonincreasing maxLength, fixed per-facet equality and consistent min/max ordering. Effective length can coexist with min/max only under the specified ancestor rule: an earlier restriction ancestor has the same min/max value without a length component, and numeric bounds agree. Intermediate omission does not erase inheritance. Original named/anonymous base objects and facet namespace scopes retain authority.
+
+The binary facet-component algorithm and binary octet-value validation are unchanged. NOTATION remains excluded. Existing duplicate/inapplicable/annotation syntax classifications and raw lexical256/length-value65536 limits remain explicit. Existing source/type/string/schema/regex/atom/value/lifetime budgets remain. Complete invalid assessment precedes facts. Nil, original XML/export, cancellation, recovery, foreign ownership, detached QName values and expiry retain their contracts.
+
+The 185 authored contracts run through both facades;15 native proofs verify source/type/value authority and lifetimes. Six unchanged original upstream QName samples are reported separately in corpus results. Package public checks overlap source. No public API/Core pin, publication or full conformance claim is added.

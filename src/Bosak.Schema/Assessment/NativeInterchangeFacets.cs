@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.2 | 28-11-2026 | Retain original anonymous interchange base and facet namespace context. |
+//                      | Charles Korthout | 0.3 | 28-11-2026 | Qualify QName length component consistency without lexical length measurement. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Globalization;
@@ -79,7 +80,6 @@ internal sealed class NativeInterchangeFacets(NativeInterchangeFacets? parent, i
             }
             else
             {
-                NativeDecimalSchema.Require(kind != NativeInterchangeKind.QName, "QName length facets await qualification.", NativeDecimalUnsupportedReason.ValueType);
                 NativeDecimalSchema.Require(supplied!.Length <= 256, "Length lexical capacity exceeded.", NativeDecimalUnsupportedReason.RepresentationCapacity);
                 var lexical = NativeCalendarParser.Collapse(supplied!);
                 var start = lexical.StartsWith('+') || lexical.StartsWith('-') ? 1 : 0;
@@ -96,23 +96,53 @@ internal sealed class NativeInterchangeFacets(NativeInterchangeFacets? parent, i
                 if (isFixed) fixedValues.Add(name, (int)value);
             }
         }
-        if (length is not null && (minimum is not null || maximum is not null) || minimum > maximum)
-            throw new NativeProfileException(NativeOutcome.Invalid, "Inconsistent length facets.");
-        if (parent is not null && (length is { } exact && (exact < parent.EffectiveMinimum || exact > parent.EffectiveMaximum) ||
-            minimum is { } lo && lo < parent.EffectiveMinimum || maximum is { } hi && hi > parent.EffectiveMaximum))
-            throw new NativeProfileException(NativeOutcome.Invalid, "Binary length facets widen the base.");
         var result = new NativeInterchangeFacets(parent, length, minimum, maximum, enumeration.ToImmutable(), patterns.ToImmutable());
-        if (result.EffectiveMinimum > result.EffectiveMaximum) throw new NativeProfileException(NativeOutcome.Invalid, "Empty binary length interval.");
+        if (kind == NativeInterchangeKind.QName)
+            result.ValidateQNameLengths();
+        else
+        {
+            if (length is not null && (minimum is not null || maximum is not null) || minimum > maximum)
+                throw new NativeProfileException(NativeOutcome.Invalid, "Inconsistent length facets.");
+            if (parent is not null && (length is { } exact && (exact < parent.EffectiveMinimum || exact > parent.EffectiveMaximum) ||
+                minimum is { } lo && lo < parent.EffectiveMinimum || maximum is { } hi && hi > parent.EffectiveMaximum))
+                throw new NativeProfileException(NativeOutcome.Invalid, "Binary length facets widen the base.");
+            if (result.EffectiveMinimum > result.EffectiveMaximum) throw new NativeProfileException(NativeOutcome.Invalid, "Empty binary length interval.");
+        }
         foreach (var pair in fixedValues) result.fixedLengths.Add(pair.Key, pair.Value);
         return result;
+    }
+
+    private int? QNameLength => length ?? parent?.QNameLength;
+    private int? QNameMinimum => minimum ?? parent?.QNameMinimum;
+    private int? QNameMaximum => maximum ?? parent?.QNameMaximum;
+
+    private void ValidateQNameLengths()
+    {
+        if (length is { } exact && parent?.QNameLength is { } inheritedLength && exact != inheritedLength ||
+            minimum is { } lower && parent?.QNameMinimum is { } inheritedMinimum && lower < inheritedMinimum ||
+            maximum is { } upper && parent?.QNameMaximum is { } inheritedMaximum && upper > inheritedMaximum)
+            throw new NativeProfileException(NativeOutcome.Invalid, "QName length facet changes an inherited component illegally.");
+        if (QNameMinimum > QNameMaximum)
+            throw new NativeProfileException(NativeOutcome.Invalid, "Inconsistent QName minLength/maxLength components.");
+        if (QNameLength is not { } effectiveLength) return;
+        bool HasAncestorBound(int value, bool lower)
+        {
+            for (var ancestor = parent; ancestor is not null; ancestor = ancestor.Parent)
+                if (ancestor.QNameLength is null && (lower ? ancestor.QNameMinimum : ancestor.QNameMaximum) == value) return true;
+            return false;
+        }
+        if (QNameMinimum is { } min && (min > effectiveLength || !HasAncestorBound(min, true)) ||
+            QNameMaximum is { } max && (max < effectiveLength || !HasAncestorBound(max, false)))
+            throw new NativeProfileException(NativeOutcome.Invalid, "QName length with minLength/maxLength requires a consistent original ancestor bound.");
     }
 
     private bool HasPatterns => !patterns.IsEmpty || parent?.HasPatterns == true;
     internal bool Accepts(NativeInterchangeValue value, NativePatternBudget budget) =>
         (parent?.Accepts(value, budget) ?? true) &&
-        (length is null || value.Octets.Length == length) &&
-        (minimum is null || value.Octets.Length >= minimum) &&
-        (maximum is null || value.Octets.Length <= maximum) &&
+        (value.Kind == NativeInterchangeKind.QName ||
+            (length is null || value.Octets.Length == length) &&
+            (minimum is null || value.Octets.Length >= minimum) &&
+            (maximum is null || value.Octets.Length <= maximum)) &&
         (enumeration.IsEmpty || enumeration.Any(value.ValueEquals)) &&
         (patterns.IsEmpty || patterns.Any(pattern => pattern.Match(value.Lexical, budget)));
 }

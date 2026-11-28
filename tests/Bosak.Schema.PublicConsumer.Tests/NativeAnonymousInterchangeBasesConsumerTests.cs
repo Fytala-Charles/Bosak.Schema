@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 28-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.2 | 28-11-2026 | Reconcile admitted URI/text bases with original inputs retained. |
+//                      | Charles Korthout | 0.3 | 28-11-2026 | Reconcile QName length admission; retain original inputs and names. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Globalization;
@@ -34,6 +35,7 @@ public sealed class NativeAnonymousInterchangeBasesConsumerTests
     [Theory][MemberData(nameof(Cases))]public void Contract(string id,string json,bool data)
     {
         using var p=JsonDocument.Parse(json);var r=p.RootElement;var schema=r.GetProperty("schema").GetString()!;var xml=r.GetProperty("instance").GetString()!;var compile=r.GetProperty("compile").GetString();var outcome=r.GetProperty("outcome").GetString();var options=new NativeSchemaSessionOptions(r.TryGetProperty("digits",out var digits)?digits.GetInt32():256,r.TryGetProperty("scale",out var scale)?scale.GetInt32():256,r.GetProperty("maxString").GetInt32(),65536,2,256,16,256,1024);var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);string exported;
+        if(id is "IB-173" or "IB-174" or "IB-175")compile="Valid"; // Original QName length inputs retained.
         if(id=="IB-190"){compile="Valid";outcome="Invalid";} // Original input retained; admitted URI/text base reconciled.
         if(id=="IB-189"){compile="Valid";outcome="Invalid";} // Original input retained; admitted URI/text base reconciled.
         if(id=="IB-188"){compile="Valid";outcome="Valid";var reconciled=System.Text.Json.Nodes.JsonNode.Parse(json)!;reconciled["reads"]![0]!["kind"]="AnyUri";reconciled["reads"]![0]!["expected"]=System.Text.Json.Nodes.JsonArray.Parse("[\"01.20\"]");r=JsonSerializer.SerializeToElement(reconciled);} // Original input retained; admitted URI/text base reconciled.
