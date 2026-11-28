@@ -1,0 +1,9 @@
+# Bounded anonymous floating restriction bases
+
+28 November 2026. Recorded before implementation at 24b99237b380c368339cfee022580e12608a237e. ADOPTION.json records immutable specification revisions, affected sections and intentional deviations.
+
+Admit actual float/double NativeType bases through existing inline restrictions. Preserve the original unnamed direct DerivationBase and original facet elements. Reuse NativeFloatingFacets, skipping only the exact inline child. No aliases, synthetic names/declarations, anonymous global registration, source cloning or namespace mutation.
+
+Retain existing IEEE32/64 family mapping and rounding, NaN schema-enumeration equality, signed-zero value equality with sign-preserving transport, infinities, overflow/underflow and lexical grammar. Keep inherited enumeration/bounds/fixed/whitespace/pattern rules, same-step pattern alternatives and inherited intersections. NaN bound endpoints and enumeration/bounds over patterned ancestors remain Unsupported. Equal exclusive endpoints retain the legal empty value space; existing mixed endpoint and fixed/inapplicable syntax classifications remain. No primitive semantics change.
+
+Keep shared16 inline sites/depth4, lexical256 and caller string/regex/schema/atom/value/lifetime limits, forward/final checks, nil, original XML, ownership/cancellation/recovery/export/detached expiry. Complete assessment precedes facts. Qualify both facades/native identity and IEEE bits, all prior names and original inputs with archived reconciliation, exact isolated package, API/signed Core/original samples/invoice/docs/release/workload controls. Package checks overlap source. Complex bases/wider derivation/assertions/full PSVI/C45 remain separate. Authorized Git/PR/green merge/main verification is included; registry/tag/controller actions are excluded.

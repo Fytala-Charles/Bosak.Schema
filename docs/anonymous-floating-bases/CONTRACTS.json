@@ -1,0 +1,1243 @@
+{
+  "count": 206,
+  "behavioralContractsNotFeatures": true,
+  "stimuli": "../../tests/TestData/AnonymousFloatingBases/cases.json",
+  "contracts": [
+    {
+      "id": "FB-001",
+      "contract": "float placement named 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-002",
+      "contract": "float placement named 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-003",
+      "contract": "float placement root 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-004",
+      "contract": "float placement root 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-005",
+      "contract": "float placement local 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-006",
+      "contract": "float placement local 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-007",
+      "contract": "float placement globalAttr 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-008",
+      "contract": "float placement globalAttr 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-009",
+      "contract": "float placement localAttr 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-010",
+      "contract": "float placement localAttr 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-011",
+      "contract": "float enumeration equality 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-012",
+      "contract": "float enumeration equality 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-013",
+      "contract": "float enumeration equality 2",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-014",
+      "contract": "float inherited enumeration 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-015",
+      "contract": "float inherited enumeration 2",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-016",
+      "contract": "float bound minInclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-017",
+      "contract": "float bound rejects minInclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-018",
+      "contract": "float bound minExclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-019",
+      "contract": "float bound rejects minExclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-020",
+      "contract": "float bound maxInclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-021",
+      "contract": "float bound rejects maxInclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-022",
+      "contract": "float bound maxExclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-023",
+      "contract": "float bound rejects maxExclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-024",
+      "contract": "float inherited widening <xs:minInclusive value='1'/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-025",
+      "contract": "float inherited widening <xs:maxInclusive value='3'/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-026",
+      "contract": "float inherited widening <xs:enumeration value='3'/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-027",
+      "contract": "float fixed bound 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-028",
+      "contract": "float fixed bound 2",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-029",
+      "contract": "float equal endpoints minInclusivemaxInclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-030",
+      "contract": "float equal endpoints minExclusivemaxExclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-031",
+      "contract": "float equal endpoints minInclusivemaxExclusive",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-032",
+      "contract": "float whitespace collapse",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-033",
+      "contract": "float whitespace preserve",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-034",
+      "contract": "float whitespace replace",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-035",
+      "contract": "float pattern ancestry 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-036",
+      "contract": "float pattern ancestry 125e-2",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-037",
+      "contract": "float pattern alternatives 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-038",
+      "contract": "float pattern alternatives 2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-039",
+      "contract": "float patterned ancestor exclusion <xs:enumeration value='1.250'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-040",
+      "contract": "float patterned ancestor exclusion <xs:minInclusive value='1'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-041",
+      "contract": "float patterned ancestor exclusion <xs:maxExclusive value='2'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-042",
+      "contract": "float depth 1",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-043",
+      "contract": "float depth 4",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-044",
+      "contract": "float depth 5",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-045",
+      "contract": "float conflicting base base='xs:float'",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-046",
+      "contract": "float conflicting base <xs:simpleType><xs:restriction base='xs:float'></xs:restriction></xs:simpleType>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-047",
+      "contract": "float forward final False",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-048",
+      "contract": "float forward final True",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-049",
+      "contract": "float list item",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-050",
+      "contract": "float union selected floating",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-051",
+      "contract": "float nilled",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-052",
+      "contract": "float excluded facet <xs:assertion test='true()'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-053",
+      "contract": "float excluded facet <xs:length value='1'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-054",
+      "contract": "float excluded facet <xs:totalDigits value='2'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-055",
+      "contract": "float excluded facet <xs:explicitTimezone value='required'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-056",
+      "contract": "float fixed syntax enumeration",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-057",
+      "contract": "float fixed syntax pattern",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-058",
+      "contract": "float enumeration capacity",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-059",
+      "contract": "float pattern capacity",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-060",
+      "contract": "float raw lexical capacity",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "FB-061",
+      "contract": "float caller string capacity",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "FB-062",
+      "contract": "float invalid lexical ''",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-063",
+      "contract": "float invalid lexical 'infinity'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-064",
+      "contract": "float invalid lexical 'Infinity'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-065",
+      "contract": "float invalid lexical 'nan'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-066",
+      "contract": "float invalid lexical 'NAN'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-067",
+      "contract": "float invalid lexical '+NaN'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-068",
+      "contract": "float invalid lexical '1_0'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-069",
+      "contract": "float invalid lexical '0x1'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-070",
+      "contract": "float invalid lexical '1,2'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-071",
+      "contract": "float invalid lexical '1e'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-072",
+      "contract": "float invalid lexical '--1'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-073",
+      "contract": "float special mapping NaN",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-074",
+      "contract": "float special mapping INF",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-075",
+      "contract": "float special mapping +INF",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-076",
+      "contract": "float special mapping -INF",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-077",
+      "contract": "float special mapping 1e999",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-078",
+      "contract": "float special mapping -1e999",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-079",
+      "contract": "float special mapping 1e-999",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-080",
+      "contract": "float special mapping -1e-999",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-081",
+      "contract": "float special mapping -0",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-082",
+      "contract": "float special mapping +0",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-083",
+      "contract": "float special mapping .5",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-084",
+      "contract": "float special mapping 1.",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-085",
+      "contract": "float zero enumeration -0",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-086",
+      "contract": "float zero enumeration +0",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-087",
+      "contract": "float NaN enumeration",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-088",
+      "contract": "float NaN rejects finite enum",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-089",
+      "contract": "float NaN bound excluded minInclusive",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-090",
+      "contract": "float bound excludes NaN minInclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-091",
+      "contract": "float NaN bound excluded minExclusive",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-092",
+      "contract": "float bound excludes NaN minExclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-093",
+      "contract": "float NaN bound excluded maxInclusive",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-094",
+      "contract": "float bound excludes NaN maxInclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-095",
+      "contract": "float NaN bound excluded maxExclusive",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-096",
+      "contract": "float bound excludes NaN maxExclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-097",
+      "contract": "float fixed zero value equality",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-098",
+      "contract": "float infinite inclusive interval",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-099",
+      "contract": "float exclusive infinity INF",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-100",
+      "contract": "float exclusive infinity 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-101",
+      "contract": "float integer rounding",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-102",
+      "contract": "float rounded enumeration equality",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-103",
+      "contract": "float collapsed lexical",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-104",
+      "contract": "double placement named 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-105",
+      "contract": "double placement named 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-106",
+      "contract": "double placement root 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-107",
+      "contract": "double placement root 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-108",
+      "contract": "double placement local 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-109",
+      "contract": "double placement local 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-110",
+      "contract": "double placement globalAttr 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-111",
+      "contract": "double placement globalAttr 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-112",
+      "contract": "double placement localAttr 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-113",
+      "contract": "double placement localAttr 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-114",
+      "contract": "double enumeration equality 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-115",
+      "contract": "double enumeration equality 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-116",
+      "contract": "double enumeration equality 2",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-117",
+      "contract": "double inherited enumeration 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-118",
+      "contract": "double inherited enumeration 2",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-119",
+      "contract": "double bound minInclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-120",
+      "contract": "double bound rejects minInclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-121",
+      "contract": "double bound minExclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-122",
+      "contract": "double bound rejects minExclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-123",
+      "contract": "double bound maxInclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-124",
+      "contract": "double bound rejects maxInclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-125",
+      "contract": "double bound maxExclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-126",
+      "contract": "double bound rejects maxExclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-127",
+      "contract": "double inherited widening <xs:minInclusive value='1'/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-128",
+      "contract": "double inherited widening <xs:maxInclusive value='3'/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-129",
+      "contract": "double inherited widening <xs:enumeration value='3'/>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-130",
+      "contract": "double fixed bound 125e-2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-131",
+      "contract": "double fixed bound 2",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-132",
+      "contract": "double equal endpoints minInclusivemaxInclusive",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-133",
+      "contract": "double equal endpoints minExclusivemaxExclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-134",
+      "contract": "double equal endpoints minInclusivemaxExclusive",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-135",
+      "contract": "double whitespace collapse",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-136",
+      "contract": "double whitespace preserve",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-137",
+      "contract": "double whitespace replace",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-138",
+      "contract": "double pattern ancestry 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-139",
+      "contract": "double pattern ancestry 125e-2",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-140",
+      "contract": "double pattern alternatives 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-141",
+      "contract": "double pattern alternatives 2",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-142",
+      "contract": "double patterned ancestor exclusion <xs:enumeration value='1.250'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-143",
+      "contract": "double patterned ancestor exclusion <xs:minInclusive value='1'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-144",
+      "contract": "double patterned ancestor exclusion <xs:maxExclusive value='2'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-145",
+      "contract": "double depth 1",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-146",
+      "contract": "double depth 4",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-147",
+      "contract": "double depth 5",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-148",
+      "contract": "double conflicting base base='xs:double'",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-149",
+      "contract": "double conflicting base <xs:simpleType><xs:restriction base='xs:double'></xs:restriction></xs:simpleType>",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-150",
+      "contract": "double forward final False",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-151",
+      "contract": "double forward final True",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-152",
+      "contract": "double list item",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-153",
+      "contract": "double union selected floating",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-154",
+      "contract": "double nilled",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-155",
+      "contract": "double excluded facet <xs:assertion test='true()'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-156",
+      "contract": "double excluded facet <xs:length value='1'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-157",
+      "contract": "double excluded facet <xs:totalDigits value='2'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-158",
+      "contract": "double excluded facet <xs:explicitTimezone value='required'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-159",
+      "contract": "double fixed syntax enumeration",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-160",
+      "contract": "double fixed syntax pattern",
+      "compile": "Invalid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-161",
+      "contract": "double enumeration capacity",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-162",
+      "contract": "double pattern capacity",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-163",
+      "contract": "double raw lexical capacity",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "FB-164",
+      "contract": "double caller string capacity",
+      "compile": "Valid",
+      "outcome": "Unsupported"
+    },
+    {
+      "id": "FB-165",
+      "contract": "double invalid lexical ''",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-166",
+      "contract": "double invalid lexical 'infinity'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-167",
+      "contract": "double invalid lexical 'Infinity'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-168",
+      "contract": "double invalid lexical 'nan'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-169",
+      "contract": "double invalid lexical 'NAN'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-170",
+      "contract": "double invalid lexical '+NaN'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-171",
+      "contract": "double invalid lexical '1_0'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-172",
+      "contract": "double invalid lexical '0x1'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-173",
+      "contract": "double invalid lexical '1,2'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-174",
+      "contract": "double invalid lexical '1e'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-175",
+      "contract": "double invalid lexical '--1'",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-176",
+      "contract": "double special mapping NaN",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-177",
+      "contract": "double special mapping INF",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-178",
+      "contract": "double special mapping +INF",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-179",
+      "contract": "double special mapping -INF",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-180",
+      "contract": "double special mapping 1e999",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-181",
+      "contract": "double special mapping -1e999",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-182",
+      "contract": "double special mapping 1e-999",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-183",
+      "contract": "double special mapping -1e-999",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-184",
+      "contract": "double special mapping -0",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-185",
+      "contract": "double special mapping +0",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-186",
+      "contract": "double special mapping .5",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-187",
+      "contract": "double special mapping 1.",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-188",
+      "contract": "double zero enumeration -0",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-189",
+      "contract": "double zero enumeration +0",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-190",
+      "contract": "double NaN enumeration",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-191",
+      "contract": "double NaN rejects finite enum",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-192",
+      "contract": "double NaN bound excluded minInclusive",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-193",
+      "contract": "double bound excludes NaN minInclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-194",
+      "contract": "double NaN bound excluded minExclusive",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-195",
+      "contract": "double bound excludes NaN minExclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-196",
+      "contract": "double NaN bound excluded maxInclusive",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-197",
+      "contract": "double bound excludes NaN maxInclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-198",
+      "contract": "double NaN bound excluded maxExclusive",
+      "compile": "Unsupported",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-199",
+      "contract": "double bound excludes NaN maxExclusive",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-200",
+      "contract": "double fixed zero value equality",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-201",
+      "contract": "double infinite inclusive interval",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-202",
+      "contract": "double exclusive infinity INF",
+      "compile": "Valid",
+      "outcome": "Invalid"
+    },
+    {
+      "id": "FB-203",
+      "contract": "double exclusive infinity 1.25",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-204",
+      "contract": "double integer rounding",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-205",
+      "contract": "double rounded enumeration equality",
+      "compile": "Valid",
+      "outcome": "Valid"
+    },
+    {
+      "id": "FB-206",
+      "contract": "double collapsed lexical",
+      "compile": "Valid",
+      "outcome": "Valid"
+    }
+  ]
+}

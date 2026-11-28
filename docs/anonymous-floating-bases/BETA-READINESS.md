@@ -1,0 +1,5 @@
+# Beta readiness
+
+Development 0.47 qualifies bounded inline anonymous float and double restriction bases. Original unnamed objects, direct base links and facet sources preserve IEEE family mapping/rounding, special values, value/lexical facet ancestry and bounded lifetime rules. All 29,374 source tests (2,111 internal / 27,263 public) and 27,263 overlapping exact-package checks pass. All 28,931 prior names and original test inputs remain; four public expectations are explicitly reconciled and 443 checks are added. Pilot 21; structural 65/64; datatype 582/16; zero errors. API 55/663 and nine signed Core 1.86.0 payloads are unchanged. Unpublished; broader simple-type/complex-content derivation and full XSD 1.1/PSVI/C45 acceptance remain separate.
+
+Published beta.1 remains narrower. No registry, tag or release-controller action is included. Next: reassess original remaining Unsupported cases and the current specification matrix, then rank structural/composition and derivation gaps for a separate bounded contract. Do not infer complete simple-type coverage from this family series. No overall specification percentage or production acceptance claim.
