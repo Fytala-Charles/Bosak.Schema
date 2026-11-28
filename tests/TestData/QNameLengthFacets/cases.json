@@ -1,0 +1,5907 @@
+{
+  "cases": [
+    {
+      "id": "QL-001",
+      "contract": "length=0 named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-002",
+      "contract": "length=0 root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-003",
+      "contract": "length=0 local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"><v>p:item</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-004",
+      "contract": "length=0 globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-005",
+      "contract": "length=0 localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-006",
+      "contract": "length=1 named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-007",
+      "contract": "length=1 root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='1'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-008",
+      "contract": "length=1 local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"><v>p:item</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-009",
+      "contract": "length=1 globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='1'/></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-010",
+      "contract": "length=1 localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='1'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-011",
+      "contract": "length=100 named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='100'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-012",
+      "contract": "length=100 root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='100'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-013",
+      "contract": "length=100 local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='100'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"><v>p:item</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-014",
+      "contract": "length=100 globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='100'/></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-015",
+      "contract": "length=100 localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='100'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-016",
+      "contract": "length=65536 named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='65536'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-017",
+      "contract": "length=65536 root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='65536'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-018",
+      "contract": "length=65536 local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='65536'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"><v>p:item</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-019",
+      "contract": "length=65536 globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='65536'/></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-020",
+      "contract": "length=65536 localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='65536'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-021",
+      "contract": "length ignores spelling longprefix:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">longprefix:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-022",
+      "contract": "length ignores spelling   p:item  ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">  p:item  </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-023",
+      "contract": "length ignores spelling item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-024",
+      "contract": "length keeps lexical validity ?",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">?</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-025",
+      "contract": "length keeps lexical validity missing:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">missing:item</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-026",
+      "contract": "length keeps lexical validity p:",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-027",
+      "contract": "length keeps lexical validity p:a:b",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:a:b</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-028",
+      "contract": "length keeps lexical validity ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-029",
+      "contract": "length literal -1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='-1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-030",
+      "contract": "length literal x",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='x'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-031",
+      "contract": "length literal 1.0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='1.0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-032",
+      "contract": "length literal ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value=''/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-033",
+      "contract": "length literal 65537",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='65537'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-034",
+      "contract": "length literal +0005",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='+0005'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-035",
+      "contract": "length literal  5 ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value=' 5 '/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-036",
+      "contract": "length fixed same true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:length value='5' fixed='true'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-037",
+      "contract": "length fixed/change true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='6'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:length value='5' fixed='true'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-038",
+      "contract": "length fixed same 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:length value='5' fixed='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-039",
+      "contract": "length fixed/change 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='6'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:length value='5' fixed='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-040",
+      "contract": "length fixed same false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:length value='5' fixed='false'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-041",
+      "contract": "length fixed/change false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='6'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:length value='5' fixed='false'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-042",
+      "contract": "length fixed same 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:length value='5' fixed='0'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-043",
+      "contract": "length fixed/change 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='6'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:length value='5' fixed='0'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-044",
+      "contract": "length inherited omitted",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:length value='5'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-045",
+      "contract": "length duplicate retained refusal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='5'/><xs:length value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-046",
+      "contract": "minLength=0 named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-047",
+      "contract": "minLength=0 root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-048",
+      "contract": "minLength=0 local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"><v>p:item</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-049",
+      "contract": "minLength=0 globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-050",
+      "contract": "minLength=0 localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-051",
+      "contract": "minLength=1 named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-052",
+      "contract": "minLength=1 root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='1'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-053",
+      "contract": "minLength=1 local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"><v>p:item</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-054",
+      "contract": "minLength=1 globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='1'/></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-055",
+      "contract": "minLength=1 localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='1'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-056",
+      "contract": "minLength=100 named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='100'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-057",
+      "contract": "minLength=100 root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='100'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-058",
+      "contract": "minLength=100 local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='100'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"><v>p:item</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-059",
+      "contract": "minLength=100 globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='100'/></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-060",
+      "contract": "minLength=100 localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='100'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-061",
+      "contract": "minLength=65536 named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='65536'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-062",
+      "contract": "minLength=65536 root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='65536'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-063",
+      "contract": "minLength=65536 local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='65536'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"><v>p:item</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-064",
+      "contract": "minLength=65536 globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='65536'/></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-065",
+      "contract": "minLength=65536 localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='65536'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-066",
+      "contract": "minLength ignores spelling longprefix:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">longprefix:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-067",
+      "contract": "minLength ignores spelling   p:item  ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">  p:item  </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-068",
+      "contract": "minLength ignores spelling item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-069",
+      "contract": "minLength keeps lexical validity ?",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">?</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-070",
+      "contract": "minLength keeps lexical validity missing:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">missing:item</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-071",
+      "contract": "minLength keeps lexical validity p:",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-072",
+      "contract": "minLength keeps lexical validity p:a:b",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:a:b</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-073",
+      "contract": "minLength keeps lexical validity ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-074",
+      "contract": "minLength literal -1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='-1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-075",
+      "contract": "minLength literal x",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='x'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-076",
+      "contract": "minLength literal 1.0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='1.0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-077",
+      "contract": "minLength literal ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value=''/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-078",
+      "contract": "minLength literal 65537",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='65537'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-079",
+      "contract": "minLength literal +0005",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='+0005'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-080",
+      "contract": "minLength literal  5 ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value=' 5 '/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-081",
+      "contract": "minLength fixed same true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='5' fixed='true'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-082",
+      "contract": "minLength fixed/change true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='6'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='5' fixed='true'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-083",
+      "contract": "minLength fixed same 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='5' fixed='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-084",
+      "contract": "minLength fixed/change 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='6'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='5' fixed='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-085",
+      "contract": "minLength fixed same false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='5' fixed='false'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-086",
+      "contract": "minLength fixed/change false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='6'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='5' fixed='false'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-087",
+      "contract": "minLength fixed same 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='5' fixed='0'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-088",
+      "contract": "minLength fixed/change 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='6'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='5' fixed='0'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-089",
+      "contract": "minLength inherited omitted",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='5'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-090",
+      "contract": "minLength duplicate retained refusal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='5'/><xs:minLength value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-091",
+      "contract": "maxLength=0 named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-092",
+      "contract": "maxLength=0 root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-093",
+      "contract": "maxLength=0 local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"><v>p:item</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-094",
+      "contract": "maxLength=0 globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-095",
+      "contract": "maxLength=0 localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-096",
+      "contract": "maxLength=1 named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-097",
+      "contract": "maxLength=1 root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='1'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-098",
+      "contract": "maxLength=1 local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='1'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"><v>p:item</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-099",
+      "contract": "maxLength=1 globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='1'/></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-100",
+      "contract": "maxLength=1 localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='1'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-101",
+      "contract": "maxLength=100 named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='100'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-102",
+      "contract": "maxLength=100 root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='100'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-103",
+      "contract": "maxLength=100 local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='100'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"><v>p:item</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-104",
+      "contract": "maxLength=100 globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='100'/></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-105",
+      "contract": "maxLength=100 localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='100'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-106",
+      "contract": "maxLength=65536 named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='65536'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-107",
+      "contract": "maxLength=65536 root",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='65536'/></xs:restriction></xs:simpleType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-108",
+      "contract": "maxLength=65536 local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='65536'/></xs:restriction></xs:simpleType></xs:element></xs:sequence></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"><v>p:item</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [
+            0
+          ],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-109",
+      "contract": "maxLength=65536 globalAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='65536'/></xs:restriction></xs:simpleType></xs:attribute><xs:element name='a'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            ""
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-110",
+      "contract": "maxLength=65536 localAttr",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:element name='a'><xs:complexType><xs:attribute name='g'><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='65536'/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType></xs:element></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\" g=\"p:item\"/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": false,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-111",
+      "contract": "maxLength ignores spelling longprefix:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">longprefix:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-112",
+      "contract": "maxLength ignores spelling   p:item  ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">  p:item  </a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-113",
+      "contract": "maxLength ignores spelling item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-114",
+      "contract": "maxLength keeps lexical validity ?",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">?</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-115",
+      "contract": "maxLength keeps lexical validity missing:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">missing:item</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-116",
+      "contract": "maxLength keeps lexical validity p:",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-117",
+      "contract": "maxLength keeps lexical validity p:a:b",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:a:b</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-118",
+      "contract": "maxLength keeps lexical validity ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\"></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-119",
+      "contract": "maxLength literal -1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='-1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-120",
+      "contract": "maxLength literal x",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='x'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-121",
+      "contract": "maxLength literal 1.0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='1.0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-122",
+      "contract": "maxLength literal ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value=''/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-123",
+      "contract": "maxLength literal 65537",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='65537'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-124",
+      "contract": "maxLength literal +0005",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='+0005'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-125",
+      "contract": "maxLength literal  5 ",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value=' 5 '/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-126",
+      "contract": "maxLength fixed same true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='5' fixed='true'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-127",
+      "contract": "maxLength fixed/change true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='4'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='5' fixed='true'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-128",
+      "contract": "maxLength fixed same 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='5' fixed='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-129",
+      "contract": "maxLength fixed/change 1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='4'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='5' fixed='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-130",
+      "contract": "maxLength fixed same false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='5' fixed='false'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-131",
+      "contract": "maxLength fixed/change false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='4'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='5' fixed='false'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-132",
+      "contract": "maxLength fixed same 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='5' fixed='0'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-133",
+      "contract": "maxLength fixed/change 0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='4'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='5' fixed='0'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-134",
+      "contract": "maxLength inherited omitted",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='5'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-135",
+      "contract": "maxLength duplicate retained refusal",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='5'/><xs:maxLength value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-136",
+      "contract": "component ancestry <xs:minLength value='5'/><xs:minLength value='4'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='4'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='5'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-137",
+      "contract": "component ancestry <xs:maxLength value='5'/><xs:maxLength value='6'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='6'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='5'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-138",
+      "contract": "component ancestry <xs:minLength value='5'/><xs:maxLength value='4'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='5'/><xs:maxLength value='4'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-139",
+      "contract": "component ancestry <xs:minLength value='5'/><xs:maxLength value='5'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='5'/><xs:maxLength value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-140",
+      "contract": "component ancestry <xs:length value='5'/><xs:minLength value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/><xs:minLength value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-141",
+      "contract": "component ancestry <xs:length value='5'/><xs:maxLength value='9'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/><xs:maxLength value='9'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-142",
+      "contract": "component ancestry <xs:minLength value='1'/><xs:length value='5'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-143",
+      "contract": "component ancestry <xs:maxLength value='9'/><xs:length value='5'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='9'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-144",
+      "contract": "component ancestry <xs:minLength value='1'/><xs:maxLength value='9'/><xs:length value='5'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='1'/><xs:maxLength value='9'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-145",
+      "contract": "component ancestry <xs:minLength value='1'/><xs:length value='5'/><xs:minLength value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/><xs:minLength value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-146",
+      "contract": "component ancestry <xs:minLength value='1'/><xs:length value='5'/><xs:minLength value='2'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/><xs:minLength value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='1'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-147",
+      "contract": "component ancestry <xs:maxLength value='9'/><xs:length value='5'/><xs:maxLength value='8'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/><xs:maxLength value='8'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='9'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-148",
+      "contract": "component ancestry <xs:minLength value='6'/><xs:length value='5'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:minLength value='6'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-149",
+      "contract": "component ancestry <xs:maxLength value='4'/><xs:length value='5'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='5'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:maxLength value='4'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-150",
+      "contract": "component ancestry <xs:length value='5'/><xs:minLength value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:length value='5'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-151",
+      "contract": "enumeration lengthp:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-152",
+      "contract": "enumeration lengthlongprefix:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">longprefix:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-153",
+      "contract": "enumeration lengthp:other",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:other</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-154",
+      "contract": "lexical pattern lengthp:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/><xs:pattern value='p:.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-155",
+      "contract": "lexical pattern lengthlongprefix:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:length value='0'/><xs:pattern value='p:.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">longprefix:item</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-156",
+      "contract": "patterned ancestor enum still excluded length",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:length value='0'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:pattern value='.*'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-157",
+      "contract": "anonymous direct base length",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-158",
+      "contract": "anonymous ancestry length<xs:length value='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:length value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-159",
+      "contract": "anonymous ancestry length<xs:length value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:QName'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:length value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-160",
+      "contract": "enumeration minLengthp:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-161",
+      "contract": "enumeration minLengthlongprefix:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">longprefix:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-162",
+      "contract": "enumeration minLengthp:other",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:other</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-163",
+      "contract": "lexical pattern minLengthp:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/><xs:pattern value='p:.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-164",
+      "contract": "lexical pattern minLengthlongprefix:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:minLength value='0'/><xs:pattern value='p:.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">longprefix:item</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-165",
+      "contract": "patterned ancestor enum still excluded minLength",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:minLength value='0'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:pattern value='.*'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-166",
+      "contract": "anonymous direct base minLength",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-167",
+      "contract": "anonymous ancestry minLength<xs:minLength value='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType><xs:minLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-168",
+      "contract": "anonymous ancestry minLength<xs:minLength value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:QName'><xs:minLength value='0'/></xs:restriction></xs:simpleType><xs:minLength value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-169",
+      "contract": "enumeration maxLengthp:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-170",
+      "contract": "enumeration maxLengthlongprefix:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">longprefix:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-171",
+      "contract": "enumeration maxLengthp:other",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:other</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-172",
+      "contract": "lexical pattern maxLengthp:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/><xs:pattern value='p:.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-173",
+      "contract": "lexical pattern maxLengthlongprefix:item",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='xs:QName'><xs:maxLength value='0'/><xs:pattern value='p:.*'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">longprefix:item</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-174",
+      "contract": "patterned ancestor enum still excluded maxLength",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction base='B'><xs:maxLength value='0'/><xs:enumeration value='p:item'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/><xs:simpleType name='B'><xs:restriction base='xs:QName'><xs:pattern value='.*'/></xs:restriction></xs:simpleType></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-175",
+      "contract": "anonymous direct base maxLength",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-176",
+      "contract": "anonymous ancestry maxLength<xs:maxLength value='0'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType><xs:maxLength value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-177",
+      "contract": "anonymous ancestry maxLength<xs:maxLength value='1'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:p='urn:one'><xs:simpleType name='T'><xs:restriction ><xs:simpleType><xs:restriction base='xs:QName'><xs:maxLength value='0'/></xs:restriction></xs:simpleType><xs:maxLength value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a xmlns:p=\"urn:one\" xmlns:longprefix=\"urn:one\">p:item</a>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "{urn:one}item"
+          ],
+          "kind": "QName",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-178",
+      "contract": "unchanged binary octets hexBinarylength2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:length value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>0AFF</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0AFF"
+          ],
+          "kind": "HexBinary",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-179",
+      "contract": "unchanged binary octets hexBinarylength0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>0AFF</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0AFF"
+          ],
+          "kind": "HexBinary",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-180",
+      "contract": "unchanged binary octets hexBinaryminLength3",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:minLength value='3'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>0AFF</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0AFF"
+          ],
+          "kind": "HexBinary",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-181",
+      "contract": "unchanged binary octets hexBinarymaxLength1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:hexBinary'><xs:maxLength value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>0AFF</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0AFF"
+          ],
+          "kind": "HexBinary",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-182",
+      "contract": "unchanged binary octets base64Binarylength2",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:base64Binary'><xs:length value='2'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>Cv8=</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0AFF"
+          ],
+          "kind": "Base64Binary",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-183",
+      "contract": "unchanged binary octets base64Binarylength0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:base64Binary'><xs:length value='0'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>Cv8=</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0AFF"
+          ],
+          "kind": "Base64Binary",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-184",
+      "contract": "unchanged binary octets base64BinaryminLength3",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:base64Binary'><xs:minLength value='3'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>Cv8=</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0AFF"
+          ],
+          "kind": "Base64Binary",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    },
+    {
+      "id": "QL-185",
+      "contract": "unchanged binary octets base64BinarymaxLength1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:simpleType name='T'><xs:restriction base='xs:base64Binary'><xs:maxLength value='1'/></xs:restriction></xs:simpleType><xs:element name='a' type='T'/></xs:schema>",
+      "instance": "<a>Cv8=</a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "rootScalar": true,
+      "rootNilled": false,
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "0AFF"
+          ],
+          "kind": "Base64Binary",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "maxString": 1024
+    }
+  ]
+}
