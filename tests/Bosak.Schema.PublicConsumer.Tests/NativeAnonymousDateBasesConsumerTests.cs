@@ -15,6 +15,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.2 | 27-11-2026 | Reconcile admitted dateTime/time bases with original inputs retained. |
 //                      | Charles Korthout | 0.3 | 27-11-2026 | Reconcile admitted Gregorian base with original input retained. |
+//                      | Charles Korthout | 0.4 | 28-11-2026 | Reconcile admitted interchange bases with original inputs retained. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Globalization;
@@ -35,6 +36,8 @@ public sealed class NativeAnonymousDateBasesConsumerTests
     [Theory][MemberData(nameof(Cases))]public void Contract(string id,string json,bool data)
     {
         using var p=JsonDocument.Parse(json);var r=p.RootElement;var schema=r.GetProperty("schema").GetString()!;var xml=r.GetProperty("instance").GetString()!;var compile=r.GetProperty("compile").GetString();var outcome=r.GetProperty("outcome").GetString();var options=new NativeSchemaSessionOptions(256,256,r.GetProperty("maxString").GetInt32(),65536,2,256,16,256,1024);var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);string exported;
+        if(id=="AD-096"){compile="Valid";outcome="Invalid";} // Original input retained; admitted interchange base reconciled.
+        if(id=="AD-095"){compile="Valid";outcome="Invalid";} // Original input retained; admitted interchange base reconciled.
         if(id=="AD-094"){compile="Valid";outcome="Invalid";} // Original date/calendar lexical is invalid for the newly admitted gYear base.
         if(id is "AD-092" or "AD-093"){compile="Valid";outcome="Invalid";} // Original date-only input is invalid for either new calendar base.
         if(data){var c=NativeSchemaNodeDataSession.Create(schema,options);Assert.True(c.Outcome.ToString()==compile,id+":compile:"+c.Outcome);if(compile!="Valid"){Assert.Null(c.Value);return;}using var s=c.Value!;var a=s.Assess(xml,context);Assert.True(a.Outcome.ToString()==outcome,id+":assess:"+a.Outcome);if(outcome!="Valid"){Assert.Null(a.Value);return;}using var d=a.Value!;foreach(var expected in r.GetProperty("nilStates").EnumerateArray())Assert.Equal(expected.GetProperty("nilled").GetBoolean(),d.IsNilled(expected.GetProperty("path").EnumerateArray().Select(v=>v.GetInt32()).ToImmutableArray()));foreach(var read in r.GetProperty("reads").EnumerateArray()){var path=read.GetProperty("path").EnumerateArray().Select(v=>v.GetInt32()).ToImmutableArray();Check(read.GetProperty("target").GetString()=="attribute"?d.ReadAttributeItems(path,read.GetProperty("namespace").GetString()!,read.GetProperty("name").GetString()!):d.ReadElementItems(path),read);}exported=d.ExportXml();d.Dispose();Assert.Throws<ObjectDisposedException>(()=>d.ExportXml());}

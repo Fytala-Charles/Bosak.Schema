@@ -1,3 +1,7 @@
+## Anonymous binary and QName restriction bases — 28 November 2026
+
+Development 0.45 qualifies bounded inline anonymous hexBinary, base64Binary and QName restriction bases. Original unnamed objects, direct base links and facet namespace scopes preserve exact octets/length, expanded-name QName equality and fixed/enumeration/whitespace/pattern ancestry. All 28,107 source tests (2,044 internal / 26,063 public) and 26,063 overlapping exact-package checks pass. All 27,708 prior names and original test inputs remain; 26 public expectations are explicitly reconciled and 399 checks are added. Pilot 21; structural 65/64; datatype 582/16; zero errors. API 55/663 and nine signed Core 1.86.0 payloads are unchanged. Unpublished; other atomic/complex inline bases, broader derivation and full XSD 1.1/PSVI/C45 acceptance remain separate. [Scope and evidence](anonymous-interchange-bases/README.md). [ADR053](ADR-053-anonymous-interchange-bases.md). Earlier entries remain historical.
+
 ## Anonymous duration restriction bases — 27 November 2026
 
 Development 0.44 qualifies bounded inline anonymous duration, yearMonthDuration and dayTimeDuration restriction bases. Original unnamed objects, direct base links and original facet sources preserve exact month/second values, family grammar, equality/partial ordering and fixed/enumeration/bound/whitespace/pattern ancestry. All 27,708 source tests (2,025 internal / 25,683 public) and 25,683 overlapping exact-package checks pass. All 27,209 prior names and original test inputs remain; six public expectations are explicitly reconciled and 499 checks are added. Pilot 21; structural 65/64; datatype 582/16; zero errors. API 55/663 and nine signed Core 1.86.0 payloads are unchanged. Unpublished; other atomic/complex inline bases, broader derivation and full XSD 1.1/PSVI/C45 acceptance remain separate. [Scope and evidence](anonymous-duration-bases/README.md). [ADR052](ADR-052-anonymous-duration-bases.md). Earlier entries remain historical.
@@ -358,7 +362,7 @@ The transition does not implement the proposed core session API, change frozen W
 
 The 3 November [O1/O2 versioned responses](core-disposition-responses/2026-11-03-v2/README.md) are scoped historical design acceptance, not proof of current native adapter/runtime delivery. Their original source/proposal hashes and the unsigned [confirmation drafts](core-disposition-inbox/2026-11-03/README.md) remain unchanged. The published Core 1.81.2 release and its budget deferral do not complete Schema's native provider/session or performance requirements. See [history](DEVELOPMENT_HISTORY.md).
 
-*Last updated: 2026-11-27*
+*Last updated: 2026-11-28*
 
 
 ## M2A scope proposal - 19 November 2026

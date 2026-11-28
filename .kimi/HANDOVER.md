@@ -1,3 +1,7 @@
+## Anonymous binary and QName restriction bases — 28 November 2026
+
+Development 0.45 qualifies bounded inline anonymous hexBinary, base64Binary and QName restriction bases. Original unnamed objects, direct base links and facet namespace scopes preserve exact octets/length, expanded-name QName equality and fixed/enumeration/whitespace/pattern ancestry. All 28,107 source tests (2,044 internal / 26,063 public) and 26,063 overlapping exact-package checks pass. All 27,708 prior names and original test inputs remain; 26 public expectations are explicitly reconciled and 399 checks are added. Pilot 21; structural 65/64; datatype 582/16; zero errors. API 55/663 and nine signed Core 1.86.0 payloads are unchanged. Unpublished; other atomic/complex inline bases, broader derivation and full XSD 1.1/PSVI/C45 acceptance remain separate. [Scope and evidence](../docs/anonymous-interchange-bases/README.md). Earlier entries remain historical.
+
 ## Anonymous duration restriction bases — 27 November 2026
 
 Development 0.44 qualifies bounded inline anonymous duration, yearMonthDuration and dayTimeDuration restriction bases. Original unnamed objects, direct base links and original facet sources preserve exact month/second values, family grammar, equality/partial ordering and fixed/enumeration/bound/whitespace/pattern ancestry. All 27,708 source tests (2,025 internal / 25,683 public) and 25,683 overlapping exact-package checks pass. All 27,209 prior names and original test inputs remain; six public expectations are explicitly reconciled and 499 checks are added. Pilot 21; structural 65/64; datatype 582/16; zero errors. API 55/663 and nine signed Core 1.86.0 payloads are unchanged. Unpublished; other atomic/complex inline bases, broader derivation and full XSD 1.1/PSVI/C45 acceptance remain separate. [Scope and evidence](../docs/anonymous-duration-bases/README.md). Earlier entries remain historical.
@@ -150,7 +154,7 @@ The 0.8 development candidate qualifies DT-101â€“DT-180: bounded hexBinary/
 
 The 0.7 development candidate admits bounded dateTime/time/dateTimeStamp on signed Core 1.86.0 through both native facades, with exact fractional seconds, applicable finite facets, original typed facts and preserved lifetime/capacity gates. All 100 [calendar contracts](../docs/calendar-100/README.md) are qualified: 11,024 source tests and 9,516 overlapping package-only public tests pass. API additions are three enum values and CalendarValue; existing exported type names and members are preserved. The frozen pilot is 21/21; the expanded sample remains 19 matches/110 Unsupported/zero errors. This supersedes earlier calendar-refusal/planned notices below. Published beta.1 and its controller remain historical; no Schema publication or general C45/full-XSD acceptance.
 
-Last updated: 2026-11-27
+Last updated: 2026-11-28
 
 
 The [calendar transport prerequisite assessment](../docs/calendar-transport-prerequisites/README.md) completes item 20 of the approved batch. Its 48 handled observations confirm current millisecond precision loss and native dateTime/time/dateTimeStamp refusals against the qualified package. Next is a separately adopted additive exact fractional-second Core contract. No production source/API/pin or publication changes occur; slice 19 qualification is reused without a new execution claim. The batch stops at 20.

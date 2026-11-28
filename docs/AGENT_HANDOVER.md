@@ -1,3 +1,7 @@
+## Anonymous binary and QName restriction bases — 28 November 2026
+
+Development 0.45 qualifies bounded inline anonymous hexBinary, base64Binary and QName restriction bases. Original unnamed objects, direct base links and facet namespace scopes preserve exact octets/length, expanded-name QName equality and fixed/enumeration/whitespace/pattern ancestry. All 28,107 source tests (2,044 internal / 26,063 public) and 26,063 overlapping exact-package checks pass. All 27,708 prior names and original test inputs remain; 26 public expectations are explicitly reconciled and 399 checks are added. Pilot 21; structural 65/64; datatype 582/16; zero errors. API 55/663 and nine signed Core 1.86.0 payloads are unchanged. Unpublished; other atomic/complex inline bases, broader derivation and full XSD 1.1/PSVI/C45 acceptance remain separate. [Scope and evidence](anonymous-interchange-bases/README.md). Earlier entries remain historical.
+
 ## Anonymous duration restriction bases — 27 November 2026
 
 Development 0.44 qualifies bounded inline anonymous duration, yearMonthDuration and dayTimeDuration restriction bases. Original unnamed objects, direct base links and original facet sources preserve exact month/second values, family grammar, equality/partial ordering and fixed/enumeration/bound/whitespace/pattern ancestry. All 27,708 source tests (2,025 internal / 25,683 public) and 25,683 overlapping exact-package checks pass. All 27,209 prior names and original test inputs remain; six public expectations are explicitly reconciled and 499 checks are added. Pilot 21; structural 65/64; datatype 582/16; zero errors. API 55/663 and nine signed Core 1.86.0 payloads are unchanged. Unpublished; other atomic/complex inline bases, broader derivation and full XSD 1.1/PSVI/C45 acceptance remain separate. [Scope and evidence](anonymous-duration-bases/README.md). Earlier entries remain historical.
@@ -158,7 +162,7 @@ The approved 100-contract [calendar batch](calendar-100/README.md) first qualifi
 
 The [current audit](specification-coverage-current/README.md) reconciles 24 areas against qualified source revisions, normative section references and hashed evidence. It distinguishes bounded native support, legacy descriptors, explicit refusals and unpublished Core prerequisites. Selected expanded sample: 19 matches / 110 Unsupported / zero mismatches or harness errors; no conformance percentage. Schema native calendars await signed Core availability and separate adoption. The 19 November matrix remains historical and unchanged.
 
-Last updated: 2026-11-27
+Last updated: 2026-11-28
 
 
 The [calendar transport prerequisite assessment](calendar-transport-prerequisites/README.md) completes item 20 of the approved batch. Its 48 handled observations confirm current millisecond precision loss and native dateTime/time/dateTimeStamp refusals against the qualified package. Next is a separately adopted additive exact fractional-second Core contract. No production source/API/pin or publication changes occur; slice 19 qualification is reused without a new execution claim. The batch stops at 20.

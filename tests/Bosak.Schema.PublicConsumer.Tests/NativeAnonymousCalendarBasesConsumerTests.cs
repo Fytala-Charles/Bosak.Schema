@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.2 | 27-11-2026 | Reconcile admitted stamp base and detached kind with original inputs retained. |
 //                      | Charles Korthout | 0.3 | 27-11-2026 | Reconcile admitted Gregorian base with original input retained. |
 //                      | Charles Korthout | 0.4 | 27-11-2026 | Reconcile admitted duration base with original input retained. |
+//                      | Charles Korthout | 0.5 | 28-11-2026 | Reconcile admitted interchange bases with original inputs retained. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Globalization;
@@ -36,6 +37,8 @@ public sealed class NativeAnonymousCalendarBasesConsumerTests
     [Theory][MemberData(nameof(Cases))]public void Contract(string id,string json,bool data)
     {
         using var p=JsonDocument.Parse(json);var r=p.RootElement;var schema=r.GetProperty("schema").GetString()!;var xml=r.GetProperty("instance").GetString()!;var compile=r.GetProperty("compile").GetString();var outcome=r.GetProperty("outcome").GetString();var options=new NativeSchemaSessionOptions(r.TryGetProperty("digits",out var digits)?digits.GetInt32():256,r.TryGetProperty("scale",out var scale)?scale.GetInt32():256,r.GetProperty("maxString").GetInt32(),65536,2,256,16,256,1024);var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);string exported;
+        if(id=="AC-170"){compile="Valid";outcome="Invalid";} // Original input retained; admitted interchange base reconciled.
+        if(id=="AC-169"){compile="Valid";outcome="Invalid";} // Original input retained; admitted interchange base reconciled.
         if(id=="AC-168"){compile="Valid";outcome="Invalid";} // Original calendar/Gregorian input is invalid for the newly admitted duration base.
         if(id=="AC-167"){compile="Valid";outcome="Invalid";} // Original date/calendar lexical is invalid for the newly admitted gYear base.
         if(id=="AC-166"){compile="Valid";var reconciled=System.Text.Json.Nodes.JsonNode.Parse(json)!;reconciled["reads"]![0]!["kind"]="DateTimeStamp";r=JsonSerializer.SerializeToElement(reconciled);} // Original schema/XML retained; admitted carrier kind is explicitly reconciled.
