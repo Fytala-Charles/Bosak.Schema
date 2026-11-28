@@ -49,6 +49,7 @@
 //                      | Charles Korthout | 0.35 | 27-11-2026     | Enforce bounded simple-type final derivation controls.                                   |
 //                      | Charles Korthout | 0.36 | 27-11-2026     | Preserve original anonymous compound restriction bases and inherited facets.             |
 //                      | Charles Korthout | 0.37 | 27-11-2026     | Preserve anonymous decimal/text bases and original facet source identities.              |
+//                      | Charles Korthout | 0.38 | 28-11-2026 | Admit original named integer bases through existing exact inherited facets. |
 // ===========================================================================================================================================================
 
 using System.Xml.Linq;
@@ -145,7 +146,7 @@ internal sealed partial class NativeDecimalSchema
         if (maxStringCharacters is not null && baseName == Xs + "integer")
             return new NativeType(name, false, namespaceUri, isInteger: true,
                 integerFacets: NativeIntegerFacets.Compile(restriction, limits), baseName: baseName);
-        if (maxStringCharacters is not null && baseName.Namespace == Xs && simple.TryGetValue(baseName, out var inherited) && inherited.IsInteger)
+        if (maxStringCharacters is not null && simple.TryGetValue(baseName, out var inherited) && inherited.IsInteger)
         {
             foreach (var facet in Elements(restriction))
             {

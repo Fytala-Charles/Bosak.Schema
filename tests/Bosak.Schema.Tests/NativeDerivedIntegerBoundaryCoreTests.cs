@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 22-11-2026     | Creation                                                                                 |
 //                      | Charles Korthout | 0.2   | 24-11-2026     | Adopt measured enumeration expectations and upstream validity |
 //                      | Charles Korthout | 0.3 | 26-11-2026     | Reconcile measured original numeric pattern outcomes without changing inputs |
+//                      | Charles Korthout | 0.4 | 28-11-2026     | Reconcile named integer admission; preserve original inputs and test names |
 //                      |==================|=======|================|=========================================================================================
 // ===========================================================================================================================================================
 
@@ -80,10 +81,10 @@ public sealed class NativeDerivedIntegerBoundaryCoreTests
     [Theory][InlineData("enumeration","value='1'")][InlineData("pattern","value='.*'")][InlineData("whiteSpace","value='preserve'")][InlineData("fractionDigits","value='0' fixed='true'")]
     public void ExcludedFacetGrammar(string facet,string attributes)
     {var schema=S($"<xs:simpleType name='N'><xs:restriction base='xs:int'><xs:{facet} {attributes}/></xs:restriction></xs:simpleType>"+Root());var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(facet is "enumeration" or "pattern"?NativeSchemaOutcome.Valid:NativeSchemaOutcome.Unsupported,c.Outcome);if(facet is "enumeration" or "pattern")Assert.NotNull(c.Value);else Assert.Null(c.Value);c.Value?.Dispose();}
-    /// <summary>User Chains Stay Excluded.</summary>
+    /// <summary>Preserves the historical test name while qualifying named integer chains.</summary>
     [Fact]
     public void UserChainsStayExcluded()
-    {var schema=S("<xs:simpleType name='N'><xs:restriction base='xs:int'/></xs:simpleType><xs:simpleType name='D'><xs:restriction base='N'/></xs:simpleType>"+Root());Assert.Equal(NativeSchemaOutcome.Unsupported,NativeSchemaSession.Create(schema,Options).Outcome);}
+    {var schema=S("<xs:simpleType name='N'><xs:restriction base='xs:int'/></xs:simpleType><xs:simpleType name='D'><xs:restriction base='N'/></xs:simpleType>"+Root());var c=NativeSchemaSession.Create(schema,Options);Assert.Equal(NativeSchemaOutcome.Valid,c.Outcome);using var session=c.Value!;}
     /// <summary>Builtins.</summary>
     /// <returns>The explicit controls.</returns>
     public static IEnumerable<object[]> Builtins(){using var d=JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"TestData/DerivedIntegers/builtin-types.json")));foreach(var row in d.RootElement.GetProperty("types").EnumerateArray())yield return[row.GetProperty("name").GetString()!];}

@@ -154,3 +154,7 @@ Development 0.47 qualifies bounded inline anonymous float and double restriction
 ## Next specification work after anonymous families
 
 Start with [named-integer restriction chains](docs/post-anonymous-coverage/NEXT-CONTRACT.md), then QName facet compatibility and schema default-attribute groups. Broader open content/composition follows the [evidence-based ranking](docs/post-anonymous-coverage/RANKING.md). Product remains 0.47; every new semantic slice needs separate immutable adoption and full qualification.
+
+## Named integer restriction checkpoint
+
+Development 0.48 qualifies bounded named-integer restriction chains through original named type objects and source facets. All 29,913 source tests (2,144 internal / 27,769 public) and 27,769 overlapping exact-package checks pass. All 29,374 prior names and original fixture bytes remain. There are 252 authored contracts through both facades, one unchanged upstream trial through both facades and 33 native proofs: 539 new checks. Four public and one internal expectations are explicitly reconciled. Pilot21; structural 65/64; datatype 583/15; zero errors. API55/663 and nine signed Core1.86.0 payloads remain unchanged. Unpublished; full XSD1.1, PSVI and C45 acceptance remain pending. [Guide](docs/named-integer-bases/GUIDE.md). Next: QName length compatibility, then default-attribute groups.
