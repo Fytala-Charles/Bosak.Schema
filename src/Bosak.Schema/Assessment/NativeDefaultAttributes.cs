@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 28-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.2 | 28-11-2026 | Qualify scoped closed attributes on default-group opt-out owners. |
+//                      | Charles Korthout | 0.3 | 28-11-2026 | Admit original default-group uses on existing bounded all/choice owners. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml;
@@ -72,9 +73,9 @@ internal sealed partial class NativeDecimalSchema
         }
 
         Require(!plan.Root.Type.MixedContent && plan.Root.Type.ContentType is null &&
-            plan.AllMinimum is null && plan.ChoiceMinimum is null && plan.CompiledAttributeWildcard is null &&
+            plan.CompiledAttributeWildcard is null &&
             !members.Any(e => e.Name == Xs + "assert" || e.Name == Xs + "simpleContent" || e.Name == Xs + "complexContent"),
-            "Default groups initially require empty or finite element-only sequence owners without assertions/wildcards.", NativeDecimalUnsupportedReason.DeclarationShape);
+            "Default groups require bounded empty, sequence, all or choice owners without assertions/wildcards.", NativeDecimalUnsupportedReason.DeclarationShape);
         var uses = plan.AttributeUses.ToBuilder();
         var names = uses.ToDictionary(d => d.ExpandedName);
         foreach (var use in context.Uses)
