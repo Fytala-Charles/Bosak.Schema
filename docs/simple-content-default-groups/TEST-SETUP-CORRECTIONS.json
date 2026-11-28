@@ -1,0 +1,23 @@
+{
+  "corrections": [
+    {
+      "stage": "Initial diagnostic build",
+      "issue": "Native proof treated IEnumerable<SchemaAtomicItem> as an array",
+      "correction": "Use Count() and First() over the existing sequence contract; no product semantic change",
+      "originalLog": "diagnostic-source.log"
+    },
+    {
+      "case": "SC-117",
+      "issue": "Authored list expected HasRootScalar=true",
+      "correction": "Lists return ReadRootItems but HasRootScalar=false under the existing facade contract; schema/XML and all value expectations unchanged",
+      "initialStimuli": "INITIAL-AUTHORED-CASES.json"
+    },
+    {
+      "stage": "Precommit semantic author review",
+      "issue": "Descendant assertion scan would inspect opaque annotation payloads",
+      "correction": "Use existing Elements(extension) semantic member traversal; add SC-120 through both facades",
+      "supersededQualification": "Private schema-simple-content-default-groups-initial retains original source/package receipts; final fresh lane replaces them",
+      "initialSchemaDllSha256": "803e39cf14a149d332c56ada1e2d2b0f44badb8abded0d2d20a5b8897ef18d4f"
+    }
+  ]
+}
