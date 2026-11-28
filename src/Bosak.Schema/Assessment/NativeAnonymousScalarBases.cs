@@ -20,6 +20,7 @@
 //                      | Charles Korthout | 0.6 | 27-11-2026 | Admit original Gregorian bases with bounded value/facet ancestry. |
 //                      | Charles Korthout | 0.7 | 27-11-2026 | Admit original duration bases with bounded exact value/facet ancestry. |
 //                      | Charles Korthout | 0.8 | 28-11-2026 | Admit original binary and QName bases with original facet namespace scopes. |
+//                      | Charles Korthout | 0.9 | 28-11-2026 | Admit original URI/text-derived bases with lexical and identity authority. |
 // ===========================================================================================================================================================
 using System.Xml.Linq;
 using Bosak.XPath.Core.Xdm;
@@ -31,6 +32,9 @@ internal sealed partial class NativeDecimalSchema
         string? name, string ns, NativeNumericLimits limits, int maxCharacters, NativePatternCompilation compilation)
     {
         compilation.Check();
+        if (baseType.IsUri)
+            return new NativeType(name, false, ns, isUri: true, textKind: NativeTextKind.Token, derivationBase: baseType,
+                textFacets: NativeTextFacets.Compile(restriction, baseType, maxCharacters, compilation, inlineSource));
         if (baseType.InterchangeKind is { } interchangeKind)
             return new NativeType(name, false, ns, interchangeKind: interchangeKind, derivationBase: baseType,
                 interchangeFacets: NativeInterchangeFacets.Compile(restriction, interchangeKind, maxCharacters, compilation, baseType.InterchangeFacets, inlineSource));
@@ -70,7 +74,7 @@ internal sealed partial class NativeDecimalSchema
                 inlineBase: inlineSource, omitPatterns: hasPatterns);
             return new NativeType(name, false, ns, facets: facets, derivationBase: baseType, numericPatterns: patterns);
         }
-        if (baseType.IsString && !baseType.IsUri && baseType.TextKind is NativeTextKind.String or NativeTextKind.NormalizedString or NativeTextKind.Token)
+        if (baseType.IsString && !baseType.IsUri)
             return new NativeType(name, false, ns, isString: true, textKind: baseType.TextKind, derivationBase: baseType,
                 textFacets: NativeTextFacets.Compile(restriction, baseType, maxCharacters, compilation, inlineSource));
         return null;

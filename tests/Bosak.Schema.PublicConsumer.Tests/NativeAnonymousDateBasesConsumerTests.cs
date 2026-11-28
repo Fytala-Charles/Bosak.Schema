@@ -16,6 +16,7 @@
 //                      | Charles Korthout | 0.2 | 27-11-2026 | Reconcile admitted dateTime/time bases with original inputs retained. |
 //                      | Charles Korthout | 0.3 | 27-11-2026 | Reconcile admitted Gregorian base with original input retained. |
 //                      | Charles Korthout | 0.4 | 28-11-2026 | Reconcile admitted interchange bases with original inputs retained. |
+//                      | Charles Korthout | 0.5 | 28-11-2026 | Reconcile admitted URI/text bases with original inputs retained. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Globalization;
@@ -36,6 +37,7 @@ public sealed class NativeAnonymousDateBasesConsumerTests
     [Theory][MemberData(nameof(Cases))]public void Contract(string id,string json,bool data)
     {
         using var p=JsonDocument.Parse(json);var r=p.RootElement;var schema=r.GetProperty("schema").GetString()!;var xml=r.GetProperty("instance").GetString()!;var compile=r.GetProperty("compile").GetString();var outcome=r.GetProperty("outcome").GetString();var options=new NativeSchemaSessionOptions(256,256,r.GetProperty("maxString").GetInt32(),65536,2,256,16,256,1024);var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);string exported;
+        if(id=="AD-097"){compile="Valid";outcome="Valid";var reconciled=System.Text.Json.Nodes.JsonNode.Parse(json)!;reconciled["reads"]![0]!["kind"]="AnyUri";reconciled["reads"]![0]!["expected"]=System.Text.Json.Nodes.JsonArray.Parse("[\"2000-01-02Z\"]");r=JsonSerializer.SerializeToElement(reconciled);} // Original input retained; admitted URI/text base reconciled.
         if(id=="AD-096"){compile="Valid";outcome="Invalid";} // Original input retained; admitted interchange base reconciled.
         if(id=="AD-095"){compile="Valid";outcome="Invalid";} // Original input retained; admitted interchange base reconciled.
         if(id=="AD-094"){compile="Valid";outcome="Invalid";} // Original date/calendar lexical is invalid for the newly admitted gYear base.
