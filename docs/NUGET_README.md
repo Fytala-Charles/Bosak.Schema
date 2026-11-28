@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.46 development candidate requires Bosak Core 1.86.0 or later.
+The 0.47 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1901,3 +1901,7 @@ Existing inline restriction placements admit hexBinary, base64Binary and QName b
 ## Anonymous URI and text-derived bases (development0.46)
 
 Existing inline restriction placements admit anyURI, language, Name, NCName, NMTOKEN, ID and IDREF using original unnamed types and facet sources. Lexical-family normalization, scalar lengths, inherited/fixed facets and validation-root identity checks retain their rules and limits. URI resolution and general key/keyref are separate. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-text-bases/GUIDE.md). Unpublished development source.
+
+## Anonymous floating restriction bases (development0.47)
+
+Existing inline restriction placements admit float and double using original unnamed types and facet sources. Existing IEEE family mapping/rounding, NaN/infinities/signed zero, inherited/fixed facets, patterned-ancestor refusals and limits remain. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-floating-bases/GUIDE.md). Unpublished development source.

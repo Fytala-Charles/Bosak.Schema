@@ -21,6 +21,7 @@
 //                      | Charles Korthout | 0.7 | 27-11-2026 | Admit original duration bases with bounded exact value/facet ancestry. |
 //                      | Charles Korthout | 0.8 | 28-11-2026 | Admit original binary and QName bases with original facet namespace scopes. |
 //                      | Charles Korthout | 0.9 | 28-11-2026 | Admit original URI/text-derived bases with lexical and identity authority. |
+//                      | Charles Korthout | 0.10 | 28-11-2026 | Admit original floating bases with existing IEEE value/facet ancestry. |
 // ===========================================================================================================================================================
 using System.Xml.Linq;
 using Bosak.XPath.Core.Xdm;
@@ -32,6 +33,9 @@ internal sealed partial class NativeDecimalSchema
         string? name, string ns, NativeNumericLimits limits, int maxCharacters, NativePatternCompilation compilation)
     {
         compilation.Check();
+        if (baseType.FloatingKind is { } floatingKind)
+            return new NativeType(name, false, ns, floatingKind: floatingKind, derivationBase: baseType,
+                floatingFacets: NativeFloatingFacets.Compile(restriction, floatingKind, maxCharacters, compilation, baseType.FloatingFacets, inlineSource));
         if (baseType.IsUri)
             return new NativeType(name, false, ns, isUri: true, textKind: NativeTextKind.Token, derivationBase: baseType,
                 textFacets: NativeTextFacets.Compile(restriction, baseType, maxCharacters, compilation, inlineSource));
