@@ -11,7 +11,7 @@ Bosak.Schema provides Apache-2.0 schema services and bounded native XSD assessme
 | Availability | Scope |
 |---|---|
 | Published `0.5.0-beta.1` | Historical bounded decimal beta; use its release and integration guides |
-| Development `0.52`, signed Core `1.86.0` | Bounded native assess/read/export for scalar datatypes, finite structural models, attributes and selected XSD 1.1 facilities; unpublished |
+| Development `0.53`, signed Core `1.86.0` | Bounded native assess/read/export for scalar datatypes, finite structural models, attributes and selected XSD 1.1 facilities; unpublished |
 
 The [current coverage guide](docs/SPECIFICATION_COVERAGE.md) distinguishes native implementation from legacy descriptor helpers and remaining specification gaps. General XSD 1.1 conformance, arbitrary schema-aware query integration and full PSVI/C45 acceptance remain incomplete.
 

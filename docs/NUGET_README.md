@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.52 development candidate requires Bosak Core 1.86.0 or later.
+The 0.53 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1906,7 +1906,7 @@ Existing inline restriction placements admit anyURI, language, Name, NCName, NMT
 
 Existing inline restriction placements admit float and double using original unnamed types and facet sources. Existing IEEE family mapping/rounding, NaN/infinities/signed zero, inherited/fixed facets, patterned-ancestor refusals and limits remain. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-floating-bases/GUIDE.md). Unpublished development source.
 
-## Named-integer restriction bases (development0.52)
+## Named-integer restriction bases (development0.53)
 
 Existing integer placements admit ordinary named integer restriction chains and their bounded numeric-pattern route. Original named base objects/QNames, exact inherited facets, pattern exclusions, budgets and lifetime remain; integer pattern facets use original source elements. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/named-integer-bases/GUIDE.md). Unpublished development source; no broader fixed-facet syntax, API or Core pin change.
 
@@ -1917,3 +1917,5 @@ Existing empty and finite element-only sequence complex owners support schema de
 Empty and finite-sequence complex owners that explicitly opt out of a schema default group and declare no attribute uses reject ordinary extra attributes as Invalid. Existing special-attribute handling and other profile boundaries remain.
 
 Existing bounded all/choice complex owners support schema default-attribute groups with original declaration identity and unchanged model recognition/limits. Nested all/choice, wildcard/assertion combinations and instance augmentation remain separate.
+
+Existing noninteger simple-content extension owners support original schema default groups. Integer/Boolean extensions, active wildcard/assertion combinations, broader derivation and augmentation remain separate.

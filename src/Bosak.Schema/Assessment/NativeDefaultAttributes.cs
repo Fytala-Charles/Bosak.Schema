@@ -15,6 +15,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.2 | 28-11-2026 | Qualify scoped closed attributes on default-group opt-out owners. |
 //                      | Charles Korthout | 0.3 | 28-11-2026 | Admit original default-group uses on existing bounded all/choice owners. |
+//                      | Charles Korthout | 0.4 | 28-11-2026 | Qualify original default groups on existing noninteger simple-content extensions. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml;
@@ -72,10 +73,14 @@ internal sealed partial class NativeDecimalSchema
             return plan;
         }
 
-        Require(!plan.Root.Type.MixedContent && plan.Root.Type.ContentType is null &&
-            plan.CompiledAttributeWildcard is null &&
-            !members.Any(e => e.Name == Xs + "assert" || e.Name == Xs + "simpleContent" || e.Name == Xs + "complexContent"),
-            "Default groups require bounded empty, sequence, all or choice owners without assertions/wildcards.", NativeDecimalUnsupportedReason.DeclarationShape);
+        var simpleExtension = plan.Root.Type.ContentType is { IsInteger: false, IsBoolean: false } &&
+            members.Count == 1 && members[0].Name == Xs + "simpleContent" &&
+            Elements(members[0]) is { Count: 1 } content && content[0].Name == Xs + "extension" &&
+            !Elements(content[0]).Any(e => e.Name == Xs + "assert");
+        Require(!plan.Root.Type.MixedContent && plan.CompiledAttributeWildcard is null &&
+            (simpleExtension || (plan.Root.Type.ContentType is null &&
+                !members.Any(e => e.Name == Xs + "assert" || e.Name == Xs + "simpleContent" || e.Name == Xs + "complexContent"))),
+            "Default groups require bounded element-only owners or existing noninteger simple-content extensions without assertions/wildcards.", NativeDecimalUnsupportedReason.DeclarationShape);
         var uses = plan.AttributeUses.ToBuilder();
         var names = uses.ToDictionary(d => d.ExpandedName);
         foreach (var use in context.Uses)

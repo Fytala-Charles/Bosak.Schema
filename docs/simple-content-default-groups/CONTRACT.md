@@ -1,0 +1,9 @@
+# Default groups on existing noninteger simple-content extensions
+
+28 November 2026. Immutable ADOPTION.json is recorded before implementation from verified PR118 main.
+
+Admit original defaultAttributes uses on already-supported noninteger source simpleContent/extension owners. Keep governing complex G distinct from the actual content type A and original compound member identities. Reuse original cached group/global declarations, union/conflict rules, provided value validation and effective-use16 ceiling. Retain named, inline and existing nested owner routes and original namespace scopes. No source clones or synthetic declarations.
+
+Integer-extension attribute syntax and Boolean extensions remain unsupported. Restriction, complexContent/general complex-base derivation, wildcard/mixed/assertion combinations and the separate opt-out closed-attribute marker do not expand. Existing datatype, identity-binding, model, depth, schema, string, regex, atom and lifetime limits remain. Missing default/fixed attributes require augmentation and remain Unsupported; provided values retain equality rules. No XML insertion or broad specification/PSVI/C45 claim.
+
+Qualify both facades and actual native G/A/member/type authority, use union, flags, original aliases, canonical references, boundaries, complete assessment/no facts on failure, XML/export, recovery, cancellation, detached values, foreign ownership and expiry. Preserve every old name and fixture byte; archive measured original expectations. Full stable source/exact package/API/signed Core/original samples/invoice/docs/release/workload qualification precedes Git/PR author review, green merge and exact-main verification. Then complete the fresh coverage/consumer/beta-readiness reassessment. No registry, tag or controller action.

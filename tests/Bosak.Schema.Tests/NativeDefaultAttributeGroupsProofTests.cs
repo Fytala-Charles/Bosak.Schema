@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 28-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.2 | 28-11-2026 | Reconcile scoped opt-out validity; preserve original inputs and names. |
+//                      | Charles Korthout | 0.3 | 28-11-2026 | Reconcile original simple-content default-group owner expectation. |
 // ===========================================================================================================================================================
 using Bosak.Schema.Tests.NodeData;
 using Bosak.XPath.Core.Schema;
@@ -73,7 +74,7 @@ public sealed class NativeDefaultAttributeGroupsProofTests
     {var source=S(Root(),"<xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' default='false'/></xs:attributeGroup>");using var owner=NativeSchemaSession.Create(source,Options).Value!;var absent=owner.Assess("<a/>",Context);Assert.Equal(NativeSchemaOutcome.Unsupported,absent.Outcome);Assert.Null(absent.Value);using var doc=owner.Assess("<a g='0'/>",Context).Value!;Assert.False(doc.ReadAttribute(0).Value.BooleanValue);Assert.Equal("0",System.Xml.Linq.XElement.Parse(doc.ExportXml()).Attribute("g")!.Value);}
     /// <summary>Active defaults retain the first owner-closure exclusions; explicit false preserves earlier content.</summary>
     [Fact]public void OwnerScope()
-    {var body=Root(extra:"<xs:simpleContent><xs:extension base='xs:string'/></xs:simpleContent>");Assert.Equal(NativeSchemaOutcome.Unsupported,NativeSchemaSession.Create(S(body),Options).Outcome);using var owner=NativeSchemaSession.Create(S(body.Replace("<xs:complexType>","<xs:complexType defaultAttributesApply='false'>")),Options).Value!;using var doc=owner.Assess("<a>text</a>",Context).Value!;Assert.Equal("text",doc.ReadRootScalar().StringValue);}
+    {var body=Root(extra:"<xs:simpleContent><xs:extension base='xs:string'/></xs:simpleContent>");using var active=NativeSchemaSession.Create(S(body),Options).Value!;Assert.Equal(NativeSchemaOutcome.Invalid,active.Assess("<a>text</a>",Context).Outcome);using var owner=NativeSchemaSession.Create(S(body.Replace("<xs:complexType>","<xs:complexType defaultAttributesApply='false'>")),Options).Value!;using var doc=owner.Assess("<a>text</a>",Context).Value!;Assert.Equal("text",doc.ReadRootScalar().StringValue);}
     /// <summary>The legacy decimal-only facade does not acquire default-group support.</summary>
     [Fact]public void LegacyBoundary()
     {var attempt=NativeDecimalSession.Create(S(Root()),new(256,256,1,32,1,256,256));Assert.Equal(NativeDecimalOutcome.Unsupported,attempt.Outcome);Assert.Null(attempt.Value);}
