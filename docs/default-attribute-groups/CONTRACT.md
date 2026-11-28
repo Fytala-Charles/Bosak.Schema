@@ -1,0 +1,11 @@
+# Bounded schema default-attribute groups
+
+28 November 2026. Fresh ADOPTION.json recorded before implementation from verified PR115 main.
+
+Resolve schema defaultAttributes in its original namespace scope to an existing closed attribute group, even when no complex owner applies it. Every supported source complex type independently applies that group's original uses unless its own defaultAttributesApply is false/0; omitted/true/1 applies. Collapse XML whitespace; malformed Boolean/QName flags are Invalid and source literals remain bounded. Preserve original declaration objects with the existing set-union identity/conflict rules and effective attribute ceilings. No synthetic source group/ref node, alias or declaration clone.
+
+First closure: existing named, root and local empty/finite element-only sequence owners. Active application on simpleContent/complexContent, all/choice, mixed/assertion or wildcard combinations stays Unsupported; explicit false preserves earlier support. Single schema-document route only, without composition expansion. Simple types and implicit/explicit built-in anyType have no source complexType to which the group applies.
+
+Required/optional uses and provided values retain current rules, source forms/namespace scopes and original type identity. Missing default/fixed-valued attributes still require augmentation and are Unsupported. No instance XML node is inserted. Complete assessment precedes facts; retain no-facts failure, original XML/export, false-versus-absence, cancellation, ownership, recovery, detached values and expiry. Keep definition/use/type16, aggregate attributes64, depth4 and all existing source/string/schema/regex/atom/value/lifetime limits, including effective uses on repeated nested owners.
+
+Preserve every earlier test name/fixture byte; archive measured assertion changes. Rerun all frozen samples unchanged, separating the five self-contained original default-attribute cases from authored variants; two open205 cases still have composition blockers, with no admission forecast. Fully qualify source/exact-package/API/signed Core/invoice/docs/release/workload, then authorized commit/push/PR author review/green merge/exact-main. No registry/tag/controller action or full conformance claim.

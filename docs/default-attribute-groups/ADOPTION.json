@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-28",
+  "base": "ad9fc8b4c0965506d2cc211814155d0c95fc6753",
+  "recordedBeforeImplementation": true,
+  "sources": [
+    {
+      "id": "structures",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-1-20120405/",
+      "sha256": "5ffb773f81fb81cfc9ac54dfb871c333cefb12fbdffe4caeb28170054b21fc6a",
+      "bytes": 2021328,
+      "reviewedSections": [
+        "3.4.2.1 and3.4.2.4 complex-type attribute-use mapping and defaultAttributesApply",
+        "3.4.4.2 required/provided attribute validity",
+        "3.4.6.1 complex-type attribute-use consistency",
+        "3.5 attribute uses and3.6 attribute-group definitions",
+        "4.2.2 schema document defaultAttributes QName representation"
+      ]
+    },
+    {
+      "id": "datatypes",
+      "url": "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/",
+      "sha256": "cc2ae20cdeab02600c73fd13f1cc31dbbdd61f62aa455026fa84388b540443b8",
+      "bytes": 1508774,
+      "reviewedSections": [
+        "3.3.2 Boolean source flag lexical mapping",
+        "3.3.18 QName resolution in original schema namespace context",
+        "Existing supported attribute datatype/value constraints unchanged"
+      ]
+    },
+    {
+      "id": "xdm31",
+      "url": "https://www.w3.org/TR/2017/REC-xpath-datamodel-31-20170321/",
+      "sha256": "a157e098f0de2fefd81ce95bb934762ff5a1f616a4745854f0340d177082acd3",
+      "bytes": 646995,
+      "reviewedSections": [
+        "3.3.1 original governing/actual type and atomic values",
+        "6.2.4 unchanged declaration/type/value/nil facts"
+      ]
+    },
+    {
+      "id": "xml10",
+      "url": "https://www.w3.org/TR/2008/REC-xml-20081126/",
+      "sha256": "f58a4b9e1e5b8bac13fb55c4e5c7c8c5e2c176aa45ee68e2f1ab2498511927ec",
+      "bytes": 219926
+    },
+    {
+      "id": "namespaces10",
+      "url": "https://www.w3.org/TR/2009/REC-xml-names-20091208/",
+      "sha256": "b4a649e5fdab9852d68eca21442481599164949bcdee5549f2ec7e38fb3cd3a8",
+      "bytes": 51390
+    }
+  ],
+  "scope": [
+    "Schema defaultAttributes selects an original closed attribute group; complexType defaultAttributesApply defaults true and supports explicit Boolean opt-out",
+    "Apply original group uses to existing empty and finite element-only sequence complex owners, preserving component set identity and all budgets"
+  ],
+  "intentionalDeviations": [
+    "Single schema-document route only; no include/import or foreign complex-type expansion",
+    "Active application to all/choice, simpleContent/complexContent, mixed/assertion or wildcard owners remains Unsupported; explicit false retains prior behavior",
+    "Default groups with wildcards/prohibited uses remain outside existing group profile",
+    "Absent default/fixed-valued attribute still requires augmentation and remains Unsupported; no instance nodes inserted",
+    "Existing group/reference duplicate-identity, definition16/use16/aggregate64/depth4/source/schema/string/atom/value/lifetime limits retained",
+    "Malformed/unbound default group QName Invalid; unresolved closed group Unsupported consistently with the bounded group profile",
+    "No synthetic attributeGroup/ref nodes, aliases, declaration cloning, API/Core pin/publication/full XSD1.1/PSVI/C45 acceptance"
+  ],
+  "qualification": [
+    "Independent root/local/named apply flags, original namespace/group declaration identity, required/optional/provided value rules",
+    "Duplicate unions, eager unused checks, capacities including repeated nested aggregate attributes",
+    "Both facades/native source/type/value/lifetime authority; original samples unchanged and authored variants separate",
+    "Full source/exact package/API/signed Core/samples/invoice/docs/release/workload and authorized Git/PR/green merge/exact-main"
+  ],
+  "status": "Recorded before implementation; qualification pending"
+}

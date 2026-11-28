@@ -50,6 +50,7 @@
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 //                      | Charles Korthout | 0.42 | 27-11-2026     | Enforce abstract complex types after admitted type resolution.                           |
 //                      | Charles Korthout | 0.43 | 27-11-2026     | Preserve bounded anyType nil states and independent wildcard attributes.                |
+//                      | Charles Korthout | 0.44 | 28-11-2026 | Apply independent default groups before nested effective-attribute budgets. |
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.36  | 26-11-2026     | Add bounded strict attribute wildcards on empty complex owners.                           |
 //                      | Charles Korthout | 0.37  | 26-11-2026     | Retain strict wildcard metadata on finite sequence owners.                               |
@@ -127,7 +128,7 @@ internal sealed partial class NativeDecimalSchema
             }
             else
             {
-                var complex = Single(element!, "complexType"); Attributes(complex, "mixed");
+                var complex = Single(element!, "complexType"); Attributes(complex, "mixed", "defaultAttributesApply");
                 plan = Complex(complex, new NativeDeclaration(name, MixedComplexType(complex, null, targetNamespace), 1, 1, targetNamespace));
             }
             NestedBudget(plan, cancellationToken); visitingElements.Remove(key); roots.Add(key, plan); return plan;
@@ -140,7 +141,7 @@ internal sealed partial class NativeDecimalSchema
             if (named.TryGetValue(name, out var existing)) return existing;
             Require(definitions.TryGetValue(name, out var definition), "Unresolved complex type.", NativeDecimalUnsupportedReason.ValueType);
             Require(visiting.Add(name), "Recursive complex types are outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
-            Attributes(definition!, "name", "mixed", "abstract");
+            Attributes(definition!, "name", "mixed", "abstract", "defaultAttributesApply");
             var plan = Complex(definition!, new NativeDeclaration(name.LocalName, MixedComplexType(definition!, name.LocalName, targetNamespace), 1, 1, targetNamespace));
             named.Add(name, plan);
             visiting.Remove(name);
@@ -148,6 +149,14 @@ internal sealed partial class NativeDecimalSchema
         }
 
         NativeDecimalSchema Complex(XElement complex, NativeDeclaration root)
+        {
+            var apply = ReadDefaultAttributesApply(complex);
+            var plan = ApplyDefaultAttributeUses(complex, ComplexCore(complex, root), apply, cancellationToken);
+            NestedBudget(plan, cancellationToken);
+            return plan;
+        }
+
+        NativeDecimalSchema ComplexCore(XElement complex, NativeDeclaration root)
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (root.Type.MixedContent)
@@ -224,7 +233,7 @@ internal sealed partial class NativeDecimalSchema
                 else
                 {
                     Require(inline.Count == 1 && inline[0].Name == Xs + "complexType", "Expected an inline complex type.", NativeDecimalUnsupportedReason.DeclarationShape);
-                    Attributes(inline[0], "mixed");
+                    Attributes(inline[0], "mixed", "defaultAttributesApply");
                     container = Complex(inline[0], new NativeDeclaration(name, MixedComplexType(inline[0], null, ns), 1, 1, ns));
                     type = container.Root.Type;
                 }

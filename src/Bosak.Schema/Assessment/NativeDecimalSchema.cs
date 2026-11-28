@@ -82,6 +82,7 @@
 //                      | Charles Korthout | 1.61 | 27-11-2026     | Enforce abstract complex types after admitted type resolution.                           |
 //                      | Charles Korthout | 1.62 | 27-11-2026     | Preserve bounded anyType nil states and independent wildcard attributes.                |
 //                      | Charles Korthout | 1.63 | 27-11-2026     | Preserve original anonymous compound restriction bases and inherited facets.             |
+//                      | Charles Korthout | 1.64 | 28-11-2026 | Apply original schema default groups to bounded source complex owners. |
 // ===========================================================================================================================================================
 //                      | Charles Korthout | 0.21  | 26-11-2026     | Preserve absent lax declarations and original node identity.                              |
 
@@ -154,7 +155,7 @@ internal sealed partial class NativeDecimalSchema
             var mixedProfile = maxStringCharacters is not null;
             if (mixedProfile) PrepareSchemaAnnotations(root, cancellationToken);
             if (mixedProfile) root.AddAnnotation(new NativeValueConstraintCompilation(limits, maxStringCharacters!.Value, cancellationToken));
-            if (mixedProfile) Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault", "attributeFormDefault");
+            if (mixedProfile) Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault", "attributeFormDefault", "defaultAttributes");
             else Attributes(root, "version", "xpathDefaultNamespace", "targetNamespace", "elementFormDefault");
             var attributeForm = mixedProfile ? Form(root, "attributeFormDefault", "unqualified") : "unqualified";
             Require(root.Attribute("version") is null || (string?)root.Attribute("version") == "1.1", "Only schema version 1.1 is admitted.");
@@ -238,6 +239,7 @@ internal sealed partial class NativeDecimalSchema
             var anonymousSimple = CompileAnonymousRestrictions(root, limits, maxStringCharacters, cancellationToken, patternCompilation, simple);
             var globalAttributes = CompileGlobalAttributeDeclarations(root, targetNamespace, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
             CompileAttributeGroups(root, targetNamespace, attributeForm, decimalType, stringType, booleanType, integerType, simple, cancellationToken);
+            if (mixedProfile) PrepareDefaultAttributeGroup(root, cancellationToken);
             if (stringType is not null && HasNestedDeclarations(root, types, targetNamespace))
             {
                 var nested = CompileNestedSchema(root, types, declarations, targetNamespace,
@@ -259,7 +261,7 @@ internal sealed partial class NativeDecimalSchema
                 if (named.TryGetValue(key, out var known)) return known;
                 Require(resolvingComplex.Add(key), "Complex dependency cycle is outside the profile.", NativeDecimalUnsupportedReason.DeclarationShape);
                 var type = complexDefinitions[key];
-                Attributes(type, mixedProfile ? ["name", "abstract"] : ["name"]);
+                Attributes(type, mixedProfile ? ["name", "abstract", "defaultAttributesApply"] : ["name"]);
                 var name = Name(type);
                 var identity = new NativeType(name, true, targetNamespace);
                 var plan = CompileComplex(type, new NativeDeclaration(name, identity, 1, 1, targetNamespace),
@@ -294,7 +296,7 @@ internal sealed partial class NativeDecimalSchema
                 else
                 {
                     var complex = Single(declaration, "complexType");
-                    Attributes(complex);
+                    if (mixedProfile) Attributes(complex, "defaultAttributesApply"); else Attributes(complex);
                     plan = CompileComplex(complex, new NativeDeclaration(name, new NativeType(null, true), 1, 1, targetNamespace),
                         targetNamespace, defaultForm, attributeForm, assertionNamespace, decimalType, stringType, booleanType, integerType, simple, limits, cancellationToken, anonymousSimple, requested => complexDefinitions.ContainsKey(requested) ? ResolveComplex(requested) : null, maxStringCharacters: maxStringCharacters, patternCompilation: patternCompilation);
                 }
@@ -350,7 +352,7 @@ internal sealed partial class NativeDecimalSchema
         return new NativeDecimalSchema(new NativeDeclaration(root.Name, type, root.MinOccurs, root.MaxOccurs, root.NamespaceUri), [], [], limits) { AttributeUses = uses, NestedProfile = true, structuralAssertions = CompileStructuralAssertions(assertions, targetNamespace, assertionNamespace, cancellationToken) };
     }
 
-    private static NativeDecimalSchema CompileComplex(XElement complex, NativeDeclaration root,
+    private static NativeDecimalSchema CompileComplexCore(XElement complex, NativeDeclaration root,
         string targetNamespace, string defaultForm, string attributeForm, string assertionNamespace, NativeType decimalType, NativeType? stringType, NativeType? booleanType, NativeType? integerType,
         Dictionary<XName, NativeType> simple, NativeNumericLimits limits, CancellationToken cancellationToken, Dictionary<XElement, NativeType> anonymousSimple, Func<XName, NativeDecimalSchema?>? complexResolver = null, bool nestedContext = false, int? maxStringCharacters = null, NativePatternCompilation? patternCompilation = null)
     {
