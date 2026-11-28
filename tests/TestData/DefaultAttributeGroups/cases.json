@@ -1,0 +1,3450 @@
+{
+  "cases": [
+    {
+      "id": "DA-001",
+      "contract": "empty flag=None present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-002",
+      "contract": "empty flag=None present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-003",
+      "contract": "empty flag=true present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='true'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-004",
+      "contract": "empty flag=true present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='true'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-005",
+      "contract": "empty flag=1 present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='1'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-006",
+      "contract": "empty flag=1 present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='1'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-007",
+      "contract": "empty flag=false present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-008",
+      "contract": "empty flag=false present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-009",
+      "contract": "empty flag=0 present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='0'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-010",
+      "contract": "empty flag=0 present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='0'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-011",
+      "contract": "empty flag= true  present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply=' true '></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-012",
+      "contract": "empty flag= true  present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply=' true '></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-013",
+      "contract": "empty flag= false  present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply=' false '></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-014",
+      "contract": "empty flag= false  present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply=' false '></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-015",
+      "contract": "named flag=None present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-016",
+      "contract": "named flag=None present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-017",
+      "contract": "named flag=true present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply='true'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-018",
+      "contract": "named flag=true present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply='true'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-019",
+      "contract": "named flag=1 present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply='1'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-020",
+      "contract": "named flag=1 present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply='1'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-021",
+      "contract": "named flag=false present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply='false'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-022",
+      "contract": "named flag=false present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply='false'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-023",
+      "contract": "named flag=0 present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply='0'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-024",
+      "contract": "named flag=0 present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply='0'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-025",
+      "contract": "named flag= true  present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply=' true '></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-026",
+      "contract": "named flag= true  present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply=' true '></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-027",
+      "contract": "named flag= false  present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply=' false '></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-028",
+      "contract": "named flag= false  present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply=' false '></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-029",
+      "contract": "sequence flag=None present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-030",
+      "contract": "sequence flag=None present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-031",
+      "contract": "sequence flag=true present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='true'><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-032",
+      "contract": "sequence flag=true present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='true'><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-033",
+      "contract": "sequence flag=1 present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='1'><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-034",
+      "contract": "sequence flag=1 present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='1'><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-035",
+      "contract": "sequence flag=false present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-036",
+      "contract": "sequence flag=false present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-037",
+      "contract": "sequence flag=0 present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='0'><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-038",
+      "contract": "sequence flag=0 present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='0'><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-039",
+      "contract": "sequence flag= true  present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply=' true '><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-040",
+      "contract": "sequence flag= true  present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply=' true '><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-041",
+      "contract": "sequence flag= false  present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply=' false '><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-042",
+      "contract": "sequence flag= false  present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply=' false '><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-043",
+      "contract": "local flag=None present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v/></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-044",
+      "contract": "local flag=None present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-045",
+      "contract": "local flag=true present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='true'></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v/></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-046",
+      "contract": "local flag=true present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='true'></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-047",
+      "contract": "local flag=1 present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='1'></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v/></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-048",
+      "contract": "local flag=1 present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='1'></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-049",
+      "contract": "local flag=false present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='false'></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-050",
+      "contract": "local flag=false present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='false'></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-051",
+      "contract": "local flag=0 present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='0'></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-052",
+      "contract": "local flag=0 present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='0'></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-053",
+      "contract": "local flag= true  present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply=' true '></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v/></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-054",
+      "contract": "local flag= true  present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply=' true '></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-055",
+      "contract": "local flag= false  present=False",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply=' false '></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-056",
+      "contract": "local flag= false  present=True",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply=' false '></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-057",
+      "contract": "invalid Boolean empty''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply=''></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-058",
+      "contract": "invalid Boolean named''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply=''></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-059",
+      "contract": "invalid Boolean local''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply=''></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-060",
+      "contract": "invalid Boolean empty'True'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='True'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-061",
+      "contract": "invalid Boolean named'True'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply='True'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-062",
+      "contract": "invalid Boolean local'True'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='True'></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-063",
+      "contract": "invalid Boolean empty'yes'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='yes'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-064",
+      "contract": "invalid Boolean named'yes'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply='yes'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-065",
+      "contract": "invalid Boolean local'yes'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='yes'></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-066",
+      "contract": "invalid Boolean empty'2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='2'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-067",
+      "contract": "invalid Boolean named'2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply='2'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-068",
+      "contract": "invalid Boolean local'2'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='2'></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-069",
+      "contract": "invalid Boolean empty'false true'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false true'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-070",
+      "contract": "invalid Boolean named'false true'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T' defaultAttributesApply='false true'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-071",
+      "contract": "invalid Boolean local'false true'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='false true'></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-072",
+      "contract": "flag without schema defaults true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType defaultAttributesApply='true'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 0
+    },
+    {
+      "id": "DA-073",
+      "contract": "flag without schema defaults false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 0
+    },
+    {
+      "id": "DA-074",
+      "contract": "flag source capacity",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='                                                                                                                                                                                                                                                                 '></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-075",
+      "contract": "schema default QName ''",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-076",
+      "contract": "schema default QName 'missing:G'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='missing:G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-077",
+      "contract": "schema default QName 'a:b:c'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='a:b:c' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-078",
+      "contract": "schema default QName 'bad name'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='bad name' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-079",
+      "contract": "schema default QName 'Unknown'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='Unknown' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-080",
+      "contract": "schema default QName ' G '",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes=' G ' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-081",
+      "contract": "schema default QName 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-082",
+      "contract": "original Boolean value emptyfalse",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-083",
+      "contract": "original Boolean value empty0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='0'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-084",
+      "contract": "original Boolean value emptytrue",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='true'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-085",
+      "contract": "original Boolean value empty1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='1'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-086",
+      "contract": "original Boolean value emptyx",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='x'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-087",
+      "contract": "original Boolean value namedfalse",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-088",
+      "contract": "original Boolean value named0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='0'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-089",
+      "contract": "original Boolean value namedtrue",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='true'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-090",
+      "contract": "original Boolean value named1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='1'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-091",
+      "contract": "original Boolean value namedx",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='x'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-092",
+      "contract": "original Boolean value localfalse",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-093",
+      "contract": "original Boolean value local0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='0'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-094",
+      "contract": "original Boolean value localtrue",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='true'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-095",
+      "contract": "original Boolean value local1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='1'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "true"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-096",
+      "contract": "original Boolean value localx",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='x'/></a>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-097",
+      "contract": "optional group use absent empty",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 0
+    },
+    {
+      "id": "DA-098",
+      "contract": "optional group use absent named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T'></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 0
+    },
+    {
+      "id": "DA-099",
+      "contract": "optional group use absent local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 0
+    },
+    {
+      "id": "DA-100",
+      "contract": "identity set union empty",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='H'><xs:attributeGroup ref='G'/></xs:attributeGroup><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-101",
+      "contract": "identity set union empty<xs:attributeGroup ref='G'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType><xs:attributeGroup ref='G'/></xs:complexType></xs:element><xs:attributeGroup name='H'><xs:attributeGroup ref='G'/></xs:attributeGroup><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-102",
+      "contract": "identity set union empty<xs:attributeGroup ref='H'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType><xs:attributeGroup ref='H'/></xs:complexType></xs:element><xs:attributeGroup name='H'><xs:attributeGroup ref='G'/></xs:attributeGroup><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-103",
+      "contract": "identity set union named",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T'></xs:complexType><xs:attributeGroup name='H'><xs:attributeGroup ref='G'/></xs:attributeGroup><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-104",
+      "contract": "identity set union named<xs:attributeGroup ref='G'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T'><xs:attributeGroup ref='G'/></xs:complexType><xs:attributeGroup name='H'><xs:attributeGroup ref='G'/></xs:attributeGroup><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-105",
+      "contract": "identity set union named<xs:attributeGroup ref='H'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='T'/><xs:complexType name='T'><xs:attributeGroup ref='H'/></xs:complexType><xs:attributeGroup name='H'><xs:attributeGroup ref='G'/></xs:attributeGroup><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-106",
+      "contract": "identity set union sequence",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='H'><xs:attributeGroup ref='G'/></xs:attributeGroup><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-107",
+      "contract": "identity set union sequence<xs:attributeGroup ref='G'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attributeGroup ref='G'/></xs:complexType></xs:element><xs:attributeGroup name='H'><xs:attributeGroup ref='G'/></xs:attributeGroup><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-108",
+      "contract": "identity set union sequence<xs:attributeGroup ref='H'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v' type='xs:string'/></xs:sequence><xs:attributeGroup ref='H'/></xs:complexType></xs:element><xs:attributeGroup name='H'><xs:attributeGroup ref='G'/></xs:attributeGroup><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-109",
+      "contract": "identity set union local",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='H'><xs:attributeGroup ref='G'/></xs:attributeGroup><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-110",
+      "contract": "identity set union local<xs:attributeGroup ref='G'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType><xs:attributeGroup ref='G'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='H'><xs:attributeGroup ref='G'/></xs:attributeGroup><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-111",
+      "contract": "identity set union local<xs:attributeGroup ref='H'/>",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType><xs:attributeGroup ref='H'/></xs:complexType></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='H'><xs:attributeGroup ref='G'/></xs:attributeGroup><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-112",
+      "contract": "distinct use same name conflict",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType><xs:attribute name='g' type='xs:boolean'/></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-113",
+      "contract": "explicit and default groups combine",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType><xs:attributeGroup ref='H'/></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup><xs:attributeGroup name='H'><xs:attribute name='h' type='xs:integer' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a h='05' g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "5"
+          ],
+          "kind": "Integer",
+          "name": "h",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        },
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 1,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 2
+    },
+    {
+      "id": "DA-114",
+      "contract": "value constraint absence default='false'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' default='false'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-115",
+      "contract": "provided constraint default='false'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' default='false'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='0'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-116",
+      "contract": "value constraint absence fixed='false'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' fixed='false'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Unsupported",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-117",
+      "contract": "provided constraint fixed='false'",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' fixed='false'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='0'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-118",
+      "contract": "provided fixed differs",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' fixed='false'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='true'/>",
+      "compile": "Valid",
+      "outcome": "Invalid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-119",
+      "contract": "independent owner flags false/None",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:sequence><xs:element name='v'><xs:complexType/></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-120",
+      "contract": "independent owner flags None/false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='false'/></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'><v/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-121",
+      "contract": "independent owner flags 1/0",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='1'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='0'/></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a g='false'><v/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-122",
+      "contract": "independent owner flags 0/1",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='0'><xs:sequence><xs:element name='v'><xs:complexType defaultAttributesApply='1'/></xs:element></xs:sequence></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v g='false'/></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [
+            0
+          ],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024,
+      "attributeCount": 1
+    },
+    {
+      "id": "DA-123",
+      "contract": "owner scope alltrue",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='true'><xs:all><xs:element name='v' type='xs:string'/></xs:all></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v>text</v></a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-124",
+      "contract": "owner scope allfalse",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:all><xs:element name='v' type='xs:string'/></xs:all></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-125",
+      "contract": "owner scope choicetrue",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='true'><xs:choice><xs:element name='v' type='xs:string'/></xs:choice></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v>text</v></a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-126",
+      "contract": "owner scope choicefalse",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:choice><xs:element name='v' type='xs:string'/></xs:choice></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a><v>text</v></a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-127",
+      "contract": "simple-content scope true",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='true'><xs:simpleContent><xs:extension base='xs:string'/></xs:simpleContent></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a>text</a>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": true,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-128",
+      "contract": "simple-content scope false",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'><xs:simpleContent><xs:extension base='xs:string'/></xs:simpleContent></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a>text</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": true,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-129",
+      "contract": "simple type no default uses xs:string",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='xs:string'/><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a>text</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "text"
+          ],
+          "kind": "String",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": true,
+      "maxString": 1024,
+      "attributeCount": 0
+    },
+    {
+      "id": "DA-130",
+      "contract": "simple type no default uses xs:integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='xs:integer'/><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a>0005</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "5"
+          ],
+          "kind": "Integer",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": true,
+      "maxString": 1024,
+      "attributeCount": 0
+    },
+    {
+      "id": "DA-131",
+      "contract": "simple type no default uses xs:boolean",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a' type='xs:boolean'/><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a>false</a>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "element",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": true,
+      "maxString": 1024,
+      "attributeCount": 0
+    },
+    {
+      "id": "DA-132",
+      "contract": "original default use datatype xs:integer",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:integer' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a xmlns:q='urn:value' g='123456789012345678901234567890123456789'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "123456789012345678901234567890123456789"
+          ],
+          "kind": "Integer",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-133",
+      "contract": "original default use datatype xs:token",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:token' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a xmlns:q='urn:value' g='  a  b  '/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "a b"
+          ],
+          "kind": "String",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-134",
+      "contract": "original default use datatype xs:QName",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:QName' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a xmlns:q='urn:value' g='q:item'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "{urn:value}item"
+          ],
+          "kind": "QName",
+          "name": "g",
+          "namespace": "",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-135",
+      "contract": "qualified original group scope",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='t:G' targetNamespace='urn:schema' xmlns:t='urn:schema' attributeFormDefault='qualified'><xs:element name='a'><xs:complexType/></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<t:a xmlns:t='urn:schema' t:g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "urn:schema",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-136",
+      "contract": "local prefix shadow does not rebind schema default",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='t:G' targetNamespace='urn:schema' xmlns:t='urn:schema' attributeFormDefault='qualified'><xs:element name='a'><xs:complexType xmlns:t='urn:shadow'/></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<t:a xmlns:t='urn:schema' t:g='false'/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [
+        {
+          "target": "attribute",
+          "path": [],
+          "expected": [
+            "false"
+          ],
+          "kind": "Boolean",
+          "name": "g",
+          "namespace": "urn:schema",
+          "index": 0,
+          "nodeDataOnly": false
+        }
+      ],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-137",
+      "contract": "default group resolves even no applying owner",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='Unknown' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-138",
+      "contract": "unused default conflict eager",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType defaultAttributesApply='false'></xs:complexType></xs:element><xs:complexType name='Unused'><xs:attribute name='g' type='xs:boolean'/></xs:complexType><xs:attributeGroup name='G'><xs:attribute name='g' type='xs:boolean' use='required'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Invalid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-139",
+      "contract": "effective group ceiling 16",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g0' type='xs:boolean'/><xs:attribute name='g1' type='xs:boolean'/><xs:attribute name='g2' type='xs:boolean'/><xs:attribute name='g3' type='xs:boolean'/><xs:attribute name='g4' type='xs:boolean'/><xs:attribute name='g5' type='xs:boolean'/><xs:attribute name='g6' type='xs:boolean'/><xs:attribute name='g7' type='xs:boolean'/><xs:attribute name='g8' type='xs:boolean'/><xs:attribute name='g9' type='xs:boolean'/><xs:attribute name='g10' type='xs:boolean'/><xs:attribute name='g11' type='xs:boolean'/><xs:attribute name='g12' type='xs:boolean'/><xs:attribute name='g13' type='xs:boolean'/><xs:attribute name='g14' type='xs:boolean'/><xs:attribute name='g15' type='xs:boolean'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Valid",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    },
+    {
+      "id": "DA-140",
+      "contract": "effective group ceiling 17",
+      "schema": "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' defaultAttributes='G' ><xs:element name='a'><xs:complexType></xs:complexType></xs:element><xs:attributeGroup name='G'><xs:attribute name='g0' type='xs:boolean'/><xs:attribute name='g1' type='xs:boolean'/><xs:attribute name='g2' type='xs:boolean'/><xs:attribute name='g3' type='xs:boolean'/><xs:attribute name='g4' type='xs:boolean'/><xs:attribute name='g5' type='xs:boolean'/><xs:attribute name='g6' type='xs:boolean'/><xs:attribute name='g7' type='xs:boolean'/><xs:attribute name='g8' type='xs:boolean'/><xs:attribute name='g9' type='xs:boolean'/><xs:attribute name='g10' type='xs:boolean'/><xs:attribute name='g11' type='xs:boolean'/><xs:attribute name='g12' type='xs:boolean'/><xs:attribute name='g13' type='xs:boolean'/><xs:attribute name='g14' type='xs:boolean'/><xs:attribute name='g15' type='xs:boolean'/><xs:attribute name='g16' type='xs:boolean'/></xs:attributeGroup></xs:schema>",
+      "instance": "<a/>",
+      "compile": "Unsupported",
+      "outcome": "Valid",
+      "reads": [],
+      "nilStates": [
+        {
+          "path": [],
+          "nilled": false
+        }
+      ],
+      "rootNilled": false,
+      "rootScalar": false,
+      "maxString": 1024
+    }
+  ]
+}

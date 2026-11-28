@@ -1,0 +1,13 @@
+# Bounded schema default-attribute groups
+
+Both owned native facades accept schema defaultAttributes naming an existing closed attribute group. The QName resolves once in the original schema namespace context. Each supported source complex type independently applies those original uses unless its own defaultAttributesApply is false or 0. Omitted, true and 1 apply; XML whitespace is collapsed. A parent's opt-out does not propagate to a local type. Local prefix shadowing does not rebind the schema-level QName.
+
+The first closure is existing named, root and local empty or finite element-only sequence complex owners. Actual group declaration objects are shared, including canonical global attribute references. Explicit and default uses form a set by original identity: repeated shared uses are deduplicated; distinct same-name declarations are Invalid. No synthetic source attributeGroup/ref node, alias or declaration clone is introduced. All definitions and the selected default group resolve eagerly, including unused definitions and opted-out owners.
+
+Required uses, optional presence and provided values retain their existing validation and source namespace/form rules. False remains distinct from absence. Missing default/fixed-valued attributes are Unsupported because original-node augmentation is outside this API. No attribute is inserted into instance XML. The existing ordinary-extra-attribute refusal on an opted-out zero-use owner also remains Unsupported. This is a retained boundary, not an Invalid validity result.
+
+Active application on simpleContent/complexContent, all/choice, mixed/assertion and wildcard owner combinations remains Unsupported. Explicit false preserves prior content support. Built-in anyType and simple types have no source complexType to which the group is applied. Include/import and foreign complex-type support are unchanged. Default groups with wildcard/prohibited uses remain outside the existing group closure.
+
+Definition/use/type limits, effective uses per owner, aggregate repeated nested attributes, depth and all source/schema/string/regex/atom/value/lifetime capacities remain. There are at most 16 effective uses per owner and 64 aggregate nested attributes, with depth 4. Complete assessment precedes facts. Recovery, cancellation, foreign ownership, detached values, expiry and original XML/export retain their contracts.
+
+The 140 authored contracts run through both public facades, with 19 native proofs. Frozen original cases and authored variants are separate. Package checks overlap source. No public API/Core pin or publication change is included; no full XSD 1.1/PSVI/C45 claim is made.
