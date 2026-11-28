@@ -14,6 +14,7 @@
 //                      | Charles Korthout | 0.1   | 27-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.2 | 28-11-2026 | Reconcile admitted interchange bases with original inputs retained. |
+//                      | Charles Korthout | 0.3 | 28-11-2026 | Reconcile admitted URI/text bases with original inputs retained. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Globalization;
@@ -34,6 +35,7 @@ public sealed class NativeAnonymousDurationBasesConsumerTests
     [Theory][MemberData(nameof(Cases))]public void Contract(string id,string json,bool data)
     {
         using var p=JsonDocument.Parse(json);var r=p.RootElement;var schema=r.GetProperty("schema").GetString()!;var xml=r.GetProperty("instance").GetString()!;var compile=r.GetProperty("compile").GetString();var outcome=r.GetProperty("outcome").GetString();var options=new NativeSchemaSessionOptions(r.TryGetProperty("digits",out var digits)?digits.GetInt32():256,r.TryGetProperty("scale",out var scale)?scale.GetInt32():256,r.GetProperty("maxString").GetInt32(),65536,2,256,16,256,1024);var context=new NativeSchemaAssessmentContext(DateTimeOffset.UnixEpoch,0);string exported;
+        if(id=="DU-238"){compile="Valid";outcome="Valid";var reconciled=System.Text.Json.Nodes.JsonNode.Parse(json)!;reconciled["reads"]![0]!["kind"]="AnyUri";reconciled["reads"]![0]!["expected"]=System.Text.Json.Nodes.JsonArray.Parse("[\"P1M\"]");r=JsonSerializer.SerializeToElement(reconciled);} // Original input retained; admitted URI/text base reconciled.
         if(id=="DU-237"){compile="Valid";outcome="Valid";var reconciled=System.Text.Json.Nodes.JsonNode.Parse(json)!;reconciled["reads"]![0]!["kind"]="QName";reconciled["reads"]![0]!["expected"]=System.Text.Json.Nodes.JsonArray.Parse("[\"{}P1M\"]");r=JsonSerializer.SerializeToElement(reconciled);} // Original input retained; admitted interchange base reconciled.
         if(id=="DU-236"){compile="Valid";outcome="Invalid";} // Original input retained; admitted interchange base reconciled.
         if(id=="DU-235"){compile="Valid";outcome="Invalid";} // Original input retained; admitted interchange base reconciled.

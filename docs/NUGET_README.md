@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.45 development candidate requires Bosak Core 1.86.0 or later.
+The 0.46 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1897,3 +1897,7 @@ Existing inline restriction placements admit duration, yearMonthDuration and day
 ## Anonymous binary and QName restriction bases (development0.45)
 
 Existing inline restriction placements admit hexBinary, base64Binary and QName bases using original unnamed types and facet elements. Binary octet values/lengths, namespace-aware QName equality, fixed/enumeration/whitespace/pattern ancestry and existing limits remain. QName facet literals retain original namespace context. Other atomic/complex families and wider derivation remain separate. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-interchange-bases/GUIDE.md). Unpublished development source.
+
+## Anonymous URI and text-derived bases (development0.46)
+
+Existing inline restriction placements admit anyURI, language, Name, NCName, NMTOKEN, ID and IDREF using original unnamed types and facet sources. Lexical-family normalization, scalar lengths, inherited/fixed facets and validation-root identity checks retain their rules and limits. URI resolution and general key/keyref are separate. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-text-bases/GUIDE.md). Unpublished development source.
