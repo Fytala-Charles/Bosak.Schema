@@ -1,0 +1,37 @@
+// ===========================================================================================================================================================
+// AUTHOR               : Charles Korthout
+// CREATE DATE          : 28 November 2026
+// PURPOSE              : Reports detailed refusal diagnostics from the unchanged qualified native binary.
+// SPECIAL NOTES        : Unit tests verifying correctness of the underlying implementation.
+//
+// COPYRIGHT            : Fytala
+// LICENSE              : LICENSE.md (Apache-2.0)
+// SPDX-License-Identifier: Apache-2.0
+// ===========================================================================================================================================================
+// Change History:      |==================|=======|================|=========================================================================================
+//                      |     Author       |Version|  Date          | Notes                                                                                    |
+//                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.1   | 28-11-2026     | Creation                                                                                 |
+//                      |==================|=======|================|=========================================================================================
+// ===========================================================================================================================================================
+
+using System.Text.Json;
+using Bosak.Schema;
+internal static class Program
+{
+    private static int Main(string[] args)
+    {
+        try
+        {
+            using var request=JsonDocument.Parse(File.ReadAllText(args[0]));var rows=new List<object>();
+            foreach(var row in request.RootElement.EnumerateArray())
+            {
+                var id=row.GetProperty("id").GetString();
+                try {var result=NativeDecimalSchema.Compile(File.ReadAllText(row.GetProperty("schema").GetString()!),new(256,256),maxStringCharacters:65536);if(result.Outcome==NativeOutcome.Valid){var assessed=result.Value!.Assess(File.ReadAllText(row.GetProperty("instance").GetString()!));rows.Add(new{id,phase="assessment",outcome=assessed.Outcome.ToString(),reason=assessed.UnsupportedReason.ToString(),diagnostic=assessed.Diagnostic,error=(string?)null});}else rows.Add(new{id,phase="compile",outcome=result.Outcome.ToString(),reason=result.UnsupportedReason.ToString(),diagnostic=result.Diagnostic,error=(string?)null});}
+                catch(Exception error){rows.Add(new{id,outcome=(string?)null,reason=(string?)null,diagnostic=(string?)null,error=error.GetType().Name});}
+            }
+            File.WriteAllText(args[1],JsonSerializer.Serialize(rows,new JsonSerializerOptions{WriteIndented=true}));return 0;
+        }
+        catch(Exception error){Console.Error.WriteLine("Caught audit diagnostic error: "+error.GetType().Name);return 3;}
+    }
+}
