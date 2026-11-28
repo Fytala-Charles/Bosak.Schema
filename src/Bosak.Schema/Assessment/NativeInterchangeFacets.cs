@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 25-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.2 | 28-11-2026 | Retain original anonymous interchange base and facet namespace context. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Globalization;
@@ -29,14 +30,14 @@ internal sealed class NativeInterchangeFacets(NativeInterchangeFacets? parent, i
     private int EffectiveMinimum => length ?? minimum ?? parent?.EffectiveMinimum ?? 0;
     private int EffectiveMaximum => length ?? maximum ?? parent?.EffectiveMaximum ?? int.MaxValue;
     internal static NativeInterchangeFacets Compile(XElement restriction, NativeInterchangeKind kind, int maxCharacters,
-        NativePatternCompilation compilation, NativeInterchangeFacets? parent)
+        NativePatternCompilation compilation, NativeInterchangeFacets? parent, XElement? inlineBase = null)
     {
         int? length = null, minimum = null, maximum = null;
         var enumeration = ImmutableArray.CreateBuilder<NativeInterchangeValue>();
         var patterns = ImmutableArray.CreateBuilder<NativePattern>();
         var seen = new HashSet<string>(StringComparer.Ordinal);
         var fixedValues = new Dictionary<string, int>(StringComparer.Ordinal);
-        foreach (var facet in NativeDecimalSchema.Elements(restriction))
+        foreach (var facet in NativeDecimalSchema.Elements(restriction).Where(f => !ReferenceEquals(f, inlineBase)))
         {
             compilation.Check();
             var name = facet.Name.LocalName;

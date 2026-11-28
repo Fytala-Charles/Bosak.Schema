@@ -1,0 +1,9 @@
+# Bounded anonymous binary and QName restriction bases
+
+28 November 2026. Recorded before implementation at e6f24c3796f870d7d1d5714f80087af7280e18a3. ADOPTION.json records immutable specification revisions, affected sections and intentional deviations.
+
+Admit actual NativeType bases of hexBinary, base64Binary and QName through existing inline restriction placements. Preserve the actual unnamed direct DerivationBase, original facet elements and their namespace ancestry. The existing interchange facet compiler skips only the exact inline base element. No aliases, synthetic names/declarations, anonymous global registration, source/facet cloning or namespace mutation.
+
+Retain exact octets, binary length in octets, canonical detached binary text and prefix-independent QName namespace/local-name equality. Facet QName literals resolve in the original facet context; instance QName text resolves in the original instance context. Keep same-step pattern alternatives, inherited intersections, enumeration ancestry, fixed collapse and fixed/nonwidening binary lengths. Enumeration over patterned ancestors and QName length facets remain Unsupported, as do assertions and fixed pattern/enumeration syntax. Primitive semantics are unchanged.
+
+Keep shared16 inline sites/depth4, lexical256, string/regex/schema/atom/value/lifetime budgets, forward/final controls, nil, complete assessment before facts, original XML, detached values, ownership, cancellation, recovery, export and expiry. Qualify both facades and native authority, all prior names and unchanged inputs with archived expectation reconciliation, an exact isolated package, API, signed Core, original samples, invoice, documentation and release/workload controls. Package checks overlap source. URI/other text/complex bases and wider derivation remain separate. Authorized Git/PR/green merge/main verification is included; registry/tag/controller actions are excluded.

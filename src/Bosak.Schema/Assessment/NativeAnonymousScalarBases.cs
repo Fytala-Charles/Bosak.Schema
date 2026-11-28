@@ -19,6 +19,7 @@
 //                      | Charles Korthout | 0.5 | 27-11-2026 | Admit original dateTimeStamp bases with inherited required timezone. |
 //                      | Charles Korthout | 0.6 | 27-11-2026 | Admit original Gregorian bases with bounded value/facet ancestry. |
 //                      | Charles Korthout | 0.7 | 27-11-2026 | Admit original duration bases with bounded exact value/facet ancestry. |
+//                      | Charles Korthout | 0.8 | 28-11-2026 | Admit original binary and QName bases with original facet namespace scopes. |
 // ===========================================================================================================================================================
 using System.Xml.Linq;
 using Bosak.XPath.Core.Xdm;
@@ -30,6 +31,9 @@ internal sealed partial class NativeDecimalSchema
         string? name, string ns, NativeNumericLimits limits, int maxCharacters, NativePatternCompilation compilation)
     {
         compilation.Check();
+        if (baseType.InterchangeKind is { } interchangeKind)
+            return new NativeType(name, false, ns, interchangeKind: interchangeKind, derivationBase: baseType,
+                interchangeFacets: NativeInterchangeFacets.Compile(restriction, interchangeKind, maxCharacters, compilation, baseType.InterchangeFacets, inlineSource));
         if (baseType.DurationKind is { } durationKind)
             return new NativeType(name, false, ns, durationKind: durationKind, derivationBase: baseType,
                 durationFacets: NativeDurationFacets.Compile(restriction, durationKind, limits, maxCharacters, compilation, baseType.DurationFacets, inlineSource));

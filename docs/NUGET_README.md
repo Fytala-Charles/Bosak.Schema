@@ -2,7 +2,7 @@
 
 # Bosak.Schema
 
-The 0.44 development candidate requires Bosak Core 1.86.0 or later.
+The 0.45 development candidate requires Bosak Core 1.86.0 or later.
 
 ## IDs and references (0.16 source)
 
@@ -1893,3 +1893,7 @@ Existing inline restriction placements admit gYear, gYearMonth, gMonth, gMonthDa
 ## Anonymous duration restriction bases (development0.44)
 
 Existing inline restriction placements admit duration, yearMonthDuration and dayTimeDuration bases using original unnamed type objects and facet sources. Existing exact month/second values, family grammar, partial ordering and fixed/enumeration/bound/whitespace/pattern ancestry retain their semantics and limits. Other atomic/complex families and wider derivation remain separate. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-duration-bases/GUIDE.md). Unpublished development source.
+
+## Anonymous binary and QName restriction bases (development0.45)
+
+Existing inline restriction placements admit hexBinary, base64Binary and QName bases using original unnamed types and facet elements. Binary octet values/lengths, namespace-aware QName equality, fixed/enumeration/whitespace/pattern ancestry and existing limits remain. QName facet literals retain original namespace context. Other atomic/complex families and wider derivation remain separate. [Scope](https://github.com/Fytala-Charles/Bosak.Schema/blob/main/docs/anonymous-interchange-bases/GUIDE.md). Unpublished development source.
