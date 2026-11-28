@@ -150,3 +150,7 @@ Development 0.46 qualifies bounded inline anonymous anyURI, language, Name, NCNa
 ## Anonymous floating restriction base checkpoint
 
 Development 0.47 qualifies bounded inline anonymous float and double restriction bases. Original unnamed objects, direct base links and facet sources preserve IEEE family mapping/rounding, special values, value/lexical facet ancestry and bounded lifetime rules. All 29,374 source tests (2,111 internal / 27,263 public) and 27,263 overlapping exact-package checks pass. All 28,931 prior names and original test inputs remain; four public expectations are explicitly reconciled and 443 checks are added. Pilot 21; structural 65/64; datatype 582/16; zero errors. API 55/663 and nine signed Core 1.86.0 payloads are unchanged. Unpublished; broader simple-type/complex-content derivation and full XSD 1.1/PSVI/C45 acceptance remain separate. [Guide](docs/anonymous-floating-bases/GUIDE.md). Next: rank original remaining gaps before separate adoption.
+
+## Next specification work after anonymous families
+
+Start with [named-integer restriction chains](docs/post-anonymous-coverage/NEXT-CONTRACT.md), then QName facet compatibility and schema default-attribute groups. Broader open content/composition follows the [evidence-based ranking](docs/post-anonymous-coverage/RANKING.md). Product remains 0.47; every new semantic slice needs separate immutable adoption and full qualification.
