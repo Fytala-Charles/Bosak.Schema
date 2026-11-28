@@ -13,6 +13,7 @@
 //                      |==================|=======|================|=========================================================================================
 //                      | Charles Korthout | 0.1   | 26-11-2026     | Creation                                                                                 |
 //                      |==================|=======|================|=========================================================================================
+//                      | Charles Korthout | 0.2 | 28-11-2026 | Admit named integer pattern bases while retaining original value-facet sources. |
 // ===========================================================================================================================================================
 using System.Collections.Immutable;
 using System.Xml.Linq;
@@ -43,16 +44,15 @@ internal sealed partial class NativeDecimalSchema
     private static NativeType CompileNumericPatternRestriction(XElement restriction, string? name, string ns, XName baseName,
         NativeType baseType, NativeNumericLimits limits, NativePatternCompilation compilation)
     {
-        Require(!baseType.IsInteger || baseName.Namespace == Xs, "Named integer chains remain outside this profile.", NativeDecimalUnsupportedReason.ValueType);
         var values = Elements(restriction).Where(f => f.Name != Xs + "pattern").ToArray();
         Require(baseType.NumericPatterns is null || !values.Any(f => f.Name.LocalName is "enumeration" or "minInclusive" or "minExclusive" or "maxInclusive" or "maxExclusive"),
             "Value facets over patterned numeric bases await separate adoption.", NativeDecimalUnsupportedReason.ValueType);
         var patterns = NativeNumericPatterns.Compile(restriction, baseType.NumericPatterns, compilation);
-        var valueRestriction = new XElement(restriction.Name, restriction.Attributes(), values);
         if (baseType.IsInteger)
             return new NativeType(name, false, ns, isInteger: true, integerFacets: baseName == Xs + "integer"
-                ? NativeIntegerFacets.Compile(valueRestriction, limits) : NativeIntegerFacets.CompileDerived(valueRestriction, baseType.IntegerFacets, limits),
+                ? NativeIntegerFacets.Compile(restriction, limits, omitPatterns: true) : NativeIntegerFacets.CompileDerived(restriction, baseType.IntegerFacets, limits, omitPatterns: true),
                 baseName: baseName, derivationBase: baseName == Xs + "integer" ? null : baseType, numericPatterns: patterns);
+        var valueRestriction = new XElement(restriction.Name, restriction.Attributes(), values);
         return new NativeType(name, false, ns, facets: baseName == Xs + "decimal"
             ? NativeDecimalFacets.Compile(valueRestriction, limits, allowEnumeration: true)
             : NativeDecimalFacets.CompileDerived(valueRestriction, baseType.Facets, limits, nativeDerivation: true),
